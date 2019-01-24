@@ -30,6 +30,8 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd() {
                 MainActivity.actionStart(SplashActivity.this);
+                //Activity切换动画
+                overridePendingTransition(R.anim.alpha_fade,R.anim.translate_hold);
                 finish();
             }
         });
