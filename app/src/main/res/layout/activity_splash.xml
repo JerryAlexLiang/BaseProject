@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".SplashActivity">
+
+    <!--
+    pv_background_color:        设置背景颜色
+    pv_host_text:               设置左边主文案
+    pv_host_text_size:          设置主文案的大小
+    pv_particle_text:           设置右边粒子上的文案
+    pv_particle_text_size:      设置粒子上文案的大小
+    pv_text_color:              设置左边主文案颜色
+    pv_text_anim_time:          设置粒子上文案的运动时间
+    pv_spread_anim_time:        设置粒子上文案的伸展时间
+    pv_host_text_anim_time:     设置左边主文案的位移时间
+    -->
+    <me.wangyuwei.particleview.ParticleView
+        android:id="@+id/pv_splash_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:pv_background_color="?attr/colorPrimary"
+        app:pv_host_text="致一"
+        app:pv_host_text_anim_time="1000"
+        app:pv_particle_text="科技"
+        app:pv_particle_text_size="16sp"
+        app:pv_spread_anim_time="600"
+        app:pv_text_anim_time="1000"
+        app:pv_text_color="#ffffff" />
+
+</LinearLayout>
