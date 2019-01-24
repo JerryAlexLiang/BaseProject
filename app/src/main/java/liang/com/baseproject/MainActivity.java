@@ -60,6 +60,7 @@ public class MainActivity extends BaseActivity {
 
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
         baseToolbarRightIcon.setVisibility(View.VISIBLE);
+        addActivity(this, MainActivity.class);
     }
 
     private long waitTime = 2000;

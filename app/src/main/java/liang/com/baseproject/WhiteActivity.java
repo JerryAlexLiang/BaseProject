@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,9 +28,11 @@ public class WhiteActivity extends BaseActivity {
     ImageView baseToolbarRightIcon;
     @BindView(R.id.base_toolbar)
     FrameLayout baseToolbar;
+    @BindView(R.id.btn_jump_translate_activity)
+    Button btnJumpTranslateActivity;
 
-    public static void actionStart(Context context){
-        Intent intent = new Intent(context,WhiteActivity.class);
+    public static void actionStart(Context context) {
+        Intent intent = new Intent(context, WhiteActivity.class);
         context.startActivity(intent);
     }
 
@@ -49,10 +52,22 @@ public class WhiteActivity extends BaseActivity {
         baseToolbarTitle.setVisibility(View.VISIBLE);
         baseToolbarTitle.setTextColor(Color.BLACK);
         baseToolbarTitle.setText("白色主题沉浸式状态栏");
+
+        addActivity(this, WhiteActivity.class);
     }
 
-    @OnClick({R.id.base_toolbar_left_tv,R.id.base_toolbar_right_icon})
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.base_toolbar_left_tv, R.id.base_toolbar_right_icon, R.id.btn_jump_translate_activity})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.base_toolbar_left_tv:
+            case R.id.base_toolbar_right_icon:
+                finish();
+                break;
+
+            case R.id.btn_jump_translate_activity:
+                startActivity(TranslateActivity.class, null, false);
+                break;
+        }
     }
+
 }

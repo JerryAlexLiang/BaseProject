@@ -2,20 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/base_toolbar_ll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".WhiteActivity">
-
-    <include
-        layout="@layout/layout_toolbar_default"/>
+    android:layout_height="wrap_content"
+    tools:context=".TranslateActivity">
 
     <Button
-        android:id="@+id/btn_jump_translate_activity"
+        android:id="@+id/btn_log_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="跳转到TranslateActivity"
-        android:textAllCaps="false"/>
+        android:layout_marginTop="120dp"
+        android:text="退出登录"/>
 
 
 </LinearLayout>

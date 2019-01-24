@@ -1,12 +1,21 @@
 package liang.com.baseproject;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.ButterKnife;
 
 /**
  * 创建日期：2019/1/24 on 11:04
@@ -14,6 +23,34 @@ import android.view.WindowManager;
  * 作者: liangyang
  */
 public abstract class BaseActivity extends AppCompatActivity {
+
+    private static final String TAG = BaseActivity.class.getSimpleName();
+    /**
+     * 管理所有的activity资源对象
+     */
+    private static List<BaseActivity> activities;
+    public Activity mActivity;
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this);
+        mActivity = this;
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        ButterKnife.bind(this);
+        mActivity = this;
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        ButterKnife.bind(this);
+        mActivity = this;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +81,43 @@ public abstract class BaseActivity extends AppCompatActivity {
                 //恢复状态栏白色字体
                 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
             }
+        }
+    }
+
+    /**
+     * 管理所有的activity资源对象  添加Activity
+     */
+    public void addActivity(BaseActivity baseActivity, Class<? extends Activity> target) {
+        if (activities == null) {
+            activities = new ArrayList<>();
+        }
+        activities.add(baseActivity);
+        Log.d(TAG, "addActivity:   " + target);
+    }
+
+    public void finishAll() {
+        for (BaseActivity activity : activities) {
+            if (activity != null) {
+                activity.finish();
+            }
+        }
+    }
+
+    public void finishPreAll() {
+        for (int i = 0; i < activities.size() - 2; i++) {
+            activities.get(i).finish();
+        }
+    }
+
+    public void startActivity(Class<? extends Activity> target, Bundle bundle, boolean finish) {
+        Intent intent = new Intent();
+        intent.setClass(this, target);
+        if (bundle != null) {
+            intent.putExtra(getPackageName(), bundle);
+        }
+        startActivity(intent);
+        if (finish) {
+            finish();
         }
     }
 }

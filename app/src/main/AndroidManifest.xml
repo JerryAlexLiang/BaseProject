@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".WhiteActivity"></activity>
+        <activity android:name=".WhiteActivity" />
+        <activity android:name=".TranslateActivity"></activity>
     </application>
 
 </manifest>
