@@ -105,6 +105,11 @@ public class MainActivity extends BaseActivity {
 
             case R.id.btn_change_toolbar_white:
                 WhiteActivity.actionStart(MainActivity.this);
+//                overridePendingTransition(R.anim.left_in, R.anim.right_out);
+                //实现淡入浅出的效
+//                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                //跳入效果
+                overridePendingTransition(R.anim.screen_zoom_in, R.anim.screen_zoom_out);
                 break;
 
             case R.id.btn_change_toolbar_background:

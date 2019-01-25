@@ -66,6 +66,9 @@ public class WhiteActivity extends BaseActivity {
 
             case R.id.btn_jump_translate_activity:
                 startActivity(TranslateActivity.class, null, false);
+//                overridePendingTransition(R.anim.rotate_up, R.anim.rotate_down);
+                // 实现由左向右滑入的效果
+                overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
                 break;
         }
     }
