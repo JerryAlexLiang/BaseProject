@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
     android:orientation="vertical"
-    tools:context=".SplashActivity">
+    tools:context=".activity.SplashOneActivity">
 
     <!--
     pv_background_color:        设置背景颜色
