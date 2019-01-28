@@ -29,9 +29,9 @@ public class SplashActivity extends AppCompatActivity {
         pvSplashLogo.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
             @Override
             public void onAnimationEnd() {
-                MainActivity.actionStart(SplashActivity.this);
+                HomeActivity.actionStart(SplashActivity.this);
                 //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
-                overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
             }
         });

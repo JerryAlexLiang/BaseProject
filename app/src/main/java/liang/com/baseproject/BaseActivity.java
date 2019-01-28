@@ -11,11 +11,16 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import liang.com.baseproject.utils.SPUtils;
+
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
 
 /**
  * 创建日期：2019/1/24 on 11:04
@@ -65,7 +70,44 @@ public abstract class BaseActivity extends AppCompatActivity {
             //半透明状态栏(带阴影)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+    }
 
+    /**
+     * 本地化存储操作(存入) - 设置状态栏颜色
+     * @param ACTIONBAR_COLOR
+     */
+    public void setActionBarTheme(int ACTIONBAR_COLOR) {
+        SPUtils.put(BaseActivity.this, ACTIONBAR_COLOR_THEME, ACTIONBAR_COLOR);
+    }
+
+    /**
+     * 本地化存储操作(取出) - 设置状态栏颜色
+     * @param baseToolbar
+     */
+    public void getActionBarTheme(FrameLayout baseToolbar) {
+        int actionBarColorInt = (int) SPUtils.get(BaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
+        Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
+        switch (actionBarColorInt) {
+            case 0:
+                baseToolbar.setBackgroundColor(Color.RED);
+                break;
+
+            case 1:
+                baseToolbar.setBackgroundColor(Color.BLUE);
+                break;
+
+            case 2:
+                baseToolbar.setBackgroundColor(Color.BLACK);
+                break;
+
+            case 3:
+                baseToolbar.setBackgroundColor(Color.WHITE);
+                break;
+
+            case 4:
+                baseToolbar.setBackgroundColor(Color.TRANSPARENT);
+                break;
+        }
     }
 
     /**

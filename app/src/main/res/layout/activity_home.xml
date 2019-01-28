@@ -2,21 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/base_toolbar_ll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TranslateActivity">
+    tools:context=".HomeActivity">
 
     <include
         layout="@layout/layout_toolbar_default"/>
 
     <Button
-        android:id="@+id/btn_log_out"
+        android:id="@+id/button_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:text="退出登录"/>
-
+        android:text="设置"/>
 
 </LinearLayout>
