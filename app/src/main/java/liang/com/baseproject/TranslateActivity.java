@@ -10,9 +10,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import liang.com.baseproject.utils.SPUtils;
-
-import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
+import liang.com.baseproject.base.BaseActivity;
 
 public class TranslateActivity extends BaseActivity {
 

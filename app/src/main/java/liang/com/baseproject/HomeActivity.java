@@ -13,9 +13,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import liang.com.baseproject.utils.SPUtils;
-
-import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
+import liang.com.baseproject.base.BaseActivity;
 
 public class HomeActivity extends BaseActivity {
 

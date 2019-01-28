@@ -1,4 +1,4 @@
-package liang.com.baseproject;
+package liang.com.baseproject.base;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +19,6 @@ import java.util.List;
 import butterknife.ButterKnife;
 import liang.com.baseproject.utils.SPUtils;
 
-import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
 
 /**

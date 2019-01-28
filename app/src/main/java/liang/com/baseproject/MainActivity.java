@@ -4,27 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import liang.com.baseproject.utils.SPUtils;
+import liang.com.baseproject.base.BaseActivity;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_RED;
-import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
-import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_WHITE;
 
 public class MainActivity extends BaseActivity {
 

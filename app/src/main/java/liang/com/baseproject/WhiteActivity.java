@@ -13,6 +13,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import liang.com.baseproject.base.BaseActivity;
 
 public class WhiteActivity extends BaseActivity {
 
