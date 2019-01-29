@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@drawable/icon_scan_code"
+            android:title="扫一扫"/>
+        <item
+            android:id="@+id/nav_friends"
+            android:icon="@drawable/icon_activity"
+            android:title="活动" />
+        <item
+            android:id="@+id/nav_follow"
+            android:icon="@drawable/icon_follow"
+            android:title="关注" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/icon_feedback"
+            android:title="反馈" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/icon_setting"
+            android:title="设置" />
+    </group>
+</menu>
