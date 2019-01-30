@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="liang.com.baseproject">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -26,8 +27,11 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/icon_new_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.SplashOneActivity">
+        android:theme="@style/AppTheme"
+        tools:targetApi="n">
+        <activity
+            android:name=".activity.SplashOneActivity"
+            android:theme="@style/Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,7 +45,7 @@
         <activity android:name=".activity.MainHomeActivity" />
         <activity
             android:name=".base.PermissionActivity"
-            android:theme="@style/transparent"
+            android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustPan" />
     </application>
 

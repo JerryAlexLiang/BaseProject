@@ -1,11 +1,14 @@
 package liang.com.baseproject.activity;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.BaseActivity;
+import liang.com.baseproject.utils.APKVersionCodeUtils;
 import me.wangyuwei.particleview.ParticleView;
 
 /**
@@ -17,6 +20,8 @@ public class SplashOneActivity extends BaseActivity {
 
     @BindView(R.id.pv_splash_logo)
     ParticleView pvSplashLogo;
+    @BindView(R.id.tv_version_code)
+    TextView tvVersionCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +33,9 @@ public class SplashOneActivity extends BaseActivity {
         pvSplashLogo.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
             @Override
             public void onAnimationEnd() {
-                MainHomeActivity.actionStart(SplashOneActivity.this);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    MainHomeActivity.actionStart(SplashOneActivity.this);
+                }
                 //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();
@@ -36,6 +43,9 @@ public class SplashOneActivity extends BaseActivity {
         });
         //开启栗子动画
         pvSplashLogo.startAnim();
+        //获取当前版本号
+        tvVersionCode.setText(String.format("Version:%s", APKVersionCodeUtils.getVerName(this)));
+
     }
 
 //    private void fullScreen(boolean enable) {

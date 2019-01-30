@@ -27,11 +27,20 @@
     <!-- item name="android:windowIsTranslucent"      设置当前Activity是否透明-->
     <!-- item name="android:windowAnimationStyle"     设置当前Activity进出方式-->
     <!--清单文件中设置android:theme="@style/transparent"-->
-    <style name="transparent">
+    <style name="Transparent" parent="AppTheme">
         <item name="android:windowBackground">@color/translucent_background</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="android:windowIsTranslucent">true</item>
         <!-- <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item> -->
+    </style>
+
+    <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/colorBlue</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+        <!--<item name="android:windowIsTranslucent">false</item>-->
+        <!--<item name="android:windowDisablePreview">true</item>-->
     </style>
 </resources>

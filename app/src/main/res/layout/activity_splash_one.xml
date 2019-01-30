@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
-    android:orientation="vertical"
+    android:background="@color/colorBlue"
     tools:context=".activity.SplashOneActivity">
 
+    <!--android:background="?attr/colorPrimary"-->
     <!--
     pv_background_color:        设置背景颜色
     pv_host_text:               设置左边主文案
@@ -23,7 +23,7 @@
         android:id="@+id/pv_splash_logo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:pv_background_color="?attr/colorPrimary"
+        app:pv_background_color="@color/colorBlue"
         app:pv_host_text="致一"
         app:pv_host_text_anim_time="1000"
         app:pv_particle_text="科技"
@@ -32,4 +32,14 @@
         app:pv_text_anim_time="1000"
         app:pv_text_color="#ffffff" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/tv_version_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+</RelativeLayout>
