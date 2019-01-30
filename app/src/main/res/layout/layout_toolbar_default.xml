@@ -11,19 +11,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize">
 
         <ImageView
             android:id="@+id/base_toolbar_left_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:paddingLeft="8dp"
-            android:paddingStart="8dp"
-            android:paddingRight="8dp"
+            android:padding="8dp"
             android:src="@drawable/icon_back"
-            tools:ignore="RtlSymmetry"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/base_toolbar_left_tv"
@@ -31,9 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:paddingLeft="8dp"
-            android:paddingStart="8dp"
             android:paddingRight="8dp"
-            android:text="左边文字"
+            android:paddingStart="8dp"
             android:textColor="#ffffff"
             android:textSize="15sp"
             android:visibility="gone" />
@@ -48,10 +46,9 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="标题"
-            android:visibility="gone"
             android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/base_toolbar_right_tv"
@@ -65,8 +62,7 @@
             android:paddingRight="8dp"
             android:textColor="#ffffff"
             android:textSize="15sp"
-            android:visibility="gone"
-            tools:text="右边文字" />
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/base_toolbar_right_icon"
@@ -75,10 +71,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:paddingEnd="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:src="@drawable/icon_true"
+            android:padding="8dp"
+            android:src="@drawable/icon_message"
             android:visibility="gone" />
     </RelativeLayout>
 

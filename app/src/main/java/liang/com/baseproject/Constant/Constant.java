@@ -60,6 +60,15 @@ public class Constant {
     public static final int ACTIONBAR_COLOR_WHITE = 3;
     public static final int ACTIONBAR_COLOR_TRANSLATE = 4;
 
+    //没有连接网络
+    public static final int NETWORK_NONE = -1;
+    //移动网络
+    public static final int NETWORK_MOBILE = 0;
+    //无线网络
+    public static final int NETWORK_WIFI = 1;
+
+
+
 
 
 }

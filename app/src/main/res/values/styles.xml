@@ -11,4 +11,27 @@
     <style name="myNavigationDrawerStyle" >
         <item name="android:textSize">16sp</item>
     </style>
+
+    <!-- 自定义进度对话框样式 -->
+    <style name="CustomProgressDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- item name="android:windowBackground"         设置背景透明度及其颜色值 -->
+    <!-- item name="android:windowIsTranslucent"      设置当前Activity是否透明-->
+    <!-- item name="android:windowAnimationStyle"     设置当前Activity进出方式-->
+    <!--清单文件中设置android:theme="@style/transparent"-->
+    <style name="transparent">
+        <item name="android:windowBackground">@color/translucent_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item> -->
+    </style>
 </resources>

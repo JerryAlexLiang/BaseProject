@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import liang.com.baseproject.HomeActivity;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.BaseActivity;
 import me.wangyuwei.particleview.ParticleView;
@@ -29,7 +28,7 @@ public class SplashOneActivity extends BaseActivity {
         pvSplashLogo.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
             @Override
             public void onAnimationEnd() {
-                HomeActivity.actionStart(SplashOneActivity.this);
+                MainHomeActivity.actionStart(SplashOneActivity.this);
                 //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finish();

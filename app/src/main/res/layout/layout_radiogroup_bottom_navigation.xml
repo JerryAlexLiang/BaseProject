@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/radio_group_container_home"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal"
+    tools:showIn="@layout/activity_home">
+
+    <RadioButton
+        android:id="@+id/main_rg_rb_one"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:checked="true"
+        android:padding="3dp"
+        android:drawableBottom="@drawable/gift_select"
+        android:gravity="center" />
+
+    <RadioButton
+        android:id="@+id/main_rg_rb_two"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:padding="3dp"
+        android:drawableBottom="@drawable/open_select"
+        android:gravity="center" />
+
+    <RadioButton
+        android:id="@+id/main_rg_rb_three"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:padding="3dp"
+        android:drawableBottom="@drawable/hot_select"
+        android:gravity="center" />
+
+    <RadioButton
+        android:id="@+id/main_rg_rb_four"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:button="@null"
+        android:padding="3dp"
+        android:drawableBottom="@drawable/feature_select"
+        android:gravity="center" />
+</RadioGroup>

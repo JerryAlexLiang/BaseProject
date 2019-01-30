@@ -8,7 +8,7 @@
     android:padding="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/icon_user_image"
+        android:id="@+id/nav_icon_user_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_alignParentLeft="true"
@@ -19,25 +19,36 @@
         app:civ_border_width="2dp" />
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/nav_tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
-        android:layout_toEndOf="@id/icon_user_image"
-        android:layout_toRightOf="@id/icon_user_image"
+        android:layout_toEndOf="@id/nav_icon_user_image"
+        android:layout_toRightOf="@id/nav_icon_user_image"
         android:text="Jerry"
         android:textColor="#FFF"
-        android:textSize="18sp" />
+        android:textSize="28sp" />
 
     <TextView
-        android:id="@+id/user_mail"
+        android:id="@+id/nav_tv_user_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="193***0239@qq.com"
         android:textColor="#FFF"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/nav_tv_wifi_ssid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="#FFF"
+        android:text="Wifi"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"/>
 
 </RelativeLayout>

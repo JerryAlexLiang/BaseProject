@@ -4,4 +4,43 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlue">#00a2ed</color>
+
+    <color name="black">#000000</color>
+    <color name="bg_tab">#f7f7fb</color>
+    <color name="tab_text_unselect">#c6cbcf</color>
+    <color name="tab_text_select">#3147ca</color>
+    <color name="black_50">#80000000</color>
+
+    <color name="page_background">#EDEBF3</color>
+    <color name="page_transparent">#00000000</color>
+    <color name="color_397bff">#397bff</color>
+    <color name="color_line">#e1e1e1</color>
+    <color name="color_ef7907">#ef7907</color>
+    <color name="color_7b7b7b">#7b7b7b</color>
+    <color name="page_gray">#BCBCBC</color>
+
+    <color name="bg_title">#111322</color>
+    <color name="color_white">#ffffff</color>
+
+    <!--移植老项目-->
+    <color name="blue">#00FFFC</color>
+    <color name="green">#23D315</color>
+    <color name="white_50">#80FFFFFF</color>
+    <color name="text_grey">#B1B1B1</color>
+    <color name="text_grey2">#5E5E5E</color>
+    <color name="blue2">#00fffc</color>
+    <color name="blue3">#197b7a</color>
+    <color name="red2">#813939</color>
+
+    <color name="bg_his_grey">#232323</color>
+    <color name="bg_line">#9c9c9c</color>
+    <color name="bg_alarm_panorama">#80232323</color>
+
+    <color name="bg_selector_picture">#454545</color>
+    <color name="bg_login_page">#140F36</color>
+    <color name="commom_background">#f3f3f3</color>
+    <color name="font_blue">#42369a</color>
+    <!-- 透明 -->
+    <color name="translucent_background">#00000000</color>
 </resources>

@@ -1,16 +1,14 @@
-package liang.com.baseproject;
+package liang.com.baseproject.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -18,13 +16,18 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,17 +35,29 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import liang.com.baseproject.MainActivity;
+import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
+import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
 import liang.com.baseproject.fragment.OneFragment;
 import liang.com.baseproject.fragment.ThreeFragment;
 import liang.com.baseproject.fragment.TwoFragment;
-import liang.com.baseproject.widget.MyViewPage;
-import ru.alexbykov.nopermission.PermissionHelper;
+import liang.com.baseproject.receiver.NetBroadcastReceiver;
+import liang.com.baseproject.receiver.NetEvent;
+import liang.com.baseproject.utils.CheckPermission;
+import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.utils.NetUtil;
+import liang.com.baseproject.utils.WifiUtils;
 
-public class HomeActivity extends BaseActivity {
+import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
+import static liang.com.baseproject.Constant.Constant.NETWORK_WIFI;
 
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+public class MainHomeActivity extends BaseActivity {
+
+    private static final String TAG = MainHomeActivity.class.getSimpleName();
     @BindView(R.id.base_toolbar_left_icon)
     ImageView baseToolbarLeftIcon;
     @BindView(R.id.base_toolbar_left_tv)
@@ -57,7 +72,6 @@ public class HomeActivity extends BaseActivity {
     FrameLayout baseToolbar;
     @BindView(R.id.my_view_pager)
     ViewPager myViewPager;
-    //    MyViewPage myViewPager;
     @BindView(R.id.main_rg_rb_one)
     RadioButton mainRgRbOne;
     @BindView(R.id.main_rg_rb_two)
@@ -72,12 +86,33 @@ public class HomeActivity extends BaseActivity {
     NavigationView navView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.iv_net_warn)
+    ImageView ivNetWarn;
+    @BindView(R.id.tv_net_title)
+    TextView tvNetTitle;
+    @BindView(R.id.rl_net_bar)
+    RelativeLayout rlNetBar;
 
-    private PermissionHelper permissionHelper;
+    /**
+     * android 6.0 或以上权限申请
+     */
+    private static final int REQUEST_CODE = 0;                        //权限请求码
+
+    private CheckPermission mCheckPermission;                        //检测权限工具
+
+    //配置需要取的权限
+    static final String[] PERMISSION = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,                // SD卡写入权限
+            Manifest.permission.READ_EXTERNAL_STORAGE,                // SD卡读取权限
+            Manifest.permission.ACCESS_FINE_LOCATION,                //Android9.0之后获取Wifi SSID 需要定位权限
+    };
+
+    private NetBroadcastReceiver netReceiver;
 
     //FragmentList
     private List<Fragment> fragmentList = new ArrayList<>();
-//    private List<String> fragmentList = new ArrayList<>();
+    //标题列表
+    private List<String> titleList = new ArrayList<>();
     private OneFragment oneFragment;
     private TwoFragment twoFragment;
     private ThreeFragment threeFragment;
@@ -86,33 +121,120 @@ public class HomeActivity extends BaseActivity {
 
     //记录ViewPage当前的选中界面
     private int currentPosition = 0;
+    private ImageView navUserIocn;
+    private TextView navUserName;
+    private TextView navUserMail;
+    private TextView navWifiName;
 
     public static void actionStart(Context context) {
-        Intent intent = new Intent(context, HomeActivity.class);
+        Intent intent = new Intent(context, MainHomeActivity.class);
         context.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_main_home);
         ButterKnife.bind(this);
-        addActivity(this, HomeActivity.class);
+        addActivity(this, MainHomeActivity.class);
         getActionBarTheme(baseToolbar);
+
+        //请求权限
+        initPermission();
+        //注册监听网络状态的广播接收者
+        initReceive();
+        //订阅EventBus事件
+        EventBus.getDefault().register(this);
 
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
         baseToolbarLeftIcon.setImageResource(R.drawable.icon_drawer_menu);
         baseToolbarTitle.setVisibility(View.VISIBLE);
 
-        permissionHelper = new PermissionHelper(this);
-        getWifiSSid();
-
         initViewPage();
-        initEvent();
+        initDrawerLayout();
 
     }
 
-    private void initEvent() {
+    private void initReceive() {
+        netReceiver = new NetBroadcastReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netReceiver, intentFilter);
+    }
+
+    @Subscribe
+    public void onEventMainThread(NetEvent event) {
+        setNetState(event.isNet(), event.networkStatus);
+    }
+
+    private void setNetState(boolean net, int networkStatus) {
+        if (net) {
+            //获取网络状态
+            rlNetBar.setVisibility(View.GONE);
+            getNetStatus(networkStatus);
+        } else {
+            rlNetBar.setVisibility(View.VISIBLE);
+            navWifiName.setText("没有连接网络...");
+        }
+    }
+
+    private void getNetStatus(int networkStatus) {
+        if (networkStatus == NETWORK_MOBILE) {
+            //移动网络
+            navWifiName.setText("移动数据上网");
+        } else if (networkStatus == NETWORK_WIFI) {
+            //无线网络
+            //Wifi的SSID(名称)
+            String wifiName = WifiUtils.getWifiName(this);
+            LogUtil.d(TAG, "wifi名称: " + wifiName);
+            navWifiName.setText("Wifi: " + wifiName);
+        }
+    }
+
+
+    /**
+     * 进入权限设置页面
+     */
+    private void initPermission() {
+        //SDK版本小于23时候不做检测
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
+            return;
+        mCheckPermission = new CheckPermission(this);
+        //缺少权限时，进入权限设置页面
+        if (mCheckPermission.permissionSet(PERMISSION)) {
+            startPermissionActivity();
+        }
+    }
+
+    private void startPermissionActivity() {
+        PermissionActivity.startActivityForResult(this, REQUEST_CODE, PERMISSION);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            //权限请求码
+            if (resultCode == PermissionActivity.PERMISSION_DENIEG) {
+                //拒绝时，没有获取到主要权限，无法运行，关闭页面
+                finish();
+            } else {
+                //注册监听网络状态的广播接收者
+                initReceive();
+            }
+        }
+    }
+
+    private void initDrawerLayout() {
+        //nav_header
+        View navViewHeaderView = navView.getHeaderView(0);
+        navUserIocn = navViewHeaderView.findViewById(R.id.nav_icon_user_image);
+        navUserName = navViewHeaderView.findViewById(R.id.nav_tv_user_name);
+        navUserMail = navViewHeaderView.findViewById(R.id.nav_tv_user_mail);
+        navWifiName = navViewHeaderView.findViewById(R.id.nav_tv_wifi_ssid);
+        //nav_menu
+        setupDrawerContent(navView);
+
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -136,6 +258,40 @@ public class HomeActivity extends BaseActivity {
         });
     }
 
+    private void setupDrawerContent(NavigationView navView) {
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int itemOrder = menuItem.getOrder();
+                switch (menuItem.getItemId()) {
+                    case R.id.menu_nav_scan:
+
+                        break;
+
+                    case R.id.menu_nav_friends:
+
+                        break;
+
+                    case R.id.menu_nav_follow:
+
+                        break;
+
+                    case R.id.menu_nav_feedback:
+                        SplashTwoActivity.actionStart(MainHomeActivity.this);
+                        break;
+
+                    case R.id.menu_nav_setting:
+                        MainActivity.actionStart(MainHomeActivity.this);
+                        break;
+                }
+                // 关闭侧滑菜单
+                menuItem.setChecked(true);
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });
+    }
+
     private void initViewPage() {
         oneFragment = new OneFragment();
         twoFragment = new TwoFragment();
@@ -147,9 +303,16 @@ public class HomeActivity extends BaseActivity {
         fragmentList.add(threeFragment);
         fragmentList.add(fourFragment);
 
+        titleList.add("礼包");
+        titleList.add("开服");
+        titleList.add("热门");
+        titleList.add("特色");
+
         //ViewPager的适配器
-        fragmentViewPagerAdapter = new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList);
+        fragmentViewPagerAdapter = new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);
         myViewPager.setAdapter(fragmentViewPagerAdapter);
+        myViewPager.setCurrentItem(currentPosition);
+        baseToolbarTitle.setText(titleList.get(currentPosition));
         myViewPager.setOffscreenPageLimit(2);
 //        myViewPager.setRightDistance(getWindowManager().getDefaultDisplay().getWidth());
         //ViewPager滑动监听事件
@@ -166,14 +329,12 @@ public class HomeActivity extends BaseActivity {
                         //记录ViewPage当前的选中界面
                         currentPosition = 0;
                         mainRgRbOne.setChecked(true);
-                        baseToolbarTitle.setText("礼包");
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         break;
 
                     case 1:
                         currentPosition = 1;
                         mainRgRbTwo.setChecked(true);
-                        baseToolbarTitle.setText("开服");
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -186,23 +347,22 @@ public class HomeActivity extends BaseActivity {
                     case 2:
                         currentPosition = 2;
                         mainRgRbThree.setChecked(true);
-                        baseToolbarTitle.setText("热门");
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         break;
 
                     case 3:
                         currentPosition = 3;
                         mainRgRbFour.setChecked(true);
-                        baseToolbarTitle.setText("特色");
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "哈哈哈", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, "特色产品", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
                 }
+                baseToolbarTitle.setText(titleList.get(currentPosition));
             }
 
             @Override
@@ -214,12 +374,11 @@ public class HomeActivity extends BaseActivity {
         radioGroupContainerHome.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.main_rg_rb_one:
                         //切换fragment
 //                        switchFragment(0);
                         myViewPager.setCurrentItem(0);
-                        baseToolbarTitle.setText("礼包");
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         break;
 
@@ -227,7 +386,6 @@ public class HomeActivity extends BaseActivity {
                         //切换fragment
 //                        switchFragment(1);
                         myViewPager.setCurrentItem(1);
-                        baseToolbarTitle.setText("开服");
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -241,7 +399,6 @@ public class HomeActivity extends BaseActivity {
                         //切换fragment
 //                        switchFragment(2);
                         myViewPager.setCurrentItem(2);
-                        baseToolbarTitle.setText("热门");
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         break;
 
@@ -249,7 +406,6 @@ public class HomeActivity extends BaseActivity {
                         //切换fragment
 //                        switchFragment(3);
                         myViewPager.setCurrentItem(3);
-                        baseToolbarTitle.setText("特色");
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -259,6 +415,7 @@ public class HomeActivity extends BaseActivity {
                         });
                         break;
                 }
+                baseToolbarTitle.setText(titleList.get(currentPosition));
             }
         });
     }
@@ -287,9 +444,6 @@ public class HomeActivity extends BaseActivity {
         currentPosition = i;
     }
 
-    private void getWifiSSid() {
-        permissionHelper.check(Manifest.permission.ACCESS_FINE_LOCATION).onSuccess(this::onSuccess).onDenied(this::onDenied).onNeverAskAgain(this::onNeverAskAgain).run();
-    }
 
     private long waitTime = 2000;
     private long touchTime = 0;
@@ -299,7 +453,7 @@ public class HomeActivity extends BaseActivity {
         if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
             long currentTime = System.currentTimeMillis();
             if ((currentTime - touchTime) >= waitTime) {
-                Toast.makeText(HomeActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainHomeActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
                 touchTime = currentTime;
             } else {
                 finish();
@@ -318,53 +472,27 @@ public class HomeActivity extends BaseActivity {
         getActionBarTheme(baseToolbar);
     }
 
-    public String getWIFISSID(Activity activity) {
-        String ssid = "unknown id";
+    @OnClick({R.id.base_toolbar_left_icon, R.id.rl_net_bar})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.base_toolbar_left_icon:
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O || Build.VERSION.SDK_INT == Build.VERSION_CODES.P) {
-
-            WifiManager mWifiManager = (WifiManager) activity.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-
-            assert mWifiManager != null;
-            WifiInfo info = mWifiManager.getConnectionInfo();
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                return info.getSSID();
-            } else {
-                return info.getSSID().replace("\"", "");
-            }
-        } else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1) {
-
-            ConnectivityManager connManager = (ConnectivityManager) activity.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            assert connManager != null;
-            NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-            if (networkInfo.isConnected()) {
-                if (networkInfo.getExtraInfo() != null) {
-                    return networkInfo.getExtraInfo().replace("\"", "");
-                }
-            }
+            case R.id.rl_net_bar:
+//                NetUtil.openWifiSetting(MainHomeActivity.this);
+//                NetUtil.openSystemSetting(MainHomeActivity.this);
+//                NetUtil.openMobileNetSetting(MainHomeActivity.this);
+                NetUtil.openNetSetting(MainHomeActivity.this);
+                break;
         }
-        return ssid;
-    }
-
-    private void onSuccess() {
-        String wifissid = getWIFISSID(this);
-        System.out.println("====>   >   >  " + wifissid);
-    }
-
-    private void onDenied() {
-    }
-
-    private void onNeverAskAgain() {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        permissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(netReceiver);
+        EventBus.getDefault().unregister(this);
     }
 
-    @OnClick(R.id.base_toolbar_left_icon)
-    public void onViewClicked() {
-        drawerLayout.openDrawer(GravityCompat.START);
-    }
 }

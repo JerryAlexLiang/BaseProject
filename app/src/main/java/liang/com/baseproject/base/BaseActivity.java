@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import liang.com.baseproject.R;
 import liang.com.baseproject.utils.SPUtils;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
@@ -92,7 +93,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
 
             case 1:
-                baseToolbar.setBackgroundColor(Color.BLUE);
+                baseToolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 break;
 
             case 2:

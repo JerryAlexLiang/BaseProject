@@ -75,7 +75,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_change_toolbar_blue:
-                baseToolbar.setBackgroundColor(Color.BLUE);
+                baseToolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 llMainContainer.setBackgroundColor(Color.WHITE);
                 setActionBarTheme(ACTIONBAR_COLOR_BLUE);
                 break;

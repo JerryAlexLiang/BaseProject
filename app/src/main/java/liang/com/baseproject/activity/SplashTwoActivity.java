@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import liang.com.baseproject.HomeActivity;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.BaseActivity;
 
@@ -48,7 +47,7 @@ public class SplashTwoActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                HomeActivity.actionStart(SplashTwoActivity.this);
+                MainHomeActivity.actionStart(SplashTwoActivity.this);
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finishAll();
                 finish();
