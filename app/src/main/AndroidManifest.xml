@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="liang.com.baseproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -47,6 +48,7 @@
             android:name=".base.PermissionActivity"
             android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.ScanCodeActivity"></activity>
     </application>
 
 </manifest>

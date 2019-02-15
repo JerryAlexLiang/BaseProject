@@ -14,4 +14,6 @@
 
     <!--网络异常提示-->
     <string name="net_warn_content">网络连接异常，请检查你的网络设置</string>
+
+    <string name="loading">加载中...</string>
 </resources>

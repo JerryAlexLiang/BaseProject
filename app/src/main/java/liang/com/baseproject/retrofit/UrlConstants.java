@@ -7,7 +7,7 @@ package liang.com.baseproject.retrofit;
  */
 public interface UrlConstants {
 
-    String BASE_URL = "";
+    String NEWS_URL = "http://v.juhe.cn";
 
     //图片的前缀
     String IMG_FRONT_URL = "/iface/downloadfile?file=";

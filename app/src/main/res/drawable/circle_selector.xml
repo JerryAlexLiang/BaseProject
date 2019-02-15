@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/im_hover_bzfamily" android:state_checked="true" />
+    <item android:drawable="@drawable/im_bzfamily" android:state_checked="false" />
+
+</selector>

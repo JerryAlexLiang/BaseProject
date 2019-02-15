@@ -13,12 +13,6 @@ public class FragmentViewPagerAdapter extends FragmentPagerAdapter {
     List<Fragment> fragmentList = new ArrayList<>();
     List<String> titleList = new ArrayList<>();
 
-//    public FragmentViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
-//        super(fm);
-//        this.fragmentList = fragmentList;
-//    }
-
-
     public FragmentViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList, List<String> titleList) {
         super(fm);
         this.fragmentList = fragmentList;

@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlue">#00a2ed</color>
+    <color name="tabIndicatorColor">#FF6F00</color>
 
     <color name="black">#000000</color>
     <color name="bg_tab">#f7f7fb</color>
@@ -43,4 +44,37 @@
     <color name="font_blue">#42369a</color>
     <!-- 透明 -->
     <color name="translucent_background">#00000000</color>
+
+    <!--Text-->
+    <color name="textColor">#424242</color>
+
+    <!--Splash-->
+    <color name="white">#FFFFFF</color>
+    <color name="gery">#FAFAFA</color>
+    <color name="darkgery">#797979</color>
+    <color name="trangery">#512e2e2e</color>
+
+    <!--RefreshLayout-->
+    <color name="refresh_progress_1">#536DFE</color>
+    <color name="refresh_progress_2">#f44336</color>
+    <color name="refresh_progress_3">#FF4081</color>
+
+    <!--TabLayout-->
+    <color name="TabTextColor">#FFFFFF</color>
+    <color name="TabSelectColor">#FAFAFA</color>
+    <color name="TabIndicatorColor">#FFFFFF</color>
+
+    <!--gank-->
+    <color name="android">#1F8AFF</color>
+    <color name="ios">#F05D5E</color>
+    <color name="休息视频">#FFD034</color>
+    <color name="前端">#28B78D</color>
+    <color name="拓展资源">#F16745</color>
+    <color name="瞎推荐">#A199E9</color>
+
+    <!--option card-->
+    <color name="card_1">#9068be</color>
+    <color name="card_2">#1F8AFF</color>
+    <color name="card_3">#28B78D</color>
+    <color name="card_4">#F16745</color>
 </resources>

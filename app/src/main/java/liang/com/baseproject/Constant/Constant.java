@@ -1,5 +1,10 @@
 package liang.com.baseproject.Constant;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * 创建日期：2019/1/28 on 10:46
  * 描述: 全局常量
@@ -67,8 +72,16 @@ public class Constant {
     //无线网络
     public static final int NETWORK_WIFI = 1;
 
+    //聚合数据-新闻头条APPKEY
+    public static final String NEWS_APPKEY = "c0aa201cdbd21714e8e3fbea9bdf621d";
 
 
+    public static final Map map = new HashMap() {{
 
+        put("key1", "value1");
+
+        put("key2", "value2");
+
+    }};
 
 }

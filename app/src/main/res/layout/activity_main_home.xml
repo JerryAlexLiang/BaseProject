@@ -15,26 +15,38 @@
 
         <include layout="@layout/layout_toolbar_default" />
 
-        <!--<liang.com.baseproject.widget.MyViewPage-->
-        <!--android:id="@+id/my_view_pager"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_above="@id/radio_group_container_home"-->
-        <!--android:layout_below="@id/base_toolbar"/>-->
-
         <include
             layout="@layout/layout_net_warn_bar"
-            android:layout_below="@id/base_toolbar"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:visibility="gone"/>
+            android:layout_below="@id/base_toolbar"
+            android:visibility="gone" />
+
+        <!--<liang.com.baseproject.widget.MyViewPage-->
+            <!--android:id="@+id/my_view_pager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_above="@+id/radio_group_container_home"-->
+            <!--android:layout_below="@id/rl_net_bar"-->
+            <!--android:overScrollMode="never"-->
+            <!--tools:ignore="UnknownIdInLayout" />-->
 
         <android.support.v4.view.ViewPager
             android:id="@+id/my_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/radio_group_container_home"
             android:layout_below="@id/rl_net_bar"
-            android:overScrollMode="never" />
+            android:overScrollMode="never"
+            tools:ignore="UnknownIdInLayout" />
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_above="@+id/radio_group_container_home"
+            android:background="#88888888"
+            tools:ignore="UnknownIdInLayout" />
 
         <!--底部RadioButton-->
         <include layout="@layout/layout_radiogroup_bottom_navigation" />

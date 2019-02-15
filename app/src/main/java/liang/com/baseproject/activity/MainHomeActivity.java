@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,7 +44,7 @@ import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
-import liang.com.baseproject.fragment.OneFragment;
+import liang.com.baseproject.fragment.NewsFragment;
 import liang.com.baseproject.fragment.ThreeFragment;
 import liang.com.baseproject.fragment.TwoFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
@@ -49,6 +52,7 @@ import liang.com.baseproject.receiver.NetEvent;
 import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.NetUtil;
+import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.utils.WifiUtils;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
@@ -71,7 +75,8 @@ public class MainHomeActivity extends BaseActivity {
     @BindView(R.id.base_toolbar)
     FrameLayout baseToolbar;
     @BindView(R.id.my_view_pager)
-    ViewPager myViewPager;
+//    MyViewPage myViewPager;
+            ViewPager myViewPager;
     @BindView(R.id.main_rg_rb_one)
     RadioButton mainRgRbOne;
     @BindView(R.id.main_rg_rb_two)
@@ -113,7 +118,7 @@ public class MainHomeActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<>();
     //标题列表
     private List<String> titleList = new ArrayList<>();
-    private OneFragment oneFragment;
+    private NewsFragment newsFragment;
     private TwoFragment twoFragment;
     private ThreeFragment threeFragment;
     private FourFragment fourFragment;
@@ -265,7 +270,7 @@ public class MainHomeActivity extends BaseActivity {
                 int itemOrder = menuItem.getOrder();
                 switch (menuItem.getItemId()) {
                     case R.id.menu_nav_scan:
-
+                        startActivity(new Intent(MainHomeActivity.this, ScanCodeActivity.class));
                         break;
 
                     case R.id.menu_nav_friends:
@@ -293,28 +298,29 @@ public class MainHomeActivity extends BaseActivity {
     }
 
     private void initViewPage() {
-        oneFragment = new OneFragment();
+        newsFragment = new NewsFragment();
         twoFragment = new TwoFragment();
         threeFragment = new ThreeFragment();
         fourFragment = new FourFragment();
 
-        fragmentList.add(oneFragment);
+        fragmentList.add(newsFragment);
         fragmentList.add(twoFragment);
         fragmentList.add(threeFragment);
         fragmentList.add(fourFragment);
 
-        titleList.add("礼包");
+        titleList.add("新闻");
         titleList.add("开服");
         titleList.add("热门");
         titleList.add("特色");
 
         //ViewPager的适配器
         fragmentViewPagerAdapter = new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);
-        myViewPager.setAdapter(fragmentViewPagerAdapter);
         myViewPager.setCurrentItem(currentPosition);
         baseToolbarTitle.setText(titleList.get(currentPosition));
-        myViewPager.setOffscreenPageLimit(2);
+        myViewPager.setOffscreenPageLimit(3);//设置至少3个fragment，防止重复创建和销毁，造成内存溢出
 //        myViewPager.setRightDistance(getWindowManager().getDefaultDisplay().getWidth());
+        myViewPager.setAdapter(fragmentViewPagerAdapter);
+
         //ViewPager滑动监听事件
         myViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -453,7 +459,9 @@ public class MainHomeActivity extends BaseActivity {
         if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
             long currentTime = System.currentTimeMillis();
             if ((currentTime - touchTime) >= waitTime) {
-                Toast.makeText(MainHomeActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainHomeActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
+                ToastUtil.setCustomToast(MainHomeActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_notice),
+                        true, "再按一次退出应用", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
                 touchTime = currentTime;
             } else {
                 finish();
