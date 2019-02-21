@@ -2,6 +2,7 @@ package liang.com.baseproject.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -47,7 +48,9 @@ public class SplashTwoActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                MainHomeActivity.actionStart(SplashTwoActivity.this);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    MainHomeActivity.actionStart(SplashTwoActivity.this);
+                }
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 finishAll();
                 finish();

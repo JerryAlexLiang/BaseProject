@@ -24,7 +24,7 @@ import butterknife.Unbinder;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.NewsView;
-import liang.com.baseproject.adapter.NewsAdapter;
+import liang.com.baseproject.adapter.JuheNewsAdapter;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.interactor.NewsInteractor;
 import liang.com.baseproject.presenter.NewsPresenter;
@@ -135,15 +135,16 @@ public class OneFragment extends Fragment implements NewsView, SwipeRefreshLayou
 
     @Override
     public void setToastShow(String str) {
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_notice),
+        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 true, str, Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
     @Override
     public void getNewsSuccess(List<NewsRes.ResultBean.DataBean> data) {
         //适配器
-        NewsAdapter adapter = new NewsAdapter(getContext(), data);
+        JuheNewsAdapter adapter = new JuheNewsAdapter(getContext(), data);
         recyclerView.setAdapter(adapter);
+
     }
 
     /**

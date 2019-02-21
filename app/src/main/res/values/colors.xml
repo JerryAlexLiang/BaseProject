@@ -70,7 +70,7 @@
     <color name="休息视频">#FFD034</color>
     <color name="前端">#28B78D</color>
     <color name="拓展资源">#F16745</color>
-    <color name="瞎推荐">#A199E9</color>
+    <color name="webView_progress_bar_color">#A199E9</color>
 
     <!--option card-->
     <color name="card_1">#9068be</color>

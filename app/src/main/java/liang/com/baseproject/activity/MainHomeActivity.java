@@ -308,7 +308,7 @@ public class MainHomeActivity extends BaseActivity {
         fragmentList.add(threeFragment);
         fragmentList.add(fourFragment);
 
-        titleList.add("新闻");
+        titleList.add("聚合新闻");
         titleList.add("开服");
         titleList.add("热门");
         titleList.add("特色");
@@ -460,7 +460,7 @@ public class MainHomeActivity extends BaseActivity {
             long currentTime = System.currentTimeMillis();
             if ((currentTime - touchTime) >= waitTime) {
 //                Toast.makeText(MainHomeActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
-                ToastUtil.setCustomToast(MainHomeActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_notice),
+                ToastUtil.setCustomToast(MainHomeActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                         true, "再按一次退出应用", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
                 touchTime = currentTime;
             } else {

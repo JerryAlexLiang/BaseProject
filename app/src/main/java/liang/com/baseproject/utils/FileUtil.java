@@ -1,13 +1,26 @@
 package liang.com.baseproject.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Environment;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+
+import liang.com.baseproject.R;
+import liang.com.baseproject.activity.SinglePictureActivity;
 
 /**
  * 创建日期：2019/1/30 on 15:14
@@ -164,5 +177,36 @@ public class FileUtil {
             e.printStackTrace();
         }
         return file;
+    }
+
+    /**
+     * 下载保存图片到本地
+     */
+    public static void saveImage(Context context, ImageView imageView, String fileName) {
+        imageView.buildDrawingCache();
+        Bitmap bitmap = imageView.getDrawingCache();
+        //将Bitmap 转换成二进制，写入本地
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BaseProjectJerry");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        File file = new File(dir, fileName.substring(0, 16) + ".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(byteArray, 0, byteArray.length);
+            fos.flush();
+            //用广播通知相册进行更新相册
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            Uri uri = Uri.fromFile(file);
+            intent.setData(uri);
+            context.sendBroadcast(intent);
+            ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_true),
+                    true, "保存成功~", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

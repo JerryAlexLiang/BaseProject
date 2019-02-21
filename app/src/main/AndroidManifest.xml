@@ -48,7 +48,9 @@
             android:name=".base.PermissionActivity"
             android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.ScanCodeActivity"></activity>
+        <activity android:name=".activity.ScanCodeActivity" />
+        <activity android:name=".activity.JuheNewsDetailActivity" />
+        <activity android:name=".activity.SinglePictureActivity" />
     </application>
 
 </manifest>
