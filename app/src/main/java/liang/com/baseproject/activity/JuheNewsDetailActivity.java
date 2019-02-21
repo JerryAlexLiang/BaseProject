@@ -109,7 +109,11 @@ public class JuheNewsDetailActivity extends MVPBaseActivity<JuheNewsDetailWebVie
                 break;
 
             case R.id.base_toolbar_right_icon:
-                ToastUtil.showShortToast(JuheNewsDetailActivity.this, "分享");
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT,url);
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent,"分享到..."));
                 break;
         }
     }
