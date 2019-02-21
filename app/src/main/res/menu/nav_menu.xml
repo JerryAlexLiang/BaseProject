@@ -8,11 +8,11 @@
         <item
             android:id="@+id/menu_nav_friends"
             android:icon="@drawable/icon_activity"
-            android:title="活动" />
+            android:title="主题" />
         <item
             android:id="@+id/menu_nav_follow"
             android:icon="@drawable/icon_follow"
-            android:title="关注" />
+            android:title="闪屏" />
         <item
             android:id="@+id/menu_nav_feedback"
             android:icon="@drawable/icon_feedback"

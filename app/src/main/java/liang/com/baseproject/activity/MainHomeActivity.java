@@ -270,23 +270,26 @@ public class MainHomeActivity extends BaseActivity {
                 int itemOrder = menuItem.getOrder();
                 switch (menuItem.getItemId()) {
                     case R.id.menu_nav_scan:
+                        //扫描界面
                         startActivity(new Intent(MainHomeActivity.this, ScanCodeActivity.class));
                         break;
 
                     case R.id.menu_nav_friends:
-
+                        //改变主题
+                        MainActivity.actionStart(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_follow:
-
-                        break;
-
-                    case R.id.menu_nav_feedback:
+                        //闪屏
                         SplashTwoActivity.actionStart(MainHomeActivity.this);
                         break;
 
+                    case R.id.menu_nav_feedback:
+
+                        break;
+
                     case R.id.menu_nav_setting:
-                        MainActivity.actionStart(MainHomeActivity.this);
+                        SettingActivity.actionStart(MainHomeActivity.this);
                         break;
                 }
                 // 关闭侧滑菜单

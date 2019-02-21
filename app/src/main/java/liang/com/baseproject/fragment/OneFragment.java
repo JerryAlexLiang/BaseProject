@@ -159,4 +159,5 @@ public class OneFragment extends Fragment implements NewsView, SwipeRefreshLayou
         }
         setToastShow("刷新成功~");
     }
+
 }
