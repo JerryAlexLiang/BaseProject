@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.concurrent.TimeUnit;
 
+import liang.com.baseproject.app.MyApplication;
+import liang.com.baseproject.utils.NetUtil;
+import okhttp3.CacheControl;
 import okhttp3.Connection;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -129,8 +132,20 @@ public class HttpLoggingInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Level level = this.level;
+        //************添加缓存******************//
+        CacheControl.Builder cacheBuilder = new CacheControl.Builder();
+        cacheBuilder.maxAge(0, TimeUnit.SECONDS);
+        cacheBuilder.maxStale(365, TimeUnit.DAYS);
+        CacheControl cacheControl = cacheBuilder.build();
 
         Request request = chain.request();
+        if (!NetUtil.isNetworkAvailable(MyApplication.mContext)){
+            request = request.newBuilder()
+                    .cacheControl(cacheControl)
+                    .build();
+        }
+        //*************************************//
+//        Request request = chain.request();
         if (level == Level.NONE) {
             return chain.proceed(request);
         }
@@ -204,6 +219,7 @@ public class HttpLoggingInterceptor implements Interceptor {
             logger.log("<-- HTTP FAILED: " + e);
             throw e;
         }
+
         long tookMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - startNs);
 
         ResponseBody responseBody = response.body();
@@ -248,8 +264,22 @@ public class HttpLoggingInterceptor implements Interceptor {
                 logger.log("<-- END HTTP (" + buffer.size() + "-byte body)");
             }
         }
-
-        return response;
+        //************添加缓存******************//
+        if (NetUtil.isNetworkAvailable(MyApplication.mContext)) {
+            int maxAge = 0; // read from cache
+            return response.newBuilder()
+                    .removeHeader("Pragma")
+                    .header("Cache-Control", "public ,max-age=" + maxAge)
+                    .build();
+        } else {
+            int maxStale = 60 * 60 * 24 * 28; // tolerate 4-weeks stale
+            return response.newBuilder()
+                    .removeHeader("Pragma")
+                    .header("Cache-Control", "public, only-if-cached, max-stale=" + maxStale)
+                    .build();
+        }
+        //************添加缓存******************//
+//        return response;
     }
 
     /**

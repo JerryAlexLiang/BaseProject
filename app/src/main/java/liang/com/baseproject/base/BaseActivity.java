@@ -70,6 +70,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             //半透明状态栏(带阴影)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+        //本地化存储操作(取出) - 设置状态栏颜色
+        FrameLayout baseToolbar = findViewById(R.id.base_toolbar);
+        if (baseToolbar != null) {
+            getActionBarTheme(baseToolbar);
+        }
     }
 
     /**

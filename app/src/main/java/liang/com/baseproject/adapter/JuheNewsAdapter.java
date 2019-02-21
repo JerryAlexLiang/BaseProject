@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -96,8 +98,8 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvNewsTitle.setText(dataBean.getTitle());
             tvNewsTime.setText(dataBean.getDate());
             tvNewsAuthor.setText(dataBean.getAuthor_name());
-            ImageLoaderUtils.loadImage(context, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 5);
-
+            Glide.with(context).load(dataBean.getThumbnail_pic_s()).into(ivNewsImg);
+            ImageLoaderUtils.loadImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 5);
 //            //点击图片跳转图片Activity -> SinglePictureActivity
 //            ivNewsImg.setOnClickListener(v -> AnimationJumpToSinglePictureActivity(dataBean));
 
@@ -105,7 +107,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View v) {
                     SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
-                    ((Activity)context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             });
 
@@ -130,7 +132,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             @Override
             public void onAnimationEnd(Animation animation) {
                 SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
-                ((Activity)context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
 
             @Override

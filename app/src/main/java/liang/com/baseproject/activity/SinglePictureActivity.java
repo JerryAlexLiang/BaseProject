@@ -81,7 +81,7 @@ public class SinglePictureActivity extends MVPBaseActivity {
         //获取传递过来的数据
         parseIntent();
         //赋值
-        ImageLoaderUtils.loadImage(this, ivMeizhiPic, imgUrl, 0, 0, 0);
+        ImageLoaderUtils.loadImage(this, true, ivMeizhiPic, imgUrl, 0, 0, 0);
         new PhotoViewAttacher(ivMeizhiPic);
     }
 
@@ -90,7 +90,7 @@ public class SinglePictureActivity extends MVPBaseActivity {
         imgDesc = getIntent().getStringExtra(IMG_DESC);
     }
 
-    @OnClick({R.id.base_toolbar_left_icon, R.id.base_toolbar_right_icon,R.id.save_img})
+    @OnClick({R.id.base_toolbar_left_icon, R.id.base_toolbar_right_icon, R.id.save_img})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_toolbar_left_icon:

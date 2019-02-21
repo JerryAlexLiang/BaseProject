@@ -38,7 +38,7 @@ public class ImageLoaderUtils {
      * @createTime 2016/8/15
      * @lastModify 2016/8/15
      */
-    public static void loadImage(Context context, ImageView imageView, Object url, int defaultImage,
+    public static void loadImage(Context context, boolean isCache, ImageView imageView, Object url, int defaultImage,
                                  int errorImage, int radius) {
         //RequestOptions 设置请求参数，通过apply方法设置
         RequestOptions options = new RequestOptions()
@@ -51,7 +51,7 @@ public class ImageLoaderUtils {
                 .placeholder(defaultImage)
                 .error(errorImage)
 //                // 缓存原始数据
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .diskCacheStrategy(isCache ? DiskCacheStrategy.ALL : DiskCacheStrategy.NONE)
                 .centerCrop()
                 .transform(new CornersTranform(context, radius));
         // 图片加载库采用Glide框架
@@ -72,7 +72,7 @@ public class ImageLoaderUtils {
      * @param defaultImage
      * @param errorImage
      */
-    public static void loadCircleImage(Context context, final ImageView imageView, Object url, int defaultImage,
+    public static void loadCircleImage(Context context, boolean isCache,final ImageView imageView, Object url, int defaultImage,
                                        int errorImage) {
         RequestOptions options = new RequestOptions()
                 // 但不保证所有图片都按序加载
@@ -85,7 +85,7 @@ public class ImageLoaderUtils {
                 .placeholder(defaultImage)
                 .error(errorImage)
 //                // 缓存原始数据
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .diskCacheStrategy(isCache ? DiskCacheStrategy.ALL : DiskCacheStrategy.NONE)
                 .centerCrop()
                 .transform(new GlideCircleTransform(context));
         // 图片加载库采用Glide框架

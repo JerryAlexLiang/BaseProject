@@ -2,8 +2,11 @@ package liang.com.baseproject.retrofit;
 
 import android.util.Log;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
+import liang.com.baseproject.app.MyApplication;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -21,6 +24,12 @@ public class RetrofitHelper {
     private MyService mMyService;
 
     private RetrofitHelper(String url) {
+
+        //cache url
+        File httpCacheDirectory = new File(MyApplication.mContext.getCacheDir(), "responses");
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        Cache cache = new Cache(httpCacheDirectory, cacheSize);
+
         OkHttpClient.Builder client = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS);
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
@@ -31,6 +40,8 @@ public class RetrofitHelper {
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.addInterceptor(loggingInterceptor);
+        client.cache(cache).build();
+
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(url)
                 .addConverterFactory(GsonConverterFactory.create())
