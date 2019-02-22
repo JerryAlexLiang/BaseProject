@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,8 +23,10 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.JuheNewsDetailActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
+import liang.com.baseproject.activity.ViewPagerPictureActivity;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.utils.ImageLoaderUtils;
+import retrofit2.http.POST;
 
 public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -51,7 +54,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof JuheNewsViewHolder) {
             JuheNewsViewHolder juheNewsViewHolder = (JuheNewsViewHolder) viewHolder;
-            juheNewsViewHolder.bindItem(dataList.get(position));
+            juheNewsViewHolder.bindItem(dataList.get(position), position);
         } else if (viewHolder instanceof EmptyViewHolder) {
 
         }
@@ -94,19 +97,32 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ButterKnife.bind(this, itemView);
         }
 
-        public void bindItem(NewsRes.ResultBean.DataBean dataBean) {
+        public void bindItem(NewsRes.ResultBean.DataBean dataBean, int position) {
             tvNewsTitle.setText(dataBean.getTitle());
             tvNewsTime.setText(dataBean.getDate());
             tvNewsAuthor.setText(dataBean.getAuthor_name());
             Glide.with(context).load(dataBean.getThumbnail_pic_s()).into(ivNewsImg);
             ImageLoaderUtils.loadImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 5);
-//            //点击图片跳转图片Activity -> SinglePictureActivity
-//            ivNewsImg.setOnClickListener(v -> AnimationJumpToSinglePictureActivity(dataBean));
 
+
+//            //点击图片跳转图片Activity -> SinglePictureActivity  a%2 != 0
             ivNewsImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
+                    if (position % 2 != 0) {
+                        //奇数Item
+                        SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
+                    } else {
+                        //偶数Item
+                        List<String> imageUrlList = new ArrayList<>();
+                        String thumbnail_pic_s = dataBean.getThumbnail_pic_s();
+                        String thumbnail_pic_s02 = dataBean.getThumbnail_pic_s02();
+                        String thumbnail_pic_s03 = dataBean.getThumbnail_pic_s03();
+                        imageUrlList.add(thumbnail_pic_s);
+                        imageUrlList.add(thumbnail_pic_s02);
+                        imageUrlList.add(thumbnail_pic_s03);
+                        ViewPagerPictureActivity.actionStart(context, imageUrlList);
+                    }
                     ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             });
@@ -115,33 +131,6 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             cardStories.setOnClickListener(v -> JuheNewsDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl()));
         }
     }
-
-    private void AnimationJumpToSinglePictureActivity(NewsRes.ResultBean.DataBean dataBean) {
-        ScaleAnimation mScaleAnim = new ScaleAnimation(1.0f, 1.2f, 1.0f, 1.2f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
-        mScaleAnim.setFillAfter(true);
-        mScaleAnim.setDuration(5000);
-
-        mScaleAnim.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
-                ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-    }
-
 
 //public class JuheNewsAdapter extends BaseRecycleAdapter<NewsRes.ResultBean.DataBean> {
 

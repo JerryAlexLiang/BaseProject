@@ -21,7 +21,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 创建日期：2019/2/20 on 17:32
- * 描述:
+ * 描述: 单张大图显示器
  * 作者: liangyang
  */
 public class SinglePictureActivity extends MVPBaseActivity {

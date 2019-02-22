@@ -51,7 +51,8 @@
         <activity android:name=".activity.ScanCodeActivity" />
         <activity android:name=".activity.JuheNewsDetailActivity" />
         <activity android:name=".activity.SinglePictureActivity" />
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ViewPagerPictureActivity"></activity>
     </application>
 
 </manifest>

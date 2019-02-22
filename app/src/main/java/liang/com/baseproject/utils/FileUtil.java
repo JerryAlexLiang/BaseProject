@@ -11,6 +11,9 @@ import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -18,9 +21,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.concurrent.ExecutionException;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.SinglePictureActivity;
+import liang.com.baseproject.app.MyApplication;
 
 /**
  * 创建日期：2019/1/30 on 15:14
@@ -28,6 +33,8 @@ import liang.com.baseproject.activity.SinglePictureActivity;
  * 作者: liangyang
  */
 public class FileUtil {
+
+    private static File imageFile;
 
     /**
      * 删除目录及目录下的文件
@@ -180,7 +187,7 @@ public class FileUtil {
     }
 
     /**
-     * 下载保存图片到本地
+     * 下载保存图片到本地-单张图片源
      */
     public static void saveImage(Context context, ImageView imageView, String fileName) {
         imageView.buildDrawingCache();
@@ -193,7 +200,8 @@ public class FileUtil {
         if (!dir.exists()) {
             dir.mkdir();
         }
-        File file = new File(dir, fileName.substring(0, 16) + ".png");
+//        File file = new File(dir, fileName.substring(0, 16) + ".png");
+        File file = new File(dir, fileName + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(byteArray, 0, byteArray.length);
@@ -210,3 +218,4 @@ public class FileUtil {
         }
     }
 }
+
