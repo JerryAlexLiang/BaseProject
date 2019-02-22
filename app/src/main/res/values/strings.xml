@@ -18,7 +18,20 @@
     <string name="loading">加载中...</string>
 
     <!--设置界面-->
+    <string name="actionbar_theme">主题</string>
+    <string name="key_actionbar_theme_modify">key_actionbar_theme_modify</string>
+    <string name="title_actionbar_theme_modify">修改主题颜色</string>
     <string name="title_normal">常规</string>
+    <string name="key_theme_red">theme_red</string>
+    <string name="title_theme_red">红色</string>
+    <string name="key_theme_blue">theme_blue</string>
+    <string name="title_theme_blue">蓝色</string>
+    <string name="key_theme_black">theme_black</string>
+    <string name="title_theme_black">黑色</string>
+    <string name="key_theme_white">theme_white</string>
+    <string name="title_theme_white">白色</string>
+    <string name="key_theme_picture">theme_picture</string>
+    <string name="title_theme_picture">图片</string>
     <string name="summary_no_load_img">移动网络下不加载图片</string>
     <string name="title_no_load_img">无图模式</string>
     <string name="title_big_font">大字号</string>
@@ -34,4 +47,5 @@
     <string name="login_by_mb">使用微博登录</string>
     <string name="sina">新浪微博</string>
     <string name="tencent">腾讯微博</string>
+    
 </resources>

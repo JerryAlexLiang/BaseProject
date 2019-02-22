@@ -10,30 +10,34 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Toast;
 
+import liang.com.baseproject.MainActivity;
 import liang.com.baseproject.R;
-import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.utils.CacheCleanUtil;
 import liang.com.baseproject.utils.ToastUtil;
-import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
-import liang.com.baseproject.widget.toast.CustomToast;
 
 /**
  * 创建日期：2019/2/21 on 17:23
  * 描述: 设置选项内容
  * 作者: liangyang
  */
-public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, CustomPopupWindow.ViewInterface {
+public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings);
+        //主题样式
+        Preference modifyActionBarTheme = getPreferenceManager().findPreference(getResources().getString(R.string.key_actionbar_theme_modify));
+        //缓存及其他
         Preference clearCache = getPreferenceManager().findPreference(getResources().getString(R.string.key_clear_cache));
         Preference notice = getPreferenceManager().findPreference(getResources().getString(R.string.key_notice));
         Preference developer = getPreferenceManager().findPreference(getResources().getString(R.string.key_developer));
+
+        if (modifyActionBarTheme != null) {
+            modifyActionBarTheme.setOnPreferenceClickListener(this);
+        }
 
         if (clearCache != null) {
             clearCache.setOnPreferenceClickListener(this);
@@ -50,6 +54,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
+            case "key_actionbar_theme_modify":
+                MainActivity.actionStart(getActivity());
+                getActivity().finish();
+                ToastUtil.showShortToast(getActivity(), "更该主题样式~");
+                break;
+
             case "clear_cache":
                 showClearCacheDialog();
                 break;
@@ -99,9 +109,4 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 .show();
     }
 
-
-    @Override
-    public void getChildView(View view, int layoutResId, int flag) {
-
-    }
 }
