@@ -26,8 +26,7 @@ public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fra
 
     protected abstract int createViewLayoutId();
 
-    protected void initView(View rootView) {
-    }
+    protected abstract void initView(View rootView);
 
     public Boolean isSetRefresh() {
         return true;

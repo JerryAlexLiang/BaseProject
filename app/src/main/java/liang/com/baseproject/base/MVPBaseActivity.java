@@ -136,7 +136,7 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
     }
 
     /**
-     * 刷线数据
+     * 刷新数据
      */
     public void setRefresh(boolean requestDataRefresh) {
         if (mRefreshLayout == null) {

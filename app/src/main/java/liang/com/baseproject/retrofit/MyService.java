@@ -2,7 +2,9 @@ package liang.com.baseproject.retrofit;
 
 import io.reactivex.Observable;
 import liang.com.baseproject.entity.NewsRes;
+import liang.com.baseproject.entity.NiceGankRes;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -19,6 +21,14 @@ public interface MyService {
      */
     @GET("/toutiao/index")
     Observable<NewsRes> getNews(@Query("type") String type, @Query("key") String key);
+
+    /**
+     * 干货API - 颜如玉(福利) http://gank.io/api/data/福利/10/1
+     * http://gank.io/api/data/%E7%A6%8F%E5%88%A9/10/2
+     */
+//    @GET("/data/福利/10/{page}")
+    @GET("data/%E7%A6%8F%E5%88%A9/10/{page}")
+    Observable<NiceGankRes> getNiceGankData(@Path("page") int page);
 
 
 }
