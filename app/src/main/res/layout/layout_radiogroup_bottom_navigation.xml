@@ -21,7 +21,7 @@
         android:drawableTop="@drawable/home_selector"
         android:gravity="center"
         android:padding="6dp"
-        android:text="新闻"
+        android:text="@string/radio_button_one_text"
         android:textColor="#888888" />
 
     <RadioButton
@@ -34,7 +34,7 @@
         android:drawableTop="@drawable/circle_selector"
         android:gravity="center"
         android:padding="6dp"
-        android:text="段子"
+        android:text="@string/radio_button_two_text"
         android:textColor="#888888" />
 
     <RadioButton

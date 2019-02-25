@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -25,7 +26,7 @@ import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
 
 /**
  * 创建日期：2019/1/24 on 11:04
- * 描述: BaseActivity
+ * 描述: MVPBaseActivity - 通用标题栏模式
  * 作者: liangyang
  */
 public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
@@ -63,6 +64,15 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         mActivity = this;
     }
 
+    /**
+     * 判断子Activity是否需要刷新功能
+     *
+     * @return false
+     */
+    public Boolean isSetRefresh() {
+        return false;
+    }
+
     protected abstract T createPresenter();
 
     abstract protected int provideContentViewId();//用于引入布局文件
@@ -86,14 +96,64 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
         }
+
         //引入布局文件
         setContentView(provideContentViewId());//布局
+
         //本地化存储操作(取出) - 设置状态栏颜色
         FrameLayout baseToolbar = findViewById(R.id.base_toolbar);
         if (baseToolbar != null) {
             getActionBarTheme(baseToolbar);
         }
+
+        if (isSetRefresh()) {
+            //判断子Activity是否需要刷新功能
+            setupSwipeRefresh();
+        }
+
         ButterKnife.bind(this);
+    }
+
+    /**
+     * 判断子Activity是否需要刷新功能
+     */
+    private void setupSwipeRefresh() {
+        mRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        if (mRefreshLayout != null) {
+            //设置下拉刷新进度条颜色变化
+            mRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1, R.color.refresh_progress_2,
+                    R.color.refresh_progress_3);
+            //第一个参数scale是刷新圆形进度是否缩放,true表示缩放,圆形进度图会从小到大展示出来,为false就不缩放
+            //第二个参数start和end是刷新进度条展示的相对于默认的展示位置,start和end组成一个范围，在这个y轴范围就是那个圆形进度ProgressView展示的位置
+            mRefreshLayout.setProgressViewOffset(true, 0, (int) TypedValue
+                    .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
+            mRefreshLayout.setOnRefreshListener(this::requestDataRefresh);
+        }
+    }
+
+    public void requestDataRefresh() {
+        mIsRequestDataRefresh = true;
+    }
+
+    /**
+     * 刷线数据
+     */
+    public void setRefresh(boolean requestDataRefresh) {
+        if (mRefreshLayout == null) {
+            return;
+        }
+        if (!requestDataRefresh){
+            //不刷新
+            mIsRequestDataRefresh = false;
+            mRefreshLayout.postDelayed(()->{
+                if (mRefreshLayout!=null){
+                    mRefreshLayout.setRefreshing(false);
+                }
+            },1000);
+        }else {
+            //刷新效果
+            mRefreshLayout.setRefreshing(true);
+        }
     }
 
     /**

@@ -47,5 +47,7 @@
     <string name="login_by_mb">使用微博登录</string>
     <string name="sina">新浪微博</string>
     <string name="tencent">腾讯微博</string>
+    <string name="radio_button_one_text">新头条</string>
+    <string name="radio_button_two_text">颜如玉</string>
 
 </resources>

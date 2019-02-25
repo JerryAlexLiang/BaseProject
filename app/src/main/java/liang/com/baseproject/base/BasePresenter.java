@@ -3,6 +3,9 @@ package liang.com.baseproject.base;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
+import liang.com.baseproject.retrofit.MyService;
+import liang.com.baseproject.retrofit.RetrofitHelper;
+
 /**
  * 创建日期：2019/2/20 on 14:13
  * 描述: BasePresenter

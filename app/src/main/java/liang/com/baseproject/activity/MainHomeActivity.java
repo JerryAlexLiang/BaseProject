@@ -46,7 +46,7 @@ import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
 import liang.com.baseproject.fragment.NewsFragment;
 import liang.com.baseproject.fragment.ThreeFragment;
-import liang.com.baseproject.fragment.TwoFragment;
+import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
 import liang.com.baseproject.utils.CheckPermission;
@@ -119,7 +119,7 @@ public class MainHomeActivity extends BaseActivity {
     //标题列表
     private List<String> titleList = new ArrayList<>();
     private NewsFragment newsFragment;
-    private TwoFragment twoFragment;
+    private NiceGankFragment niceGankFragment;
     private ThreeFragment threeFragment;
     private FourFragment fourFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
@@ -302,17 +302,17 @@ public class MainHomeActivity extends BaseActivity {
 
     private void initViewPage() {
         newsFragment = new NewsFragment();
-        twoFragment = new TwoFragment();
+        niceGankFragment = new NiceGankFragment();
         threeFragment = new ThreeFragment();
         fourFragment = new FourFragment();
 
         fragmentList.add(newsFragment);
-        fragmentList.add(twoFragment);
+        fragmentList.add(niceGankFragment);
         fragmentList.add(threeFragment);
         fragmentList.add(fourFragment);
 
         titleList.add("聚合新闻");
-        titleList.add("开服");
+        titleList.add("颜如玉");
         titleList.add("热门");
         titleList.add("特色");
 
@@ -348,7 +348,7 @@ public class MainHomeActivity extends BaseActivity {
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "开服测试", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, "切换模式", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;
@@ -399,7 +399,7 @@ public class MainHomeActivity extends BaseActivity {
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "开服测试", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, "切换模式", Toast.LENGTH_SHORT).show();
                             }
                         });
                         break;

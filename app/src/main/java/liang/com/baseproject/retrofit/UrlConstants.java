@@ -9,6 +9,8 @@ public interface UrlConstants {
 
     String NEWS_URL = "http://v.juhe.cn";
 
+    String GANK_BASE_URL = "http://gank.io/api/";
+
     //图片的前缀
     String IMG_FRONT_URL = "/iface/downloadfile?file=";
 }
