@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.NiceGankView;
 import liang.com.baseproject.base.MVPBaseFragment;
@@ -32,7 +31,6 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
     RecyclerView recyclerViewNiceGank;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
-    Unbinder unbinder;
     private GridLayoutManager gridLayoutManager;
 
     @Override
@@ -59,12 +57,6 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
             mPresenter.getNiceGankData();
             mPresenter.scrollRecycleViewListener();
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
