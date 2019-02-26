@@ -30,7 +30,7 @@ public class NewsInteractor {
      */
     public void getNewsData(String serverUrl, String type, String key, onRetrofitListener listener) {
         RetrofitHelper
-                .getJuheSingletonInstance(serverUrl)
+                .getInstance(serverUrl)
                 .getMyService()
                 .getNews(type, key)
                 .subscribeOn(Schedulers.io())

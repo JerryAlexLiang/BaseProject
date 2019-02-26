@@ -51,7 +51,7 @@ public class RetrofitHelper {
         mMyService = mRetrofit.create(MyService.class);
     }
 
-    public static RetrofitHelper getJuheSingletonInstance(String url) {
+    public static RetrofitHelper getInstance(String url) {
         if (sInstance == null) {
             synchronized (RetrofitHelper.class) {
                 if (sInstance == null) {
@@ -64,6 +64,13 @@ public class RetrofitHelper {
 
     public static RetrofitHelper getGankSingletonInstance(String url) {
         return new RetrofitHelper(url);
+    }
+
+    /**
+     * Android Retrofit 在开发中进行更改多个BaseUrl
+     */
+    public static RetrofitHelper getInstanceChangeBaseUrl(String newApiBaseUrl) {
+        return new RetrofitHelper(newApiBaseUrl);
     }
 
     public MyService getMyService() {

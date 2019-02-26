@@ -56,7 +56,8 @@ public class NiceGankPresenter extends BasePresenter<NiceGankView> {
 
             //请求网络数据
             RetrofitHelper
-                    .getGankSingletonInstance(UrlConstants.GANK_BASE_URL)
+//                    .getGankSingletonInstance(UrlConstants.GANK_BASE_URL)
+                    .getInstanceChangeBaseUrl(UrlConstants.GANK_BASE_URL)
                     .getMyService()
                     .getNiceGankData(page)
                     .subscribeOn(Schedulers.io())
