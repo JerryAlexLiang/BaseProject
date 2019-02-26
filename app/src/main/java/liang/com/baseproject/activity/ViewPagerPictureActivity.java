@@ -2,6 +2,7 @@ package liang.com.baseproject.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -118,6 +121,7 @@ public class ViewPagerPictureActivity extends MVPBaseActivity {
 
     private void parseIntent() {
         imageUrlList = (List<String>) getIntent().getSerializableExtra("imageUrlList");
+        LogUtil.d(TAG, imageUrlList.toString());
     }
 
     @OnClick({R.id.base_toolbar_left_icon, R.id.save_img})
@@ -128,8 +132,16 @@ public class ViewPagerPictureActivity extends MVPBaseActivity {
                 break;
 
             case R.id.save_img:
-                String currentImageUrl = imageUrlList.get(currentPage);
-
+                int currentItem = imageViewPager.getCurrentItem();
+                String currentImageUrl = imageUrlList.get(currentItem);
+                LogUtil.d(TAG, "当前图片地址:  " + currentImageUrl);
+                Bitmap bitmap = FileUtil.saveImageByUrl(currentImageUrl);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FileUtil.translateBitmapToFile(mActivity, bitmap, String.valueOf(System.currentTimeMillis()));
+                    }
+                });
                 break;
         }
     }

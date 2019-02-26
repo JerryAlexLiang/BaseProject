@@ -1,5 +1,6 @@
 package liang.com.baseproject.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,15 +15,30 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.plugins.RxJavaPlugins;
+import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.SinglePictureActivity;
 import liang.com.baseproject.app.MyApplication;
@@ -201,6 +217,81 @@ public class FileUtil {
             dir.mkdir();
         }
 //        File file = new File(dir, fileName.substring(0, 16) + ".png");
+        File file = new File(dir, fileName + ".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(byteArray, 0, byteArray.length);
+            fos.flush();
+            //用广播通知相册进行更新相册
+            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            Uri uri = Uri.fromFile(file);
+            intent.setData(uri);
+            context.sendBroadcast(intent);
+            ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_true),
+                    true, "保存成功~", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 根据URL下载图片到本地
+     */
+    public static Bitmap saveImageByUrl(String url) {
+        URL imageUrl = null;
+        Bitmap bitmap = null;
+        try {
+            imageUrl = new URL(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            //将URL转为Bitmap
+            HttpURLConnection connection = (HttpURLConnection) (imageUrl != null ? imageUrl.openConnection() : null);
+            assert connection != null;
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream is = connection.getInputStream();
+            bitmap = BitmapFactory.decodeStream(is);
+//                    translateBitmapToFile(context, bitmap, fileName);
+//            //将Bitmap 转换成二进制，写入本地
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//            byte[] byteArray = stream.toByteArray();
+//            File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BaseProjectJerry");
+//            if (!dir.exists()) {
+//                dir.mkdir();
+//            }
+//            File file = new File(dir, fileName + ".png");
+//            try {
+//                FileOutputStream fos = new FileOutputStream(file);
+//                fos.write(byteArray, 0, byteArray.length);
+//                fos.flush();
+//                //用广播通知相册进行更新相册
+//                Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//                Uri uri = Uri.fromFile(file);
+//                intent.setData(uri);
+//                context.sendBroadcast(intent);
+//                ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_true),
+//                        true, "保存成功~", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    public static void translateBitmapToFile(Context context, Bitmap bitmap, String fileName) {
+        //将Bitmap 转换成二进制，写入本地
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BaseProjectJerry");
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
         File file = new File(dir, fileName + ".png");
         try {
             FileOutputStream fos = new FileOutputStream(file);

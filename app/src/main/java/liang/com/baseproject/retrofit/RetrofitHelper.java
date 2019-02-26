@@ -51,7 +51,7 @@ public class RetrofitHelper {
         mMyService = mRetrofit.create(MyService.class);
     }
 
-    public static RetrofitHelper getInstance(String url) {
+    public static RetrofitHelper getJuheSingletonInstance(String url) {
         if (sInstance == null) {
             synchronized (RetrofitHelper.class) {
                 if (sInstance == null) {
@@ -62,7 +62,7 @@ public class RetrofitHelper {
         return sInstance;
     }
 
-    public static RetrofitHelper newInstance(String url) {
+    public static RetrofitHelper getGankSingletonInstance(String url) {
         return new RetrofitHelper(url);
     }
 

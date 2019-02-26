@@ -109,20 +109,36 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             ivNewsImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (position % 2 != 0) {
-                        //奇数Item
-                        SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
-                    } else {
-                        //偶数Item
+//                    if (position % 2 != 0) {
+//                        //奇数Item
+//                        SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
+//                    } else {
+//                        //偶数Item
+//                        List<String> imageUrlList = new ArrayList<>();
+//                        String thumbnail_pic_s = dataBean.getThumbnail_pic_s();
+//                        String thumbnail_pic_s02 = dataBean.getThumbnail_pic_s02();
+//                        String thumbnail_pic_s03 = dataBean.getThumbnail_pic_s03();
+//                        imageUrlList.add(thumbnail_pic_s);
+//                        imageUrlList.add(thumbnail_pic_s02);
+//                        imageUrlList.add(thumbnail_pic_s03);
+//                        ViewPagerPictureActivity.actionStart(context, imageUrlList);
+//                    }
+
+                    String thumbnail_pic_s = dataBean.getThumbnail_pic_s();
+                    String thumbnail_pic_s02 = dataBean.getThumbnail_pic_s02();
+                    String thumbnail_pic_s03 = dataBean.getThumbnail_pic_s03();
+                    if (thumbnail_pic_s != null && thumbnail_pic_s02 != null && thumbnail_pic_s03 != null) {
+                        //跳转到ViewPager多张大图显示界面
                         List<String> imageUrlList = new ArrayList<>();
-                        String thumbnail_pic_s = dataBean.getThumbnail_pic_s();
-                        String thumbnail_pic_s02 = dataBean.getThumbnail_pic_s02();
-                        String thumbnail_pic_s03 = dataBean.getThumbnail_pic_s03();
                         imageUrlList.add(thumbnail_pic_s);
                         imageUrlList.add(thumbnail_pic_s02);
                         imageUrlList.add(thumbnail_pic_s03);
                         ViewPagerPictureActivity.actionStart(context, imageUrlList);
+                    }else {
+                        //不是全部有数据的时候跳转到单张大图显示界面
+                        SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
                     }
+                    //渐变式切换Activity效果
                     ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             });

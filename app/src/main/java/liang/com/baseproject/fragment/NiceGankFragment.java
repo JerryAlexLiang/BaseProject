@@ -18,6 +18,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.View.NiceGankView;
 import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.presenter.NiceGankPresenter;
+import liang.com.baseproject.utils.NetUtil;
 import liang.com.baseproject.utils.ToastUtil;
 
 /**
@@ -53,9 +54,11 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setDataRefresh(true);
-        mPresenter.getNiceGankData();
-        mPresenter.scrollRecycleViewListener();
+        if (NetUtil.isNetworkAvailable(getContext())){
+            setDataRefresh(true);
+            mPresenter.getNiceGankData();
+            mPresenter.scrollRecycleViewListener();
+        }
     }
 
     @Override

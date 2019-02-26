@@ -1,7 +1,10 @@
 package liang.com.baseproject.activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -17,6 +21,8 @@ import liang.com.baseproject.base.BasePresenter;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.ImageLoaderUtils;
+import liang.com.baseproject.utils.ToastUtil;
+import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
@@ -24,7 +30,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  * 描述: 单张大图显示器
  * 作者: liangyang
  */
-public class SinglePictureActivity extends MVPBaseActivity {
+public class SinglePictureActivity extends MVPBaseActivity implements View.OnLongClickListener {
 
     public static final String IMG_URL = "img_url";
     public static final String IMG_DESC = "img_desc";
@@ -48,6 +54,8 @@ public class SinglePictureActivity extends MVPBaseActivity {
     FloatingActionButton saveImg;
     @BindView(R.id.layout_pic)
     RelativeLayout layoutPic;
+    @BindView(R.id.iv_meizhi_zoom_pic)
+    PhotoView ivMeizhiZoomPic;
     private String imgUrl;
     private String imgDesc;
 
@@ -81,8 +89,21 @@ public class SinglePictureActivity extends MVPBaseActivity {
         //获取传递过来的数据
         parseIntent();
         //赋值
-        ImageLoaderUtils.loadImage(this, true, ivMeizhiPic, imgUrl, 0, 0, 0);
-        new PhotoViewAttacher(ivMeizhiPic);
+//        ImageLoaderUtils.loadImage(this, true, ivMeizhiPic, imgUrl, 0, 0, 0);
+//        new PhotoViewAttacher(ivMeizhiPic); //使用缩放控件
+        ImageLoaderUtils.loadImage(this, true, ivMeizhiZoomPic, imgUrl, 0, 0, 0);
+
+        //ivMeizhiZoomPic的长按点击事件
+        ivMeizhiZoomPic.setOnLongClickListener(this);
+
+        //ivMeizhiZoomPic的单击点击事件- 仿微博单击后退出大图界面   ((Activity)context).finish();
+        ivMeizhiZoomPic.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(View view, float x, float y) {
+                finish();
+            }
+        });
+
     }
 
     private void parseIntent() {
@@ -98,19 +119,59 @@ public class SinglePictureActivity extends MVPBaseActivity {
                 break;
 
             case R.id.base_toolbar_right_icon:
-                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
+//                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
+                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiZoomPic, imgDesc);
                 break;
 
             case R.id.save_img:
-                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
+//                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
+                savePicByUrl();
                 break;
-
-
         }
+    }
+
+    private void savePicByUrl() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = FileUtil.saveImageByUrl(imgUrl);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        FileUtil.translateBitmapToFile(mActivity, bitmap, imgDesc);
+                    }
+                });
+            }
+        }).start();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * ivMeizhiZoomPic的长按点击事件
+     */
+    @Override
+    public boolean onLongClick(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("保存图片")
+                .setMessage("图片将保存到手机内存中，会占用内存哦~")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("下载", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        savePicByUrl();
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+        return false;
     }
 }

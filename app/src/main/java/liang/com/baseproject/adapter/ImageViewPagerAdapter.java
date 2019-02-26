@@ -1,5 +1,6 @@
 package liang.com.baseproject.adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.ImageLoaderUtils;
 import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 创建日期：2019/2/22 on 13:47
@@ -81,6 +83,16 @@ public class ImageViewPagerAdapter extends PagerAdapter {
                 return false;
             }
         });
+
+        //photoView的单击点击事件- 仿微博单击后退出大图界面
+        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(View view, float x, float y) {
+                ((Activity)container.getContext()).finish();
+            }
+        });
+
+
         return photoView;
     }
 
