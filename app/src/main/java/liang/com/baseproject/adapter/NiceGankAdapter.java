@@ -65,6 +65,8 @@ public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         ImageView ivNiceGank;
         @BindView(R.id.tv_nice_gank)
         TextView tvNiceGank;
+        @BindView(R.id.tv_nice_source)
+        TextView tvNiceSource;
         @BindView(R.id.card_nice_gank)
         CardView cardNiceGank;
 
@@ -75,6 +77,7 @@ public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         public void bindItem(GankRes gankRes) {
             tvNiceGank.setText(gankRes.getDesc());
+            tvNiceSource.setText("来源: " + gankRes.getSource());
 //            Glide.with(context).load(gankRes.getUrl()).into(ivNiceGank);
             ImageLoaderUtils.loadImage(context, true, ivNiceGank, gankRes.getUrl(),
                     0, 0, 0);

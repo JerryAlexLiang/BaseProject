@@ -23,14 +23,32 @@
             android:layout_height="180dp"
             android:scaleType="centerCrop"/>
 
-        <TextView
-            android:id="@+id/tv_nice_gank"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:padding="10dp"
-            android:textColor="@color/textColor" />
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_nice_gank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/textColor" />
+
+            <TextView
+                android:id="@+id/tv_nice_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/color_397bff" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 
