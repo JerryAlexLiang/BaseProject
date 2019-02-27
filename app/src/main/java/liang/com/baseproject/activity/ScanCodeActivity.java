@@ -6,7 +6,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -29,6 +31,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     ViewPager bannerViewPager;
     @BindView(R.id.tv_image_desc)
     TextView tvImageDesc;
+    @BindView(R.id.ll_indicator_dot)
+    LinearLayout llIndicatorDot;
 
     private List<String> stringList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -37,6 +41,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     private String[] imageDescs;
     private int previousPosition = 0; // 前一个被选中的position
     private boolean isStop = false;   //是否停止自动播放
+    private int currentPosition; //当前位置
 
 
     @Override
@@ -69,8 +74,55 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         setFirstLocation();
         //第五步: 设置自动播放,每隔3秒换一张图片
         autoPlayView();
+        //第七部：定义banner的滚动点
+        initDots();
 
 
+    }
+
+    /**
+     * 定义banner的滚动点
+     */
+    private void initDots() {
+        //llIndicatorDot
+
+        //dots = new ImageView[mLinearLayout.getChildCount()];
+        //        for (int i = 0; i < dots.length; i++) {
+        //            dots[i] = (ImageView) mLinearLayout.getChildAt(i);
+        //            //让ImageView有效
+        //            dots[i].setEnabled(true);
+        //            dots[i].setTag(i);
+        //            dots[i].setOnClickListener(new View.OnClickListener() {
+        //                @Override
+        //                public void onClick(View v) {
+        //                    int position = (int) v.getTag();
+        //                    index = position;
+        //
+        //                    setDotsEnable(position);
+        //
+        //                    //设置当前页面
+        //                    mViewPager.setCurrentItem(position);
+        //                }
+        //            });
+        //        }
+        //        dots[0].setEnabled(false);
+        ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = (ImageView) llIndicatorDot.getChildAt(i);
+            //让ImageView有效
+            dots[i].setEnabled(true);
+            dots[i].setTag(i);
+            dots[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = (int) v.getTag();
+                    currentPosition = position;
+
+
+
+                }
+            });
+        }
     }
 
     /**
@@ -102,7 +154,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         tvImageDesc.setText(imageDescs[previousPosition]);
         // *把ViewPager设置为默认选中Integer.MAX_VALUE / 2，从十几亿次开始轮播图片，达到无限循环目的;
         int m = (Integer.MAX_VALUE / 2) % mImageList.size();
-        int currentPosition = Integer.MAX_VALUE / 2 - m;
+        currentPosition = Integer.MAX_VALUE / 2 - m;
         //设置ViewPager图片当前位置
         bannerViewPager.setCurrentItem(currentPosition - 1);
     }

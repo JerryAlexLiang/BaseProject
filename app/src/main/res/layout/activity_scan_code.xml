@@ -26,7 +26,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/scan_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="50dp"></android.support.v4.view.ViewPager>
+            android:layout_height="50dp"/>
 
         <View
             android:layout_width="match_parent"
@@ -47,6 +47,7 @@
             </android.support.v4.view.ViewPager>
 
             <LinearLayout
+                android:id="@+id/ll_indicator_dot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -54,31 +55,26 @@
                 android:layout_marginTop="190dp">
 
                 <ImageView
-                    android:id="@+id/iv_indicator_one"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/selector_banner_indicator"/>
 
                 <ImageView
-                    android:id="@+id/iv_indicator_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/selector_banner_indicator"/>
 
                 <ImageView
-                    android:id="@+id/iv_indicator_three"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/selector_banner_indicator"/>
 
                 <ImageView
-                    android:id="@+id/iv_indicator_four"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/selector_banner_indicator"/>
 
                 <ImageView
-                    android:id="@+id/iv_indicator_five"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/selector_banner_indicator"/>
