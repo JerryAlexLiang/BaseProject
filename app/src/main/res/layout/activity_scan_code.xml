@@ -26,7 +26,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/scan_view_pager"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
 
         <View
             android:layout_width="match_parent"
@@ -50,34 +50,42 @@
                 android:id="@+id/ll_indicator_dot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="190dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginTop="190dp">
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/selector_banner_indicator"/>
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/selector_banner_indicator" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/selector_banner_indicator"/>
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/selector_banner_indicator" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/selector_banner_indicator"/>
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/selector_banner_indicator" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/selector_banner_indicator"/>
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginRight="3dp"
+                    android:src="@drawable/selector_banner_indicator" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/selector_banner_indicator"/>
+                    android:src="@drawable/selector_banner_indicator" />
 
             </LinearLayout>
 

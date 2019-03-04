@@ -1,11 +1,13 @@
 package liang.com.baseproject.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,9 +24,11 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
 import liang.com.baseproject.fragment.OneFragment;
+import liang.com.baseproject.utils.LogUtil;
 
 public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
+    private static final String TAG = ScanCodeActivity.class.getSimpleName();
     @BindView(R.id.scan_tab_layout)
     TabLayout scanTabLayout;
     @BindView(R.id.scan_view_pager)
@@ -39,11 +45,30 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
     private List<ImageView> mImageList = new ArrayList<>();
     private String[] imageDescs;
+
+    private Timer mTimer = new Timer();
     private int previousPosition = 0; // 前一个被选中的position
     private boolean isStop = false;   //是否停止自动播放
     private int currentPosition; //当前位置
 
+    //第五步: 设置自动播放,每隔3秒换一张图片
+    private TimerTask mTimerTask =  new TimerTask() {
+        @Override
+        public void run() {
+            if (!isStop){
+                LogUtil.d(TAG, "开始自动播放Banner");
+                //播放时，主线程更新UI
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1);
+                    }
+                });
+            }
+        }
+    };
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,10 +85,6 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         //TabLayout同步fragment
         scanTabLayout.setupWithViewPager(scanViewPager);
 
-        //MyPagerAdapter mAdapter = new MyPagerAdapter(mImageList, mViewPager);
-        //        mViewPager.setAdapter(mAdapter);
-        //        mViewPager.addOnPageChangeListener(this);
-        //        setFirstLocation();
         //Banner ViewPager的Adapter
         //第二步：设置viewpager适配器
         MyBannerPagerAdapter bannerPagerAdapter = new MyBannerPagerAdapter(mImageList, bannerViewPager);
@@ -72,10 +93,29 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         bannerViewPager.addOnPageChangeListener(this);
         //第四步：设置刚打开app时显示的图片和文字
         setFirstLocation();
-        //第五步: 设置自动播放,每隔3秒换一张图片
-        autoPlayView();
-        //第七部：定义banner的滚动点
-        initDots();
+//        //第五步: 设置自动播放,每隔3秒换一张图片
+//        autoPlayView();
+        mTimer.schedule(mTimerTask,3000,3000);
+        //第七部：设置ViewPager的触摸事件，触摸停止自动播放Banner
+        bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+                    //按下或移动手指,停止自动播放
+                    isStop = true;
+                    LogUtil.d(TAG, "触摸状态，停止自动播放Banner");
+                } else if (action == MotionEvent.ACTION_UP) {
+                    //抬起触摸，开启自动播放
+                    isStop = false;
+                    LogUtil.d(TAG, "触摸抬起，开启自动播放Banner");
+                }
+                return false;
+            }
+        });
+
+        //第八部：定义banner的滚动点
+//        initDots();
 
 
     }
@@ -106,6 +146,12 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         //            });
         //        }
         //        dots[0].setEnabled(false);
+
+        //position %= DEFAULT_BANNER_SIZE;
+        //        for(ImageView indicator : mIndicators) {
+        //            indicator.setImageResource(R.mipmap.indicator_unchecked);
+        //        }
+        //        mIndicators[position].setImageResource(R.mipmap.indicator_checked);
         ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
         for (int i = 0; i < dots.length; i++) {
             dots[i] = (ImageView) llIndicatorDot.getChildAt(i);
@@ -117,12 +163,13 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
                 public void onClick(View v) {
                     int position = (int) v.getTag();
                     currentPosition = position;
-
-
-
+                    dots[currentPosition].setEnabled(false);
+                    //设置当前页面
+                    bannerViewPager.setCurrentItem(currentPosition);
                 }
             });
         }
+        dots[0].setEnabled(false);
     }
 
     /**
@@ -134,7 +181,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
             @Override
             public void run() {
                 while (!isStop) {
-                    //停止播放时，主线程更新UI
+                    LogUtil.d(TAG, "开始自动播放Banner");
+                    //播放时，主线程更新UI
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -156,7 +204,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         int m = (Integer.MAX_VALUE / 2) % mImageList.size();
         currentPosition = Integer.MAX_VALUE / 2 - m;
         //设置ViewPager图片当前位置
-        bannerViewPager.setCurrentItem(currentPosition - 1);
+        bannerViewPager.setCurrentItem(currentPosition);
     }
 
     private void initData() {
@@ -220,11 +268,34 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     public void onPageSelected(int position) {
         //伪无限循环，滑到最后一张图片又从新进入第一张图片
         int newPosition = position % mImageList.size();
+
         //把当前选中的点给切换了, 还有描述信息也切换
-        ////图片下面设置显示文本
+        //图片下面设置显示文本
         tvImageDesc.setText(imageDescs[newPosition]);
+
+        //第八部：定义banner的滚动点
+        ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = (ImageView) llIndicatorDot.getChildAt(i);
+            //让ImageView有效
+            dots[i].setEnabled(true);
+            dots[i].setTag(i);
+            dots[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = (int) v.getTag();
+                    currentPosition = position;
+                    //设置当前页面
+                    bannerViewPager.setCurrentItem(currentPosition);
+                }
+            });
+        }
+        dots[newPosition].setEnabled(false);
+
         //把当前的索引赋值给前一个索引变量，方便下一次再切换
         previousPosition = newPosition;
+
+
     }
 
     @Override
@@ -240,5 +311,6 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         super.onDestroy();
         //停止自动播放
         isStop = true;
+        mTimer.cancel();
     }
 }
