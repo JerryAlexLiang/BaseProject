@@ -18,6 +18,7 @@ public class MyBannerPagerAdapter extends PagerAdapter {
 
     private List<ImageView> imageList;
     private ViewPager viewPager;
+    private ViewPagerClickInterFace viewPagerClickInterFace;
 
     public MyBannerPagerAdapter(List<ImageView> imageList, ViewPager viewPager) {
         this.imageList = imageList;
@@ -50,6 +51,16 @@ public class MyBannerPagerAdapter extends PagerAdapter {
         // 把position对应位置的ImageView添加到ViewPager中
         ImageView iv = imageList.get(position % imageList.size());
         viewPager.addView(iv);
+        //点击事件
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewPagerClickInterFace!=null){
+                    //执行回调方法
+                    viewPagerClickInterFace.onClick(position % imageList.size());
+                }
+            }
+        });
         // 把当前添加ImageView返回回去.
         return iv;
     }
@@ -62,5 +73,22 @@ public class MyBannerPagerAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         // 把ImageView从ViewPager中移除掉
         viewPager.removeView(imageList.get(position % imageList.size()));
+    }
+
+    /**
+     * 点击事件监听器回调接口
+     */
+    public interface ViewPagerClickInterFace {
+        /**
+         * item点击事件监听
+         */
+        void onClick(int position);
+    }
+
+    /**
+     * 点击事件监听器回调方法
+     */
+    public void setViewPagerClickInterFace(ViewPagerClickInterFace viewPagerClickInterFace) {
+        this.viewPagerClickInterFace = viewPagerClickInterFace;
     }
 }

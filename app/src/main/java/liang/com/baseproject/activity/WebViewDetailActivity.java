@@ -15,12 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.JuheNewsDetailWebView;
-import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.presenter.JuheNewsDetailPresenter;
 import liang.com.baseproject.utils.LogUtil;
@@ -31,9 +28,9 @@ import liang.com.baseproject.utils.ToastUtil;
  * 描述: 聚合新闻详情页- WebView加载Url
  * 作者: liangyang  <IGankWebView,GankWebPresenter> implements IGankWebView
  */
-public class JuheNewsDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView {
+public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView {
 
-    private static final String TAG = JuheNewsDetailActivity.class.getSimpleName();
+    private static final String TAG = WebViewDetailActivity.class.getSimpleName();
     @BindView(R.id.base_toolbar_left_icon)
     ImageView baseToolbarLeftIcon;
     @BindView(R.id.base_toolbar_left_tv)
@@ -54,7 +51,7 @@ public class JuheNewsDetailActivity extends MVPBaseActivity<JuheNewsDetailWebVie
     private String url;
 
     public static void actionStart(Context context, String title, String url) {
-        Intent intent = new Intent(context, JuheNewsDetailActivity.class);
+        Intent intent = new Intent(context, WebViewDetailActivity.class);
         intent.putExtra("title", title);
         intent.putExtra("url", url);
         context.startActivity(intent);
@@ -130,7 +127,7 @@ public class JuheNewsDetailActivity extends MVPBaseActivity<JuheNewsDetailWebVie
 
     @Override
     public void setToast(String content) {
-        ToastUtil.setCustomToast(JuheNewsDetailActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+        ToastUtil.setCustomToast(WebViewDetailActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 true, content, Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 

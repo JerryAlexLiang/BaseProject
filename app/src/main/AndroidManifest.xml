@@ -56,7 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.JuheNewsDetailActivity" />
+        <activity android:name=".activity.WebViewDetailActivity" />
         <activity android:name=".activity.SinglePictureActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ViewPagerPictureActivity"/>

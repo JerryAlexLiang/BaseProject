@@ -12,8 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -40,11 +42,19 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     @BindView(R.id.ll_indicator_dot)
     LinearLayout llIndicatorDot;
 
+    //TabLayout标题列表
     private List<String> stringList = new ArrayList<>();
+    //ViewPager+TabLayout包裹内容Fragment列表
     private List<Fragment> fragmentList = new ArrayList<>();
 
+    //Viewpager Banner ImageView列表
     private List<ImageView> mImageList = new ArrayList<>();
+    //Viewpager Banner ImageView中显示文字内容列表列表
+    private List<String> mBnanerDesacList = new ArrayList<>();
     private String[] imageDescs;
+
+    //Viewpager Banner ImageView点击跳转详情页Url列表
+    private List<String> mBannerDetailUrl = new ArrayList<>();
 
     private Timer mTimer = new Timer();
     private int previousPosition = 0; // 前一个被选中的position
@@ -52,10 +62,10 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     private int currentPosition; //当前位置
 
     //第五步: 设置自动播放,每隔3秒换一张图片
-    private TimerTask mTimerTask =  new TimerTask() {
+    private TimerTask mTimerTask = new TimerTask() {
         @Override
         public void run() {
-            if (!isStop){
+            if (!isStop) {
                 LogUtil.d(TAG, "开始自动播放Banner");
                 //播放时，主线程更新UI
                 runOnUiThread(new Runnable() {
@@ -95,8 +105,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         setFirstLocation();
 //        //第五步: 设置自动播放,每隔3秒换一张图片
 //        autoPlayView();
-        mTimer.schedule(mTimerTask,3000,3000);
-        //第七部：设置ViewPager的触摸事件，触摸停止自动播放Banner
+        mTimer.schedule(mTimerTask, 3000, 3000);
+        //第七步：设置ViewPager的触摸事件，触摸停止自动播放Banner
         bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -114,9 +124,19 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
             }
         });
 
-        //第八部：定义banner的滚动点
-//        initDots();
-
+        //第九步：ViewPager Banner的点击事件
+        //回调相当于把对象new MyBannerPagerAdapter.ViewPagerClickInterFace()对象传给MyBannerPagerAdapter中viewPagerClickInterFace对象
+        //viewPagerClickInterFace.setClick(position);调的就是viewPagerClickInterFace对象调用重写后的方法
+        bannerPagerAdapter.setViewPagerClickInterFace(new MyBannerPagerAdapter.ViewPagerClickInterFace() {
+            @Override
+            public void onClick(int position) {
+//                Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) + " 个广告栏   当前内容为： " + imageDescs[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) +
+                        " 个广告栏   当前内容为： " + mBnanerDesacList.get(position)
+                        + "跳转Url: " + mBannerDetailUrl.get(position), Toast.LENGTH_SHORT).show();
+                WebViewDetailActivity.actionStart(ScanCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position));
+            }
+        });
 
     }
 
@@ -124,34 +144,6 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
      * 定义banner的滚动点
      */
     private void initDots() {
-        //llIndicatorDot
-
-        //dots = new ImageView[mLinearLayout.getChildCount()];
-        //        for (int i = 0; i < dots.length; i++) {
-        //            dots[i] = (ImageView) mLinearLayout.getChildAt(i);
-        //            //让ImageView有效
-        //            dots[i].setEnabled(true);
-        //            dots[i].setTag(i);
-        //            dots[i].setOnClickListener(new View.OnClickListener() {
-        //                @Override
-        //                public void onClick(View v) {
-        //                    int position = (int) v.getTag();
-        //                    index = position;
-        //
-        //                    setDotsEnable(position);
-        //
-        //                    //设置当前页面
-        //                    mViewPager.setCurrentItem(position);
-        //                }
-        //            });
-        //        }
-        //        dots[0].setEnabled(false);
-
-        //position %= DEFAULT_BANNER_SIZE;
-        //        for(ImageView indicator : mIndicators) {
-        //            indicator.setImageResource(R.mipmap.indicator_unchecked);
-        //        }
-        //        mIndicators[position].setImageResource(R.mipmap.indicator_checked);
         ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
         for (int i = 0; i < dots.length; i++) {
             dots[i] = (ImageView) llIndicatorDot.getChildAt(i);
@@ -199,7 +191,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
      * 第三步：设置刚打开app时显示的图片和文字
      */
     private void setFirstLocation() {
-        tvImageDesc.setText(imageDescs[previousPosition]);
+//        tvImageDesc.setText(imageDescs[previousPosition]);
+        tvImageDesc.setText(mBnanerDesacList.get(previousPosition));
         // *把ViewPager设置为默认选中Integer.MAX_VALUE / 2，从十几亿次开始轮播图片，达到无限循环目的;
         int m = (Integer.MAX_VALUE / 2) % mImageList.size();
         currentPosition = Integer.MAX_VALUE / 2 - m;
@@ -239,17 +232,33 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
             iv.setBackgroundResource(imageResIDs[i]);
             mImageList.add(iv);
 
-            //初始化显示每张图片下面现实的文字
-            imageDescs = new String[]{
-                    "1  今年二十七八岁，我最喜欢的事就是睡觉",
-                    "2  懒虫，起床了，要上班了",
-                    "3  我翻了个身，想着如果今天是周末多好",
-                    "4  终于爬起来，坐在沙发上一脸懵逼",
-                    "5  一个人早餐就随便吃点"
-            };
+//            //初始化显示每张图片下面显示的文字
+//            imageDescs = new String[]{
+//                    "1  今年二十七八岁，我最喜欢的事就是睡觉",
+//                    "2  懒虫，起床了，要上班了",
+//                    "3  我翻了个身，想着如果今天是周末多好",
+//                    "4  终于爬起来，坐在沙发上一脸懵逼",
+//                    "5  一个人早餐就随便吃点"
+//            };
         }
 
+        //初始化显示每张图片下面显示的文字
+        imageDescs = new String[]{
+                "1  今年二十七八岁，我最喜欢的事就是睡觉",
+                "2  懒虫，起床了，要上班了",
+                "3  我翻了个身，想着如果今天是周末多好",
+                "4  终于爬起来，坐在沙发上一脸懵逼",
+                "5  一个人早餐就随便吃点"
+        };
+        mBnanerDesacList.addAll(Arrays.asList(imageDescs));
 
+        //mBannerDetailUrl
+        //Viewpager Banner ImageView点击跳转详情页Url列表
+        mBannerDetailUrl.add("https://v.douyin.com/YDmdxx/");
+        mBannerDetailUrl.add("https://v.douyin.com/YN4GQp/");
+        mBannerDetailUrl.add("https://v.douyin.com/NwdsVy/");
+        mBannerDetailUrl.add("https://v.douyin.com/LYVFNT/");
+        mBannerDetailUrl.add("https://v.douyin.com/8EXApX/");
     }
 
     /**
@@ -271,9 +280,10 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
         //把当前选中的点给切换了, 还有描述信息也切换
         //图片下面设置显示文本
-        tvImageDesc.setText(imageDescs[newPosition]);
+//        tvImageDesc.setText(imageDescs[newPosition]);
+        tvImageDesc.setText(mBnanerDesacList.get(newPosition));
 
-        //第八部：定义banner的滚动点
+        //第八步：定义banner的滚动点
         ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
         for (int i = 0; i < dots.length; i++) {
             dots[i] = (ImageView) llIndicatorDot.getChildAt(i);

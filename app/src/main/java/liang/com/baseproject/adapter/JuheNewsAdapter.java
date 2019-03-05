@@ -7,11 +7,8 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -21,12 +18,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
-import liang.com.baseproject.activity.JuheNewsDetailActivity;
+import liang.com.baseproject.activity.WebViewDetailActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
 import liang.com.baseproject.activity.ViewPagerPictureActivity;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.utils.ImageLoaderUtils;
-import retrofit2.http.POST;
 
 public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -144,7 +140,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
 
             //点击CardView跳转到WebView新闻详情页
-            cardStories.setOnClickListener(v -> JuheNewsDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl()));
+            cardStories.setOnClickListener(v -> WebViewDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl()));
         }
     }
 
@@ -172,8 +168,8 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            holder.setCommonClickListener(new BaseViewHolder.onItemBaseClickListener() {
 //                @Override
 //                public void onItemClickListener(int position) {
-////                    JuheNewsDetailActivity.actionStart(mContext, data.getTitle(), data.getUrl());
-//                    Intent intent = new Intent(mContext, JuheNewsDetailActivity.class);
+////                    WebViewDetailActivity.actionStart(mContext, data.getTitle(), data.getUrl());
+//                    Intent intent = new Intent(mContext, WebViewDetailActivity.class);
 //                    intent.putExtra("title", data.getTitle());
 //                    intent.putExtra("url", data.getUrl());
 //                    mContext.getApplicationContext().startActivity(intent);
