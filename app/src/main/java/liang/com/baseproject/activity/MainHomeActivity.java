@@ -38,7 +38,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import liang.com.baseproject.MainActivity;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
@@ -276,7 +275,7 @@ public class MainHomeActivity extends BaseActivity {
 
                     case R.id.menu_nav_friends:
                         //改变主题
-                        MainActivity.actionStart(MainHomeActivity.this);
+                        ThemeSettingActivity.actionStart(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_follow:

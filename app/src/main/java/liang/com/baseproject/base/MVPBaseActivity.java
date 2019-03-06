@@ -193,6 +193,10 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
             case 4:
                 baseToolbar.setBackgroundColor(Color.TRANSPARENT);
                 break;
+
+            case 5:
+                baseToolbar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                break;
         }
     }
 

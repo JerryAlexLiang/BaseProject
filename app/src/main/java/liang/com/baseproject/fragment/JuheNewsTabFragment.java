@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.NewsView;
 import liang.com.baseproject.adapter.JuheNewsAdapter;
@@ -28,6 +29,7 @@ import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.interactor.NewsInteractor;
 import liang.com.baseproject.presenter.NewsPresenter;
 import liang.com.baseproject.retrofit.RetrofitHelper;
+import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.widget.CustomProgressDialog;
 
@@ -80,7 +82,7 @@ public class JuheNewsTabFragment extends Fragment implements NewsView, SwipeRefr
     private void getData() {
         if (getArguments() != null) {
             String newsKey = getArguments().getString("newsKey");
-//            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
+            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
 //            presenter.getNewsData(UrlConstants.NEWS_URL, "guoji", Constant.NEWS_APPKEY);
         }
     }

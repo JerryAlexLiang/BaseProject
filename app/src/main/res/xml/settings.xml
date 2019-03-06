@@ -17,7 +17,7 @@
         <Preference
             android:key="@string/key_actionbar_theme_modify"
             android:title="@string/title_actionbar_theme_modify"
-            android:summary="5种颜色可选"/>
+            android:summary="N种颜色可选"/>
 
     </PreferenceCategory>
 

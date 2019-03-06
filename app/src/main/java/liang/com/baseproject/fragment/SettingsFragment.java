@@ -12,8 +12,8 @@ import android.support.annotation.Nullable;
 import android.view.Gravity;
 import android.widget.Toast;
 
-import liang.com.baseproject.MainActivity;
 import liang.com.baseproject.R;
+import liang.com.baseproject.activity.ThemeSettingActivity;
 import liang.com.baseproject.utils.CacheCleanUtil;
 import liang.com.baseproject.utils.ToastUtil;
 
@@ -55,7 +55,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
             case "key_actionbar_theme_modify":
-                MainActivity.actionStart(getActivity());
+                ThemeSettingActivity.actionStart(getActivity());
                 getActivity().finish();
                 ToastUtil.showShortToast(getActivity(), "更该主题样式~");
                 break;
