@@ -112,10 +112,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             case 4:
                 baseToolbar.setBackgroundColor(Color.TRANSPARENT);
                 break;
-
-            case 5:
-                baseToolbar.setBackgroundColor(getResources().getColor(R.color.palegreen));
-                break;
         }
     }
 

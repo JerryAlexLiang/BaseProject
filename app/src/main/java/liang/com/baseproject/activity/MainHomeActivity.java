@@ -38,12 +38,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import liang.com.baseproject.MainActivity;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
-import liang.com.baseproject.fragment.JuheNewsFragment;
+import liang.com.baseproject.fragment.NewsFragment;
 import liang.com.baseproject.fragment.ThreeFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
@@ -117,7 +118,7 @@ public class MainHomeActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<>();
     //标题列表
     private List<String> titleList = new ArrayList<>();
-    private JuheNewsFragment juheNewsFragment;
+    private NewsFragment newsFragment;
     private NiceGankFragment niceGankFragment;
     private ThreeFragment threeFragment;
     private FourFragment fourFragment;
@@ -275,7 +276,7 @@ public class MainHomeActivity extends BaseActivity {
 
                     case R.id.menu_nav_friends:
                         //改变主题
-                        ThemeSettingActivity.actionStart(MainHomeActivity.this);
+                        MainActivity.actionStart(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_follow:
@@ -300,12 +301,12 @@ public class MainHomeActivity extends BaseActivity {
     }
 
     private void initViewPage() {
-        juheNewsFragment = new JuheNewsFragment();
+        newsFragment = new NewsFragment();
         niceGankFragment = new NiceGankFragment();
         threeFragment = new ThreeFragment();
         fourFragment = new FourFragment();
 
-        fragmentList.add(juheNewsFragment);
+        fragmentList.add(newsFragment);
         fragmentList.add(niceGankFragment);
         fragmentList.add(threeFragment);
         fragmentList.add(fourFragment);

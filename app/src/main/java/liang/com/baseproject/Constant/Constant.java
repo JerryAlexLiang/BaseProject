@@ -63,7 +63,6 @@ public class Constant {
     public static final int ACTIONBAR_COLOR_BLACK = 2;
     public static final int ACTIONBAR_COLOR_WHITE = 3;
     public static final int ACTIONBAR_COLOR_TRANSLATE = 4;
-    public static final int ACTIONBAR_COLOR_GREEN = 5;
 
     //没有连接网络
     public static final int NETWORK_NONE = -1;

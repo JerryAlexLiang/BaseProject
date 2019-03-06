@@ -1,4 +1,4 @@
-package liang.com.baseproject.activity;
+package liang.com.baseproject;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import liang.com.baseproject.R;
 import liang.com.baseproject.base.BaseActivity;
 
 public class TranslateActivity extends BaseActivity {

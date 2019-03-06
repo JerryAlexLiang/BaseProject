@@ -38,7 +38,7 @@ import liang.com.baseproject.widget.CustomProgressDialog;
  * 描述: 国际新闻-测试RecyclerView 通用适配器1- BaseRecycleAdapter
  * 作者: liangyang
  */
-public class JuheNewsContainerFragment extends Fragment implements NewsView, SwipeRefreshLayout.OnRefreshListener {
+public class OneFragment extends Fragment implements NewsView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -49,12 +49,12 @@ public class JuheNewsContainerFragment extends Fragment implements NewsView, Swi
     private CustomProgressDialog progressDialog;
     private NewsPresenter presenter;
 
-    public JuheNewsContainerFragment() {
+    public OneFragment() {
         // Required empty public constructor
     }
 
-    public static JuheNewsContainerFragment newInstance(Bundle args) {
-        JuheNewsContainerFragment fragment = new JuheNewsContainerFragment();
+    public static OneFragment newInstance(Bundle args) {
+        OneFragment fragment = new OneFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,7 +62,7 @@ public class JuheNewsContainerFragment extends Fragment implements NewsView, Swi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_juhe_news_container, container, false);
+        View view = inflater.inflate(R.layout.fragment_one, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -82,7 +82,7 @@ public class JuheNewsContainerFragment extends Fragment implements NewsView, Swi
     private void getData() {
         if (getArguments() != null) {
             String newsKey = getArguments().getString("newsKey");
-            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
+//            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
 //            presenter.getNewsData(UrlConstants.NEWS_URL, "guoji", Constant.NEWS_APPKEY);
         }
     }
