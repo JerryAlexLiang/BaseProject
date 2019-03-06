@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:background="#33000000"
+                android:background="@color/translate"
                 android:padding="5dp">
 
                 <TextView

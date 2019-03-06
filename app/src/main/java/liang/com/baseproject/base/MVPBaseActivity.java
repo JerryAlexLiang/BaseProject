@@ -142,15 +142,15 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         if (mRefreshLayout == null) {
             return;
         }
-        if (!requestDataRefresh){
+        if (!requestDataRefresh) {
             //不刷新
             mIsRequestDataRefresh = false;
-            mRefreshLayout.postDelayed(()->{
-                if (mRefreshLayout!=null){
+            mRefreshLayout.postDelayed(() -> {
+                if (mRefreshLayout != null) {
                     mRefreshLayout.setRefreshing(false);
                 }
-            },1000);
-        }else {
+            }, 1000);
+        } else {
             //刷新效果
             mRefreshLayout.setRefreshing(true);
         }
@@ -192,6 +192,10 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
             case 4:
                 baseToolbar.setBackgroundColor(Color.TRANSPARENT);
+                break;
+
+            case 5:
+                baseToolbar.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 break;
         }
     }

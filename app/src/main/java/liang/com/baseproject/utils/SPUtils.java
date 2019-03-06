@@ -5,6 +5,7 @@ package liang.com.baseproject.utils;
  * 描述: SharedPreferences工具类
  * 作者: liangyang
  */
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -191,6 +192,21 @@ public class SPUtils {
             editor.commit();
         }
     }
+
+    //存储设置标题栏颜色设置
+    public static void saveActionBarThemeColor(Context context, int flag) {
+        SharedPreferences preferences = context.getSharedPreferences("ActionBarThemeColor", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("themeColorFlag", flag);
+        editor.commit();
+    }
+
+    //读取设置标题栏颜色设置
+    public static Integer getActionBarThemeColor(Context context, String key) {
+        SharedPreferences preferences = context.getSharedPreferences("ActionBarThemeColor", Context.MODE_PRIVATE);
+        return preferences.getInt(key, 0);
+    }
+
 
 }
 

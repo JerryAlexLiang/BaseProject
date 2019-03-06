@@ -29,37 +29,31 @@
         android:roundIcon="@mipmap/icon_new_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="n"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="n">
         <activity
             android:name=".activity.SplashOneActivity"
             android:theme="@style/Transparent">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".WhiteActivity" />
-        <activity android:name=".TranslateActivity" />
-        <activity android:name=".activity.SplashTwoActivity" />
-        <activity android:name=".activity.MainHomeActivity" />
-        <activity
-            android:name=".base.PermissionActivity"
-            android:theme="@style/Transparent"
-            android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.ScanCodeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ThemeSettingActivity" />
+        <activity android:name=".activity.WhiteActivity" />
+        <activity android:name=".activity.TranslateActivity" />
+        <activity android:name=".activity.SplashTwoActivity" />
+        <activity android:name=".activity.MainHomeActivity" />
+        <activity
+            android:name=".base.PermissionActivity"
+            android:theme="@style/Transparent"
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.ScanCodeActivity" />
         <activity android:name=".activity.WebViewDetailActivity" />
         <activity android:name=".activity.SinglePictureActivity" />
         <activity android:name=".activity.SettingActivity" />
-        <activity android:name=".activity.ViewPagerPictureActivity"/>
+        <activity android:name=".activity.ViewPagerPictureActivity" />
     </application>
 
 </manifest>

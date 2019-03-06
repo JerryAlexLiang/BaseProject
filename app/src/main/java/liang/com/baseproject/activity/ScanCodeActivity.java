@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
-import liang.com.baseproject.fragment.OneFragment;
+import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.utils.LogUtil;
 
 public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
@@ -209,13 +209,13 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         stringList.add("明星");
         stringList.add("科技");
 
-        fragmentList.add(OneFragment.newInstance(null));
-        fragmentList.add(OneFragment.newInstance(null));
-        fragmentList.add(OneFragment.newInstance(null));
-        fragmentList.add(OneFragment.newInstance(null));
-        fragmentList.add(OneFragment.newInstance(null));
-        fragmentList.add(OneFragment.newInstance(null));
-        fragmentList.add(OneFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
+        fragmentList.add(JuheNewsContainerFragment.newInstance(null));
 
         //第一步：初始化数据
         int[] imageResIDs = {
