@@ -26,7 +26,7 @@ import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
  * 描述: 新闻-Fragment Container
  * 作者: liangyang
  */
-public class NewsFragment extends Fragment {
+public class JuheNewsContainerFragment extends Fragment {
 
     @BindView(R.id.news_tab_layout)
     TabLayout newsTabLayout;
@@ -36,7 +36,7 @@ public class NewsFragment extends Fragment {
     private List<String> stringList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
 
-    public NewsFragment() {
+    public JuheNewsContainerFragment() {
         // Required empty public constructor
     }
 
@@ -44,7 +44,7 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_juhe_news_container, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -106,11 +106,11 @@ public class NewsFragment extends Fragment {
         Bundle bundle5 = new Bundle();
         bundle5.putString("newsKey", "keji");
 
-        fragmentList.add(OneFragment.newInstance(bundle));
-        fragmentList.add(OneFragment.newInstance(bundle2));
-        fragmentList.add(OneFragment.newInstance(bundle3));
-        fragmentList.add(OneFragment.newInstance(bundle4));
-        fragmentList.add(OneFragment.newInstance(bundle5));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle2));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle3));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle4));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle5));
     }
 
     @Override

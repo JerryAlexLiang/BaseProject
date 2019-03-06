@@ -21,7 +21,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.NewsView;
 import liang.com.baseproject.adapter.JuheNewsAdapter;
@@ -29,7 +28,6 @@ import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.interactor.NewsInteractor;
 import liang.com.baseproject.presenter.NewsPresenter;
 import liang.com.baseproject.retrofit.RetrofitHelper;
-import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.widget.CustomProgressDialog;
 
@@ -38,7 +36,7 @@ import liang.com.baseproject.widget.CustomProgressDialog;
  * 描述: 国际新闻-测试RecyclerView 通用适配器1- BaseRecycleAdapter
  * 作者: liangyang
  */
-public class OneFragment extends Fragment implements NewsView, SwipeRefreshLayout.OnRefreshListener {
+public class JuheNewsTabFragment extends Fragment implements NewsView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -49,12 +47,12 @@ public class OneFragment extends Fragment implements NewsView, SwipeRefreshLayou
     private CustomProgressDialog progressDialog;
     private NewsPresenter presenter;
 
-    public OneFragment() {
+    public JuheNewsTabFragment() {
         // Required empty public constructor
     }
 
-    public static OneFragment newInstance(Bundle args) {
-        OneFragment fragment = new OneFragment();
+    public static JuheNewsTabFragment newInstance(Bundle args) {
+        JuheNewsTabFragment fragment = new JuheNewsTabFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,7 +60,7 @@ public class OneFragment extends Fragment implements NewsView, SwipeRefreshLayou
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_juhe_news_tab, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }

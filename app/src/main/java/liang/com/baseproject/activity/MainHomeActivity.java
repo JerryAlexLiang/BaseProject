@@ -44,7 +44,7 @@ import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
-import liang.com.baseproject.fragment.NewsFragment;
+import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.ThreeFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
@@ -118,7 +118,7 @@ public class MainHomeActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<>();
     //标题列表
     private List<String> titleList = new ArrayList<>();
-    private NewsFragment newsFragment;
+    private JuheNewsContainerFragment juheNewsContainerFragment;
     private NiceGankFragment niceGankFragment;
     private ThreeFragment threeFragment;
     private FourFragment fourFragment;
@@ -301,12 +301,12 @@ public class MainHomeActivity extends BaseActivity {
     }
 
     private void initViewPage() {
-        newsFragment = new NewsFragment();
+        juheNewsContainerFragment = new JuheNewsContainerFragment();
         niceGankFragment = new NiceGankFragment();
         threeFragment = new ThreeFragment();
         fourFragment = new FourFragment();
 
-        fragmentList.add(newsFragment);
+        fragmentList.add(juheNewsContainerFragment);
         fragmentList.add(niceGankFragment);
         fragmentList.add(threeFragment);
         fragmentList.add(fourFragment);
