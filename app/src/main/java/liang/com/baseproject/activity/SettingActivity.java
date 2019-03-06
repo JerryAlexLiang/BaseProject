@@ -22,17 +22,17 @@ import liang.com.baseproject.fragment.SettingsFragment;
  */
 public class SettingActivity extends MVPBaseActivity {
 
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
     @BindView(R.id.fly_setting_container)
     FrameLayout flySettingContainer;
@@ -64,7 +64,7 @@ public class SettingActivity extends MVPBaseActivity {
         getFragmentManager().beginTransaction().add(R.id.fly_setting_container, new SettingsFragment()).commit();
     }
 
-    @OnClick(R.id.base_toolbar_left_icon)
+    @OnClick(R.id.base_actionbar_left_icon)
     public void onViewClicked() {
         finish();
     }

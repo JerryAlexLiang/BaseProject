@@ -19,17 +19,17 @@ public class TranslateActivity extends BaseActivity {
     Button btnLogOut;
     @BindView(R.id.base_toolbar_ll)
     LinearLayout baseToolbarLl;
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
 
     @Override
@@ -37,7 +37,7 @@ public class TranslateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_translate);
         ButterKnife.bind(this);
-        getActionBarTheme(baseToolbar);
+//        getActionBarTheme(baseToolbar);
         addActivity(this, TranslateActivity.class);
 
 

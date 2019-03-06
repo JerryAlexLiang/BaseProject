@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/base_toolbar"
+    android:id="@+id/base_actionbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
@@ -15,7 +15,7 @@
         android:minHeight="?attr/actionBarSize">
 
         <ImageView
-            android:id="@+id/base_toolbar_left_icon"
+            android:id="@+id/base_actionbar_left_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -25,7 +25,7 @@
             tools:ignore="RtlSymmetry" />
 
         <TextView
-            android:id="@+id/base_toolbar_left_tv"
+            android:id="@+id/base_actionbar_left_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -37,7 +37,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/base_toolbar_title"
+            android:id="@+id/base_actionbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -51,7 +51,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/base_toolbar_right_tv"
+            android:id="@+id/base_actionbar_right_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -65,7 +65,7 @@
             android:visibility="gone" />
 
         <ImageView
-            android:id="@+id/base_toolbar_right_icon"
+            android:id="@+id/base_actionbar_right_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

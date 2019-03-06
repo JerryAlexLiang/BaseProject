@@ -6,8 +6,10 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -101,9 +103,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         setContentView(provideContentViewId());//布局
 
         //本地化存储操作(取出) - 设置状态栏颜色
-        FrameLayout baseToolbar = findViewById(R.id.base_toolbar);
-        if (baseToolbar != null) {
-            getActionBarTheme(baseToolbar);
+        FrameLayout baseActionBar = findViewById(R.id.base_actionbar);
+        if (baseActionBar != null) {
+            getActionBarTheme(baseActionBar);
         }
 
         if (isSetRefresh()) {
@@ -142,15 +144,15 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         if (mRefreshLayout == null) {
             return;
         }
-        if (!requestDataRefresh){
+        if (!requestDataRefresh) {
             //不刷新
             mIsRequestDataRefresh = false;
-            mRefreshLayout.postDelayed(()->{
-                if (mRefreshLayout!=null){
+            mRefreshLayout.postDelayed(() -> {
+                if (mRefreshLayout != null) {
                     mRefreshLayout.setRefreshing(false);
                 }
-            },1000);
-        }else {
+            }, 1000);
+        } else {
             //刷新效果
             mRefreshLayout.setRefreshing(true);
         }
@@ -167,35 +169,45 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     /**
      * 本地化存储操作(取出) - 设置状态栏颜色
-     *
-     * @param baseToolbar
      */
-    public void getActionBarTheme(FrameLayout baseToolbar) {
+    public void getActionBarTheme(FrameLayout baseActionBar) {
         int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
             case 0:
-                baseToolbar.setBackgroundColor(Color.RED);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.RED);
+                }
                 break;
 
             case 1:
-                baseToolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                }
                 break;
 
             case 2:
-                baseToolbar.setBackgroundColor(Color.BLACK);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.BLACK);
+                }
                 break;
 
             case 3:
-                baseToolbar.setBackgroundColor(Color.WHITE);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.WHITE);
+                }
                 break;
 
             case 4:
-                baseToolbar.setBackgroundColor(Color.TRANSPARENT);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.TRANSPARENT);
+                }
                 break;
 
             case 5:
-                baseToolbar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                }
                 break;
         }
     }

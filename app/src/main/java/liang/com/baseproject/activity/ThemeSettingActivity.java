@@ -29,17 +29,17 @@ import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
 public class ThemeSettingActivity extends BaseActivity implements CustomRadioGroup.OnCheckedChangeListener {
 
     private static final String TAG = ThemeSettingActivity.class.getSimpleName();
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
     @BindView(R.id.ll_main_container)
     LinearLayout llMainContainer;
@@ -69,7 +69,7 @@ public class ThemeSettingActivity extends BaseActivity implements CustomRadioGro
         setContentView(R.layout.activity_theme_setting);
         ButterKnife.bind(this);
 
-        getActionBarTheme(baseToolbar);
+//        getActionBarTheme(baseToolbar);
 
         baseToolbarTitle.setVisibility(View.VISIBLE);
         baseToolbarTitle.setText("致一科技");
@@ -106,15 +106,15 @@ public class ThemeSettingActivity extends BaseActivity implements CustomRadioGro
 
     }
 
-    @OnClick({R.id.base_toolbar_left_icon, R.id.base_toolbar_right_icon})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.base_actionbar_right_icon})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
-            case R.id.base_toolbar_left_icon:
+            case R.id.base_actionbar_left_icon:
                 finish();
                 break;
 
-            case R.id.base_toolbar_right_icon:
+            case R.id.base_actionbar_right_icon:
                 finish();
                 break;
 

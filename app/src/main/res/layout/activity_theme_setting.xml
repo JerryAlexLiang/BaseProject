@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".activity.ThemeSettingActivity">
 
-    <include layout="@layout/layout_toolbar_default" />
+    <include layout="@layout/layout_base_actionbar_default" />
 
     <liang.com.baseproject.widget.CustomRadioGroup
         android:id="@+id/custom_radio_group"

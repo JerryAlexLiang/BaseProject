@@ -134,7 +134,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
                 Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) +
                         " 个广告栏   当前内容为： " + mBnanerDesacList.get(position)
                         + "跳转Url: " + mBannerDetailUrl.get(position), Toast.LENGTH_SHORT).show();
-                WebViewDetailActivity.actionStart(ScanCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position));
+                WebViewDetailActivity.actionStart(ScanCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position), "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
             }
         });
 

@@ -18,17 +18,17 @@ import liang.com.baseproject.base.BaseActivity;
 
 public class WhiteActivity extends BaseActivity {
 
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
     @BindView(R.id.btn_jump_translate_activity)
     Button btnJumpTranslateActivity;
@@ -58,11 +58,11 @@ public class WhiteActivity extends BaseActivity {
         addActivity(this, WhiteActivity.class);
     }
 
-    @OnClick({R.id.base_toolbar_left_tv, R.id.base_toolbar_right_icon, R.id.btn_jump_translate_activity})
+    @OnClick({R.id.base_actionbar_left_tv, R.id.base_actionbar_right_icon, R.id.btn_jump_translate_activity})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.base_toolbar_left_tv:
-            case R.id.base_toolbar_right_icon:
+            case R.id.base_actionbar_left_tv:
+            case R.id.base_actionbar_right_icon:
                 finish();
                 break;
 

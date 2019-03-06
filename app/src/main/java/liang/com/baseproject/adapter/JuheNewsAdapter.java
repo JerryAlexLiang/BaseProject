@@ -130,7 +130,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         imageUrlList.add(thumbnail_pic_s02);
                         imageUrlList.add(thumbnail_pic_s03);
                         ViewPagerPictureActivity.actionStart(context, imageUrlList);
-                    }else {
+                    } else {
                         //不是全部有数据的时候跳转到单张大图显示界面
                         SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
                     }
@@ -140,7 +140,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             });
 
             //点击CardView跳转到WebView新闻详情页
-            cardStories.setOnClickListener(v -> WebViewDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl()));
+            cardStories.setOnClickListener(v -> WebViewDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl(), dataBean.getThumbnail_pic_s()));
         }
     }
 

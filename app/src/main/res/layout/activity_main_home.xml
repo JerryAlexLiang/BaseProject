@@ -13,13 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/layout_toolbar_default" />
+        <include layout="@layout/layout_base_actionbar_default" />
 
         <include
             layout="@layout/layout_net_warn_bar"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:layout_below="@id/base_toolbar"
+            android:layout_below="@id/base_actionbar"
             android:visibility="gone" />
 
         <!--<liang.com.baseproject.widget.MyViewPage-->

@@ -61,17 +61,17 @@ import static liang.com.baseproject.Constant.Constant.NETWORK_WIFI;
 public class MainHomeActivity extends BaseActivity {
 
     private static final String TAG = MainHomeActivity.class.getSimpleName();
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
     @BindView(R.id.my_view_pager)
 //    MyViewPage myViewPager;
@@ -141,7 +141,6 @@ public class MainHomeActivity extends BaseActivity {
         setContentView(R.layout.activity_main_home);
         ButterKnife.bind(this);
         addActivity(this, MainHomeActivity.class);
-        getActionBarTheme(baseToolbar);
 
         //请求权限
         initPermission();
@@ -482,10 +481,10 @@ public class MainHomeActivity extends BaseActivity {
         getActionBarTheme(baseToolbar);
     }
 
-    @OnClick({R.id.base_toolbar_left_icon, R.id.rl_net_bar})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.rl_net_bar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.base_toolbar_left_icon:
+            case R.id.base_actionbar_left_icon:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
 

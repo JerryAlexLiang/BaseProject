@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -71,14 +72,16 @@ public abstract class BaseActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         //本地化存储操作(取出) - 设置状态栏颜色
-        FrameLayout baseToolbar = findViewById(R.id.base_toolbar);
-        if (baseToolbar != null) {
-            getActionBarTheme(baseToolbar);
+        FrameLayout baseActionBar = findViewById(R.id.base_actionbar);
+        if (baseActionBar != null) {
+            getActionBarTheme(baseActionBar);
         }
+
     }
 
     /**
      * 本地化存储操作(存入) - 设置状态栏颜色
+     *
      * @param ACTIONBAR_COLOR
      */
     public void setActionBarTheme(int ACTIONBAR_COLOR) {
@@ -87,34 +90,45 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 本地化存储操作(取出) - 设置状态栏颜色
-     * @param baseToolbar
      */
-    public void getActionBarTheme(FrameLayout baseToolbar) {
+    public void getActionBarTheme(FrameLayout baseActionBar) {
         int actionBarColorInt = (int) SPUtils.get(BaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
             case 0:
-                baseToolbar.setBackgroundColor(Color.RED);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.RED);
+                }
                 break;
 
             case 1:
-                baseToolbar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                }
                 break;
 
             case 2:
-                baseToolbar.setBackgroundColor(Color.BLACK);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.BLACK);
+                }
                 break;
 
             case 3:
-                baseToolbar.setBackgroundColor(Color.WHITE);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.WHITE);
+                }
                 break;
 
             case 4:
-                baseToolbar.setBackgroundColor(Color.TRANSPARENT);
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.TRANSPARENT);
+                }
                 break;
 
             case 5:
-                baseToolbar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                }
                 break;
         }
     }

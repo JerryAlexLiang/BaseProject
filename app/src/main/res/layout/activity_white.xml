@@ -8,7 +8,7 @@
     tools:context=".activity.WhiteActivity">
 
     <include
-        layout="@layout/layout_toolbar_default"/>
+        layout="@layout/layout_base_actionbar_default"/>
 
     <Button
         android:id="@+id/btn_jump_translate_activity"

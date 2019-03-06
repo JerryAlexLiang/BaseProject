@@ -11,10 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,7 +22,6 @@ import liang.com.baseproject.base.BasePresenter;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * 创建日期：2019/2/22 on 13:18
@@ -35,17 +31,17 @@ import uk.co.senab.photoview.PhotoView;
 public class ViewPagerPictureActivity extends MVPBaseActivity {
 
     private static final String TAG = ViewPagerPictureActivity.class.getSimpleName();
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
     @BindView(R.id.image_view_pager)
     ViewPager imageViewPager;
@@ -124,10 +120,10 @@ public class ViewPagerPictureActivity extends MVPBaseActivity {
         LogUtil.d(TAG, imageUrlList.toString());
     }
 
-    @OnClick({R.id.base_toolbar_left_icon, R.id.save_img})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.save_img})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.base_toolbar_left_icon:
+            case R.id.base_actionbar_left_icon:
                 finish();
                 break;
 

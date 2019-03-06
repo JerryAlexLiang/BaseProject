@@ -7,13 +7,13 @@
     android:background="@color/black"
     tools:context=".activity.ViewPagerPictureActivity">
 
-    <include layout="@layout/layout_toolbar_default" />
+    <include layout="@layout/layout_base_actionbar_default" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/image_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/base_toolbar"
+        android:layout_below="@+id/base_actionbar"
         tools:ignore="UnknownIdInLayout" />
 
     <TextView

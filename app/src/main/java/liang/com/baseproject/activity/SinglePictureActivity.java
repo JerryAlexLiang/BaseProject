@@ -12,7 +12,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -21,7 +20,6 @@ import liang.com.baseproject.base.BasePresenter;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.ImageLoaderUtils;
-import liang.com.baseproject.utils.ToastUtil;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -36,17 +34,17 @@ public class SinglePictureActivity extends MVPBaseActivity implements View.OnLon
     public static final String IMG_DESC = "img_desc";
     public static final String TRANSIT_PIC = "picture";
 
-    @BindView(R.id.base_toolbar_left_icon)
+    @BindView(R.id.base_actionbar_left_icon)
     ImageView baseToolbarLeftIcon;
-    @BindView(R.id.base_toolbar_left_tv)
+    @BindView(R.id.base_actionbar_left_tv)
     TextView baseToolbarLeftTv;
-    @BindView(R.id.base_toolbar_title)
+    @BindView(R.id.base_actionbar_title)
     TextView baseToolbarTitle;
-    @BindView(R.id.base_toolbar_right_tv)
+    @BindView(R.id.base_actionbar_right_tv)
     TextView baseToolbarRightTv;
-    @BindView(R.id.base_toolbar_right_icon)
+    @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
-    @BindView(R.id.base_toolbar)
+    @BindView(R.id.base_actionbar)
     FrameLayout baseToolbar;
     @BindView(R.id.iv_meizhi_pic)
     ImageView ivMeizhiPic;
@@ -111,14 +109,14 @@ public class SinglePictureActivity extends MVPBaseActivity implements View.OnLon
         imgDesc = getIntent().getStringExtra(IMG_DESC);
     }
 
-    @OnClick({R.id.base_toolbar_left_icon, R.id.base_toolbar_right_icon, R.id.save_img})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.base_actionbar_right_icon, R.id.save_img})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.base_toolbar_left_icon:
+            case R.id.base_actionbar_left_icon:
                 finish();
                 break;
 
-            case R.id.base_toolbar_right_icon:
+            case R.id.base_actionbar_right_icon:
 //                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
                 FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiZoomPic, imgDesc);
                 break;
