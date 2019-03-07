@@ -27,6 +27,7 @@ import liang.com.baseproject.presenter.JuheNewsDetailPresenter;
 import liang.com.baseproject.utils.ImageLoaderUtils;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.ToastUtil;
+import uk.co.senab.photoview.PhotoView;
 
 /**
  * 创建日期：2019/2/20 on 13:31
@@ -96,6 +97,9 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         setContentView(R.layout.activity_juhe_news_detail);
         ButterKnife.bind(this);
 
+        //随系统设置更改ToolBar状态栏颜色
+        getActionBarTheme(null, toolbarLayout);
+
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
         baseToolbarRightIcon.setVisibility(View.VISIBLE);
 
@@ -103,13 +107,16 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         //得到Intent传递的数据
         parseIntent();
         //WebView
-//        mPresenter.setWebView(url);
+        mPresenter.setWebView(url);
         ImageLoaderUtils.loadImage(WebViewDetailActivity.this, true, ivDetailTop,
                 imageUrl, R.drawable.image_top_default, R.drawable.image_top_default, 0);
-        mPresenter.setWebView("https://blog.csdn.net/u013139425/article/details/79519268?tdsourcetag=s_pcqq_aiomsg");
+//        mPresenter.setWebView("https://blog.csdn.net/u013139425/article/details/79519268?tdsourcetag=s_pcqq_aiomsg");
 
         toolbarLayout.setTitle(title);
-
+        //设置CollapsingToolbarLayout扩展状态标题栏颜色
+        toolbarLayout.setExpandedTitleColor(Color.YELLOW);
+        //设置CollapsingToolbarLayout收缩状态标题栏颜色
+        toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
     }
 
     /**
@@ -144,7 +151,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         urlWeb.destroy();
     }
 
-    @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout})
+    @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout, R.id.iv_detail_top})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_back_layout:
@@ -157,6 +164,10 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
                 intent.putExtra(Intent.EXTRA_TEXT, url);
                 intent.setType("text/plain");
                 startActivity(Intent.createChooser(intent, "分享到..."));
+                break;
+
+            case R.id.iv_detail_top:
+                SinglePictureActivity.actionStart(WebViewDetailActivity.this, imageUrl, title);
                 break;
         }
     }

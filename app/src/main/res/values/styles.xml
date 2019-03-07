@@ -54,7 +54,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="ExpandedCollapsingToolbarTitle" >
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="CollapsedCollapsingToolbarTitle" >

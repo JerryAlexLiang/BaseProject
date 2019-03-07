@@ -105,7 +105,12 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         //本地化存储操作(取出) - 设置状态栏颜色
         FrameLayout baseActionBar = findViewById(R.id.base_actionbar);
         if (baseActionBar != null) {
-            getActionBarTheme(baseActionBar);
+            getActionBarTheme(baseActionBar, null);
+        }
+
+        CollapsingToolbarLayout baseToolBar = findViewById(R.id.toolbar_layout);
+        if (baseToolBar != null) {
+            getActionBarTheme(null, baseToolBar);
         }
 
         if (isSetRefresh()) {
@@ -169,8 +174,9 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
 
     /**
      * 本地化存储操作(取出) - 设置状态栏颜色
+     * //toolbar_layout  CollapsingToolbarLayout  app:contentScrim="?attr/colorPrimary"  app:statusBarScrim="?attr/colorPrimary"
      */
-    public void getActionBarTheme(FrameLayout baseActionBar) {
+    public void getActionBarTheme(FrameLayout baseActionBar, CollapsingToolbarLayout baseToolBar) {
         int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
@@ -178,11 +184,19 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.RED);
                 }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(Color.RED);
+                    baseToolBar.setStatusBarScrimColor(Color.RED);
+                }
                 break;
 
             case 1:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.colorBlue));
+                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.colorBlue));
                 }
                 break;
 
@@ -190,11 +204,19 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.BLACK);
                 }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(Color.BLACK);
+                    baseToolBar.setStatusBarScrimColor(Color.BLACK);
+                }
                 break;
 
             case 3:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.WHITE);
+                }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(Color.WHITE);
+                    baseToolBar.setStatusBarScrimColor(Color.WHITE);
                 }
                 break;
 
@@ -202,11 +224,19 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.TRANSPARENT);
                 }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(Color.TRANSPARENT);
+                    baseToolBar.setStatusBarScrimColor(Color.TRANSPARENT);
+                }
                 break;
 
             case 5:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.palegreen));
+                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.palegreen));
                 }
                 break;
         }

@@ -163,13 +163,13 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <ProgressBar
-        android:id="@+id/pb_progress"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-8dp"
-        android:indeterminateDrawable="@color/webView_progress_bar_color" />
+    <!--<ProgressBar-->
+        <!--android:id="@+id/pb_progress"-->
+        <!--style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="-8dp"-->
+        <!--android:indeterminateDrawable="@color/webView_progress_bar_color" />-->
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -177,10 +177,25 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_juhe_news_detail">
 
-        <WebView
-            android:id="@+id/url_web"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/pb_progress"
+                style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-8dp"
+                android:indeterminateDrawable="@color/webView_progress_bar_color" />
+
+            <WebView
+                android:id="@+id/url_web"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

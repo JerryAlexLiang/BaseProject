@@ -254,11 +254,11 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
         //mBannerDetailUrl
         //Viewpager Banner ImageView点击跳转详情页Url列表
-        mBannerDetailUrl.add("https://v.douyin.com/YDmdxx/");
-        mBannerDetailUrl.add("https://v.douyin.com/YN4GQp/");
-        mBannerDetailUrl.add("https://v.douyin.com/NwdsVy/");
-        mBannerDetailUrl.add("https://v.douyin.com/LYVFNT/");
-        mBannerDetailUrl.add("https://v.douyin.com/8EXApX/");
+        mBannerDetailUrl.add("https://mp.weixin.qq.com/s?__biz=MzIwMzYwMTk1NA==&mid=2247484939&idx=1&sn=d1871b09de55ca681da6ec2432a63ee1&chksm=96cda746a1ba2e501605dbb64b32f82b2cb44ad9c6f9ba2308a9321231b2782e6ba679ef31a6&mpshare=1&scene=23&srcid=0614bARC7g4dwQ3qbIVEJ29b#rd");
+        mBannerDetailUrl.add("https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90");
+        mBannerDetailUrl.add("https://www.jianshu.com/p/dd3799363318");
+        mBannerDetailUrl.add("https://www.jianshu.com/p/e7dc17fcbbc6");
+        mBannerDetailUrl.add("https://blog.csdn.net/a_yue10/article/details/78691288");
     }
 
     /**

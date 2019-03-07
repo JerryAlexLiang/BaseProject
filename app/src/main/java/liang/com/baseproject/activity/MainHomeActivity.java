@@ -72,7 +72,7 @@ public class MainHomeActivity extends BaseActivity {
     @BindView(R.id.base_actionbar_right_icon)
     ImageView baseToolbarRightIcon;
     @BindView(R.id.base_actionbar)
-    FrameLayout baseToolbar;
+    FrameLayout baseActionBar;
     @BindView(R.id.my_view_pager)
 //    MyViewPage myViewPager;
             ViewPager myViewPager;
@@ -478,7 +478,7 @@ public class MainHomeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getActionBarTheme(baseToolbar);
+        getActionBarTheme(baseActionBar, null);
     }
 
     @OnClick({R.id.base_actionbar_left_icon, R.id.rl_net_bar})
