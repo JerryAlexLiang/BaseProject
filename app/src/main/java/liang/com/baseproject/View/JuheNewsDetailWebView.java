@@ -1,6 +1,7 @@
 package liang.com.baseproject.View;
 
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 /**
@@ -13,6 +14,8 @@ public interface JuheNewsDetailWebView {
     ProgressBar getProgressBar();
 
     WebView getWebView();
+
+    ImageView getErrorView();
 
     void setToast(String content);
 }

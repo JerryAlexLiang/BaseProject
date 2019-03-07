@@ -27,7 +27,6 @@ import liang.com.baseproject.presenter.JuheNewsDetailPresenter;
 import liang.com.baseproject.utils.ImageLoaderUtils;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.ToastUtil;
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * 创建日期：2019/2/20 on 13:31
@@ -69,6 +68,8 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     TextView baseToolbarRightTv;
     @BindView(R.id.toolbar_right_layout)
     RelativeLayout toolbarRightLayout;
+    @BindView(R.id.iv_web_view_error)
+    ImageView ivWebViewError;
     private String title;
     private String url;
     private String imageUrl;
@@ -140,10 +141,16 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     }
 
     @Override
+    public ImageView getErrorView() {
+        return ivWebViewError;
+    }
+
+    @Override
     public void setToast(String content) {
         ToastUtil.setCustomToast(WebViewDetailActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 true, content, Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
+
 
     @Override
     protected void onDestroy() {

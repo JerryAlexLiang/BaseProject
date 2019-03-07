@@ -195,8 +195,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_web_view_error"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:src="@drawable/icon_no_net"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:visibility="visible"/>-->
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <ImageView
+        android:id="@+id/iv_web_view_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:src="@drawable/icon_no_net"
+        android:visibility="gone"/>
 
 </android.support.design.widget.CoordinatorLayout>
