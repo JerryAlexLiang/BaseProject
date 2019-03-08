@@ -96,10 +96,11 @@ public class ZhihuListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_TOP) {
-            View headerView = View.inflate(parent.getContext(), R.layout.layout_view_pager_banner, null);
-            return new HeaderViewHolder(headerView);
-        } else if (viewType == TYPE_FOOTER) {
+//        if (viewType == TYPE_TOP) {
+//            View headerView = View.inflate(parent.getContext(), R.layout.layout_view_pager_banner, null);
+//            return new HeaderViewHolder(headerView);
+//        } else
+        if (viewType == TYPE_FOOTER) {
             View footerView = View.inflate(parent.getContext(), R.layout.item_recycler_view_footer, null);
             return new FooterViewHolder(footerView);
         } else {
@@ -112,20 +113,22 @@ public class ZhihuListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof StoriesViewHolder) {
             StoriesViewHolder storiesViewHolder = (StoriesViewHolder) holder;
-//            storiesViewHolder.bindItem(zhihuLastNewsRes.getStories().get(position));
-            storiesViewHolder.bindItem(zhihuLastNewsRes.getStories().get(position - 1)); //添加头部时
+            storiesViewHolder.bindItem(zhihuLastNewsRes.getStories().get(position));
+//            storiesViewHolder.bindItem(zhihuLastNewsRes.getStories().get(position - 1)); //添加头部时
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
             footerViewHolder.bindItem();
-        } else if (holder instanceof HeaderViewHolder) {
-            HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
-            headerViewHolder.bindItem(zhihuLastNewsRes.getTop_stories());
         }
+//        else if (holder instanceof HeaderViewHolder) {
+//            HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+//            headerViewHolder.bindItem(zhihuLastNewsRes.getTop_stories());
+//        }
     }
 
     @Override
     public int getItemCount() {
-        return zhihuLastNewsRes.getStories().size() + 2;
+//        return zhihuLastNewsRes.getStories().size() + 2;
+        return zhihuLastNewsRes.getStories().size() + 1;
     }
 
 //    class TopStoriesViewHolder extends RecyclerView.ViewHolder {
@@ -148,145 +151,145 @@ public class ZhihuListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 //            }
 //        }
 
-    /**
-     * 头部shitu
-     */
-    class HeaderViewHolder extends RecyclerView.ViewHolder implements ViewPager.OnPageChangeListener {
-
-        @BindView(R.id.banner_view_pager)
-        ViewPager bannerViewPager;
-        @BindView(R.id.ll_indicator_dot)
-        LinearLayout llIndicatorDot;
-        @BindView(R.id.tv_image_desc)
-        TextView tvImageDesc;
-        @BindView(R.id.ll_banner_image_desc)
-        LinearLayout llBannerImageDesc;
-
-        public HeaderViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-
-        @SuppressLint("ClickableViewAccessibility")
-        public void bindItem(List<ZhihuLastNewsRes.TopStoriesBean> topStoriesBeanList) {
-            //Banner ViewPager的Adapter
-            //第一步：初始化数据
-            ImageView iv;
-            for (int i = 0; i < topStoriesBeanList.size(); i++) {
-                iv = new ImageView(context);
-                Glide.with(context).load(topStoriesBeanList.get(i).getImage()).into(iv);
-                mImageList.add(iv);
-                //初始化显示每张图片下面显示的文字
-                mBnanerDesacList.add(topStoriesBeanList.get(i).getTitle());
-                mBannerDetailUrlList.add(topStoriesBeanList.get(i).getId());
-            }
-
-            //第二步：设置viewpager适配器
-            MyBannerPagerAdapter bannerPagerAdapter = new MyBannerPagerAdapter(mImageList, bannerViewPager);
-            bannerViewPager.setAdapter(bannerPagerAdapter);
-            //第三步：给viewpager设置轮播监听器
-            bannerViewPager.addOnPageChangeListener(this);
-            //第四步：设置刚打开app时显示的图片和文字
-            setFirstLocation();
-            //第五步: 设置自动播放,每隔3秒换一张图片
-            mTimer.schedule(mTimerTask, 3000, 3000);
-            //第七步：设置ViewPager的触摸事件，触摸停止自动播放Banner
-            bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    int action = event.getAction();
-                    if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-                        //按下或移动手指,停止自动播放
-                        isStop = true;
-                    } else if (action == MotionEvent.ACTION_UP) {
-                        //抬起触摸，开启自动播放
-                        isStop = false;
-                    }
-                    return false;
-                }
-            });
-            //第九步：ViewPager Banner的点击事件
-            //回调相当于把对象new MyBannerPagerAdapter.ViewPagerClickInterFace()对象传给MyBannerPagerAdapter中viewPagerClickInterFace对象
-            //viewPagerClickInterFace.setClick(position);调的就是viewPagerClickInterFace对象调用重写后的方法
-            bannerPagerAdapter.setViewPagerClickInterFace(new MyBannerPagerAdapter.ViewPagerClickInterFace() {
-                @Override
-                public void onClick(int position) {
-//                Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) + " 个广告栏   当前内容为： " + imageDescs[position], Toast.LENGTH_SHORT).show();
-                    Toast.makeText(context, "点击第 " + (position + 1) +
-                            " 个广告栏   当前内容为： " + mBnanerDesacList.get(position)
-                            + "跳转Url: " + mBannerDetailUrlList.get(position), Toast.LENGTH_SHORT).show();
-                    WebViewDetailActivity.actionStart(context, mBnanerDesacList.get(position), "", "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
-                }
-            });
-        }
-
-        //第五步: 设置自动播放,每隔3秒换一张图片
-        private TimerTask mTimerTask = new TimerTask() {
-            @Override
-            public void run() {
-                if (!isStop) {
-                    //播放时，主线程更新UI
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1);
-//                        }
-//                    });
-                    new Handler().post(() -> bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1));
-                }
-            }
-        };
-
-
-        private void setFirstLocation() {
-            tvImageDesc.setText(mBnanerDesacList.get(previousPosition));
-            // *把ViewPager设置为默认选中Integer.MAX_VALUE / 2，从十几亿次开始轮播图片，达到无限循环目的;
-            int m = (Integer.MAX_VALUE / 2) % mImageList.size();
-            currentPosition = Integer.MAX_VALUE / 2 - m;
-            //设置ViewPager图片当前位置
-            bannerViewPager.setCurrentItem(currentPosition);
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            //伪无限循环，滑到最后一张图片又从新进入第一张图片
-            int newPosition = position % mImageList.size();
-            //把当前选中的点给切换了, 还有描述信息也切换
-            //图片下面设置显示文本
-            tvImageDesc.setText(mBnanerDesacList.get(newPosition));
-            //第八步：定义banner的滚动点
-            ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
-            for (int i = 0; i < dots.length; i++) {
-                dots[i] = (ImageView) llIndicatorDot.getChildAt(i);
-                //让ImageView有效
-                dots[i].setEnabled(true);
-                dots[i].setTag(i);
-                dots[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int position = (int) v.getTag();
-                        currentPosition = position;
-                        //设置当前页面
-                        bannerViewPager.setCurrentItem(currentPosition);
-                    }
-                });
-            }
-            dots[newPosition].setEnabled(false);
-
-            //把当前的索引赋值给前一个索引变量，方便下一次再切换
-            previousPosition = newPosition;
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int i) {
-
-        }
-    }
+//    /**
+//     * 头部shitu
+//     */
+//    class HeaderViewHolder extends RecyclerView.ViewHolder implements ViewPager.OnPageChangeListener {
+//
+//        @BindView(R.id.banner_view_pager)
+//        ViewPager bannerViewPager;
+//        @BindView(R.id.ll_indicator_dot)
+//        LinearLayout llIndicatorDot;
+//        @BindView(R.id.tv_image_desc)
+//        TextView tvImageDesc;
+//        @BindView(R.id.ll_banner_image_desc)
+//        LinearLayout llBannerImageDesc;
+//
+//        public HeaderViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            ButterKnife.bind(this, itemView);
+//        }
+//
+//        @SuppressLint("ClickableViewAccessibility")
+//        public void bindItem(List<ZhihuLastNewsRes.TopStoriesBean> topStoriesBeanList) {
+//            //Banner ViewPager的Adapter
+//            //第一步：初始化数据
+//            ImageView iv;
+//            for (int i = 0; i < topStoriesBeanList.size(); i++) {
+//                iv = new ImageView(context);
+//                Glide.with(context).load(topStoriesBeanList.get(i).getImage()).into(iv);
+//                mImageList.add(iv);
+//                //初始化显示每张图片下面显示的文字
+//                mBnanerDesacList.add(topStoriesBeanList.get(i).getTitle());
+//                mBannerDetailUrlList.add(topStoriesBeanList.get(i).getId());
+//            }
+//
+//            //第二步：设置viewpager适配器
+//            MyBannerPagerAdapter bannerPagerAdapter = new MyBannerPagerAdapter(mImageList, bannerViewPager);
+//            bannerViewPager.setAdapter(bannerPagerAdapter);
+//            //第三步：给viewpager设置轮播监听器
+//            bannerViewPager.addOnPageChangeListener(this);
+//            //第四步：设置刚打开app时显示的图片和文字
+//            setFirstLocation();
+//            //第五步: 设置自动播放,每隔3秒换一张图片
+//            mTimer.schedule(mTimerTask, 3000, 3000);
+//            //第七步：设置ViewPager的触摸事件，触摸停止自动播放Banner
+//            bannerViewPager.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    int action = event.getAction();
+//                    if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+//                        //按下或移动手指,停止自动播放
+//                        isStop = true;
+//                    } else if (action == MotionEvent.ACTION_UP) {
+//                        //抬起触摸，开启自动播放
+//                        isStop = false;
+//                    }
+//                    return false;
+//                }
+//            });
+//            //第九步：ViewPager Banner的点击事件
+//            //回调相当于把对象new MyBannerPagerAdapter.ViewPagerClickInterFace()对象传给MyBannerPagerAdapter中viewPagerClickInterFace对象
+//            //viewPagerClickInterFace.setClick(position);调的就是viewPagerClickInterFace对象调用重写后的方法
+//            bannerPagerAdapter.setViewPagerClickInterFace(new MyBannerPagerAdapter.ViewPagerClickInterFace() {
+//                @Override
+//                public void onClick(int position) {
+////                Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) + " 个广告栏   当前内容为： " + imageDescs[position], Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "点击第 " + (position + 1) +
+//                            " 个广告栏   当前内容为： " + mBnanerDesacList.get(position)
+//                            + "跳转Url: " + mBannerDetailUrlList.get(position), Toast.LENGTH_SHORT).show();
+//                    WebViewDetailActivity.actionStart(context, mBnanerDesacList.get(position), "", "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
+//                }
+//            });
+//        }
+//
+//        //第五步: 设置自动播放,每隔3秒换一张图片
+//        private TimerTask mTimerTask = new TimerTask() {
+//            @Override
+//            public void run() {
+//                if (!isStop) {
+//                    //播放时，主线程更新UI
+////                    runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////                            bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1);
+////                        }
+////                    });
+//                    new Handler().post(() -> bannerViewPager.setCurrentItem(bannerViewPager.getCurrentItem() + 1));
+//                }
+//            }
+//        };
+//
+//
+//        private void setFirstLocation() {
+//            tvImageDesc.setText(mBnanerDesacList.get(previousPosition));
+//            // *把ViewPager设置为默认选中Integer.MAX_VALUE / 2，从十几亿次开始轮播图片，达到无限循环目的;
+//            int m = (Integer.MAX_VALUE / 2) % mImageList.size();
+//            currentPosition = Integer.MAX_VALUE / 2 - m;
+//            //设置ViewPager图片当前位置
+//            bannerViewPager.setCurrentItem(currentPosition);
+//        }
+//
+//        @Override
+//        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//        }
+//
+//        @Override
+//        public void onPageSelected(int position) {
+//            //伪无限循环，滑到最后一张图片又从新进入第一张图片
+//            int newPosition = position % mImageList.size();
+//            //把当前选中的点给切换了, 还有描述信息也切换
+//            //图片下面设置显示文本
+//            tvImageDesc.setText(mBnanerDesacList.get(newPosition));
+//            //第八步：定义banner的滚动点
+//            ImageView[] dots = new ImageView[llIndicatorDot.getChildCount()];
+//            for (int i = 0; i < dots.length; i++) {
+//                dots[i] = (ImageView) llIndicatorDot.getChildAt(i);
+//                //让ImageView有效
+//                dots[i].setEnabled(true);
+//                dots[i].setTag(i);
+//                dots[i].setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        int position = (int) v.getTag();
+//                        currentPosition = position;
+//                        //设置当前页面
+//                        bannerViewPager.setCurrentItem(currentPosition);
+//                    }
+//                });
+//            }
+//            dots[newPosition].setEnabled(false);
+//
+//            //把当前的索引赋值给前一个索引变量，方便下一次再切换
+//            previousPosition = newPosition;
+//        }
+//
+//        @Override
+//        public void onPageScrollStateChanged(int i) {
+//
+//        }
+//    }
 
     /**
      * footer view
