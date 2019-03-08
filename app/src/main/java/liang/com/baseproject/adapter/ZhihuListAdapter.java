@@ -117,9 +117,9 @@ public class ZhihuListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (holder instanceof FooterViewHolder) {
             FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
             footerViewHolder.bindItem();
-        } else if (holder instanceof BaseRVAdapter.HeaderViewHolder) {
-            BaseRVAdapter.HeaderViewHolder headerViewHolder = (BaseRVAdapter.HeaderViewHolder) holder;
-
+        } else if (holder instanceof HeaderViewHolder) {
+            HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
+            headerViewHolder.bindItem(zhihuLastNewsRes.getTop_stories());
         }
     }
 
