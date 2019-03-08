@@ -53,6 +53,7 @@ public class ImageLoaderUtils {
 //                // 缓存原始数据
                 .diskCacheStrategy(isCache ? DiskCacheStrategy.ALL : DiskCacheStrategy.NONE)
                 .centerCrop()
+                .skipMemoryCache(true)
                 .transform(new CornersTranform(context, radius));
         // 图片加载库采用Glide框架
         Glide.with(context)
@@ -87,6 +88,7 @@ public class ImageLoaderUtils {
 //                // 缓存原始数据
                 .diskCacheStrategy(isCache ? DiskCacheStrategy.ALL : DiskCacheStrategy.NONE)
                 .centerCrop()
+                .skipMemoryCache(true)
                 .transform(new GlideCircleTransform(context));
         // 图片加载库采用Glide框架
         Glide.with(context)

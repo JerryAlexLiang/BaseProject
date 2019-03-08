@@ -42,7 +42,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(parent.getContext(), R.layout.rv_item_news, null);
+        View view = View.inflate(parent.getContext(), R.layout.item_rv_news, null);
         return new JuheNewsViewHolder(view);
     }
 
@@ -98,7 +98,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvNewsTime.setText(dataBean.getDate());
             tvNewsAuthor.setText(dataBean.getAuthor_name());
             Glide.with(context).load(dataBean.getThumbnail_pic_s()).into(ivNewsImg);
-            ImageLoaderUtils.loadImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 5);
+            ImageLoaderUtils.loadImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 10);
 
 
 //            //点击图片跳转图片Activity -> SinglePictureActivity  a%2 != 0
@@ -150,7 +150,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //    private BaseViewHolder.onItemBaseClickListener baseClickListener;
 //
 //    public JuheNewsAdapter(Context context, List<NewsRes.ResultBean.DataBean> dataList) {
-//        super(context, dataList, R.layout.rv_item_news);
+//        super(context, dataList, R.layout.item_rv_news);
 //        this.mContext = context;
 //    }
 //

@@ -3,6 +3,7 @@ package liang.com.baseproject.retrofit;
 import io.reactivex.Observable;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
+import liang.com.baseproject.entity.ZhihuLastNewsRes;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -29,6 +30,19 @@ public interface MyService {
 //    @GET("/data/福利/10/{page}")
     @GET("data/%E7%A6%8F%E5%88%A9/10/{page}")
     Observable<NiceGankRes> getNiceGankData(@Path("page") int page);
+
+    /**
+     * 知乎API - 获取最新信息
+     * https://news-at.zhihu.com/api/4/news/latest
+     */
+    @GET("news/latest")
+    Observable<ZhihuLastNewsRes> getZhihuLatestData();
+
+    /**
+     * 知乎API - 请求过往数据
+     */
+    @GET("news/before/{time}")
+    Observable<ZhihuLastNewsRes> getZhihuBeforeData(@Path("time") String time);
 
 
 }

@@ -55,6 +55,7 @@
 
     <style name="ExpandedCollapsingToolbarTitle" >
         <item name="android:textSize">22sp</item>
+        <item name="android:singleLine">false</item>
     </style>
 
     <style name="CollapsedCollapsingToolbarTitle" >

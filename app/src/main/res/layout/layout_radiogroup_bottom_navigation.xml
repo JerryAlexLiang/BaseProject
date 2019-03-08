@@ -47,7 +47,7 @@
         android:drawableTop="@drawable/nearby_selector"
         android:gravity="center"
         android:padding="6dp"
-        android:text="直播"
+        android:text="@string/radio_button_three_text"
         android:textColor="#888888" />
 
     <RadioButton

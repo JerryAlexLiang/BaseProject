@@ -44,7 +44,7 @@ import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
-import liang.com.baseproject.fragment.ThreeFragment;
+import liang.com.baseproject.fragment.ZhiHuContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
@@ -119,7 +119,7 @@ public class MainHomeActivity extends BaseActivity {
     private List<String> titleList = new ArrayList<>();
     private JuheNewsContainerFragment juheNewsContainerFragment;
     private NiceGankFragment niceGankFragment;
-    private ThreeFragment threeFragment;
+    private ZhiHuContainerFragment zhiHuContainerFragment;
     private FourFragment fourFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
 
@@ -301,17 +301,17 @@ public class MainHomeActivity extends BaseActivity {
     private void initViewPage() {
         juheNewsContainerFragment = new JuheNewsContainerFragment();
         niceGankFragment = new NiceGankFragment();
-        threeFragment = new ThreeFragment();
+        zhiHuContainerFragment = new ZhiHuContainerFragment();
         fourFragment = new FourFragment();
 
         fragmentList.add(juheNewsContainerFragment);
         fragmentList.add(niceGankFragment);
-        fragmentList.add(threeFragment);
+        fragmentList.add(zhiHuContainerFragment);
         fragmentList.add(fourFragment);
 
         titleList.add("聚合新闻");
         titleList.add("颜如玉");
-        titleList.add("热门");
+        titleList.add("知乎日报");
         titleList.add("特色");
 
         //ViewPager的适配器

@@ -35,8 +35,11 @@ public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = createPresenter();
-        mPresenter.attachView((V) this);
+        //允许为空，不是所有都要实现MVP模式
+        if (createPresenter() != null) {
+            mPresenter = createPresenter();
+            mPresenter.attachView((V) this);
+        }
     }
 
     @Nullable

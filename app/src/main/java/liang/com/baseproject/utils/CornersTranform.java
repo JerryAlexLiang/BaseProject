@@ -59,7 +59,17 @@ public class CornersTranform extends BitmapTransformation {
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public void updateDiskCacheKey(MessageDigest messageDigest) {
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }

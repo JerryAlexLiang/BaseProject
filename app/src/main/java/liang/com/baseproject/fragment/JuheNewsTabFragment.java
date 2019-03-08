@@ -83,7 +83,7 @@ public class JuheNewsTabFragment extends Fragment implements NewsView, SwipeRefr
         if (getArguments() != null) {
             String newsKey = getArguments().getString("newsKey");
 //            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
-            presenter.getNewsData(UrlConstants.NEWS_URL, "guoji", Constant.NEWS_APPKEY);
+//            presenter.getNewsData(UrlConstants.NEWS_URL, "guoji", Constant.NEWS_APPKEY);
         }
     }
 
@@ -145,7 +145,6 @@ public class JuheNewsTabFragment extends Fragment implements NewsView, SwipeRefr
         //适配器
         JuheNewsAdapter adapter = new JuheNewsAdapter(getContext(), data);
         recyclerView.setAdapter(adapter);
-
     }
 
     /**

@@ -3,6 +3,7 @@ package liang.com.baseproject.presenter;
 import android.content.Context;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -28,7 +29,7 @@ public class NiceGankPresenter extends BasePresenter<NiceGankView> {
 
     private Context context;
     private List<GankRes> list;
-    private int page = 1;
+    private int page = 1;     //根据页数进行分页加载
     private int lastVisibleItem;
     private boolean isLoadMore = false; // 是否加载过更多
     private NiceGankView niceGankView;
@@ -93,6 +94,7 @@ public class NiceGankPresenter extends BasePresenter<NiceGankView> {
                         return;
                     }
                     if (lastVisibleItem + 1 == gridLayoutManager.getItemCount()) {
+                        //设置SwipeRefreshLayout刷新
                         niceGankView.setDataRefresh(true);
                         isLoadMore = true;
                         new Handler().postDelayed(() -> getNiceGankData(), 1000);

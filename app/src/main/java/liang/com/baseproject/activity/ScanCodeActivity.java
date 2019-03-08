@@ -304,8 +304,6 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
         //把当前的索引赋值给前一个索引变量，方便下一次再切换
         previousPosition = newPosition;
-
-
     }
 
     @Override
