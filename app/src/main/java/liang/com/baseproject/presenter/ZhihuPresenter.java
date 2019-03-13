@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.List;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.View.ZhihuView;
@@ -30,9 +32,8 @@ public class ZhihuPresenter extends BasePresenter<ZhihuView> {
     private LinearLayoutManager linearLayoutManager;
     private int lastVisibleItem;
     private boolean isLoadMore = false; // 是否加载过更多
-    private ZhihuListAdapter zhihuListAdapter;
     //适配器
-
+    private ZhihuListAdapter zhihuListAdapter;
 
     public ZhihuPresenter(Context context) {
         this.context = context;
@@ -101,7 +102,6 @@ public class ZhihuPresenter extends BasePresenter<ZhihuView> {
         }
     }
 
-
     private void loadError(Throwable e) {
         e.printStackTrace();
         zhihuView.setDataRefresh(false);
@@ -141,6 +141,9 @@ public class ZhihuPresenter extends BasePresenter<ZhihuView> {
      */
     public void scrollRecycleViewListener() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            /**
+             * 判断是否滑动了最后一个 Item
+             */
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -152,7 +155,7 @@ public class ZhihuPresenter extends BasePresenter<ZhihuView> {
                         return;
                     }
                     if (lastVisibleItem + 1 == linearLayoutManager.getItemCount()) {
-                        //底部视图刷新方式-下拉刷新
+                        //底部视图刷新方式-上拉刷新
                         zhihuListAdapter.updateLoadStatus(zhihuListAdapter.LOAD_PULL_TO);
                         isLoadMore = true;
                         //底部视图刷新方式-加载更多
@@ -169,6 +172,9 @@ public class ZhihuPresenter extends BasePresenter<ZhihuView> {
                 }
             }
 
+            /**
+             * 在这里获取到 RecyclerView 的最后一个 Item 的位置
+             */
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);

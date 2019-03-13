@@ -28,7 +28,7 @@ public interface MyService {
      * http://gank.io/api/data/%E7%A6%8F%E5%88%A9/10/2
      */
 //    @GET("/data/福利/10/{page}")
-    @GET("data/%E7%A6%8F%E5%88%A9/10/{page}")
+    @GET("data/%E7%A6%8F%E5%88%A9/2/{page}")
     Observable<NiceGankRes> getNiceGankData(@Path("page") int page);
 
     /**

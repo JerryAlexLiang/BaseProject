@@ -1,5 +1,6 @@
 package liang.com.baseproject.View;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -17,5 +18,7 @@ public interface NiceGankView {
     GridLayoutManager getGridLayoutManager();
 
     RecyclerView getRecyclerView();
+
+    SwipeRefreshLayout getSwipeRefreshLayout();
 
 }

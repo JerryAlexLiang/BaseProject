@@ -36,6 +36,7 @@ public class NiceGankPresenter extends BasePresenter<NiceGankView> {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
     private NiceGankAdapter niceGankAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     public NiceGankPresenter(Context context) {
         this.context = context;
@@ -133,8 +134,23 @@ public class NiceGankPresenter extends BasePresenter<NiceGankView> {
             list = gankResList;
             niceGankAdapter = new NiceGankAdapter(context, list);
             recyclerView.setAdapter(niceGankAdapter);
-            niceGankAdapter.notifyDataSetChanged();
+//            niceGankAdapter.notifyDataSetChanged();
         }
         niceGankView.setDataRefresh(false);
+    }
+
+    public void swipeRefreshListener() {
+        niceGankView = getView();
+        if (niceGankView != null) {
+            swipeRefreshLayout = niceGankView.getSwipeRefreshLayout();
+            swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    isLoadMore = false;
+                    page = 1;
+                    new Handler().postDelayed(() -> getNiceGankData(), 1000);
+                }
+            });
+        }
     }
 }
