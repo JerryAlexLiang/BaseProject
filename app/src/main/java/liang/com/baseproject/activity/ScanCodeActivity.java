@@ -1,6 +1,7 @@
 package liang.com.baseproject.activity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
@@ -14,6 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +33,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
+import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
 
 public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
@@ -138,6 +146,28 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
             }
         });
 
+
+        String url1 = "http://192.168.137.1:8080/iface/downloadfile?file=C:%5CUsers%5CDESKTOP-20190220%5CDocuments%5CArcvideo+iFaceMini%5CAlarm%5C2019%5C03%5C08%5Cid%280%29_20190308-121053625.jpg";
+        String url2 = "http://192.168.137.1:8080/iface/downloadfile?file=C:%5CUsers%5CDESKTOP-20190220%5CDocuments%5CArcvideo+iFaceMini%5CAlarm%5C2019%5C03%5C08%5Cid%280%29_20190308-121041511.jpg";
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long millisStart = System.currentTimeMillis();
+                Bitmap bitmap = FileUtil.saveImageByUrl(url1);
+                Bitmap bitmap1 = FileUtil.saveImageByUrl(url2);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        long millisEnd = System.currentTimeMillis();
+                        System.out.println("返回结果0：  " + "开始时间：  " + millisStart + "结束时间:  " + millisEnd);
+                        System.out.println("返回结果1：  " + bitmap);
+                        System.out.println("返回结果2：  " + bitmap1);
+                    }
+                });
+            }
+        }).start();
     }
 
     /**

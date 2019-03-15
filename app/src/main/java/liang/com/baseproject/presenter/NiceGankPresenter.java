@@ -134,7 +134,7 @@ public class NiceGankPresenter extends BasePresenter<NiceGankView> {
             list = gankResList;
             niceGankAdapter = new NiceGankAdapter(context, list);
             recyclerView.setAdapter(niceGankAdapter);
-//            niceGankAdapter.notifyDataSetChanged();
+            niceGankAdapter.notifyDataSetChanged();
         }
         niceGankView.setDataRefresh(false);
     }
