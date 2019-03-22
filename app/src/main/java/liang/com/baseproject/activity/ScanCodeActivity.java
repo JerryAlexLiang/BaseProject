@@ -168,6 +168,10 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
                 });
             }
         }).start();
+
+        //String.format("%1$#9x", -21474xxxxx)  十进制转十六进制
+        String format = String.format("%1$#9x", -2147418113);
+        System.out.println("kkkkkk1   " + format);
     }
 
     /**
