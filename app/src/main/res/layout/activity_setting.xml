@@ -5,9 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".activity.SettingActivity">
 
     <include layout="@layout/layout_base_actionbar_default" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="输入框"/>
 
     <FrameLayout
         android:id="@+id/fly_setting_container"

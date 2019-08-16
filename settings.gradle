@@ -1,1 +1,2 @@
-include ':app', ':RecyclerViewRefreshDemo', ':CustomDatePicker'
+include ':app',
+        ':CustomDatePicker'

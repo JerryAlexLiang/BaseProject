@@ -15,12 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +29,8 @@ import liang.com.baseproject.adapter.MyBannerPagerAdapter;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
+import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideEventListener;
 
 public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -49,6 +45,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     TextView tvImageDesc;
     @BindView(R.id.ll_indicator_dot)
     LinearLayout llIndicatorDot;
+    @BindView(R.id.scan_slide_swipe_back_layout)
+    SlideDampingAnimationLayout scanSlideSwipeBackLayout;
 
     //TabLayout标题列表
     private List<String> stringList = new ArrayList<>();
@@ -92,6 +90,18 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code);
         ButterKnife.bind(this);
+
+        scanSlideSwipeBackLayout.setSlideListener(new SlideEventListener() {
+            @Override
+            public void leftEvent() {
+                finish();
+            }
+
+            @Override
+            public void rightEvent() {
+
+            }
+        });
         //初始化资源
         initData();
         //初始化适配器

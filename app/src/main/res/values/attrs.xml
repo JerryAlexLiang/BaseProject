@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SlideDampingAnimationLayout">
+        <attr name="bezier_curves_color" format="color" />
+        <attr name="bezier_curves_type">
+            <enum name="quadratic_bezier_curves" value="0" />
+            <enum name="high_order_bezier_curves" value="1" />
+        </attr>
+        <attr name="allow_gesture">
+            <enum name="only_left" value="0" />
+            <enum name="only_right" value="1" />
+            <enum name="both" value="2"/>
+        </attr>
+    </declare-styleable>
+
+</resources>
