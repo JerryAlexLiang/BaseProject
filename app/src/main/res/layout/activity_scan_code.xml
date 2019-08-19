@@ -9,6 +9,7 @@
     app:allow_gesture="only_left"
     app:bezier_curves_color="#ff00"
     app:bezier_curves_type="quadratic_bezier_curves"
+    android:background="@color/black"
     tools:context=".activity.ScanCodeActivity">
 
     <!--
@@ -48,8 +49,10 @@
     -->
 
     <ScrollView
+        android:id="@+id/scroll_View"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ffffff">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,6 +82,26 @@
                 android:background="#88888888" />
 
             <include layout="@layout/layout_view_pager_banner" />
+
+            <Button
+                android:id="@+id/btn_animator_open"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Animator_Open"
+                android:textAllCaps="false"/>
+
+            <Button
+                android:id="@+id/btn_animator_hide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Animator_hide"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
 

@@ -10,8 +10,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
+import liang.com.baseproject.utils.AnimationUtils;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
@@ -47,6 +50,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
     LinearLayout llIndicatorDot;
     @BindView(R.id.scan_slide_swipe_back_layout)
     SlideDampingAnimationLayout scanSlideSwipeBackLayout;
+    @BindView(R.id.scroll_View)
+    ScrollView scrollView;
 
     //TabLayout标题列表
     private List<String> stringList = new ArrayList<>();
@@ -182,6 +187,22 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         //String.format("%1$#9x", -21474xxxxx)  十进制转十六进制
         String format = String.format("%1$#9x", -2147418113);
         System.out.println("kkkkkk1   " + format);
+
+
+        Button buttonOpen = (Button) findViewById(R.id.btn_animator_open);
+        Button buttonHide = (Button) findViewById(R.id.btn_animator_hide);
+        buttonOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtils.pageShowScaleAnimator(ScanCodeActivity.this, scrollView);
+            }
+        });
+        buttonHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtils.pageHideScaleAnimator(ScanCodeActivity.this, scrollView);
+            }
+        });
     }
 
     /**
@@ -365,4 +386,5 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         isStop = true;
         mTimer.cancel();
     }
+
 }
