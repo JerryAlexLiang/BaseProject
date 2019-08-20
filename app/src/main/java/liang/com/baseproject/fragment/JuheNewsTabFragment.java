@@ -82,7 +82,7 @@ public class JuheNewsTabFragment extends Fragment implements NewsView, SwipeRefr
     private void getData() {
         if (getArguments() != null) {
             String newsKey = getArguments().getString("newsKey");
-//            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
+            presenter.getNewsData(UrlConstants.NEWS_URL, newsKey, Constant.NEWS_APPKEY);
 //            presenter.getNewsData(UrlConstants.NEWS_URL, "guoji", Constant.NEWS_APPKEY);
         }
     }

@@ -466,7 +466,7 @@ public class MainHomeActivity extends BaseActivity {
                 touchTime = currentTime;
             } else {
                 finish();
-                System.exit(0);
+//                System.exit(0);
             }
             return true;
         } else if (KeyEvent.KEYCODE_HOME == keyCode) {
