@@ -55,31 +55,31 @@
                         android:id="@+id/tv_news_author"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:text="---"
+                        android:layout_marginStart="5dp"
                         android:textSize="10sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="---"
                         tools:ignore="SmallSp" />
 
                     <ImageView
                         android:id="@+id/iv_news_time"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginLeft="10dp"
                         android:layout_marginBottom="3dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/icon_time" />
 
                     <TextView
                         android:id="@+id/tv_news_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="5dp"
                         android:layout_marginLeft="5dp"
-                        android:text="---"
+                        android:layout_marginStart="5dp"
                         android:textSize="10sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="---"
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
@@ -92,8 +92,7 @@
                 android:layout_height="85dp"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="2dp"
-                android:transitionName="NewsImage"
-                tools:targetApi="lollipop" />
+                android:transitionName="NewsImage"/>
 
         </LinearLayout>
 

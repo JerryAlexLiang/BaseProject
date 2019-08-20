@@ -1,5 +1,7 @@
 package liang.com.baseproject.activity;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
@@ -80,6 +82,19 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         intent.putExtra("url", url);
         intent.putExtra("imageUrl", imageUrl);
         context.startActivity(intent);
+    }
+
+    public static void actionStart(Context context, String title, String url, String imageUrl, View view, String sharedElementName) {
+        Intent intent = new Intent(context, WebViewDetailActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("url", url);
+        intent.putExtra("imageUrl", imageUrl);
+        if (android.os.Build.VERSION.SDK_INT > 20) {
+            Bundle options = ActivityOptions.makeSceneTransitionAnimation((Activity) context, view, sharedElementName).toBundle();
+            context.startActivity(intent, options);
+        }else {
+            context.startActivity(intent);
+        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package liang.com.baseproject.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -138,9 +139,16 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 }
             });
-
             //点击CardView跳转到WebView新闻详情页
-            cardStories.setOnClickListener(v -> WebViewDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl(), dataBean.getThumbnail_pic_s()));
+            cardStories.setOnClickListener(v -> {
+                //
+                if (android.os.Build.VERSION.SDK_INT > 20) {
+                    WebViewDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl(),
+                            dataBean.getThumbnail_pic_s(), ivNewsImg, "NewsImage");
+                } else {
+                    WebViewDetailActivity.actionStart(context, dataBean.getTitle(), dataBean.getUrl(), dataBean.getThumbnail_pic_s());
+                }
+            });
         }
     }
 

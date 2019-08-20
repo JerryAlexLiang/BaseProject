@@ -283,7 +283,6 @@ public class MainHomeActivity extends BaseActivity {
                         break;
 
                     case R.id.menu_nav_feedback:
-
                         break;
 
                     case R.id.menu_nav_setting:
