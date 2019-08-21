@@ -44,7 +44,7 @@ import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.fragment.FourFragment;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
-import liang.com.baseproject.fragment.ZhiHuContainerFragment;
+import liang.com.baseproject.fragment.HomeContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
@@ -117,9 +117,9 @@ public class MainHomeActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<>();
     //标题列表
     private List<String> titleList = new ArrayList<>();
+    private HomeContainerFragment homeContainerFragment;
     private JuheNewsContainerFragment juheNewsContainerFragment;
     private NiceGankFragment niceGankFragment;
-    private ZhiHuContainerFragment zhiHuContainerFragment;
     private FourFragment fourFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
 
@@ -269,7 +269,7 @@ public class MainHomeActivity extends BaseActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.menu_nav_scan:
                         //扫描界面
-                        startActivity(new Intent(MainHomeActivity.this, ScanCodeActivity.class));
+                        startActivity(new Intent(MainHomeActivity.this, TestCodeActivity.class));
                         break;
 
                     case R.id.menu_nav_friends:
@@ -298,19 +298,19 @@ public class MainHomeActivity extends BaseActivity {
     }
 
     private void initViewPage() {
+        homeContainerFragment = new HomeContainerFragment();
         juheNewsContainerFragment = new JuheNewsContainerFragment();
         niceGankFragment = new NiceGankFragment();
-        zhiHuContainerFragment = new ZhiHuContainerFragment();
         fourFragment = new FourFragment();
 
+        fragmentList.add(homeContainerFragment);
         fragmentList.add(juheNewsContainerFragment);
         fragmentList.add(niceGankFragment);
-        fragmentList.add(zhiHuContainerFragment);
         fragmentList.add(fourFragment);
 
+        titleList.add("推荐");
         titleList.add("聚合新闻");
         titleList.add("颜如玉");
-        titleList.add("知乎日报");
         titleList.add("特色");
 
         //ViewPager的适配器

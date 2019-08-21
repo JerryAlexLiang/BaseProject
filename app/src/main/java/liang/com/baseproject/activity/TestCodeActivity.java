@@ -35,9 +35,9 @@ import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideEventListener;
 
-public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
-    private static final String TAG = ScanCodeActivity.class.getSimpleName();
+    private static final String TAG = TestCodeActivity.class.getSimpleName();
     @BindView(R.id.scan_tab_layout)
     TabLayout scanTabLayout;
     @BindView(R.id.scan_view_pager)
@@ -153,11 +153,11 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         bannerPagerAdapter.setViewPagerClickInterFace(new MyBannerPagerAdapter.ViewPagerClickInterFace() {
             @Override
             public void onClick(int position) {
-//                Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) + " 个广告栏   当前内容为： " + imageDescs[position], Toast.LENGTH_SHORT).show();
-                Toast.makeText(ScanCodeActivity.this, "点击第 " + (position + 1) +
+//                Toast.makeText(TestCodeActivity.this, "点击第 " + (position + 1) + " 个广告栏   当前内容为： " + imageDescs[position], Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestCodeActivity.this, "点击第 " + (position + 1) +
                         " 个广告栏   当前内容为： " + mBnanerDesacList.get(position)
                         + "跳转Url: " + mBannerDetailUrl.get(position), Toast.LENGTH_SHORT).show();
-                WebViewDetailActivity.actionStart(ScanCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position), "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
+                WebViewDetailActivity.actionStart(TestCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position), "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
             }
         });
 
@@ -194,13 +194,13 @@ public class ScanCodeActivity extends AppCompatActivity implements ViewPager.OnP
         buttonOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtils.pageShowScaleAnimator(ScanCodeActivity.this, scrollView);
+                AnimationUtils.pageShowScaleAnimator(TestCodeActivity.this, scrollView);
             }
         });
         buttonHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtils.pageHideScaleAnimator(ScanCodeActivity.this, scrollView);
+                AnimationUtils.pageHideScaleAnimator(TestCodeActivity.this, scrollView);
             }
         });
     }

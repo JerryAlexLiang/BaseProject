@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.ZhiHuContainerFragment">
+    tools:context=".fragment.HomeContainerFragment">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_zhihu"
+            android:id="@+id/rv_home"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gery" />
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="49dp"
+            android:scrollbars="vertical"/>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</LinearLayout>
+</RelativeLayout>

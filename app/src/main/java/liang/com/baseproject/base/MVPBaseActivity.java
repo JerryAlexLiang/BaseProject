@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.utils.SPUtils;
+import me.wangyuwei.particleview.ParticleView;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
 
@@ -111,6 +113,11 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         CollapsingToolbarLayout baseToolBar = findViewById(R.id.toolbar_layout);
         if (baseToolBar != null) {
             getActionBarTheme(null, baseToolBar);
+        }
+
+        RelativeLayout splashRelativeLayout = findViewById(R.id.splash_container_layout);
+        if (splashRelativeLayout != null) {
+            getSplashTheme(splashRelativeLayout);
         }
 
         if (isSetRefresh()) {
@@ -237,6 +244,48 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
                 if (baseToolBar != null) {
                     baseToolBar.setContentScrimColor(getResources().getColor(R.color.palegreen));
                     baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.palegreen));
+                }
+                break;
+        }
+    }
+
+    public void getSplashTheme(RelativeLayout relativeLayout) {
+        int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
+        Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
+        switch (actionBarColorInt) {
+            case 0:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(Color.RED);
+                }
+                break;
+
+            case 1:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                }
+                break;
+
+            case 2:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(Color.BLACK);
+                }
+                break;
+
+            case 3:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(Color.WHITE);
+                }
+                break;
+
+            case 4:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(Color.TRANSPARENT);
+                }
+                break;
+
+            case 5:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 }
                 break;
         }

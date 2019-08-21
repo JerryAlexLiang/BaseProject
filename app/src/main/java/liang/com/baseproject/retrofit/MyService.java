@@ -1,6 +1,11 @@
 package liang.com.baseproject.retrofit;
 
+import com.allen.library.bean.BaseData;
+
+import java.util.List;
+
 import io.reactivex.Observable;
+import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
@@ -43,6 +48,12 @@ public interface MyService {
      */
     @GET("news/before/{time}")
     Observable<ZhihuLastNewsRes> getZhihuBeforeData(@Path("time") String time);
+
+    /**
+     * 首页banner
+     */
+    @GET("banner/json")
+    Observable<BaseData<List<BannerBean>>> getBanner();
 
 
 }

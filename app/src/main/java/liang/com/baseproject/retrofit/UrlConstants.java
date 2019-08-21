@@ -7,6 +7,12 @@ package liang.com.baseproject.retrofit;
  */
 public interface UrlConstants {
 
+    public static final boolean DEBUG = true;
+
+    public static final long HTTP_TIMEOUT = 5000;
+
+    public static final String BASE_URL = "https://www.wanandroid.com/";
+
     //聚合数据新闻
     String NEWS_URL = "http://v.juhe.cn";
 

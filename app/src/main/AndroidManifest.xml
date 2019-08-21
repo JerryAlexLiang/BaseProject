@@ -27,7 +27,11 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".activity.FeedbackActivity"/>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.FeedbackActivity" />
         <activity
             android:name=".activity.SplashOneActivity"
             android:theme="@style/Transparent">
@@ -45,7 +49,7 @@
             android:name=".base.PermissionActivity"
             android:theme="@style/Transparent"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".activity.ScanCodeActivity" />
+        <activity android:name=".activity.TestCodeActivity" />
         <activity android:name=".activity.WebViewDetailActivity" />
         <activity android:name=".activity.SinglePictureActivity" />
         <activity android:name=".activity.SettingActivity" />

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBlue"
+    android:id="@+id/splash_container_layout"
     tools:context=".activity.SplashOneActivity">
 
     <!--android:background="?attr/colorPrimary"-->

@@ -10,7 +10,7 @@
     app:bezier_curves_color="#ff00"
     app:bezier_curves_type="quadratic_bezier_curves"
     android:background="@color/black"
-    tools:context=".activity.ScanCodeActivity">
+    tools:context=".activity.TestCodeActivity">
 
     <!--
     app:bezier_curves_type="quadratic_bezier_curves"
