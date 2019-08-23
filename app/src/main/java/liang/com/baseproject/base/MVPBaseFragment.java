@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 
-public abstract class MVPBaseFragment<V, T extends BasePresenter<V>> extends Fragment {
+public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends Fragment {
 
     protected T mPresenter;
     private Unbinder unbinder;

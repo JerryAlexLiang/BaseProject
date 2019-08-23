@@ -60,6 +60,6 @@
         android:drawableTop="@drawable/mine_selector"
         android:gravity="center"
         android:padding="6dp"
-        android:text="视频"
+        android:text="@string/radio_button_mine_text"
         android:textColor="#888888" />
 </RadioGroup>

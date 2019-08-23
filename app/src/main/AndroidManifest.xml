@@ -41,10 +41,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SplashTwoActivity" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
         <activity android:name=".activity.WhiteActivity" />
         <activity android:name=".activity.TranslateActivity" />
-        <activity android:name=".activity.SplashTwoActivity" />
-        <activity android:name=".activity.MainHomeActivity" />
+        <activity android:name=".activity.MainHomeActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".base.PermissionActivity"
             android:theme="@style/Transparent"

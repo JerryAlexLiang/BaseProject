@@ -23,6 +23,7 @@
 
     <color name="bg_title">#111322</color>
     <color name="color_white">#ffffff</color>
+    <color name="color_blue">#3F51B5</color>
 
     <!--移植老项目-->
     <color name="white_50">#80FFFFFF</color>

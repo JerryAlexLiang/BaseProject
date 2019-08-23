@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import liang.com.baseproject.View.JuheNewsDetailWebView;
-import liang.com.baseproject.base.BasePresenter;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.utils.LogUtil;
 
 /**
@@ -23,7 +23,7 @@ import liang.com.baseproject.utils.LogUtil;
  * 描述: 聚合新闻详情页
  * 作者: liangyang
  */
-public class JuheNewsDetailPresenter extends BasePresenter<JuheNewsDetailWebView> {
+public class JuheNewsDetailPresenter extends MVPBasePresenter<JuheNewsDetailWebView> {
 
     private Activity activity;
 

@@ -32,6 +32,9 @@ public class FragmentViewPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return titleList.get(position);
+        if (titleList != null && titleList.size() == getCount()) {
+            return titleList.get(position);
+        }
+        return "";
     }
 }

@@ -8,8 +8,12 @@ import io.reactivex.Observable;
 import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
+import liang.com.baseproject.entity.Userbean;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -54,6 +58,14 @@ public interface MyService {
      */
     @GET("banner/json")
     Observable<BaseData<List<BannerBean>>> getBanner();
+
+    /**
+     * 登陆 https://www.wanandroid.com/user/login
+     * 登录后会在cookie中返回账号密码，只要在客户端做cookie持久化存储即可自动登录验证
+     */
+    @FormUrlEncoded
+    @POST("/user/login")
+    Observable<BaseData<Userbean>> goToLogin(@Field("username") String username, @Field("password") String password);
 
 
 }

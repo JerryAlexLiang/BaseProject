@@ -50,5 +50,16 @@
     <string name="radio_button_one_text">新推荐</string>
     <string name="radio_button_two_text">最资讯</string>
     <string name="radio_button_three_text">颜如玉</string>
+    <string name="radio_button_mine_text">我的</string>
+
+    <!--登录界面-->
+    <string name="welcome_title">欢迎使用</string>
+    <string name="welcome_content">BaseProject</string>
+    <string name="go_to_register">去注册</string>
+    <string name="input_user_name">请输入用户名</string>
+    <string name="input_password">请输入密码</string>
+    <string name="go_to_login">去登录</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
 
 </resources>

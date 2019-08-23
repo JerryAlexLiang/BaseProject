@@ -13,7 +13,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.View.NiceGankView;
 import liang.com.baseproject.adapter.NiceGankAdapter;
-import liang.com.baseproject.base.BasePresenter;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.entity.GankRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.retrofit.BaseObserver;
@@ -25,7 +25,7 @@ import liang.com.baseproject.retrofit.UrlConstants;
  * 描述: 干货集中营API- 颜如玉View （另一MVP模式写法）
  * 作者: liangyang
  */
-public class NiceGankPresenter extends BasePresenter<NiceGankView> {
+public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
 
     private Context context;
     private List<GankRes> list;

@@ -1,14 +1,12 @@
 package liang.com.baseproject.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.BaseActivity;
-import liang.com.baseproject.base.BasePresenter;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.utils.APKVersionCodeUtils;
 import me.wangyuwei.particleview.ParticleView;
@@ -26,7 +24,7 @@ public class SplashOneActivity extends MVPBaseActivity {
     TextView tvVersionCode;
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected MVPBasePresenter createPresenter() {
         return null;
     }
 

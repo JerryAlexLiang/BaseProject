@@ -3,11 +3,11 @@ package liang.com.baseproject.presenter;
 import java.util.List;
 
 import liang.com.baseproject.View.HomeView;
-import liang.com.baseproject.base.BasePresenter;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.interactor.HomeInteractor;
 
-public class HomePresenter extends BasePresenter<HomeView> implements HomeInteractor.onRetrofitListener {
+public class HomePresenter extends MVPBasePresenter<HomeView> implements HomeInteractor.onRetrofitListener {
 
     private HomeInteractor homeInteractor;
 

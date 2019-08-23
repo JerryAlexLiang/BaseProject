@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.LoginFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_go_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp40"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:rotation="180"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_next"
+            android:visibility="invisible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/go_to_register"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/sp15" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:rotation="0"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_next" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_user_name_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp44"
+        android:layout_below="@id/ll_go_register"
+        android:layout_marginStart="@dimen/dp60"
+        android:layout_marginTop="@dimen/dp60"
+        android:layout_marginEnd="@dimen/dp60"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/et_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_account_normal"
+            android:drawablePadding="8dp"
+            android:gravity="top"
+            android:hint="@string/input_user_name"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textColorHint="#888888" />
+
+        <TextView
+            android:id="@+id/tv_user_name_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_clear_user_name"
+            android:text="用户名必须为2-12位字符"
+            android:textColor="@color/red"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btn_clear_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/et_user_name"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:src="@drawable/ic_delete"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_password_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp44"
+        android:layout_below="@id/rl_user_name_container"
+        android:layout_marginStart="@dimen/dp60"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp60"
+        android:background="@color/white"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_password_normal"
+            android:drawablePadding="8dp"
+            android:gravity="top"
+            android:hint="@string/input_password"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:textColorHint="#888888" />
+
+        <TextView
+            android:id="@+id/tv_password_notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_clear_password"
+            android:text="密码必须6-16位"
+            android:textColor="@color/red"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btn_clear_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/et_password"
+            android:layout_gravity="center_vertical"
+            android:layout_toStartOf="@+id/btn_password_eye"
+            android:paddingStart="10dp"
+            android:src="@drawable/ic_delete"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/btn_password_eye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/et_password"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center_vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="5dp"
+            android:src="@drawable/ic_eye_normal"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_password_container"
+        android:layout_marginLeft="@dimen/dp60"
+        android:layout_marginTop="@dimen/dp30"
+        android:layout_marginRight="@dimen/dp60"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_solid_round_color_main_radius_max" />
+
+</RelativeLayout>

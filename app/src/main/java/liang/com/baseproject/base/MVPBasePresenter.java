@@ -8,10 +8,10 @@ import liang.com.baseproject.retrofit.RetrofitHelper;
 
 /**
  * 创建日期：2019/2/20 on 14:13
- * 描述: BasePresenter
+ * 描述: MVPBasePresenter
  * 作者: liangyang
  */
-public abstract class BasePresenter<V> {
+public abstract class MVPBasePresenter<V> {
 
     protected Reference<V> mViewRef;
 
@@ -31,6 +31,7 @@ public abstract class BasePresenter<V> {
         if (mViewRef != null) {
             mViewRef.clear();
             mViewRef = null;
+
         }
     }
 }

@@ -38,7 +38,7 @@ public class SplashTwoActivity extends BaseActivity {
         mScaleAnim.setFillAfter(true);
         mScaleAnim.setDuration(5000);
 
-        addActivity(this,SplashTwoActivity.class);
+//        addActivity(this,SplashTwoActivity.class);
 
         mScaleAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -48,11 +48,10 @@ public class SplashTwoActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    MainHomeActivity.actionStart(SplashTwoActivity.this);
-                }
+                MainHomeActivity.actionStart(SplashTwoActivity.this);
+                //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
                 overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                finishAll();
+//                finishAll();
                 finish();
             }
 

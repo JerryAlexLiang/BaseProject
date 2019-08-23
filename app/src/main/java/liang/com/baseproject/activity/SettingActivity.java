@@ -11,7 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.BasePresenter;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.fragment.SettingsFragment;
 
@@ -43,7 +43,7 @@ public class SettingActivity extends MVPBaseActivity {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected MVPBasePresenter createPresenter() {
         return null;
     }
 

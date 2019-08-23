@@ -12,10 +12,10 @@ import liang.com.baseproject.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FourFragment extends Fragment {
+public class MineFragment extends Fragment {
 
 
-    public FourFragment() {
+    public MineFragment() {
         // Required empty public constructor
     }
 

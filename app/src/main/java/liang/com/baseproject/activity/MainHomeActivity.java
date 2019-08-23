@@ -1,6 +1,7 @@
 package liang.com.baseproject.activity;
 
 import android.Manifest;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -42,9 +43,9 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
-import liang.com.baseproject.fragment.FourFragment;
-import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.HomeContainerFragment;
+import liang.com.baseproject.fragment.JuheNewsContainerFragment;
+import liang.com.baseproject.fragment.MineFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
@@ -58,7 +59,7 @@ import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_WIFI;
 
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-public class MainHomeActivity extends BaseActivity {
+public class MainHomeActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = MainHomeActivity.class.getSimpleName();
     @BindView(R.id.base_actionbar_left_icon)
@@ -120,7 +121,7 @@ public class MainHomeActivity extends BaseActivity {
     private HomeContainerFragment homeContainerFragment;
     private JuheNewsContainerFragment juheNewsContainerFragment;
     private NiceGankFragment niceGankFragment;
-    private FourFragment fourFragment;
+    private MineFragment mineFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
 
     //记录ViewPage当前的选中界面
@@ -259,6 +260,34 @@ public class MainHomeActivity extends BaseActivity {
 
             }
         });
+
+        navUserIocn.setOnClickListener(this);
+        navUserName.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.nav_icon_user_image:
+                if (android.os.Build.VERSION.SDK_INT > 20) {
+                    Bundle options = ActivityOptions.makeSceneTransitionAnimation(MainHomeActivity.this, navUserIocn, "navUserIocn").toBundle();
+                    Intent intent = new Intent(MainHomeActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent, options);
+                } else {
+                    LoginActivity.actionStart();
+                }
+
+                break;
+
+            case R.id.nav_tv_user_name:
+                LoginActivity.actionStart();
+                break;
+
+            default:
+                break;
+        }
     }
 
     private void setupDrawerContent(NavigationView navView) {
@@ -301,17 +330,17 @@ public class MainHomeActivity extends BaseActivity {
         homeContainerFragment = new HomeContainerFragment();
         juheNewsContainerFragment = new JuheNewsContainerFragment();
         niceGankFragment = new NiceGankFragment();
-        fourFragment = new FourFragment();
+        mineFragment = new MineFragment();
 
         fragmentList.add(homeContainerFragment);
         fragmentList.add(juheNewsContainerFragment);
         fragmentList.add(niceGankFragment);
-        fragmentList.add(fourFragment);
+        fragmentList.add(mineFragment);
 
         titleList.add("推荐");
         titleList.add("聚合新闻");
         titleList.add("颜如玉");
-        titleList.add("特色");
+        titleList.add("我的");
 
         //ViewPager的适配器
         fragmentViewPagerAdapter = new FragmentViewPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);

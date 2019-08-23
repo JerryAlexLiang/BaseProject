@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -24,7 +23,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.utils.SPUtils;
-import me.wangyuwei.particleview.ParticleView;
+import liang.com.baseproject.widget.CustomProgressDialog;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
 
@@ -33,7 +32,7 @@ import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
  * 描述: MVPBaseActivity - 通用标题栏模式
  * 作者: liangyang
  */
-public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
+public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends AppCompatActivity {
 
     private static final String TAG = MVPBaseActivity.class.getSimpleName();
 
@@ -349,6 +348,21 @@ public abstract class MVPBaseActivity<V, T extends BasePresenter<V>> extends App
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
+        }
+    }
+
+    private CustomProgressDialog progressDialog;
+
+    public void showProgressDialog(String content,boolean cancelable) {
+        if (progressDialog != null) {
+            progressDialog = new CustomProgressDialog(this,content,cancelable);
+            progressDialog.show();
+        }
+    }
+
+    public void hideProgressDialog(){
+        if (progressDialog != null && progressDialog.isShow()) {
+            progressDialog.dismiss();
         }
     }
 }

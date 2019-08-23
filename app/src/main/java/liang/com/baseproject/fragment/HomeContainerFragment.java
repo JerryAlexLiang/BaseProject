@@ -13,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.BasePresenter;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.base.MVPBaseFragment;
 
 /**
@@ -34,7 +34,7 @@ public class HomeContainerFragment extends MVPBaseFragment {
     }
 
     @Override
-    protected BasePresenter createPresenter() {
+    protected MVPBasePresenter createPresenter() {
         return null;
     }
 
