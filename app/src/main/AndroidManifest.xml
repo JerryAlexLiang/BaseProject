@@ -27,8 +27,9 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
+        <activity android:name=".activity.AppSettingActivity"></activity>
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".login.activity.LoginActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity android:name=".activity.FeedbackActivity" />
@@ -41,17 +42,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SplashTwoActivity" >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".activity.SplashTwoActivity">
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".activity.WhiteActivity" />
         <activity android:name=".activity.TranslateActivity" />
-        <activity android:name=".activity.MainHomeActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity.MainHomeActivity"
+            android:launchMode="singleTask" />
         <activity
             android:name=".base.PermissionActivity"
             android:theme="@style/Transparent"

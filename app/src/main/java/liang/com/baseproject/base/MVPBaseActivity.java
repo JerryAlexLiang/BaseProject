@@ -17,6 +17,8 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,13 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.widget.CustomProgressDialog;
 
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_GREEN;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_RED;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_WHITE;
 
 /**
  * 创建日期：2019/1/24 on 11:04
@@ -45,6 +53,14 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
      */
     private static List<MVPBaseActivity> activities;
     public Activity mActivity;
+
+    /**
+     * 是否注册事件分发，默认不绑定
+     */
+//    protected boolean isRegisterEventBus() {
+//        return false;
+//    }
+    protected abstract boolean isRegisterEventBus();
 
     @Override
     public void setContentView(int layoutResID) {
@@ -98,6 +114,10 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         if (createPresenter() != null) {
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
+        }
+
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().register(this);
         }
 
         //引入布局文件
@@ -186,17 +206,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
-            case 0:
-                if (baseActionBar != null) {
-                    baseActionBar.setBackgroundColor(Color.RED);
-                }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(Color.RED);
-                    baseToolBar.setStatusBarScrimColor(Color.RED);
-                }
-                break;
-
-            case 1:
+            case ACTIONBAR_COLOR_BLUE:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 }
@@ -206,7 +216,17 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 }
                 break;
 
-            case 2:
+            case ACTIONBAR_COLOR_RED:
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.RED);
+                }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(Color.RED);
+                    baseToolBar.setStatusBarScrimColor(Color.RED);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.BLACK);
                 }
@@ -216,7 +236,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 }
                 break;
 
-            case 3:
+            case ACTIONBAR_COLOR_WHITE:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.WHITE);
                 }
@@ -226,7 +246,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 }
                 break;
 
-            case 4:
+            case ACTIONBAR_COLOR_TRANSLATE:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.TRANSPARENT);
                 }
@@ -236,7 +256,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 }
                 break;
 
-            case 5:
+            case ACTIONBAR_COLOR_GREEN:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 }
@@ -252,37 +272,37 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
-            case 0:
-                if (relativeLayout != null) {
-                    relativeLayout.setBackgroundColor(Color.RED);
-                }
-                break;
-
-            case 1:
+            case ACTIONBAR_COLOR_BLUE:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 }
                 break;
 
-            case 2:
+            case ACTIONBAR_COLOR_RED:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(Color.RED);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(Color.BLACK);
                 }
                 break;
 
-            case 3:
+            case ACTIONBAR_COLOR_WHITE:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(Color.WHITE);
                 }
                 break;
 
-            case 4:
+            case ACTIONBAR_COLOR_TRANSLATE:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(Color.TRANSPARENT);
                 }
                 break;
 
-            case 5:
+            case ACTIONBAR_COLOR_GREEN:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 }
@@ -349,20 +369,8 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         if (mPresenter != null) {
             mPresenter.detachView();
         }
-    }
-
-    private CustomProgressDialog progressDialog;
-
-    public void showProgressDialog(String content,boolean cancelable) {
-        if (progressDialog != null) {
-            progressDialog = new CustomProgressDialog(this,content,cancelable);
-            progressDialog.show();
-        }
-    }
-
-    public void hideProgressDialog(){
-        if (progressDialog != null && progressDialog.isShow()) {
-            progressDialog.dismiss();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().unregister(this);
         }
     }
 }

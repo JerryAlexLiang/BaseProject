@@ -15,15 +15,22 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.utils.SPUtils;
-import me.wangyuwei.particleview.ParticleView;
 
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_GREEN;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_RED;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_WHITE;
 
 /**
  * 创建日期：2019/1/24 on 11:04
@@ -38,6 +45,14 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private static List<BaseActivity> activities;
     public Activity mActivity;
+
+    /**
+     * 是否注册事件分发，默认不绑定
+     */
+//    protected boolean isRegisterEventBus() {
+//        return false;
+//    }
+    protected abstract boolean isRegisterEventBus();
 
     @Override
     public void setContentView(int layoutResID) {
@@ -73,6 +88,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             //半透明状态栏(带阴影)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().register(this);
+        }
+
         //本地化存储操作(取出) - 设置状态栏颜色
         FrameLayout baseActionBar = findViewById(R.id.base_actionbar);
         if (baseActionBar != null) {
@@ -106,17 +126,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         int actionBarColorInt = (int) SPUtils.get(BaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
-            case 0:
-                if (baseActionBar != null) {
-                    baseActionBar.setBackgroundColor(Color.RED);
-                }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(Color.RED);
-                    baseToolBar.setStatusBarScrimColor(Color.RED);
-                }
-                break;
-
-            case 1:
+            case ACTIONBAR_COLOR_BLUE:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 }
@@ -126,7 +136,17 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
                 break;
 
-            case 2:
+            case ACTIONBAR_COLOR_RED:
+                if (baseActionBar != null) {
+                    baseActionBar.setBackgroundColor(Color.RED);
+                }
+                if (baseToolBar != null) {
+                    baseToolBar.setContentScrimColor(Color.RED);
+                    baseToolBar.setStatusBarScrimColor(Color.RED);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.BLACK);
                 }
@@ -136,7 +156,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
                 break;
 
-            case 3:
+            case ACTIONBAR_COLOR_WHITE:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.WHITE);
                 }
@@ -146,7 +166,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
                 break;
 
-            case 4:
+            case ACTIONBAR_COLOR_TRANSLATE:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.TRANSPARENT);
                 }
@@ -156,7 +176,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
                 break;
 
-            case 5:
+            case ACTIONBAR_COLOR_GREEN:
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 }
@@ -172,37 +192,37 @@ public abstract class BaseActivity extends AppCompatActivity {
         int actionBarColorInt = (int) SPUtils.get(BaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
-            case 0:
-                if (relativeLayout != null) {
-                    relativeLayout.setBackgroundColor(Color.RED);
-                }
-                break;
-
-            case 1:
+            case ACTIONBAR_COLOR_BLUE:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 }
                 break;
 
-            case 2:
+            case ACTIONBAR_COLOR_RED:
+                if (relativeLayout != null) {
+                    relativeLayout.setBackgroundColor(Color.RED);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(Color.BLACK);
                 }
                 break;
 
-            case 3:
+            case ACTIONBAR_COLOR_WHITE:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(Color.WHITE);
                 }
                 break;
 
-            case 4:
+            case ACTIONBAR_COLOR_TRANSLATE:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(Color.TRANSPARENT);
                 }
                 break;
 
-            case 5:
+            case ACTIONBAR_COLOR_GREEN:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 }
@@ -260,6 +280,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         startActivity(intent);
         if (finish) {
             finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().unregister(this);
         }
     }
 }

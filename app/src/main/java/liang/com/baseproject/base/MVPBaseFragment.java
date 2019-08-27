@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
@@ -32,6 +34,14 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
         return true;
     }
 
+    /**
+     * 是否注册事件分发，默认不绑定
+     */
+//    protected boolean isRegisterEventBus() {
+//        return false;
+//    }
+    protected abstract boolean isRegisterEventBus();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +49,9 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
         if (createPresenter() != null) {
             mPresenter = createPresenter();
             mPresenter.attachView((V) this);
+        }
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().register(this);
         }
     }
 
@@ -89,11 +102,22 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        if (isRegisterEventBus()) {
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
+    }
+
+    public void finishPage() {
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
 }

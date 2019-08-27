@@ -1,6 +1,7 @@
 package liang.com.baseproject.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +14,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
+import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.base.MVPBaseFragment;
+import liang.com.baseproject.login.activity.LoginActivity;
 
 /**
  * 创建日期：2019/3/7 on 13:23
@@ -29,8 +32,16 @@ public class HomeContainerFragment extends MVPBaseFragment {
     SmartRefreshLayout smartRefreshLayout;
     Unbinder unbinder;
 
+    private MainHomeActivity mActivity;
+
     public HomeContainerFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (MainHomeActivity) context;
     }
 
     @Override
@@ -46,6 +57,11 @@ public class HomeContainerFragment extends MVPBaseFragment {
     @Override
     protected void initView(View rootView) {
 
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return false;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package liang.com.baseproject.entity;
+package liang.com.baseproject.login.entity;
 
 import java.util.List;
 

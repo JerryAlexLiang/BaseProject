@@ -1,4 +1,4 @@
-package liang.com.baseproject.fragment;
+package liang.com.baseproject.login.fragment;
 
 
 import android.content.Context;
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
-import liang.com.baseproject.activity.LoginActivity;
+import liang.com.baseproject.login.activity.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.

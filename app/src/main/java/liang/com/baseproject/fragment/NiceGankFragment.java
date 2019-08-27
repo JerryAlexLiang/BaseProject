@@ -1,6 +1,7 @@
 package liang.com.baseproject.fragment;
 
 
+import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.NiceGankView;
+import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.presenter.NiceGankPresenter;
 import liang.com.baseproject.utils.NetUtil;
@@ -38,6 +40,14 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
     Unbinder unbinder;
     private GridLayoutManager gridLayoutManager;
 
+    private MainHomeActivity mActivity;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (MainHomeActivity) context;
+    }
+
     @Override
     protected NiceGankPresenter createPresenter() {
         return new NiceGankPresenter(getContext());
@@ -52,6 +62,11 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
     protected void initView(View rootView) {
         gridLayoutManager = new GridLayoutManager(getContext(), 2);
         recyclerViewNiceGank.setLayoutManager(gridLayoutManager);
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return false;
     }
 
     @Override

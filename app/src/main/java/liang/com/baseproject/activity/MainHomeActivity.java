@@ -47,12 +47,14 @@ import liang.com.baseproject.fragment.HomeContainerFragment;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.MineFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
+import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
 import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.NetUtil;
 import liang.com.baseproject.utils.ToastUtil;
+import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.utils.WifiUtils;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
@@ -134,6 +136,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainHomeActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return false;
     }
 
     @Override
@@ -270,19 +277,25 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.nav_icon_user_image:
-                if (android.os.Build.VERSION.SDK_INT > 20) {
-                    Bundle options = ActivityOptions.makeSceneTransitionAnimation(MainHomeActivity.this, navUserIocn, "navUserIocn").toBundle();
-                    Intent intent = new Intent(MainHomeActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent, options);
+                if (UserLoginUtils.getInstance().isLogin()) {
+                    ToastUtil.showShortToast("开发中...");
                 } else {
-                    LoginActivity.actionStart();
+                    if (android.os.Build.VERSION.SDK_INT > 20) {
+                        Bundle options = ActivityOptions.makeSceneTransitionAnimation(MainHomeActivity.this, navUserIocn, "navUserIocn").toBundle();
+                        Intent intent = new Intent(MainHomeActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent, options);
+                    } else {
+                        LoginActivity.actionStart();
+                    }
                 }
-
                 break;
 
             case R.id.nav_tv_user_name:
-                LoginActivity.actionStart();
+                boolean ifNeedLogin = UserLoginUtils.getInstance().doIfNeedLogin();
+                if (ifNeedLogin){
+                    ToastUtil.showShortToast("开发中...");
+                }
                 break;
 
             default:
@@ -365,6 +378,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         currentPosition = 0;
                         mainRgRbOne.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.GONE);
+                        baseActionBar.setVisibility(View.VISIBLE);
                         break;
 
                     case 1:
@@ -377,12 +391,14 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                                 Toast.makeText(mActivity, "切换模式", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        baseActionBar.setVisibility(View.VISIBLE);
                         break;
 
                     case 2:
                         currentPosition = 2;
                         mainRgRbThree.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.GONE);
+                        baseActionBar.setVisibility(View.VISIBLE);
                         break;
 
                     case 3:
@@ -395,6 +411,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                                 Toast.makeText(mActivity, "特色产品", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        baseActionBar.setVisibility(View.GONE);
                         break;
                 }
                 baseToolbarTitle.setText(titleList.get(currentPosition));
@@ -415,6 +432,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 //                        switchFragment(0);
                         myViewPager.setCurrentItem(0);
                         baseToolbarRightIcon.setVisibility(View.GONE);
+                        baseActionBar.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.main_rg_rb_two:
@@ -428,6 +446,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                                 Toast.makeText(mActivity, "切换模式", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        baseActionBar.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.main_rg_rb_three:
@@ -435,6 +454,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 //                        switchFragment(2);
                         myViewPager.setCurrentItem(2);
                         baseToolbarRightIcon.setVisibility(View.GONE);
+                        baseActionBar.setVisibility(View.VISIBLE);
                         break;
 
                     case R.id.main_rg_rb_four:
@@ -448,6 +468,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                                 Toast.makeText(mActivity, "特色产品", Toast.LENGTH_SHORT).show();
                             }
                         });
+                        baseActionBar.setVisibility(View.GONE);
                         break;
                 }
                 baseToolbarTitle.setText(titleList.get(currentPosition));
@@ -530,6 +551,18 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         super.onDestroy();
         unregisterReceiver(netReceiver);
         EventBus.getDefault().unregister(this);
+        LogUtil.d(TAG, "onDestroy()");
+    }
+
+    /**
+     * 根据子Fragment显示隐藏标题栏
+     */
+    public void showBaseActionBar() {
+        baseActionBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideBaseActionBar() {
+        baseActionBar.setVisibility(View.GONE);
     }
 
 }

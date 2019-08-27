@@ -1,15 +1,14 @@
 package liang.com.baseproject.retrofit;
 
-import com.allen.library.bean.BaseData;
-
 import java.util.List;
 
 import io.reactivex.Observable;
+import liang.com.baseproject.base.MVPBaseResponse;
 import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
-import liang.com.baseproject.entity.Userbean;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
+import liang.com.baseproject.login.entity.Userbean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -57,7 +56,7 @@ public interface MyService {
      * 首页banner
      */
     @GET("banner/json")
-    Observable<BaseData<List<BannerBean>>> getBanner();
+    Observable<MVPBaseResponse<List<BannerBean>>> getBanner();
 
     /**
      * 登陆 https://www.wanandroid.com/user/login
@@ -65,7 +64,7 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    Observable<BaseData<Userbean>> goToLogin(@Field("username") String username, @Field("password") String password);
+    Observable<MVPBaseResponse<Userbean>> goToLogin(@Field("username") String username, @Field("password") String password);
 
 
 }

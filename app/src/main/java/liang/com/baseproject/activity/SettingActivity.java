@@ -43,6 +43,11 @@ public class SettingActivity extends MVPBaseActivity {
     }
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
     protected MVPBasePresenter createPresenter() {
         return null;
     }

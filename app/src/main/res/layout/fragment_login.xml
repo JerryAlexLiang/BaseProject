@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.LoginFragment">
+    tools:context=".login.fragment.LoginFragment">
 
     <LinearLayout
         android:id="@+id/ll_go_register"
@@ -61,7 +61,6 @@
             android:drawablePadding="8dp"
             android:gravity="top"
             android:hint="@string/input_user_name"
-            android:inputType="textPassword"
             android:maxLength="16"
             android:textColorHint="#888888" />
 

@@ -64,6 +64,11 @@ public class ThemeSettingActivity extends BaseActivity implements CustomRadioGro
     }
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_theme_setting);

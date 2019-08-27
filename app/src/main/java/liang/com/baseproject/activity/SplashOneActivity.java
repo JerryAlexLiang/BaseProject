@@ -24,6 +24,11 @@ public class SplashOneActivity extends MVPBaseActivity {
     TextView tvVersionCode;
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
     protected MVPBasePresenter createPresenter() {
         return null;
     }

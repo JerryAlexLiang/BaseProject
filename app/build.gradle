@@ -85,8 +85,6 @@ dependencies {
     /*事件总线*/
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.github.chrisbanes.photoview:library:1.2.3'
-    /*RxHttpUtils*/
-    implementation 'com.github.lygttpod:RxHttpUtils:2.0.3'
     /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
     implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
         exclude group: 'org.json', module: 'json'
@@ -109,4 +107,6 @@ dependencies {
     implementation 'com.getbase:floatingactionbutton:1.10.1'
     /*自由指定宽高比的ImageView*/
     implementation 'com.github.goweii:PercentImageView:1.0.2'
+    //仿IOS的Android的弹出框
+    implementation 'com.bigkoo:alertview:1.0.3'
 }

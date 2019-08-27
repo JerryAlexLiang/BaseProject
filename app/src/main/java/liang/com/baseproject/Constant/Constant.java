@@ -1,8 +1,6 @@
 package liang.com.baseproject.Constant;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -58,8 +56,8 @@ public class Constant {
 
     //标题栏颜色设置
     public static final String ACTIONBAR_COLOR_THEME = "actionbar_color_theme";
-    public static final int ACTIONBAR_COLOR_RED = 0;
-    public static final int ACTIONBAR_COLOR_BLUE = 1;
+    public static final int ACTIONBAR_COLOR_BLUE = 0;
+    public static final int ACTIONBAR_COLOR_RED = 1;
     public static final int ACTIONBAR_COLOR_BLACK = 2;
     public static final int ACTIONBAR_COLOR_WHITE = 3;
     public static final int ACTIONBAR_COLOR_TRANSLATE = 4;
@@ -83,5 +81,12 @@ public class Constant {
         put("key2", "value2");
 
     }};
+
+    //登录JSON
+    public static final String KEY_LOGIN_JSON = "KEY_LOGIN_JSON";
+
+    public static final String KEY_ICON = "KEY_ICON";
+
+    public static final String KEY_BG = "KEY_BG";
 
 }

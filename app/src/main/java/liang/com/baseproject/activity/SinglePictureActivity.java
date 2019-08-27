@@ -65,6 +65,11 @@ public class SinglePictureActivity extends MVPBaseActivity implements View.OnLon
     }
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
     protected MVPBasePresenter createPresenter() {
         return null;
     }

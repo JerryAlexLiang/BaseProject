@@ -11,7 +11,11 @@ public interface UrlConstants {
 
     public static final long HTTP_TIMEOUT = 5000;
 
-    public static final String BASE_URL = "https://www.wanandroid.com/";
+    public static final int SUCCESS = 0;
+
+    public static final int FAILED_NOT_LOGIN = -1001; //请先登录
+
+    public static final String WAN_ANDROID_BASE_URL = "https://www.wanandroid.com/";
 
     //聚合数据新闻
     String NEWS_URL = "http://v.juhe.cn";

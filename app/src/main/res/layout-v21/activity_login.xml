@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBlue"
     android:clipChildren="false"
-    tools:context=".activity.LoginActivity">
+    tools:context=".login.activity.LoginActivity">
 
     <include layout="@layout/layout_base_actionbar_default" />
 
@@ -22,6 +22,7 @@
         tools:ignore="UnknownIdInLayout">
 
         <ImageView
+            android:id="@+id/iv_user"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitCenter"
@@ -29,6 +30,7 @@
             android:transitionName="navUserIocn" />
 
         <TextView
+            android:id="@+id/tv_login_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

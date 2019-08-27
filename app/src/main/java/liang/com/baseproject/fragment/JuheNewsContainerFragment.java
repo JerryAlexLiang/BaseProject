@@ -1,6 +1,7 @@
 package liang.com.baseproject.fragment;
 
 
+import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
+import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 
 
@@ -36,10 +38,17 @@ public class JuheNewsContainerFragment extends Fragment {
     private List<String> stringList = new ArrayList<>();
     private List<Fragment> fragmentList = new ArrayList<>();
 
+    private MainHomeActivity mActivity;
+
     public JuheNewsContainerFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity = (MainHomeActivity) context;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

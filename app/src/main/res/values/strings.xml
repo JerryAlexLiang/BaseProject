@@ -61,5 +61,15 @@
     <string name="go_to_login">去登录</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="connect_error">连接错误</string>
+    <string name="connect_timeout">连接超时</string>
+    <string name="bad_netword">网络错误</string>
+    <string name="parse_error">解析数据失败</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="user_integral">积分:</string>
+    <string name="user_level">等级:</string>
+    <string name="setting">设置</string>
+    <string name="go_to_logout">退出登录</string>
+    <string name="ensure_go_to_logout">确定要退出登陆吗?</string>
 
 </resources>

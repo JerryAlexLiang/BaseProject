@@ -3,8 +3,10 @@ package liang.com.baseproject.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
+import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.widget.toast.CustomToast;
 

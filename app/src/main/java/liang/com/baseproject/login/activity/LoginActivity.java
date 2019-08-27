@@ -1,20 +1,23 @@
-package liang.com.baseproject.activity;
+package liang.com.baseproject.login.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +28,22 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.app.MyApplication;
-import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.fragment.LoginFragment;
-import liang.com.baseproject.fragment.RegisterFragment;
+import liang.com.baseproject.base.MVPBasePresenter;
+import liang.com.baseproject.login.fragment.LoginFragment;
+import liang.com.baseproject.login.fragment.RegisterFragment;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.SPUtils;
+import liang.com.baseproject.utils.ToastUtil;
 import per.goweii.percentimageview.percentimageview.PercentImageView;
 
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_GREEN;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_RED;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_WHITE;
 
 public class LoginActivity extends MVPBaseActivity {
 
@@ -62,6 +72,10 @@ public class LoginActivity extends MVPBaseActivity {
     RelativeLayout rlVpContainer;
     @BindView(R.id.rl_login_container)
     RelativeLayout rlLoginContainer;
+    @BindView(R.id.iv_user)
+    ImageView ivUser;
+    @BindView(R.id.tv_login_user_name)
+    TextView tvLoginUserName;
 
     private List<Fragment> fragmentList = new ArrayList<>();
 
@@ -73,6 +87,11 @@ public class LoginActivity extends MVPBaseActivity {
         Intent intent = new Intent(MyApplication.getAppContext(), LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         MyApplication.getAppContext().startActivity(intent);
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return false;
     }
 
     @Override
@@ -167,9 +186,25 @@ public class LoginActivity extends MVPBaseActivity {
         super.onStop();
     }
 
-    @OnClick(R.id.base_actionbar_left_icon)
-    public void onViewClicked() {
-        finish();
+    @OnClick({R.id.base_actionbar_left_icon, R.id.iv_user, R.id.tv_login_user_name})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.base_actionbar_left_icon:
+                finish();
+                break;
+
+            case R.id.iv_user:
+//                Toast.makeText(this, "加载中...", Toast.LENGTH_SHORT).show();
+                ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                        true, "加载中...", getResources().getColor(R.color.translate), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+                break;
+
+            case R.id.tv_login_user_name:
+//                Toast.makeText(this, "加载结束...", Toast.LENGTH_SHORT).show();
+                ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                        true, "加载结束...", getResources().getColor(R.color.translate), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+                break;
+        }
     }
 
     private AnimatorSet startCircleAnim(View target) {
@@ -252,37 +287,37 @@ public class LoginActivity extends MVPBaseActivity {
         int actionBarColorInt = (int) SPUtils.get(LoginActivity.this, ACTIONBAR_COLOR_THEME, 0);
         LogUtil.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
-            case 0:
-                if (rlLoginContainer != null) {
-                    rlLoginContainer.setBackgroundColor(Color.RED);
-                }
-                break;
-
-            case 1:
+            case ACTIONBAR_COLOR_BLUE:
                 if (rlLoginContainer != null) {
                     rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.colorBlue));
                 }
                 break;
 
-            case 2:
+            case ACTIONBAR_COLOR_RED:
+                if (rlLoginContainer != null) {
+                    rlLoginContainer.setBackgroundColor(Color.RED);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
                 if (rlLoginContainer != null) {
                     rlLoginContainer.setBackgroundColor(Color.BLACK);
                 }
                 break;
 
-            case 3:
+            case ACTIONBAR_COLOR_WHITE:
                 if (rlLoginContainer != null) {
                     rlLoginContainer.setBackgroundColor(Color.WHITE);
                 }
                 break;
 
-            case 4:
+            case ACTIONBAR_COLOR_TRANSLATE:
                 if (rlLoginContainer != null) {
                     rlLoginContainer.setBackgroundColor(Color.TRANSPARENT);
                 }
                 break;
 
-            case 5:
+            case ACTIONBAR_COLOR_GREEN:
                 if (rlLoginContainer != null) {
                     rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.palegreen));
                 }

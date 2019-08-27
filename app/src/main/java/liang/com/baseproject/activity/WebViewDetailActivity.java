@@ -98,6 +98,11 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     }
 
     @Override
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
     protected JuheNewsDetailPresenter createPresenter() {
         return new JuheNewsDetailPresenter(this);
     }

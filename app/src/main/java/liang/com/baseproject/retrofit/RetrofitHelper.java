@@ -1,11 +1,10 @@
 package liang.com.baseproject.retrofit;
 
-import android.util.Log;
-
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import liang.com.baseproject.app.MyApplication;
+import liang.com.baseproject.utils.LogUtil;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -35,7 +34,8 @@ public class RetrofitHelper {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.e("okhttp", "message=" + message);
+//                Log.e("okhttp", "message=" + message);
+                LogUtil.e("RxHttpUtils","message= " + message);
             }
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

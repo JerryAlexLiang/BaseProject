@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorBlue">#00a2ed</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorBlue2">#00a2ed</color>
     <color name="tabIndicatorColor">#FF6F00</color>
 
     <color name="black">#000000</color>
@@ -221,4 +222,17 @@
     <color name="darkblue">#00008b</color> <!-- 暗蓝色 -->
     <color name="navy">#000080</color> <!-- 海军色 -->
     <color name="translate">#33000000</color> <!-- 透明色 -->
+    <color name="toast_bg">#55000000</color> <!-- 透明灰色色 -->
+
+    <!--我的中心-->
+    <color name="bottom_bar_overlay">#aff5f5f5</color>
+    <color name="mine_blur_overlay">#33000000</color>
+    <color name="about_me_blur_overlay">#33000000</color>
+
+    <!--点击水波纹效果的颜色-->
+    <color name="ripple_dark">#11000000</color>
+    <color name="ripple_light">#11ffffff</color>
+
+    <color name="gray_light">#999999</color>
+
 </resources>
