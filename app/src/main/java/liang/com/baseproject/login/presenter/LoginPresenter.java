@@ -23,17 +23,17 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
     }
 
     @Override
-    public void onSuccess(Userbean data) {
+    public void onRequestSuccess(Userbean data) {
         //本地化存储登录信息数据
         UserLoginUtils.getInstance().login(data);
-        if (getView() != null) {
+        if (isViewAttached()) {
             getView().onLoginSuccess(data);
         }
     }
 
     @Override
-    public void onFail(String content) {
-        if (getView() != null) {
+    public void onRequestFail(String content) {
+        if (isViewAttached()) {
             getView().onLoginFail(content);
         }
     }
@@ -47,15 +47,16 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
 
     @Override
     public void onRequestFinish() {
-        if (getView() != null) {
+        if (isViewAttached()) {
             getView().onHideProgress();
         }
     }
 
     @Override
     public void onRequestStart() {
-        if (getView() != null) {
+        if (isViewAttached()) {
             getView().onShowProgress();
         }
     }
+
 }

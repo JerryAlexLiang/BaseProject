@@ -15,6 +15,7 @@ import org.greenrobot.eventbus.EventBus;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
+import liang.com.baseproject.widget.CustomProgressDialog;
 
 public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends Fragment {
 
@@ -23,6 +24,7 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
 
     private boolean mIsRequestDataRefresh = false;
     private SwipeRefreshLayout mRefreshLayout;
+    private CustomProgressDialog customProgressDialog;
 
     protected abstract T createPresenter();
 
@@ -112,6 +114,21 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
         super.onDestroy();
         if (mPresenter != null) {
             mPresenter.detachView();
+        }
+    }
+
+    public void showProgressDialog(String content, boolean cancelable) {
+        if (customProgressDialog == null) {
+            customProgressDialog = new CustomProgressDialog(getActivity(), content, cancelable);
+        }
+        if (!customProgressDialog.isShow()) {
+            customProgressDialog.show();
+        }
+    }
+
+    public void hideProgressDialog() {
+        if (customProgressDialog != null && customProgressDialog.isShow()) {
+            customProgressDialog.dismiss();
         }
     }
 

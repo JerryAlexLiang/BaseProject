@@ -53,6 +53,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
      */
     private static List<MVPBaseActivity> activities;
     public Activity mActivity;
+    private CustomProgressDialog customProgressDialog;
 
     /**
      * 是否注册事件分发，默认不绑定
@@ -371,6 +372,21 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         }
         if (isRegisterEventBus()) {
             EventBus.getDefault().unregister(this);
+        }
+    }
+
+    public void showProgressDialog(String content, boolean cancelable) {
+        if (customProgressDialog == null) {
+            customProgressDialog = new CustomProgressDialog(mActivity, content, cancelable);
+        }
+        if (!customProgressDialog.isShow()) {
+            customProgressDialog.show();
+        }
+    }
+
+    public void hideProgressDialog(){
+        if (customProgressDialog != null && customProgressDialog.isShow()) {
+            customProgressDialog.dismiss();
         }
     }
 }

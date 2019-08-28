@@ -8,25 +8,13 @@ import liang.com.baseproject.retrofit.MVPBaseObserver;
 import liang.com.baseproject.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
 
-public class LoginInteractor {
+public class RegisterInteractor {
 
-//    public interface onRetrofitListener {
-//
-//        void onLoginSuccess(Userbean data);
-//
-//        void onLoginFail(String content);
-//
-//        void onLoginError(String content);
-//
-//        void onLoginFinish();
-//    }
-
-    //    public void goToLogin(String username, String password, onRetrofitListener listener) {
-    public void goToLogin(String username, String password, MVPRetrofitListener<Userbean> listener) {
+    public void goToRegister(String username, String password, String repassword, MVPRetrofitListener<Userbean> listener) {
         RetrofitHelper
                 .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
                 .getMyService()
-                .goToLogin(username, password)
+                .goToRegister(username, password, repassword)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new MVPBaseObserver<Userbean>() {
@@ -36,14 +24,9 @@ public class LoginInteractor {
                     }
 
                     @Override
-                    protected void onFinish() {
-                        listener.onRequestFinish();
+                    protected void onSuccess(Userbean data) {
+                        listener.onRequestSuccess(data);
                     }
-
-//                    @Override
-//                    protected void onError(String errorMsg) {
-//                        listener.onError(errorMsg);
-//                    }
 
                     @Override
                     protected void onFail(String errorMsg) {
@@ -51,9 +34,10 @@ public class LoginInteractor {
                     }
 
                     @Override
-                    protected void onSuccess(Userbean data) {
-                        listener.onRequestSuccess(data);
+                    protected void onFinish() {
+                        listener.onRequestFinish();
                     }
                 });
+
     }
 }

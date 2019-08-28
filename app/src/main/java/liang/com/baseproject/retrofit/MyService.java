@@ -66,5 +66,12 @@ public interface MyService {
     @POST("/user/login")
     Observable<MVPBaseResponse<Userbean>> goToLogin(@Field("username") String username, @Field("password") String password);
 
+    /**
+     * 注册 https://www.wanandroid.com/user/register
+     */
+    @FormUrlEncoded
+    @POST("/user/register")
+    Observable<MVPBaseResponse<Userbean>> goToRegister(@Field("username") String username, @Field("password") String password,
+                                                       @Field("repassword") String repassword);
 
 }

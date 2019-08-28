@@ -9,33 +9,33 @@
         android:id="@+id/ll_go_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true">
+        android:gravity="center">
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:rotation="180"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_next"/>
+            android:src="@drawable/icon_next" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:textSize="@dimen/sp15"
+            android:text="@string/go_to_login"
             android:textColor="@color/colorBlue"
-            android:text="@string/go_to_login"/>
+            android:textSize="@dimen/sp15" />
 
         <ImageView
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:rotation="0"
-            android:visibility="invisible"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_next"/>
+            android:src="@drawable/icon_next"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
@@ -61,7 +61,6 @@
             android:drawablePadding="8dp"
             android:gravity="top"
             android:hint="@string/input_user_name"
-            android:inputType="textPassword"
             android:maxLength="16"
             android:textColorHint="#888888" />
 
@@ -134,7 +133,8 @@
             android:layout_toStartOf="@+id/btn_password_eye"
             android:paddingStart="10dp"
             android:src="@drawable/ic_delete"
-            android:visibility="gone" />
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
 
         <ImageView
             android:id="@+id/btn_password_eye"
@@ -219,8 +219,8 @@
         android:layout_marginLeft="@dimen/dp60"
         android:layout_marginTop="@dimen/dp30"
         android:layout_marginRight="@dimen/dp60"
+        android:background="@drawable/bg_solid_round_color_main_radius_max"
         android:text="@string/register"
-        android:textColor="@color/white"
-        android:background="@drawable/bg_solid_round_color_main_radius_max" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>

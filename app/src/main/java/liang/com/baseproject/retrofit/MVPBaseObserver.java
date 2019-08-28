@@ -153,16 +153,11 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
     protected abstract void onStart();
 
     /**
-     * 请求结束回调
+     * 成功回调
+     *
+     * @param data 结果
      */
-    protected abstract void onFinish();
-
-//    /**
-//     * 异常回调
-//     *
-//     * @param errorMsg 错误信息
-//     */
-//    protected abstract void onError(String errorMsg);
+    protected abstract void onSuccess(T data);
 
     /**
      * 失败回调
@@ -171,10 +166,15 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
      */
     protected abstract void onFail(String errorMsg);
 
+    //    /**
+//     * 异常回调
+//     *
+//     * @param errorMsg 错误信息
+//     */
+//    protected abstract void onError(String errorMsg);
+
     /**
-     * 成功回调
-     *
-     * @param data 结果
+     * 请求结束回调
      */
-    protected abstract void onSuccess(T data);
+    protected abstract void onFinish();
 }
