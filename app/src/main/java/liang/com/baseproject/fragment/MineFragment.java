@@ -10,9 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,12 +28,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import liang.com.baseproject.R;
-import liang.com.baseproject.activity.AppSettingActivity;
+import liang.com.baseproject.setting.activity.AppSettingActivity;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.base.MVPBasePresenter;
@@ -120,8 +117,9 @@ public class MineFragment extends MVPBaseFragment {
         if (isDetached()) {
             return;
         }
+        boolean login = event.isLogin();
         Userbean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
-        LogUtil.e(TAG, "登录用户信息Event: " + new Gson().toJson(loginUserBean));
+        LogUtil.e(TAG, "登录用户信息Event: " + new Gson().toJson(loginUserBean) + "  是否已登录: " + login);
         //更新用户UI
         initUserInfo();
         //请求获取积分接口
@@ -157,7 +155,8 @@ public class MineFragment extends MVPBaseFragment {
             llUserCoin.setVisibility(View.VISIBLE);
         } else {
             //未登录，初始化视图
-            civUserIcon.setImageResource(R.color.translate);
+            civUserIcon.setImageResource(R.drawable.icon_user_logo);
+            civUserIcon.setCircleBackgroundColorResource(R.color.translate);
             tvUserName.setText(getString(R.string.go_to_login));
             llUserId.setVisibility(View.GONE);
             llUserCoin.setVisibility(View.GONE);

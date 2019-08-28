@@ -23,6 +23,7 @@ public class LoginInteractor {
 
     //    public void goToLogin(String username, String password, onRetrofitListener listener) {
     public void goToLogin(String username, String password, MVPRetrofitListener<Userbean> listener) {
+//    public void goToLogin(String username, String password, LoginRetrofitListener<Userbean> listener) {
         RetrofitHelper
                 .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
                 .getMyService()

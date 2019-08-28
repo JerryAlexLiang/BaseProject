@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -118,7 +119,18 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
                 String userName = etUserName.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
                 String confirmPassword = etConfirmPassword.getText().toString().trim();
-                LogUtil.e(TAG, "用户名: " + userName + "  密码: " + password + "  确认密码: " + confirmPassword);
+                if (TextUtils.isEmpty(userName)) {
+                    onShowToast("用户名不能为空!");
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    onShowToast("密码不能为空!");
+                    return;
+                }
+                if (TextUtils.isEmpty(confirmPassword)) {
+                    onShowToast("请输入确认密码!");
+                    return;
+                }
                 mPresenter.goToRegister(userName, password, confirmPassword);
                 break;
         }
@@ -148,7 +160,7 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
 
     @Override
     public void onShowProgress() {
-        showProgressDialog("Loading", false);
+        showProgressDialog("Loading...", false);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package liang.com.baseproject.base;
 
 public interface MVPRetrofitListener<T> {
+//public interface MVPRetrofitListener {
 
     void onRequestStart();
 

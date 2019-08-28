@@ -74,4 +74,11 @@ public interface MyService {
     Observable<MVPBaseResponse<Userbean>> goToRegister(@Field("username") String username, @Field("password") String password,
                                                        @Field("repassword") String repassword);
 
+    /**
+     * 退出登录 https://www.wanandroid.com/user/logout/json
+     * 访问了logout 后，服务端会让客户端清除 Cookie（即cookie max-Age=0），
+     * 如果客户端 Cookie 实现合理，可以实现自动清理，如果本地做了用户账号密码和保存，及时清理。
+     */
+    @GET("/user/logout/json")
+    Observable<MVPBaseResponse<String>> goToLogout();
 }

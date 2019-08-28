@@ -27,7 +27,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".activity.AppSettingActivity"></activity>
+        <activity android:name=".setting.activity.AppSettingActivity"></activity>
         <activity
             android:name=".login.activity.LoginActivity"
             android:launchMode="singleTask"

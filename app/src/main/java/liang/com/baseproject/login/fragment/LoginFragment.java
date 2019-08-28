@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,6 +114,14 @@ public class LoginFragment extends MVPBaseFragment<LoginView, LoginPresenter> im
             case R.id.btn_login:
                 String userName = etUserName.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
+                if (TextUtils.isEmpty(userName)) {
+                    onShowToast("用户名不能为空!");
+                    return;
+                }
+                if (TextUtils.isEmpty(password)) {
+                    onShowToast("密码不能为空!");
+                    return;
+                }
                 mPresenter.goToLogin(userName, password);
                 break;
         }
