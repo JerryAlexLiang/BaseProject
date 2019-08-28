@@ -9,5 +9,7 @@ public interface MVPRetrofitListener<T> {
 //    void onError(String content);
 
     void onRequestFinish();
+
+    void onRequestStart();
 }
 

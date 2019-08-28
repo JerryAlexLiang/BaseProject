@@ -31,6 +31,11 @@ public class LoginInteractor {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new MVPBaseObserver<Userbean>() {
                     @Override
+                    protected void onStart() {
+                        listener.onRequestStart();
+                    }
+
+                    @Override
                     protected void onFinish() {
                         listener.onRequestFinish();
                     }

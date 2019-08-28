@@ -35,6 +35,7 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
     @Override
     public void onSubscribe(Disposable d) {
         disposable = d;
+        onStart();
     }
 
     @Override
@@ -145,6 +146,11 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
         }
         LogUtil.e(TAG, "onComplete()");
     }
+
+    /**
+     * 请求结束回调
+     */
+    protected abstract void onStart();
 
     /**
      * 请求结束回调

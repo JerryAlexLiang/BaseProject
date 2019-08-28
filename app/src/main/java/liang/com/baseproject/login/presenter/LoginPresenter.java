@@ -19,9 +19,6 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
      * 登陆
      */
     public void goToLogin(String username, String password) {
-        if (getView() != null) {
-            getView().onShowProgress();
-        }
         loginInteractor.goToLogin(username, password, this);
     }
 
@@ -52,6 +49,13 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
     public void onRequestFinish() {
         if (getView() != null) {
             getView().onHideProgress();
+        }
+    }
+
+    @Override
+    public void onRequestStart() {
+        if (getView() != null) {
+            getView().onShowProgress();
         }
     }
 }
