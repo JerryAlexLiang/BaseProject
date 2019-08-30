@@ -71,5 +71,6 @@
     <string name="setting">设置</string>
     <string name="go_to_logout">退出登录</string>
     <string name="ensure_go_to_logout">确定要退出登陆吗?</string>
+    <string name="read_later">稍后阅读</string>
 
 </resources>

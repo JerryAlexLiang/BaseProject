@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RevealLayout"><attr format="reference" name="rl_checked_layout"/><attr format="reference" name="rl_unchecked_layout"/><attr format="boolean" name="rl_checked"/><attr format="integer" name="rl_anim_duration"/><attr format="boolean" name="rl_check_with_expand"/><attr format="boolean" name="rl_uncheck_with_expand"/><attr format="boolean" name="rl_allow_revert"/></declare-styleable>
+</resources>

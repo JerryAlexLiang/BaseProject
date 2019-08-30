@@ -38,8 +38,8 @@ public class ImageLoaderUtils {
      * @createTime 2016/8/15
      * @lastModify 2016/8/15
      */
-    public static void loadImage(Context context, boolean isCache, ImageView imageView, Object url, int defaultImage,
-                                 int errorImage, int radius) {
+    public static void loadRadiusImage(Context context, boolean isCache, ImageView imageView, Object url, int defaultImage,
+                                       int errorImage, int radius) {
         //RequestOptions 设置请求参数，通过apply方法设置
         RequestOptions options = new RequestOptions()
                 // 但不保证所有图片都按序加载

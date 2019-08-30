@@ -2,7 +2,6 @@ package liang.com.baseproject.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -99,7 +98,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvNewsTime.setText(dataBean.getDate());
             tvNewsAuthor.setText(dataBean.getAuthor_name());
             Glide.with(context).load(dataBean.getThumbnail_pic_s()).into(ivNewsImg);
-            ImageLoaderUtils.loadImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 10);
+            ImageLoaderUtils.loadRadiusImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 10);
 
 
 //            //点击图片跳转图片Activity -> SinglePictureActivity  a%2 != 0
@@ -155,7 +154,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //public class JuheNewsAdapter extends BaseRecycleAdapter<NewsRes.ResultBean.DataBean> {
 
 //    private Context mContext;
-//    private BaseViewHolder.onItemBaseClickListener baseClickListener;
+//    private CommonViewHolder.onItemBaseClickListener baseClickListener;
 //
 //    public JuheNewsAdapter(Context context, List<NewsRes.ResultBean.DataBean> dataList) {
 //        super(context, dataList, R.layout.item_rv_news);
@@ -163,7 +162,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //    }
 //
 //    @Override
-//    public void bindData(BaseViewHolder holder, NewsRes.ResultBean.DataBean data) {
+//    public void bindData(CommonViewHolder holder, NewsRes.ResultBean.DataBean data) {
 //        super.bindData(holder, data);
 //        if (data != null) {
 //            holder.setText(R.id.tv_news_title, data.getTitle())
@@ -173,7 +172,7 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //                    .setCommonClickListener(baseClickListener);
 //
 //            //点击事件
-//            holder.setCommonClickListener(new BaseViewHolder.onItemBaseClickListener() {
+//            holder.setCommonClickListener(new CommonViewHolder.onItemBaseClickListener() {
 //                @Override
 //                public void onItemClickListener(int position) {
 ////                    WebViewDetailActivity.actionStart(mContext, data.getTitle(), data.getUrl());

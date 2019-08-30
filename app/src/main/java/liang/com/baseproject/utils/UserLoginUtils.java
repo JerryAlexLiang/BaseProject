@@ -12,7 +12,7 @@ import static liang.com.baseproject.Constant.Constant.KEY_LOGIN_JSON;
 
 /**
  * 创建日期：2019/8/27 on 15:57
- * 描述: 用户信息管理工具类
+ * 描述: 用户信息管理工具类-使用SharedPreferences本地化存储
  * 作者: liangyang
  */
 public class UserLoginUtils {

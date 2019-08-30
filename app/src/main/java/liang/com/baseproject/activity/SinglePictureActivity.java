@@ -92,9 +92,9 @@ public class SinglePictureActivity extends MVPBaseActivity implements View.OnLon
         //获取传递过来的数据
         parseIntent();
         //赋值
-//        ImageLoaderUtils.loadImage(this, true, ivMeizhiPic, imgUrl, 0, 0, 0);
+//        ImageLoaderUtils.loadRadiusImage(this, true, ivMeizhiPic, imgUrl, 0, 0, 0);
 //        new PhotoViewAttacher(ivMeizhiPic); //使用缩放控件
-        ImageLoaderUtils.loadImage(this, true, ivMeizhiZoomPic, imgUrl, 0, 0, 0);
+        ImageLoaderUtils.loadRadiusImage(this, true, ivMeizhiZoomPic, imgUrl, 0, 0, 0);
 
         //ivMeizhiZoomPic的长按点击事件
         ivMeizhiZoomPic.setOnLongClickListener(this);

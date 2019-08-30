@@ -79,7 +79,7 @@ public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvNiceGank.setText(gankRes.getDesc());
             tvNiceSource.setText("来源: " + gankRes.getSource());
             Glide.with(context).load(gankRes.getUrl()).into(ivNiceGank);
-//            ImageLoaderUtils.loadImage(context, true, ivNiceGank, gankRes.getUrl(),
+//            ImageLoaderUtils.loadRadiusImage(context, true, ivNiceGank, gankRes.getUrl(),
 //                    0, 0, 0);
             //点击图片
             ivNiceGank.setOnClickListener(v -> {

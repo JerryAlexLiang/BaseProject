@@ -129,7 +129,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         parseIntent();
         //WebView
         mPresenter.setWebView(url);
-        ImageLoaderUtils.loadImage(WebViewDetailActivity.this, true, ivDetailTop,
+        ImageLoaderUtils.loadRadiusImage(WebViewDetailActivity.this, true, ivDetailTop,
                 imageUrl, R.drawable.image_top_default, R.drawable.image_top_default, 0);
 //        mPresenter.setWebView("https://blog.csdn.net/u013139425/article/details/79519268?tdsourcetag=s_pcqq_aiomsg");
 

@@ -1,4 +1,4 @@
-package liang.com.baseproject.fragment;
+package liang.com.baseproject.mine;
 
 
 import android.app.ActivityOptions;
@@ -32,6 +32,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 import liang.com.baseproject.R;
+import liang.com.baseproject.mine.activity.ReadLaterActivity;
 import liang.com.baseproject.setting.activity.AppSettingActivity;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBaseFragment;
@@ -76,6 +77,8 @@ public class MineFragment extends MVPBaseFragment {
     Unbinder unbinder1;
     @BindView(R.id.ll_setting)
     LinearLayout llSetting;
+    @BindView(R.id.ll_read_later)
+    LinearLayout llReadLater;
     Unbinder unbinder2;
     private MainHomeActivity mActivity;
     private boolean login;
@@ -145,8 +148,8 @@ public class MineFragment extends MVPBaseFragment {
             String localBg = UserLoginUtils.getInstance().getLocalBg();
 
             if (!TextUtils.isEmpty(localUserIcon) && !TextUtils.isEmpty(localBg)) {
-                ImageLoaderUtils.loadImage(getActivity(), false, civUserIcon, localUserIcon, 0, 0, 0);
-                ImageLoaderUtils.loadImage(getActivity(), false, ivBlur, localBg, 0, 0, 0);
+                ImageLoaderUtils.loadRadiusImage(getActivity(), false, civUserIcon, localUserIcon, 0, 0, 0);
+                ImageLoaderUtils.loadRadiusImage(getActivity(), false, ivBlur, localBg, 0, 0, 0);
             }
 
             tvUserName.setText(loginUserBean.getUsername());
@@ -228,7 +231,7 @@ public class MineFragment extends MVPBaseFragment {
 
     }
 
-    @OnClick({R.id.civ_user_icon, R.id.user_info_container, R.id.ll_setting})
+    @OnClick({R.id.civ_user_icon, R.id.user_info_container, R.id.ll_setting, R.id.ll_read_later})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.civ_user_icon:
@@ -256,6 +259,10 @@ public class MineFragment extends MVPBaseFragment {
 
             case R.id.ll_setting:
                 AppSettingActivity.actionStart(mActivity);
+                break;
+
+            case R.id.ll_read_later:
+                ReadLaterActivity.actionStart(mActivity);
                 break;
         }
     }

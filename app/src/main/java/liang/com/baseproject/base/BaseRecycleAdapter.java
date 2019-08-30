@@ -13,7 +13,7 @@ import java.util.List;
  * 描述: 通用adapter
  * 作者: liangyang
  */
-public class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
+public class BaseRecycleAdapter<T> extends RecyclerView.Adapter<CommonViewHolder> {
 
 //    public static final int MAX_ITEM_COUNT = 20;
 
@@ -35,13 +35,13 @@ public class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> 
     }
 
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CommonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = layoutInflater.inflate(layoutId, parent, false);
-        return new BaseViewHolder(itemView);
+        return new CommonViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
+    public void onBindViewHolder(CommonViewHolder holder, int position) {
         bindData(holder, dataList.get(position));
     }
 
@@ -52,7 +52,7 @@ public class BaseRecycleAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> 
 //        return dataList != null ? Math.min(MAX_ITEM_COUNT, dataList.size()) : 0;
     }
 
-    public void bindData(BaseViewHolder holder, T data) {
+    public void bindData(CommonViewHolder holder, T data) {
 
     }
 }

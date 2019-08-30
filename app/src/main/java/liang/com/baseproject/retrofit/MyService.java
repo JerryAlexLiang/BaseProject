@@ -8,7 +8,9 @@ import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
+import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.mine.CollectionArticleBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -81,4 +83,20 @@ public interface MyService {
      */
     @GET("/user/logout/json")
     Observable<MVPBaseResponse<String>> goToLogout();
+
+    /**
+     * 收藏文章列表  https://www.wanandroid.com/lg/collect/list/0/json
+     * 方法：GET
+     * 参数： 页码：拼接在链接中，从0开始。
+     */
+    @GET("lg/collect/list/{page}/json")
+    Observable<MVPBaseResponse<CollectionArticleBean>> getCollectArticleList(@Path("page") int page);
+
+    /**
+     * 首页文章列表  https://www.wanandroid.com/article/list/0/json
+     * 方法：GET
+     * 参数：页码，拼接在连接中，从0开始。
+     */
+    @GET("article/list/{page}/json")
+    Observable<MVPBaseResponse<HomeBean>> getArticleList(@Path("page") int page);
 }

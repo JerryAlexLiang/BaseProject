@@ -40,7 +40,7 @@ public class ImageViewPagerAdapter extends PagerAdapter {
 //        View rootView = LayoutInflater.from(container.getContext()).inflate(R.layout.item_image_view_pager_adapter, null);
 //        PhotoView photoView = rootView.findViewById(R.id.photo_view);
 //        FloatingActionButton saveViewPagerImg = rootView.findViewById(R.id.save_view_pager_img);
-//        ImageLoaderUtils.loadImage(container.getContext(), true, photoView, imageUrlList.get(position),
+//        ImageLoaderUtils.loadRadiusImage(container.getContext(), true, photoView, imageUrlList.get(position),
 //                R.drawable.default_pic_content_image_loading_light, R.drawable.default_pic_content_image_download_light, 0);
 ////        photoView.setZoomable(true);
 //        container.addView(rootView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -55,7 +55,7 @@ public class ImageViewPagerAdapter extends PagerAdapter {
 //        return rootView;
 
         PhotoView photoView = new PhotoView(container.getContext());
-        ImageLoaderUtils.loadImage(container.getContext(), true, photoView, imageUrlList.get(position),
+        ImageLoaderUtils.loadRadiusImage(container.getContext(), true, photoView, imageUrlList.get(position),
                 R.drawable.default_pic_content_image_loading_light, R.drawable.default_pic_content_image_download_light, 0);
         photoView.setZoomable(true);
         container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);

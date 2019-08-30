@@ -1,5 +1,9 @@
 package liang.com.baseproject.retrofit;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -21,8 +25,11 @@ public class RetrofitHelper {
     private volatile static RetrofitHelper sInstance;
     private Retrofit mRetrofit;
     private MyService mMyService;
+    private PersistentCookieJar cookieJar;
 
     private RetrofitHelper(String url) {
+
+        cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(MyApplication.getAppContext()));
 
         //cache url
         File httpCacheDirectory = new File(MyApplication.mContext.getCacheDir(), "responses");
@@ -35,12 +42,15 @@ public class RetrofitHelper {
             @Override
             public void log(String message) {
 //                Log.e("okhttp", "message=" + message);
-                LogUtil.e("RxHttpUtils","message= " + message);
+                LogUtil.e("RxHttpUtils", "message= " + message);
             }
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         client.addInterceptor(loggingInterceptor);
-        client.cache(cache).build();
+        client.cache(cache);
+        client.cookieJar(cookieJar);
+        client.build();
+
 
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(url)

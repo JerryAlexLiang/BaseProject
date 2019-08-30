@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.MineFragment">
+    tools:context=".mine.MineFragment">
 
     <ImageView
         android:id="@+id/iv_blur"
@@ -171,6 +171,44 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:text="@string/setting"/>
+
+                        <ImageView
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:scaleType="fitCenter"
+                            android:rotation="180"
+                            android:tint="@color/gray_light"
+                            android:src="@drawable/ic_back"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_read_later"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_press_color_white"
+                        android:paddingLeft="16dp"
+                        android:gravity="center"
+                        android:paddingRight="16dp">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_read_later"
+                            android:tint="@color/colorBlue" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp15"
+                            android:textColor="@color/black"
+                            android:singleLine="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/read_later"/>
 
                         <ImageView
                             android:layout_width="13dp"

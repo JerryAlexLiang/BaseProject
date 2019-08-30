@@ -15,6 +15,11 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.scwang.smartrefresh.header.BezierCircleHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -107,6 +112,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         RelativeLayout splashRelativeLayout = findViewById(R.id.splash_container_layout);
         if (splashRelativeLayout != null) {
             getSplashTheme(splashRelativeLayout);
+        }
+
+        SmartRefreshLayout smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
+        if (smartRefreshLayout != null) {
+            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout);
         }
     }
 
@@ -225,6 +235,57 @@ public abstract class BaseActivity extends AppCompatActivity {
             case ACTIONBAR_COLOR_GREEN:
                 if (relativeLayout != null) {
                     relativeLayout.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                }
+                break;
+        }
+    }
+
+    public void getSmartRefreshPrimaryColorsTheme(SmartRefreshLayout smartRefreshLayout) {
+        int actionBarColorInt = (int) SPUtils.get(BaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
+        Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
+
+        if (smartRefreshLayout != null) {
+            //下拉刷新沉浸式水滴头部View
+            smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(this));
+            //上滑加载更多三点渐变动画底部View
+            smartRefreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        }
+
+        switch (actionBarColorInt) {
+            case ACTIONBAR_COLOR_BLUE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.colorBlue, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_RED:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.red, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_WHITE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_TRANSLATE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.translate, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_GREEN:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.palegreen, R.color.white);
                 }
                 break;
         }

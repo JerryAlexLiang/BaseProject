@@ -17,6 +17,11 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.scwang.smartrefresh.header.BezierCircleHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -138,6 +143,11 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         RelativeLayout splashRelativeLayout = findViewById(R.id.splash_container_layout);
         if (splashRelativeLayout != null) {
             getSplashTheme(splashRelativeLayout);
+        }
+
+        SmartRefreshLayout smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
+        if (smartRefreshLayout != null) {
+            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout);
         }
 
         if (isSetRefresh()) {
@@ -311,6 +321,76 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         }
     }
 
+    public void getSmartRefreshPrimaryColorsTheme(SmartRefreshLayout smartRefreshLayout) {
+        int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
+        Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
+
+        if (smartRefreshLayout != null) {
+            //下拉刷新沉浸式水滴头部View
+            smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(this));
+            //上滑加载更多三点渐变动画底部View
+            smartRefreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
+
+        }
+        switch (actionBarColorInt) {
+            case ACTIONBAR_COLOR_BLUE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.colorBlue, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_RED:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.red, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_WHITE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_TRANSLATE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.translate, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_GREEN:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.palegreen, R.color.white);
+                }
+                break;
+        }
+    }
+
+    //    private void initHeaderAndFooterView(SmartRefreshLayout smartRefreshLayout) {
+//        //设置样式后面的背景颜色
+////        alarmMessageSrlRefreshLayout.setPrimaryColorsId(R.color.color_blue, android.R.color.white);
+//
+//        //设置不同的头部、底部样式
+////        //沉浸式圆圈头部刷新View
+//        //沉浸式...+雷达
+////        alarmMessageSrlRefreshLayout.setRefreshHeader(new BezierRadarHeader(this));
+//        //沉浸式水滴
+////        alarmMessageSrlRefreshLayout.setRefreshHeader(new BezierCircleHeader(getActivity()));
+////        alarmMessageSrlRefreshLayout.setRefreshHeader(new MaterialHeader(getActivity()).setShowBezierWave(true));
+////        alarmMessageSrlRefreshLayout.setRefreshHeader(new ClassicsHeader(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+//        // alarmMessageSrlRefreshLayout.setRefreshHeader(new PhoenixHeader(getActivity()));
+//
+//        //进度圆圈+正在加载...->加载完成
+//        alarmMessageSrlRefreshLayout.setRefreshFooter(new ClassicsFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+//        //三点渐变动画底部View
+//        alarmMessageSrlRefreshLayout.setRefreshFooter(new BallPulseFooter(getActivity()).setSpinnerStyle(SpinnerStyle.Scale));
+//    }
+
     /**
      * google官方在安卓6.0以上版本才推出的深色状态栏字体api
      * <item name="android:windowLightStatusBar">true</item>
@@ -384,7 +464,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         }
     }
 
-    public void hideProgressDialog(){
+    public void hideProgressDialog() {
         if (customProgressDialog != null && customProgressDialog.isShow()) {
             customProgressDialog.dismiss();
         }

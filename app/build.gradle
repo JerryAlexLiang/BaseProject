@@ -57,7 +57,8 @@ android {
 
     greendao {
         schemaVersion 1//<--数据库的版本，用于升级时候进行更改
-        daoPackage 'liang.com.baseproject.gen'//这个是生成DAOs、DaoMaster、DaoSession代码保存的包名,默认为entities所在包名
+        daoPackage 'liang.com.baseproject.gen'
+//这个是生成DAOs、DaoMaster、DaoSession代码保存的包名,默认为entities所在包名
         targetGenDir 'src/main/java'
         //生成DAOs、DaoMaster、DaoSession的目录。默认为build/generated/source/greendao
     }
@@ -119,4 +120,8 @@ dependencies {
     implementation 'com.bigkoo:alertview:1.0.3'
     /*greendao*/
     implementation 'org.greenrobot:greendao:3.2.2'
+    /*Android PersistentCookieJar  持久化Cookie*/
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+    /*圆角图片*/
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

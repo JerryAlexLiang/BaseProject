@@ -134,6 +134,22 @@ public class FileUtil {
         }
     }
 
+    //递归删除文件夹下的数据
+    public static synchronized void recursionDeleteFile(String filePath){
+        File file = new File(filePath);
+        if (!file.exists()) return;
+
+        if (file.isDirectory()){
+            File[] files = file.listFiles();
+            for (File subFile : files){
+                String path = subFile.getPath();
+                recursionDeleteFile(path);
+            }
+        }
+        //删除文件
+        file.delete();
+    }
+
     // 将字符串写入到文本文件中
     public static void writeTxtToFile(String strcontent, String filePath, String fileName) {
         //生成文件夹之后，再生成文件，不然会出错

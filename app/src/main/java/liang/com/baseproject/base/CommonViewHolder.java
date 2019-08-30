@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
  * 描述: 通用ViewHolder
  * 作者: liangyang
  */
-public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+public class CommonViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
 
     // SparseArray 比 HashMap 更省内存，在某些条件下性能更好，只能存储 key 为 int 类型的数据，
     // 用来存放 View 以减少 findViewById 的次数
@@ -22,7 +22,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnLo
 
     private onItemBaseClickListener commonClickListener;
 
-    public BaseViewHolder(View itemView) {
+    public CommonViewHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
@@ -47,24 +47,24 @@ public class BaseViewHolder extends RecyclerView.ViewHolder implements View.OnLo
         return (T) view;
     }
 
-    public BaseViewHolder setText(int viewId, CharSequence text) {
+    public CommonViewHolder setText(int viewId, CharSequence text) {
         TextView tv = getView(viewId);
         tv.setText(text);
         return this;
     }
 
-    public BaseViewHolder setViewVisibility(int viewId, int visibility) {
+    public CommonViewHolder setViewVisibility(int viewId, int visibility) {
         getView(viewId).setVisibility(visibility);
         return this;
     }
 
-    public BaseViewHolder setImageResource(int viewId, int resourceId) {
+    public CommonViewHolder setImageResource(int viewId, int resourceId) {
         ImageView imageView = getView(viewId);
         imageView.setImageResource(resourceId);
         return this;
     }
 
-    public BaseViewHolder setImageUrl(Context context, int viewId, String url) {
+    public CommonViewHolder setImageUrl(Context context, int viewId, String url) {
         ImageView imageView = getView(viewId);
         Glide.with(context).load(url).into(imageView);
         return this;

@@ -2,13 +2,17 @@
 <resources>
     <!--字体大小sp-->
     <dimen name="sp22">22sp</dimen>
+    <dimen name="sp11">11sp</dimen>
     <dimen name="sp12">12sp</dimen>
+    <dimen name="sp13">13sp</dimen>
     <dimen name="sp15">15sp</dimen>
 
 
 
     <!--间距dp-->
+    <dimen name="dp5">5dp</dimen>
     <dimen name="dp10">10dp</dimen>
+    <dimen name="dp16">16dp</dimen>
     <dimen name="dp30">30dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp44">44dp</dimen>

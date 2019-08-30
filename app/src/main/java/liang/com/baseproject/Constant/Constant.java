@@ -89,4 +89,7 @@ public class Constant {
 
     public static final String KEY_BG = "KEY_BG";
 
+    //DB_NAME
+    public static final String APP_DB_NAME = "BaseProject_DB";
+
 }
