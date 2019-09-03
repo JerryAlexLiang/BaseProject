@@ -5,17 +5,35 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.scwang.smartrefresh.header.BezierCircleHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.footer.FalsifyFooter;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
+import liang.com.baseproject.app.MyApplication;
+import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.widget.CustomProgressDialog;
+
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_GREEN;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_RED;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_THEME;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
+import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_WHITE;
 
 public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends Fragment {
 
@@ -44,6 +62,10 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
 //    }
     protected abstract boolean isRegisterEventBus();
 
+    protected abstract boolean isSetRefreshHeader();
+
+    protected abstract boolean isSetRefreshFooter();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +88,13 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
         if (isSetRefresh()) {
             setupSwipeRefresh(rootView);
         }
+
+        SmartRefreshLayout smartRefreshLayout = rootView.findViewById(R.id.smart_refresh_layout);
+        if (smartRefreshLayout != null) {
+            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout, isSetRefreshHeader(), isSetRefreshFooter());
+        }
+
+
         return rootView;
     }
 
@@ -98,6 +127,58 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
 
     public void requestDataRefresh() {
         mIsRequestDataRefresh = true;
+    }
+
+    public void getSmartRefreshPrimaryColorsTheme(SmartRefreshLayout smartRefreshLayout, boolean isSetRefreshHeader, boolean isSetRefreshFooter) {
+        int actionBarColorInt = (int) SPUtils.get(MyApplication.getAppContext(), ACTIONBAR_COLOR_THEME, 0);
+
+        if (smartRefreshLayout != null) {
+            if (isSetRefreshHeader) {
+                //下拉刷新沉浸式水滴头部View
+                smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(MyApplication.getAppContext()));
+            }
+            if (isSetRefreshFooter) {
+                //上滑加载更多三点渐变动画底部View
+                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
+            }
+        }
+        switch (actionBarColorInt) {
+            case ACTIONBAR_COLOR_BLUE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.colorBlue, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_RED:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.red, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_BLACK:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_WHITE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_TRANSLATE:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.translate, R.color.white);
+                }
+                break;
+
+            case ACTIONBAR_COLOR_GREEN:
+                if (smartRefreshLayout != null) {
+                    smartRefreshLayout.setPrimaryColorsId(R.color.palegreen, R.color.white);
+                }
+                break;
+        }
     }
 
     @Override

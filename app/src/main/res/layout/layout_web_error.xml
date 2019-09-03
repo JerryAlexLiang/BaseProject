@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_web_error_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/web_error_page_color">
+
+    <ImageView
+        android:id="@+id/iv_404"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitEnd"
+        android:src="@drawable/pic_404" />
+
+    <ImageView
+        android:id="@+id/iv_web_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/ic_error" />
+
+</RelativeLayout>

@@ -2,23 +2,38 @@ package liang.com.baseproject.home.fragment;
 
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
+import liang.com.baseproject.activity.AgentWebActivity;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBaseFragment;
+import liang.com.baseproject.home.adapter.HomeContainerAdapter;
+import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.utils.JsonFormatUtils;
 import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.utils.ToastUtil;
 
 /**
  * 创建日期：2019/3/7 on 13:23
@@ -35,6 +50,11 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     Unbinder unbinder;
 
     private MainHomeActivity mActivity;
+
+    //    private static final int PAGE_START = 350;
+    private static final int PAGE_START = 0;
+    private int currPage = PAGE_START;
+    private HomeContainerAdapter homeContainerAdapter;
 
     public HomeContainerFragment() {
         // Required empty public constructor
@@ -58,9 +78,73 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     protected void initView(View rootView) {
+        //获取数据源
+//        mPresenter.getArticleList(PAGE_START);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         rvHome.setLayoutManager(linearLayoutManager);
         //初始化适配器
+        homeContainerAdapter = new HomeContainerAdapter();
+        homeContainerAdapter.setEnableLoadMore(false);
+        rvHome.setAdapter(homeContainerAdapter);
+
+        homeContainerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ArticleBean item = homeContainerAdapter.getItem(position);
+                if (item != null) {
+//                ToastUtil.showShortToast("点击了:  " + Objects.requireNonNull(homeContainerAdapter.getItem(position)).getTitle());
+                    LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
+                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
+                }
+            }
+        });
+
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                currPage = PAGE_START;
+                mPresenter.getArticleList(currPage);
+            }
+        });
+
+        boolean setRefreshFooter = isSetRefreshFooter();
+        if (setRefreshFooter) {
+            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                    currPage++;
+                    mPresenter.getArticleList(currPage);
+                }
+            });
+        } else {
+            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    currPage++;
+                    mPresenter.getArticleList(currPage);
+                }
+            }, rvHome);
+        }
+
+        //自动刷新(替代第一次请求数据)
+        smartRefreshLayout.autoRefresh();
+
+//        homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//            @Override
+//            public void onLoadMoreRequested() {
+//                currPage++;
+//                mPresenter.getArticleList(currPage);
+//            }
+//        });
+
+//        homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//            @Override
+//            public void onLoadMoreRequested() {
+//                currPage++;
+//                mPresenter.getArticleList(currPage);
+//            }
+//        }, rvHome);
 
     }
 
@@ -70,10 +154,19 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     }
 
     @Override
+    protected boolean isSetRefreshHeader() {
+        return true;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return true;
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         LogUtil.d(TAG, "执行onResume()");
-        mPresenter.getArticleList(0);
     }
 
     @Override
@@ -96,17 +189,45 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     public void onGetArticleListSuccess(HomeBean data) {
-        LogUtil.e(TAG, "数据: ===>" + JsonFormatUtils.format(new Gson().toJson(data.getDatas())));
+        LogUtil.d(TAG, "数据: ===>" + JsonFormatUtils.format(new Gson().toJson(data.getDatas())));
+        LogUtil.e(TAG, "当前数据源: " + " page= " + currPage);
+
+        if (currPage == PAGE_START) {
+            //第一页数据
+            homeContainerAdapter.setNewData(data.getDatas());
+        } else {
+            //请求更多数据,直接添加list中
+            homeContainerAdapter.addData(data.getDatas());
+            homeContainerAdapter.loadMoreComplete();
+        }
+
+        if (data.isOver() || data.getDatas().size() == 0) {
+//        if (data.getDatas().size() == 0) {
+            homeContainerAdapter.loadMoreEnd();
+            smartRefreshLayout.setEnableLoadMore(false);
+            onShowToast("没有更多数据了!");
+        } else {
+            if (!homeContainerAdapter.isLoadMoreEnable()) {
+                homeContainerAdapter.setEnableLoadMore(true);
+            }
+            smartRefreshLayout.setEnableLoadMore(true);
+        }
+        smartRefreshLayout.finishRefresh();
+        smartRefreshLayout.finishLoadMore();
     }
 
     @Override
     public void onGetArticleListFail(String content) {
-
+        homeContainerAdapter.loadMoreFail();
+        onShowToast(content);
+        smartRefreshLayout.finishRefresh(false);
+        smartRefreshLayout.finishLoadMore(false);
     }
 
     @Override
     public void onShowToast(String content) {
-
+        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
     }
 
     @Override

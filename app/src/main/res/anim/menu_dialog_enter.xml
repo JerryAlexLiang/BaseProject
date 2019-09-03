@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+   duration：动画的执行时间 毫秒为单位
+   fromXScale:执行动画的起始缩放X轴
+   fromYScale：执行动画的起始缩放Y轴
+   pivotX：缩放起点X轴坐标
+   pivotY：缩放起点Y轴坐标
+   toXScale:执行动画的结束缩放X轴
+   toYScale：执行动画的结束缩放Y轴
+   -->
+    <scale
+        android:duration="500"
+        android:fromXScale="0.0"
+        android:fromYScale="0.0"
+        android:pivotX="100%"
+        android:pivotY="0%"
+        android:toXScale="1.0"
+        android:toYScale="1.0" />
+
+</set>

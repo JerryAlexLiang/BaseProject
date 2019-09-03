@@ -103,6 +103,16 @@ public class LoginFragment extends MVPBaseFragment<LoginView, LoginPresenter> im
         return false;
     }
 
+    @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
     @OnClick({R.id.ll_go_register, R.id.btn_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {

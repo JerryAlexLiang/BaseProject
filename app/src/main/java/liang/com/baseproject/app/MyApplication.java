@@ -10,6 +10,7 @@ import android.os.StrictMode;
 import android.util.Log;
 
 import liang.com.baseproject.retrofit.RetrofitHelper;
+import liang.com.baseproject.utils.Utils;
 
 public class MyApplication extends Application {
     private static String TAG = "App";
@@ -40,6 +41,7 @@ public class MyApplication extends Application {
         outputLog(TAG, "App");
         super.onCreate();
 
+        Utils.init(this);
         app = this;
 
         mContext = getApplicationContext();

@@ -21,7 +21,7 @@
     <!--android:indeterminateDrawable="@color/webView_progress_bar_color"-->
     <!--android:layout_marginTop="-8dp" />-->
 
-    <!--<WebView-->
+    <!--<WebViewInterface-->
     <!--android:id="@+id/url_web"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"/>-->

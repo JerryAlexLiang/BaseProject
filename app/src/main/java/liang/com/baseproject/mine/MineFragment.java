@@ -112,6 +112,16 @@ public class MineFragment extends MVPBaseFragment {
         return true;
     }
 
+    @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
     /**
      * 接收登录消息
      */

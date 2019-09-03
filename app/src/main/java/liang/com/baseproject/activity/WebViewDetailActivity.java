@@ -127,7 +127,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
 
         //得到Intent传递的数据
         parseIntent();
-        //WebView
+        //WebViewInterface
         mPresenter.setWebView(url);
         ImageLoaderUtils.loadRadiusImage(WebViewDetailActivity.this, true, ivDetailTop,
                 imageUrl, R.drawable.image_top_default, R.drawable.image_top_default, 0);

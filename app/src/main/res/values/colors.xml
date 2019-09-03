@@ -239,4 +239,5 @@
     <color name="text_gray_dark">#666666</color>
     <color name="text_gray_light">#999999</color>
 
+    <color name="web_error_page_color">#eaeff2</color>
 </resources>

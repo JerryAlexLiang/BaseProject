@@ -70,6 +70,16 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
     }
 
     @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (NetUtil.isNetworkAvailable(getContext())) {

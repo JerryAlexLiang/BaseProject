@@ -107,6 +107,16 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
         return false;
     }
 
+    @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
     @OnClick({R.id.ll_go_login, R.id.btn_register})
     public void onViewClicked(View view) {
         switch (view.getId()) {
