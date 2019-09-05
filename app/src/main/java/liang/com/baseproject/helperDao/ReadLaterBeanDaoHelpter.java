@@ -32,18 +32,9 @@ public class ReadLaterBeanDaoHelpter {
      * 删除添加到本地的稍后阅读
      */
     public static void removeReaderLaterBean(ReadLaterBean readLaterBean) {
-//        File file = new File(readLaterBean.getTitle());
-//        if (file.exists()) {
-//            //本地数据库删除
-//            MyApplication.getDaoSession().getReadLaterBeanDao().delete(readLaterBean);
-//            //删除本地文件
-//            FileUtil.deleteFile(readLaterBean.getTitle());
-//        }
         //本地数据库删除
         MyApplication.getDaoSession().getReadLaterBeanDao().delete(readLaterBean);
 //        MyApplication.getDaoSession().getReadLaterBeanDao().deleteByKey();
-        //删除本地文件
-        FileUtil.deleteFile(readLaterBean.getTitle());
     }
 
     /**

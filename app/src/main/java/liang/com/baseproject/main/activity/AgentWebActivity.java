@@ -192,15 +192,15 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
-//                if (!mAgentWeb.back()) {
-//                    finish();
-//                }
-                if (readLaterBean != null) {
-                    ReadLaterBeanDaoHelpter.removeReaderLaterBean(readLaterBean);
-                    onShowToast("移除稍后阅读成功");
-                } else {
-                    onShowToast("当前不存在");
+                if (!mAgentWeb.back()) {
+                    finish();
                 }
+//                if (readLaterBean != null) {
+//                    ReadLaterBeanDaoHelpter.removeReaderLaterBean(readLaterBean);
+//                    onShowToast("移除稍后阅读成功");
+//                } else {
+//                    onShowToast("当前不存在");
+//                }
                 break;
 
             case R.id.base_actionbar_left2_icon:
@@ -249,6 +249,17 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
         TextView tvMenuCollect = view.findViewById(R.id.dialog_web_menu_tv_collect);
         TextView tvMenuReadLater = view.findViewById(R.id.dialog_web_menu_tv_read_later);
         TextView tvMenuOpenByBrowser = view.findViewById(R.id.dialog_web_menu_tv_browser);
+
+        ReadLaterBean readLaterByTitle = ReadLaterBeanDaoHelpter.findReadLaterByTitle(mCurrTitle);
+        if (readLaterByTitle != null) {
+            if (TextUtils.equals(readLaterByTitle.getTitle(), mCurrTitle)) {
+                tvMenuReadLater.setText("移除稍后阅读");
+            } else {
+                tvMenuReadLater.setText("稍后阅读");
+            }
+        } else {
+            tvMenuReadLater.setText("稍后阅读");
+        }
 
         tvMenuShare.setOnClickListener(this);
         tvMenuCollect.setOnClickListener(this);
@@ -318,8 +329,23 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
                 readLaterBean.setTime(System.currentTimeMillis());
                 //本地化存储-加入稍后阅读
 //                ReadLaterBeanDaoHelpter.getInstance().saveReaderLaterBean(readLaterBean);
-                ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
-                onShowToast("已加入稍后阅读");
+
+                ReadLaterBean readLaterByTitle = ReadLaterBeanDaoHelpter.findReadLaterByTitle(mCurrTitle);
+                if (readLaterByTitle != null) {
+                    if (TextUtils.equals(readLaterByTitle.getTitle(), mCurrTitle)) {
+                        ReadLaterBeanDaoHelpter.removeReaderLaterBean(readLaterBean);
+                        onShowToast("移除稍后阅读");
+                    } else {
+                        ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
+                        onShowToast("已加入稍后阅读");
+                    }
+                }else {
+                    ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
+                    onShowToast("已加入稍后阅读");
+                }
+
+
+
                 break;
 
             case R.id.dialog_web_menu_tv_browser:
