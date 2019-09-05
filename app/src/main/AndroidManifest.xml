@@ -27,7 +27,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".activity.AgentWebActivity"></activity>
+        <activity android:name=".main.activity.AgentWebActivity"/>
         <activity android:name=".mine.activity.ReadLaterActivity" />
         <activity android:name=".mine.activity.CollectionActivity" />
         <activity android:name=".setting.activity.AppSettingActivity" />

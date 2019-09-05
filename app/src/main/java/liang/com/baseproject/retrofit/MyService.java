@@ -3,13 +3,17 @@ package liang.com.baseproject.retrofit;
 import java.util.List;
 
 import io.reactivex.Observable;
+import liang.com.baseproject.base.MVPBaseBean;
 import liang.com.baseproject.base.MVPBaseResponse;
 import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
+import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.main.entity.CollectOutsideArticleBean;
+import liang.com.baseproject.main.entity.CollectionLinkBean;
 import liang.com.baseproject.mine.CollectionArticleBean;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -99,4 +103,34 @@ public interface MyService {
      */
     @GET("article/list/{page}/json")
     Observable<MVPBaseResponse<HomeBean>> getArticleList(@Path("page") int page);
+
+    /**
+     * 收藏站内文章
+     * 方法：POST
+     * 参数： 文章id，拼接在链接中  {"data":null,"errorCode":0,"errorMsg":""}
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<MVPBaseResponse<MVPBaseBean>> goToCollectInsideArticle(@Path("id") int id);
+
+    /**
+     * 收藏站外文章
+     * 方法：POST
+     * 参数：
+     * title，author，link
+     */
+    @FormUrlEncoded
+    @POST("lg/collect/add/json")
+    Observable<MVPBaseResponse<CollectOutsideArticleBean>> goToCollectOutsideArticle(@Field("title") String title,
+                                                                                     @Field("author") String author,
+                                                                                     @Field("link") String link);
+
+    /**
+     * 收藏网址
+     * 方法：POST
+     * 参数：
+     * name,link
+     */
+    @FormUrlEncoded
+    @POST("lg/collect/addtool/json")
+    Observable<MVPBaseResponse<CollectionLinkBean>> goToCollectLink(@Field("name") String name, @Field("link") String link);
 }

@@ -1,4 +1,4 @@
-package liang.com.baseproject.View;
+package liang.com.baseproject.main.view;
 
 import liang.com.baseproject.base.MVPBaseView;
 

@@ -1,5 +1,6 @@
 package liang.com.baseproject.home.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import liang.com.baseproject.base.MVPBaseBean;
@@ -9,7 +10,7 @@ import liang.com.baseproject.base.MVPBaseBean;
  * 描述: 首页文章列表
  * 作者: liangyang
  */
-public class ArticleBean extends MVPBaseBean {
+public class ArticleBean extends MVPBaseBean implements Serializable {
     /**
      * apkLink :
      * author : 玉刚说

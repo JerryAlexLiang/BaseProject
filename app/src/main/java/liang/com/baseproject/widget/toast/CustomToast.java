@@ -52,6 +52,7 @@ public class CustomToast {
         private CustomToast mine;
         private int gravity = Gravity.NO_GRAVITY;//设置位置
         private int offsetX = 0;//设置偏移度X
+//        private int offsetY = 0;//设置偏移度Y
         private int offsetY = 160;//设置偏移度Y
         private boolean isShowIcon;//是否显示图标
         private int textColor = Color.WHITE;//字体颜色

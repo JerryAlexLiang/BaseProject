@@ -1,8 +1,12 @@
-package liang.com.baseproject.activity;
+package liang.com.baseproject.main.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,25 +14,35 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 import com.just.agentweb.WebViewClient;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.View.WebViewInterface;
 import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.presenter.AgentWebPresenter;
+import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
+import liang.com.baseproject.home.entity.ArticleBean;
+import liang.com.baseproject.main.presenter.AgentWebPresenter;
+import liang.com.baseproject.main.view.WebViewInterface;
+import liang.com.baseproject.mine.entity.ReadLaterBean;
 import liang.com.baseproject.utils.AgentWebCreator;
+import liang.com.baseproject.utils.GsonUtils;
+import liang.com.baseproject.utils.IntentUtils;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.ResolutionUtils;
 import liang.com.baseproject.utils.ToastUtil;
+import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.widget.WebContainer;
 import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
 
-public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWebPresenter> implements CustomPopupWindow.ViewInterface, View.OnClickListener {
+public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWebPresenter> implements CustomPopupWindow.ViewInterface, View.OnClickListener, WebViewInterface {
 
     private static final String TAG = AgentWebActivity.class.getSimpleName();
     @BindView(R.id.base_actionbar_left_icon)
@@ -60,6 +74,16 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     private AgentWeb mAgentWeb;
 
     private CustomPopupWindow customPopupWindow;
+    private String superChapterName;
+    private String chapterName;
+    private String envelopePic;
+    private ReadLaterBean readLaterBean;
+
+    public static void actionStart(Context context, ArticleBean articleBean) {
+        Intent intent = new Intent(context, AgentWebActivity.class);
+        intent.putExtra("articleBean", articleBean);
+        context.startActivity(intent);
+    }
 
     public static void actionStart(Context context, int articleId, String title, String url) {
         Intent intent = new Intent(context, AgentWebActivity.class);
@@ -91,7 +115,7 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
 
     @Override
     protected AgentWebPresenter createPresenter() {
-        return new AgentWebPresenter();
+        return new AgentWebPresenter(this);
     }
 
     @Override
@@ -137,12 +161,27 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     }
 
     private void getIntentData() {
+        //解析传递过来的文章对象
         Intent intent = getIntent();
+        ArticleBean articleBean = (ArticleBean) intent.getSerializableExtra("articleBean");
         //传递过来的文章ID、标题、作者信息、Url等数据
-        mArticleId = intent.getIntExtra("articleId", -1);
-        mTitle = intent.getStringExtra("title");
-        mAuthor = intent.getStringExtra("author");
-        mUrl = intent.getStringExtra("url");
+        mArticleId = articleBean.getId();
+        mTitle = articleBean.getTitle();
+        mAuthor = articleBean.getAuthor();
+        mUrl = articleBean.getLink();
+        superChapterName = articleBean.getSuperChapterName();//一级分类
+        chapterName = articleBean.getChapterName();//二级分类
+        envelopePic = articleBean.getEnvelopePic();//图片
+
+
+//        //传递过来的文章ID、标题、作者信息、Url等数据
+//        mArticleId = intent.getIntExtra("articleId", -1);
+//        mTitle = intent.getStringExtra("title");
+//        mAuthor = intent.getStringExtra("author");
+//        mUrl = intent.getStringExtra("url");
+
+        String json = GsonUtils.toJson(intent);
+        LogUtil.d(TAG, "接收数据: " + json);
 
         //当前网页页面标题、链接
         mCurrTitle = mTitle;
@@ -153,14 +192,25 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
-                if (!mAgentWeb.back()) {
-                    finish();
+//                if (!mAgentWeb.back()) {
+//                    finish();
+//                }
+                if (readLaterBean != null) {
+                    ReadLaterBeanDaoHelpter.removeReaderLaterBean(readLaterBean);
+                    onShowToast("移除稍后阅读成功");
+                } else {
+                    onShowToast("当前不存在");
                 }
                 break;
 
             case R.id.base_actionbar_left2_icon:
-                //直接关闭当前页面
-                finish();
+//                //直接关闭当前页面
+//                finish();
+//                List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.getInstance().findAllReadLaters();
+                List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.findAllReadLaters();
+                String s = GsonUtils.toJson(allReadLaters);
+                LogUtil.d("----->>>", s);
+                onShowToast(s);
                 break;
 
             case R.id.base_actionbar_right_icon:
@@ -201,6 +251,9 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
         TextView tvMenuOpenByBrowser = view.findViewById(R.id.dialog_web_menu_tv_browser);
 
         tvMenuShare.setOnClickListener(this);
+        tvMenuCollect.setOnClickListener(this);
+        tvMenuReadLater.setOnClickListener(this);
+        tvMenuOpenByBrowser.setOnClickListener(this);
 
     }
 
@@ -208,10 +261,72 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_web_menu_tv_share:
-                ToastUtil.showShortToast("分享");
-                dismissMenuDialog();
+                IntentUtils.goToShareUrl(this, mCurrUrl);
+                break;
+
+            case R.id.dialog_web_menu_tv_collect:
+                if (UserLoginUtils.getInstance().doIfNeedLogin()) {
+                    //已登录
+                    if (TextUtils.equals(mCurrUrl, mUrl)) {
+                        //当前页面
+                        if (mArticleId != -1) {
+                            //收藏站内文章
+                            mPresenter.goToCollectInsideArticle(mArticleId);
+                        } else {
+                            if (TextUtils.isEmpty(mAuthor)) {
+                                //收藏网址
+                                mPresenter.goToCollectLink(mTitle, mUrl);
+                            } else {
+                                //收藏站外文章
+                                mPresenter.goToCollectOutsideArticle(mTitle, mAuthor, mUrl);
+                            }
+                        }
+                    } else {
+                        //收藏网址(HTML页面内跳转链接后的页面进行收藏)
+                        mPresenter.goToCollectLink(mCurrTitle, mCurrUrl);
+                    }
+
+                } else {
+                    ToastUtil.showShortToast("请先登录！");
+                }
+                break;
+
+            case R.id.dialog_web_menu_tv_read_later:
+                readLaterBean = new ReadLaterBean();
+                readLaterBean.setTitle(mCurrTitle);
+                readLaterBean.setLink(mCurrUrl);
+//                if (!TextUtils.isEmpty(mAuthor)) {
+//                    readLaterBean.setAuthor(mAuthor);
+//                }else {
+//                    readLaterBean.setAuthor("网页");
+//                }
+//                if (!TextUtils.isEmpty(envelopePic)) {
+//                    readLaterBean.setEnvelopePic(envelopePic);
+//                }else {
+//                    readLaterBean.setAuthor("");
+//                }
+//                if (!TextUtils.isEmpty(chapterName)) {
+//                    readLaterBean.setChapterName(chapterName);
+//                }else {
+//                    readLaterBean.setAuthor("");
+//                }
+//                if (!TextUtils.isEmpty(superChapterName)) {
+//                    readLaterBean.setSuperChapterName(superChapterName);
+//                }else {
+//                    readLaterBean.setAuthor("");
+//                }
+                readLaterBean.setTime(System.currentTimeMillis());
+                //本地化存储-加入稍后阅读
+//                ReadLaterBeanDaoHelpter.getInstance().saveReaderLaterBean(readLaterBean);
+                ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
+                onShowToast("已加入稍后阅读");
+                break;
+
+            case R.id.dialog_web_menu_tv_browser:
+                IntentUtils.openBrowser(this, mCurrUrl);
                 break;
         }
+        dismissMenuDialog();
     }
 
     public void dismissMenuDialog() {
@@ -245,5 +360,32 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public void onCollectSuccess() {
+        onShowToast("收藏成功~");
+    }
+
+    @Override
+    public void onCollectFailed(String msg) {
+        onShowToast(msg);
+    }
+
+    @Override
+    public void onShowToast(String content) {
+        ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onShowProgress() {
+        showProgressDialog("Loading...", false);
+    }
+
+    @Override
+    public void onHideProgress() {
+        hideProgressDialog();
+    }
+
 
 }

@@ -2,13 +2,16 @@ package liang.com.baseproject.home.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,12 +21,14 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
-import liang.com.baseproject.activity.AgentWebActivity;
+import liang.com.baseproject.main.activity.AgentWebActivity;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
@@ -86,6 +91,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //初始化适配器
         homeContainerAdapter = new HomeContainerAdapter();
         homeContainerAdapter.setEnableLoadMore(false);
+        //开启动画
+        homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvHome.setAdapter(homeContainerAdapter);
 
         homeContainerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -95,7 +102,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
                 if (item != null) {
 //                ToastUtil.showShortToast("点击了:  " + Objects.requireNonNull(homeContainerAdapter.getItem(position)).getTitle());
                     LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
-                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
+//                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
+                    AgentWebActivity.actionStart(getContext(), item);
                 }
             }
         });
@@ -195,10 +203,13 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         if (currPage == PAGE_START) {
             //第一页数据
             homeContainerAdapter.setNewData(data.getDatas());
+//            homeContainerAdapter.addData(data.getDatas());
+            LogUtil.d(TAG, "下拉刷新：  " + "数量: " + homeContainerAdapter.getData().size());
         } else {
             //请求更多数据,直接添加list中
             homeContainerAdapter.addData(data.getDatas());
             homeContainerAdapter.loadMoreComplete();
+            LogUtil.d(TAG, "上拉加载更多：  " + "数量: " + homeContainerAdapter.getData().size());
         }
 
         if (data.isOver() || data.getDatas().size() == 0) {
@@ -227,7 +238,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     @Override
     public void onShowToast(String content) {
         ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
     @Override

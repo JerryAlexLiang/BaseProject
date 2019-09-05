@@ -5,19 +5,24 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 
+import liang.com.baseproject.gen.DaoMaster;
+import liang.com.baseproject.gen.DaoSession;
 import liang.com.baseproject.retrofit.RetrofitHelper;
 import liang.com.baseproject.utils.Utils;
+
+import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
 public class MyApplication extends Application {
     private static String TAG = "App";
 
     private static MyApplication app;
 
-    public static Context getAppContext(){
+    public static Context getAppContext() {
         return app;
     }
 
@@ -29,6 +34,8 @@ public class MyApplication extends Application {
     }
 
     public static PackageInfo packageInfo;
+
+    private static DaoSession daoSession;
 
     private static void outputLog(String strTAG, String strInfo) {
         if (_bOuputLog)
@@ -62,47 +69,24 @@ public class MyApplication extends Application {
             builder.detectFileUriExposure();
         }
 
-        //初始化配置
-        initRxHttpUtils();
+        //配置GreenDao数据库
+        setupDatabase();
     }
 
-    /**
-     * 初始化配置
-     */
-    private void initRxHttpUtils() {
-//        RxHttpUtils.init(this);
-//        OkHttpClient.Builder client = new OkHttpClient().newBuilder()
-//                .connectTimeout(20, TimeUnit.SECONDS)
-//                .readTimeout(20, TimeUnit.SECONDS)
-//                .writeTimeout(20, TimeUnit.SECONDS)
-//                .addInterceptor(new LoggingInterceptor.Builder()
-//                        .setLevel(Level.BASIC)
-//                        .log(Platform.INFO)
-//                        .request("Request")
-//                        .response("Response")
-//                        .build());
-//
-//        RxHttpUtils
-//                .getInstance()
-//                //开启全局配置
-//                .config()
-//                //全局的BaseUrl
-//                .setBaseUrl(UrlConstants.BASE_URL)
-//                //全局的请求头信息
-////                .setHeaders(map)
-//                //全局持久话cookie,保存本地每次都会携带在header中
-//                .setCookie(false)
-//                //全局ssl证书认证
-//                //信任所有证书,不安全有风险
-////                .setSslSocketFactory()
-//                //使用预埋证书，校验服务端证书（自签名证书）
-//                //.setSslSocketFactory(getAssets().open("your.cer"))
-//                //使用bks证书和密码管理客户端证书（双向认证），使用预埋证书，校验服务端证书（自签名证书）
-//                //.setSslSocketFactory(getAssets().open("your.bks"), "123456", getAssets().open("your.cer"))
-//                //全局超时配置
-//                //全局是否打开请求log日志
-//                .setOkClient(client.build())
-//                .setLog(true);
+    private void setupDatabase() {
+        //DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "face.db", null);
+        //        SQLiteDatabase db = helper.getWritableDatabase();
+        //        DaoMaster daoMaster = new DaoMaster(db);
+        //        daoSession = daoMaster.newSession();
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, APP_DB_NAME, null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        daoSession = daoMaster.newSession();
+    }
+
+    public static DaoSession getDaoSession(){
+        return daoSession;
     }
 
     @Override

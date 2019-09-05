@@ -24,12 +24,13 @@ public class ReadLaterBeanDao extends AbstractDao<ReadLaterBean, String> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Id = new Property(0, String.class, "id", true, "ID");
-        public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
-        public final static Property Author = new Property(2, String.class, "author", false, "AUTHOR");
-        public final static Property Link = new Property(3, String.class, "link", false, "LINK");
-        public final static Property Time = new Property(4, long.class, "time", false, "TIME");
-        public final static Property ChapterName = new Property(5, String.class, "chapterName", false, "CHAPTER_NAME");
+        public final static Property Title = new Property(0, String.class, "title", true, "TITLE");
+        public final static Property Author = new Property(1, String.class, "author", false, "AUTHOR");
+        public final static Property Link = new Property(2, String.class, "link", false, "LINK");
+        public final static Property Time = new Property(3, long.class, "time", false, "TIME");
+        public final static Property ChapterName = new Property(4, String.class, "chapterName", false, "CHAPTER_NAME");
+        public final static Property SuperChapterName = new Property(5, String.class, "superChapterName", false, "SUPER_CHAPTER_NAME");
+        public final static Property EnvelopePic = new Property(6, String.class, "envelopePic", false, "ENVELOPE_PIC");
     }
 
 
@@ -45,12 +46,13 @@ public class ReadLaterBeanDao extends AbstractDao<ReadLaterBean, String> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"READ_LATER_BEAN\" (" + //
-                "\"ID\" TEXT PRIMARY KEY NOT NULL ," + // 0: id
-                "\"TITLE\" TEXT," + // 1: title
-                "\"AUTHOR\" TEXT," + // 2: author
-                "\"LINK\" TEXT," + // 3: link
-                "\"TIME\" INTEGER NOT NULL ," + // 4: time
-                "\"CHAPTER_NAME\" TEXT);"); // 5: chapterName
+                "\"TITLE\" TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: title
+                "\"AUTHOR\" TEXT," + // 1: author
+                "\"LINK\" TEXT," + // 2: link
+                "\"TIME\" INTEGER NOT NULL ," + // 3: time
+                "\"CHAPTER_NAME\" TEXT," + // 4: chapterName
+                "\"SUPER_CHAPTER_NAME\" TEXT," + // 5: superChapterName
+                "\"ENVELOPE_PIC\" TEXT);"); // 6: envelopePic
     }
 
     /** Drops the underlying database table. */
@@ -63,30 +65,35 @@ public class ReadLaterBeanDao extends AbstractDao<ReadLaterBean, String> {
     protected final void bindValues(DatabaseStatement stmt, ReadLaterBean entity) {
         stmt.clearBindings();
  
-        String id = entity.getId();
-        if (id != null) {
-            stmt.bindString(1, id);
-        }
- 
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(2, title);
+            stmt.bindString(1, title);
         }
  
         String author = entity.getAuthor();
         if (author != null) {
-            stmt.bindString(3, author);
+            stmt.bindString(2, author);
         }
  
         String link = entity.getLink();
         if (link != null) {
-            stmt.bindString(4, link);
+            stmt.bindString(3, link);
         }
-        stmt.bindLong(5, entity.getTime());
+        stmt.bindLong(4, entity.getTime());
  
         String chapterName = entity.getChapterName();
         if (chapterName != null) {
-            stmt.bindString(6, chapterName);
+            stmt.bindString(5, chapterName);
+        }
+ 
+        String superChapterName = entity.getSuperChapterName();
+        if (superChapterName != null) {
+            stmt.bindString(6, superChapterName);
+        }
+ 
+        String envelopePic = entity.getEnvelopePic();
+        if (envelopePic != null) {
+            stmt.bindString(7, envelopePic);
         }
     }
 
@@ -94,30 +101,35 @@ public class ReadLaterBeanDao extends AbstractDao<ReadLaterBean, String> {
     protected final void bindValues(SQLiteStatement stmt, ReadLaterBean entity) {
         stmt.clearBindings();
  
-        String id = entity.getId();
-        if (id != null) {
-            stmt.bindString(1, id);
-        }
- 
         String title = entity.getTitle();
         if (title != null) {
-            stmt.bindString(2, title);
+            stmt.bindString(1, title);
         }
  
         String author = entity.getAuthor();
         if (author != null) {
-            stmt.bindString(3, author);
+            stmt.bindString(2, author);
         }
  
         String link = entity.getLink();
         if (link != null) {
-            stmt.bindString(4, link);
+            stmt.bindString(3, link);
         }
-        stmt.bindLong(5, entity.getTime());
+        stmt.bindLong(4, entity.getTime());
  
         String chapterName = entity.getChapterName();
         if (chapterName != null) {
-            stmt.bindString(6, chapterName);
+            stmt.bindString(5, chapterName);
+        }
+ 
+        String superChapterName = entity.getSuperChapterName();
+        if (superChapterName != null) {
+            stmt.bindString(6, superChapterName);
+        }
+ 
+        String envelopePic = entity.getEnvelopePic();
+        if (envelopePic != null) {
+            stmt.bindString(7, envelopePic);
         }
     }
 
@@ -129,35 +141,37 @@ public class ReadLaterBeanDao extends AbstractDao<ReadLaterBean, String> {
     @Override
     public ReadLaterBean readEntity(Cursor cursor, int offset) {
         ReadLaterBean entity = new ReadLaterBean( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // title
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // author
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // link
-            cursor.getLong(offset + 4), // time
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // chapterName
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // title
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // author
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // link
+            cursor.getLong(offset + 3), // time
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // chapterName
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // superChapterName
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6) // envelopePic
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, ReadLaterBean entity, int offset) {
-        entity.setId(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setTitle(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setAuthor(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setLink(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setTime(cursor.getLong(offset + 4));
-        entity.setChapterName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setTitle(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setAuthor(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setLink(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setTime(cursor.getLong(offset + 3));
+        entity.setChapterName(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setSuperChapterName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setEnvelopePic(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
      }
     
     @Override
     protected final String updateKeyAfterInsert(ReadLaterBean entity, long rowId) {
-        return entity.getId();
+        return entity.getTitle();
     }
     
     @Override
     public String getKey(ReadLaterBean entity) {
         if(entity != null) {
-            return entity.getId();
+            return entity.getTitle();
         } else {
             return null;
         }
@@ -165,7 +179,7 @@ public class ReadLaterBeanDao extends AbstractDao<ReadLaterBean, String> {
 
     @Override
     public boolean hasKey(ReadLaterBean entity) {
-        return entity.getId() != null;
+        return entity.getTitle() != null;
     }
 
     @Override
