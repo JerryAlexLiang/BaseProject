@@ -22,7 +22,7 @@ import liang.com.baseproject.R;
  */
 public class AgentWebCreator {
 
-        @SuppressLint("SetJavaScriptEnabled")
+    @SuppressLint("SetJavaScriptEnabled")
     public static AgentWeb create(Activity activity, FrameLayout container, String url, WebChromeClient webChromeClient, WebViewClient webViewClient) {
         AgentWeb agentWeb = AgentWeb.with(activity)
                 .setAgentWebParent(container, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))

@@ -28,7 +28,7 @@ public class GsonUtils {
      * @param cls
      * @return
      */
-    public static <T> T parseJsonToBean(String json, Class<T> cls) {
+    public static <T> T parseJsonObjectToBean(String json, Class<T> cls) {
         Gson gson = new Gson();
         T t = null;
         try {
@@ -41,7 +41,7 @@ public class GsonUtils {
     }
 
     //解析json数组
-    public static <T> List<T> fromJsonArray(String json, Class<T> clazz) {
+    public static <T> List<T> parseJsonArrayToBean(String json, Class<T> clazz) {
         List<T> lst = null;
         try {
             lst = new ArrayList<T>();
@@ -60,7 +60,7 @@ public class GsonUtils {
 
 
     /**
-     * 对象转为json字符串
+     * 对象转为String字符串
      *
      * @param target
      * @return

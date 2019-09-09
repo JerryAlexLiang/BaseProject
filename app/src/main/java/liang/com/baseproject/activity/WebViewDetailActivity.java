@@ -33,7 +33,7 @@ import liang.com.baseproject.utils.ToastUtil;
 /**
  * 创建日期：2019/2/20 on 13:31
  * 描述: 聚合新闻详情页- WebView加载Url
- * 作者: liangyang  <IGankWebView,GankWebPresenter> implements IGankWebView
+ * 作者: liangyang
  */
 public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView {
 
@@ -99,6 +99,16 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
 
     @Override
     protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
         return false;
     }
 

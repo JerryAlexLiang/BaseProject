@@ -95,17 +95,16 @@
             android:layout_width="120dp"
             android:layout_height="80dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/white"
+            android:background="@color/page_background"
             android:scaleType="centerCrop"
-            android:visibility="gone"
             app:riv_corner_radius="3dp"
             app:riv_mutate_background="true"
-            tools:src="@drawable/image_holder"
-            tools:visibility="visible" />
+            tools:src="@drawable/image_holder" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <TextView
@@ -116,9 +115,9 @@
                 android:includeFontPadding="false"
                 android:lineSpacingExtra="0dp"
                 android:maxLines="3"
-                android:singleLine="false"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp15"
+                android:singleLine="false"
                 tools:singleLine="true"
                 tools:text="公众号文章列表强势上线公众号文章列表强势公众号文章列表强势上线公众号文章列表强势" />
 
@@ -134,8 +133,7 @@
                 android:maxLines="3"
                 android:textColor="@color/text_gray_light"
                 android:textSize="@dimen/sp13"
-                tools:text="公众号文章列表强势上线"
-                tools:visibility="visible" />
+                tools:text="公众号文章列表强势上线" />
 
         </LinearLayout>
 

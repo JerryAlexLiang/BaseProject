@@ -27,6 +27,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseActivity;
+import liang.com.baseproject.entity.TagsBean;
 import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
 import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.main.presenter.AgentWebPresenter;
@@ -78,6 +79,8 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     private String chapterName;
     private String envelopePic;
     private ReadLaterBean readLaterBean;
+    private String desc;
+    private List<TagsBean> tags;
 
     public static void actionStart(Context context, ArticleBean articleBean) {
         Intent intent = new Intent(context, AgentWebActivity.class);
@@ -110,6 +113,16 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
 
     @Override
     protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshHeader() {
+        return true;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
         return false;
     }
 
@@ -164,21 +177,24 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
         //解析传递过来的文章对象
         Intent intent = getIntent();
         ArticleBean articleBean = (ArticleBean) intent.getSerializableExtra("articleBean");
-        //传递过来的文章ID、标题、作者信息、Url等数据
-        mArticleId = articleBean.getId();
-        mTitle = articleBean.getTitle();
-        mAuthor = articleBean.getAuthor();
-        mUrl = articleBean.getLink();
-        superChapterName = articleBean.getSuperChapterName();//一级分类
-        chapterName = articleBean.getChapterName();//二级分类
-        envelopePic = articleBean.getEnvelopePic();//图片
-
-
-//        //传递过来的文章ID、标题、作者信息、Url等数据
-//        mArticleId = intent.getIntExtra("articleId", -1);
-//        mTitle = intent.getStringExtra("title");
-//        mAuthor = intent.getStringExtra("author");
-//        mUrl = intent.getStringExtra("url");
+        if (articleBean != null) {
+            //传递过来的文章ID、标题、作者信息、Url等数据
+            mArticleId = articleBean.getId();
+            mTitle = articleBean.getTitle();
+            mAuthor = articleBean.getAuthor();
+            mUrl = articleBean.getLink();
+            superChapterName = articleBean.getSuperChapterName();//一级分类
+            chapterName = articleBean.getChapterName();//二级分类
+            envelopePic = articleBean.getEnvelopePic();//图片
+            desc = articleBean.getDesc();//描述
+            tags = articleBean.getTags();//tags列表
+        } else {
+            //传递过来的文章ID、标题、作者信息、Url等数据
+            mArticleId = intent.getIntExtra("articleId", -1);
+            mTitle = intent.getStringExtra("title");
+            mAuthor = intent.getStringExtra("author");
+            mUrl = intent.getStringExtra("url");
+        }
 
         String json = GsonUtils.toJson(intent);
         LogUtil.d(TAG, "接收数据: " + json);
@@ -306,30 +322,41 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
                 readLaterBean = new ReadLaterBean();
                 readLaterBean.setTitle(mCurrTitle);
                 readLaterBean.setLink(mCurrUrl);
-//                if (!TextUtils.isEmpty(mAuthor)) {
-//                    readLaterBean.setAuthor(mAuthor);
-//                }else {
-//                    readLaterBean.setAuthor("网页");
-//                }
-//                if (!TextUtils.isEmpty(envelopePic)) {
-//                    readLaterBean.setEnvelopePic(envelopePic);
-//                }else {
-//                    readLaterBean.setAuthor("");
-//                }
-//                if (!TextUtils.isEmpty(chapterName)) {
-//                    readLaterBean.setChapterName(chapterName);
-//                }else {
-//                    readLaterBean.setAuthor("");
-//                }
-//                if (!TextUtils.isEmpty(superChapterName)) {
-//                    readLaterBean.setSuperChapterName(superChapterName);
-//                }else {
-//                    readLaterBean.setAuthor("");
-//                }
-                readLaterBean.setTime(System.currentTimeMillis());
-                //本地化存储-加入稍后阅读
-//                ReadLaterBeanDaoHelpter.getInstance().saveReaderLaterBean(readLaterBean);
+                if (!TextUtils.isEmpty(mAuthor)) {
+                    readLaterBean.setAuthor(mAuthor);
+                } else {
+                    readLaterBean.setAuthor("网页");
+                }
+                if (!TextUtils.isEmpty(envelopePic)) {
+                    readLaterBean.setEnvelopePic(envelopePic);
+                } else {
+                    readLaterBean.setEnvelopePic("");
+                }
+                if (!TextUtils.isEmpty(chapterName)) {
+                    readLaterBean.setChapterName(chapterName);
+                } else {
+                    readLaterBean.setChapterName("");
+                }
+                if (!TextUtils.isEmpty(superChapterName)) {
+                    readLaterBean.setSuperChapterName(superChapterName);
+                } else {
+                    readLaterBean.setSuperChapterName("");
+                }
+                if (!TextUtils.isEmpty(desc)) {
+                    readLaterBean.setDesc(desc);
+                } else {
+                    readLaterBean.setDesc("");
+                }
 
+                if (tags != null && tags.size() > 0) {
+                    readLaterBean.setTagsBeanList(tags);
+                } else {
+                    readLaterBean.setTagsBeanList(null);
+                }
+
+                readLaterBean.setTime(System.currentTimeMillis());
+
+                //本地化存储-加入稍后阅读
                 ReadLaterBean readLaterByTitle = ReadLaterBeanDaoHelpter.findReadLaterByTitle(mCurrTitle);
                 if (readLaterByTitle != null) {
                     if (TextUtils.equals(readLaterByTitle.getTitle(), mCurrTitle)) {
@@ -339,13 +366,10 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
                         ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
                         onShowToast("已加入稍后阅读");
                     }
-                }else {
+                } else {
                     ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
                     onShowToast("已加入稍后阅读");
                 }
-
-
-
                 break;
 
             case R.id.dialog_web_menu_tv_browser:

@@ -65,6 +65,16 @@ public class ViewPagerPictureActivity extends MVPBaseActivity {
     }
 
     @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
+    @Override
     protected MVPBasePresenter createPresenter() {
         return null;
     }

@@ -60,6 +60,16 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
     }
 
     @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
+    @Override
     protected AppSettingPresenter createPresenter() {
         return new AppSettingPresenter();
     }

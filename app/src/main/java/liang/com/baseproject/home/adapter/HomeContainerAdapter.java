@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
@@ -14,7 +15,9 @@ import java.util.List;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
+import liang.com.baseproject.entity.TagsBean;
 import liang.com.baseproject.home.entity.ArticleBean;
+import liang.com.baseproject.utils.GsonUtils;
 import liang.com.baseproject.utils.ImageLoaderUtils;
 import liang.com.baseproject.widget.CollectView;
 
@@ -42,9 +45,15 @@ public class HomeContainerAdapter extends BaseQuickAdapter<ArticleBean, BaseView
 
     @Override
     protected void convert(@NonNull BaseViewHolder helper, ArticleBean item) {
+
+        helper.getView(R.id.tv_desc).setVisibility(View.GONE);
+//        helper.setText(R.id.tv_desc,item.getDesc());
         //文章Title
 //        helper.setText(R.id.tv_title, Html.fromHtml(item.getTitle()));
         helper.setText(R.id.tv_title, item.getTitle());
+//        TextView tvTitle = helper.getView(R.id.tv_title);
+//        tvTitle.setSingleLine(true);
+
         //作者
         helper.setText(R.id.tv_author, item.getAuthor());
         //时间
@@ -67,12 +76,13 @@ public class HomeContainerAdapter extends BaseQuickAdapter<ArticleBean, BaseView
             imageView.setVisibility(View.GONE);
         } else {
             imageView.setVisibility(View.VISIBLE);
-            ImageLoaderUtils.loadRadiusImage(MyApplication.getAppContext(), false, imageView, envelopePic,
-                    R.drawable.image_holder, R.drawable.image_holder, 0);
+//            ImageLoaderUtils.loadRadiusImage(MyApplication.getAppContext(), false, imageView, envelopePic,
+//                    R.drawable.image_holder, R.drawable.image_holder, 3);
+            Glide.with(MyApplication.getAppContext()).asBitmap().load(envelopePic).into(imageView);
         }
         //Tag
         TextView tvTag = helper.getView(R.id.tv_tag);
-        List<ArticleBean.TagsBean> tags = item.getTags();
+        List<TagsBean> tags = item.getTags();
         if (tags != null && tags.size() > 0) {
             tvTag.setVisibility(View.VISIBLE);
             if (tags.size() > 1) {

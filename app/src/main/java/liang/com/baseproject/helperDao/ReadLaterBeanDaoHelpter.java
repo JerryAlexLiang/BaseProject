@@ -1,12 +1,13 @@
 package liang.com.baseproject.helperDao;
 
-import java.io.File;
+import android.support.annotation.IntRange;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.gen.ReadLaterBeanDao;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import liang.com.baseproject.utils.FileUtil;
 
 /**
  * 创建日期：2019/8/29 on 18:41
@@ -17,7 +18,7 @@ public class ReadLaterBeanDaoHelpter {
 
     private static ReadLaterBeanDao readLaterBeanDao;
 
-    public static ReadLaterBeanDao getReadLaterBeanDao(){
+    public static ReadLaterBeanDao getReadLaterBeanDao() {
         return readLaterBeanDao = MyApplication.getDaoSession().getReadLaterBeanDao();
     }
 
@@ -59,6 +60,31 @@ public class ReadLaterBeanDaoHelpter {
     public static List<ReadLaterBean> findAllReadLaters() {
         List<ReadLaterBean> readLaterBeanList = MyApplication.getDaoSession().getReadLaterBeanDao().queryBuilder().orderDesc(ReadLaterBeanDao.Properties.Title).list();
         return readLaterBeanList;
+    }
+
+    /**
+     * 分页查询添加到本地的稍后阅读
+     *
+     * @param page         页码
+     * @param perPageCount 每页数量
+     */
+    public List<ReadLaterBean> findReadLatersByPage(@IntRange(from = 0) int page, int perPageCount) {
+        List<ReadLaterBean> allReadLaters = findAllReadLaters();
+        int firstIndex = perPageCount * (page);
+        int lastIndex = firstIndex + perPageCount;
+        if (allReadLaters.size() - 1 < firstIndex) {
+            return new ArrayList<>(0);
+        } else {
+            List<ReadLaterBean> list = new ArrayList<>(perPageCount);
+            if (allReadLaters.size() - 1 <= lastIndex) {
+                list.addAll(firstIndex, allReadLaters);
+            } else {
+                for (int i = firstIndex; i <= lastIndex; i++) {
+                    list.add(allReadLaters.get(i));
+                }
+            }
+            return list;
+        }
     }
 
 }

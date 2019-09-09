@@ -4,7 +4,6 @@
     android:id="@+id/base_actionbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ff00"
     android:clipToPadding="false"
     android:elevation="2dp"
     android:fitsSystemWindows="true"

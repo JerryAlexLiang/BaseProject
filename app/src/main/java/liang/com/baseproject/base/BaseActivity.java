@@ -27,6 +27,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
+import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.utils.SPUtils;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
@@ -58,6 +59,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        return false;
 //    }
     protected abstract boolean isRegisterEventBus();
+
+    protected abstract boolean isSetRefreshHeader();
+
+    protected abstract boolean isSetRefreshFooter();
 
     @Override
     public void setContentView(int layoutResID) {
@@ -116,7 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         SmartRefreshLayout smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
         if (smartRefreshLayout != null) {
-            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout);
+            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout,isSetRefreshHeader(), isSetRefreshFooter());
         }
     }
 
@@ -240,16 +245,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public void getSmartRefreshPrimaryColorsTheme(SmartRefreshLayout smartRefreshLayout) {
+    public void getSmartRefreshPrimaryColorsTheme(SmartRefreshLayout smartRefreshLayout, boolean isSetRefreshHeader, boolean isSetRefreshFooter) {
         int actionBarColorInt = (int) SPUtils.get(BaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
 
         if (smartRefreshLayout != null) {
-            //下拉刷新沉浸式水滴头部View
-            smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(this));
-            //上滑加载更多三点渐变动画底部View
-            smartRefreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));
-
+            if (isSetRefreshHeader) {
+                //下拉刷新沉浸式水滴头部View
+                smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(MyApplication.getAppContext()));
+            }
+            if (isSetRefreshFooter) {
+                //上滑加载更多三点渐变动画底部View
+                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
+            }
         }
 
         switch (actionBarColorInt) {

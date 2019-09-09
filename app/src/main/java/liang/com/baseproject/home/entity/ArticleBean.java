@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import liang.com.baseproject.base.MVPBaseBean;
+import liang.com.baseproject.entity.TagsBean;
 
 /**
  * 创建日期：2019/8/30 on 15:37
@@ -255,29 +256,29 @@ public class ArticleBean extends MVPBaseBean implements Serializable {
         this.tags = tags;
     }
 
-    /**
-     * name : 公众号
-     * url : /wxarticle/list/410/1
-     */
-    public static class TagsBean extends MVPBaseBean {
-
-        private String name;
-        private String url;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-    }
+//    /**
+//     * name : 公众号
+//     * url : /wxarticle/list/410/1
+//     */
+//    public static class TagsBean extends MVPBaseBean {
+//
+//        private String name;
+//        private String url;
+//
+//        public String getName() {
+//            return name;
+//        }
+//
+//        public void setName(String name) {
+//            this.name = name;
+//        }
+//
+//        public String getUrl() {
+//            return url;
+//        }
+//
+//        public void setUrl(String url) {
+//            this.url = url;
+//        }
+//    }
 }

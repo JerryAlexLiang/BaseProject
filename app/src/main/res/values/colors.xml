@@ -223,6 +223,7 @@
     <color name="navy">#000080</color> <!-- 海军色 -->
     <color name="translate">#33000000</color> <!-- 透明色 -->
     <color name="toast_bg">#55000000</color> <!-- 透明灰色色 -->
+    <color name="green">#3cdc86</color>
 
     <!--我的中心-->
     <color name="bottom_bar_overlay">#aff5f5f5</color>
