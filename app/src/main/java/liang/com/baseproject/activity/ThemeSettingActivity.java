@@ -15,7 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.BaseActivity;
+import liang.com.baseproject.base.MVPBaseActivity;
+import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.widget.CustomRadioGroup;
@@ -26,7 +27,7 @@ import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_GREEN;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_RED;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_TRANSLATE;
 
-public class ThemeSettingActivity extends BaseActivity implements CustomRadioGroup.OnCheckedChangeListener {
+public class ThemeSettingActivity extends MVPBaseActivity implements CustomRadioGroup.OnCheckedChangeListener {
 
     private static final String TAG = ThemeSettingActivity.class.getSimpleName();
     @BindView(R.id.base_actionbar_left_icon)
@@ -79,9 +80,19 @@ public class ThemeSettingActivity extends BaseActivity implements CustomRadioGro
     }
 
     @Override
+    protected MVPBasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    protected int provideContentViewId() {
+        return R.layout.activity_theme_setting;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theme_setting);
+//        setContentView(R.layout.activity_theme_setting);
         ButterKnife.bind(this);
 
 //        getActionBarTheme(baseToolbar);
