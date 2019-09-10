@@ -55,36 +55,11 @@ public class ReadLaterBeanDaoHelpter {
     }
 
     /**
-     * 查询所有的添加到本地的稍后阅读
+     * 查询所有的添加到本地的稍后阅读(根据加入时间倒序排列)
      */
     public static List<ReadLaterBean> findAllReadLaters() {
-        List<ReadLaterBean> readLaterBeanList = MyApplication.getDaoSession().getReadLaterBeanDao().queryBuilder().orderDesc(ReadLaterBeanDao.Properties.Title).list();
+        List<ReadLaterBean> readLaterBeanList = MyApplication.getDaoSession().getReadLaterBeanDao().queryBuilder().orderDesc(ReadLaterBeanDao.Properties.Time).list();
         return readLaterBeanList;
-    }
-
-    /**
-     * 分页查询添加到本地的稍后阅读
-     *
-     * @param page         页码
-     * @param perPageCount 每页数量
-     */
-    public List<ReadLaterBean> findReadLatersByPage(@IntRange(from = 0) int page, int perPageCount) {
-        List<ReadLaterBean> allReadLaters = findAllReadLaters();
-        int firstIndex = perPageCount * (page);
-        int lastIndex = firstIndex + perPageCount;
-        if (allReadLaters.size() - 1 < firstIndex) {
-            return new ArrayList<>(0);
-        } else {
-            List<ReadLaterBean> list = new ArrayList<>(perPageCount);
-            if (allReadLaters.size() - 1 <= lastIndex) {
-                list.addAll(firstIndex, allReadLaters);
-            } else {
-                for (int i = firstIndex; i <= lastIndex; i++) {
-                    list.add(allReadLaters.get(i));
-                }
-            }
-            return list;
-        }
     }
 
 }

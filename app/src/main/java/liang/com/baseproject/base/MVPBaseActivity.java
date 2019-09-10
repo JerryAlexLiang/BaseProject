@@ -1,6 +1,7 @@
 package liang.com.baseproject.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -24,6 +25,7 @@ import com.scwang.smartrefresh.header.BezierCircleHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -541,5 +543,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
     public void onShowToast(String content){
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    protected Activity getActivity() {
+        return this;
     }
 }

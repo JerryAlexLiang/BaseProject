@@ -128,6 +128,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 
     //记录ViewPage当前的选中界面
     private int currentPosition = 0;
+    private boolean currentNetStatus;
     private ImageView navUserIocn;
     private TextView navUserName;
     private TextView navUserMail;
@@ -189,6 +190,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void setNetState(boolean net, int networkStatus) {
+        currentNetStatus = net;
         if (net) {
             //获取网络状态
             rlNetBar.setVisibility(View.GONE);
@@ -389,6 +391,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         mainRgRbOne.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
+                        if (currentNetStatus){
+                            rlNetBar.setVisibility(View.GONE);
+                        }else {
+                            rlNetBar.setVisibility(View.VISIBLE);
+                        }
                         break;
 
                     case 1:
@@ -402,6 +409,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
+                        if (currentNetStatus){
+                            rlNetBar.setVisibility(View.GONE);
+                        }else {
+                            rlNetBar.setVisibility(View.VISIBLE);
+                        }
                         break;
 
                     case 2:
@@ -409,6 +421,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         mainRgRbThree.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
+                        if (currentNetStatus){
+                            rlNetBar.setVisibility(View.GONE);
+                        }else {
+                            rlNetBar.setVisibility(View.VISIBLE);
+                        }
                         break;
 
                     case 3:
@@ -422,6 +439,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             }
                         });
                         baseActionBar.setVisibility(View.GONE);
+                        rlNetBar.setVisibility(View.GONE);
                         break;
                 }
                 baseToolbarTitle.setText(titleList.get(currentPosition));
@@ -443,6 +461,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         myViewPager.setCurrentItem(0);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
+                        if (currentNetStatus){
+                            rlNetBar.setVisibility(View.GONE);
+                        }else {
+                            rlNetBar.setVisibility(View.VISIBLE);
+                        }
                         break;
 
                     case R.id.main_rg_rb_two:
@@ -457,6 +480,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
+                        if (currentNetStatus){
+                            rlNetBar.setVisibility(View.GONE);
+                        }else {
+                            rlNetBar.setVisibility(View.VISIBLE);
+                        }
                         break;
 
                     case R.id.main_rg_rb_three:
@@ -465,6 +493,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         myViewPager.setCurrentItem(2);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
+                        if (currentNetStatus){
+                            rlNetBar.setVisibility(View.GONE);
+                        }else {
+                            rlNetBar.setVisibility(View.VISIBLE);
+                        }
                         break;
 
                     case R.id.main_rg_rb_four:
@@ -479,6 +512,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             }
                         });
                         baseActionBar.setVisibility(View.GONE);
+                        rlNetBar.setVisibility(View.GONE);
                         break;
                 }
                 baseToolbarTitle.setText(titleList.get(currentPosition));

@@ -159,16 +159,19 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
             @Override
             public void onReceivedTitle(WebView view, String title) {
                 super.onReceivedTitle(view, title);
+//                showProgressDialog("Loading...", false);
+//                webContainer.setVisibility(View.INVISIBLE);
                 mCurrTitle = title;
                 mCurrUrl = view.getUrl();
-                baseActionbarTitle.setText(title);
+                baseActionbarTitle.setText(mCurrTitle);
                 LogUtil.d(TAG, "title: " + title + "  链接: " + view.getUrl());
             }
         }, new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-
+//                hideProgressDialog();
+//                webContainer.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -211,22 +214,11 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
                 if (!mAgentWeb.back()) {
                     finish();
                 }
-//                if (readLaterBean != null) {
-//                    ReadLaterBeanDaoHelpter.removeReaderLaterBean(readLaterBean);
-//                    onShowToast("移除稍后阅读成功");
-//                } else {
-//                    onShowToast("当前不存在");
-//                }
                 break;
 
             case R.id.base_actionbar_left2_icon:
-//                //直接关闭当前页面
-//                finish();
-//                List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.getInstance().findAllReadLaters();
-                List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.findAllReadLaters();
-                String s = GsonUtils.toJson(allReadLaters);
-                LogUtil.d("----->>>", s);
-                onShowToast(s);
+                //直接关闭当前页面
+                finish();
                 break;
 
             case R.id.base_actionbar_right_icon:

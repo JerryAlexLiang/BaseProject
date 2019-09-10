@@ -229,8 +229,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     public void onGetArticleListFail(String content) {
-        homeContainerAdapter.loadMoreFail();
         onShowToast(content);
+        homeContainerAdapter.loadMoreFail();
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
     }

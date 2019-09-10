@@ -105,20 +105,25 @@ public class ReadLaterAdapter extends BaseQuickAdapter<ReadLaterBean, BaseViewHo
             helper.getView(R.id.tv_chapter_name).setVisibility(View.GONE);
         }
 
+
         if (!TextUtils.isEmpty(envelopePic)) {
+            helper.getView(R.id.iv_img).setVisibility(View.VISIBLE);
             RoundedImageView roundedImageView = helper.getView(R.id.iv_img);
             Glide.with(MyApplication.getAppContext()).load(envelopePic).into(roundedImageView);
+
+            if (!TextUtils.isEmpty(desc)){
+                helper.getView(R.id.tv_desc).setVisibility(View.VISIBLE);
+                TextView tvTitle = helper.getView(R.id.tv_title);
+                tvTitle.setSingleLine(true);
+                helper.setText(R.id.tv_desc,desc);
+            }else {
+                helper.getView(R.id.tv_desc).setVisibility(View.GONE);
+            }
         } else {
             helper.getView(R.id.iv_img).setVisibility(View.GONE);
-        }
-
-        TextView tvTitle = helper.getView(R.id.tv_title);
-        TextView tvDesc = helper.getView(R.id.tv_desc);
-        if (!TextUtils.isEmpty(desc) && !TextUtils.isEmpty(envelopePic)) {
-            tvTitle.setSingleLine(true);
-            tvDesc.setText(desc);
-        } else {
-            tvDesc.setVisibility(View.GONE);
+            helper.getView(R.id.tv_desc).setVisibility(View.GONE);
+            TextView tvTitle = helper.getView(R.id.tv_title);
+            tvTitle.setSingleLine(false);
         }
 
         helper.setText(R.id.tv_time, DateUtils.timeStamp2Date(time, "yyyy-MM-dd"));
