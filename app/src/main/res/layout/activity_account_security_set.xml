@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/page_background"
-    tools:context=".setting.activity.AppSettingActivity">
+    tools:context=".setting.activity.AccountSecuritySetActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/layout_base_actionbar_default"/>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/base_actionbar"
         app:srlEnablePureScrollMode="true"
         tools:ignore="UnknownIdInLayout">
 
@@ -29,7 +29,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/ll_logout"
+                    android:id="@+id/ll_modify_password"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/bg_press_color_white"
@@ -44,7 +44,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:text="@string/go_to_logout"
+                        android:text="@string/modify_pwd"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp15" />
 
@@ -73,7 +73,39 @@
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1"
                         android:singleLine="true"
-                        android:text="@string/set_securty"
+                        android:text="@string/gesture_pwd"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp15" />
+
+                    <Switch
+                        android:id="@+id/switch_button_gesture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:thumb="@drawable/switch_ios_thumb"
+                        android:track="@drawable/switch_ios_track_selector" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_gesture_pwd_modify"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_press_color_white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginTop="1dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:text="@string/gesture_pwd_modify"
                         android:textColor="@color/black"
                         android:textSize="@dimen/sp15" />
 
@@ -92,4 +124,4 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-</RelativeLayout>
+</LinearLayout>

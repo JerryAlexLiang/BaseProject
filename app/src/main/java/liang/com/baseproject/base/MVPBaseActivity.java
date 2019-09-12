@@ -545,7 +545,22 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
-    protected Activity getActivity() {
-        return this;
+    public void jumpToActivity(Intent intent) {
+        startActivity(intent);
     }
+
+    public void jumpToActivity(Class activity) {
+        Intent intent = new Intent(this, activity);
+        startActivity(intent);
+    }
+
+    public void jumpToActivity(Class activity, int requestCode) {
+        Intent intent = new Intent(this, activity);
+        startActivityForResult(intent, requestCode);
+    }
+
+    public void jumpToActivity(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
+    }
+
 }

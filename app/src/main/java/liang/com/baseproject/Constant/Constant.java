@@ -3,6 +3,8 @@ package liang.com.baseproject.Constant;
 import java.util.HashMap;
 import java.util.Map;
 
+import liang.com.baseproject.R;
+
 /**
  * 创建日期：2019/1/28 on 10:46
  * 描述: 全局常量
@@ -91,5 +93,74 @@ public class Constant {
 
     //DB_NAME
     public static final String APP_DB_NAME = "BaseProject.db";
+
+    /**
+     * 友盟统计Key
+     */
+    public static final String YOUMENG_KEY = "5a4b01c9a40fa320590000b2";
+    /**
+     * 启动应用动画时间
+     */
+    public static final int ANIM_TIME = 3000;
+    /**
+     * 启动页面页面SCALE
+     */
+    public static final float SCALE_END = 1.15F;
+    /**
+     * 应用启动随机
+     */
+    public static final int[] SPLASH_IMGS = {
+            R.drawable.welcomimg1, R.drawable.welcomimg2,
+            R.drawable.welcomimg3, R.drawable.welcomimg4,
+            R.drawable.welcomimg5, R.drawable.welcomimg6,
+            R.drawable.welcomimg7, R.drawable.welcomimg8,
+            R.drawable.welcomimg9, R.drawable.welcomimg10,
+            R.drawable.welcomimg11, R.drawable.welcomimg12};
+    /**
+     * 语言设置
+     */
+    public static final String[] SYSTEM_LANGUAGES = {"SYSTEM", "CHINESE", "ENGLISH"};
+
+    /**
+     * 手势CODE
+     * 1:删除密码
+     * 2:修改密码
+     * 3:解锁成功
+     */
+    public static final int[] GESTURE_FLG_CODE = {1, 2, 3};
+
+    /**
+     * 图片拍照张数
+     */
+    public static final int MAX_PICTURE_SIZE = 9;// 最多拍照张数
+
+    /**
+     * 第一次启动应用
+     */
+    public static final String IS_FIRST_FLAG = "is_first_flag";
+
+    /**
+     * 判断是否设置有手势密码
+     */
+    public static final String IS_GESTURE_FLAG = "is_gesture_flag";
+
+    /**
+     * 存储指纹flag
+     */
+    public static final String IS_FINGEER_FLAG = "is_finger_flag";
+
+    /**
+     * 手势密码输入错误超过5次时间
+     */
+    public static final String IS_GESTURE_TIME = "is_gesture_time";
+    /**
+     * 应用语言设置FLAG
+     */
+    public static final String SYSTEM_LANGUAGE_KEY = "system_language_key";
+
+    /**
+     * 保存在手机里面的文件名
+     */
+    public static final String FILE_NAME = "share_data";
 
 }

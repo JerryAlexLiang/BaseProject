@@ -73,4 +73,39 @@
     <string name="ensure_go_to_logout">确定要退出登陆吗?</string>
     <string name="read_later">稍后阅读</string>
 
+    <!--设置-->
+    <string name="set_title">设置</string>
+    <string name="set_securty">账号与安全</string>
+    <string name="set_notice">新消息通知</string>
+    <string name="set_clear_cache">清除缓存</string>
+    <string name="ensure_clear_cache">确定要清除已缓存内容吗！</string>
+    <string name="set_language">语言设置</string>
+    <string name="set_ours">关于我们</string>
+    <string name="modify_pwd">修改密码</string>
+
+    <!--解锁相关-->
+    <string name="unlock_mode_set">设置解锁方式</string>
+    <string name="account_verify">账号密码验证</string>
+    <string name="gesture_pwd">手势密码</string>
+    <string name="gesture_pwd_modify">修改手势密码</string>
+    <string name="gesture_set">设置手势密码</string>
+    <string name="gesture_login">用手势密码验证登录</string>
+    <string name="gesture_paint_tips">请绘制解锁图形</string>
+    <string name="gesture_paint_msg">请绘制手势</string>
+    <string name="gesture_forget_pwd">忘记手势密码</string>
+    <string name="gesture_switch_login">切换登陆</string>
+    <string name="gesture_unlock_clear_success">清空手势密码成功</string>
+    <string name="gesture_unlock_verify_success">验证手势密码成功,请重新设置</string>
+    <string name="finger__verify_failed_times">验证失败，您还有%s 次机会</string>
+    <string name="finger_temp_lock_verify_failed">验证失败指纹暂被锁定</string>
+    <string name="finger_lock_verify_failed">验证失败，指纹已被锁定</string>
+    <string name="finger_relogin_tip">到自己登录页面重新登陆,处理逻辑</string>
+    <string name="finger_verify_cancelled">指纹验证功能已取消</string>
+    <string name="finger_verify_opened">指纹验证功能已打开</string>
+    <string name="finger_record_first">请先去录入指纹</string>
+    <string name="finger_unsupport">当前手机不支持指纹系统</string>
+    <string name="finger_verify_click">点击指纹进行验证</string>
+    <string name="finger">指纹</string>
+    <string name="finger_exist">通过Home键验证已有手机指纹</string>
+
 </resources>

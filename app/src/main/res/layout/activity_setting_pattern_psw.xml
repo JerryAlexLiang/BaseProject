@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".setting.activity.SettingPatternPswActivity">
+
+    <include layout="@layout/layout_base_actionbar_default" />
+
+    <liang.com.baseproject.widget.CustomGestureView
+        android:id="@+id/gesture_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        app:maxFailCounts="5"
+        app:minPoint="4"
+        app:paintColor="@color/colorBlue"
+        app:paintTextSize="15sp"
+        app:selectedBitmap="@drawable/icon_finger_selected"
+        app:selectedBitmapSmall="@drawable/icon_finger_selected_small"
+        app:unselectedBitmap="@drawable/icon_finger_unselected"
+        app:unselectedBitmapSmall="@drawable/icon_finger_unselected_new"
+        app:waitTime="30" />
+
+</LinearLayout>

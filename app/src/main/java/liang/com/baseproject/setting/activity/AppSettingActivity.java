@@ -47,6 +47,8 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
     LinearLayout llLogout;
     @BindView(R.id.smart_refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.ll_setting_security)
+    LinearLayout llSettingSecurity;
     private AlertView logoutAlertView;
 
     public static void actionStart(Context context) {
@@ -92,10 +94,10 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
         baseActionbarTitle.setText(getResources().getString(R.string.setting));
 
         //设置“退出登录按钮”显示与隐藏
-        if (UserLoginUtils.getInstance().isLogin()){
+        if (UserLoginUtils.getInstance().isLogin()) {
             //显示
             llLogout.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             llLogout.setVisibility(View.GONE);
         }
 
@@ -130,7 +132,7 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
                 .build();
     }
 
-    @OnClick({R.id.base_actionbar_left_icon, R.id.ll_logout})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.ll_logout, R.id.ll_setting_security})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
@@ -139,6 +141,10 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
 
             case R.id.ll_logout:
                 logoutAlertView.show();
+                break;
+
+            case R.id.ll_setting_security:
+                AccountSecuritySetActivity.actionStart(this);
                 break;
         }
     }

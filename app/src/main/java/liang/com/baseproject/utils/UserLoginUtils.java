@@ -53,7 +53,8 @@ public class UserLoginUtils {
      */
     public void logout() {
         mUserbean = null;
-        SPUtils.clear(MyApplication.getAppContext());
+//        SPUtils.clear(MyApplication.getAppContext());
+        SPUtils.remove(MyApplication.getAppContext(), KEY_LOGIN_JSON);
     }
 
     /**
