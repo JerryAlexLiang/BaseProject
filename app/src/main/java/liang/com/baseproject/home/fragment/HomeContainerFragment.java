@@ -219,6 +219,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             }
             smartRefreshLayout.setEnableLoadMore(true);
         }
+        //这两个方法是在加载成功,并且还有数据的情况下调用的
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
     }
@@ -227,6 +228,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     public void onGetArticleListFail(String content) {
         onShowToast(content);
         homeContainerAdapter.loadMoreFail();
+        //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
     }

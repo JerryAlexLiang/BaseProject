@@ -14,9 +14,21 @@
 
     <ImageView
         android:id="@+id/iv_web_error"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="center"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:tint="@color/red"
         android:src="@drawable/ic_error" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="网络被外星人劫走了~~~"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/iv_web_error"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

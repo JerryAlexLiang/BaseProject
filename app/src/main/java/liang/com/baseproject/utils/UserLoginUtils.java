@@ -1,7 +1,13 @@
 package liang.com.baseproject.utils;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 
+import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.Userbean;
@@ -9,6 +15,7 @@ import liang.com.baseproject.login.entity.Userbean;
 import static liang.com.baseproject.Constant.Constant.KEY_BG;
 import static liang.com.baseproject.Constant.Constant.KEY_ICON;
 import static liang.com.baseproject.Constant.Constant.KEY_LOGIN_JSON;
+import static liang.com.baseproject.utils.ResUtils.getResources;
 
 /**
  * 创建日期：2019/8/27 on 15:57
@@ -87,6 +94,7 @@ public class UserLoginUtils {
             return true;
         } else {
             //跳转登录界面
+            onShowToast(getResources().getString(R.string.please_login_first));
             LoginActivity.actionStart();
             return false;
         }
@@ -106,5 +114,10 @@ public class UserLoginUtils {
 
     public String getLocalBg() {
         return (String) SPUtils.get(MyApplication.getAppContext(), KEY_BG, "");
+    }
+
+    public void onShowToast(String content) {
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 }

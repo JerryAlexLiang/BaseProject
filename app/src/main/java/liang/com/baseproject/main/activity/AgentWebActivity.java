@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
 import com.just.agentweb.WebViewClient;
@@ -306,7 +305,7 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
                     }
 
                 } else {
-                    ToastUtil.showShortToast("请先登录！");
+                    onShowToast(getResources().getString(R.string.please_login_first));
                 }
                 break;
 

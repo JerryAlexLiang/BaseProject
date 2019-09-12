@@ -61,6 +61,7 @@
     <string name="go_to_login">去登录</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="please_login_first">请先登录!</string>
     <string name="connect_error">连接错误</string>
     <string name="connect_timeout">连接超时</string>
     <string name="bad_netword">网络错误</string>

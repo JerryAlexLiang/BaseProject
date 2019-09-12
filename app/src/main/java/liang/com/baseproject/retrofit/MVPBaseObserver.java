@@ -1,5 +1,10 @@
 package liang.com.baseproject.retrofit;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.view.Gravity;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
@@ -15,12 +20,14 @@ import io.reactivex.disposables.Disposable;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.base.MVPBaseResponse;
+import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.ToastUtil;
 import retrofit2.HttpException;
 
 import static liang.com.baseproject.retrofit.UrlConstants.FAILED_NOT_LOGIN;
 import static liang.com.baseproject.retrofit.UrlConstants.SUCCESS;
+import static liang.com.baseproject.utils.ResUtils.getResources;
 
 /**
  * 创建日期：2018/12/24 on 11:13
@@ -48,12 +55,8 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
                 break;
 
             case FAILED_NOT_LOGIN:
-                /*
-                ToastUtils.showToast(data.getMsg());
-                Intent intent = new Intent(WYApplication.getAppContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                WYApplication.getAppContext().startActivity(intent);
-                 */
+                onShowToast(getResources().getString(R.string.please_login_first));
+                LoginActivity.actionStart();
                 break;
 
             default:
@@ -98,27 +101,32 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
         switch (reason) {
             case CONNECT_ERROR:
                 //连接错误
-                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.connect_error));
+//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.connect_error));
+                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.connect_error));
                 break;
 
             case CONNECT_TIMEOUT:
                 //连接超时
-                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.connect_timeout));
+//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.connect_timeout));
+                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.connect_timeout));
                 break;
 
             case BAD_NETWORK:
                 //网络错误
-                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.bad_netword));
+//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.bad_netword));
+                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.bad_netword));
                 break;
 
             case PARSE_ERROR:
                 //解析数据失败
-                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.parse_error));
+//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.parse_error));
+                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.parse_error));
                 break;
 
             case UNKNOWN_ERROR:
                 //未知错误
-                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.unknown_error));
+//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.unknown_error));
+                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.unknown_error));
                 break;
         }
     }
@@ -177,4 +185,9 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
      * 请求结束回调
      */
     protected abstract void onFinish();
+
+    public void onShowToast(String content) {
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
 }
