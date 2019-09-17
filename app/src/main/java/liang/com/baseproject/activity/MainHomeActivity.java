@@ -43,11 +43,11 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
-import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
-import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
+import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
+import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
 import liang.com.baseproject.utils.CheckPermission;
@@ -104,6 +104,8 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
      * android 6.0 或以上权限申请
      */
     private static final int REQUEST_CODE = 0;                        //权限请求码
+    @BindView(R.id.rl_main_page_container)
+    RelativeLayout rlMainPageContainer;
 
     private CheckPermission mCheckPermission;                        //检测权限工具
 
@@ -292,7 +294,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                 if (UserLoginUtils.getInstance().isLogin()) {
                     ToastUtil.showShortToast("开发中...");
                 } else {
-                    if (android.os.Build.VERSION.SDK_INT > 20) {
+                    if (Build.VERSION.SDK_INT > 20) {
                         Bundle options = ActivityOptions.makeSceneTransitionAnimation(MainHomeActivity.this, navUserIocn, "navUserIocn").toBundle();
                         Intent intent = new Intent(MainHomeActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -305,7 +307,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 
             case R.id.nav_tv_user_name:
                 boolean ifNeedLogin = UserLoginUtils.getInstance().doIfNeedLogin();
-                if (ifNeedLogin){
+                if (ifNeedLogin) {
                     ToastUtil.showShortToast("开发中...");
                 }
                 break;
@@ -391,9 +393,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         mainRgRbOne.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus){
+                        if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             rlNetBar.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -409,9 +411,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus){
+                        if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             rlNetBar.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -421,9 +423,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         mainRgRbThree.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus){
+                        if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             rlNetBar.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -461,9 +463,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         myViewPager.setCurrentItem(0);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus){
+                        if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             rlNetBar.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -480,9 +482,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus){
+                        if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             rlNetBar.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -493,9 +495,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         myViewPager.setCurrentItem(2);
                         baseToolbarRightIcon.setVisibility(View.GONE);
                         baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus){
+                        if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
-                        }else {
+                        } else {
                             rlNetBar.setVisibility(View.VISIBLE);
                         }
                         break;
@@ -609,4 +611,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         baseActionBar.setVisibility(View.GONE);
     }
 
+    public RelativeLayout getMainPageContainer(){
+        return rlMainPageContainer;
+    }
 }

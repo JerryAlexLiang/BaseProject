@@ -1,9 +1,12 @@
 package liang.com.baseproject.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -17,6 +20,11 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.luck.picture.lib.entity.LocalMedia;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +33,8 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
@@ -32,8 +42,13 @@ import liang.com.baseproject.fragment.JuheNewsTabFragment;
 import liang.com.baseproject.utils.AnimationUtils;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.utils.PictureSelectorUtils;
+import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideEventListener;
+
+import static com.luck.picture.lib.config.PictureConfig.MULTIPLE;
+import static com.luck.picture.lib.config.PictureConfig.TYPE_IMAGE;
 
 public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
@@ -52,6 +67,12 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     SlideDampingAnimationLayout scanSlideSwipeBackLayout;
     @BindView(R.id.scroll_View)
     ScrollView scrollView;
+    @BindView(R.id.btn_select_image)
+    Button btnSelectImage;
+    @BindView(R.id.iv_bg)
+    ImageView ivBg;
+    @BindView(R.id.iv_icon)
+    ImageView ivIcon;
 
     //TabLayout标题列表
     private List<String> stringList = new ArrayList<>();
@@ -88,6 +109,7 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
             }
         }
     };
+    private String imagePath;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -200,9 +222,61 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         buttonHide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtils.pageHideScaleAnimator(TestCodeActivity.this, scrollView);
+                AnimationUtils.pageHideScaleAnimator(scrollView);
             }
         });
+
+
+        btnSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
+                        true, false, true, 9);
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case Constant.REQUEST_CODE_SELECT_USER_ICON:
+                    List<LocalMedia> localMedia = PictureSelectorUtils.forResult(resultCode, data);
+                    if (localMedia != null) {
+                        LocalMedia media = localMedia.get(0);
+                        if (media.isCut() && !media.isCompressed()) {
+                            //裁剪未压缩
+                            imagePath = media.getCutPath();
+                            long cutImageSize = new File(media.getCutPath()).length() / 1024;
+                            LogUtil.d(TAG, "裁剪地址: ---> 大小:  " + cutImageSize + "k" + "   裁剪地址:" + media.getCutPath());
+                        } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
+                            //压缩过，或者裁剪同时压缩过，以最终压缩过的图片为准
+                            imagePath = media.getCompressPath();
+                            long compressImageSize = new File(media.getCompressPath()).length() / 1024;
+                            LogUtil.d(TAG, "压缩地址: ---> 大小:  " + compressImageSize + "k" + "   压缩地址:" + media.getCutPath());
+                        } else {
+                            //原图
+                            imagePath = media.getPath();
+                            long imageSize = new File(media.getPath()).length() / 1024;
+                            LogUtil.d(TAG, "原图地址: ---> 大小:  " + imageSize + "k" + "   原图地址:" + media.getPath());
+                        }
+                        //UI
+                        if (!imagePath.isEmpty()) {
+                            Glide.with(TestCodeActivity.this).asBitmap().load(imagePath).into(ivIcon);
+
+                            RequestOptions options = new RequestOptions()
+                                    .transform(new BlurTransformation(50));
+                            Glide.with(TestCodeActivity.this).asBitmap().apply(options).load(imagePath).into(ivBg);
+
+                            UserLoginUtils.getInstance().setLocalUserIcon(imagePath);
+                            UserLoginUtils.getInstance().setLocalBg(imagePath);
+                        }
+                    }
+                    break;
+            }
+        }
     }
 
     /**

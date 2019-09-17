@@ -63,7 +63,7 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
 
     @Override
     protected boolean isSetRefreshHeader() {
-        return false;
+        return true;
     }
 
     @Override

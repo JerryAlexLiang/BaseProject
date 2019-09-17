@@ -68,7 +68,7 @@ public class AccountSecuritySetActivity extends MVPBaseActivity {
 
     @Override
     protected boolean isSetRefreshHeader() {
-        return false;
+        return true;
     }
 
     @Override

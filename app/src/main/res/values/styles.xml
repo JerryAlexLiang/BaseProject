@@ -67,4 +67,250 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <!--line 分割线-->
+    <style name="view_line_style">
+        <item name="android:background">@color/color_line</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <!--白色主题样式，，注意每一项都不能少-->
+    <style name="picture.white.style" parent="picture.default.style">
+        <!-- Customize your theme here. -->
+        <!--标题栏背景色-->
+        <item name="colorPrimary">@color/white</item>
+        <!--状态栏背景色-->
+        <item name="colorPrimaryDark">@color/white</item>
+        <!--是否改变图片列表界面状态栏字体颜色为黑色-->
+        <item name="picture.statusFontColor">true</item>
+        <!--返回键图标-->
+        <item name="picture.leftBack.icon">@drawable/back2</item>
+        <!--标题下拉箭头-->
+        <item name="picture.arrow_down.icon">@drawable/orange_arrow_down</item>
+        <!--标题上拉箭头-->
+        <item name="picture.arrow_up.icon">@drawable/orange_arrow_up</item>
+        <!--标题文字颜色-->
+        <item name="picture.title.textColor">@color/black</item>
+        <!--标题栏右边文字-->
+        <item name="picture.right.textColor">@color/black</item>
+        <!--图片列表勾选样式-->
+        <item name="picture.checked.style">@drawable/picture_checkbox_selector</item>
+        <!--开启图片列表勾选数字模式,开启的话勾选样式要换-->
+        <item name="picture.style.checkNumMode">false</item>
+        <!--选择图片样式0/9-->
+        <item name="picture.style.numComplete">true</item>
+        <!--图片列表底部背景色-->
+        <item name="picture.bottom.bg">@color/color_fa</item>
+        <!--图片列表背景色-->
+        <item name="picture.bg">@color/whitesmoke</item>
+        <!--图片列表预览文字颜色-->
+        <item name="picture.preview.textColor">@color/tab_color_false</item>
+        <!--图片列表已完成文字颜色-->
+        <item name="picture.complete.textColor">@color/tab_color_false</item>
+        <!--图片已选数量圆点背景色-->
+        <item name="picture.num.style">@drawable/num_oval</item>
+        <!--预览界面标题栏背景色-->
+        <item name="picture.ac_preview.title.bg">@color/white</item>
+        <!--预览界面标题文字颜色-->
+        <item name="picture.ac_preview.title.textColor">@color/black</item>
+        <!--预览界面已完成文字颜色-->
+        <item name="picture.ac_preview.complete.textColor">@color/tab_color_false</item>
+        <!--预览界面底部背景色-->
+        <item name="picture.ac_preview.bottom.bg">@color/color_fa</item>
+        <!--预览界面返回箭头-->
+        <item name="picture.preview.leftBack.icon">@drawable/back2</item>
+        <!--裁剪页面标题背景色-->
+        <item name="picture.crop.toolbar.bg">@color/bar_grey</item>
+        <!--裁剪页面状态栏颜色-->
+        <item name="picture.crop.status.color">@color/bar_grey</item>
+        <!--裁剪页面标题文字颜色-->
+        <item name="picture.crop.title.color">@color/white</item>
+        <!--相册文件夹列表选中图标-->
+        <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
+    </style>
+
+    <!--QQ数字风格样式，注意每一项都不能少-->
+    <style name="picture.QQ.style" parent="picture.default.style">
+        <!-- Customize your theme here. -->
+        <!--标题栏背景色-->
+        <item name="colorPrimary">@color/blue</item>
+        <!--状态栏背景色-->
+        <item name="colorPrimaryDark">@color/blue</item>
+        <!--是否改变图片列表界面状态栏字体颜色为黑色-->
+        <item name="picture.statusFontColor">false</item>
+        <!--返回键图标-->
+        <item name="picture.leftBack.icon">@drawable/picture_back</item>
+        <!--标题下拉箭头-->
+        <item name="picture.arrow_down.icon">@drawable/arrow_down</item>
+        <!--标题上拉箭头-->
+        <item name="picture.arrow_up.icon">@drawable/arrow_up</item>
+        <!--标题文字颜色-->
+        <item name="picture.title.textColor">@color/white</item>
+        <!--标题栏右边文字-->
+        <item name="picture.right.textColor">@color/white</item>
+        <!--图片列表勾选样式-->
+        <item name="picture.checked.style">@drawable/checkbox_num_selector</item>
+        <!--开启图片列表勾选数字模式,开启的话勾选样式要换-->
+        <item name="picture.style.checkNumMode">true</item>
+        <!--选择图片样式0/9-->
+        <item name="picture.style.numComplete">false</item>
+        <!--图片列表底部背景色-->
+        <item name="picture.bottom.bg">@color/color_fa</item>
+        <!--图片列表背景色-->
+        <item name="picture.bg">@color/whitesmoke</item>
+        <!--图片列表预览文字颜色-->
+        <item name="picture.preview.textColor">@color/blue</item>
+        <!--图片列表已完成文字颜色-->
+        <item name="picture.complete.textColor">@color/blue</item>
+        <!--图片已选数量圆点背景色-->
+        <item name="picture.num.style">@drawable/num_oval_blue</item>
+        <!--预览界面标题文字颜色-->
+        <item name="picture.ac_preview.title.textColor">@color/white</item>
+        <!--预览界面已完成文字颜色-->
+        <item name="picture.ac_preview.complete.textColor">@color/blue</item>
+        <!--预览界面标题栏背景色-->
+        <item name="picture.ac_preview.title.bg">@color/blue</item>
+        <!--预览界面底部背景色-->
+        <item name="picture.ac_preview.bottom.bg">@color/color_fa</item>
+        <!--预览界面返回箭头-->
+        <item name="picture.preview.leftBack.icon">@drawable/picture_back</item>
+        <!--裁剪页面标题背景色-->
+        <item name="picture.crop.toolbar.bg">@color/bar_grey</item>
+        <!--裁剪页面状态栏颜色-->
+        <item name="picture.crop.status.color">@color/bar_grey</item>
+        <!--裁剪页面标题文字颜色-->
+        <item name="picture.crop.title.color">@color/white</item>
+        <!--相册文件夹列表选中图标-->
+        <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
+    </style>
+
+
+    <!--新浪微博样式，注意每一项都不能少-->
+    <style name="picture.Sina.style" parent="picture.default.style">
+        <!-- Customize your theme here. -->
+        <!--标题栏背景色-->
+        <item name="colorPrimary">@color/white</item>
+        <!--状态栏背景色-->
+        <item name="colorPrimaryDark">@color/white</item>
+        <!--是否改变图片列表界面状态栏字体颜色为黑色-->
+        <item name="picture.statusFontColor">true</item>
+        <!--返回键图标-->
+        <item name="picture.leftBack.icon">@drawable/back2</item>
+        <!--标题下拉箭头-->
+        <item name="picture.arrow_down.icon">@drawable/orange_arrow_down</item>
+        <!--标题上拉箭头-->
+        <item name="picture.arrow_up.icon">@drawable/orange_arrow_up</item>
+        <!--标题文字颜色-->
+        <item name="picture.title.textColor">@color/color_53</item>
+        <!--标题栏右边文字-->
+        <item name="picture.right.textColor">@color/color_53</item>
+        <!--图片列表勾选样式-->
+        <item name="picture.checked.style">@drawable/picture_checkbox_selector</item>
+        <!--开启图片列表勾选数字模式,开启的话勾选样式要换-->
+        <item name="picture.style.checkNumMode">false</item>
+        <!--选择图片样式0/9-->
+        <item name="picture.style.numComplete">false</item>
+        <!--图片列表底部背景色-->
+        <item name="picture.bottom.bg">@color/color_fa</item>
+        <!--图片列表背景色-->
+        <item name="picture.bg">@color/whitesmoke</item>
+        <!--图片列表预览文字颜色-->
+        <item name="picture.preview.textColor">@drawable/picture_list_sina_text_color</item>
+        <!--图片列表已完成文字颜色-->
+        <item name="picture.complete.textColor">@drawable/picture_list_sina_text_color</item>
+        <!--图片已选数量圆点背景色-->
+        <item name="picture.num.style">@drawable/num_oval_orange</item>
+        <!--预览界面标题文字颜色-->
+        <item name="picture.ac_preview.title.textColor">@color/color_53</item>
+        <!--预览界面已完成文字颜色-->
+        <item name="picture.ac_preview.complete.textColor">@drawable/picture_list_sina_text_color</item>
+        <!--预览界面标题栏背景色-->
+        <item name="picture.ac_preview.title.bg">@color/white</item>
+        <!--预览界面底部背景色-->
+        <item name="picture.ac_preview.bottom.bg">@color/color_fa</item>
+        <!--预览界面返回箭头-->
+        <item name="picture.preview.leftBack.icon">@drawable/icon_back</item>
+        <!--裁剪页面标题背景色-->
+        <item name="picture.crop.toolbar.bg">@color/colorBlue</item>
+        <!--裁剪页面状态栏颜色-->
+        <item name="picture.crop.status.color">@color/colorBlue</item>
+        <!--裁剪页面标题文字颜色-->
+        <item name="picture.crop.title.color">@color/white</item>
+        <!--相册文件夹列表选中图标-->
+        <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
+    </style>
+
+    <style name="PictureSelectorStyle" parent="picture.default.style">
+        <!--标题栏高度-->
+        <item name="picture.title_bar.height">@dimen/action_bar_height</item>
+        <!--标题栏背景色-->
+        <item name="colorPrimary">@color/colorBlue</item>
+        <!--状态栏背景色-->
+        <item name="colorPrimaryDark">@color/colorBlue</item>
+        <!--图片列表占位图-->
+        <item name="picture.image.holder">@drawable/image_holder</item>
+        <!--拍摄按钮背图标-->
+        <!--<item name="picture.camera.icon">@drawable/ic_camera</item>-->
+        <!--拍摄按钮背景色-->
+        <item name="picture.camera.bg">@color/white</item>
+        <!--是否改变图片列表界面状态栏字体颜色为黑色-->
+        <!--<item name="picture.statusFontColor">false</item>-->
+        <!--返回键图标-->
+        <item name="picture.leftBack.icon">@drawable/ic_back</item>
+        <!--返回键图标边距，高度宽度为标题栏高度-->
+        <item name="picture.leftBack.icon.padding">13dp</item>
+        <!--标题下拉箭头-->
+        <!--<item name="picture.arrow_down.icon">@drawable/arrow_down</item>-->
+        <!--标题上拉箭头-->
+        <!--<item name="picture.arrow_up.icon">@drawable/arrow_up</item>-->
+        <!--标题文字颜色-->
+        <item name="picture.title.textColor">@color/white</item>
+        <!--标题栏右边文字-->
+        <item name="picture.right.textColor">@color/white</item>
+        <!--图片列表勾选样式-->
+        <item name="picture.checked.style">@drawable/picture_selector_checkbox</item>
+        <!--开启图片列表勾选数字模式-->
+        <item name="picture.style.checkNumMode">false</item>
+        <!--选择图片样式0/9-->
+        <item name="picture.style.numComplete">false</item>
+        <!--图片列表背景色-->
+        <item name="picture.bg">@color/whitesmoke</item>
+        <!--图片列表底部背景色-->
+        <item name="picture.bottom.bg">@color/white</item>
+        <!--图片列表底部高度-->
+        <item name="picture.bottom.height">@dimen/bottom_bar_height</item>
+        <!--图片列表预览文字颜色-->
+        <item name="picture.preview.textColor">@drawable/picture_selector_preview_text_color</item>
+        <!--图片列表已完成文字颜色-->
+        <item name="picture.complete.textColor">@drawable/picture_selector_preview_text_color</item>
+        <!--图片已选数量圆点背景色-->
+        <item name="picture.num.style">@drawable/picture_selector_num_oval</item>
+        <!--预览界面标题文字颜色-->
+        <item name="picture.ac_preview.title.textColor">@color/white</item>
+        <!--预览界面已完成文字颜色-->
+        <item name="picture.ac_preview.complete.textColor">
+            @drawable/picture_selector_preview_text_color
+        </item>
+        <!--预览界面标题栏背景色-->
+        <item name="picture.ac_preview.title.bg">@color/colorBlue</item>
+        <!--预览界面背景色-->
+        <item name="picture.ac_preview.bg">@color/whitesmoke</item>
+        <!--预览界面底部背景色-->
+        <item name="picture.ac_preview.bottom.bg">@color/white</item>
+        <!--预览界面底部高度-->
+        <item name="picture.ac_preview.bottom.height">@dimen/bottom_bar_height</item>
+        <!--预览界面返回箭头-->
+        <item name="picture.preview.leftBack.icon">@drawable/ic_back</item>
+        <!--裁剪页面标题高度-->
+        <item name="picture.crop.toolbar.height">@dimen/action_bar_height</item>
+        <!--裁剪页面标题背景色-->
+        <item name="picture.crop.toolbar.bg">@color/colorBlue</item>
+        <!--裁剪页面状态栏颜色-->
+        <item name="picture.crop.status.color">@color/colorBlue</item>
+        <!--裁剪页面标题文字颜色-->
+        <item name="picture.crop.title.color">@color/white</item>
+        <!--相册文件夹列表选中图标-->
+        <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
+    </style>
+
 </resources>

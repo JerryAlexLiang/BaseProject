@@ -101,11 +101,15 @@ public class UserLoginUtils {
     }
 
     public void setLocalUserIcon(String icon) {
-        SPUtils.put(MyApplication.getAppContext(), KEY_ICON, icon);
+//        SPUtils.put(MyApplication.getAppContext(), KEY_ICON, icon);
+        mUserbean.setIcon(icon);
+        String json = new Gson().toJson(mUserbean);
+        SPUtils.put(MyApplication.getAppContext(), KEY_LOGIN_JSON, json);
     }
 
     public String getLocalUserIcon() {
-        return (String) SPUtils.get(MyApplication.getAppContext(), KEY_ICON, "");
+//        return (String) SPUtils.get(MyApplication.getAppContext(), KEY_ICON, "");
+        return mUserbean.getIcon();
     }
 
     public void setLocalBg(String icon) {

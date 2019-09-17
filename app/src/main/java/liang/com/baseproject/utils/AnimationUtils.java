@@ -28,7 +28,7 @@ public class AnimationUtils {
         animatorSet.start();
     }
 
-    public static void pageHideScaleAnimator(Activity activity, View target) {
+    public static void pageHideScaleAnimator(View target) {
         long duration = 500;
         float[] scale = new float[2];
         scale[0] = 0.8f;

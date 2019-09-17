@@ -1,5 +1,7 @@
 package liang.com.baseproject.base;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,9 +9,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.scwang.smartrefresh.header.BezierCircleHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -25,6 +29,7 @@ import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.utils.SPUtils;
+import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.widget.CustomProgressDialog;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
@@ -211,6 +216,11 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
         if (customProgressDialog != null && customProgressDialog.isShow()) {
             customProgressDialog.dismiss();
         }
+    }
+
+    public void onShowToast(String content){
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
     public void finishPage() {

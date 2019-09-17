@@ -19,4 +19,8 @@
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp80">80dp</dimen>
     <dimen name="dp100">100dp</dimen>
+
+    <dimen name="action_bar_height">44dp</dimen>
+    <dimen name="action_bar_bottom_line_height">1dp</dimen>
+    <dimen name="bottom_bar_height">49dp</dimen>
 </resources>

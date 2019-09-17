@@ -163,4 +163,8 @@ public class Constant {
      */
     public static final String FILE_NAME = "share_data";
 
+    public static final int REQUEST_CODE_SELECT_USER_ICON = 1;
+    public static final int REQUEST_CODE_SELECT_BG = 2;
+
+
 }

@@ -19,15 +19,16 @@ import java.security.MessageDigest;
  */
 public class CornersTranform extends BitmapTransformation {
 
+    private Context context;
     private float radius;
 
     public CornersTranform(Context context) {
-        super(context);
+        this.context = context;
         radius = 10;
     }
 
     public CornersTranform(Context context, float radius) {
-        super(context);
+        this.context = context;
         this.radius = radius;
     }
 

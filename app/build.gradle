@@ -6,17 +6,13 @@ android {
     defaultConfig {
         applicationId "liang.com.baseproject"
         minSdkVersion 19
+        //noinspection OldTargetApi
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-//    buildTypes {
-//        release {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -58,7 +54,7 @@ android {
     greendao {
         schemaVersion 1//<--数据库的版本，用于升级时候进行更改
         daoPackage 'liang.com.baseproject.gen'
-//这个是生成DAOs、DaoMaster、DaoSession代码保存的包名,默认为entities所在包名
+        //这个是生成DAOs、DaoMaster、DaoSession代码保存的包名,默认为entities所在包名
         targetGenDir 'src/main/java'
         //生成DAOs、DaoMaster、DaoSession的目录。默认为build/generated/source/greendao
     }
@@ -82,7 +78,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
 
     //glide样式（圆角、圆、毛玻璃）
     implementation 'jp.wasabeef:glide-transformations:3.0.1'
@@ -112,7 +108,6 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
 
     //没有使用特殊Header，可以不加这行
-
     /*BaseRecyclerViewAdapterHelper*/
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
 
@@ -154,4 +149,8 @@ dependencies {
 
     //侧滑菜单
     implementation 'com.daimajia.swipelayout:library:1.2.0'
+
+    //图片选择器
+    implementation 'com.github.goweii:PictureSelector:v2.3.1'
+//    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
 }
