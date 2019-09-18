@@ -82,7 +82,7 @@ public class PictureSelectorUtils {
                 .minimumCompressSize(100)// 小于100kb的图片不压缩
                 .rotateEnabled(true) // 裁剪是否可旋转图片
                 .scaleEnabled(true)// 裁剪是否可放大缩小图片
-                .compressSavePath("BaseProject")//压缩图片保存地址
+//                .compressSavePath("BaseProject")//压缩图片保存地址
 //                .selectionMedia(selectList)// 是否传入已选图片
                 //.videoMaxSecond(15)
                 //.videoMinSecond(10)
@@ -94,7 +94,7 @@ public class PictureSelectorUtils {
                 //.videoSecond()//显示多少秒以内的视频or音频也可适用
                 //.recordVideoSecond(90)//录制视频秒数 默认60s
                 //.imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
-                //.setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
+//                .setOutputCameraPath("/CustomPath")// 自定义拍照保存路径
 //                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
                 .forResult(requestCode);//结果回调onActivityResult code
     }

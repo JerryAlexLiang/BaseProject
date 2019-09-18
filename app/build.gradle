@@ -79,6 +79,7 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
 
     //glide样式（圆角、圆、毛玻璃）
     implementation 'jp.wasabeef:glide-transformations:3.0.1'

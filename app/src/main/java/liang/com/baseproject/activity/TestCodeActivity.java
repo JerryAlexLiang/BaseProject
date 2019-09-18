@@ -269,9 +269,6 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
                             RequestOptions options = new RequestOptions()
                                     .transform(new BlurTransformation(50));
                             Glide.with(TestCodeActivity.this).asBitmap().apply(options).load(imagePath).into(ivBg);
-
-                            UserLoginUtils.getInstance().setLocalUserIcon(imagePath);
-                            UserLoginUtils.getInstance().setLocalBg(imagePath);
                         }
                     }
                     break;
