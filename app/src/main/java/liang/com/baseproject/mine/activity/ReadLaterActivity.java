@@ -2,6 +2,7 @@ package liang.com.baseproject.mine.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -128,25 +129,13 @@ public class ReadLaterActivity extends MVPBaseActivity {
         readLaterAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                //一次查询所有数据
-                getArticleList();
+//                //一次查询所有数据
+//                getArticleList();
             }
         }, rvReadLater);
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
-
-        if (readLaterAdapter.getData().size() > 0) {
-            TextView textView = new TextView(this);
-            //此处相当于布局文件中的Android:layout_gravity属性
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(10, 10, 10, 10);//4个参数按顺序分别是左上右下mView.setLayoutParams(layoutParams);
-            textView.setLayoutParams(layoutParams);
-            textView.setText("我是有底线的");
-            //此处相当于布局文件中的Android：gravity属性
-            textView.setGravity(Gravity.CENTER);
-            readLaterAdapter.addFooterView(textView);
-        }
 
         readLaterAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -208,6 +197,10 @@ public class ReadLaterActivity extends MVPBaseActivity {
         baseActionbarLeftIcon.setVisibility(View.VISIBLE);
         baseActionbarTitle.setVisibility(View.VISIBLE);
         baseActionbarTitle.setText("稍后阅读");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            baseActionbar.setElevation(0);
+        }
     }
 
     @OnClick({R.id.base_actionbar_left_icon, R.id.rl_empty_container})

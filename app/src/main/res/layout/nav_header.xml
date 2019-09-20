@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_nav_container"
     android:layout_width="match_parent"
     android:layout_height="220dp"
     android:background="@drawable/icon_info_bg"
@@ -10,48 +11,62 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_icon_user_image"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/nav_tv_user_mail"
         android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
         android:src="@drawable/icon_user_logo"
-        app:civ_border_color="@color/colorWhite"
         android:transitionName="navUserIocn"
+        app:civ_border_color="@color/red"
         app:civ_border_width="2dp"
+        app:civ_circle_background_color="@color/translate"
+        tools:ignore="RtlHardcoded"
         tools:targetApi="lollipop" />
 
     <TextView
         android:id="@+id/nav_tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/nav_tv_user_mail"
+        android:layout_alignBaseline="@id/nav_icon_user_image"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginBottom="38dp"
         android:layout_toEndOf="@id/nav_icon_user_image"
         android:layout_toRightOf="@id/nav_icon_user_image"
-        android:text="Jerry"
-        android:textColor="#FFF"
-        android:textSize="28sp" />
+        android:text="昵称"
+        android:textColor="@color/yellow"
+        android:textSize="32sp"
+        tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/nav_tv_user_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="193***0239@qq.com"
-        android:textColor="#FFF"
-        android:textSize="14sp" />
+        android:text="ID:"
+        android:textColor="@color/red"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/nav_tv_wifi_ssid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:textColor="#FFF"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toEndOf="@id/nav_tv_user_mail"
+        android:ellipsize="marquee"
+        android:gravity="end"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:text="Wifi"
-        android:textSize="14sp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"/>
+        android:textColor="@color/blue"
+        android:textSize="16sp" />
 
 </RelativeLayout>

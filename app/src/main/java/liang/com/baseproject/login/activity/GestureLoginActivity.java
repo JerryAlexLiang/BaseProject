@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 import java.util.Random;
 
@@ -105,9 +107,13 @@ public class GestureLoginActivity extends MVPBaseActivity implements CustomGestu
         if (UserLoginUtils.getInstance().isLogin()) {
             cvGestureAvatar.setBorderColor(getResources().getColor(R.color.yellow));
             tvUserName.setText(UserLoginUtils.getInstance().getLoginUserBean().getUsername());
+
+            Glide.with(GestureLoginActivity.this).asBitmap().load(UserLoginUtils.getInstance().getLocalUserIcon()).into(cvGestureAvatar);
         } else {
             tvUserName.setText("Welcome");
             cvGestureAvatar.setBorderColor(getResources().getColor(R.color.colorBlue));
+
+            Glide.with(GestureLoginActivity.this).asBitmap().load(R.drawable.icon_user_logo).into(cvGestureAvatar);
         }
     }
 

@@ -3,8 +3,11 @@ package liang.com.baseproject.utils;
 import android.os.Environment;
 import android.text.format.Formatter;
 
+import com.yalantis.ucrop.util.FileUtils;
+
 import java.io.File;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import liang.com.baseproject.app.MyApplication;
 
@@ -16,16 +19,32 @@ import liang.com.baseproject.app.MyApplication;
 public class CacheCleanUtil {
 
     /**
-     * 获取总缓存大小
+     * 获取系统默认缓存文件夹
+     * 优先返回SD卡中的缓存文件夹
+     */
+    public static String getCacheDir() {
+        File cacheFile = null;
+        if (FileUtil.isSDCardAlive()) {
+            cacheFile = Utils.getAppContext().getExternalCacheDir();
+        }
+        if (cacheFile == null) {
+            cacheFile = Utils.getAppContext().getCacheDir();
+        }
+        return cacheFile.getAbsolutePath();
+    }
+
+    /**
+     * 获取总缓存大小(获取系统默认缓存文件夹内的缓存大小)
      *
      * @return cacheDir目录下文件总大小
      */
     public static String getTotalCacheSize() {
         long cacheSize = getFolderSize(MyApplication.mContext.getCacheDir());
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            cacheSize += getFolderSize(MyApplication.mContext.getExternalCacheDir());
+            cacheSize += getFolderSize(Objects.requireNonNull(MyApplication.mContext.getExternalCacheDir()));
         }
-        return Formatter.formatFileSize(MyApplication.mContext, cacheSize);
+//        return Formatter.formatFileSize(MyApplication.mContext, cacheSize);
+        return FileUtil.formatSize(cacheSize);
     }
 
     /**
@@ -33,7 +52,7 @@ public class CacheCleanUtil {
      */
     public static void cleanAllCache() {
         deleteDir(MyApplication.mContext.getCacheDir());
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+        if (FileUtil.isSDCardAlive()) {
             deleteDir(MyApplication.mContext.getExternalCacheDir());
         }
     }

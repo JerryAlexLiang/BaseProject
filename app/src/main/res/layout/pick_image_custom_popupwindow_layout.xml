@@ -84,6 +84,23 @@
             android:textColor="@color/color_ef7907"
             android:textSize="16sp" />
 
+        <View
+            android:id="@+id/view_line_five"
+            style="@style/view_line_style"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/btn_recover_bg"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="恢复默认背景"
+            android:visibility="gone"
+            android:textColor="@color/color_ef7907"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout

@@ -51,6 +51,7 @@ public class UserLoginUtils {
      */
     public void login(Userbean userbean) {
         mUserbean = userbean;
+        userbean.setIcon(getLocalUserIcon());
         String json = new Gson().toJson(userbean);
         SPUtils.put(MyApplication.getAppContext(), KEY_LOGIN_JSON, json);
     }
@@ -101,19 +102,21 @@ public class UserLoginUtils {
     }
 
     public void setLocalUserIcon(String icon) {
-//        SPUtils.put(MyApplication.getAppContext(), KEY_ICON, icon);
-        mUserbean.setIcon(icon);
-        String json = new Gson().toJson(mUserbean);
-        SPUtils.put(MyApplication.getAppContext(), KEY_LOGIN_JSON, json);
+        SPUtils.put(MyApplication.getAppContext(), KEY_ICON, icon);
+//        mUserbean.setIcon(icon);
+//        String json = new Gson().toJson(mUserbean);
+//        SPUtils.put(MyApplication.getAppContext(), KEY_LOGIN_JSON, json);
     }
 
     public String getLocalUserIcon() {
-//        return (String) SPUtils.get(MyApplication.getAppContext(), KEY_ICON, "");
-        return mUserbean.getIcon();
+        return (String) SPUtils.get(MyApplication.getAppContext(), KEY_ICON, "");
     }
 
     public void setLocalBg(String icon) {
         SPUtils.put(MyApplication.getAppContext(), KEY_BG, icon);
+//        mUserbean.setBgIcon(icon);
+//        String json = new Gson().toJson(mUserbean);
+//        SPUtils.put(MyApplication.getAppContext(), KEY_LOGIN_JSON, json);
     }
 
     public String getLocalBg() {

@@ -132,14 +132,20 @@ public class SinglePictureActivity extends MVPBaseActivity implements View.OnLon
                 break;
 
             case R.id.base_actionbar_right_icon:
-//                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
-                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiZoomPic, imgDesc);
+                savePictureLocal();
                 break;
 
             case R.id.save_img:
-//                FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiPic, imgDesc);
-                savePicByUrl();
+                savePictureLocal();
                 break;
+        }
+    }
+
+    private void savePictureLocal() {
+        if (imgUrl.startsWith("http://") || imgUrl.startsWith("https://")) {
+            savePicByUrl();
+        }else {
+            FileUtil.saveImage(SinglePictureActivity.this, ivMeizhiZoomPic, imgDesc);
         }
     }
 

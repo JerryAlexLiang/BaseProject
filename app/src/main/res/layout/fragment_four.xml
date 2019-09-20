@@ -17,9 +17,8 @@
             android:id="@+id/iv_blur"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:background="@drawable/icon_navigation_bg"
-            android:scaleType="centerCrop"
-            android:tint="@color/mine_blur_overlay" />
+            android:background="@drawable/icon_header"
+            android:scaleType="centerCrop" />
 
         <com.scwang.smartrefresh.layout.SmartRefreshLayout
             android:id="@+id/smart_refresh_layout"
@@ -47,7 +46,6 @@
                             android:layout_height="80dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="80dp"
-                            android:scaleType="centerCrop"
                             android:src="@drawable/icon_user_logo"
                             app:civ_border_color="@color/yellow"
                             app:civ_border_overlay="true"

@@ -169,6 +169,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     @Override
     public void onResume() {
         super.onResume();
+        //同步刷新背景
         getSmartRefreshPrimaryColorsTheme(smartRefreshLayout, true, true);
         LogUtil.d(TAG, "执行onResume()");
     }

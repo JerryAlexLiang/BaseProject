@@ -62,4 +62,8 @@ public class ReadLaterBeanDaoHelpter {
         return readLaterBeanList;
     }
 
+    /**
+     * 分页查询数据添加到本地的稍后阅读(根据加入时间倒序排列)
+     */
+
 }

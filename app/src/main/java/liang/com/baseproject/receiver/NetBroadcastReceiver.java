@@ -7,7 +7,10 @@ import android.net.ConnectivityManager;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.nio.file.Path;
+
 import liang.com.baseproject.utils.NetUtil;
+import retrofit2.http.POST;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_NONE;
@@ -29,17 +32,20 @@ public class NetBroadcastReceiver extends BroadcastReceiver {
             switch (netWorkState) {
                 case 1:
                     //wifi
-                    EventBus.getDefault().post(new NetEvent(true, NETWORK_WIFI));
+//                    EventBus.getDefault().post(new NetEvent(true, NETWORK_WIFI));
+                    new NetEvent(true, NETWORK_WIFI).post();
                     break;
 
                 case 0:
                     //移动网络
-                    EventBus.getDefault().post(new NetEvent(true, NETWORK_MOBILE));
+//                    EventBus.getDefault().post(new NetEvent(true, NETWORK_MOBILE));
+                    new NetEvent(true, NETWORK_MOBILE).post();
                     break;
 
                 case -1:
                     //没有连接网络
-                    EventBus.getDefault().post(new NetEvent(false, NETWORK_NONE));
+//                    EventBus.getDefault().post(new NetEvent(false, NETWORK_NONE));
+                    new NetEvent(false, NETWORK_NONE).post();
                     break;
             }
         }

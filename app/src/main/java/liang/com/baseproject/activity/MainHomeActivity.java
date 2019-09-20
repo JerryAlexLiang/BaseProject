@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -30,8 +33,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.greenrobot.eventbus.EventBus;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +50,12 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
+import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
+import liang.com.baseproject.login.entity.Userbean;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
@@ -135,6 +144,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private TextView navUserName;
     private TextView navUserMail;
     private TextView navWifiName;
+    private View navViewHeaderView;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainHomeActivity.class);
@@ -143,7 +153,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     protected boolean isRegisterEventBus() {
-        return false;
+        return true;
     }
 
     @Override
@@ -167,8 +177,6 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         initPermission();
         //注册监听网络状态的广播接收者
         initReceive();
-        //订阅EventBus事件
-        EventBus.getDefault().register(this);
 
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
         baseToolbarLeftIcon.setImageResource(R.drawable.icon_drawer_menu);
@@ -250,15 +258,70 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    /**
+     * 接收登录消息
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onLoginEvent(LoginEvent event) {
+        boolean login = event.isLogin();
+        LogUtil.e("ppppp1", "登录状态: " + login);
+        //更新用户UI
+        initUserInfo();
+    }
+
+    private void initUserInfo() {
+        if (UserLoginUtils.getInstance().isLogin()) {
+            Userbean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
+            String nickname = loginUserBean.getNickname();
+            int id = loginUserBean.getId();
+            String localUserIcon = UserLoginUtils.getInstance().getLocalUserIcon();
+            String localBg = UserLoginUtils.getInstance().getLocalBg();
+
+            LogUtil.e("ppppp2", "头像地址: " + localUserIcon);
+            LogUtil.e("ppppp3", "背景地址: " + localBg);
+
+            navUserMail.setText("ID: " + id);
+            if (!TextUtils.isEmpty(nickname)) {
+                navUserName.setText(nickname);
+            }
+
+            if (!TextUtils.isEmpty(localUserIcon)) {
+                Glide.with(MainHomeActivity.this).asBitmap().load(localUserIcon).into(navUserIocn);
+            } else {
+                navUserIocn.setBackgroundResource(R.drawable.icon_user_logo);
+            }
+
+            if (!TextUtils.isEmpty(localBg)) {
+                Glide.with(MainHomeActivity.this).load(localBg).into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        navViewHeaderView.setBackground(resource);
+                    }
+                });
+            } else {
+                navViewHeaderView.setBackgroundResource(R.drawable.icon_info_bg);
+            }
+        } else {
+            Glide.with(mActivity).asBitmap().load(R.drawable.icon_user_logo).into(navUserIocn);
+            navViewHeaderView.setBackgroundResource(R.drawable.icon_info_bg);
+            navUserMail.setText("ID: ");
+            navUserName.setText("昵称");
+        }
+    }
+
     private void initDrawerLayout() {
         //nav_header
-        View navViewHeaderView = navView.getHeaderView(0);
+        navViewHeaderView = navView.getHeaderView(0);
         navUserIocn = navViewHeaderView.findViewById(R.id.nav_icon_user_image);
         navUserName = navViewHeaderView.findViewById(R.id.nav_tv_user_name);
         navUserMail = navViewHeaderView.findViewById(R.id.nav_tv_user_mail);
         navWifiName = navViewHeaderView.findViewById(R.id.nav_tv_wifi_ssid);
+        //设置跑马灯效果
+        navWifiName.setSelected(true);
         //nav_menu
         setupDrawerContent(navView);
+
+        initUserInfo();
 
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -596,7 +659,6 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(netReceiver);
-        EventBus.getDefault().unregister(this);
         LogUtil.d(TAG, "onDestroy()");
     }
 
@@ -611,7 +673,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         baseActionBar.setVisibility(View.GONE);
     }
 
-    public RelativeLayout getMainPageContainer(){
+    public RelativeLayout getMainPageContainer() {
         return rlMainPageContainer;
     }
 }

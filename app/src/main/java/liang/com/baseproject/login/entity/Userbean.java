@@ -26,6 +26,7 @@ public class Userbean {
     private boolean admin;
     private String email;
     private String icon;
+    private String bgIcon;
     private int id;
     private String nickname;
     private String password;
@@ -57,6 +58,14 @@ public class Userbean {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public String getBgIcon() {
+        return bgIcon;
+    }
+
+    public void setBgIcon(String bgIcon) {
+        this.bgIcon = bgIcon;
     }
 
     public int getId() {

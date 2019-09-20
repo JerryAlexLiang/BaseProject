@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -49,6 +50,10 @@ import liang.com.baseproject.app.MyApplication;
  * 作者: liangyang
  */
 public class FileUtil {
+
+    public static boolean isSDCardAlive() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
 
     private static File imageFile;
 
@@ -96,6 +101,22 @@ public class FileUtil {
         }
     }
 
+    public static boolean delete(File file) {
+        if (file == null) {
+            return false;
+        }
+        if (file.isDirectory()) {
+            String[] children = file.list();
+            for (String c : children) {
+                boolean success = delete(new File(file, c));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+        return file.delete();
+    }
+
     /**
      * 删除文件，可以是文件或文件夹
      *
@@ -135,13 +156,13 @@ public class FileUtil {
     }
 
     //递归删除文件夹下的数据
-    public static synchronized void recursionDeleteFile(String filePath){
+    public static synchronized void recursionDeleteFile(String filePath) {
         File file = new File(filePath);
         if (!file.exists()) return;
 
-        if (file.isDirectory()){
+        if (file.isDirectory()) {
             File[] files = file.listFiles();
-            for (File subFile : files){
+            for (File subFile : files) {
                 String path = subFile.getPath();
                 recursionDeleteFile(path);
             }
@@ -323,6 +344,33 @@ public class FileUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 格式化单位
+     */
+    public static String formatSize(double size) {
+        double kiloByte = size / 1024;
+        if (kiloByte < 1) {
+            return "0KB";
+        }
+        double megaByte = kiloByte / 1024;
+        if (megaByte < 1) {
+            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "KB";
+        }
+        double gigaByte = megaByte / 1024;
+        if (gigaByte < 1) {
+            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "MB";
+        }
+        double teraBytes = gigaByte / 1024;
+        if (teraBytes < 1) {
+            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "GB";
+        }
+        BigDecimal result4 = new BigDecimal(teraBytes);
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
 }
 
