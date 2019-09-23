@@ -21,7 +21,11 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -30,10 +34,12 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.MVPBasePresenter;
+import liang.com.baseproject.event.ReadLaterEvent;
 import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
 import liang.com.baseproject.main.activity.AgentWebActivity;
 import liang.com.baseproject.mine.adapter.ReadLaterAdapter;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
+import liang.com.baseproject.retrofit.RetrofitHelper;
 import liang.com.baseproject.utils.CopyUtils;
 import liang.com.baseproject.utils.GsonUtils;
 import liang.com.baseproject.utils.IntentUtils;
@@ -69,16 +75,38 @@ public class ReadLaterActivity extends MVPBaseActivity {
 
     private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
-    private int perPageCount = 5;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ReadLaterActivity.class);
         context.startActivity(intent);
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onReadLaterEvent(ReadLaterEvent event) {
+        if (event.isReadLater()) {
+            getArticleList();
+        } else {
+            //移除稍后阅读列表
+            //UI
+            List<ReadLaterBean> readLaterAdapterData = readLaterAdapter.getData();
+            for (int i = 0; i < readLaterAdapterData.size(); i++) {
+                if (event.getTitle().equals(readLaterAdapterData.get(i).getTitle())) {
+                    readLaterAdapter.remove(i);
+                    onShowToast("删除成功");
+                }
+            }
+            List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.findAllReadLaters();
+            if (allReadLaters.isEmpty()) {
+                rlEmptyContainer.setVisibility(View.VISIBLE);
+            } else {
+                rlEmptyContainer.setVisibility(View.GONE);
+            }
+        }
+    }
+
     @Override
     protected boolean isRegisterEventBus() {
-        return false;
+        return true;
     }
 
     @Override
@@ -123,19 +151,39 @@ public class ReadLaterActivity extends MVPBaseActivity {
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 //一次查询所有数据
                 getArticleList();
+
+//                currPage = PAGE_START;
+//                getArticleListByPage();
             }
         });
 
-        readLaterAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-//                //一次查询所有数据
-//                getArticleList();
-            }
-        }, rvReadLater);
+        boolean setRefreshFooter = isSetRefreshFooter();
+        if (setRefreshFooter) {
+            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                    getArticleList();
+
+//                    currPage++;
+//                    getArticleListByPage();
+                }
+            });
+        } else {
+            readLaterAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    getArticleList();
+
+//                    currPage++;
+//                    getArticleListByPage();
+                }
+            }, rvReadLater);
+        }
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
+        smartRefreshLayout.autoLoadMore();
+//        readLaterAdapter.setEnableLoadMore(false);
 
         readLaterAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -155,15 +203,17 @@ public class ReadLaterActivity extends MVPBaseActivity {
                     case R.id.tv_delete:
                         //本地数据库删除操作
                         ReadLaterBeanDaoHelpter.removeReaderLaterBean(item);
-                        //UI
-                        readLaterAdapter.remove(position);
-                        onShowToast("删除成功");
-                        List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.findAllReadLaters();
-                        if (allReadLaters.isEmpty()) {
-                            rlEmptyContainer.setVisibility(View.VISIBLE);
-                        } else {
-                            rlEmptyContainer.setVisibility(View.GONE);
-                        }
+                        //事件总线
+                        ReadLaterEvent.postUnReadLaterWithTitle(item.getTitle());
+//                        //UI
+//                        readLaterAdapter.remove(position);
+//                        onShowToast("删除成功");
+//                        List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.findAllReadLaters();
+//                        if (allReadLaters.isEmpty()) {
+//                            rlEmptyContainer.setVisibility(View.VISIBLE);
+//                        } else {
+//                            rlEmptyContainer.setVisibility(View.GONE);
+//                        }
                         break;
 
                     case R.id.tv_edit:
@@ -213,11 +263,11 @@ public class ReadLaterActivity extends MVPBaseActivity {
             case R.id.rl_empty_container:
                 //一次查询所有数据
                 getArticleList();
+//                getArticleListByPage();
                 break;
         }
 
     }
-
 
     public void getArticleList() {
         //查询所有
@@ -238,11 +288,44 @@ public class ReadLaterActivity extends MVPBaseActivity {
         readLaterAdapter.loadMoreEnd();
     }
 
+    public void getArticleListByPage() {
+        int perPageCount = 6;
+        List<ReadLaterBean> readLatersByPage = ReadLaterBeanDaoHelpter.getReadLatersByPage(currPage, perPageCount);
+        LogUtil.d(TAG, "currPage =  " + currPage + "请求数据数量: " + readLatersByPage.size() + "\n" + "请求数据: " + GsonUtils.toJson(readLatersByPage));
+
+        if (currPage == PAGE_START) {
+            if (readLatersByPage.isEmpty()) {
+                rlEmptyContainer.setVisibility(View.VISIBLE);
+                onShowToast("没有数据~");
+            } else {
+                rlEmptyContainer.setVisibility(View.GONE);
+                //第一页数据
+                readLaterAdapter.setNewData(readLatersByPage);
+            }
+        } else {
+            //请求更多数据,直接添加list中
+            readLaterAdapter.addData(readLatersByPage);
+            readLaterAdapter.loadMoreComplete();
+        }
+
+        if (readLatersByPage.size() == 0) {
+            onShowToast("没有更多数据了!");
+            readLaterAdapter.loadMoreEnd();
+            smartRefreshLayout.setEnableLoadMore(false);
+        } else {
+            if (!readLaterAdapter.isLoadMoreEnable()) {
+                readLaterAdapter.setEnableLoadMore(true);
+            }
+            smartRefreshLayout.setEnableLoadMore(true);
+        }
+        //这两个方法是在加载成功,并且还有数据的情况下调用的
+        smartRefreshLayout.finishRefresh();
+        smartRefreshLayout.finishLoadMore();
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
-        //一次查询所有数据
-        getArticleList();
     }
 }

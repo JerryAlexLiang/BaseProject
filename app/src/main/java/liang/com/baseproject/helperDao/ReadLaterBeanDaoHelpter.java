@@ -64,6 +64,13 @@ public class ReadLaterBeanDaoHelpter {
 
     /**
      * 分页查询数据添加到本地的稍后阅读(根据加入时间倒序排列)
+     * @param offset   页数
+     * @param count    每页数量
+     * @return
      */
-
+    public static List<ReadLaterBean> getReadLatersByPage(int offset,int count){
+        List<ReadLaterBean> readLaterBeanList = MyApplication.getDaoSession().queryBuilder(ReadLaterBean.class).orderDesc(ReadLaterBeanDao.Properties.Time)
+                .offset(offset * count).limit(count).list();
+        return readLaterBeanList;
+    }
 }

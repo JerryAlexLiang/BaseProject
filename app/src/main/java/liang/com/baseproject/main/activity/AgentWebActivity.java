@@ -27,6 +27,7 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.entity.TagsBean;
+import liang.com.baseproject.event.ReadLaterEvent;
 import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
 import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.main.presenter.AgentWebPresenter;
@@ -353,13 +354,19 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
                     if (TextUtils.equals(readLaterByTitle.getTitle(), mCurrTitle)) {
                         ReadLaterBeanDaoHelpter.removeReaderLaterBean(readLaterBean);
                         onShowToast("移除稍后阅读");
+                        //事件总线
+                        ReadLaterEvent.postUnReadLaterWithTitle(mCurrTitle);
                     } else {
                         ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
                         onShowToast("已加入稍后阅读");
+                        //事件总线
+                        ReadLaterEvent.postReadLaterWithTitle(mCurrTitle);
                     }
                 } else {
                     ReadLaterBeanDaoHelpter.saveReaderLaterBean(readLaterBean);
                     onShowToast("已加入稍后阅读");
+                    //事件总线
+                    ReadLaterEvent.postReadLaterWithTitle(mCurrTitle);
                 }
                 break;
 
