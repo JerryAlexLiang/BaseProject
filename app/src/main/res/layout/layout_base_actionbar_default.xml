@@ -65,15 +65,24 @@
         <TextView
             android:id="@+id/base_actionbar_title"
             android:layout_width="0dp"
-            android:gravity="center"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:ellipsize="marquee"
+            android:gravity="center"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
             android:text="测试"
             android:textColor="#ffffff"
             android:textSize="16sp"
+            android:visibility="gone" />
+
+        <liang.com.baseproject.widget.SearchEditText
+            android:id="@+id/edit_search_view"
+            style="@style/editTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_weight="3"
+            android:background="@drawable/shape_search_view_bg"
             android:visibility="gone" />
 
         <RelativeLayout
@@ -85,12 +94,12 @@
                 android:id="@+id/base_actionbar_right_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/base_actionbar_right_icon"
                 android:layout_centerInParent="true"
+                android:layout_toStartOf="@+id/base_actionbar_right_icon"
                 android:padding="8dp"
+                android:text="测试"
                 android:textColor="#ffffff"
                 android:textSize="15sp"
-                android:text="测试"
                 android:visibility="gone" />
 
             <ImageView

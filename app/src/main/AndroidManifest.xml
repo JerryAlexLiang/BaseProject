@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <meta-data
         android:name="android.max_aspect"
@@ -29,7 +29,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".login.activity.GestureLoginActivity"/>
+        <activity android:name=".home.activity.SearchWanArticleActivity"></activity>
+        <activity android:name=".login.activity.GestureLoginActivity" />
         <activity android:name=".login.activity.WelcomeGuideActivity" />
         <activity android:name=".setting.activity.AccountSecuritySetActivity" />
         <activity android:name=".setting.activity.SettingPatternPswActivity" />

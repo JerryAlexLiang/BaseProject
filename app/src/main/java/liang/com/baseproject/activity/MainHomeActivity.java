@@ -53,6 +53,7 @@ import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
+import liang.com.baseproject.home.activity.SearchWanArticleActivity;
 import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.Userbean;
@@ -181,6 +182,8 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
         baseToolbarLeftIcon.setImageResource(R.drawable.icon_drawer_menu);
         baseToolbarTitle.setVisibility(View.VISIBLE);
+        baseToolbarRightIcon.setVisibility(View.VISIBLE);
+        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search));
 
         initViewPage();
         initDrawerLayout();
@@ -454,7 +457,15 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         //记录ViewPage当前的选中界面
                         currentPosition = 0;
                         mainRgRbOne.setChecked(true);
-                        baseToolbarRightIcon.setVisibility(View.GONE);
+                        baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search));
+                        baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //跳转搜索文章界面
+                                goToSearchWanAndroidArticle();
+                            }
+                        });
                         baseActionBar.setVisibility(View.VISIBLE);
                         if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
@@ -467,6 +478,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         currentPosition = 1;
                         mainRgRbTwo.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_more));
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -524,7 +536,15 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         //切换fragment
 //                        switchFragment(0);
                         myViewPager.setCurrentItem(0);
-                        baseToolbarRightIcon.setVisibility(View.GONE);
+                        baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search));
+                        baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //跳转搜索文章界面
+                                goToSearchWanAndroidArticle();
+                            }
+                        });
                         baseActionBar.setVisibility(View.VISIBLE);
                         if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
@@ -538,6 +558,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 //                        switchFragment(1);
                         myViewPager.setCurrentItem(1);
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_more));
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -583,6 +604,13 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                 baseToolbarTitle.setText(titleList.get(currentPosition));
             }
         });
+    }
+
+    /**
+     * 跳转搜索文章界面
+     */
+    private void goToSearchWanAndroidArticle() {
+        SearchWanArticleActivity.actionStart(mActivity);
     }
 
     /**
@@ -639,7 +667,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         getActionBarTheme(baseActionBar, null);
     }
 
-    @OnClick({R.id.base_actionbar_left_icon, R.id.rl_net_bar})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.rl_net_bar,R.id.base_actionbar_right_icon})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
@@ -651,6 +679,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 //                NetUtil.openSystemSetting(MainHomeActivity.this);
 //                NetUtil.openMobileNetSetting(MainHomeActivity.this);
                 NetUtil.openNetSetting(MainHomeActivity.this);
+                break;
+
+            case R.id.base_actionbar_right_icon:
+                //跳转搜索文章界面
+                goToSearchWanAndroidArticle();
                 break;
         }
     }
