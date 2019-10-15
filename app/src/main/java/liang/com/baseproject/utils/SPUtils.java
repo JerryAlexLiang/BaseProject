@@ -14,6 +14,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import liang.com.baseproject.app.MyApplication;
+
 public class SPUtils {
 
     private SPUtils() {
@@ -207,6 +209,24 @@ public class SPUtils {
         return preferences.getInt(key, 0);
     }
 
+    //存储定位信息
+    public void saveMapLocation(double latitude, double longitude){
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("MapLocation", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("latitude",String.valueOf(latitude));
+        editor.putString("longitude",String.valueOf(longitude));
+        editor.commit();
+    }
+
+    //获取本地存储的定位信息
+    public String getMapLocation_lat(String str){
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("MapLocation", Context.MODE_PRIVATE);
+        return preferences.getString(str,"36.190662");
+    }
+    public String getMapLocation_lng(String str){
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("MapLocation", Context.MODE_PRIVATE);
+        return preferences.getString(str,"118.180473");
+    }
 
 }
 

@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -34,6 +35,11 @@ android {
                 }
                 outputFileName = fileName
             }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
     compileOptions {
@@ -154,4 +160,8 @@ dependencies {
     //图片选择器
     implementation 'com.github.goweii:PictureSelector:v2.3.1'
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.4'
+
+    implementation files('libs/AMap3DMap_6.9.4_AMapSearch_6.9.2_AMapLocation_4.7.0_20190831.jar')
+
+    implementation 'com.android.support:multidex:1.0.1'
 }

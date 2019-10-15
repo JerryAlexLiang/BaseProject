@@ -1,6 +1,5 @@
 package liang.com.baseproject.app;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +7,8 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.StrictMode;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import liang.com.baseproject.gen.DaoMaster;
@@ -16,8 +17,7 @@ import liang.com.baseproject.retrofit.RetrofitHelper;
 import liang.com.baseproject.utils.Utils;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
-
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static String TAG = "App";
 
     private static MyApplication app;
@@ -40,6 +40,16 @@ public class MyApplication extends Application {
     private static void outputLog(String strTAG, String strInfo) {
         if (_bOuputLog)
             Log.i(strTAG, strInfo);
+    }
+
+    /**
+     * 方法超过64K，需要采用分包
+     */
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        //初始化
+        MultiDex.install(this);
     }
 
     @Override

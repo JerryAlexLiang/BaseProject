@@ -26,10 +26,11 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"/>-->
 
+    <!--android:theme="@style/AppTheme.AppBarOverlay"-->
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="500dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -60,6 +61,15 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:statusBarScrim="?attr/colorPrimary">
 
+            <!--<android.support.design.widget.CollapsingToolbarLayout-->
+            <!--android:id="@+id/toolbar_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--app:collapsedTitleTextAppearance="@style/CollapsedCollapsingToolbarTitle"-->
+            <!--app:expandedTitleTextAppearance="@style/ExpandedCollapsingToolbarTitle"-->
+            <!--app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
+
             <ImageView
                 android:id="@+id/iv_detail_top"
                 android:layout_width="match_parent"
@@ -68,6 +78,7 @@
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:transitionName="NewsImage"
+                android:visibility="gone"
                 app:layout_collapseMode="parallax" />
 
             <!--底部渐变灰色效果-->
@@ -75,7 +86,8 @@
                 android:id="@+id/news_image_mask"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/shape_mask" />
+                android:background="@drawable/shape_mask"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_imgSource"
@@ -86,6 +98,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="12dp"
                 android:textSize="12sp"
+                android:visibility="gone"
                 app:layout_collapseMode="pin"
                 tools:ignore="RtlHardcoded" />
 
@@ -99,7 +112,32 @@
                 android:layout_marginBottom="36dp"
                 android:textColor="@android:color/white"
                 android:textSize="22sp"
+                android:visibility="gone"
                 app:layout_collapseMode="pin" />
+
+            <liang.com.baseproject.widget.CustomScrollRelativeLayout
+                android:id="@+id/custom_scroll_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax">
+
+                <com.amap.api.maps.MapView
+                    android:id="@+id/map_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/iv_btn_my_location"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="80dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:visibility="visible"
+                    android:background="@drawable/selector_my_loaction" />
+
+            </liang.com.baseproject.widget.CustomScrollRelativeLayout>
 
             <include layout="@layout/layout_base_toolbar_default" />
 
@@ -172,9 +210,28 @@
     <!--android:layout_marginTop="-8dp"-->
     <!--android:indeterminateDrawable="@color/webView_progress_bar_color" />-->
 
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smart_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePreviewInEditMode="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_juhe_news_detail">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:scrollbars="vertical" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_juhe_news_detail">
 
