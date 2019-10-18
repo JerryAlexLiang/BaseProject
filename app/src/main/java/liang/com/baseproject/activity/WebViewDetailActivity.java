@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -59,7 +60,7 @@ import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.entity.HomeBean;
-import liang.com.baseproject.home.presenter.HomeContainerPresenter;
+import liang.com.baseproject.listener.AppBarStateChangeListener;
 import liang.com.baseproject.presenter.JuheNewsDetailPresenter;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
 import liang.com.baseproject.retrofit.RetrofitHelper;
@@ -206,6 +207,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         mapView.onSaveInstanceState(outState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -230,7 +232,8 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
             initMapLocation();
         }
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
-        baseToolbarRightIcon.setVisibility(View.VISIBLE);
+        baseToolbarLeftIcon.setImageDrawable(getDrawable(R.drawable.abc_ic_ab_back_material));
+        baseToolbarRightIcon.setVisibility(View.GONE);
 
 
         //得到Intent传递的数据
@@ -248,6 +251,38 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
 
         initRecyclerView();
+
+        //设置监听android.support.design.widget.AppBarLayout这个控件设置监听了
+        //因为android.support.design.widget.CollapsingToolbarLayout外层是 android.support.design.widget.AppBarLayout所以设置的监听是它了
+        initListener();
+    }
+
+    /**
+     * CollapsingToolbarLayout滑动状态监听
+     * 因为android.support.design.widget.CollapsingToolbarLayout外层是android.support.design.widget.AppBarLayout所以设置的监听是它了
+     *
+     */
+    private void initListener() {
+        appBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if( state == State.EXPANDED ) {
+                    //展开状态
+                    baseToolbarRightIcon.setVisibility(View.GONE);
+                    baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
+                }else if(state == State.COLLAPSED){
+                    //折叠状态
+                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                    baseToolbarLeftIcon.setImageResource(R.drawable.ic_back);
+                }else {
+                    //中间状态
+                    baseToolbarRightIcon.setVisibility(View.GONE);
+                    baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
+                }
+            }
+        });
+
     }
 
     private void initData(int page) {
