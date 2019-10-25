@@ -8,6 +8,8 @@
     android:elevation="2dp"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:id="@+id/coordinator_layout"
+    android:background="@color/page_background"
     tools:context=".activity.WebViewDetailActivity"
     tools:targetApi="lollipop">
 
@@ -218,13 +220,22 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_juhe_news_detail">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_map"
+        <RelativeLayout
+            android:id="@+id/rl_recycler_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:scrollbars="vertical" />
+            android:padding="10dp"
+            android:background="@drawable/shape_white_card_bg">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="vertical" />
+
+        </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

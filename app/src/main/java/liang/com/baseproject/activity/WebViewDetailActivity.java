@@ -5,8 +5,10 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -125,6 +128,10 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     RecyclerView rvMap;
     @BindView(R.id.smart_refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.rl_recycler_container)
+    RelativeLayout rlRecyclerContainer;
     private String title;
     private String url;
     private String imageUrl;
@@ -232,7 +239,8 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
             initMapLocation();
         }
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
-        baseToolbarLeftIcon.setImageDrawable(getDrawable(R.drawable.abc_ic_ab_back_material));
+//        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+//        baseToolbarLeftIcon.setImageDrawable(getDrawable(R.drawable.abc_ic_ab_back_material));
         baseToolbarRightIcon.setVisibility(View.GONE);
 
 
@@ -260,25 +268,36 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     /**
      * CollapsingToolbarLayout滑动状态监听
      * 因为android.support.design.widget.CollapsingToolbarLayout外层是android.support.design.widget.AppBarLayout所以设置的监听是它了
-     *
      */
     private void initListener() {
         appBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
-                if( state == State.EXPANDED ) {
+                if (state == State.EXPANDED) {
                     //展开状态
                     baseToolbarRightIcon.setVisibility(View.GONE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
-                }else if(state == State.COLLAPSED){
+                    baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                    rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
+
+                    toolbarLayout.setTitleEnabled(false);
+                } else if (state == State.COLLAPSED) {
                     //折叠状态
                     baseToolbarRightIcon.setVisibility(View.VISIBLE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.ic_back);
-                }else {
+                    baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                    rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_rectangle_bg));
+
+                    toolbarLayout.setTitleEnabled(true);
+                } else {
                     //中间状态
                     baseToolbarRightIcon.setVisibility(View.GONE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
+                    baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                    rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
+
+                    toolbarLayout.setTitleEnabled(false);
                 }
             }
         });

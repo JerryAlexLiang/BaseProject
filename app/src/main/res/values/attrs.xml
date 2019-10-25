@@ -34,4 +34,12 @@
         <attr name="paintTextSize" format="dimension" />
     </declare-styleable>
 
+    <!--可折叠的TextView的相关属性-->
+    <declare-styleable name="ExpandableTextViewAttr">
+        <!-- 允许显示最大行数 -->
+        <attr name="maxExpandLines" format="integer" />
+        <!-- 动画执行时间 -->
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+
 </resources>

@@ -33,17 +33,18 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
+import liang.com.baseproject.testlaboratory.FiltrateActivity;
 import liang.com.baseproject.utils.AnimationUtils;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.PictureSelectorUtils;
-import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
 import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideEventListener;
 
@@ -73,6 +74,12 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     ImageView ivBg;
     @BindView(R.id.iv_icon)
     ImageView ivIcon;
+    @BindView(R.id.btn_animator_open)
+    Button btnAnimatorOpen;
+    @BindView(R.id.btn_animator_hide)
+    Button btnAnimatorHide;
+    @BindView(R.id.btn_filtrate_jingdong)
+    Button btnFiltrateJingdong;
 
     //TabLayout标题列表
     private List<String> stringList = new ArrayList<>();
@@ -458,4 +465,12 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         mTimer.cancel();
     }
 
+    @OnClick({R.id.btn_filtrate_jingdong})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.btn_filtrate_jingdong:
+                FiltrateActivity.actionStart(TestCodeActivity.this);
+                break;
+        }
+    }
 }
