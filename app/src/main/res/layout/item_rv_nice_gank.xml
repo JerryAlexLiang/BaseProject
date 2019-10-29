@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_nice_gank"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -36,7 +37,7 @@
                 android:layout_alignParentLeft="true"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/text_surface" />
 
             <TextView
                 android:id="@+id/tv_nice_source"
@@ -46,7 +47,8 @@
                 android:layout_alignParentRight="true"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/color_397bff" />
+                android:textColor="@color/color_397bff"
+                tools:ignore="RtlHardcoded" />
 
         </RelativeLayout>
 

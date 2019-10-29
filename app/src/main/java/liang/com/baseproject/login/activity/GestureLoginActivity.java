@@ -3,6 +3,7 @@ package liang.com.baseproject.login.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
@@ -105,7 +106,7 @@ public class GestureLoginActivity extends MVPBaseActivity implements CustomGestu
         rlGestureLoginContainer.setBackground(currentDrawable);
 
         if (UserLoginUtils.getInstance().isLogin()) {
-            cvGestureAvatar.setBorderColor(getResources().getColor(R.color.yellow));
+            cvGestureAvatar.setBorderColor(Color.YELLOW);
             tvUserName.setText(UserLoginUtils.getInstance().getLoginUserBean().getUsername());
 
             Glide.with(GestureLoginActivity.this).asBitmap().load(UserLoginUtils.getInstance().getLocalUserIcon()).into(cvGestureAvatar);

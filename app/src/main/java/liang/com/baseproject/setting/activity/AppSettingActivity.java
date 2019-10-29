@@ -2,17 +2,15 @@ package liang.com.baseproject.setting.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
@@ -22,12 +20,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
+import liang.com.baseproject.activity.MainHomeActivity;
+import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.setting.presenter.AppSettingPresenter;
 import liang.com.baseproject.setting.view.AppSettingView;
-import liang.com.baseproject.utils.ToastUtil;
+import liang.com.baseproject.utils.SettingUtils;
 import liang.com.baseproject.utils.UserLoginUtils;
+import liang.com.baseproject.widget.SearchEditText;
 
 public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSettingPresenter> implements AppSettingView {
 
@@ -49,7 +50,14 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
     SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.ll_setting_security)
     LinearLayout llSettingSecurity;
+    @BindView(R.id.base_actionbar_left2_icon)
+    ImageView baseActionbarLeft2Icon;
+    @BindView(R.id.edit_search_view)
+    SearchEditText editSearchView;
+    @BindView(R.id.switch_button_night_mode)
+    Switch switchButtonNightMode;
     private AlertView logoutAlertView;
+    private boolean mDarkTheme;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, AppSettingActivity.class);
@@ -86,13 +94,10 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
         initView();
+        initData();
     }
 
-    private void initView() {
-        baseActionbarLeftIcon.setVisibility(View.VISIBLE);
-        baseActionbarTitle.setVisibility(View.VISIBLE);
-        baseActionbarTitle.setText(getResources().getString(R.string.setting));
-
+    private void initData() {
         //设置“退出登录按钮”显示与隐藏
         if (UserLoginUtils.getInstance().isLogin()) {
             //显示
@@ -101,9 +106,53 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
             llLogout.setVisibility(View.GONE);
         }
 
+        //主题模式
+        mDarkTheme = SettingUtils.getInstance().isDarkTheme();
+        //设置当前主题模式
+        switchButtonNightMode.setChecked(mDarkTheme);
+        initSwitchListener();
+
+    }
+
+    private void initSwitchListener() {
+        switchButtonNightMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SettingUtils.getInstance().setDarkTheme(isChecked);
+                MyApplication.setDarkModeStatus();
+                buttonView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Recreate所有Activity
+                        MyApplication.recreate();
+
+                        //方式1: 直接退出当前Activity - 最佳实现方案
+                        MainHomeActivity.actionStart(AppSettingActivity.this);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+
+//                        //方式2: 使用recreate()方法重启Activity(会有闪屏问题)
+//                        recreate();
+
+                        //方式3: 不掉用recreate()方法，而是自己重启当前activity并为activity设置启动和退出动画即可,但是仅仅这样的话主界面MainHomeActivity没有产生效果,
+                        //需要发送一个广播通知MainHomeActivity->重启
+                        //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
+//                        AppSettingActivity.actionStart(AppSettingActivity.this);
+//                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                        finish();
+                    }
+                }, 300);
+            }
+        });
+    }
+
+    private void initView() {
+        baseActionbarLeftIcon.setVisibility(View.VISIBLE);
+        baseActionbarTitle.setVisibility(View.VISIBLE);
+        baseActionbarTitle.setText(getResources().getString(R.string.setting));
+
         //初始化登出提示弹框
         initLogoutAlert();
-
     }
 
     private void initLogoutAlert() {
@@ -119,7 +168,7 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
                     public void onItemClick(Object o, int position) {
                         switch (position) {
                             case 0:
-                                ToastUtil.showShortToast("取消退出");
+                                onShowToast("取消退出");
                                 break;
 
                             case 1:
@@ -184,8 +233,7 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
 
     @Override
     public void onShowToast(String content) {
-        ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                false, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+        onShowTrueToast(content);
     }
 
     @Override

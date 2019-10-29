@@ -83,6 +83,9 @@
     <string name="set_language">语言设置</string>
     <string name="set_ours">关于我们</string>
     <string name="modify_pwd">修改密码</string>
+    <string name="night_mode">黑夜模式</string>
+    <string name="blade_white_mode">银翼白</string>
+    <string name="night_black_mode">玄夜黑</string>
 
     <!--解锁相关-->
     <string name="unlock_mode_set">设置解锁方式</string>

@@ -28,6 +28,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import liang.com.baseproject.R;
+import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.utils.ToastUtil;
 
@@ -102,8 +103,6 @@ public class CustomGestureView extends View {
                 if (mTimer != null)
                     mTimerTask.cancel();
                 mTimeOut = false;
-//               ToastUtil.setCustomToast(mContext, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-//                       true, getResources().getString(R.string.gesture_paint_tips), getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
                 onShowToast(getResources().getString(R.string.gesture_paint_tips));
                 mError = false;
                 invalidate();
@@ -643,9 +642,9 @@ public class CustomGestureView extends View {
             this.minPointNums = 9;
     }
 
-    public void onShowToast(String content) {
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+    public void onShowToast(String content){
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
 }

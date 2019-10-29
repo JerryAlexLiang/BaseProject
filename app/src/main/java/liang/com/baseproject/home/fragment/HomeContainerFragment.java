@@ -95,7 +95,6 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ArticleBean item = homeContainerAdapter.getItem(position);
                 if (item != null) {
-//                ToastUtil.showShortToast("点击了:  " + Objects.requireNonNull(homeContainerAdapter.getItem(position)).getTitle());
                     LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
 //                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
                     AgentWebActivity.actionStart(getContext(), item);
@@ -236,8 +235,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     public void onShowToast(String content) {
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+        onShowTrueToast(content);
     }
 
     @Override

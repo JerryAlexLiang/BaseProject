@@ -1,19 +1,35 @@
 package liang.com.baseproject.app;
 
+import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.os.Process;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
+import android.support.v7.app.AppCompatDelegate;
+import android.text.TextUtils;
 import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
 import liang.com.baseproject.retrofit.RetrofitHelper;
+import liang.com.baseproject.utils.SettingUtils;
+import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.utils.Utils;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
@@ -21,6 +37,8 @@ public class MyApplication extends MultiDexApplication {
     private static String TAG = "App";
 
     private static MyApplication app;
+
+    private static List<Activity> activities = Collections.synchronizedList(new LinkedList<Activity>());
 
     public static Context getAppContext() {
         return app;
@@ -63,6 +81,10 @@ public class MyApplication extends MultiDexApplication {
 
         mContext = getApplicationContext();
 
+        if (isMainProcess()){
+            setDarkModeStatus();
+        }
+
         try {
             packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -103,5 +125,259 @@ public class MyApplication extends MultiDexApplication {
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
         RetrofitHelper.deleteInstance();
+    }
+
+    public static List<Activity> getActivities() {
+        return activities;
+    }
+
+    public static boolean isAppAlive() {
+        if (app == null) {
+            return false;
+        }
+        if (activities == null || activities.size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 判断Android程序是否在前台运行
+     */
+    public static boolean isAppOnForeground() {
+        ActivityManager activityManager = (ActivityManager) getAppContext().getSystemService(Context.ACTIVITY_SERVICE);
+        if (activityManager == null) {
+            return false;
+        }
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        if (appProcesses == null) {
+            return false;
+        }
+        String packageName = getAppContext().getPackageName();
+        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.processName.equals(packageName) && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * APP从后台切换回前台
+     */
+    public static void returnToForeground() {
+        if (!isAppOnForeground()) {
+            Activity currentActivity = currentActivity();
+            if (currentActivity != null) {
+                Intent intent = new Intent(getAppContext(), currentActivity.getClass());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                getAppContext().startActivity(intent);
+            }
+        }
+    }
+
+    public static boolean isMainProcess() {
+        String mainProcessName = getAppContext().getPackageName();
+        String processName = currentProcessName();
+        return processName == null || TextUtils.equals(processName, mainProcessName);
+    }
+
+    @Nullable
+    public static String currentProcessName() {
+        return getProcessName(Process.myPid());
+    }
+
+    /**
+     * 获取进程号对应的进程名
+     *
+     * @param pid 进程号
+     * @return 进程名
+     */
+    @Nullable
+    private static String getProcessName(int pid) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
+            String processName = reader.readLine();
+            if (!TextUtils.isEmpty(processName)) {
+                processName = processName.trim();
+            }
+            return processName;
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 获取当前Activity
+     */
+    @Nullable
+    public static Activity currentActivity() {
+        if (activities == null || activities.isEmpty()) {
+            return null;
+        }
+        return activities.get(activities.size() - 1);
+    }
+
+    /**
+     * 按照指定类名找到activity
+     */
+    @Nullable
+    public static Activity findActivity(Class<?> cls) {
+        if (cls == null) {
+            return null;
+        }
+        if (activities == null || activities.isEmpty()) {
+            return null;
+        }
+        for (Activity activity : activities) {
+            if (activity.getClass().equals(cls)) {
+                return activity;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 结束当前Activity
+     */
+    public static void finishCurrentActivity() {
+        finishActivity(currentActivity());
+    }
+
+    /**
+     * 结束指定的Activity
+     */
+    public static void finishActivity(Activity activity) {
+        if (activity == null) {
+            return;
+        }
+        if (activities == null || activities.isEmpty()) {
+            return;
+        }
+        activities.remove(activity);
+        activity.finish();
+        activity = null;
+    }
+
+    /**
+     * 结束指定类名的Activity
+     */
+    public static void finishActivity(Class<? extends Activity> cls) {
+        if (cls == null) {
+            return;
+        }
+        if (activities == null || activities.isEmpty()) {
+            return;
+        }
+        for (int i = activities.size() - 1; i >= 0; i--) {
+            Activity activity = activities.get(i);
+            if (cls.equals(activity.getClass())) {
+                finishActivity(activity);
+            }
+        }
+    }
+
+    /**
+     * 结束所有Activity
+     */
+    public static void finishAllActivity() {
+        if (activities == null || activities.isEmpty()) {
+            return;
+        }
+        for (int i = activities.size() - 1; i >= 0; i--) {
+            Activity activity = activities.get(i);
+            if (!activity.isFinishing()) {
+                activity.finish();
+            }
+        }
+        activities.clear();
+    }
+
+    /**
+     * 退出应用程序
+     */
+    public static void exitApp() {
+        finishAllActivity();
+    }
+
+    /**
+     * 退出应用程序
+     */
+    public static void killProcess() {
+        exitApp();
+        Process.killProcess(Process.myPid());
+    }
+
+    public static void restart() {
+        finishActivityWithoutCount(1);
+        if (activities != null && !activities.isEmpty()) {
+            activities.get(0).recreate();
+        }
+    }
+
+    public static void recreate() {
+        if (activities != null && !activities.isEmpty()) {
+            for (Activity activity : activities) {
+                activity.recreate();
+            }
+        }
+    }
+
+    public static void finishActivityWithoutCount(int count) {
+        if (activities == null || activities.isEmpty()) {
+            return;
+        }
+        if (count <= 0) {
+            finishAllActivity();
+            return;
+        }
+        for (int i = activities.size() - 1; i >= count; i--) {
+            finishActivity(activities.get(i));
+        }
+    }
+
+    public static void finishActivityWithout(Class<? extends Activity> cls) {
+        if (cls == null) {
+            finishAllActivity();
+            return;
+        }
+        if (activities == null || activities.isEmpty()) {
+            return;
+        }
+        for (int i = activities.size() - 1; i >= 0; i--) {
+            Activity activity = activities.get(i);
+            if (!cls.equals(activity.getClass())) {
+                finishActivity(activity);
+            }
+        }
+    }
+
+    public static void finishActivityWithout(Activity activity) {
+        if (activity == null) {
+            finishAllActivity();
+            return;
+        }
+        finishActivityWithout(activity.getClass());
+    }
+
+    public static void setDarkModeStatus(){
+        if (SettingUtils.getInstance().isDarkTheme()){
+            //设置为黑色主题
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            ToastUtil.onShowTrueToast("夜晚主题");
+        }else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            ToastUtil.onShowTrueToast("白天主题");
+        }
     }
 }

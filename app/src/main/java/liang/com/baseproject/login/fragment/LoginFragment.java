@@ -161,9 +161,7 @@ public class LoginFragment extends MVPBaseFragment<LoginView, LoginPresenter> im
 
     @Override
     public void onShowToast(String content) {
-//        ToastUtil.showShortToast(content);
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+        onShowTrueToast(content);
     }
 
     @Override

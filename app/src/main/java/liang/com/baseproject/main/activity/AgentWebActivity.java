@@ -2,11 +2,8 @@ package liang.com.baseproject.main.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +11,6 @@ import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.WebChromeClient;
@@ -34,11 +30,9 @@ import liang.com.baseproject.main.presenter.AgentWebPresenter;
 import liang.com.baseproject.main.view.WebViewInterface;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
 import liang.com.baseproject.utils.AgentWebCreator;
-import liang.com.baseproject.utils.GsonUtils;
 import liang.com.baseproject.utils.IntentUtils;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.ResolutionUtils;
-import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.widget.WebContainer;
 import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
@@ -199,8 +193,8 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
             mUrl = intent.getStringExtra("url");
         }
 
-        String json = GsonUtils.toJson(intent);
-        LogUtil.d(TAG, "接收数据: " + json);
+//        String json = GsonUtils.toJson(intent);
+//        LogUtil.d(TAG, "接收数据: " + json);
 
         //当前网页页面标题、链接
         mCurrTitle = mTitle;
@@ -421,8 +415,7 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
 
     @Override
     public void onShowToast(String content) {
-        ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+        onShowTrueToast(content);
     }
 
     @Override

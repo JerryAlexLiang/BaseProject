@@ -3,23 +3,16 @@ package liang.com.baseproject.home.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.support.v7.widget.SearchView;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.widget.SearchEditText;
 
 public class SearchWanArticleActivity extends MVPBaseActivity {
@@ -95,10 +88,10 @@ public class SearchWanArticleActivity extends MVPBaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
-                ToastUtil.showShortToast("返回");
+                onShowToast("返回");
                 break;
             case R.id.base_actionbar_right_tv:
-                ToastUtil.showShortToast(this, "右侧");
+                onShowToast("右侧");
                 break;
 
             case R.id.edit_search_view:

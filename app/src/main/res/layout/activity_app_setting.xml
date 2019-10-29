@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_background"
+    android:background="@color/surface"
     tools:context=".setting.activity.AppSettingActivity">
 
     <include layout="@layout/layout_base_actionbar_default" />
@@ -29,6 +29,34 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_press_color_white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:text="@string/night_mode"
+                        android:textColor="@color/text_surface"
+                        android:textSize="@dimen/sp15" />
+
+                    <Switch
+                        android:id="@+id/switch_button_night_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumb="@drawable/switch_ios_thumb"
+                        android:track="@drawable/switch_ios_track_selector"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/ll_logout"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -45,7 +73,7 @@
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:text="@string/go_to_logout"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_surface"
                         android:textSize="@dimen/sp15" />
 
                     <ImageView
@@ -74,7 +102,7 @@
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:text="@string/set_securty"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_surface"
                         android:textSize="@dimen/sp15" />
 
                     <ImageView
@@ -86,7 +114,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
         </ScrollView>
 

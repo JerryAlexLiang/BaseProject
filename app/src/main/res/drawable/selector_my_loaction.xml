@@ -3,6 +3,6 @@
 
     <item android:drawable="@drawable/icon_my_location_press" android:state_pressed="true" />
     <item android:drawable="@drawable/icon_my_location_nor" android:state_pressed="false" />
-    <item android:drawable="@drawable/icon_my_location_nor"></item>
+    <item android:drawable="@drawable/icon_my_location_nor"/>
 
 </selector>

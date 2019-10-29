@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlue">#2196F3</color>
+    <color name="colorBlue2">#00a2ed</color>
+    <color name="tabIndicatorColor">#FF6F00</color>
+
+    <!--标题栏-->
+    <color name="title_bar_blue">#000000</color>
+    <color name="title_bar_red">#000000</color>
+    <color name="title_bar_green">#000000</color>
+
+    <color name="bg_tab">#f7f7fb</color>
+    <color name="tab_text_unselect">#c6cbcf</color>
+    <color name="tab_text_select">#3147ca</color>
+
+    <color name="color_397bff">#397bff</color>
+    <color name="color_line">#111111</color>
+    <color name="color_ef7907">#ef7907</color>
+    <color name="color_7b7b7b">#7b7b7b</color>
+    <color name="page_gray">#BCBCBC</color>
+
+    <color name="bg_selector_picture">#454545</color>
+    <color name="bg_login_page">#140F36</color>
+    <color name="commom_background">#f3f3f3</color>
+    <color name="font_blue">#42369a</color>
+    <!-- 透明 -->
+    <color name="translucent_background">#00000000</color>
+
+    <!--Splash-->
+    <color name="white">#FFFFFF</color>
+    <color name="gery">#FAFAFA</color>
+    <color name="darkgery">#797979</color>
+    <color name="trangery">#512e2e2e</color>
+
+    <!--RefreshLayout-->
+    <color name="refresh_progress_1">#536DFE</color>
+    <color name="refresh_progress_2">#f44336</color>
+    <color name="refresh_progress_3">#FF4081</color>
+
+    <!--TabLayout-->
+    <color name="TabTextColor">#FFFFFF</color>
+    <color name="TabSelectColor">#FAFAFA</color>
+    <color name="TabIndicatorColor">#FFFFFF</color>
+
+    <!--option card-->
+    <color name="card_1">#9068be</color>
+    <color name="card_2">#1F8AFF</color>
+    <color name="card_3">#28B78D</color>
+    <color name="card_4">#F16745</color>
+
+    <!--我的中心-->
+    <color name="bottom_bar_overlay">#aff5f5f5</color>
+    <color name="mine_blur_overlay">#33000000</color>
+    <color name="about_me_blur_overlay">#33000000</color>
+
+    <color name="progress_dialog">#ffffff</color>
+    <color name="menu_bg">#ffffff</color>
+    <color name="toast_bg">#ffffff</color>
+
+    <!--点击水波纹效果的颜色-->
+    <color name="ripple_dark">#114282f4</color>
+    <color name="ripple_light">#114282f4</color>
+
+    <color name="gray_light">#999999</color>
+
+    <color name="bg_dark">#c5c5c5</color>
+    <color name="text_gray_dark">#666666</color>
+    <color name="text_gray_light">#999999</color>
+
+    <!--通用颜色-->
+    <color name="main">#6f9ff4</color>
+    <color name="assist">#64dc9c</color>
+    <color name="accent">#ff0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="line">#111111</color>
+    <color name="background">#1a1a1a</color>
+    <color name="background_inner">#ffffff</color>
+    <color name="background_alpha">#dd111111</color>
+    <color name="background_mask">#11ffffff</color>
+    <color name="foreground">#111111</color>
+    <color name="foreground_alpha">#dd111111</color>
+    <color name="foreground_mask">#11ffffff</color>
+    <color name="foreground_top">#1a1a1a</color>
+    <color name="surface">#1a1a1a</color>
+    <color name="surface_alpha">#cc1a1a1a</color>
+    <color name="surface_mask">#11ffffff</color>
+    <color name="invert">#e1e1e1</color>
+    <color name="invert_alpha">#11e1e1e1</color>
+    <color name="second">#9b9b9b</color>
+    <color name="third">#616161</color>
+    <color name="fourth">#393939</color>
+    <color name="foreground_blue">#111111</color>
+    <!--文字颜色-->
+    <color name="text_main">@color/main</color>
+    <color name="text_accent">@color/accent</color>
+    <color name="text_surface">#dddddd</color>
+    <color name="text_surface_alpha">#88dddddd</color>
+    <color name="text_second">#9b9b9b</color>
+    <color name="text_third">#6a6a6a</color>
+    <color name="text_invert">#111111</color>
+    <color name="text_invert_alpha">#88111111</color>
+    <color name="text_on_main">#ffffff</color>
+
+</resources>

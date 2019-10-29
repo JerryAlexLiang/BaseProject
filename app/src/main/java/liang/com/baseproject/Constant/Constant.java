@@ -87,9 +87,14 @@ public class Constant {
     //登录JSON
     public static final String KEY_LOGIN_JSON = "KEY_LOGIN_JSON";
 
+    //头像本地持久化
     public static final String KEY_ICON = "KEY_ICON";
 
+    //主页背景持久化
     public static final String KEY_BG = "KEY_BG";
+
+    //主题模式本地持久化
+    public static final String KEY_DARK_THEME = "KEY_DARK_THEME";
 
     //DB_NAME
     public static final String APP_DB_NAME = "BaseProject.db";

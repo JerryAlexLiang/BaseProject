@@ -4,7 +4,7 @@
     android:useLevel="false">
 
     <!-- 填充的颜色 -->
-    <solid android:color="@color/palegreen" />
+    <solid android:color="@color/assist" />
 
     <size android:width="20dp" android:height="20dp"/>
 </shape>

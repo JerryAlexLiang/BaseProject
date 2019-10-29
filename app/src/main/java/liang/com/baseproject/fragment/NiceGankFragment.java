@@ -2,18 +2,14 @@ package liang.com.baseproject.fragment;
 
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +20,6 @@ import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.presenter.NiceGankPresenter;
 import liang.com.baseproject.utils.NetUtil;
-import liang.com.baseproject.utils.ToastUtil;
 
 /**
  * 创建日期：2019/2/25 on 19:22
@@ -92,8 +87,7 @@ public class NiceGankFragment extends MVPBaseFragment<NiceGankView, NiceGankPres
 
     @Override
     public void setToastShow(String str) {
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getContext().getResources(), R.drawable.icon_wrong),
-                true, str, Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+        onShowErrorToast(str);
     }
 
     @Override

@@ -47,7 +47,7 @@
         android:layout_marginStart="@dimen/dp60"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="@dimen/dp60"
-        android:background="@color/white"
+        android:background="@color/foreground"
         android:padding="10dp">
 
         <EditText
@@ -62,7 +62,7 @@
             android:gravity="top"
             android:hint="@string/input_user_name"
             android:maxLength="16"
-            android:textColorHint="#888888" />
+            android:textColorHint="@color/text_second" />
 
         <TextView
             android:id="@+id/tv_user_name_notice"
@@ -71,7 +71,7 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn_clear_user_name"
             android:text="用户名必须为2-12位字符"
-            android:textColor="@color/red"
+            android:textColor="@color/text_accent"
             android:visibility="gone" />
 
         <ImageView
@@ -96,7 +96,7 @@
         android:layout_marginStart="@dimen/dp60"
         android:layout_marginTop="@dimen/dp10"
         android:layout_marginEnd="@dimen/dp60"
-        android:background="@color/white"
+        android:background="@color/foreground"
         android:padding="10dp">
 
         <EditText
@@ -112,7 +112,7 @@
             android:hint="@string/input_password"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="#888888" />
+            android:textColorHint="@color/text_second" />
 
         <TextView
             android:id="@+id/tv_password_notice"
@@ -121,7 +121,7 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn_clear_password"
             android:text="密码必须6-16位"
-            android:textColor="@color/red"
+            android:textColor="@color/text_accent"
             android:visibility="gone" />
 
         <ImageView
@@ -158,7 +158,7 @@
         android:layout_marginStart="@dimen/dp60"
         android:layout_marginTop="@dimen/dp10"
         android:layout_marginEnd="@dimen/dp60"
-        android:background="@color/white"
+        android:background="@color/foreground"
         android:padding="10dp">
 
         <EditText
@@ -174,7 +174,7 @@
             android:hint="@string/input_password"
             android:inputType="textPassword"
             android:maxLength="16"
-            android:textColorHint="#888888" />
+            android:textColorHint="@color/text_second" />
 
         <TextView
             android:id="@+id/tv_confirm_password_notice"
@@ -183,7 +183,7 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/btn_confirm_clear_password"
             android:text="密码必须6-16位"
-            android:textColor="@color/red"
+            android:textColor="@color/text_accent"
             android:visibility="gone" />
 
         <ImageView

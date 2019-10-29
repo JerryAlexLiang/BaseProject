@@ -4,7 +4,7 @@
     android:useLevel="false">
 
     <!-- 填充的颜色 -->
-    <solid android:color="@color/translate" />
+    <solid android:color="@color/transparent" />
 
     <size android:width="20dp" android:height="20dp"/>
 </shape>

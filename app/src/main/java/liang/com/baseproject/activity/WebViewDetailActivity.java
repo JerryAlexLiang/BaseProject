@@ -6,9 +6,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +20,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
@@ -30,7 +27,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -71,7 +67,6 @@ import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.ImageLoaderUtils;
 import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.widget.CustomScrollRelativeLayout;
 
 /**
@@ -280,24 +275,30 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
                     baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
-
+                    //不显示ToolBar
                     toolbarLayout.setTitleEnabled(false);
+                    //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                    changeStatusBarTextColor(true);
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
                     baseToolbarRightIcon.setVisibility(View.VISIBLE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.ic_back);
                     baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_rectangle_bg));
-
+                    //显示ToolBar
                     toolbarLayout.setTitleEnabled(true);
+                    //google官方在安卓6.0以上版本才推出的深色状态栏字体api-白色
+                    changeStatusBarTextColor(false);
                 } else {
                     //中间状态
                     baseToolbarRightIcon.setVisibility(View.GONE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
                     baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
-
+                    //不显示ToolBar
                     toolbarLayout.setTitleEnabled(false);
+                    //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                    changeStatusBarTextColor(true);
                 }
             }
         });
@@ -516,8 +517,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
 
     @Override
     public void setToast(String content) {
-        ToastUtil.setCustomToast(WebViewDetailActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+        onShowTrueToast(content);
     }
 
     @Override

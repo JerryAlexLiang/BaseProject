@@ -217,7 +217,7 @@ public class ReadLaterActivity extends MVPBaseActivity {
                         break;
 
                     case R.id.tv_edit:
-                        ToastUtil.showShortToast("编辑");
+                        onShowToast("编辑");
                         break;
 
                     case R.id.tv_open_browser:

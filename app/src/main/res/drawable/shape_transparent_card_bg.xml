@@ -4,6 +4,6 @@
 
     <!--UI效果：圆角方形框-->
     <corners android:radius="20dp" />
-    <solid android:color="@color/translate" />
+    <solid android:color="@color/transparent" />
 
 </shape>

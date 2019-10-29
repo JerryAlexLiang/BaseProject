@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -182,10 +181,6 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         bannerPagerAdapter.setViewPagerClickInterFace(new MyBannerPagerAdapter.ViewPagerClickInterFace() {
             @Override
             public void onClick(int position) {
-//                Toast.makeText(TestCodeActivity.this, "点击第 " + (position + 1) + " 个广告栏   当前内容为： " + imageDescs[position], Toast.LENGTH_SHORT).show();
-                Toast.makeText(TestCodeActivity.this, "点击第 " + (position + 1) +
-                        " 个广告栏   当前内容为： " + mBnanerDesacList.get(position)
-                        + "跳转Url: " + mBannerDetailUrl.get(position), Toast.LENGTH_SHORT).show();
                 WebViewDetailActivity.actionStart(TestCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position), "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
             }
         });

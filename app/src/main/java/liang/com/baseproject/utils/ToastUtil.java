@@ -3,12 +3,16 @@ package liang.com.baseproject.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.widget.toast.CustomToast;
+
+import static liang.com.baseproject.utils.ResUtils.getResources;
 
 
 /**
@@ -97,6 +101,21 @@ public class ToastUtil {
                 .setDuration(duration)
                 .build();//创建吐司
         toast.show();
+    }
+
+    public static void onShowToast(String content) {
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                false, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    public static void onShowTrueToast(String content) {
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    public static void onShowErrorToast(String content) {
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_wrong),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
 }

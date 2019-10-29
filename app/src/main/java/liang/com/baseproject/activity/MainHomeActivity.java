@@ -5,12 +5,11 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -21,7 +20,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +29,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -48,6 +45,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
+import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.event.LoginEvent;
@@ -63,7 +61,6 @@ import liang.com.baseproject.receiver.NetEvent;
 import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.NetUtil;
-import liang.com.baseproject.utils.ToastUtil;
 import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.utils.WifiUtils;
 
@@ -358,7 +355,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.nav_icon_user_image:
                 if (UserLoginUtils.getInstance().isLogin()) {
-                    ToastUtil.showShortToast("开发中...");
+                    onShowToast("开发中...");
                 } else {
                     if (Build.VERSION.SDK_INT > 20) {
                         Bundle options = ActivityOptions.makeSceneTransitionAnimation(MainHomeActivity.this, navUserIocn, "navUserIocn").toBundle();
@@ -374,7 +371,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
             case R.id.nav_tv_user_name:
                 boolean ifNeedLogin = UserLoginUtils.getInstance().doIfNeedLogin();
                 if (ifNeedLogin) {
-                    ToastUtil.showShortToast("开发中...");
+                    onShowToast("开发中...");
                 }
                 break;
 
@@ -482,7 +479,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "切换模式", Toast.LENGTH_SHORT).show();
+                                onShowToast("切换模式");
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
@@ -512,7 +509,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "特色产品", Toast.LENGTH_SHORT).show();
+                                onShowToast("特色产品");
                             }
                         });
                         baseActionBar.setVisibility(View.GONE);
@@ -562,7 +559,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "切换模式", Toast.LENGTH_SHORT).show();
+                                onShowToast("切换模式");
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
@@ -594,7 +591,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast.makeText(mActivity, "特色产品", Toast.LENGTH_SHORT).show();
+                                onShowToast("特色产品");
                             }
                         });
                         baseActionBar.setVisibility(View.GONE);
@@ -646,13 +643,10 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         if (event.getAction() == KeyEvent.ACTION_DOWN && KeyEvent.KEYCODE_BACK == keyCode) {
             long currentTime = System.currentTimeMillis();
             if ((currentTime - touchTime) >= waitTime) {
-//                Toast.makeText(MainHomeActivity.this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
-                ToastUtil.setCustomToast(MainHomeActivity.this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                        true, "再按一次退出应用", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+                onShowTrueToast("再按一次退出应用");
                 touchTime = currentTime;
             } else {
                 finish();
-//                System.exit(0);
             }
             return true;
         } else if (KeyEvent.KEYCODE_HOME == keyCode) {
@@ -667,7 +661,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         getActionBarTheme(baseActionBar, null);
     }
 
-    @OnClick({R.id.base_actionbar_left_icon, R.id.rl_net_bar,R.id.base_actionbar_right_icon})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.rl_net_bar, R.id.base_actionbar_right_icon})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:

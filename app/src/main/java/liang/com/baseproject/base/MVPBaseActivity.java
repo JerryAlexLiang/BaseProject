@@ -237,21 +237,21 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         switch (actionBarColorInt) {
             case ACTIONBAR_COLOR_BLUE:
                 if (baseActionBar != null) {
-                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.title_bar_blue));
                 }
                 if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.colorBlue));
-                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.colorBlue));
+                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_blue));
+                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_blue));
                 }
                 break;
 
             case ACTIONBAR_COLOR_RED:
                 if (baseActionBar != null) {
-                    baseActionBar.setBackgroundColor(Color.RED);
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.title_bar_red));
                 }
                 if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(Color.RED);
-                    baseToolBar.setStatusBarScrimColor(Color.RED);
+                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_red));
+                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_red));
                 }
                 break;
 
@@ -287,11 +287,11 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
             case ACTIONBAR_COLOR_GREEN:
                 if (baseActionBar != null) {
-                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                    baseActionBar.setBackgroundColor(getResources().getColor(R.color.title_bar_green));
                 }
                 if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.palegreen));
-                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.palegreen));
+                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_green));
+                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_green));
                 }
                 break;
         }
@@ -303,13 +303,13 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         switch (actionBarColorInt) {
             case ACTIONBAR_COLOR_BLUE:
                 if (relativeLayout != null) {
-                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.title_bar_blue));
                 }
                 break;
 
             case ACTIONBAR_COLOR_RED:
                 if (relativeLayout != null) {
-                    relativeLayout.setBackgroundColor(Color.RED);
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.title_bar_red));
                 }
                 break;
 
@@ -333,7 +333,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
             case ACTIONBAR_COLOR_GREEN:
                 if (relativeLayout != null) {
-                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                    relativeLayout.setBackgroundColor(getResources().getColor(R.color.title_bar_green));
                 }
                 break;
         }
@@ -368,7 +368,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
             case ACTIONBAR_COLOR_RED:
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.red, R.color.white);
+                    smartRefreshLayout.setPrimaryColorsId(R.color.accent, R.color.white);
                 }
                 break;
 
@@ -386,13 +386,13 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
             case ACTIONBAR_COLOR_TRANSLATE:
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.translate, R.color.white);
+                    smartRefreshLayout.setPrimaryColorsId(R.color.transparent, R.color.white);
                 }
                 break;
 
             case ACTIONBAR_COLOR_GREEN:
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.palegreen, R.color.white);
+                    smartRefreshLayout.setPrimaryColorsId(R.color.assist, R.color.white);
                 }
                 break;
         }
@@ -546,7 +546,17 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
     public void onShowToast(String content){
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+                false, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    public void onShowTrueToast(String content){
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    public void onShowErrorToast(String content){
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_wrong),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
     public void jumpToActivity(Intent intent) {

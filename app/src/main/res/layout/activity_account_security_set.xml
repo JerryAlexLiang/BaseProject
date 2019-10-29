@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/page_background"
+    android:background="@color/foreground"
     tools:context=".setting.activity.AccountSecuritySetActivity">
 
     <include layout="@layout/layout_base_actionbar_default"/>
@@ -45,7 +45,7 @@
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:text="@string/modify_pwd"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_surface"
                         android:textSize="@dimen/sp15" />
 
                     <ImageView
@@ -74,7 +74,7 @@
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:text="@string/gesture_pwd"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_surface"
                         android:textSize="@dimen/sp15" />
 
                     <Switch
@@ -106,7 +106,7 @@
                         android:layout_weight="1"
                         android:singleLine="true"
                         android:text="@string/gesture_pwd_modify"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_surface"
                         android:textSize="@dimen/sp15" />
 
                     <ImageView

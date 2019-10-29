@@ -156,7 +156,7 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
 
             case ACTIONBAR_COLOR_RED:
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.red, R.color.white);
+                    smartRefreshLayout.setPrimaryColorsId(R.color.accent, R.color.white);
                 }
                 break;
 
@@ -174,13 +174,13 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
 
             case ACTIONBAR_COLOR_TRANSLATE:
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.translate, R.color.white);
+                    smartRefreshLayout.setPrimaryColorsId(R.color.transparent, R.color.white);
                 }
                 break;
 
             case ACTIONBAR_COLOR_GREEN:
                 if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.palegreen, R.color.white);
+                    smartRefreshLayout.setPrimaryColorsId(R.color.assist, R.color.white);
                 }
                 break;
         }
@@ -220,7 +220,17 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
 
     public void onShowToast(String content){
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
+                false, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    public void onShowTrueToast(String content){
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
+    }
+
+    public void onShowErrorToast(String content){
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_wrong),
+                true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
     public void finishPage() {

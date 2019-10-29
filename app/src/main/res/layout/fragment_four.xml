@@ -4,14 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/foreground"
     tools:context=".mine.MineFragment">
 
     <RelativeLayout
         android:id="@+id/rl_page_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/page_background">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/iv_blur"
@@ -47,10 +46,10 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="80dp"
                             android:src="@drawable/icon_user_logo"
-                            app:civ_border_color="@color/yellow"
+                            app:civ_border_color="@color/assist"
                             app:civ_border_overlay="true"
                             app:civ_border_width="2dp"
-                            app:civ_circle_background_color="@color/translate" />
+                            app:civ_circle_background_color="@color/transparent" />
 
                         <RelativeLayout
                             android:id="@+id/user_info_container"
@@ -147,7 +146,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/page_background"
+                        android:background="@color/foreground"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -175,7 +174,7 @@
                                 android:layout_weight="1"
                                 android:singleLine="true"
                                 android:text="@string/setting"
-                                android:textColor="@color/black"
+                                android:textColor="@color/text_surface"
                                 android:textSize="@dimen/sp15" />
 
                             <ImageView
@@ -213,7 +212,7 @@
                                 android:layout_weight="1"
                                 android:singleLine="true"
                                 android:text="@string/read_later"
-                                android:textColor="@color/black"
+                                android:textColor="@color/text_surface"
                                 android:textSize="@dimen/sp15" />
 
                             <ImageView

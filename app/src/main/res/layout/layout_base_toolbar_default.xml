@@ -33,7 +33,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/base_toolbar_left_icon"
             android:padding="8dp"
-            android:textColor="#ffffff"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:visibility="gone" />
 
@@ -61,7 +61,7 @@
         android:gravity="center"
         android:lines="1"
         android:scrollHorizontally="true"
-        android:textColor="@android:color/white"
+        android:textColor="@color/white"
         android:visibility="gone" />
 
     <RelativeLayout

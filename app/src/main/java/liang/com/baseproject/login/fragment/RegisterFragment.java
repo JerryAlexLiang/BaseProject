@@ -2,27 +2,17 @@ package liang.com.baseproject.login.fragment;
 
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
@@ -34,7 +24,6 @@ import liang.com.baseproject.login.presenter.RegisterPresenter;
 import liang.com.baseproject.login.view.RegisterView;
 import liang.com.baseproject.utils.GsonUtils;
 import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ToastUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -164,8 +153,7 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
 
     @Override
     public void onShowToast(String content) {
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                false, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+        onShowTrueToast(content);
     }
 
     @Override

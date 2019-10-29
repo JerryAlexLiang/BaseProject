@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/foreground"
     tools:context=".activity.SettingActivity">
 
     <include layout="@layout/layout_base_actionbar_default" />

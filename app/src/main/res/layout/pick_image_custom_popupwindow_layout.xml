@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/page_transparent"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -22,6 +21,7 @@
             android:gravity="center"
             android:padding="10dp"
             android:text="标题"
+            android:textColor="@color/text_second"
             android:textSize="12sp" />
 
         <View

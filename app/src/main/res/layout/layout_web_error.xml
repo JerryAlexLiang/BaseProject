@@ -3,7 +3,7 @@
     android:id="@+id/rl_web_error_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/web_error_page_color">
+    android:background="@color/foreground">
 
     <ImageView
         android:id="@+id/iv_404"
@@ -19,7 +19,7 @@
         android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:tint="@color/red"
+        android:tint="@color/accent"
         android:src="@drawable/ic_error" />
 
     <TextView
@@ -28,6 +28,7 @@
         android:text="网络被外星人劫走了~~~"
         android:gravity="center"
         android:layout_marginTop="10dp"
+        android:textColor="@color/text_second"
         android:layout_below="@id/iv_web_error"
         android:layout_centerHorizontal="true"/>
 

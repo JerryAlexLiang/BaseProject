@@ -3,14 +3,10 @@ package liang.com.baseproject.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.ThemeSettingActivity;
@@ -57,7 +53,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             case "key_actionbar_theme_modify":
                 ThemeSettingActivity.actionStart(getActivity());
                 getActivity().finish();
-                ToastUtil.showShortToast(getActivity(), "更该主题样式~");
+                ToastUtil.onShowToast("更该主题样式~");
                 break;
 
             case "clear_cache":
@@ -69,7 +65,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 break;
 
             case "developer":
-                ToastUtil.showShortToast(getActivity(), "开发中~");
+                ToastUtil.onShowToast("开发中~");
                 break;
         }
         return false;
@@ -102,8 +98,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CacheCleanUtil.cleanAllCache();
-                        ToastUtil.setCustomToast(getActivity(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                                true, getResources().getString(R.string.toast_clear_cache), Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
+                        ToastUtil.onShowTrueToast(getResources().getString(R.string.toast_clear_cache));
                     }
                 })
                 .show();

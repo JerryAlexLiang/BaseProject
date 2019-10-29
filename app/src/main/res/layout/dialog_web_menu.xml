@@ -7,7 +7,6 @@
     android:layout_margin="8dp"
     android:paddingTop="8dp"
     android:paddingBottom="8dp"
-    android:backgroundTint="@color/black"
     android:background="@drawable/bg_solid_round_color_white_radius_def"
     android:orientation="vertical"
     tools:ignore="UnusedAttribute">
@@ -18,7 +17,7 @@
         android:layout_height="44dp"
         android:gravity="center"
         android:text="分享"
-        android:textColor="@color/white"
+        android:textColor="@color/text_invert"
         android:textSize="15sp" />
 
     <TextView
@@ -27,7 +26,7 @@
         android:layout_height="44dp"
         android:gravity="center"
         android:text="收藏"
-        android:textColor="@color/white"
+        android:textColor="@color/text_invert"
         android:textSize="15sp" />
 
     <TextView
@@ -36,7 +35,7 @@
         android:layout_height="44dp"
         android:gravity="center"
         android:text="稍后阅读"
-        android:textColor="@color/white"
+        android:textColor="@color/text_invert"
         android:textSize="15sp" />
 
     <TextView
@@ -45,7 +44,7 @@
         android:layout_height="44dp"
         android:gravity="center"
         android:text="浏览器打开"
-        android:textColor="@color/white"
+        android:textColor="@color/text_invert"
         android:textSize="15sp" />
 
 </LinearLayout>

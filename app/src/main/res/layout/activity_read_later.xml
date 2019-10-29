@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/foreground"
     tools:context=".mine.activity.ReadLaterActivity">
 
     <include layout="@layout/layout_base_actionbar_default" />
@@ -21,7 +22,7 @@
             android:id="@+id/iv_empty"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:tint="@color/red"
+            android:tint="@color/accent"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_empty" />
 

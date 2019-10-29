@@ -8,77 +8,6 @@
     <color name="colorBlue2">#00a2ed</color>
     <color name="tabIndicatorColor">#FF6F00</color>
 
-    <color name="black">#000000</color>
-    <color name="bg_tab">#f7f7fb</color>
-    <color name="tab_text_unselect">#c6cbcf</color>
-    <color name="tab_text_select">#3147ca</color>
-    <color name="black_50">#80000000</color>
-
-    <color name="page_background">#EDEBF3</color>
-    <color name="page_transparent">#00000000</color>
-    <color name="color_397bff">#397bff</color>
-    <color name="color_line">#e1e1e1</color>
-    <color name="color_ef7907">#ef7907</color>
-    <color name="color_7b7b7b">#7b7b7b</color>
-    <color name="page_gray">#BCBCBC</color>
-
-    <color name="bg_title">#111322</color>
-    <color name="color_white">#ffffff</color>
-    <color name="color_blue">#3F51B5</color>
-
-    <!--移植老项目-->
-    <color name="white_50">#80FFFFFF</color>
-    <color name="text_grey">#B1B1B1</color>
-    <color name="text_grey2">#5E5E5E</color>
-    <color name="blue2">#00fffc</color>
-    <color name="blue3">#197b7a</color>
-    <color name="red2">#813939</color>
-
-    <color name="bg_his_grey">#232323</color>
-    <color name="bg_line">#9c9c9c</color>
-    <color name="bg_alarm_panorama">#80232323</color>
-
-    <color name="bg_selector_picture">#454545</color>
-    <color name="bg_login_page">#140F36</color>
-    <color name="commom_background">#f3f3f3</color>
-    <color name="font_blue">#42369a</color>
-    <!-- 透明 -->
-    <color name="translucent_background">#00000000</color>
-
-    <!--Text-->
-    <color name="textColor">#424242</color>
-
-    <!--Splash-->
-    <color name="white">#FFFFFF</color>
-    <color name="gery">#FAFAFA</color>
-    <color name="darkgery">#797979</color>
-    <color name="trangery">#512e2e2e</color>
-
-    <!--RefreshLayout-->
-    <color name="refresh_progress_1">#536DFE</color>
-    <color name="refresh_progress_2">#f44336</color>
-    <color name="refresh_progress_3">#FF4081</color>
-
-    <!--TabLayout-->
-    <color name="TabTextColor">#FFFFFF</color>
-    <color name="TabSelectColor">#FAFAFA</color>
-    <color name="TabIndicatorColor">#FFFFFF</color>
-
-    <!--gank-->
-    <color name="android">#1F8AFF</color>
-    <color name="ios">#F05D5E</color>
-    <color name="休息视频">#FFD034</color>
-    <color name="前端">#28B78D</color>
-    <color name="拓展资源">#F16745</color>
-    <color name="webView_progress_bar_color">#A199E9</color>
-
-    <!--option card-->
-    <color name="card_1">#9068be</color>
-    <color name="card_2">#1F8AFF</color>
-    <color name="card_3">#28B78D</color>
-    <color name="card_4">#F16745</color>
-
-
     <color name="ivory">#fffff0</color> <!-- 象牙色 -->
     <color name="lightyellow">#ffffe0</color> <!-- 亮黄色 -->
     <color name="yellow">#ffff00</color> <!-- 黄色 -->
@@ -222,13 +151,60 @@
     <color name="darkblue">#00008b</color> <!-- 暗蓝色 -->
     <color name="navy">#000080</color> <!-- 海军色 -->
     <color name="translate">#33000000</color> <!-- 透明色 -->
-    <color name="toast_bg">#55000000</color> <!-- 透明灰色色 -->
     <color name="green">#3cdc86</color>
+
+    <!--标题栏-->
+    <color name="title_bar_blue">#2196F3</color>
+    <color name="title_bar_red">#ff0000</color>
+    <color name="title_bar_green">#3cdc86</color>
+
+    <color name="bg_tab">#f7f7fb</color>
+    <color name="tab_text_unselect">#c6cbcf</color>
+    <color name="tab_text_select">#3147ca</color>
+
+    <color name="color_397bff">#397bff</color>
+    <color name="color_line">#e1e1e1</color>
+    <color name="color_ef7907">#ef7907</color>
+    <color name="color_7b7b7b">#7b7b7b</color>
+    <color name="page_gray">#BCBCBC</color>
+
+    <color name="bg_selector_picture">#454545</color>
+    <color name="bg_login_page">#140F36</color>
+    <color name="commom_background">#f3f3f3</color>
+    <color name="font_blue">#42369a</color>
+    <!-- 透明 -->
+    <color name="translucent_background">#00000000</color>
+
+    <!--Splash-->
+    <color name="white">#FFFFFF</color>
+    <color name="gery">#FAFAFA</color>
+    <color name="darkgery">#797979</color>
+    <color name="trangery">#512e2e2e</color>
+
+    <!--RefreshLayout-->
+    <color name="refresh_progress_1">#536DFE</color>
+    <color name="refresh_progress_2">#f44336</color>
+    <color name="refresh_progress_3">#FF4081</color>
+
+    <!--TabLayout-->
+    <color name="TabTextColor">#FFFFFF</color>
+    <color name="TabSelectColor">#FAFAFA</color>
+    <color name="TabIndicatorColor">#FFFFFF</color>
+
+    <!--option card-->
+    <color name="card_1">#9068be</color>
+    <color name="card_2">#1F8AFF</color>
+    <color name="card_3">#28B78D</color>
+    <color name="card_4">#F16745</color>
 
     <!--我的中心-->
     <color name="bottom_bar_overlay">#aff5f5f5</color>
     <color name="mine_blur_overlay">#33000000</color>
     <color name="about_me_blur_overlay">#33000000</color>
+
+    <color name="progress_dialog">#55000000</color>
+    <color name="menu_bg">#000000</color>
+    <color name="toast_bg">#000000</color>
 
     <!--点击水波纹效果的颜色-->
     <color name="ripple_dark">#11000000</color>
@@ -240,5 +216,41 @@
     <color name="text_gray_dark">#666666</color>
     <color name="text_gray_light">#999999</color>
 
-    <color name="web_error_page_color">#eaeff2</color>
+    <!--通用颜色-->
+    <color name="main">#4282f4</color>
+    <color name="assist">#3cdc86</color>
+    <color name="accent">#ff0000</color>
+    <color name="transparent">#00000000</color>
+    <color name="line">#f5f5f5</color>
+    <color name="background">#f5f5f5</color>
+    <color name="background_inner">#000000</color>
+    <color name="background_alpha">#ccf5f5f5</color>
+    <color name="background_mask">#11000000</color>
+    <color name="foreground">#ffffff</color>
+    <color name="foreground_alpha">#ccffffff</color>
+    <color name="foreground_mask">#ccffffff</color>
+    <color name="foreground_top">#f5f5f5</color>
+    <color name="surface">#ffffff</color>
+    <color name="surface_alpha">#ccffffff</color>
+    <color name="surface_mask">#ccffffff</color>
+    <color name="invert">#333333</color>
+    <color name="invert_alpha">#11000000</color>
+    <color name="second">#666666</color>
+    <color name="third">#999999</color>
+    <color name="fourth">#cccccc</color>
+    <color name="foreground_blue">#2196F3</color>
+    <!--文字颜色-->
+    <color name="text_main">@color/main</color>
+    <color name="text_accent">@color/accent</color>
+    <color name="text_surface">#333333</color>
+    <color name="text_surface_alpha">#88333333</color>
+    <color name="text_second">#666666</color>
+    <color name="text_third">#999999</color>
+    <color name="text_invert">#ffffff</color>
+    <color name="text_invert_alpha">#88ffffff</color>
+    <color name="text_on_main">#ffffff</color>
+
+
+
+
 </resources>

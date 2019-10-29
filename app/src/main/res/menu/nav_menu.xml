@@ -4,7 +4,7 @@
         <item
             android:id="@+id/menu_nav_scan"
             android:icon="@drawable/icon_scan_code"
-            android:title="扫一扫"/>
+            android:title="扫一扫" />
         <item
             android:id="@+id/menu_nav_friends"
             android:icon="@drawable/icon_activity"
@@ -22,4 +22,5 @@
             android:icon="@drawable/icon_setting"
             android:title="设置" />
     </group>
+
 </menu>

@@ -11,195 +11,324 @@
 
     <include layout="@layout/layout_base_actionbar_default" />
 
-    <liang.com.baseproject.widget.CustomRadioGroup
-        android:id="@+id/custom_radio_group"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        tools:ignore="UnknownIdInLayout">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_night_mode"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="8dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="0dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/app_theme_night_mode_bg"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginStart="35dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_night_mode"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/no_collection"
+                        android:tint="@color/white"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/night_black_mode"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="10dp"
+                        android:textSize="26sp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_day_mode"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                app:cardElevation="3dp"
+                app:cardCornerRadius="8dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="0dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/app_theme_default_mode_bg"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginStart="35dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_day_mode"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/no_collection"
+                        android:tint="@color/white"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blade_white_mode"
+                        android:textColor="@color/white"
+                        android:layout_marginStart="10dp"
+                        android:textSize="26sp"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
+                android:id="@+id/ll_color_theme_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radio_blue"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/selector_theme_blue"
-                    android:button="@null" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="蓝色"
-                    android:layout_marginTop="5dp"
+                    android:text="主题样式"
                     android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textSize="26sp"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radio_black"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
+                <liang.com.baseproject.widget.CustomRadioGroup
+                    android:id="@+id/custom_radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/selector_theme_black"
-                    android:button="@null" />
+                    android:gravity="center_horizontal"
+                    android:padding="10dp"
+                    tools:ignore="UnknownIdInLayout">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="黑色"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
 
-            </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
+                            <RadioButton
+                                android:id="@+id/radio_blue"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/selector_theme_blue"
+                                android:button="@null" />
 
-                <RadioButton
-                    android:id="@+id/radio_red"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/selector_theme_red"
-                    android:button="@null" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="蓝色"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/text_invert"
+                                android:layout_gravity="center_horizontal"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="红色"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radio_black"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/selector_theme_black"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="黑色"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/text_invert"
+                                android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radio_red"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/selector_theme_red"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="红色"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/text_invert"
+                                android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="15dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radio_white"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/selector_theme_white"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="白色"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/text_invert"
+                                android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radio_green"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/selector_theme_green"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="绿色"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/text_invert"
+                                android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/radio_translate"
+                                android:layout_width="65dp"
+                                android:layout_height="65dp"
+                                android:layout_marginLeft="15dp"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginRight="15dp"
+                                android:background="@drawable/selector_theme_translate"
+                                android:button="@null" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="透明色"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/text_invert"
+                                android:layout_gravity="center_horizontal"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </liang.com.baseproject.widget.CustomRadioGroup>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="15dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radio_white"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/selector_theme_white"
-                    android:button="@null" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="白色"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radio_green"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/selector_theme_green"
-                    android:button="@null" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="绿色"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radio_translate"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginRight="15dp"
-                    android:background="@drawable/selector_theme_translate"
-                    android:button="@null" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="透明色"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_horizontal"/>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </liang.com.baseproject.widget.CustomRadioGroup>
+    </ScrollView>
 
 </LinearLayout>

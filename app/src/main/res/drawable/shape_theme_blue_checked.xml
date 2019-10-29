@@ -7,7 +7,7 @@
     <solid android:color="@color/colorBlue" />
 
     <!--&lt;!&ndash; 设置边框宽度 &ndash;&gt;-->
-    <stroke android:color="@color/yellow" android:width="5dp"/>
+    <stroke android:color="#00ff00" android:width="5dp"/>
 
     <size android:width="20dp" android:height="20dp"/>
 

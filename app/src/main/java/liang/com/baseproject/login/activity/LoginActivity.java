@@ -204,15 +204,10 @@ public class LoginActivity extends MVPBaseActivity {
                 break;
 
             case R.id.iv_user:
-//                Toast.makeText(this, "加载中...", Toast.LENGTH_SHORT).show();
-                ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                        true, "加载中...", getResources().getColor(R.color.translate), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
+                onShowToast(getResources().getString(R.string.loading));
                 break;
 
             case R.id.tv_login_user_name:
-//                Toast.makeText(this, "加载结束...", Toast.LENGTH_SHORT).show();
-                ToastUtil.setCustomToast(this, BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-                        true, "加载结束...", getResources().getColor(R.color.translate), Color.WHITE, Gravity.BOTTOM, Toast.LENGTH_SHORT);
                 break;
         }
     }
@@ -299,13 +294,13 @@ public class LoginActivity extends MVPBaseActivity {
         switch (actionBarColorInt) {
             case ACTIONBAR_COLOR_BLUE:
                 if (rlLoginContainer != null) {
-                    rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.colorBlue));
+                    rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.title_bar_blue));
                 }
                 break;
 
             case ACTIONBAR_COLOR_RED:
                 if (rlLoginContainer != null) {
-                    rlLoginContainer.setBackgroundColor(Color.RED);
+                    rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.title_bar_red));
                 }
                 break;
 
@@ -329,7 +324,7 @@ public class LoginActivity extends MVPBaseActivity {
 
             case ACTIONBAR_COLOR_GREEN:
                 if (rlLoginContainer != null) {
-                    rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.palegreen));
+                    rlLoginContainer.setBackgroundColor(getResources().getColor(R.color.title_bar_green));
                 }
                 break;
         }

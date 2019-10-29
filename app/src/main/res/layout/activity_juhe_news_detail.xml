@@ -2,14 +2,14 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00000000"
     android:clipToPadding="false"
     android:elevation="2dp"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:id="@+id/coordinator_layout"
-    android:background="@color/page_background"
     tools:context=".activity.WebViewDetailActivity"
     tools:targetApi="lollipop">
 
@@ -127,17 +127,18 @@
                 <com.amap.api.maps.MapView
                     android:id="@+id/map_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:background="@color/transparent" />
 
                 <ImageView
                     android:id="@+id/iv_btn_my_location"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginTop="80dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_alignParentEnd="true"
-                    android:visibility="visible"
-                    android:background="@drawable/selector_my_loaction" />
+                    android:background="@drawable/selector_my_loaction"
+                    android:visibility="visible" />
 
             </liang.com.baseproject.widget.CustomScrollRelativeLayout>
 
@@ -216,16 +217,16 @@
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlEnablePreviewInEditMode="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlEnablePreviewInEditMode="true"
         tools:showIn="@layout/activity_juhe_news_detail">
 
         <RelativeLayout
             android:id="@+id/rl_recycler_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-            android:background="@drawable/shape_white_card_bg">
+            android:background="@drawable/shape_white_card_bg"
+            android:padding="10dp">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_map"
@@ -257,7 +258,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-8dp"
-                android:indeterminateDrawable="@color/webView_progress_bar_color" />
+                android:indeterminateDrawable="@color/accent" />
 
             <WebView
                 android:id="@+id/url_web"

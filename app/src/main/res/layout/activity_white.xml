@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/foreground"
     tools:context=".activity.WhiteActivity">
 
     <include
@@ -15,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="跳转到TranslateActivity"
+        android:textColor="@color/text_surface"
         android:textAllCaps="false"/>
 
 
