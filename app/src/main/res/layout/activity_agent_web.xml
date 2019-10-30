@@ -18,7 +18,8 @@
         <liang.com.baseproject.widget.WebContainer
             android:id="@+id/web_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:background="@color/surface"/>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 

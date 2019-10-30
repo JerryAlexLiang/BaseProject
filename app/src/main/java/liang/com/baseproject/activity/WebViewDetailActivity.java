@@ -20,10 +20,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,6 +46,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,16 +73,20 @@ import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.ImageLoaderUtils;
 import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.utils.ResolutionUtils;
+import liang.com.baseproject.utils.SettingUtils;
 import liang.com.baseproject.widget.CustomScrollRelativeLayout;
+import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
 
 /**
  * 创建日期：2019/2/20 on 13:31
  * 描述: 聚合新闻详情页- WebView加载Url
  * 作者: liangyang
  */
-public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView, AMap.OnMyLocationChangeListener, AMap.OnMarkerClickListener, AMap.OnMapTouchListener {
+public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView, AMap.OnMyLocationChangeListener, AMap.OnMarkerClickListener, AMap.OnMapTouchListener, CustomPopupWindow.ViewInterface, View.OnClickListener {
 
     private static final String TAG = WebViewDetailActivity.class.getSimpleName();
+
     @BindView(R.id.pb_progress)
     ProgressBar pbProgress;
     @BindView(R.id.url_web)
@@ -132,6 +142,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     private String imageUrl;
 
     private String userIcon = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3706852963,2399513353&fm=26&gp=0.jpg";
+    private CustomPopupWindow customPopupWindow;
 
     /**
      * android 6.0 或以上权限申请
@@ -148,13 +159,16 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
 
     private boolean followMove = true;
 
+    private boolean isSetCustomMapMode = false;
     private Map<String, LatLng> poaitionMap = new HashMap<>();
     private AMap aMap;
+
     private MyLocationStyle myLocationStyle;
     private HomeContainerAdapter homeContainerAdapter;
 
     private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
+    private boolean mDarkTheme;
 
     public static void actionStart(Context context, String title, String url, String imageUrl) {
         Intent intent = new Intent(context, WebViewDetailActivity.class);
@@ -217,36 +231,27 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         ButterKnife.bind(this);
         //随系统设置更改ToolBar状态栏颜色
         getActionBarTheme(null, toolbarLayout);
-        //google官方在安卓6.0以上版本才推出的深色状态栏字体api
-        changeStatusBarTextColor(true);
-        customScrollContainer.setCollapsingToolbarLayout(toolbarLayout);
-        //获取地图控件引用
-        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
-        mapView.onCreate(savedInstanceState);
-        //AMap类是地图的控制器类，用来操作地图。
-        //初始化地图控制器对象
-        if (aMap == null) {
-            aMap = mapView.getMap();
-        }
-        //初始化权限
-        initPermission();
-        if (mIsPermissionGanted) {
-            initMapLocation();
-        }
-        baseToolbarLeftIcon.setVisibility(View.VISIBLE);
-//        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
-//        baseToolbarLeftIcon.setImageDrawable(getDrawable(R.drawable.abc_ic_ab_back_material));
-        baseToolbarRightIcon.setVisibility(View.GONE);
-
-
         //得到Intent传递的数据
         parseIntent();
+        //初始化地图视图
+        initMap(savedInstanceState);
+        //初始化视图
+        initView();
         //WebViewInterface
         mPresenter.setWebView(url);
         ImageLoaderUtils.loadRadiusImage(WebViewDetailActivity.this, true, ivDetailTop,
                 imageUrl, R.drawable.image_top_default, R.drawable.image_top_default, 0);
 //        mPresenter.setWebView("https://blog.csdn.net/u013139425/article/details/79519268?tdsourcetag=s_pcqq_aiomsg");
+    }
 
+    private void initView() {
+        //自定义的RelativeLayout-CollapsingToolbarLayout-滑动冲突
+        customScrollContainer.setCollapsingToolbarLayout(toolbarLayout);
+        baseToolbarLeftIcon.setVisibility(View.VISIBLE);
+//        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+//        baseToolbarLeftIcon.setImageDrawable(getDrawable(R.drawable.abc_ic_ab_back_material));
+//        baseToolbarRightIcon.setVisibility(View.GONE);
+        baseToolbarRightIcon.setVisibility(View.VISIBLE);
         toolbarLayout.setTitle(title);
         //设置CollapsingToolbarLayout扩展状态标题栏颜色
         toolbarLayout.setExpandedTitleColor(Color.YELLOW);
@@ -260,45 +265,230 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         initListener();
     }
 
+    private void initMap(Bundle savedInstanceState) {
+        //获取地图控件引用
+        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
+        mapView.onCreate(savedInstanceState);
+        //AMap类是地图的控制器类，用来操作地图。
+        //初始化地图控制器对象
+        if (aMap == null) {
+            aMap = mapView.getMap();
+        }
+        //初始化权限
+        initPermission();
+        if (mIsPermissionGanted) {
+            initMapLocation();
+        }
+
+        //自定义地图 - 设定离线样式文件
+        setMapCustomStyleFile(this);
+
+        if (mDarkTheme) {
+            //黑夜模式 - 夜景地图模式
+            aMap.setMapType(AMap.MAP_TYPE_NIGHT);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+//                baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+//            }
+        } else {
+            //标准模式 - 矢量地图模式
+            aMap.setMapType(AMap.MAP_TYPE_NORMAL);
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+//                baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+//            }
+        }
+    }
+
+    /**
+     * 自定义地图 - 设定离线样式文件
+     */
+    private void setMapCustomStyleFile(Context context) {
+        String styleName = "style.data";
+        FileOutputStream outputStream = null;
+        InputStream inputStream = null;
+        String filePath = null;
+        try {
+            inputStream = context.getAssets().open(styleName);
+            byte[] b = new byte[inputStream.available()];
+            inputStream.read(b);
+
+            filePath = context.getFilesDir().getAbsolutePath();
+            File file = new File(filePath + "/" + styleName);
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            outputStream = new FileOutputStream(file);
+            outputStream.write(b);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null)
+                    inputStream.close();
+
+                if (outputStream != null)
+                    outputStream.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        aMap.setCustomMapStylePath(filePath + "/" + styleName);
+        aMap.showBuildings(true);
+        aMap.showIndoorMap(true);
+        aMap.showMapText(true);
+    }
+
     /**
      * CollapsingToolbarLayout滑动状态监听
      * 因为android.support.design.widget.CollapsingToolbarLayout外层是android.support.design.widget.AppBarLayout所以设置的监听是它了
      */
+    private AppBarStateChangeListener.State currentState;
+
     private void initListener() {
         appBar.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                int mapType = aMap.getMapType();
                 if (state == State.EXPANDED) {
-                    //展开状态
-                    baseToolbarRightIcon.setVisibility(View.GONE);
+                    currentState = state;
+//                    //展开状态
+//                    toolbarRightLayout.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            showMenuWindow(0);
+//                        }
+//                    });
+//                    baseToolbarRightIcon.setVisibility(View.GONE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
-                    baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
+
+                    if (mDarkTheme) {
+                        //黑夜模式
+                        if (mapType == AMap.MAP_TYPE_NORMAL || mapType == AMap.MAP_TYPE_NAVI) {
+                            //标准模式地图or导航模式
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(true);
+                        } else if (mapType == AMap.MAP_TYPE_NIGHT || mapType == AMap.MAP_TYPE_SATELLITE) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                        if (isSetCustomMapMode) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                    } else {
+                        //白天模式
+                        if (mapType == AMap.MAP_TYPE_NORMAL || mapType == AMap.MAP_TYPE_NAVI) {
+                            //标准模式地图or导航模式
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(true);
+                        } else if (mapType == AMap.MAP_TYPE_NIGHT || mapType == AMap.MAP_TYPE_SATELLITE) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                        if (isSetCustomMapMode) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                    }
+
                     //不显示ToolBar
                     toolbarLayout.setTitleEnabled(false);
-                    //google官方在安卓6.0以上版本才推出的深色状态栏字体api
-                    changeStatusBarTextColor(true);
+
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
-                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                    currentState = state;
+//                    toolbarRightLayout.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            showMenuWindow(1);
+//                        }
+//                    });
+//                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.ic_back);
                     baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                    baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_rectangle_bg));
+
                     //显示ToolBar
                     toolbarLayout.setTitleEnabled(true);
                     //google官方在安卓6.0以上版本才推出的深色状态栏字体api-白色
                     changeStatusBarTextColor(false);
                 } else {
-                    //中间状态
-                    baseToolbarRightIcon.setVisibility(View.GONE);
+                    //中间滑动任意位置状态
+                    currentState = state;
+//                    toolbarRightLayout.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            showMenuWindow(0);
+//                        }
+//                    });
+//                    baseToolbarRightIcon.setVisibility(View.GONE);
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
-                    baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
+
+                    if (mDarkTheme) {
+                        //黑夜模式
+                        if (mapType == AMap.MAP_TYPE_NORMAL || mapType == AMap.MAP_TYPE_NAVI) {
+                            //标准模式地图or导航模式
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(true);
+                        } else if (mapType == AMap.MAP_TYPE_NIGHT || mapType == AMap.MAP_TYPE_SATELLITE) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                        if (isSetCustomMapMode) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                    } else {
+                        //白天模式
+                        if (mapType == AMap.MAP_TYPE_NORMAL || mapType == AMap.MAP_TYPE_NAVI) {
+                            //标准模式地图or导航模式
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(true);
+                        } else if (mapType == AMap.MAP_TYPE_NIGHT || mapType == AMap.MAP_TYPE_SATELLITE) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                        if (isSetCustomMapMode) {
+                            baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                            //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                            changeStatusBarTextColor(false);
+                        }
+                    }
+
                     //不显示ToolBar
                     toolbarLayout.setTitleEnabled(false);
-                    //google官方在安卓6.0以上版本才推出的深色状态栏字体api
-                    changeStatusBarTextColor(true);
                 }
             }
         });
@@ -498,6 +688,8 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         url = getIntent().getStringExtra("url");
         imageUrl = getIntent().getStringExtra("imageUrl");
         LogUtil.d(TAG, "title:  " + title + "  url:  " + url);
+
+        mDarkTheme = SettingUtils.getInstance().isDarkTheme();
     }
 
     @Override
@@ -553,11 +745,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
                 break;
 
             case R.id.toolbar_right_layout:
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, url);
-                intent.setType("text/plain");
-                startActivity(Intent.createChooser(intent, "分享到..."));
+                showMenuWindow();
                 break;
 
             case R.id.iv_detail_top:
@@ -569,6 +757,173 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
                 Log.e("LocationChange", "onMyLocationChange再定位: " + new Gson().toJson(latLng));
                 aMap.animateCamera(CameraUpdateFactory.changeLatLng(latLng));
                 break;
+
+            default:
+                break;
+        }
+    }
+
+    //    private void showMenuWindow(int flag) {
+    private void showMenuWindow() {
+        if (customPopupWindow != null && customPopupWindow.isShowing()) {
+            return;
+        }
+
+        View menuView = LayoutInflater.from(this).inflate(R.layout.dialog_map_menu, null);
+        //测量View的高和宽
+        int menuWidth = ResolutionUtils.dip2px(this, 120);
+        CustomPopupWindow.measureWidthAndHeight(menuView);
+        customPopupWindow = new CustomPopupWindow.Builder(this)
+                .setView(R.layout.dialog_map_menu)
+//                .setWidthAndHeight(menuWidth, menuView.getMeasuredHeight())
+                .setWidthAndHeight(menuWidth, LinearLayout.LayoutParams.WRAP_CONTENT)
+                .setBackGroundLevel(1.0f)//取值范围0.0f-1.0f 值越小越暗
+                .setAnimationStyle(R.style.MenuDialog)
+                .setViewOnclickListener(this, 0)
+                .create();
+        int leftPx = ResolutionUtils.dip2px(this, -90);
+        customPopupWindow.showAsDropDown(baseToolbarRightIcon, leftPx, 40);
+//        customPopupWindow.showAtLocation(menuView, Gravity.TOP,0,0);
+
+    }
+
+    @Override
+    public void getChildView(View view, int layoutResId, int flag) {
+        TextView tvMenuShare = view.findViewById(R.id.dialog_map_menu_share);
+        TextView tvMenuCustomMap = view.findViewById(R.id.dialog_map_menu_custom);
+        TextView tvMenuStandardMap = view.findViewById(R.id.dialog_map_menu_standard);
+        TextView tvMenuSatelliteMap = view.findViewById(R.id.dialog_map_menu_satellite);
+        TextView tvMenuNightMap = view.findViewById(R.id.dialog_map_menu_night);
+        TextView tvMenuNavigationMap = view.findViewById(R.id.dialog_map_menu_navigation);
+
+//        if (flag == 1) {
+        if (currentState == AppBarStateChangeListener.State.COLLAPSED) {
+            //折叠状态时隐藏PopupMenuDialog地图模式切换选项
+            tvMenuCustomMap.setVisibility(View.GONE);
+            tvMenuStandardMap.setVisibility(View.GONE);
+            tvMenuSatelliteMap.setVisibility(View.GONE);
+            tvMenuNightMap.setVisibility(View.GONE);
+            tvMenuNavigationMap.setVisibility(View.GONE);
+        } else {
+            tvMenuCustomMap.setVisibility(View.VISIBLE);
+            tvMenuStandardMap.setVisibility(View.VISIBLE);
+            tvMenuSatelliteMap.setVisibility(View.VISIBLE);
+            tvMenuNightMap.setVisibility(View.VISIBLE);
+            tvMenuNavigationMap.setVisibility(View.VISIBLE);
+        }
+
+        tvMenuShare.setOnClickListener(this);
+        tvMenuCustomMap.setOnClickListener(this);
+        tvMenuStandardMap.setOnClickListener(this);
+        tvMenuSatelliteMap.setOnClickListener(this);
+        tvMenuNightMap.setOnClickListener(this);
+        tvMenuNavigationMap.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.dialog_map_menu_share:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, url);
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent, "分享到..."));
+                break;
+
+            case R.id.dialog_map_menu_custom:
+                //自定义地图
+                onShowToast("自定义地图");
+                //设置自定义地图后，自定义地图默认为关闭状态，可通过如下方法开启：
+                aMap.setMapCustomEnable(true);
+                isSetCustomMapMode = true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                    baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                }
+                //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                changeStatusBarTextColor(false);
+                LogUtil.d(TAG, "地图MapType:    " + aMap.getMapType());
+                break;
+
+            case R.id.dialog_map_menu_standard:
+                //标准地图
+                onShowToast("标准地图");
+                if (aMap != null) {
+                    // 矢量地图模式
+                    aMap.setMapType(AMap.MAP_TYPE_NORMAL);
+                    isSetCustomMapMode = false;
+                    LogUtil.d(TAG, "地图MapType:    " + aMap.getMapType());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                        baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                        //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                        changeStatusBarTextColor(true);
+                    }
+                }
+                break;
+
+            case R.id.dialog_map_menu_satellite:
+                //卫星地图
+                onShowToast("卫星地图");
+                if (aMap != null) {
+                    // 卫星地图模式
+                    aMap.setMapType(AMap.MAP_TYPE_SATELLITE);
+                    isSetCustomMapMode = false;
+                    LogUtil.d(TAG, "地图MapType:    " + aMap.getMapType());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                        baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                        //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                        changeStatusBarTextColor(false);
+                    }
+                }
+                break;
+
+            case R.id.dialog_map_menu_night:
+                //夜间模式(使用这种方式实现地图层的暗黑夜间模式or自定义MapView的前套餐层实现dispatchDraw()方法canvas.drawColor实现)
+                onShowToast("夜间模式");
+                if (aMap != null) {
+                    //夜景地图模式
+                    aMap.setMapType(AMap.MAP_TYPE_NIGHT);
+                    isSetCustomMapMode = false;
+                    LogUtil.d(TAG, "地图MapType:    " + aMap.getMapType());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                        baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
+                        //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                        changeStatusBarTextColor(false);
+                    }
+                }
+                break;
+
+            case R.id.dialog_map_menu_navigation:
+                //导航模式
+                onShowToast("导航模式");
+                if (aMap != null) {
+                    //导航地图模式
+                    aMap.setMapType(AMap.MAP_TYPE_NAVI);
+                    isSetCustomMapMode = false;
+                    LogUtil.d(TAG, "地图MapType:    " + aMap.getMapType());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        baseToolbarLeftIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                        baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.black)));
+                        //google官方在安卓6.0以上版本才推出的深色状态栏字体api
+                        changeStatusBarTextColor(true);
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+        //关闭DialogMenu
+        dismissMenuDialog();
+    }
+
+    public void dismissMenuDialog() {
+        if (customPopupWindow != null) {
+            customPopupWindow.dismiss();
         }
     }
 
@@ -605,4 +960,5 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
             followMove = false;
         }
     }
+
 }
