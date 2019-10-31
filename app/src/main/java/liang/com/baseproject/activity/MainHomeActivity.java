@@ -55,6 +55,7 @@ import liang.com.baseproject.home.activity.SearchWanArticleActivity;
 import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
@@ -388,12 +389,16 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                 switch (menuItem.getItemId()) {
                     case R.id.menu_nav_scan:
                         //扫描界面
-                        startActivity(new Intent(MainHomeActivity.this, TestCodeActivity.class));
+                        onShowToast("扫一扫");
                         break;
 
-                    case R.id.menu_nav_friends:
+                    case R.id.menu_nav_night_theme:
                         //改变主题
                         ThemeSettingActivity.actionStart(MainHomeActivity.this);
+                        break;
+
+                    case R.id.menu_nav_location:
+                        MapLocationActivity.actionStart(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_follow:
@@ -402,6 +407,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         break;
 
                     case R.id.menu_nav_feedback:
+                        onShowToast("反馈");
+                        break;
+
+                    case R.id.menu_nav_laboratory:
+                        TestCodeActivity.actionStart(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_setting:

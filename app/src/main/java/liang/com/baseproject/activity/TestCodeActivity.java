@@ -2,6 +2,7 @@ package liang.com.baseproject.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -79,6 +80,11 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     Button btnAnimatorHide;
     @BindView(R.id.btn_filtrate_jingdong)
     Button btnFiltrateJingdong;
+
+    public static void actionStart(Context context) {
+        Intent intent = new Intent(context, TestCodeActivity.class);
+        context.startActivity(intent);
+    }
 
     //TabLayout标题列表
     private List<String> stringList = new ArrayList<>();
@@ -382,7 +388,8 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
         //初始化显示每张图片下面显示的文字
         imageDescs = new String[]{
-                "1  今年二十七八岁，我最喜欢的事就是睡觉",
+//                "1  今年二十七八岁，我最喜欢的事就是睡觉",
+                "1今年",
                 "2  懒虫，起床了，要上班了",
                 "3  我翻了个身，想着如果今天是周末多好",
                 "4  终于爬起来，坐在沙发上一脸懵逼",

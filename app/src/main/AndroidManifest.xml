@@ -36,8 +36,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".testlaboratory.FiltrateActivity"/>
-        <!-- 配置高德地图key -->
+        <activity android:name=".map.MapLocationActivity"></activity>
+        <activity android:name=".testlaboratory.FiltrateActivity" /> <!-- 配置高德地图key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="407924c0edf98e401382b2730ee6ea82" />

@@ -5,18 +5,32 @@
             android:id="@+id/menu_nav_scan"
             android:icon="@drawable/icon_scan_code"
             android:title="扫一扫" />
+
         <item
-            android:id="@+id/menu_nav_friends"
+            android:id="@+id/menu_nav_night_theme"
             android:icon="@drawable/icon_activity"
             android:title="主题" />
+
+        <item
+            android:id="@+id/menu_nav_location"
+            android:icon="@drawable/icon_location"
+            android:title="地图" />
+
         <item
             android:id="@+id/menu_nav_follow"
             android:icon="@drawable/icon_follow"
             android:title="闪屏" />
+
         <item
             android:id="@+id/menu_nav_feedback"
             android:icon="@drawable/icon_feedback"
             android:title="反馈" />
+
+        <item
+            android:id="@+id/menu_nav_laboratory"
+            android:icon="@drawable/ic_test_laboratory"
+            android:title="实验室" />
+
         <item
             android:id="@+id/menu_nav_setting"
             android:icon="@drawable/icon_setting"
