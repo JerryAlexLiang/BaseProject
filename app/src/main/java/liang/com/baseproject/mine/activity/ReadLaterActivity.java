@@ -157,18 +157,18 @@ public class ReadLaterActivity extends MVPBaseActivity {
             }
         });
 
-        boolean setRefreshFooter = isSetRefreshFooter();
-        if (setRefreshFooter) {
-            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-                @Override
-                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                    getArticleList();
-
-//                    currPage++;
-//                    getArticleListByPage();
-                }
-            });
-        } else {
+//        boolean setRefreshFooter = isSetRefreshFooter();
+//        if (setRefreshFooter) {
+//            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//                @Override
+//                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+//                    getArticleList();
+//
+////                    currPage++;
+////                    getArticleListByPage();
+//                }
+//            });
+//        } else {
             readLaterAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
@@ -178,7 +178,7 @@ public class ReadLaterActivity extends MVPBaseActivity {
 //                    getArticleListByPage();
                 }
             }, rvReadLater);
-        }
+//        }
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();

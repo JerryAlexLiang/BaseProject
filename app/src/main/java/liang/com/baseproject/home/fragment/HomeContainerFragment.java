@@ -51,8 +51,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-    //    private static final int PAGE_START = 350;
-    private static final int PAGE_START = 0;
+        private static final int PAGE_START = 368;
+//    private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
 
@@ -110,16 +110,16 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             }
         });
 
-        boolean setRefreshFooter = isSetRefreshFooter();
-        if (setRefreshFooter) {
-            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-                @Override
-                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
-            });
-        } else {
+//        boolean setRefreshFooter = isSetRefreshFooter();
+//        if (setRefreshFooter) {
+//            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//                @Override
+//                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+//                    currPage++;
+//                    mPresenter.getArticleList(currPage);
+//                }
+//            });
+//        } else {
             homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
                 @Override
                 public void onLoadMoreRequested() {
@@ -127,27 +127,10 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
                     mPresenter.getArticleList(currPage);
                 }
             }, rvHome);
-        }
+//        }
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
-
-//        homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-//            @Override
-//            public void onLoadMoreRequested() {
-//                currPage++;
-//                mPresenter.getArticleList(currPage);
-//            }
-//        });
-
-//        homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-//            @Override
-//            public void onLoadMoreRequested() {
-//                currPage++;
-//                mPresenter.getArticleList(currPage);
-//            }
-//        }, rvHome);
-
     }
 
     @Override
@@ -162,7 +145,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     protected boolean isSetRefreshFooter() {
-        return true;
+        return false;
     }
 
     @Override
@@ -211,7 +194,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         if (data.isOver() || data.getDatas().size() == 0) {
 //        if (data.getDatas().size() == 0) {
             homeContainerAdapter.loadMoreEnd();
-            smartRefreshLayout.setEnableLoadMore(false);
+            smartRefreshLayout.setEnableLoadMore(false);  //
             onShowToast("没有更多数据了!");
         } else {
             if (!homeContainerAdapter.isLoadMoreEnable()) {
