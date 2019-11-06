@@ -1,6 +1,7 @@
 package liang.com.baseproject.map;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -14,14 +15,18 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,33 +34,26 @@ import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapOptions;
+import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.maps.model.animation.Animation;
+import com.amap.api.maps.model.animation.ScaleAnimation;
+import com.amap.api.maps.offlinemap.OfflineMapCity;
+import com.amap.api.maps.offlinemap.OfflineMapManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
-import com.scwang.smartrefresh.header.DeliveryHeader;
-import com.scwang.smartrefresh.header.DropBoxHeader;
-import com.scwang.smartrefresh.header.FlyRefreshHeader;
-import com.scwang.smartrefresh.header.FunGameBattleCityHeader;
-import com.scwang.smartrefresh.header.FunGameHitBlockHeader;
 import com.scwang.smartrefresh.header.MaterialHeader;
-import com.scwang.smartrefresh.header.PhoenixHeader;
-import com.scwang.smartrefresh.header.StoreHouseHeader;
-import com.scwang.smartrefresh.header.TaurusHeader;
-import com.scwang.smartrefresh.header.WaterDropHeader;
-import com.scwang.smartrefresh.header.WaveSwipeHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
-import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.scwang.smartrefresh.layout.header.FalsifyHeader;
-import com.scwang.smartrefresh.layout.header.TwoLevelHeader;
-import com.scwang.smartrefresh.layout.impl.RefreshHeaderWrapper;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -63,11 +61,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.base.MVPBaseActivity;
@@ -79,7 +80,9 @@ import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.listener.AppBarStateChangeListener;
 import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.utils.NetUtil;
 import liang.com.baseproject.utils.ResolutionUtils;
+import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.utils.SettingUtils;
 import liang.com.baseproject.widget.CustomScrollRelativeLayout;
 import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
@@ -147,11 +150,20 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     private UiSettings uiSettings;
     private CheckPermission mCheckPermission;
 
+    private boolean hasQueryOfflineCity = false;
+
+    private android.app.AlertDialog offlineCityLibDialog;
+    private String selectOfflineCity;
+    private LatLng initLatLng = null;
+
     private boolean followMove = true;
 
     private boolean isSetCustomMapMode = false;
-    private Map<String, LatLng> poaitionMap = new HashMap<>();
+    //定位成功时，存储当前定位坐标，作为判断下次定位成功时与其比较，相等的话，就不再重新执行添加Marker，
+    // 不相等即定位坐标发生变化，则清除之前Marker并重新Add
+    private Map<String, LatLng> currentPositionMap = new HashMap<>();
     private AMap aMap;
+    private boolean isAddDefaultMarker = true;
 
     private MyLocationStyle myLocationStyle;
     private HomeContainerAdapter homeContainerAdapter;
@@ -159,6 +171,10 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private boolean mDarkTheme;
+    private boolean networkAvailable;
+    private List<OfflineMapCity> downloadOfflineMapCityList;
+    private Marker currentLocationMarker;
+    private Marker latelyMarker;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MapLocationActivity.class);
@@ -197,6 +213,9 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         mapView.onSaveInstanceState(outState);
     }
 
+    private String mAmapMap_path;
+    private String mPath_offline = "/AmapOfflineMapData";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -204,10 +223,135 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         getActionBarTheme(null, toolbarLayout);
         //得到Intent传递的数据
         parseIntent();
+        //查询离线地图资源
+        networkAvailable = NetUtil.isNetworkAvailable(this);
+        mAmapMap_path = this.getExternalFilesDir("").getAbsolutePath();
         //初始化地图视图
         initMap(savedInstanceState);
         //初始化视图
         initView();
+    }
+
+    /**
+     * 查询离线地图资源
+     */
+    private void initOfflineMap() {
+        OfflineMapManager offlineMapManager = new OfflineMapManager(MapLocationActivity.this, new OfflineMapManager.OfflineMapDownloadListener() {
+            @Override
+            public void onDownload(int i, int i1, String s) {
+
+            }
+
+            @Override
+            public void onCheckUpdate(boolean b, String s) {
+
+            }
+
+            @Override
+            public void onRemove(boolean b, String s, String s1) {
+
+            }
+        });
+
+        showProgressDialog("查询离线地图资源...", false);
+        mapView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                downloadOfflineMapCityList = offlineMapManager.getDownloadOfflineMapCityList();
+                if (null == downloadOfflineMapCityList || 0 == downloadOfflineMapCityList.size()) {
+                    LogUtil.d("offlineMap", "没有下载离线地图");
+                    hideProgressDialog();
+                } else {
+                    LogUtil.d("offlineMap", "离线地图城市: " + downloadOfflineMapCityList.size() + "个");
+                    for (OfflineMapCity offlineMapCity : downloadOfflineMapCityList) {
+                        LogUtil.d("offlineMap", "离线地图城市: " + offlineMapCity.getCity());
+                    }
+                    //切换离线地图列表
+                    onShowToast("已下载离线地图资源");
+                    hideProgressDialog();
+                    showOfflineMapCityList(downloadOfflineMapCityList);
+                    hasQueryOfflineCity = true;
+                }
+            }
+        }, 10 * 1000);
+    }
+
+    private void showOfflineMapCityList(List<OfflineMapCity> downloadOfflineMapCityList) {
+        View offlineCityListView = LayoutInflater.from(this).inflate(R.layout.dialog_recyclerview_layout, null);
+        RecyclerView dialogCityRecyclerView = offlineCityListView.findViewById(R.id.rv_face_lib);
+        //初始化适配器
+        OfflineCityListAdapter offlineCityListAdapter = new OfflineCityListAdapter(downloadOfflineMapCityList);
+        //线性布局
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        dialogCityRecyclerView.setLayoutManager(linearLayoutManager);
+        //添加Android自带的分割线
+        dialogCityRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        //绑定适配器
+        dialogCityRecyclerView.setAdapter(offlineCityListAdapter);
+
+        //设置点击事件
+        offlineCityListAdapter.setmOnItemClickListener(new OfflineCityListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, OfflineMapCity dataBean) {
+                if (offlineCityLibDialog.isShowing()) {
+                    offlineCityLibDialog.dismiss();
+                }
+                selectOfflineCity = dataBean.getCity();
+
+                if (selectOfflineCity.contains("亳州")) {
+                    initLatLng = Constant.BOZHOU;
+                    aMap.clear();
+                } else if (selectOfflineCity.contains("阜阳")) {
+                    initLatLng = Constant.FUYANG;
+                    aMap.clear();
+                } else if (selectOfflineCity.contains("杭州")) {
+                    initLatLng = Constant.HANZGHOU;
+                    aMap.clear();
+                } else if (selectOfflineCity.contains("宁波")) {
+                    initLatLng = Constant.NINGBO;
+                    aMap.clear();
+                } else if (selectOfflineCity.contains("全国概要图")) {
+                    aMap.clear();
+                    //调用函数animateCamera或moveCamera来改变可视区域
+                    changeCamera(
+                            //CameraPosition(LatLng target, float zoom, float tilt, float bearing)
+                            //zoom:目标可视区域的缩放级别   tilt:目标可视区域的倾斜度，以角度为单位  bearing:可视区域指向的方向，以角度为单位，从正北向逆时针方向计算，从0 度到360 度
+                            CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                                    initLatLng, 1, 0, 0)));
+                    return;
+                }
+                //调用函数animateCamera或moveCamera来改变可视区域
+                changeCamera(
+                        //CameraPosition(LatLng target, float zoom, float tilt, float bearing)
+                        //zoom:目标可视区域的缩放级别   tilt:目标可视区域的倾斜度，以角度为单位  bearing:可视区域指向的方向，以角度为单位，从正北向逆时针方向计算，从0 度到360 度
+                        CameraUpdateFactory.newCameraPosition(new CameraPosition(
+                                initLatLng, 16, 0, 0)));
+
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        offlineCityLibDialog = builder.create();
+        offlineCityLibDialog.show();
+        offlineCityLibDialog.setCanceledOnTouchOutside(false);
+        //AlertDialog设置高度自适应
+        WindowManager windowManager = this.getWindowManager();
+        Display display = windowManager.getDefaultDisplay();
+        WindowManager.LayoutParams lp = offlineCityLibDialog.getWindow().getAttributes();
+        lp.height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        offlineCityLibDialog.getWindow().setAttributes(lp);
+        offlineCityLibDialog.getWindow().setContentView(offlineCityListView);
+
+        ImageView ivCloseDialog = offlineCityListView.findViewById(R.id.iv_btn_close_dialog);
+        ivCloseDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (offlineCityLibDialog.isShowing()) {
+                    offlineCityLibDialog.dismiss();
+                }
+            }
+        });
     }
 
     private void initView() {
@@ -360,6 +504,29 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     }
 
     private void initMapLocation() {
+        //使用压缩文件导入手机中的方式-只设置默认一个离线城市地图资源时-使用以下代码加载离线地图资源
+        File file1 = new File(mAmapMap_path + mPath_offline);
+        if (!networkAvailable && file1.exists()) {
+            //调用函数animateCamera或moveCamera来改变可视区域
+            initLatLng = Constant.HANZGHOU;
+//            changeCamera(
+//                    //CameraPosition(LatLng target, float zoom, float tilt, float bearing)
+//                    //zoom:目标可视区域的缩放级别   tilt:目标可视区域的倾斜度，以角度为单位  bearing:可视区域指向的方向，以角度为单位，从正北向逆时针方向计算，从0 度到360 度
+//                    CameraUpdateFactory.newCameraPosition(new CameraPosition(
+//                            initLatLng, 16, 0, 0)));
+
+            //获取本地存储的定位信息
+            double latelyLatitude = Double.parseDouble(SPUtils.getMapLocation_lat("latitude"));
+            double latelyLongitude = Double.parseDouble(SPUtils.getMapLocation_lng("longitude"));
+            if (latelyLatitude != 0 && latelyLongitude != 0) {
+                LatLng latelyLatLng = new LatLng(latelyLatitude, latelyLongitude);
+                aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latelyLatLng, 16));
+            } else {
+                aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(initLatLng, 16));
+            }
+        }
+        //使用压缩文件导入手机中的方式-只设置默认一个离线城市地图资源时-使用以上代码加载离线地图资源
+
         //实例化UiSettings类对象
         uiSettings = aMap.getUiSettings();
         //缩放按钮(默认显示)
@@ -395,7 +562,6 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
 
         //比例尺控件
         uiSettings.setScaleControlsEnabled(true);
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(16));
 
         //地图Logo
         uiSettings.setLogoLeftMargin(10000); // 隐藏logo
@@ -410,26 +576,88 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         aMap.setOnMapTouchListener(this);
     }
 
-
     @Override
     public void onMyLocationChange(Location location) {
+
+        //获取本地存储的定位信息
+        double latelyLatitude = Double.parseDouble(SPUtils.getMapLocation_lat("latitude"));
+        double latelyLongitude = Double.parseDouble(SPUtils.getMapLocation_lng("longitude"));
+        LatLng latelyLatLng = new LatLng(latelyLatitude, latelyLongitude);
+
         //获取地址描述数据 - 逆地理编码（坐标转地址）
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-
         LatLng currentLatLng = new LatLng(latitude, longitude);
+
+        LatLng currentPositionMapLng = currentPositionMap.get("currentPosition");
 
         if (latitude == 0 && longitude == 0) {
             //定位失败
-            Log.e("LocationChange", "onMyLocationChange: 定位失败  " + currentLatLng + "   ");
+            if (latelyLatitude != 0 && latelyLongitude != 0) {
+                //最近一次有定位成功，将最近一次定位点置为marker
+                if (currentLocationMarker != null) {
+                    currentLocationMarker.destroy();
+                }
+
+                if (latelyMarker != null) {
+                    latelyMarker.destroy();
+                }
+
+                latelyMarker = aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)).position(latelyLatLng));
+                //这个场景暂时无法做出和上次比较判断是否坐标发生变化，所以不添加Marker动画
+                //                startGrowAnimation(latelyMarker);
+                Log.d("onMyLocationChange", "定位失败-上次定位-Add Marker  " + "latelyLatLng:  " + latelyLatLng + " currentLatLng= " + currentLatLng);
+
+            } else {
+                //最近一次没有定位成功，设置固定位置marker
+                if (currentLocationMarker != null) {
+                    currentLocationMarker.destroy();
+                }
+                if (isAddDefaultMarker) {
+                    if (latelyMarker != null) {
+                        latelyMarker.destroy();
+                    }
+                    //第一次进入
+                    latelyMarker = aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)).position(initLatLng));
+                    startGrowAnimation(latelyMarker);
+                    Log.d("onMyLocationChange", "定位失败-默认坐标-Add Marker  " + "initLatLng:  " + initLatLng + " currentLatLng= " + currentLatLng);
+                    isAddDefaultMarker = false;
+                } else {
+                    //只要是定位失败，且最近一次没有定位成功，则固定Marker，不再每次都add marker
+                    Log.d("onMyLocationChange", "定位失败-默认坐标-No Add Marker  " + "initLatLng:  " + initLatLng + " currentLatLng= " + currentLatLng);
+                }
+            }
             onShowErrorToast("定位失败");
+            //此处将followMove=true，意图为当定位成功时可以自动将地图定位到定位中心
+            followMove = true;
         } else {
             if (followMove) {
-                aMap.animateCamera(CameraUpdateFactory.newLatLng(currentLatLng));
+                aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 16));
             }
-            Log.e("LocationChange", "onMyLocationChange: " + new Gson().toJson(currentLatLng));
+            //定位成功
+            if (!currentLatLng.equals(currentPositionMapLng)) {
+                //存储定位信息
+                SPUtils.saveMapLocation(currentLatLng.latitude, currentLatLng.longitude);
+
+                //最近一次定位点与当前成功获取定位信息点经纬度不同时，更新Marker
+                if (latelyMarker != null) {
+                    latelyMarker.destroy();
+                }
+
+                if (currentLocationMarker != null) {
+                    currentLocationMarker.destroy();
+                }
+
+                currentLocationMarker = aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_car)).position(currentLatLng));
+                startGrowAnimation(currentLocationMarker);
+                Log.d("onMyLocationChange", "定位成功-Add Marker    currentLatLng:  " + currentLatLng + "  " + "latelyLatLng： " + latelyLatLng);
+            } else {
+                //最近一次定位点与当前成功获取定位信息点经纬度相同时，不更新Marker
+                Log.d("onMyLocationChange", "定位成功-No Add Marker    currentLatLng:  " + currentLatLng + "  " + "latelyLatLng： " + latelyLatLng);
+            }
+            followMove = false;
         }
-        poaitionMap.put("position", currentLatLng);
+        currentPositionMap.put("currentPosition", currentLatLng);
     }
 
     @Override
@@ -443,6 +671,13 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         if (followMove) {
             followMove = false;
         }
+    }
+
+    /**
+     * 调用函数animateCamera或moveCamera来改变可视区域
+     */
+    private void changeCamera(CameraUpdate update) {
+        aMap.moveCamera(update);
     }
 
     /**
@@ -654,9 +889,31 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
                 break;
 
             case R.id.iv_btn_my_location:
-                LatLng latLng = poaitionMap.get("position");
-                Log.e("LocationChange", "onMyLocationChange再定位: " + new Gson().toJson(latLng));
-                aMap.animateCamera(CameraUpdateFactory.changeLatLng(latLng));
+//                LatLng latLng = poaitionMap.get("position");
+//                Log.e("LocationChange", "onMyLocationChange再定位: " + new Gson().toJson(latLng));
+////                aMap.animateCamera(CameraUpdateFactory.changeLatLng(latLng));
+//                if (latLng != null && latLng.latitude != 0 && latLng.longitude != 0) {
+//                    aMap.animateCamera(CameraUpdateFactory.changeLatLng(latLng));
+//                } else {
+//                    //调用函数animateCamera或moveCamera来改变可视区域
+////                    LatLng initLatLng = new LatLng(33.869338, 115.782939);
+//                    changeCamera(
+//                            //CameraPosition(LatLng target, float zoom, float tilt, float bearing)
+//                            //zoom:目标可视区域的缩放级别   tilt:目标可视区域的倾斜度，以角度为单位  bearing:可视区域指向的方向，以角度为单位，从正北向逆时针方向计算，从0 度到360 度
+//                            CameraUpdateFactory.newCameraPosition(new CameraPosition(
+//                                    initLatLng, 16, 0, 0)));
+//                    onShowToast("定位失败，重置中心");
+//                }
+
+                //获取本地存储的定位信息
+                double latelyLatitude = Double.parseDouble(SPUtils.getMapLocation_lat("latitude"));
+                double latelyLongitude = Double.parseDouble(SPUtils.getMapLocation_lng("longitude"));
+                if (latelyLatitude != 0 && latelyLongitude != 0) {
+                    LatLng latelyLatLng = new LatLng(latelyLatitude, latelyLongitude);
+                    aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latelyLatLng, 16));
+                } else {
+                    aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(initLatLng, 16));
+                }
                 break;
 
             case R.id.iv_control_btn:
@@ -696,6 +953,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     public void getChildView(View view, int layoutResId, int flag) {
         TextView tvMenuShare = view.findViewById(R.id.dialog_map_menu_share);
         TextView tvMenuCustomMap = view.findViewById(R.id.dialog_map_menu_custom);
+        TextView tvMenuOfflineMap = view.findViewById(R.id.dialog_map_offline_custom);
         TextView tvMenuStandardMap = view.findViewById(R.id.dialog_map_menu_standard);
         TextView tvMenuSatelliteMap = view.findViewById(R.id.dialog_map_menu_satellite);
         TextView tvMenuNightMap = view.findViewById(R.id.dialog_map_menu_night);
@@ -705,6 +963,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         if (currentState == AppBarStateChangeListener.State.COLLAPSED) {
             //折叠状态时隐藏PopupMenuDialog地图模式切换选项
             tvMenuCustomMap.setVisibility(View.GONE);
+            tvMenuOfflineMap.setVisibility(View.GONE);
             tvMenuStandardMap.setVisibility(View.GONE);
             tvMenuSatelliteMap.setVisibility(View.GONE);
             tvMenuNightMap.setVisibility(View.GONE);
@@ -715,10 +974,19 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
             tvMenuSatelliteMap.setVisibility(View.VISIBLE);
             tvMenuNightMap.setVisibility(View.VISIBLE);
             tvMenuNavigationMap.setVisibility(View.VISIBLE);
+
+            boolean networkAvailable = NetUtil.isNetworkAvailable(this);
+            Log.d(TAG, "getChildView: " + networkAvailable);
+            if (networkAvailable) {
+                tvMenuOfflineMap.setVisibility(View.GONE);
+            } else {
+                tvMenuOfflineMap.setVisibility(View.VISIBLE);
+            }
         }
 
         tvMenuShare.setOnClickListener(this);
         tvMenuCustomMap.setOnClickListener(this);
+        tvMenuOfflineMap.setOnClickListener(this);
         tvMenuStandardMap.setOnClickListener(this);
         tvMenuSatelliteMap.setOnClickListener(this);
         tvMenuNightMap.setOnClickListener(this);
@@ -749,6 +1017,17 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
                 //google官方在安卓6.0以上版本才推出的深色状态栏字体api
                 changeStatusBarTextColor(false);
                 LogUtil.d(TAG, "地图MapType:    " + aMap.getMapType());
+                break;
+
+            case R.id.dialog_map_offline_custom:
+                onShowToast("查询离线地图");
+                isSetCustomMapMode = false;
+                if (!hasQueryOfflineCity) {
+                    //离线下载-获取数据
+                    initOfflineMap();
+                } else {
+                    showOfflineMapCityList(downloadOfflineMapCityList);
+                }
                 break;
 
             case R.id.dialog_map_menu_standard:
@@ -904,5 +1183,21 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     @Override
     public void onHideProgress() {
 
+    }
+
+    /**
+     * 地上生长的Marker
+     */
+    private void startGrowAnimation(Marker growMarker) {
+        if (growMarker != null) {
+            Animation animation = new ScaleAnimation(0, 1, 0, 1);
+            animation.setInterpolator(new LinearInterpolator());
+            //整个移动所需要的时间
+            animation.setDuration(1000);
+            //设置动画
+            growMarker.setAnimation(animation);
+            //开始动画
+            growMarker.startAnimation();
+        }
     }
 }

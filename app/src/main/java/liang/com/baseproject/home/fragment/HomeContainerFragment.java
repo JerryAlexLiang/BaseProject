@@ -51,8 +51,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-        private static final int PAGE_START = 368;
-//    private static final int PAGE_START = 0;
+    //        private static final int PAGE_START = 368;
+    private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
 
@@ -120,13 +120,13 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 //                }
 //            });
 //        } else {
-            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                @Override
-                public void onLoadMoreRequested() {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
-            }, rvHome);
+        homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                currPage++;
+                mPresenter.getArticleList(currPage);
+            }
+        }, rvHome);
 //        }
 
         //自动刷新(替代第一次请求数据)

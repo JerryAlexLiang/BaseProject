@@ -30,6 +30,15 @@
         android:textSize="15sp" />
 
     <TextView
+        android:id="@+id/dialog_map_offline_custom"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:text="离线地图"
+        android:textColor="@color/text_invert"
+        android:textSize="15sp" />
+
+    <TextView
         android:id="@+id/dialog_map_menu_standard"
         android:layout_width="match_parent"
         android:layout_height="44dp"

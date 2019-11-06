@@ -3,15 +3,27 @@ package liang.com.baseproject.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.amap.api.maps.MapsInitializer;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
+import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.login.activity.GestureLoginActivity;
 import liang.com.baseproject.login.activity.WelcomeGuideActivity;
 import liang.com.baseproject.utils.APKVersionCodeUtils;
+import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.SPUtils;
 import me.wangyuwei.particleview.ParticleView;
 
@@ -29,6 +41,9 @@ public class SplashOneActivity extends MVPBaseActivity {
     ParticleView pvSplashLogo;
     @BindView(R.id.tv_version_code)
     TextView tvVersionCode;
+
+    private String mAmapMap_path;
+    private String mPath_offline = "/AmapOfflineMapData";
 
     @Override
     protected boolean isRegisterEventBus() {
@@ -62,9 +77,23 @@ public class SplashOneActivity extends MVPBaseActivity {
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 //        setContentView(R.layout.activity_splash_one);
         ButterKnife.bind(this);
+
+        mAmapMap_path = this.getExternalFilesDir("").getAbsolutePath();
+        File file1 = new File(mAmapMap_path + mPath_offline);
+
         pvSplashLogo.setOnParticleAnimListener(new ParticleView.ParticleAnimListener() {
             @Override
             public void onAnimationEnd() {
+
+                if (!file1.exists()) {
+                    FileUtil.deleteDirectory(mAmapMap_path);
+                    //解压离线地图到手机内存
+                    unZipMapCache();
+                    MapsInitializer.sdcardDir = offlineMapsDirs();
+                }else {
+                    MapsInitializer.sdcardDir = offlineMapsDirs();
+                }
+
 //                MainHomeActivity.actionStart(SplashOneActivity.this);
 //                //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
 //                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -106,7 +135,7 @@ public class SplashOneActivity extends MVPBaseActivity {
 //            intent.putExtra("gestureFlg", Constant.GESTURE_FLG_CODE[2]);
 //            startActivity(intent);
             //等于3为认证成功
-            GestureLoginActivity.actionStart(this,Constant.GESTURE_FLG_CODE[2]);
+            GestureLoginActivity.actionStart(this, Constant.GESTURE_FLG_CODE[2]);
             //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             finish();
@@ -133,4 +162,45 @@ public class SplashOneActivity extends MVPBaseActivity {
 //            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 //        }
 //    }
+
+
+    private void unZipMapCache() {
+        try {
+            InputStream is = this.getAssets().open("AmapOfflineMapData.zip");
+            ZipInputStream zis = new ZipInputStream(is);
+            ZipEntry entry = null;
+            while ((entry = zis.getNextEntry()) != null) {
+                File file = new File(MyApplication.getAppContext().getExternalFilesDir(null), entry.getName());
+                System.out.println("filename----" + entry.getName());
+                if (entry.isDirectory()) {
+                    file.mkdirs();
+                    continue;
+                } else {
+                    file.createNewFile();
+                    OutputStream myOutput = new FileOutputStream(file);
+                    byte[] buffer = new byte[1024];
+                    int count;
+                    while ((count = zis.read(buffer)) != -1) {
+                        myOutput.write(buffer, 0, count);
+                    }
+                    myOutput.close();
+                }
+            }
+            zis.close();
+            is.close();
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private String offlineMapsDirs() {
+        String path = this.getExternalFilesDir("").getAbsolutePath() + "/AmapOfflineMapData";
+        File dirs = new File(path);
+        if (!dirs.exists()) {
+            dirs.mkdirs();
+        }
+        return path;
+    }
 }

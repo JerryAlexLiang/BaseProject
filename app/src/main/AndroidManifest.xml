@@ -97,6 +97,10 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ViewPagerPictureActivity" />
         <activity android:name=".activity.ThemeSettingActivity" />
+
+        <activity
+            android:name="com.amap.api.maps.offlinemap.OfflineMapActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

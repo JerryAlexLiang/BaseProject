@@ -51,6 +51,7 @@
     <string name="radio_button_two_text">最资讯</string>
     <string name="radio_button_three_text">颜如玉</string>
     <string name="radio_button_mine_text">我的</string>
+    <string name="offline_map">离线地图</string>
 
     <!--登录界面-->
     <string name="welcome_title">欢迎使用</string>

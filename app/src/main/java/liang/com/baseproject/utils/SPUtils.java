@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.amap.api.maps.model.LatLng;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -97,7 +99,6 @@ public class SPUtils {
         } else if (defaultObject instanceof Long) {
             return sp.getLong(key, (Long) defaultObject);
         }
-
         return null;
     }
 
@@ -210,22 +211,23 @@ public class SPUtils {
     }
 
     //存储定位信息
-    public void saveMapLocation(double latitude, double longitude){
+    public static void saveMapLocation(double latitude, double longitude) {
         SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("MapLocation", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("latitude",String.valueOf(latitude));
-        editor.putString("longitude",String.valueOf(longitude));
+        editor.putString("latitude", String.valueOf(latitude));
+        editor.putString("longitude", String.valueOf(longitude));
         editor.commit();
     }
 
     //获取本地存储的定位信息
-    public String getMapLocation_lat(String str){
+    public static String getMapLocation_lat(String str) {
         SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("MapLocation", Context.MODE_PRIVATE);
-        return preferences.getString(str,"36.190662");
+        return preferences.getString(str, "0");
     }
-    public String getMapLocation_lng(String str){
+
+    public static String getMapLocation_lng(String str) {
         SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("MapLocation", Context.MODE_PRIVATE);
-        return preferences.getString(str,"118.180473");
+        return preferences.getString(str, "0");
     }
 
 }

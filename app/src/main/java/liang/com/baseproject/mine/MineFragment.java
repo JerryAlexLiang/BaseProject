@@ -12,7 +12,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.amap.api.maps.AMapException;
+import com.amap.api.maps.offlinemap.OfflineMapActivity;
+import com.amap.api.maps.offlinemap.OfflineMapCity;
+import com.amap.api.maps.offlinemap.OfflineMapManager;
 import com.bigkoo.alertview.AlertView;
-import com.bigkoo.alertview.OnDismissListener;
-import com.bigkoo.alertview.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
@@ -40,10 +41,11 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
 import butterknife.Unbinder;
@@ -106,6 +108,9 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
     LinearLayout llReadLater;
     @BindView(R.id.rl_page_container)
     RelativeLayout rlPageContainer;
+    @BindView(R.id.ll_offline_map)
+    LinearLayout llOfflineMap;
+    Unbinder unbinder2;
     private MainHomeActivity mActivity;
     private boolean login;
 
@@ -113,14 +118,37 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
     private String imagePath;
     private AlertView alertView;
 
-    public MineFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mActivity = (MainHomeActivity) context;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        unbinder2 = ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //设置SmartRefreshLayout容器越界回弹
+        initSmartRefreshLayoutPureScroll();
+        //加载数据
+        initUserInfo();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder2.unbind();
+    }
+
+    public MineFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -168,15 +196,6 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
         //请求获取积分接口
     }
 
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //设置SmartRefreshLayout容器越界回弹
-        initSmartRefreshLayoutPureScroll();
-        //加载数据
-        initUserInfo();
-    }
 
     private void initUserInfo() {
         if (UserLoginUtils.getInstance().isLogin()) {
@@ -591,7 +610,7 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
 
     }
 
-    @OnClick({R.id.civ_user_icon, R.id.user_info_container, R.id.ll_setting, R.id.ll_read_later, R.id.rl_user_info})
+    @OnClick({R.id.civ_user_icon, R.id.user_info_container, R.id.ll_setting, R.id.ll_read_later, R.id.rl_user_info, R.id.ll_offline_map})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.civ_user_icon:
@@ -626,6 +645,13 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
 
             case R.id.ll_read_later:
                 ReadLaterActivity.actionStart(mActivity);
+                break;
+
+            case R.id.ll_offline_map:
+                startActivity(new Intent(mActivity, OfflineMapActivity.class));
+                break;
+
+            default:
                 break;
         }
     }

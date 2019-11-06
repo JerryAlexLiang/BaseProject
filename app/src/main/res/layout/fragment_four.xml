@@ -225,6 +225,44 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:id="@+id/ll_offline_map"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@drawable/bg_press_color_white"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp">
+
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_read_later"
+                                android:tint="@color/colorBlue" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:singleLine="true"
+                                android:text="@string/offline_map"
+                                android:textColor="@color/text_surface"
+                                android:textSize="@dimen/sp15" />
+
+                            <ImageView
+                                android:layout_width="13dp"
+                                android:layout_height="13dp"
+                                android:rotation="180"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_back"
+                                android:tint="@color/gray_light" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </LinearLayout>
