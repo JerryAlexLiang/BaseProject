@@ -2,12 +2,14 @@ package liang.com.baseproject.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 
 import java.security.MessageDigest;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+
+import liang.com.baseproject.app.MyApplication;
 
 /**
  * 创建日期：2019/2/21 on 17:01
@@ -68,6 +70,42 @@ public class CommonUtil {
         int picScreenHeight;
         picScreenHeight = (screenWidth * picHeight) / picWidth;
         return picScreenHeight;
+    }
+
+    /**
+     * Drawable转Bitmap 方法1
+     */
+    public static Bitmap drawableToBitmapWayOne(Drawable drawable) {
+        BitmapDrawable bd = (BitmapDrawable) drawable;
+        return bd.getBitmap();
+    }
+
+    /**
+     * Drawable转Bitmap 方法2
+     */
+    public static Bitmap drawableToBitmapWayTwo(Drawable drawable) {
+        // 取 drawable 的长宽
+        int w = drawable.getIntrinsicWidth();
+        int h = drawable.getIntrinsicHeight();
+        // 取 drawable 的颜色格式
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888
+                : Bitmap.Config.RGB_565;
+        // 建立对应 bitmap
+        Bitmap bitmap = Bitmap.createBitmap(w, h, config);
+        // 建立对应 bitmap 的画布
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, w, h);
+        // 把 drawable 内容画到画布中
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    /**
+     * Bitmap转Drawable 方法1
+     */
+    public static Drawable bitmapToDrawableWayOne(Bitmap bitmap) {
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(MyApplication.getAppResources(), bitmap);
+        return bitmapDrawable;
     }
 
 }

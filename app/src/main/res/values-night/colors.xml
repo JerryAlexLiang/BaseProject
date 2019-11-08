@@ -94,6 +94,7 @@
     <color name="third">#616161</color>
     <color name="fourth">#393939</color>
     <color name="foreground_blue">#111111</color>
+    <color name="part_linear_color">#e1e1e1</color>
     <!--文字颜色-->
     <color name="text_main">@color/main</color>
     <color name="text_accent">@color/accent</color>

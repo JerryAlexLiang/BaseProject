@@ -239,6 +239,7 @@
     <color name="third">#999999</color>
     <color name="fourth">#cccccc</color>
     <color name="foreground_blue">#2196F3</color>
+    <color name="part_linear_color">#bababa</color>
     <!--文字颜色-->
     <color name="text_main">@color/main</color>
     <color name="text_accent">@color/accent</color>

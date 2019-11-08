@@ -188,5 +188,27 @@ public class Constant {
     public static final LatLng HANZGHOU = new LatLng(30.291115, 120.114108);//杭州经纬度
     public static final LatLng NINGBO = new LatLng(29.859515, 121.6216);//宁波经纬度
 
+    //图片Url及对应经纬度
+    //费启鸣
+    public static final String FEIQIMING = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573104184485&di=004da23722bad904fc35b6de5a3e0ab6&imgtype=0&src=http%3A%2F%2Fimage.uc.cn%2Fs%2Fwemedia%2Fs%2Fupload%2F2019%2F9fb79e14b91bdecc57173c409b7e2777.jpg";
+    public static final LatLng FEIQIMING_LATLNG = new LatLng(30.289406, 120.114317);
+    //马天宇
+    public static final String MATIANYU = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570685761527&di=242567a8fbb3b2d1b82233f5b4ef25ea&imgtype=0&src=http%3A%2F%2F00imgmini.eastday.com%2Fmobile%2F20190907%2F20190907172442_7db7e5407ac69b339ae40b3090632250_1.jpeg";
+    public static final LatLng MATIANYU_LATLNG = new LatLng(30.291722, 120.116297);
+    //马嘉琪
+    public static final String MAJIAQI = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570685798443&di=a7e17871d4c5a659e3cfb907030da273&imgtype=0&src=http%3A%2F%2Fp.store.itangyuan.com%2Fp%2Fbook%2Fcover%2F4B6v4gbueA%2FEg6TEBES4BjwEtMwEtMsETuReHemJhyVhA.jpg";
+    public static final LatLng MAJIAQI_LATLNG = new LatLng(30.288146, 120.119666);
+    //肖战
+    public static final String XIAOZHAN = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570685823607&di=68c8e5c4d1f467f742b782b09532bb17&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201806%2F18%2F20180618235127_yglui.jpg";
+    public static final LatLng XIAOZHAN_LATLNG = new LatLng(30.285847, 120.12133);
+    //丁程鑫
+    public static final String DINGCHENGXIN = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570685871918&di=51e080ce2ccd92e9ea958d173273f9d1&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201808%2F21%2F20180821212620_hwmnx.thumb.700_0.jpg";
+    public static final LatLng DINGCHENGXIN_LATLNG = new LatLng(30.285811, 120.116812);
+    //姚景元
+    public static final String YAOJINGYUAN = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570685489375&di=4ec083facefe99c5df83326e6fb3a169&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn12%2F300%2Fw1620h1080%2F20180816%2Ffab8-hhvciiv7482028.jpg";
+    public static final LatLng YAOJINGYUAN_LATLNG = new LatLng(30.290999, 120.121313);
+
+
+
 
 }

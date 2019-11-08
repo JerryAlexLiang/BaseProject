@@ -36,7 +36,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".map.MapLocationActivity"></activity>
+        <activity android:name=".testlaboratory.MapTestActivity"></activity>
+        <activity android:name=".map.MapLocationActivity" />
         <activity android:name=".testlaboratory.FiltrateActivity" /> <!-- 配置高德地图key -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -97,7 +98,6 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ViewPagerPictureActivity" />
         <activity android:name=".activity.ThemeSettingActivity" />
-
         <activity
             android:name="com.amap.api.maps.offlinemap.OfflineMapActivity"
             android:screenOrientation="portrait" />

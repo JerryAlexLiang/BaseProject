@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Process;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -45,7 +44,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
-import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.base.BaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.event.LoginEvent;
@@ -54,7 +52,7 @@ import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.home.activity.SearchWanArticleActivity;
 import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
-import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
@@ -168,6 +166,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fullScreen(false);
         setContentView(R.layout.activity_main_home);
         ButterKnife.bind(this);
         addActivity(this, MainHomeActivity.class);
@@ -272,7 +271,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 
     private void initUserInfo() {
         if (UserLoginUtils.getInstance().isLogin()) {
-            Userbean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
+            UserBean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
             String nickname = loginUserBean.getNickname();
             int id = loginUserBean.getId();
             String localUserIcon = UserLoginUtils.getInstance().getLocalUserIcon();

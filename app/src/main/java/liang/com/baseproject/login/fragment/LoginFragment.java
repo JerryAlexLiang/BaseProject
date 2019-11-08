@@ -2,41 +2,29 @@ package liang.com.baseproject.login.fragment;
 
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
-import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.event.LoginEvent;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.view.LoginView;
 import liang.com.baseproject.base.MVPBaseFragment;
-import liang.com.baseproject.login.entity.Userbean;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.presenter.LoginPresenter;
-import liang.com.baseproject.utils.CommonUtil;
 import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ToastUtil;
-import liang.com.baseproject.utils.UserLoginUtils;
 import liang.com.baseproject.widget.CustomProgressDialog;
 
 /**
@@ -138,7 +126,7 @@ public class LoginFragment extends MVPBaseFragment<LoginView, LoginPresenter> im
     }
 
     @Override
-    public void onLoginSuccess(Userbean data) {
+    public void onLoginSuccess(UserBean data) {
         LogUtil.e(TAG, "登陆成功~" + "  用户账号信息:  " + new Gson().toJson(data));
         onShowToast("登陆成功~");
         //订阅登录事件总线

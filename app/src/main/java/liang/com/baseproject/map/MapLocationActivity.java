@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
@@ -19,6 +21,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -38,7 +41,6 @@ import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
@@ -78,7 +80,9 @@ import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.listener.AppBarStateChangeListener;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.utils.CheckPermission;
+import liang.com.baseproject.utils.DrawCustomMarkerBitmapUtil;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.NetUtil;
 import liang.com.baseproject.utils.ResolutionUtils;
@@ -120,8 +124,8 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     RelativeLayout toolbarRightLayout;
     @BindView(R.id.base_toolbar)
     Toolbar baseToolbar;
-    @BindView(R.id.toolbar_layout)
-    CollapsingToolbarLayout toolbarLayout;
+    @BindView(R.id.collapsing_layout)
+    CollapsingToolbarLayout collapsingLayout;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
     @BindView(R.id.rv_map)
@@ -176,6 +180,11 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     private Marker currentLocationMarker;
     private Marker latelyMarker;
 
+    private List<Marker> localMarkers;
+
+    //最近一次点击的Marker
+    private Marker lastClickMarker;
+
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MapLocationActivity.class);
         context.startActivity(intent);
@@ -220,7 +229,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //随系统设置更改ToolBar状态栏颜色
-        getActionBarTheme(null, toolbarLayout);
+        getActionBarTheme(null, collapsingLayout);
         //得到Intent传递的数据
         parseIntent();
         //查询离线地图资源
@@ -356,16 +365,16 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
 
     private void initView() {
         //自定义的RelativeLayout-CollapsingToolbarLayout-滑动冲突
-        customScrollContainer.setCollapsingToolbarLayout(toolbarLayout);
+        customScrollContainer.setCollapsingToolbarLayout(collapsingLayout);
         baseToolbarLeftIcon.setVisibility(View.VISIBLE);
         baseToolbarRightIcon.setVisibility(View.VISIBLE);
-        toolbarLayout.setTitle("Location");
-        toolbarLayout.setCollapsedTitleGravity(Gravity.CENTER);
-        toolbarLayout.setExpandedTitleGravity(Gravity.CENTER);
+        collapsingLayout.setTitle("Location");
+        collapsingLayout.setCollapsedTitleGravity(Gravity.CENTER);
+        collapsingLayout.setExpandedTitleGravity(Gravity.CENTER);
         //设置CollapsingToolbarLayout扩展状态标题栏颜色
-        toolbarLayout.setExpandedTitleColor(Color.YELLOW);
+        collapsingLayout.setExpandedTitleColor(Color.YELLOW);
         //设置CollapsingToolbarLayout收缩状态标题栏颜色
-        toolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+        collapsingLayout.setCollapsedTitleTextColor(Color.WHITE);
 
         initRecyclerView();
 
@@ -451,10 +460,14 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         if (aMap == null) {
             aMap = mapView.getMap();
         }
+
+
+
         //初始化权限
         initPermission();
         if (mIsPermissionGanted) {
             initMapLocation();
+            getLocalData();
         }
 
         //自定义地图 - 设定离线样式文件
@@ -467,6 +480,10 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
             //标准模式 - 矢量地图模式
             aMap.setMapType(AMap.MAP_TYPE_NORMAL);
         }
+    }
+
+    private void getLocalData() {
+        mPresenter.getLocalMarkerData();
     }
 
     private void initPermission() {
@@ -499,6 +516,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
                 //定位权限授权成功
                 mIsPermissionGanted = true;
                 initMapLocation();
+                getLocalData();
             }
         }
     }
@@ -660,16 +678,35 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         currentPositionMap.put("currentPosition", currentLatLng);
     }
 
+    /**
+     * 点击marker事件监听器
+     */
     @Override
     public boolean onMarkerClick(Marker marker) {
+        lastClickMarker = marker;
+        //判断当前定位点是否显示信息窗口如果显示则关闭，如果没有显示则显示信息窗口
+        if (lastClickMarker.isInfoWindowShown()) {
+            lastClickMarker.hideInfoWindow();
+        } else {
+            lastClickMarker.showInfoWindow();
+        }
+        //返回false，点击Marker后当前点位显示在地图中心
         return false;
     }
 
+    /**
+     * 地图触摸响应事件
+     */
     @Override
     public void onTouch(MotionEvent motionEvent) {
         //用户拖动地图后，不再跟随移动，需要跟随移动时再把这个改成true
         if (followMove) {
             followMove = false;
+        }
+
+        //触摸地图，关闭Marker的InfoWindow
+        if (aMap != null && lastClickMarker.isInfoWindowShown()) {
+            lastClickMarker.hideInfoWindow();
         }
     }
 
@@ -792,7 +829,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
                     }
 
                     //不显示ToolBar
-                    toolbarLayout.setTitleEnabled(false);
+                    collapsingLayout.setTitleEnabled(false);
 
                 } else if (state == State.COLLAPSED) {
                     //折叠状态
@@ -810,7 +847,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_rectangle_bg));
 
                     //显示ToolBar
-                    toolbarLayout.setTitleEnabled(true);
+                    collapsingLayout.setTitleEnabled(true);
                     //google官方在安卓6.0以上版本才推出的深色状态栏字体api-白色
                     changeStatusBarTextColor(false);
                 } else {
@@ -870,7 +907,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
                     }
 
                     //不显示ToolBar
-                    toolbarLayout.setTitleEnabled(false);
+                    collapsingLayout.setTitleEnabled(false);
                 }
             }
         });
@@ -1173,6 +1210,61 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
+    }
+
+    @Override
+    public void onGetLocalMarkerDataSuccess(List<UserBean> localMarkerDataList) {
+        LogUtil.d(TAG, "本地数据Marker:  " + new Gson().toJson(localMarkerDataList));
+
+        if (localMarkers != null) {
+            for (Marker marker : localMarkers) {
+                marker.remove();
+            }
+        }
+        localMarkers = new ArrayList<>();
+
+        for (int i = 0; i < localMarkerDataList.size(); i++) {
+            if (!TextUtils.isEmpty(localMarkerDataList.get(i).getIcon())) {
+                DrawCustomMarkerBitmapUtil.drawMark(localMarkerDataList.get(i), localMarkerDataList.get(i).getIcon(),
+                        144, true, new DrawCustomMarkerBitmapUtil.OnGetMapHeadListener() {
+                            @Override
+                            public void success(Bitmap bitmap, Object object) {
+                                UserBean userBean = (UserBean) object;
+                                localMarkers.add(aMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(bitmap))));
+                                localMarkers.get(localMarkers.size() - 1).setPosition(userBean.getLatLng());
+                                startGrowAnimation(localMarkers.get(localMarkers.size() - 1));
+                                //可以给定位点绑定一个信息对象
+                                localMarkers.get(localMarkers.size() - 1).setObject(userBean);
+                                localMarkers.get(localMarkers.size() - 1).setInfoWindowEnable(true);
+                                localMarkers.get(localMarkers.size() - 1).setTitle(userBean.getUsername());
+                                localMarkers.get(localMarkers.size() - 1).setSnippet(userBean.getDescribe());
+                                localMarkers.get(localMarkers.size() - 1).hideInfoWindow();
+                            }
+
+                            @Override
+                            public void fail(Object object) {
+
+                            }
+                        });
+            } else {
+                localMarkers.add(aMap.addMarker(new MarkerOptions().icon(
+                        BitmapDescriptorFactory.fromBitmap(DrawCustomMarkerBitmapUtil.drawMark(BitmapFactory.decodeResource(
+                                MapLocationActivity.this.getResources(), R.mipmap.ic_launcher), 144, true)))));
+                localMarkers.get(localMarkers.size() - 1).setPosition(localMarkerDataList.get(localMarkers.size() - 1).getLatLng());
+                startGrowAnimation(localMarkers.get(localMarkers.size() - 1));
+                //可以给定位点绑定一个信息对象
+                localMarkers.get(localMarkers.size() - 1).setObject(localMarkerDataList.get(i));
+                localMarkers.get(localMarkers.size() - 1).setInfoWindowEnable(true);
+                localMarkers.get(localMarkers.size() - 1).setTitle(localMarkerDataList.get(i).getUsername());
+                localMarkers.get(localMarkers.size() - 1).setSnippet(localMarkerDataList.get(i).getDescribe());
+                localMarkers.get(localMarkers.size() - 1).hideInfoWindow();
+            }
+        }
+    }
+
+    @Override
+    public void onGetLocalMarkerDataFail(String content) {
+
     }
 
     @Override

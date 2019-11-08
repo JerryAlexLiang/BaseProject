@@ -68,17 +68,11 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
     /**
      * 是否注册事件分发，默认不绑定
      */
-//    protected boolean isRegisterEventBus() {
-//        return false;
-//    }
     protected abstract boolean isRegisterEventBus();
 
     protected abstract boolean isSetRefreshHeader();
 
     protected abstract boolean isSetRefreshFooter();
-
-    //ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
-    //                true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
 
     @Override
     public void setContentView(int layoutResID) {
@@ -122,7 +116,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
-            getWindow().setNavigationBarColor(Color.TRANSPARENT);
+//            getWindow().setNavigationBarColor(Color.TRANSPARENT);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //半透明状态栏(带阴影)
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -159,7 +153,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
         SmartRefreshLayout smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
         if (smartRefreshLayout != null) {
-            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout,isSetRefreshHeader(), isSetRefreshFooter());
+            getSmartRefreshPrimaryColorsTheme(smartRefreshLayout, isSetRefreshHeader(), isSetRefreshFooter());
         }
 
         if (isSetRefresh()) {
@@ -225,7 +219,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
      * 本地化存储操作(取出) - 设置状态栏颜色
      * //toolbar_layout  CollapsingToolbarLayout  app:contentScrim="?attr/colorPrimary"  app:statusBarScrim="?attr/colorPrimary"
      */
-    public void getActionBarTheme(FrameLayout baseActionBar, CollapsingToolbarLayout baseToolBar) {
+    public void getActionBarTheme(FrameLayout baseActionBar, CollapsingToolbarLayout baseCollapsingToolBar) {
         int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, ACTIONBAR_COLOR_THEME, 0);
         Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
         switch (actionBarColorInt) {
@@ -233,9 +227,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.title_bar_blue));
                 }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_blue));
-                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_blue));
+                if (baseCollapsingToolBar != null) {
+                    baseCollapsingToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_blue));
+                    baseCollapsingToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_blue));
                 }
                 break;
 
@@ -243,9 +237,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.title_bar_red));
                 }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_red));
-                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_red));
+                if (baseCollapsingToolBar != null) {
+                    baseCollapsingToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_red));
+                    baseCollapsingToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_red));
                 }
                 break;
 
@@ -253,9 +247,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.BLACK);
                 }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(Color.BLACK);
-                    baseToolBar.setStatusBarScrimColor(Color.BLACK);
+                if (baseCollapsingToolBar != null) {
+                    baseCollapsingToolBar.setContentScrimColor(Color.BLACK);
+                    baseCollapsingToolBar.setStatusBarScrimColor(Color.BLACK);
                 }
                 break;
 
@@ -263,9 +257,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.WHITE);
                 }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(Color.WHITE);
-                    baseToolBar.setStatusBarScrimColor(Color.WHITE);
+                if (baseCollapsingToolBar != null) {
+                    baseCollapsingToolBar.setContentScrimColor(Color.WHITE);
+                    baseCollapsingToolBar.setStatusBarScrimColor(Color.WHITE);
                 }
                 break;
 
@@ -273,9 +267,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(Color.TRANSPARENT);
                 }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(Color.TRANSPARENT);
-                    baseToolBar.setStatusBarScrimColor(Color.TRANSPARENT);
+                if (baseCollapsingToolBar != null) {
+                    baseCollapsingToolBar.setContentScrimColor(Color.TRANSPARENT);
+                    baseCollapsingToolBar.setStatusBarScrimColor(Color.TRANSPARENT);
                 }
                 break;
 
@@ -283,9 +277,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 if (baseActionBar != null) {
                     baseActionBar.setBackgroundColor(getResources().getColor(R.color.title_bar_green));
                 }
-                if (baseToolBar != null) {
-                    baseToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_green));
-                    baseToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_green));
+                if (baseCollapsingToolBar != null) {
+                    baseCollapsingToolBar.setContentScrimColor(getResources().getColor(R.color.title_bar_green));
+                    baseCollapsingToolBar.setStatusBarScrimColor(getResources().getColor(R.color.title_bar_green));
                 }
                 break;
         }
@@ -548,17 +542,17 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         }
     }
 
-    public void onShowToast(String content){
+    public void onShowToast(String content) {
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 false, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
-    public void onShowTrueToast(String content){
+    public void onShowTrueToast(String content) {
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 
-    public void onShowErrorToast(String content){
+    public void onShowErrorToast(String content) {
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_wrong),
                 true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
@@ -579,6 +573,26 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
     public void jumpToActivity(Intent intent, int requestCode) {
         startActivityForResult(intent, requestCode);
+    }
+
+    public void fullScreen(boolean enable) {
+        if (enable) {
+            if (Build.VERSION.SDK_INT >= 19) {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= 19) {
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            }
+        }
     }
 
 

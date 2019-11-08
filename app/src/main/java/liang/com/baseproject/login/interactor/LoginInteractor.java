@@ -3,7 +3,7 @@ package liang.com.baseproject.login.interactor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.base.MVPRetrofitListener;
-import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
 import liang.com.baseproject.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
@@ -12,7 +12,7 @@ public class LoginInteractor {
 
 //    public interface onRetrofitListener {
 //
-//        void onLoginSuccess(Userbean data);
+//        void onLoginSuccess(UserBean data);
 //
 //        void onLoginFail(String content);
 //
@@ -22,15 +22,15 @@ public class LoginInteractor {
 //    }
 
     //    public void goToLogin(String username, String password, onRetrofitListener listener) {
-    public void goToLogin(String username, String password, MVPRetrofitListener<Userbean> listener) {
-//    public void goToLogin(String username, String password, LoginRetrofitListener<Userbean> listener) {
+    public void goToLogin(String username, String password, MVPRetrofitListener<UserBean> listener) {
+//    public void goToLogin(String username, String password, LoginRetrofitListener<UserBean> listener) {
         RetrofitHelper
                 .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
                 .getMyService()
                 .goToLogin(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MVPBaseObserver<Userbean>() {
+                .subscribe(new MVPBaseObserver<UserBean>() {
                     @Override
                     protected void onStart() {
                         listener.onRequestStart();
@@ -52,7 +52,7 @@ public class LoginInteractor {
                     }
 
                     @Override
-                    protected void onSuccess(Userbean data) {
+                    protected void onSuccess(UserBean data) {
                         listener.onRequestSuccess(data);
                     }
                 });

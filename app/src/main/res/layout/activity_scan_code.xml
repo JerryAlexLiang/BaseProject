@@ -87,7 +87,7 @@
                 android:id="@+id/btn_animator_open"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="Animator_Open"
@@ -97,7 +97,7 @@
                 android:id="@+id/btn_animator_hide"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="Animator_hide"
@@ -108,7 +108,7 @@
                 android:id="@+id/btn_select_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="选择图片"/>
@@ -137,10 +137,19 @@
                 android:id="@+id/btn_filtrate_jingdong"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="仿京东筛选demo01"/>
+
+            <Button
+                android:id="@+id/btn_map_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="MapViewCoordinatorLayout"/>
 
         </LinearLayout>
 

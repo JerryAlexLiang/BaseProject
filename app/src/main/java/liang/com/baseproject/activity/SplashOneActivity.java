@@ -1,6 +1,7 @@
 package liang.com.baseproject.activity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.amap.api.maps.MapsInitializer;
@@ -73,9 +74,7 @@ public class SplashOneActivity extends MVPBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        setContentView(R.layout.activity_splash_one);
+        fullScreen(true);
         ButterKnife.bind(this);
 
         mAmapMap_path = this.getExternalFilesDir("").getAbsolutePath();

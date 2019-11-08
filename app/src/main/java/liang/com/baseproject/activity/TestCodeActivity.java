@@ -41,6 +41,7 @@ import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
 import liang.com.baseproject.testlaboratory.FiltrateActivity;
+import liang.com.baseproject.testlaboratory.MapTestActivity;
 import liang.com.baseproject.utils.AnimationUtils;
 import liang.com.baseproject.utils.FileUtil;
 import liang.com.baseproject.utils.LogUtil;
@@ -80,6 +81,8 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     Button btnAnimatorHide;
     @BindView(R.id.btn_filtrate_jingdong)
     Button btnFiltrateJingdong;
+    @BindView(R.id.btn_map_view)
+    Button btnMapView;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TestCodeActivity.class);
@@ -467,11 +470,15 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         mTimer.cancel();
     }
 
-    @OnClick({R.id.btn_filtrate_jingdong})
+    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_filtrate_jingdong:
                 FiltrateActivity.actionStart(TestCodeActivity.this);
+                break;
+
+            case R.id.btn_map_view:
+                MapTestActivity.actionStart(TestCodeActivity.this);
                 break;
         }
     }

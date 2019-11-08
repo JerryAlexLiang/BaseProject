@@ -9,9 +9,8 @@ import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
-import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
-import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.main.entity.CollectOutsideArticleBean;
 import liang.com.baseproject.main.entity.CollectionLinkBean;
 import liang.com.baseproject.mine.CollectionArticleBean;
@@ -70,14 +69,14 @@ public interface MyService {
      */
     @FormUrlEncoded
     @POST("/user/login")
-    Observable<MVPBaseResponse<Userbean>> goToLogin(@Field("username") String username, @Field("password") String password);
+    Observable<MVPBaseResponse<UserBean>> goToLogin(@Field("username") String username, @Field("password") String password);
 
     /**
      * 注册 https://www.wanandroid.com/user/register
      */
     @FormUrlEncoded
     @POST("/user/register")
-    Observable<MVPBaseResponse<Userbean>> goToRegister(@Field("username") String username, @Field("password") String password,
+    Observable<MVPBaseResponse<UserBean>> goToRegister(@Field("username") String username, @Field("password") String password,
                                                        @Field("repassword") String repassword);
 
     /**

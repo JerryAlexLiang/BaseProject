@@ -19,7 +19,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.activity.LoginActivity;
-import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.presenter.RegisterPresenter;
 import liang.com.baseproject.login.view.RegisterView;
 import liang.com.baseproject.utils.GsonUtils;
@@ -136,7 +136,7 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
     }
 
     @Override
-    public void onRegisterSuccess(Userbean data) {
+    public void onRegisterSuccess(UserBean data) {
         LogUtil.e(TAG, "注册登录成功~" + "  用户账号信息:  " + GsonUtils.toJson(data));
         onShowToast("注册登录成功~");
         //订阅注册事件总线

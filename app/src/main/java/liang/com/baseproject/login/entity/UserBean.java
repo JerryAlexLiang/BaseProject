@@ -1,5 +1,7 @@
 package liang.com.baseproject.login.entity;
 
+import com.amap.api.maps.model.LatLng;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  * 描述: WanAndroid 官网 登录Bean
  * 作者: liangyang
  */
-public class Userbean {
+public class UserBean {
 
     /**
      * admin : false
@@ -35,6 +37,12 @@ public class Userbean {
     private String username;
     private List<?> chapterTops;
     private List<Integer> collectIds;
+
+    private LatLng latLng;
+    private String describe;
+
+    public UserBean() {
+    }
 
     public boolean isAdmin() {
         return admin;
@@ -130,5 +138,22 @@ public class Userbean {
 
     public void setCollectIds(List<Integer> collectIds) {
         this.collectIds = collectIds;
+    }
+
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public LatLng getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
     }
 }

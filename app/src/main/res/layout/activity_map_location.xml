@@ -37,7 +37,7 @@
         app:layout_scrollFlags="scroll|enterAlways"
         -->
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/collapsing_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
@@ -60,6 +60,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/transparent" />
 
+                <!--android:background="#b5fbfbfa"-->
                 <RelativeLayout
                     android:id="@+id/rl_control_container"
                     android:layout_width="match_parent"
@@ -85,13 +86,12 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="25dp"
-                        android:src="@drawable/ic_more"
-                        android:tint="@color/invert"
                         android:padding="8dp"
-                        android:scaleType="fitCenter" />
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_more"
+                        android:tint="@color/invert" />
 
                 </RelativeLayout>
-
 
                 <ImageView
                     android:id="@+id/iv_btn_my_location"
@@ -106,7 +106,6 @@
             </liang.com.baseproject.widget.CustomScrollRelativeLayout>
 
             <include layout="@layout/layout_base_toolbar_default" />
-
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -141,11 +140,151 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
-                android:scrollbars="vertical"/>
-
+                android:scrollbars="vertical" />
         </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    <!--android:background="#b5fbfbfa"
+    appbar_scrolling_view_behavior-->
+    <RelativeLayout
+        android:id="@+id/rl_im_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@color/red"
+        android:visibility="gone"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cv_map_head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp" />
+
+        <TextView
+            android:id="@+id/tv_publisher_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@id/cv_map_head"
+            android:text="费启鸣"
+            android:textColor="@color/text_surface"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_activity_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_toEndOf="@id/cv_map_head"
+            android:ellipsize="end"
+            android:maxWidth="210dp"
+            android:maxLines="1"
+            android:text="111"
+            android:textColor="@color/text_surface" />
+
+        <TextView
+            android:id="@+id/tv_join_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            android:text="id"
+            android:textColor="@color/colorBlue"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="10dp"
+            android:text="110m"
+            android:textColor="@color/text_second"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_over_time"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="123"
+                android:textColor="@color/text_second" />
+
+            <TextView
+                android:id="@+id/tv_activity_name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:text="234"
+                android:textColor="@color/text_second" />
+
+            <TextView
+                android:id="@+id/tv_activity_describe"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:textColor="@color/text_second"
+                android:text="111"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="10dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/part_linear_color" />
+
+        <RelativeLayout
+            android:id="@+id/rl_view_down"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp">
+
+            <View
+                android:id="@+id/v_down"
+                android:layout_width="50dp"
+                android:layout_height="7dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/map_view_bg" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#b5fbfbfa"
+        android:layout_gravity="bottom">
+
+    </RelativeLayout>
 
     <ImageView
         android:id="@+id/iv_web_view_error"

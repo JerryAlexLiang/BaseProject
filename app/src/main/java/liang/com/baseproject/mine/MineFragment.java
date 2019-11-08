@@ -21,10 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amap.api.maps.AMapException;
 import com.amap.api.maps.offlinemap.OfflineMapActivity;
-import com.amap.api.maps.offlinemap.OfflineMapCity;
-import com.amap.api.maps.offlinemap.OfflineMapManager;
 import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -41,7 +38,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -59,7 +55,7 @@ import liang.com.baseproject.base.MVPBaseFragment;
 import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.activity.LoginActivity;
-import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.mine.activity.ReadLaterActivity;
 import liang.com.baseproject.setting.activity.AppSettingActivity;
 import liang.com.baseproject.utils.AnimationUtils;
@@ -189,7 +185,7 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
             return;
         }
         boolean login = event.isLogin();
-        Userbean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
+        UserBean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
         LogUtil.e(TAG, "登录用户信息Event: " + new Gson().toJson(loginUserBean) + "  是否已登录: " + login);
         //更新用户UI
         initUserInfo();
@@ -200,7 +196,7 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
     private void initUserInfo() {
         if (UserLoginUtils.getInstance().isLogin()) {
             //已登录，填充数据
-            Userbean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
+            UserBean loginUserBean = UserLoginUtils.getInstance().getLoginUserBean();
             LogUtil.e(TAG, "登录用户信息: " + new Gson().toJson(loginUserBean));
 
             String localUserIcon = UserLoginUtils.getInstance().getLocalUserIcon();

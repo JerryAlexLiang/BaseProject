@@ -2,12 +2,12 @@ package liang.com.baseproject.login.presenter;
 
 import liang.com.baseproject.base.MVPBasePresenter;
 import liang.com.baseproject.base.MVPRetrofitListener;
-import liang.com.baseproject.login.entity.Userbean;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.interactor.RegisterInteractor;
 import liang.com.baseproject.login.view.RegisterView;
 import liang.com.baseproject.utils.UserLoginUtils;
 
-public class RegisterPresenter extends MVPBasePresenter<RegisterView> implements MVPRetrofitListener<Userbean> {
+public class RegisterPresenter extends MVPBasePresenter<RegisterView> implements MVPRetrofitListener<UserBean> {
 
     private RegisterInteractor registerInteractor;
 
@@ -30,7 +30,7 @@ public class RegisterPresenter extends MVPBasePresenter<RegisterView> implements
     }
 
     @Override
-    public void onRequestSuccess(Userbean data) {
+    public void onRequestSuccess(UserBean data) {
         //注册成功直接登陆成功
         UserLoginUtils.getInstance().login(data);
         if (isViewAttached()) {

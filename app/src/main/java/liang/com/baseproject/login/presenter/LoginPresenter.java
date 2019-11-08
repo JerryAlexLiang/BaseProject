@@ -1,13 +1,13 @@
 package liang.com.baseproject.login.presenter;
 
 import liang.com.baseproject.base.MVPRetrofitListener;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.view.LoginView;
 import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.login.entity.Userbean;
 import liang.com.baseproject.login.interactor.LoginInteractor;
 import liang.com.baseproject.utils.UserLoginUtils;
 
-public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRetrofitListener<Userbean> {
+public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRetrofitListener<UserBean> {
 
     private LoginInteractor loginInteractor;
 
@@ -23,7 +23,7 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
     }
 
     @Override
-    public void onRequestSuccess(Userbean data) {
+    public void onRequestSuccess(UserBean data) {
         //本地化存储登录信息数据
         UserLoginUtils.getInstance().login(data);
         if (isViewAttached()) {

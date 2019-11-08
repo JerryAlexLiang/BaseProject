@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -30,6 +31,7 @@ import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
+import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.main.activity.AgentWebActivity;
 import liang.com.baseproject.utils.JsonFormatUtils;
 import liang.com.baseproject.utils.LogUtil;
@@ -214,6 +216,16 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
+    }
+
+    @Override
+    public void onGetLocalMarkerDataSuccess(List<UserBean> localMarkerDataList) {
+
+    }
+
+    @Override
+    public void onGetLocalMarkerDataFail(String content) {
+
     }
 
     @Override
