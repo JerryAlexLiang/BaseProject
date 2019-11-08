@@ -2,23 +2,18 @@ package liang.com.baseproject.home.fragment;
 
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -31,11 +26,9 @@ import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
-import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.main.activity.AgentWebActivity;
 import liang.com.baseproject.utils.JsonFormatUtils;
 import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ToastUtil;
 
 /**
  * 创建日期：2019/3/7 on 13:23
@@ -80,8 +73,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     protected void initView(View rootView) {
-        //获取数据源
-//        mPresenter.getArticleList(PAGE_START);
+        //绑定View
+        mPresenter.attachView(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         rvHome.setLayoutManager(linearLayoutManager);
@@ -133,6 +126,11 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
+
+        //添加头部
+        View headerView = getLayoutInflater().inflate(R.layout.layout_web_error,null);
+        headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        homeContainerAdapter.addHeaderView(headerView);
     }
 
     @Override
@@ -207,6 +205,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //这两个方法是在加载成功,并且还有数据的情况下调用的
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
+        smartRefreshLayout.finishRefresh(true);
+        smartRefreshLayout.finishLoadMore(true);
     }
 
     @Override
@@ -216,16 +216,6 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
-    }
-
-    @Override
-    public void onGetLocalMarkerDataSuccess(List<UserBean> localMarkerDataList) {
-
-    }
-
-    @Override
-    public void onGetLocalMarkerDataFail(String content) {
-
     }
 
     @Override
@@ -241,6 +231,14 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     @Override
     public void onHideProgress() {
 
+    }
+
+    @Override
+    public void onRequestError() {
+        //这两个方法是在加载成功,并且还有数据的情况下调用的
+        smartRefreshLayout.finishRefresh(false);
+        smartRefreshLayout.finishLoadMore(false);
+        homeContainerAdapter.loadMoreFail();
     }
 
 }

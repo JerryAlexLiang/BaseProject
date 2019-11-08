@@ -37,18 +37,13 @@ public class LoginInteractor {
                     }
 
                     @Override
-                    protected void onFinish() {
-                        listener.onRequestFinish();
-                    }
-
-//                    @Override
-//                    protected void onError(String errorMsg) {
-//                        listener.onError(errorMsg);
-//                    }
-
-                    @Override
                     protected void onFail(String errorMsg) {
                         listener.onRequestFail(errorMsg);
+                    }
+
+                    @Override
+                    protected void onError(String errorMsg) {
+                        listener.onRequestError(errorMsg);
                     }
 
                     @Override

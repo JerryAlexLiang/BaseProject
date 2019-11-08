@@ -132,20 +132,20 @@ public class HttpLoggingInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Level level = this.level;
-        //************添加缓存******************//
-        CacheControl.Builder cacheBuilder = new CacheControl.Builder();
-        cacheBuilder.maxAge(0, TimeUnit.SECONDS);
-        cacheBuilder.maxStale(365, TimeUnit.DAYS);
-        CacheControl cacheControl = cacheBuilder.build();
-
-        Request request = chain.request();
-        if (!NetUtil.isNetworkAvailable(MyApplication.mContext)){
-            request = request.newBuilder()
-                    .cacheControl(cacheControl)
-                    .build();
-        }
-        //*************************************//
+//        //************添加缓存******************//
+//        CacheControl.Builder cacheBuilder = new CacheControl.Builder();
+//        cacheBuilder.maxAge(0, TimeUnit.SECONDS);
+//        cacheBuilder.maxStale(365, TimeUnit.DAYS);
+//        CacheControl cacheControl = cacheBuilder.build();
+//
 //        Request request = chain.request();
+//        if (!NetUtil.isNetworkAvailable(MyApplication.mContext)){
+//            request = request.newBuilder()
+//                    .cacheControl(cacheControl)
+//                    .build();
+//        }
+//        //*************************************//
+        Request request = chain.request();
         if (level == Level.NONE) {
             return chain.proceed(request);
         }

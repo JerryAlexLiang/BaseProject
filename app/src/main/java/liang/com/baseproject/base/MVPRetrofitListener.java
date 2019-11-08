@@ -1,7 +1,6 @@
 package liang.com.baseproject.base;
 
 public interface MVPRetrofitListener<T> {
-//public interface MVPRetrofitListener {
 
     void onRequestStart();
 
@@ -9,10 +8,7 @@ public interface MVPRetrofitListener<T> {
 
     void onRequestFail(String content);
 
-//    void onError(String content);
-
-    void onRequestFinish();
-
+    void onRequestError(String content);
 
 }
 

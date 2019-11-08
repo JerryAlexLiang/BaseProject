@@ -35,6 +35,7 @@ public class RegisterPresenter extends MVPBasePresenter<RegisterView> implements
         UserLoginUtils.getInstance().login(data);
         if (isViewAttached()) {
             getView().onRegisterSuccess(data);
+            getView().onHideProgress();
         }
     }
 
@@ -42,13 +43,15 @@ public class RegisterPresenter extends MVPBasePresenter<RegisterView> implements
     public void onRequestFail(String content) {
         if (isViewAttached()) {
             getView().onRegisterFail(content);
+            getView().onHideProgress();
         }
     }
 
     @Override
-    public void onRequestFinish() {
+    public void onRequestError(String content) {
         if (isViewAttached()) {
             getView().onHideProgress();
         }
     }
+
 }

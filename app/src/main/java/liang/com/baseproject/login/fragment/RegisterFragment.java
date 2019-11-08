@@ -165,4 +165,9 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
     public void onHideProgress() {
         hideProgressDialog();
     }
+
+    @Override
+    public void onRequestError() {
+
+    }
 }

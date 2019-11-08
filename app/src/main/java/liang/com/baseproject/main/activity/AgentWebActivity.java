@@ -428,5 +428,10 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
         hideProgressDialog();
     }
 
+    @Override
+    public void onRequestError() {
+
+    }
+
 
 }

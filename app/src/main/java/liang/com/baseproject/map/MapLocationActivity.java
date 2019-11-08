@@ -77,8 +77,6 @@ import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.PermissionActivity;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.entity.HomeBean;
-import liang.com.baseproject.home.presenter.HomeContainerPresenter;
-import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.listener.AppBarStateChangeListener;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.utils.CheckPermission;
@@ -91,7 +89,8 @@ import liang.com.baseproject.utils.SettingUtils;
 import liang.com.baseproject.widget.CustomScrollRelativeLayout;
 import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
 
-public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, HomeContainerPresenter> implements HomeContainerView, AMap.OnMyLocationChangeListener, AMap.OnMarkerClickListener, AMap.OnMapTouchListener, CustomPopupWindow.ViewInterface, View.OnClickListener {
+public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLocationPresenter> implements  AMap.OnMyLocationChangeListener,
+        AMap.OnMarkerClickListener, AMap.OnMapTouchListener, CustomPopupWindow.ViewInterface, View.OnClickListener, MapLocationView {
 
     private static final String TAG = MapLocationActivity.class.getSimpleName();
     @BindView(R.id.map_view)
@@ -206,8 +205,8 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     }
 
     @Override
-    protected HomeContainerPresenter createPresenter() {
-        return new HomeContainerPresenter();
+    protected MapLocationPresenter createPresenter() {
+        return new MapLocationPresenter();
     }
 
     @Override
@@ -230,6 +229,10 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         super.onCreate(savedInstanceState);
         //随系统设置更改ToolBar状态栏颜色
         getActionBarTheme(null, collapsingLayout);
+
+        //绑定View
+        mPresenter.attachView(this);
+
         //得到Intent传递的数据
         parseIntent();
         //查询离线地图资源
@@ -412,32 +415,32 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvMap.setAdapter(homeContainerAdapter);
 
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                currPage = PAGE_START;
-                mPresenter.getArticleList(currPage);
-            }
-        });
-
-        boolean setRefreshFooter = isSetRefreshFooter();
-        if (setRefreshFooter) {
-            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-                @Override
-                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
-            });
-        } else {
-            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                @Override
-                public void onLoadMoreRequested() {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
-            }, rvMap);
-        }
+//        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+//            @Override
+//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+//                currPage = PAGE_START;
+//                mPresenter.getArticleList(currPage);
+//            }
+//        });
+//
+//        boolean setRefreshFooter = isSetRefreshFooter();
+//        if (setRefreshFooter) {
+//            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+//                @Override
+//                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+//                    currPage++;
+//                    mPresenter.getArticleList(currPage);
+//                }
+//            });
+//        } else {
+//            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//                @Override
+//                public void onLoadMoreRequested() {
+//                    currPage++;
+//                    mPresenter.getArticleList(currPage);
+//                }
+//            }, rvMap);
+//        }
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
@@ -483,7 +486,7 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
     }
 
     private void getLocalData() {
-        mPresenter.getLocalMarkerData();
+//        mPresenter.getLocalMarkerData();
     }
 
     private void initPermission() {
@@ -1172,7 +1175,6 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
         LogUtil.d(TAG, "onDestroy()");
     }
 
-
     @Override
     public void onGetArticleListSuccess(HomeBean data) {
         if (currPage == PAGE_START) {
@@ -1274,6 +1276,11 @@ public class MapLocationActivity extends MVPBaseActivity<HomeContainerView, Home
 
     @Override
     public void onHideProgress() {
+
+    }
+
+    @Override
+    public void onRequestError() {
 
     }
 

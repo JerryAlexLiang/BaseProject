@@ -1,8 +1,8 @@
 package liang.com.baseproject.setting.presenter;
 
 import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.setting.listener.LogoutRetrofitListener;
 import liang.com.baseproject.setting.interactor.AppSettingInteractor;
+import liang.com.baseproject.setting.listener.LogoutRetrofitListener;
 import liang.com.baseproject.setting.view.AppSettingView;
 
 public class AppSettingPresenter extends MVPBasePresenter<AppSettingView> implements LogoutRetrofitListener<String> {
@@ -52,9 +52,10 @@ public class AppSettingPresenter extends MVPBasePresenter<AppSettingView> implem
     }
 
     @Override
-    public void onRequestFinish() {
+    public void onRequestError(String content) {
         if (isViewAttached()) {
             getView().onHideProgress();
         }
     }
+
 }

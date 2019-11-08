@@ -45,6 +45,7 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
                     protected void onSuccess(MVPBaseBean data) {
                         if (isViewAttached()) {
                             getView().onCollectSuccess();
+                            getView().onHideProgress();
                         }
                     }
 
@@ -52,15 +53,17 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
                     protected void onFail(String errorMsg) {
                         if (isViewAttached()) {
                             getView().onCollectFailed(errorMsg);
+                            getView().onHideProgress();
                         }
                     }
 
                     @Override
-                    protected void onFinish() {
+                    protected void onError(String errorMsg) {
                         if (isViewAttached()) {
                             getView().onHideProgress();
                         }
                     }
+
                 });
 
     }
@@ -90,6 +93,7 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
                     protected void onSuccess(CollectOutsideArticleBean data) {
                         if (isViewAttached()) {
                             getView().onCollectSuccess();
+                            getView().onHideProgress();
                         }
                     }
 
@@ -97,15 +101,17 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
                     protected void onFail(String errorMsg) {
                         if (isViewAttached()) {
                             getView().onCollectFailed(errorMsg);
+                            getView().onHideProgress();
                         }
                     }
 
                     @Override
-                    protected void onFinish() {
+                    protected void onError(String errorMsg) {
                         if (isViewAttached()) {
                             getView().onHideProgress();
                         }
                     }
+
                 });
     }
 
@@ -134,6 +140,7 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
                     protected void onSuccess(CollectionLinkBean data) {
                         if (isViewAttached()) {
                             getView().onCollectSuccess();
+                            getView().onHideProgress();
                         }
                     }
 
@@ -141,15 +148,17 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
                     protected void onFail(String errorMsg) {
                         if (isViewAttached()) {
                             getView().onCollectFailed(errorMsg);
+                            getView().onHideProgress();
                         }
                     }
 
                     @Override
-                    protected void onFinish() {
+                    protected void onError(String errorMsg) {
                         if (isViewAttached()) {
                             getView().onHideProgress();
                         }
                     }
+
                 });
     }
 }

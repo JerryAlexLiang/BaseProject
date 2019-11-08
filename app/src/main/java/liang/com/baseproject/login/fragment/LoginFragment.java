@@ -166,6 +166,11 @@ public class LoginFragment extends MVPBaseFragment<LoginView, LoginPresenter> im
         }
     }
 
+    @Override
+    public void onRequestError() {
+
+    }
+
 //    private void finishPage() {
 //        if (mActivity != null) {
 //            mActivity.finish();

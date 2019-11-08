@@ -28,6 +28,7 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
         UserLoginUtils.getInstance().login(data);
         if (isViewAttached()) {
             getView().onLoginSuccess(data);
+            getView().onHideProgress();
         }
     }
 
@@ -35,18 +36,12 @@ public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRe
     public void onRequestFail(String content) {
         if (isViewAttached()) {
             getView().onLoginFail(content);
+            getView().onHideProgress();
         }
     }
 
-//    @Override
-//    public void onError(String content) {
-//        if (getView() != null) {
-//            getView().onLoginError(content);
-//        }
-//    }
-
     @Override
-    public void onRequestFinish() {
+    public void onRequestError(String content) {
         if (isViewAttached()) {
             getView().onHideProgress();
         }

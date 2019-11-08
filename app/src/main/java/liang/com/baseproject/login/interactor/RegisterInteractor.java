@@ -34,9 +34,10 @@ public class RegisterInteractor {
                     }
 
                     @Override
-                    protected void onFinish() {
-                        listener.onRequestFinish();
+                    protected void onError(String errorMsg) {
+                        listener.onRequestError(errorMsg);
                     }
+
                 });
 
     }

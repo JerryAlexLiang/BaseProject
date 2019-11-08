@@ -245,4 +245,9 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
     public void onHideProgress() {
         hideProgressDialog();
     }
+
+    @Override
+    public void onRequestError() {
+
+    }
 }

@@ -50,7 +50,6 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
         switch (data.getErrorCode()) {
             case SUCCESS:
                 onSuccess(data.getData());
-                onFinish();
                 LogUtil.e(TAG, "onSuccess():  " + new Gson().toJson(data));
                 break;
 
@@ -61,7 +60,6 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
 
             default:
                 onFail(data.getErrorMsg());
-                onFinish();
                 LogUtil.e(TAG, "onFail():  " + new Gson().toJson(data));
                 break;
         }
@@ -72,8 +70,7 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
         if (disposable != null && !disposable.isDisposed()) {
             disposable.dispose();
         }
-        onFinish();
-//        onError(e.getMessage());
+        onError(e.getMessage());
         LogUtil.e(TAG, "onError():  " + e.toString());
 
         if (e instanceof HttpException) {
@@ -101,31 +98,26 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
         switch (reason) {
             case CONNECT_ERROR:
                 //连接错误
-//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.connect_error));
                 onShowToast(MyApplication.getAppContext().getResources().getString(R.string.connect_error));
                 break;
 
             case CONNECT_TIMEOUT:
                 //连接超时
-//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.connect_timeout));
                 onShowToast(MyApplication.getAppContext().getResources().getString(R.string.connect_timeout));
                 break;
 
             case BAD_NETWORK:
                 //网络错误
-//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.bad_netword));
                 onShowToast(MyApplication.getAppContext().getResources().getString(R.string.bad_netword));
                 break;
 
             case PARSE_ERROR:
                 //解析数据失败
-//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.parse_error));
                 onShowToast(MyApplication.getAppContext().getResources().getString(R.string.parse_error));
                 break;
 
             case UNKNOWN_ERROR:
                 //未知错误
-//                ToastUtil.showShortToast(MyApplication.getAppContext().getResources().getString(R.string.unknown_error));
                 onShowToast(MyApplication.getAppContext().getResources().getString(R.string.unknown_error));
                 break;
         }
@@ -174,17 +166,12 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
      */
     protected abstract void onFail(String errorMsg);
 
-    //    /**
+//    /**
 //     * 异常回调
 //     *
 //     * @param errorMsg 错误信息
 //     */
-//    protected abstract void onError(String errorMsg);
-
-    /**
-     * 请求结束回调
-     */
-    protected abstract void onFinish();
+    protected abstract void onError(String errorMsg);
 
     public void onShowToast(String content) {
         ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),

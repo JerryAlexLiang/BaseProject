@@ -49,9 +49,10 @@ public class WebViewInteractor {
                     }
 
                     @Override
-                    protected void onFinish() {
+                    protected void onError(String errorMsg) {
 
                     }
+
                 });
 
     }
@@ -86,9 +87,10 @@ public class WebViewInteractor {
                     }
 
                     @Override
-                    protected void onFinish() {
+                    protected void onError(String errorMsg) {
 
                     }
+
                 });
     }
 
@@ -122,9 +124,10 @@ public class WebViewInteractor {
                     }
 
                     @Override
-                    protected void onFinish() {
+                    protected void onError(String errorMsg) {
 
                     }
+
                 });
     }
 }
