@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/dp5"
-    android:background="@drawable/bg_press_color_white"
+    android:background="@drawable/selector_bg_press_color_white"
     app:drag_edge="right"
     app:show_mode="lay_down">
 
@@ -71,7 +71,7 @@
         android:id="@+id/rl_page_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_press_color_white"
+        android:background="@drawable/selector_bg_press_color_white"
         android:padding="@dimen/dp16">
 
         <RelativeLayout

@@ -65,7 +65,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     RelativeLayout toolbarRightLayout;
     @BindView(R.id.base_toolbar)
     Toolbar baseToolbar;
-    @BindView(R.id.toolbar_layout)
+    @BindView(R.id.collapsing_layout)
     CollapsingToolbarLayout toolbarLayout;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;

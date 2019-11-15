@@ -9,7 +9,7 @@
         android:id="@+id/tv_city_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/bg_press_color_white"
+        android:background="@drawable/selector_bg_press_color_white"
         android:drawableEnd="@drawable/icon_arrow_next"
         android:ellipsize="end"
         android:gravity="center_vertical"

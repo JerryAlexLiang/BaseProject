@@ -409,7 +409,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvMap.setLayoutManager(linearLayoutManager);
         //初始化适配器
-        homeContainerAdapter = new HomeContainerAdapter();
+//        homeContainerAdapter = new HomeContainerAdapter(true);
         homeContainerAdapter.setEnableLoadMore(false);
         //开启动画
         homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
@@ -1280,7 +1280,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     }
 
     @Override
-    public void onRequestError() {
+    public void onRequestError(String content) {
 
     }
 

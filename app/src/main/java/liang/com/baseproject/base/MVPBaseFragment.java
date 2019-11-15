@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.scwang.smartrefresh.header.BezierCircleHeader;
 import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
@@ -158,11 +159,13 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
         if (smartRefreshLayout != null) {
             if (isSetRefreshHeader) {
                 //下拉刷新沉浸式水滴头部View
-                smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext()));
+//                smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext()));
+                smartRefreshLayout.setRefreshHeader(new PhoenixHeader(MyApplication.getAppContext()));
             }
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View
-                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
+//                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
+                smartRefreshLayout.setRefreshFooter(new ClassicsFooter(MyApplication.getAppContext()));
             }
         }
         switch (actionBarColorInt) {

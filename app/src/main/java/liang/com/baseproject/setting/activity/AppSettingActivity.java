@@ -247,7 +247,7 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
     }
 
     @Override
-    public void onRequestError() {
+    public void onRequestError(String content) {
 
     }
 }

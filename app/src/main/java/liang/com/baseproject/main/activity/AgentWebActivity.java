@@ -429,7 +429,7 @@ public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWeb
     }
 
     @Override
-    public void onRequestError() {
+    public void onRequestError(String content) {
 
     }
 

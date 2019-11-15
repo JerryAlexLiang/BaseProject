@@ -14,32 +14,38 @@ import liang.com.baseproject.entity.TagsBean;
 public class ArticleBean extends MVPBaseBean implements Serializable {
     /**
      * apkLink :
-     * author : 玉刚说
-     * chapterId : 410
-     * chapterName : 玉刚说
+     * audit : 1
+     * author :
+     * chapterId : 502
+     * chapterName : 自助
      * collect : false
      * courseId : 13
      * desc :
      * envelopePic :
-     * fresh : false
-     * id : 8367
-     * link : https://mp.weixin.qq.com/s/uI7Fej1_qSJOJnzQ6offpw
-     * niceDate : 2019-05-06
+     * fresh : true
+     * id : 10276
+     * link : https://blog.csdn.net/qq1271396448/article/details/80527344
+     * niceDate : 3小时前
+     * niceShareDate : 3小时前
      * origin :
      * prefix :
      * projectLink :
-     * publishTime : 1557072000000
-     * superChapterId : 408
-     * superChapterName : 公众号
-     * tags : [{"name":"公众号","url":"/wxarticle/list/410/1"}]
-     * title : 深扒 EventBus：register
+     * publishTime : 1573701021000
+     * selfVisible : 0
+     * shareDate : 1573701021000
+     * shareUser : 菜鸡
+     * superChapterId : 494
+     * superChapterName : 广场Tab
+     * tags : []
+     * title : Android 6.0权限管理以及动态申请,以定位权限为例
      * type : 0
-     * userId : -1
+     * userId : 23705
      * visible : 1
      * zan : 0
      */
 
     private String apkLink;
+    private int audit;
     private String author;
     private int chapterId;
     private String chapterName;
@@ -51,10 +57,14 @@ public class ArticleBean extends MVPBaseBean implements Serializable {
     private int id;
     private String link;
     private String niceDate;
+    private String niceShareDate;
     private String origin;
     private String prefix;
     private String projectLink;
     private long publishTime;
+    private int selfVisible;
+    private long shareDate;
+    private String shareUser;
     private int superChapterId;
     private String superChapterName;
     private String title;
@@ -70,6 +80,14 @@ public class ArticleBean extends MVPBaseBean implements Serializable {
 
     public void setApkLink(String apkLink) {
         this.apkLink = apkLink;
+    }
+
+    public int getAudit() {
+        return audit;
+    }
+
+    public void setAudit(int audit) {
+        this.audit = audit;
     }
 
     public String getAuthor() {
@@ -160,6 +178,14 @@ public class ArticleBean extends MVPBaseBean implements Serializable {
         this.niceDate = niceDate;
     }
 
+    public String getNiceShareDate() {
+        return niceShareDate;
+    }
+
+    public void setNiceShareDate(String niceShareDate) {
+        this.niceShareDate = niceShareDate;
+    }
+
     public String getOrigin() {
         return origin;
     }
@@ -190,6 +216,30 @@ public class ArticleBean extends MVPBaseBean implements Serializable {
 
     public void setPublishTime(long publishTime) {
         this.publishTime = publishTime;
+    }
+
+    public int getSelfVisible() {
+        return selfVisible;
+    }
+
+    public void setSelfVisible(int selfVisible) {
+        this.selfVisible = selfVisible;
+    }
+
+    public long getShareDate() {
+        return shareDate;
+    }
+
+    public void setShareDate(long shareDate) {
+        this.shareDate = shareDate;
+    }
+
+    public String getShareUser() {
+        return shareUser;
+    }
+
+    public void setShareUser(String shareUser) {
+        this.shareUser = shareUser;
     }
 
     public int getSuperChapterId() {
@@ -256,29 +306,4 @@ public class ArticleBean extends MVPBaseBean implements Serializable {
         this.tags = tags;
     }
 
-//    /**
-//     * name : 公众号
-//     * url : /wxarticle/list/410/1
-//     */
-//    public static class TagsBean extends MVPBaseBean {
-//
-//        private String name;
-//        private String url;
-//
-//        public String getName() {
-//            return name;
-//        }
-//
-//        public void setName(String name) {
-//            this.name = name;
-//        }
-//
-//        public String getUrl() {
-//            return url;
-//        }
-//
-//        public void setUrl(String url) {
-//            this.url = url;
-//        }
-//    }
 }

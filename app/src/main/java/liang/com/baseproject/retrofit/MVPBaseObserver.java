@@ -166,11 +166,11 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
      */
     protected abstract void onFail(String errorMsg);
 
-//    /**
-//     * 异常回调
-//     *
-//     * @param errorMsg 错误信息
-//     */
+    /**
+     * 异常回调
+     *
+     * @param errorMsg 错误信息
+     */
     protected abstract void onError(String errorMsg);
 
     public void onShowToast(String content) {

@@ -167,7 +167,7 @@ public class LoginFragment extends MVPBaseFragment<LoginView, LoginPresenter> im
     }
 
     @Override
-    public void onRequestError() {
+    public void onRequestError(String content) {
 
     }
 

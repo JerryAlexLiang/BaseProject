@@ -46,7 +46,7 @@ public class HomeContainerPresenter extends MVPBasePresenter<HomeContainerView> 
             public void onRequestError(String content) {
                 if (isViewAttached()) {
                     getView().onHideProgress();
-                    getView().onRequestError();
+                    getView().onRequestError(content);
                 }
             }
         });

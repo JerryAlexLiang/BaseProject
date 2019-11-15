@@ -111,7 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             getActionBarTheme(baseActionBar, null);
         }
 
-        CollapsingToolbarLayout baseToolBar = findViewById(R.id.toolbar_layout);
+        CollapsingToolbarLayout baseToolBar = findViewById(R.id.collapsing_layout);
         if (baseToolBar != null) {
             getActionBarTheme(null, baseToolBar);
         }

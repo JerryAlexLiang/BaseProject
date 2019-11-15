@@ -167,7 +167,7 @@ public class RegisterFragment extends MVPBaseFragment<RegisterView, RegisterPres
     }
 
     @Override
-    public void onRequestError() {
+    public void onRequestError(String content) {
 
     }
 }

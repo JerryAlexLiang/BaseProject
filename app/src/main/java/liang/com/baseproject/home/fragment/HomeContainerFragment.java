@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,8 +13,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -46,10 +49,11 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-    //        private static final int PAGE_START = 368;
-    private static final int PAGE_START = 0;
+        private static final int PAGE_START = 373;
+//    private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
+    private boolean setRefreshFooter;
 
     public HomeContainerFragment() {
         // Required empty public constructor
@@ -105,32 +109,34 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             }
         });
 
-//        boolean setRefreshFooter = isSetRefreshFooter();
-//        if (setRefreshFooter) {
-//            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//                @Override
-//                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-//                    currPage++;
-//                    mPresenter.getArticleList(currPage);
-//                }
-//            });
-//        } else {
-        homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                currPage++;
-                mPresenter.getArticleList(currPage);
-            }
-        }, rvHome);
-//        }
+        setRefreshFooter = isSetRefreshFooter();
+        if (setRefreshFooter) {
+            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                    currPage++;
+                    mPresenter.getArticleList(currPage);
+                }
+            });
+        } else {
+            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    currPage++;
+                    mPresenter.getArticleList(currPage);
+                }
+            }, rvHome);
+        }
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
 
         //添加头部
-        View headerView = getLayoutInflater().inflate(R.layout.layout_web_error,null);
+        View headerView = getLayoutInflater().inflate(R.layout.layout_web_error, null);
         headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         homeContainerAdapter.addHeaderView(headerView);
+        //默认出现了头部就不会显示Empty，和尾部  配置以下方法也支持同时显示setHeaderAndEmpty  setHeaderFooterEmpty
+        homeContainerAdapter.setHeaderAndEmpty(true);
     }
 
     @Override
@@ -145,15 +151,15 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     protected boolean isSetRefreshFooter() {
-        return false;
+        return true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        LogUtil.d(TAG, "执行onResume()");
         //同步刷新背景
         getSmartRefreshPrimaryColorsTheme(smartRefreshLayout, true, true);
-        LogUtil.d(TAG, "执行onResume()");
     }
 
     @Override
@@ -174,10 +180,19 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         LogUtil.d(TAG, "执行onDestroy()");
     }
 
+    private HomeBean homeBeanData = null;
+
     @Override
     public void onGetArticleListSuccess(HomeBean data) {
+
+        if (data.getDatas() == null) {
+            homeContainerAdapter.setEmptyView(R.layout.rl_empty_container_view);
+        }
+
+
         LogUtil.d(TAG, "数据: ===>" + JsonFormatUtils.format(new Gson().toJson(data.getDatas())));
         LogUtil.e(TAG, "当前数据源: " + " page= " + currPage);
+
 
         if (currPage == PAGE_START) {
             //第一页数据
@@ -191,22 +206,22 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             LogUtil.d(TAG, "上拉加载更多：  " + "数量: " + homeContainerAdapter.getData().size());
         }
 
-        if (data.isOver() || data.getDatas().size() == 0) {
-//        if (data.getDatas().size() == 0) {
+//        if (data.isOver() || data.getDatas().size() == 0) {
+        if (data.getDatas().size() == 0 && currPage!=PAGE_START) {
             homeContainerAdapter.loadMoreEnd();
-            smartRefreshLayout.setEnableLoadMore(false);  //
+//            smartRefreshLayout.setEnableLoadMore(false);
             onShowToast("没有更多数据了!");
+            //设置是否在全部加载结束之后Footer跟随内容
+            smartRefreshLayout.setNoMoreData(true);
+            smartRefreshLayout.setEnableFooterFollowWhenNoMoreData(true);
         } else {
             if (!homeContainerAdapter.isLoadMoreEnable()) {
                 homeContainerAdapter.setEnableLoadMore(true);
             }
             smartRefreshLayout.setEnableLoadMore(true);
         }
-        //这两个方法是在加载成功,并且还有数据的情况下调用的
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
-        smartRefreshLayout.finishRefresh(true);
-        smartRefreshLayout.finishLoadMore(true);
     }
 
     @Override
@@ -216,6 +231,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
+        homeContainerAdapter.setEmptyView(R.layout.rl_empty_container_view);
     }
 
     @Override
@@ -234,11 +250,14 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     }
 
     @Override
-    public void onRequestError() {
+    public void onRequestError(String content) {
         //这两个方法是在加载成功,并且还有数据的情况下调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
         homeContainerAdapter.loadMoreFail();
+        View errorView = LayoutInflater.from(mActivity).inflate(R.layout.rl_empty_container_view, null);
+        homeContainerAdapter.setEmptyView(errorView);
+        LogUtil.d(TAG, content);
     }
 
 }

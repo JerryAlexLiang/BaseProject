@@ -8,5 +8,5 @@ public interface MVPBaseView<T> {
 
     void onHideProgress();
 
-    void onRequestError();
+    void onRequestError(String content);
 }

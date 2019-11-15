@@ -22,8 +22,7 @@ import android.widget.Toast;
 
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -141,7 +140,7 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
             getActionBarTheme(baseActionBar, null);
         }
 
-        CollapsingToolbarLayout baseToolBar = findViewById(R.id.toolbar_layout);
+        CollapsingToolbarLayout baseToolBar = findViewById(R.id.collapsing_layout);
         if (baseToolBar != null) {
             getActionBarTheme(null, baseToolBar);
         }
@@ -354,7 +353,8 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
             }
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View
-                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
+//                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
+                smartRefreshLayout.setRefreshFooter(new ClassicsFooter(MyApplication.getAppContext()));
             }
         }
         switch (actionBarColorInt) {
