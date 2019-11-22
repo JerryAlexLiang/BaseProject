@@ -73,4 +73,12 @@ public class ReadLaterBeanDaoHelpter {
                 .offset(offset * count).limit(count).list();
         return readLaterBeanList;
     }
+
+    /**
+     * 改
+     */
+    public static void updateChangeReadLaterBean(ReadLaterBean readLaterBean,String title){
+        readLaterBean.setTitle(title);
+        MyApplication.getDaoSession().getReadLaterBeanDao().update(readLaterBean);
+    }
 }

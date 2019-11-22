@@ -218,6 +218,8 @@ public class ReadLaterActivity extends MVPBaseActivity {
 
                     case R.id.tv_edit:
                         onShowToast("编辑");
+                        ReadLaterBeanDaoHelpter.updateChangeReadLaterBean(item,"测试");
+                        adapter.notifyItemChanged(position);
                         break;
 
                     case R.id.tv_open_browser:

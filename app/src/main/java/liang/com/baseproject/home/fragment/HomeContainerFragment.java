@@ -49,8 +49,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-        private static final int PAGE_START = 373;
-//    private static final int PAGE_START = 0;
+//        private static final int PAGE_START = 376;
+    private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
     private boolean setRefreshFooter;
@@ -88,6 +88,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //开启动画
         homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvHome.setAdapter(homeContainerAdapter);
+
+        mPresenter.getArticleList(PAGE_START);
 
         homeContainerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
