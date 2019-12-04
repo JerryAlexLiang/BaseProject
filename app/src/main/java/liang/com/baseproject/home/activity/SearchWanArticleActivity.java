@@ -88,7 +88,7 @@ public class SearchWanArticleActivity extends MVPBaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
-                onShowToast("返回");
+                finish();
                 break;
             case R.id.base_actionbar_right_tv:
                 onShowToast("右侧");

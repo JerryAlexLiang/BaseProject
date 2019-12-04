@@ -11,7 +11,6 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
@@ -22,12 +21,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -55,9 +56,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -83,13 +81,14 @@ import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.DrawCustomMarkerBitmapUtil;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.NetUtil;
+import liang.com.baseproject.utils.ResUtils;
 import liang.com.baseproject.utils.ResolutionUtils;
 import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.utils.SettingUtils;
 import liang.com.baseproject.widget.CustomScrollRelativeLayout;
 import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
 
-public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLocationPresenter> implements  AMap.OnMyLocationChangeListener,
+public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLocationPresenter> implements AMap.OnMyLocationChangeListener,
         AMap.OnMarkerClickListener, AMap.OnMapTouchListener, CustomPopupWindow.ViewInterface, View.OnClickListener, MapLocationView {
 
     private static final String TAG = MapLocationActivity.class.getSimpleName();
@@ -137,6 +136,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     ImageView ivWebViewError;
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
+    @BindView(R.id.icon_expand)
+    ImageView iconExpand;
 
     private CustomPopupWindow customPopupWindow;
 
@@ -155,7 +156,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 
     private boolean hasQueryOfflineCity = false;
 
-    private android.app.AlertDialog offlineCityLibDialog;
+    private AlertDialog offlineCityLibDialog;
     private String selectOfflineCity;
     private LatLng initLatLng = null;
 
@@ -183,6 +184,91 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 
     //最近一次点击的Marker
     private Marker lastClickMarker;
+
+    private int[] img = {R.drawable.icon_expand_open, R.drawable.icon_expand_close};//定义一个int数组，用来放图片
+    private boolean isExpandSmartContainer = true;//定义一个标识符，用来判断是open,还是close
+
+    private DisplayMetrics metrics;
+    private CoordinatorLayout.LayoutParams layoutParams;
+    private int widthPixels;
+    private int heightPixels;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //随系统设置更改ToolBar状态栏颜色
+        getActionBarTheme(null, collapsingLayout);
+
+        //获取屏幕高度
+        metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        widthPixels = metrics.widthPixels;
+        heightPixels = metrics.heightPixels;
+        //定义布局参数
+        layoutParams = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+//        if (data.isEmpty()) {
+//            smartRefreshLayout.setVisibility(View.GONE);
+//            layoutParams.height = heightPixels;
+//            appBar.setLayoutParams(layoutParams);
+//        } else {
+//            smartRefreshLayout.setVisibility(View.VISIBLE);
+//            layoutParams.height = (int) (heightPixels * 0.8);
+//            appBar.setLayoutParams(layoutParams);
+//        }
+
+        //首先判断isExpandSmartContainer是真还是假，如果是真，就显示close，如果是假，就显示open
+        if (isExpandSmartContainer) {
+            //当SmartContainer=true是展开状态时,显示向下图标，并且SmartContainer设置显示展开
+            iconExpand.setImageResource(R.drawable.icon_expand_open);//向下
+            smartRefreshLayout.setVisibility(View.VISIBLE);
+            layoutParams.height = (int) (heightPixels * 0.8);
+            appBar.setLayoutParams(layoutParams);
+        } else {
+            //当SmartContainer=true是展开关闭时,显示向上图标，并且SmartContainer设置伸缩隐藏
+            iconExpand.setImageResource(R.drawable.icon_expand_close);//向上
+            smartRefreshLayout.setVisibility(View.GONE);
+            layoutParams.height = heightPixels;
+            appBar.setLayoutParams(layoutParams);
+        }
+
+        //绑定View
+        mPresenter.attachView(this);
+
+        //得到Intent传递的数据
+        parseIntent();
+        //查询离线地图资源
+        networkAvailable = NetUtil.isNetworkAvailable(this);
+        mAmapMap_path = this.getExternalFilesDir("").getAbsolutePath();
+        //初始化地图视图
+        initMap(savedInstanceState);
+        //初始化视图
+        initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
+        mapView.onResume();
+        LogUtil.d(TAG, "onResume()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
+        mapView.onPause();
+        LogUtil.d(TAG, "onPause()");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
+        mapView.onDestroy();
+        LogUtil.d(TAG, "onDestroy()");
+    }
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MapLocationActivity.class);
@@ -223,26 +309,6 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 
     private String mAmapMap_path;
     private String mPath_offline = "/AmapOfflineMapData";
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //随系统设置更改ToolBar状态栏颜色
-        getActionBarTheme(null, collapsingLayout);
-
-        //绑定View
-        mPresenter.attachView(this);
-
-        //得到Intent传递的数据
-        parseIntent();
-        //查询离线地图资源
-        networkAvailable = NetUtil.isNetworkAvailable(this);
-        mAmapMap_path = this.getExternalFilesDir("").getAbsolutePath();
-        //初始化地图视图
-        initMap(savedInstanceState);
-        //初始化视图
-        initView();
-    }
 
     /**
      * 查询离线地图资源
@@ -405,11 +471,10 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 //        smartRefreshLayout.setRefreshHeader(new FunGameHitBlockHeader(MyApplication.getAppContext()));   //碰球游戏效果
 //        smartRefreshLayout.setRefreshHeader(new StoreHouseHeader(MyApplication.getAppContext()));  //StoreHouse文字渐变效果
 
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvMap.setLayoutManager(linearLayoutManager);
         //初始化适配器
-//        homeContainerAdapter = new HomeContainerAdapter(true);
+        homeContainerAdapter = new HomeContainerAdapter();
         homeContainerAdapter.setEnableLoadMore(false);
         //开启动画
         homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
@@ -463,7 +528,6 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         if (aMap == null) {
             aMap = mapView.getMap();
         }
-
 
 
         //初始化权限
@@ -789,6 +853,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 //                    rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
                     rlRecyclerContainer.setBackgroundColor(getResources().getColor(R.color.surface));
 
+                    rlControlContainer.setVisibility(View.VISIBLE);
+
                     if (mDarkTheme) {
                         //黑夜模式
                         if (mapType == AMap.MAP_TYPE_NORMAL || mapType == AMap.MAP_TYPE_NAVI) {
@@ -849,6 +915,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     baseToolbarRightIcon.setImageTintList(ColorStateList.valueOf(getResources().getColor(R.color.white)));
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_rectangle_bg));
 
+                    rlControlContainer.setVisibility(View.GONE);
+
                     //显示ToolBar
                     collapsingLayout.setTitleEnabled(true);
                     //google官方在安卓6.0以上版本才推出的深色状态栏字体api-白色
@@ -866,6 +934,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     baseToolbarLeftIcon.setImageResource(R.drawable.abc_ic_ab_back_material);
 //                    rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_card_bg));
                     rlRecyclerContainer.setBackgroundColor(getResources().getColor(R.color.surface));
+
+                    rlControlContainer.setVisibility(View.VISIBLE);
 
                     if (mDarkTheme) {
                         //黑夜模式
@@ -917,7 +987,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 
     }
 
-    @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout, R.id.iv_btn_my_location, R.id.iv_control_btn})
+    @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout, R.id.iv_btn_my_location, R.id.iv_control_btn, R.id.icon_expand})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_back_layout:
@@ -925,6 +995,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                 break;
 
             case R.id.toolbar_right_layout:
+
+            case R.id.iv_control_btn:
                 showMenuWindow();
                 break;
 
@@ -956,8 +1028,25 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                 }
                 break;
 
-            case R.id.iv_control_btn:
-                showMenuWindow();
+            case R.id.icon_expand:
+                //首先判断isExpandSmartContainer是真还是假，如果是真，就显示close，如果是假，就显示open
+                if (isExpandSmartContainer) {
+                    //SmartContainer是展开状态时，点击后缩回SmartContainer，并切换向上图标
+                    iconExpand.setImageResource(R.drawable.icon_expand_close);//向上
+                    smartRefreshLayout.setVisibility(View.GONE);
+                    layoutParams.height = heightPixels;
+                    appBar.setLayoutParams(layoutParams);
+                    isExpandSmartContainer = false;
+                    onShowToast("关闭列表布局");
+                } else {
+                    //SmartContainer是关闭状态时，点击后展开SmartContainer，并切换向下图标
+                    iconExpand.setImageResource(R.drawable.icon_expand_open);//向下
+                    smartRefreshLayout.setVisibility(View.VISIBLE);
+                    layoutParams.height = (int) (heightPixels * 0.8);
+                    appBar.setLayoutParams(layoutParams);
+                    isExpandSmartContainer = true;
+                    onShowToast("显示列表布局");
+                }
                 break;
 
             default:
@@ -1149,30 +1238,6 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         if (customPopupWindow != null) {
             customPopupWindow.dismiss();
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
-        mapView.onResume();
-        LogUtil.d(TAG, "onResume()");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
-        mapView.onPause();
-        LogUtil.d(TAG, "onPause()");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
-        mapView.onDestroy();
-        LogUtil.d(TAG, "onDestroy()");
     }
 
     @Override

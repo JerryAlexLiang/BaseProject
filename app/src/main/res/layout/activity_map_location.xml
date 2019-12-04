@@ -16,7 +16,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="600dp"
         android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -61,37 +61,38 @@
                     android:background="@color/transparent" />
 
                 <!--android:background="#b5fbfbfa"-->
-                <RelativeLayout
-                    android:id="@+id/rl_control_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@drawable/shape_white_half_card_bg">
+                <!--                <RelativeLayout-->
+                <!--                    android:id="@+id/rl_control_container"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="35dp"-->
+                <!--                    android:layout_alignParentBottom="true"-->
+                <!--                    android:background="@drawable/shape_white_half_card_bg"-->
+                <!--                    android:visibility="gone">-->
 
-                    <TextView
-                        android:id="@+id/tv_control_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="25dp"
-                        android:text="最新闻"
-                        android:textColor="@color/text_surface"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tv_control_title"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginStart="25dp"-->
+                <!--                        android:text="最新闻"-->
+                <!--                        android:textColor="@color/text_surface"-->
+                <!--                        android:textSize="16sp"-->
+                <!--                        android:textStyle="bold" />-->
 
-                    <ImageView
-                        android:id="@+id/iv_control_btn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="25dp"
-                        android:padding="8dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_more"
-                        android:tint="@color/invert" />
+                <!--                    <ImageView-->
+                <!--                        android:id="@+id/iv_control_btn"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_alignParentEnd="true"-->
+                <!--                        android:layout_centerVertical="true"-->
+                <!--                        android:layout_marginEnd="25dp"-->
+                <!--                        android:padding="8dp"-->
+                <!--                        android:scaleType="fitCenter"-->
+                <!--                        android:src="@drawable/ic_more"-->
+                <!--                        android:tint="@color/invert" />-->
 
-                </RelativeLayout>
+                <!--                </RelativeLayout>-->
 
                 <ImageView
                     android:id="@+id/iv_btn_my_location"
@@ -122,10 +123,10 @@
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:srlEnablePreviewInEditMode="true"
-        tools:showIn="@layout/activity_juhe_news_detail">
+        tools:showIn="@layout/activity_map_location">
 
         <RelativeLayout
             android:id="@+id/rl_recycler_container"
@@ -145,6 +146,61 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+<!--    <android.support.design.widget.FloatingActionButton-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:gravity="center"-->
+<!--        android:textColor="#000000"-->
+<!--        app:layout_anchor="@id/app_bar"-->
+<!--        android:visibility="visible"-->
+<!--        app:layout_anchorGravity="bottom|end" />-->
+
+    <!--    app:layout_anchor="@id/smart_refresh_layout"
+            app:layout_anchorGravity="top"-->
+    <RelativeLayout
+        android:id="@+id/rl_control_container"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/shape_white_half_card_bg"
+        android:visibility="visible"
+        app:layout_anchor="@id/smart_refresh_layout"
+        app:layout_anchorGravity="top">
+
+        <TextView
+            android:id="@+id/tv_control_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="25dp"
+            android:text="最新闻"
+            android:textColor="@color/text_surface"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/icon_expand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_expand_open"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:tint="@color/black"/>
+
+        <ImageView
+            android:id="@+id/iv_control_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="25dp"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_more"
+            android:tint="@color/invert" />
+
+    </RelativeLayout>
+
     <!--android:background="#b5fbfbfa"
     appbar_scrolling_view_behavior-->
     <RelativeLayout
@@ -153,8 +209,7 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:background="@color/red"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/cv_map_head"
@@ -246,11 +301,11 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
-                android:textColor="@color/text_second"
-                android:text="111"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:paddingStart="10dp" />
+                android:paddingStart="10dp"
+                android:text="111"
+                android:textColor="@color/text_second" />
 
         </LinearLayout>
 
@@ -281,8 +336,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_gravity="bottom"
         android:background="#b5fbfbfa"
-        android:layout_gravity="bottom">
+        android:visibility="gone">
 
     </RelativeLayout>
 
