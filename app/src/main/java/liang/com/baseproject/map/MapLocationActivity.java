@@ -221,7 +221,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         if (isExpandSmartContainer) {
             //当SmartContainer=true是展开状态时,显示向下图标，并且SmartContainer设置显示展开
             iconExpand.setImageResource(R.drawable.icon_expand_open);//向下
-            smartRefreshLayout.setVisibility(View.VISIBLE);
+//            smartRefreshLayout.setVisibility(View.VISIBLE);
             layoutParams.height = (int) (heightPixels * 0.8);
             appBar.setLayoutParams(layoutParams);
         } else {
@@ -674,6 +674,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         double longitude = location.getLongitude();
         LatLng currentLatLng = new LatLng(latitude, longitude);
 
+        Log.d("onMyLocationChange", "定位信息: " + currentLatLng);
+
         LatLng currentPositionMapLng = currentPositionMap.get("currentPosition");
 
         if (latitude == 0 && longitude == 0) {
@@ -854,6 +856,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     rlRecyclerContainer.setBackgroundColor(getResources().getColor(R.color.surface));
 
                     rlControlContainer.setVisibility(View.VISIBLE);
+                    iconExpand.setVisibility(View.VISIBLE);
 
                     if (mDarkTheme) {
                         //黑夜模式
@@ -916,6 +919,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     rlRecyclerContainer.setBackground(getResources().getDrawable(R.drawable.shape_white_rectangle_bg));
 
                     rlControlContainer.setVisibility(View.GONE);
+                    iconExpand.setVisibility(View.GONE);
 
                     //显示ToolBar
                     collapsingLayout.setTitleEnabled(true);
@@ -936,6 +940,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     rlRecyclerContainer.setBackgroundColor(getResources().getColor(R.color.surface));
 
                     rlControlContainer.setVisibility(View.VISIBLE);
+                    iconExpand.setVisibility(View.GONE);
 
                     if (mDarkTheme) {
                         //黑夜模式

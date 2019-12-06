@@ -120,6 +120,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
             Manifest.permission.WRITE_EXTERNAL_STORAGE,                // SD卡写入权限
             Manifest.permission.READ_EXTERNAL_STORAGE,                // SD卡读取权限
             Manifest.permission.ACCESS_FINE_LOCATION,                //Android9.0之后获取Wifi SSID 需要定位权限
+            Manifest.permission.CAMERA,
     };
 
     private NetBroadcastReceiver netReceiver;

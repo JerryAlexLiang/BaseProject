@@ -83,6 +83,8 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     Button btnFiltrateJingdong;
     @BindView(R.id.btn_map_view)
     Button btnMapView;
+    @BindView(R.id.btn_camera)
+    Button btnCamera;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TestCodeActivity.class);
@@ -470,7 +472,7 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         mTimer.cancel();
     }
 
-    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view})
+    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filtrate_jingdong:
@@ -479,6 +481,10 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
             case R.id.btn_map_view:
                 MapTestActivity.actionStart(TestCodeActivity.this);
+                break;
+
+            case R.id.btn_camera:
+                startActivity(new Intent(TestCodeActivity.this, CameraActivity.class));
                 break;
         }
     }

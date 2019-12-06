@@ -146,14 +146,14 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-<!--    <android.support.design.widget.FloatingActionButton-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:gravity="center"-->
-<!--        android:textColor="#000000"-->
-<!--        app:layout_anchor="@id/app_bar"-->
-<!--        android:visibility="visible"-->
-<!--        app:layout_anchorGravity="bottom|end" />-->
+    <!--    <android.support.design.widget.FloatingActionButton-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:textColor="#000000"-->
+    <!--        app:layout_anchor="@id/app_bar"-->
+    <!--        android:visibility="visible"-->
+    <!--        app:layout_anchorGravity="bottom|end" />-->
 
     <!--    app:layout_anchor="@id/smart_refresh_layout"
             app:layout_anchorGravity="top"-->
@@ -181,11 +181,11 @@
             android:id="@+id/icon_expand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/icon_expand_open"
-            android:layout_centerVertical="true"
             android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:padding="10dp"
-            android:tint="@color/black"/>
+            android:src="@drawable/icon_expand_open"
+            android:tint="@color/black" />
 
         <ImageView
             android:id="@+id/iv_control_btn"
