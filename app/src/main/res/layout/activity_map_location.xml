@@ -128,12 +128,20 @@
         app:srlEnablePreviewInEditMode="true"
         tools:showIn="@layout/activity_map_location">
 
+<!--        android:background="@color/surface"-->
         <RelativeLayout
             android:id="@+id/rl_recycler_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/surface"
+
+            android:background="#ff00"
             android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="费启鸣"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_map"
@@ -141,7 +149,8 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:layout_below="@id/tv_name"/>
         </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>

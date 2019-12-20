@@ -16,7 +16,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
@@ -49,7 +48,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-//        private static final int PAGE_START = 376;
+    //        private static final int PAGE_START = 376;
     private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
@@ -209,7 +208,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         }
 
 //        if (data.isOver() || data.getDatas().size() == 0) {
-        if (data.getDatas().size() == 0 && currPage!=PAGE_START) {
+        if (data.getDatas().size() == 0 && currPage != PAGE_START) {
             homeContainerAdapter.loadMoreEnd();
 //            smartRefreshLayout.setEnableLoadMore(false);
             onShowToast("没有更多数据了!");

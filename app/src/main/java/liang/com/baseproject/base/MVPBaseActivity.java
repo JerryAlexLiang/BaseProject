@@ -371,10 +371,6 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                 break;
 
             case ACTIONBAR_COLOR_BLACK:
-                if (smartRefreshLayout != null) {
-                    smartRefreshLayout.setPrimaryColorsId(R.color.black, R.color.white);
-                }
-                break;
 
             case ACTIONBAR_COLOR_WHITE:
                 if (smartRefreshLayout != null) {

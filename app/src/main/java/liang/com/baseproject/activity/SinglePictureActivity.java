@@ -132,8 +132,6 @@ public class SinglePictureActivity extends MVPBaseActivity implements View.OnLon
                 break;
 
             case R.id.base_actionbar_right_icon:
-                savePictureLocal();
-                break;
 
             case R.id.save_img:
                 savePictureLocal();
