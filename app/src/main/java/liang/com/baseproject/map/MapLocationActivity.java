@@ -550,7 +550,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     }
 
     private void getLocalData() {
-//        mPresenter.getLocalMarkerData();
+        mPresenter.getLocalMarkerData();
     }
 
     private void initPermission() {
@@ -1092,6 +1092,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         TextView tvMenuSatelliteMap = view.findViewById(R.id.dialog_map_menu_satellite);
         TextView tvMenuNightMap = view.findViewById(R.id.dialog_map_menu_night);
         TextView tvMenuNavigationMap = view.findViewById(R.id.dialog_map_menu_navigation);
+        TextView tvMenuCustomOverlay = view.findViewById(R.id.dialog_map_menu_custom_overlay);
 
 //        if (flag == 1) {
         if (currentState == AppBarStateChangeListener.State.COLLAPSED) {
@@ -1125,6 +1126,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         tvMenuSatelliteMap.setOnClickListener(this);
         tvMenuNightMap.setOnClickListener(this);
         tvMenuNavigationMap.setOnClickListener(this);
+        tvMenuCustomOverlay.setOnClickListener(this);
     }
 
     @Override
@@ -1230,6 +1232,10 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                         changeStatusBarTextColor(true);
                     }
                 }
+                break;
+
+            case R.id.dialog_map_menu_custom_overlay:
+                OverlayTestActivity.actionStart(this);
                 break;
 
             default:

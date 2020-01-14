@@ -19,12 +19,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许程序访问WiFi网络信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许程序读写手机状态和身份 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!--打开相机是很危险的行为，加入权限-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 打开相机是很危险的行为，加入权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
-    <uses-feature android:name="android.hardware.autofocus"/>
+    <uses-feature android:name="android.hardware.autofocus" />
 
     <meta-data
         android:name="android.max_aspect"
@@ -41,10 +40,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
-        <activity android:name=".activity.CameraActivity"
+        <activity android:name=".map.OverlayTestActivity"></activity>
+        <activity
+            android:name=".activity.CameraActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/FullscreenTheme"/>
-        <activity android:name=".testlaboratory.MapTestActivity" />
+            android:theme="@style/FullscreenTheme" />
+        <activity android:name=".testlaboratory.MapTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/StatusTranslucentTheme"/>
         <activity android:name=".map.MapLocationActivity" />
         <activity android:name=".testlaboratory.FiltrateActivity" /> <!-- 配置高德地图key -->
         <meta-data

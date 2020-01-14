@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.MVPBasePresenter;
+import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.widget.SearchEditText;
 
 public class SearchWanArticleActivity extends MVPBaseActivity {
@@ -95,7 +96,7 @@ public class SearchWanArticleActivity extends MVPBaseActivity {
                 break;
 
             case R.id.edit_search_view:
-
+                MapLocationActivity.actionStart(this);
                 break;
         }
     }

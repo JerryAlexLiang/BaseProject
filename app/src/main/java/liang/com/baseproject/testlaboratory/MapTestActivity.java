@@ -3,6 +3,7 @@ package liang.com.baseproject.testlaboratory;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.utils.SettingUtils;
+import liang.com.baseproject.utils.TitleBarUtils;
 import liang.com.baseproject.widget.CustomScrollRelativeLayout;
 
 public class MapTestActivity extends AppCompatActivity {
@@ -81,8 +84,9 @@ public class MapTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_test);
+        //设置沉浸式系统栏-深色状态栏字体
+        TitleBarUtils.changeStatusBarTextColor(this, true);
         ButterKnife.bind(this);
-
         initView();
 
         mDarkTheme = SettingUtils.getInstance().isDarkTheme();
