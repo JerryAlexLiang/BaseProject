@@ -128,20 +128,12 @@
         app:srlEnablePreviewInEditMode="true"
         tools:showIn="@layout/activity_map_location">
 
-<!--        android:background="@color/surface"-->
+        <!--        android:background="@color/surface"-->
         <RelativeLayout
             android:id="@+id/rl_recycler_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            android:background="#ff00"
             android:padding="10dp">
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="费启鸣"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_map"
@@ -149,8 +141,7 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 android:overScrollMode="never"
-                android:scrollbars="vertical"
-                android:layout_below="@id/tv_name"/>
+                android:scrollbars="vertical" />
         </RelativeLayout>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
@@ -210,14 +201,13 @@
 
     </RelativeLayout>
 
-    <!--android:background="#b5fbfbfa"
-    appbar_scrolling_view_behavior-->
     <RelativeLayout
         android:id="@+id/rl_im_activity"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="190dp"
         android:animateLayoutChanges="true"
-        android:background="@color/red"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
         android:visibility="gone">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -341,23 +331,5 @@
         </RelativeLayout>
 
     </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="bottom"
-        android:background="#b5fbfbfa"
-        android:visibility="gone">
-
-    </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/iv_web_view_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="200dp"
-        android:src="@drawable/icon_no_net"
-        android:visibility="gone" />
 
 </android.support.design.widget.CoordinatorLayout>

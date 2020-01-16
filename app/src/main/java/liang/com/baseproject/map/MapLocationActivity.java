@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.AppBarLayout;
@@ -30,6 +31,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,6 +58,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,6 +73,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
@@ -81,7 +87,6 @@ import liang.com.baseproject.utils.CheckPermission;
 import liang.com.baseproject.utils.DrawCustomMarkerBitmapUtil;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.NetUtil;
-import liang.com.baseproject.utils.ResUtils;
 import liang.com.baseproject.utils.ResolutionUtils;
 import liang.com.baseproject.utils.SPUtils;
 import liang.com.baseproject.utils.SettingUtils;
@@ -132,12 +137,32 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     RelativeLayout rlRecyclerContainer;
     @BindView(R.id.smart_refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
-    @BindView(R.id.iv_web_view_error)
-    ImageView ivWebViewError;
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
     @BindView(R.id.icon_expand)
     ImageView iconExpand;
+    @BindView(R.id.cv_map_head)
+    CircleImageView cvMapHead;
+    @BindView(R.id.tv_publisher_name)
+    TextView tvPublisherName;
+    @BindView(R.id.tv_activity_address)
+    TextView tvActivityAddress;
+    @BindView(R.id.tv_join_number)
+    TextView tvJoinNumber;
+    @BindView(R.id.tv_distance)
+    TextView tvDistance;
+    @BindView(R.id.tv_over_time)
+    TextView tvOverTime;
+    @BindView(R.id.tv_activity_name)
+    TextView tvActivityName;
+    @BindView(R.id.tv_activity_describe)
+    TextView tvActivityDescribe;
+    @BindView(R.id.v_down)
+    View vDown;
+    @BindView(R.id.rl_view_down)
+    RelativeLayout rlViewDown;
+    @BindView(R.id.rl_im_activity)
+    RelativeLayout rlImActivity;
 
     private CustomPopupWindow customPopupWindow;
 
@@ -480,32 +505,32 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvMap.setAdapter(homeContainerAdapter);
 
-//        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-//            @Override
-//            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-//                currPage = PAGE_START;
-//                mPresenter.getArticleList(currPage);
-//            }
-//        });
-//
-//        boolean setRefreshFooter = isSetRefreshFooter();
-//        if (setRefreshFooter) {
-//            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-//                @Override
-//                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-//                    currPage++;
-//                    mPresenter.getArticleList(currPage);
-//                }
-//            });
-//        } else {
-//            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-//                @Override
-//                public void onLoadMoreRequested() {
-//                    currPage++;
-//                    mPresenter.getArticleList(currPage);
-//                }
-//            }, rvMap);
-//        }
+        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                currPage = PAGE_START;
+                mPresenter.getArticleList(currPage);
+            }
+        });
+
+        boolean setRefreshFooter = isSetRefreshFooter();
+        if (setRefreshFooter) {
+            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+                @Override
+                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                    currPage++;
+                    mPresenter.getArticleList(currPage);
+                }
+            });
+        } else {
+            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    currPage++;
+                    mPresenter.getArticleList(currPage);
+                }
+            }, rvMap);
+        }
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
@@ -759,6 +784,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         } else {
             lastClickMarker.showInfoWindow();
         }
+        upTheDetail();
         //返回false，点击Marker后当前点位显示在地图中心
         return false;
     }
@@ -776,6 +802,10 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         //触摸地图，关闭Marker的InfoWindow
         if (aMap != null && lastClickMarker.isInfoWindowShown()) {
             lastClickMarker.hideInfoWindow();
+        }
+
+        if (motionEvent.getAction() == MotionEvent.ACTION_MOVE && rlImActivity.getVisibility() == View.VISIBLE) {
+            downTheDetail();
         }
     }
 
@@ -992,7 +1022,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 
     }
 
-    @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout, R.id.iv_btn_my_location, R.id.iv_control_btn, R.id.icon_expand})
+    @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout, R.id.iv_btn_my_location, R.id.iv_control_btn, R.id.icon_expand, R.id.rl_view_down})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_back_layout:
@@ -1052,6 +1082,10 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     isExpandSmartContainer = true;
                     onShowToast("显示列表布局");
                 }
+                break;
+
+            case R.id.rl_view_down:
+                downTheDetail();
                 break;
 
             default:
@@ -1374,5 +1408,25 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
             //开始动画
             growMarker.startAnimation();
         }
+    }
+
+    public void downTheDetail() {
+        if (rlImActivity.getVisibility() == View.VISIBLE) {
+            rlImActivity.setVisibility(View.GONE);
+            android.view.animation.Animation operatingAnim = AnimationUtils
+                    .loadAnimation(this, R.anim.fade_down);
+            LinearInterpolator lin = new LinearInterpolator();
+            operatingAnim.setInterpolator(lin);
+            rlImActivity.startAnimation(operatingAnim);
+        }
+    }
+
+    public void upTheDetail() {
+        android.view.animation.Animation operatingAnim = AnimationUtils
+                .loadAnimation(this, R.anim.fade_up);
+        LinearInterpolator lin = new LinearInterpolator();
+        operatingAnim.setInterpolator(lin);
+        rlImActivity.startAnimation(operatingAnim);
+        rlImActivity.setVisibility(View.VISIBLE);
     }
 }
