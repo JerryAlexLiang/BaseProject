@@ -1,7 +1,7 @@
 package liang.com.baseproject.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import liang.com.baseproject.R;
 

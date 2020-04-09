@@ -1,6 +1,6 @@
 package liang.com.baseproject.mine.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import liang.com.baseproject.R;

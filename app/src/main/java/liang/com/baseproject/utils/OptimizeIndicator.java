@@ -1,7 +1,7 @@
 package liang.com.baseproject.utils;
 
 import android.content.res.Resources;
-import android.support.design.widget.TabLayout;
+import com.google.android.material.tabs.TabLayout;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;

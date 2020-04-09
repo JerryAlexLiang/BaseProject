@@ -27,7 +27,7 @@ import liang.com.baseproject.utils.ToastUtil;
  * 描述:自定义iOS样式风格搜索框(带删除按钮及动画效果)
  * 作者:yangliang
  */
-public class SearchEditText extends android.support.v7.widget.AppCompatEditText implements View.OnFocusChangeListener, View.OnKeyListener, TextWatcher {
+public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText implements View.OnFocusChangeListener, View.OnKeyListener, TextWatcher {
     /**
      * 图标是否默认在左边
      */

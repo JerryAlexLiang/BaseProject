@@ -6,13 +6,13 @@
     android:background="@color/foreground"
     tools:showIn="@layout/activity_scan_code">
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/banner_view_pager"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_marginTop="5dp">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
         android:id="@+id/ll_indicator_dot"

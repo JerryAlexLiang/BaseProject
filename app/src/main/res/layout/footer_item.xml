@@ -7,7 +7,7 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <android.support.v4.widget.ContentLoadingProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="24dp"

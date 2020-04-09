@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Settings;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 
 public class IntentUtils {
 

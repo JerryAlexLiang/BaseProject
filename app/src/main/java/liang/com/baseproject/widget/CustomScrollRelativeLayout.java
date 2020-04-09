@@ -3,15 +3,12 @@ package liang.com.baseproject.widget;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.content.ContextCompat;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
-import liang.com.baseproject.R;
-import liang.com.baseproject.utils.ColorUtils;
-import liang.com.baseproject.utils.SettingUtils;
 /**
  * 创建日期：2019/10/30 on 14:01
  * 描述: 自定义的RelativeLayout-CollapsingToolbarLayout-滑动冲突

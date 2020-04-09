@@ -4,20 +4,18 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,6 @@ import liang.com.baseproject.login.fragment.LoginFragment;
 import liang.com.baseproject.login.fragment.RegisterFragment;
 import liang.com.baseproject.utils.LogUtil;
 import liang.com.baseproject.utils.SPUtils;
-import liang.com.baseproject.utils.ToastUtil;
 import per.goweii.percentimageview.percentimageview.PercentImageView;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;

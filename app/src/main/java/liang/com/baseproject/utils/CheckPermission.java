@@ -3,7 +3,7 @@ package liang.com.baseproject.utils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * 创建日期：2018/12/24 on 11:17

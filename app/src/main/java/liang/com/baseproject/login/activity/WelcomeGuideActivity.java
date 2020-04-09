@@ -3,8 +3,8 @@ package liang.com.baseproject.login.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
-import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.GuideViewPagerAdapter;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.MVPBasePresenter;

@@ -4,24 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -39,12 +34,10 @@ import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
 import liang.com.baseproject.main.activity.AgentWebActivity;
 import liang.com.baseproject.mine.adapter.ReadLaterAdapter;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import liang.com.baseproject.retrofit.RetrofitHelper;
 import liang.com.baseproject.utils.CopyUtils;
 import liang.com.baseproject.utils.GsonUtils;
 import liang.com.baseproject.utils.IntentUtils;
 import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ToastUtil;
 
 public class ReadLaterActivity extends MVPBaseActivity {
 

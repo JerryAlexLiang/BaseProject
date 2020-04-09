@@ -1,8 +1,7 @@
 package liang.com.baseproject.helperDao;
 
-import android.support.annotation.IntRange;
+import androidx.annotation.IntRange;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import liang.com.baseproject.app.MyApplication;
