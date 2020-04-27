@@ -665,6 +665,13 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         return super.onKeyDown(keyCode, event);
     }
 
+
+//    @Override
+//    public void onBackPressed() {
+//        moveTaskToBack(true);
+//        LogUtil.d(TAG,"onBackPressed: "+"执行moveTaskToBack 将activity 退到后台，注意不是finish()退出");
+//    }
+
     @Override
     protected void onResume() {
         super.onResume();
