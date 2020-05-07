@@ -618,7 +618,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         File file1 = new File(mAmapMap_path + mPath_offline);
         if (!networkAvailable && file1.exists()) {
             //调用函数animateCamera或moveCamera来改变可视区域
-            initLatLng = Constant.HANZGHOU;
+//            initLatLng = Constant.HANZGHOU;
+            initLatLng = Constant.ZIBO;
 //            changeCamera(
 //                    //CameraPosition(LatLng target, float zoom, float tilt, float bearing)
 //                    //zoom:目标可视区域的缩放级别   tilt:目标可视区域的倾斜度，以角度为单位  bearing:可视区域指向的方向，以角度为单位，从正北向逆时针方向计算，从0 度到360 度

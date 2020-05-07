@@ -187,6 +187,7 @@ public class Constant {
     public static final LatLng FUYANG = new LatLng(32.896969, 115.819729);//阜阳经纬度
     public static final LatLng HANZGHOU = new LatLng(30.291115, 120.114108);//杭州经纬度
     public static final LatLng NINGBO = new LatLng(29.859515, 121.6216);//宁波经纬度
+    public static final LatLng ZIBO = new LatLng(36.832651, 117.98299);//淄博经纬度
 
     //图片Url及对应经纬度
     //费启鸣

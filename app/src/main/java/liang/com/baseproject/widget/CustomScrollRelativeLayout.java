@@ -6,6 +6,7 @@ import android.graphics.Color;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
@@ -40,8 +41,10 @@ public class CustomScrollRelativeLayout extends RelativeLayout {
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_UP) {
             collapsingToolbarLayout.requestDisallowInterceptTouchEvent(false);
+            Log.d("TAG", "onInterceptTouchEvent: collapsingToolbarLayout滑动");
         } else {
             collapsingToolbarLayout.requestDisallowInterceptTouchEvent(true);
+            Log.d("TAG", "onInterceptTouchEvent: CustomScrollRelativeLayout滑动");
         }
         return false;
     }

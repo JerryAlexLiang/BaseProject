@@ -86,8 +86,14 @@ public class SplashOneActivity extends MVPBaseActivity {
 
                 if (!file1.exists()) {
                     FileUtil.deleteDirectory(mAmapMap_path);
-                    //解压离线地图到手机内存
-                    unZipMapCache();
+                    //解压离线地图到手机内存-解压缩zip文件，耗时操作，放入异步线程
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            unZipMapCache();
+                        }
+                    }).start();
+
                     MapsInitializer.sdcardDir = offlineMapsDirs();
                 }else {
                     MapsInitializer.sdcardDir = offlineMapsDirs();
@@ -170,7 +176,7 @@ public class SplashOneActivity extends MVPBaseActivity {
             ZipEntry entry = null;
             while ((entry = zis.getNextEntry()) != null) {
                 File file = new File(MyApplication.getAppContext().getExternalFilesDir(null), entry.getName());
-                System.out.println("filename----" + entry.getName());
+                System.out.println("unZipMapCache   filename----" + entry.getName());
                 if (entry.isDirectory()) {
                     file.mkdirs();
                     continue;
@@ -181,6 +187,7 @@ public class SplashOneActivity extends MVPBaseActivity {
                     int count;
                     while ((count = zis.read(buffer)) != -1) {
                         myOutput.write(buffer, 0, count);
+                        System.out.println("unZipMapCache   progress----" + count);
                     }
                     myOutput.close();
                 }
