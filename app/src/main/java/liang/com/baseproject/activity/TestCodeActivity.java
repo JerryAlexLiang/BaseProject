@@ -7,11 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
-import androidx.annotation.Nullable;
-import com.google.android.material.tabs.TabLayout;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.tabs.TabLayout;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.io.File;
@@ -31,6 +27,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -85,6 +85,8 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     Button btnMapView;
     @BindView(R.id.btn_camera)
     Button btnCamera;
+    @BindView(R.id.btn_aidl)
+    Button btnServiceAidl;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TestCodeActivity.class);
@@ -472,7 +474,7 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         mTimer.cancel();
     }
 
-    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera})
+    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera, R.id.btn_aidl})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filtrate_jingdong:
@@ -485,6 +487,10 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
             case R.id.btn_camera:
                 startActivity(new Intent(TestCodeActivity.this, CameraActivity.class));
+                break;
+
+            case R.id.btn_aidl:
+                ServiceActivity.actionStart(TestCodeActivity.this);
                 break;
         }
     }

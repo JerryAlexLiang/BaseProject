@@ -26,7 +26,7 @@ import retrofit2.http.Query;
  * 描述: 定义retrofit2请求的接口
  * 作者: liangyang
  */
-public interface MyService {
+public interface UrlService {
 
     /**
      * 新闻头条

@@ -24,7 +24,7 @@ public class RetrofitHelper {
 
     private volatile static RetrofitHelper sInstance;
     private Retrofit mRetrofit;
-    private MyService mMyService;
+    private UrlService mUrlService;
     private PersistentCookieJar cookieJar;
 
     private RetrofitHelper(String url) {
@@ -58,7 +58,7 @@ public class RetrofitHelper {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client.build())
                 .build();
-        mMyService = mRetrofit.create(MyService.class);
+        mUrlService = mRetrofit.create(UrlService.class);
     }
 
     public static RetrofitHelper getInstance(String url) {
@@ -83,8 +83,8 @@ public class RetrofitHelper {
         return new RetrofitHelper(newApiBaseUrl);
     }
 
-    public MyService getMyService() {
-        return mMyService;
+    public UrlService getMyService() {
+        return mUrlService;
     }
 
     public static RetrofitHelper deleteInstance() {

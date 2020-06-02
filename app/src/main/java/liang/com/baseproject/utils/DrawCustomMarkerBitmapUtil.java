@@ -52,6 +52,7 @@ public class DrawCustomMarkerBitmapUtil {
 
     public static void drawMark(final Object object, final String imageUrl, final int min
             , final boolean isWhite, final OnGetMapHeadListener listener) {
+        //要在图片加载完后再把 布局view添加到marker上
         Glide.with(MyApplication.getAppContext()).load(imageUrl).into(new SimpleTarget<Drawable>() {
             @Override
             public void onResourceReady(@NonNull Drawable drawable, @Nullable Transition<? super Drawable> transition) {
