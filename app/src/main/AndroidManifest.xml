@@ -25,7 +25,7 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.autofocus" />
 
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <meta-data
         android:name="android.max_aspect"
@@ -46,11 +46,11 @@
         <activity android:name=".map.OverlayTestActivity" />
         <activity
             android:name=".activity.CameraActivity"
-            android:screenOrientation="landscape"
+            android:screenOrientation="fullSensor"
             android:theme="@style/FullscreenTheme" />
         <activity
             android:name=".testlaboratory.MapTestActivity"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:theme="@style/StatusTranslucentTheme" />
         <activity android:name=".map.MapLocationActivity" />
         <activity android:name=".testlaboratory.FiltrateActivity" /> <!-- 配置高德地图key -->
@@ -70,7 +70,7 @@
         <activity
             android:name=".login.activity.LoginActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
         <activity android:name=".activity.FeedbackActivity" />
         <activity
             android:name=".activity.SplashOneActivity"
@@ -115,10 +115,14 @@
         <activity android:name=".activity.ThemeSettingActivity" />
         <activity
             android:name="com.amap.api.maps.offlinemap.OfflineMapActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
+
+        <service android:name=".service.MyService" />
 
         <service
-            android:name=".service.MyService"/>
+            android:name=".service.MyRemoteService"
+            android:process=":remote"/>
+
 
         <activity android:name=".activity.ServiceActivity" />
     </application>

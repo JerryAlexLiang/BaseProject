@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.RemoteException;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -13,15 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import liang.com.baseproject.MyAIDLService;
 import liang.com.baseproject.R;
 import liang.com.baseproject.base.MVPBaseActivity;
 import liang.com.baseproject.base.MVPBasePresenter;
+import liang.com.baseproject.service.MyRemoteService;
 import liang.com.baseproject.service.MyService;
 import liang.com.baseproject.widget.SearchEditText;
 
 public class ServiceActivity extends MVPBaseActivity {
+
+    public static final String TAG = "ServiceActivity";
 
     @BindView(R.id.start_service)
     Button startService;
@@ -47,8 +54,14 @@ public class ServiceActivity extends MVPBaseActivity {
     Button btnBindService;
     @BindView(R.id.unbind_service)
     Button btnUnbindService;
+    @BindView(R.id.bind_aidl_service)
+    Button btnAidlService;
+    @BindView(R.id.unbind_aidl_service)
+    Button btnUnBindAidlService;
 
     private MyService.MyBinder myBinder;
+
+    private MyAIDLService myAIDLService;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ServiceActivity.class);
@@ -106,6 +119,30 @@ public class ServiceActivity extends MVPBaseActivity {
         }
     };
 
+    /**
+     * MyAIDLService.Stub.asInterface()方法将传入的IBinder对象传换成了MyAIDLService对象，
+     * 接下来就可以调用在MyAIDLService.aidl文件中定义的所有接口了。
+     */
+    private ServiceConnection aidlConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            myAIDLService = MyAIDLService.Stub.asInterface(service);
+            try {
+                int result = myAIDLService.plus(5, 7);
+                String upperStr = myAIDLService.toUpperCase("hello aidl service");
+                Log.d(TAG, "onServiceConnected: " + "result is " + result);
+                Log.d(TAG, "onServiceConnected: " + "upperStr is " + upperStr);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,7 +157,8 @@ public class ServiceActivity extends MVPBaseActivity {
         baseActionbarTitle.setText("Service");
     }
 
-    @OnClick({R.id.base_actionbar_left_icon, R.id.start_service, R.id.stop_service, R.id.bind_service, R.id.unbind_service})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.start_service, R.id.stop_service, R.id.bind_service,
+            R.id.unbind_service, R.id.bind_aidl_service, R.id.unbind_aidl_service})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -152,6 +190,15 @@ public class ServiceActivity extends MVPBaseActivity {
             case R.id.unbind_service:
                 //点击Unbind Service按钮只会让Service和Activity解除关联
                 unbindService(connection);
+                break;
+
+            case R.id.bind_aidl_service:
+                Intent bindService2 = new Intent(ServiceActivity.this, MyRemoteService.class);
+                bindService(bindService2, aidlConnection, BIND_AUTO_CREATE);
+                break;
+
+            case R.id.unbind_aidl_service:
+                unbindService(aidlConnection);
                 break;
         }
     }
