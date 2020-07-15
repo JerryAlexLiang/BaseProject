@@ -134,7 +134,7 @@ dependencies {
     //仿IOS的Android的弹出框
     implementation 'com.bigkoo:alertview:1.0.3'
 
-    /*greendao*/
+    /*GreenDao*/
     implementation 'org.greenrobot:greendao:3.2.2'
 
     /*Android PersistentCookieJar  持久化Cookie*/
