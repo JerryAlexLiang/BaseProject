@@ -121,7 +121,7 @@
 
         <service
             android:name=".service.MyRemoteService"
-            android:process=":remote"/>
+            android:process=":remote" />
 
 
         <activity android:name=".activity.ServiceActivity" />
