@@ -208,8 +208,4 @@ public class Constant {
     //姚景元
     public static final String YAOJINGYUAN = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570685489375&di=4ec083facefe99c5df83326e6fb3a169&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn12%2F300%2Fw1620h1080%2F20180816%2Ffab8-hhvciiv7482028.jpg";
     public static final LatLng YAOJINGYUAN_LATLNG = new LatLng(30.290999, 120.121313);
-
-
-
-
 }
