@@ -61,7 +61,7 @@
             android:drawablePadding="8dp"
             android:gravity="top"
             android:hint="@string/input_user_name"
-            android:maxLength="16"
+            android:maxLength="20"
             android:textColorHint="@color/text_second" />
 
         <TextView
@@ -111,7 +111,7 @@
             android:gravity="top"
             android:hint="@string/input_password"
             android:inputType="textPassword"
-            android:maxLength="16"
+            android:maxLength="20"
             android:textColorHint="@color/text_second" />
 
         <TextView
