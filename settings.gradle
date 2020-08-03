@@ -1,2 +1,4 @@
+include ':model_middleware'
+include ':MyDatePicker'
 include ':app',
         ':CustomDatePicker'

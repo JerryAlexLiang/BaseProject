@@ -11,7 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CustomDatePicker" />
+            <option value="$PROJECT_DIR$/MyDatePicker" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/model_middleware" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,16 +1,24 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao'
+//apply plugin: 'com.alibaba.arouter'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "liang.com.baseproject"
-        minSdkVersion 19
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -71,6 +79,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -159,4 +168,19 @@ dependencies {
     implementation 'com.github.goweii:PictureSelector:v2.3.1'
 
     implementation 'androidx.multidex:multidex:2.0.1'
+
+    //ARouter路由
+    //// 替换成最新版本, 需要注意的是api
+    //    // 要与compiler匹配使用，均使用最新版可以保证兼容
+    //    compile 'com.alibaba:arouter-api:x.x.x'
+    //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    implementation project(':model_middleware')
+
+    implementation project(path: ':MyDatePicker')
+
+
+
 }

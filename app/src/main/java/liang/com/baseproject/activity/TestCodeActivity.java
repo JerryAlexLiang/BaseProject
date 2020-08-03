@@ -15,9 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.tabs.TabLayout;
+import com.liang.model_middleware.impl.ServiceProvider;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.io.File;
@@ -31,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -87,6 +90,8 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     Button btnCamera;
     @BindView(R.id.btn_aidl)
     Button btnServiceAidl;
+    @BindView(R.id.btn_modularization_router)
+    Button btnModularizationRouter;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TestCodeActivity.class);
@@ -135,6 +140,9 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_code);
+
+        ARouter.getInstance().inject(this);
+
         ButterKnife.bind(this);
 
         scanSlideSwipeBackLayout.setSlideListener(new SlideEventListener() {
@@ -474,7 +482,7 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         mTimer.cancel();
     }
 
-    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera, R.id.btn_aidl})
+    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera, R.id.btn_aidl, R.id.btn_modularization_router})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filtrate_jingdong:
@@ -491,6 +499,10 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
             case R.id.btn_aidl:
                 ServiceActivity.actionStart(TestCodeActivity.this);
+                break;
+
+            case R.id.btn_modularization_router:
+                ServiceProvider.getDatePickerService().startDatePickerDemoActivity(TestCodeActivity.this);
                 break;
         }
     }

@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -25,6 +27,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import liang.com.baseproject.BuildConfig;
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
 import liang.com.baseproject.retrofit.RetrofitHelper;
@@ -91,6 +94,9 @@ public class MyApplication extends MultiDexApplication {
             e.printStackTrace();
         }
 
+        //初始化路由SDK
+        initARouter();
+
         /**
          * Android7.0+系统解决拍照的问题
          * Android不再允许在app中把file://Uri暴露给其他app，包括但不局限于通过Intent或ClipData 等方法，使用file://Uri会有一些风险
@@ -105,12 +111,19 @@ public class MyApplication extends MultiDexApplication {
         setupDatabase();
     }
 
-    private void setupDatabase() {
-        //DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "face.db", null);
-        //        SQLiteDatabase db = helper.getWritableDatabase();
-        //        DaoMaster daoMaster = new DaoMaster(db);
-        //        daoSession = daoMaster.newSession();
+    /**
+     * 初始化路由SDK
+     */
+    private void initARouter() {
+        if (BuildConfig.DEBUG){  // 这两行必须写在init之前，否则这些配置在init过程中将无效
+            ARouter.openLog();   // 打印日志
+            ARouter.openDebug(); // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
+        }
+        // 尽可能早，推荐在Application中初始化
+        ARouter.init(app);
+    }
 
+    private void setupDatabase() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, APP_DB_NAME, null);
         SQLiteDatabase db = helper.getWritableDatabase();
         DaoMaster daoMaster = new DaoMaster(db);
