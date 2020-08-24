@@ -53,10 +53,16 @@
             android:screenOrientation="fullSensor"
             android:theme="@style/StatusTranslucentTheme" />
         <activity android:name=".map.MapLocationActivity" />
-        <activity android:name=".testlaboratory.FiltrateActivity" /> <!-- 配置高德地图key -->
+        <activity android:name=".testlaboratory.FiltrateActivity" />
+
+        <!-- 配置高德地图key -->
+<!--        <meta-data-->
+<!--            android:name="com.amap.api.v2.apikey"-->
+<!--            android:value="407924c0edf98e401382b2730ee6ea82" />-->
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="407924c0edf98e401382b2730ee6ea82" />
+            android:value="cb8ce9f2d44999c1a0a180f44a51780f" />
 
         <activity android:name=".home.activity.SearchWanArticleActivity" />
         <activity android:name=".login.activity.GestureLoginActivity" />

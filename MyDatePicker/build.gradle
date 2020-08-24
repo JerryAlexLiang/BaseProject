@@ -2,6 +2,11 @@ apply plugin: 'com.android.library'
 //apply plugin: 'com.alibaba.arouter'
 
 android {
+
+    dataBinding {
+        enabled = true
+    }
+
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 

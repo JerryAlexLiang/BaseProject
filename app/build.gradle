@@ -3,6 +3,11 @@ apply plugin: 'org.greenrobot.greendao'
 //apply plugin: 'com.alibaba.arouter'
 
 android {
+
+    viewBinding {
+        enabled = true
+    }
+
     compileSdkVersion 30
     defaultConfig {
         applicationId "liang.com.baseproject"
@@ -144,7 +149,9 @@ dependencies {
     implementation 'com.bigkoo:alertview:1.0.3'
 
     /*GreenDao*/
-    implementation 'org.greenrobot:greendao:3.2.2'
+//    implementation 'org.greenrobot:greendao:3.2.2'
+    //gradle:3.2.1升级到gradle:4.0.1报错,修改greendao-gradle-plugin:3.3.0就解决
+    implementation 'org.greenrobot:greendao:3.3.0'
 
     /*Android PersistentCookieJar  持久化Cookie*/
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
@@ -180,7 +187,6 @@ dependencies {
     implementation project(':model_middleware')
 
     implementation project(path: ':MyDatePicker')
-
 
 
 }

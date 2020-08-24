@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/foreground"
-    tools:showIn="@layout/activity_scan_code">
+    tools:showIn="@layout/activity_test_laboratory_code">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/banner_view_pager"

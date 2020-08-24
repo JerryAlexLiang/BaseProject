@@ -15,6 +15,10 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -29,11 +33,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,6 +41,9 @@ import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
+import liang.com.baseproject.base.MVPBaseActivity;
+import liang.com.baseproject.base.MVPBasePresenter;
+import liang.com.baseproject.databinding.ActivityTestLaboratoryCodeBinding;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
 import liang.com.baseproject.testlaboratory.FiltrateActivity;
 import liang.com.baseproject.testlaboratory.MapTestActivity;
@@ -55,9 +57,13 @@ import liang.com.baseproject.widget.slideDampingAnimationLayout.SlideEventListen
 import static com.luck.picture.lib.config.PictureConfig.MULTIPLE;
 import static com.luck.picture.lib.config.PictureConfig.TYPE_IMAGE;
 
-public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPageChangeListener {
 
     private static final String TAG = TestCodeActivity.class.getSimpleName();
+    @BindView(R.id.base_actionbar_left_icon)
+    ImageView ivBaseLeftIcon;
+    @BindView(R.id.base_actionbar_title)
+    TextView tvBaseTitle;
     @BindView(R.id.scan_tab_layout)
     TabLayout scanTabLayout;
     @BindView(R.id.scan_view_pager)
@@ -92,6 +98,7 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     Button btnServiceAidl;
     @BindView(R.id.btn_modularization_router)
     Button btnModularizationRouter;
+    private ActivityTestLaboratoryCodeBinding binding;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TestCodeActivity.class);
@@ -135,15 +142,48 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
     };
     private String imagePath;
 
+    @Override
+    protected boolean isRegisterEventBus() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshHeader() {
+        return false;
+    }
+
+    @Override
+    protected boolean isSetRefreshFooter() {
+        return false;
+    }
+
+    @Override
+    protected MVPBasePresenter createPresenter() {
+        return null;
+    }
+
+    @Override
+    protected int provideContentViewId() {
+        return R.layout.activity_test_laboratory_code;
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_code);
-
+//        setContentView(R.layout.activity_test_laboratory_code);
+        //初始化路由ARouter
         ARouter.getInstance().inject(this);
 
+//        //视图绑定
+//        binding = ActivityTestLaboratoryCodeBinding.inflate(getLayoutInflater());
+//        setContentView(binding.getRoot());
+
         ButterKnife.bind(this);
+
+        ivBaseLeftIcon.setVisibility(View.VISIBLE);
+        tvBaseTitle.setVisibility(View.VISIBLE);
+        tvBaseTitle.setText("实验室");
 
         scanSlideSwipeBackLayout.setSlideListener(new SlideEventListener() {
             @Override
@@ -156,6 +196,79 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
             }
         });
+
+        //baseToolbarLeftIcon.setVisibility(View.VISIBLE);
+        //        baseToolbarLeftIcon.setImageResource(R.drawable.icon_drawer_menu);
+        //        baseToolbarTitle.setVisibility(View.VISIBLE);
+        //        baseToolbarRightIcon.setVisibility(View.VISIBLE);
+
+
+        initBanner();
+
+
+        savePicture();
+
+        //String.format("%1$#9x", -21474xxxxx)  十进制转十六进制
+        String format = String.format("%1$#9x", -2147418113);
+        System.out.println("kkkkkk1   " + format);
+
+        initAnimatorOpen();
+
+        selectImage();
+    }
+
+    private void selectImage() {
+        btnSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
+                        true, false, true, 9);
+            }
+        });
+    }
+
+    private void savePicture() {
+        String url1 = "http://192.168.137.1:8080/iface/downloadfile?file=C:%5CUsers%5CDESKTOP-20190220%5CDocuments%5CArcvideo+iFaceMini%5CAlarm%5C2019%5C03%5C08%5Cid%280%29_20190308-121053625.jpg";
+        String url2 = "http://192.168.137.1:8080/iface/downloadfile?file=C:%5CUsers%5CDESKTOP-20190220%5CDocuments%5CArcvideo+iFaceMini%5CAlarm%5C2019%5C03%5C08%5Cid%280%29_20190308-121041511.jpg";
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long millisStart = System.currentTimeMillis();
+                Bitmap bitmap = FileUtil.saveImageByUrl(url1);
+                Bitmap bitmap1 = FileUtil.saveImageByUrl(url2);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        long millisEnd = System.currentTimeMillis();
+                        System.out.println("返回结果0：  " + "开始时间：  " + millisStart + "结束时间:  " + millisEnd);
+                        System.out.println("返回结果1：  " + bitmap);
+                        System.out.println("返回结果2：  " + bitmap1);
+                    }
+                });
+            }
+        }).start();
+    }
+
+    private void initAnimatorOpen() {
+        Button buttonOpen = (Button) findViewById(R.id.btn_animator_open);
+        Button buttonHide = (Button) findViewById(R.id.btn_animator_hide);
+        buttonOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtils.pageShowScaleAnimator(TestCodeActivity.this, scrollView);
+            }
+        });
+        buttonHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtils.pageHideScaleAnimator(scrollView);
+            }
+        });
+    }
+
+    private void initBanner() {
         //初始化资源
         initData();
         //初始化适配器
@@ -203,58 +316,6 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
             @Override
             public void onClick(int position) {
                 WebViewDetailActivity.actionStart(TestCodeActivity.this, mBnanerDesacList.get(position), mBannerDetailUrl.get(position), "https://ws1.sinaimg.cn/large/0065oQSqly1g0ajj4h6ndj30sg11xdmj.jpg");
-            }
-        });
-
-
-        String url1 = "http://192.168.137.1:8080/iface/downloadfile?file=C:%5CUsers%5CDESKTOP-20190220%5CDocuments%5CArcvideo+iFaceMini%5CAlarm%5C2019%5C03%5C08%5Cid%280%29_20190308-121053625.jpg";
-        String url2 = "http://192.168.137.1:8080/iface/downloadfile?file=C:%5CUsers%5CDESKTOP-20190220%5CDocuments%5CArcvideo+iFaceMini%5CAlarm%5C2019%5C03%5C08%5Cid%280%29_20190308-121041511.jpg";
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                long millisStart = System.currentTimeMillis();
-                Bitmap bitmap = FileUtil.saveImageByUrl(url1);
-                Bitmap bitmap1 = FileUtil.saveImageByUrl(url2);
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        long millisEnd = System.currentTimeMillis();
-                        System.out.println("返回结果0：  " + "开始时间：  " + millisStart + "结束时间:  " + millisEnd);
-                        System.out.println("返回结果1：  " + bitmap);
-                        System.out.println("返回结果2：  " + bitmap1);
-                    }
-                });
-            }
-        }).start();
-
-        //String.format("%1$#9x", -21474xxxxx)  十进制转十六进制
-        String format = String.format("%1$#9x", -2147418113);
-        System.out.println("kkkkkk1   " + format);
-
-
-        Button buttonOpen = (Button) findViewById(R.id.btn_animator_open);
-        Button buttonHide = (Button) findViewById(R.id.btn_animator_hide);
-        buttonOpen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimationUtils.pageShowScaleAnimator(TestCodeActivity.this, scrollView);
-            }
-        });
-        buttonHide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AnimationUtils.pageHideScaleAnimator(scrollView);
-            }
-        });
-
-
-        btnSelectImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
-                        true, false, true, 9);
             }
         });
     }
@@ -482,7 +543,7 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
         mTimer.cancel();
     }
 
-    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera, R.id.btn_aidl, R.id.btn_modularization_router})
+    @OnClick({R.id.btn_filtrate_jingdong, R.id.btn_map_view, R.id.btn_camera, R.id.btn_aidl, R.id.btn_modularization_router, R.id.base_actionbar_left_icon})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_filtrate_jingdong:
@@ -503,6 +564,13 @@ public class TestCodeActivity extends AppCompatActivity implements ViewPager.OnP
 
             case R.id.btn_modularization_router:
                 ServiceProvider.getDatePickerService().startDatePickerDemoActivity(TestCodeActivity.this);
+                break;
+
+            case R.id.base_actionbar_left_icon:
+                finish();
+                break;
+
+            default:
                 break;
         }
     }
