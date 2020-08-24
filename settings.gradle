@@ -1,3 +1,4 @@
+include ':module_weather'
 include ':model_middleware'
 include ':MyDatePicker'
 include ':app',

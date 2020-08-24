@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 //apply plugin: 'com.alibaba.arouter'
 
 android {
@@ -39,7 +40,12 @@ dependencies {
     //ARouter
     implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+    implementation "androidx.core:core-ktx:+"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //ButterKnife
 
+}
+repositories {
+    mavenCentral()
 }

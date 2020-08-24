@@ -9,4 +9,6 @@ public class AppRouter {
 
     public static final String DATE_PICKER_PATH = "/date_picker/DatePickerActivity";
 
+    //天气模块
+    public static final String MODULE_WEATHER_PATH = "/module_weather/WeatherActivity";
 }

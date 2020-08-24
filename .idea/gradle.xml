@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/MyDatePicker" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/model_middleware" />
+            <option value="$PROJECT_DIR$/module_weather" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

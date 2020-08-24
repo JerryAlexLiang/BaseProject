@@ -9,15 +9,20 @@ import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.navigation.NavigationView;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -32,6 +37,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.liang.model_middleware.impl.ServiceProvider;
+import com.liang.model_middleware.router.AppRouter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -167,6 +174,10 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //初始化路由ARouter
+        ARouter.getInstance().inject(this);
+
         fullScreen(false);
         setContentView(R.layout.activity_main_home);
         ButterKnife.bind(this);
@@ -387,6 +398,13 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int itemOrder = menuItem.getOrder();
                 switch (menuItem.getItemId()) {
+                    case R.id.menu_nav_weather:
+//                        ServiceProvider.getWeatherService().startWeatherActivity(MainHomeActivity.this);
+
+                        ARouter.getInstance().build(AppRouter.MODULE_WEATHER_PATH).navigation();
+
+                        break;
+
                     case R.id.menu_nav_scan:
                         //扫描界面
                         onShowToast("扫一扫");
