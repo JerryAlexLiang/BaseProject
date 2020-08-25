@@ -17,9 +17,8 @@ import org.jetbrains.anko.startActivity
 class WeatherServiceImpl : WeatherService {
 
     override fun startWeatherActivity(context: Context) {
-//        context.startActivity<WeatherActivity>()
-        WeatherActivity.actionStart(context)
-
+        context.startActivity<WeatherActivity>()
+//        WeatherActivity.actionStart(context)
     }
 
     override fun init(context: Context?) {

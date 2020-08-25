@@ -174,10 +174,6 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //初始化路由ARouter
-        ARouter.getInstance().inject(this);
-
         fullScreen(false);
         setContentView(R.layout.activity_main_home);
         ButterKnife.bind(this);
@@ -399,10 +395,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                 int itemOrder = menuItem.getOrder();
                 switch (menuItem.getItemId()) {
                     case R.id.menu_nav_weather:
-//                        ServiceProvider.getWeatherService().startWeatherActivity(MainHomeActivity.this);
-
-                        ARouter.getInstance().build(AppRouter.MODULE_WEATHER_PATH).navigation();
-
+                        ServiceProvider.getWeatherService().startWeatherActivity(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_scan:
