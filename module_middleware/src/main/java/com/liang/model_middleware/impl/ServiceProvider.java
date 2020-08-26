@@ -3,7 +3,7 @@ package com.liang.model_middleware.impl;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.liang.model_middleware.router.AppRouter;
 import com.liang.model_middleware.service.DatePickerService;
-import com.liang.model_middleware.service.WeatherService;
+import com.liang.model_middleware.service.WeatherModuleService;
 
 /**
  * 创建日期：2020/8/3 on 4:26 PM
@@ -24,9 +24,9 @@ public class ServiceProvider {
     /**
      * 获取Module_Weather库的Service
      */
-    public static WeatherService getWeatherService() {
+    public static WeatherModuleService getWeatherService() {
         //使用依赖查找的方法发现服务，主动去发现服务并使用
-        return (WeatherService) ARouter.getInstance().build(AppRouter.MODULE_WEATHER_PATH).navigation();
+        return (WeatherModuleService) ARouter.getInstance().build(AppRouter.MODULE_WEATHER_PATH).navigation();
     }
 
 } 

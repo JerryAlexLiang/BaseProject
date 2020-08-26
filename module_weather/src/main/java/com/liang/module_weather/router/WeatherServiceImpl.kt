@@ -3,7 +3,7 @@ package com.liang.module_weather.router
 import android.content.Context
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.liang.model_middleware.router.AppRouter
-import com.liang.model_middleware.service.WeatherService
+import com.liang.model_middleware.service.WeatherModuleService
 import com.liang.module_weather.WeatherActivity
 import org.jetbrains.anko.startActivity
 
@@ -14,7 +14,7 @@ import org.jetbrains.anko.startActivity
  * 作者: 杨亮
  */
 @Route(path = AppRouter.MODULE_WEATHER_PATH)
-class WeatherServiceImpl : WeatherService {
+class WeatherServiceImpl : WeatherModuleService {
 
     override fun startWeatherActivity(context: Context) {
         context.startActivity<WeatherActivity>()

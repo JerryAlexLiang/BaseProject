@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/foreground"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".ui.place.PlaceFragment">
+
+    <com.liang.module_core_java.widget.SearchEditText
+        android:id="@+id/editSearchView"
+        style="@style/editTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:textColor="@color/text_invert"
+        android:textColorHint="@color/text_invert"
+        android:background="@drawable/shape_search_view_bg"
+        android:backgroundTint="@color/colorBlue"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/ivBgImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/weather_bg_place" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCityPlaces"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/editSearchView"
+        android:visibility="gone" />
+
+</RelativeLayout>

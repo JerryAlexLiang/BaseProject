@@ -4,10 +4,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.liang.module_core_java.BuildConfig;
 import com.liang.module_core_java.app.BaseApplication;
 
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
+
+import com.liang.model_middleware.app.BaseApplicationImpl;
+import com.liang.model_middleware.app.ModuleConfig;
 import com.liang.module_core_java.retrofit.RetrofitHelper;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
@@ -65,6 +69,9 @@ public class MyApplication extends BaseApplication {
 //            setDarkModeStatus();
 //        }
 
+        // 初始化模块配置
+        initModuleConfig();
+
         try {
             packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
@@ -86,6 +93,30 @@ public class MyApplication extends BaseApplication {
 
         //配置GreenDao数据库
         setupDatabase();
+    }
+
+    /**
+     * 通过反射拿到需要初始化的各种组件application
+     * <p>
+     * 1、创建BaseApplication类，ModuleConfig类以及BaseApplicationImpl类。
+     * 2、BaseApplication类的onCreate()方法中初始化一些全局配置并且初始化模块配置。
+     * 3、BaseApplicationImpl类是一个接口类，需要各模块自己去实现各个模块的配置。
+     * 4、这些配置的类是定义在ModuleConfig中，在初始化的时候会通过反射创建这些类。
+     * 5、使用：
+     * 在各个子module中实现BaseApplicationImpl，这个类可以提供模块化的配置以及application context对象。清单文件都设置为BaseApplication即可。
+     */
+    private void initModuleConfig() {
+        for (String modules : ModuleConfig.MODULE_LIST) {
+            try {
+                Class<?> clz = Class.forName(modules);
+                Object obj = clz.newInstance();
+                if (obj instanceof BaseApplicationImpl) {
+                    ((BaseApplicationImpl) obj).onCreate(this, BuildConfig.DEBUG);
+                }
+            } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 //    /**

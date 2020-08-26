@@ -40,10 +40,20 @@ public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText 
      */
     private OnSearchClickListener listener;
 
+    private onSearchTextChangedListener changeListener;
+
     private Drawable[] drawables; // 控件的图片资源
     private Drawable drawableLeft, drawableDel; // 搜索图标和删除按钮图标
     private int eventX, eventY; // 记录点击坐标
     private Rect rect; // 控件区域
+
+    public void setOnSearchTextChangedListener(onSearchTextChangedListener changeListener){
+        this.changeListener = changeListener;
+    }
+
+    public interface onSearchTextChangedListener{
+        void onSearchTextChangedListener(Editable s);
+    }
 
     public void setOnSearchClickListener(OnSearchClickListener listener) {
         this.listener = listener;
@@ -175,6 +185,9 @@ public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText 
             drawableDel = null;
         } else {
             drawableDel = this.getResources().getDrawable(R.drawable.edit_delete_icon);
+        }
+        if (changeListener != null) {
+            changeListener.onSearchTextChangedListener(s);
         }
     }
 }

@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.facade.template.IProvider
  * 描述:
  * 作者: 杨亮
  */
-interface WeatherService : IProvider {
+interface WeatherModuleService : IProvider {
 
     fun startWeatherActivity(context: Context)
 }

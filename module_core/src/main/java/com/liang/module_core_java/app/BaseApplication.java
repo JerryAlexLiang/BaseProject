@@ -17,6 +17,7 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.liang.module_core_java.BuildConfig;
 import com.liang.module_core_java.utils.SettingUtils;
 import com.liang.module_core_java.utils.ToastUtil;
 import com.liang.module_core_java.utils.Utils;
@@ -71,7 +72,11 @@ public class BaseApplication extends MultiDexApplication {
     public void onCreate() {
         outputLog(TAG, "App");
         super.onCreate();
+        // 初始化全局配置
+        initGlobalConfig();
+    }
 
+    private void initGlobalConfig() {
         Utils.init(this);
 
         app = this;
@@ -351,12 +356,12 @@ public class BaseApplication extends MultiDexApplication {
         finishActivityWithout(activity.getClass());
     }
 
-    public static void setDarkModeStatus(){
-        if (SettingUtils.getInstance().isDarkTheme()){
+    public static void setDarkModeStatus() {
+        if (SettingUtils.getInstance().isDarkTheme()) {
             //设置为黑色主题
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             ToastUtil.onShowTrueToast("夜晚主题");
-        }else {
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             ToastUtil.onShowTrueToast("白天主题");
         }
