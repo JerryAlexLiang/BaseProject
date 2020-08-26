@@ -21,7 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
 import liang.com.baseproject.entity.TagsBean;
 import liang.com.baseproject.event.ReadLaterEvent;
 import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
@@ -29,13 +29,14 @@ import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.main.presenter.AgentWebPresenter;
 import liang.com.baseproject.main.view.WebViewInterface;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import liang.com.baseproject.utils.AgentWebCreator;
-import liang.com.baseproject.utils.IntentUtils;
-import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ResolutionUtils;
+import com.liang.module_core_java.utils.AgentWebCreator;
+import com.liang.module_core_java.utils.IntentUtils;
+import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core_java.utils.ResolutionUtils;
+import com.liang.module_core_java.widget.popupwindow.CustomPopupWindow;
+
 import liang.com.baseproject.utils.UserLoginUtils;
-import liang.com.baseproject.widget.WebContainer;
-import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
+import com.liang.module_core_java.widget.WebContainer;
 
 public class AgentWebActivity extends MVPBaseActivity<WebViewInterface, AgentWebPresenter> implements CustomPopupWindow.ViewInterface, View.OnClickListener, WebViewInterface {
 

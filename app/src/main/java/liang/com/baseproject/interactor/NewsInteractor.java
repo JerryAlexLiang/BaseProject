@@ -5,9 +5,11 @@ import java.util.List;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.entity.NewsRes;
-import liang.com.baseproject.retrofit.BaseObserver;
-import liang.com.baseproject.retrofit.RetrofitHelper;
-import liang.com.baseproject.utils.LogUtil;
+import liang.com.baseproject.retrofit.UrlService;
+
+import com.liang.module_core_java.retrofit.BaseObserver;
+import com.liang.module_core_java.retrofit.RetrofitHelper;
+import com.liang.module_core_java.utils.LogUtil;
 
 public class NewsInteractor {
 
@@ -31,8 +33,9 @@ public class NewsInteractor {
     public void getNewsData(String serverUrl, String type, String key, onRetrofitListener listener) {
         RetrofitHelper
 //                .getInstance(serverUrl)
-                .getInstanceChangeBaseUrl(serverUrl)
-                .getMyService()
+                .getInstanceChangeBaseUrl(serverUrl);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .getNews(type, key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

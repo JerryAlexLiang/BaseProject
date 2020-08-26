@@ -7,7 +7,7 @@
     android:background="@color/surface"
     tools:context=".setting.activity.AppSettingActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
@@ -52,7 +52,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/switch_ios_thumb"
-                        android:track="@drawable/switch_ios_track_selector"/>
+                        android:track="@drawable/switch_ios_track_selector"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 </LinearLayout>
 

@@ -8,14 +8,14 @@
     android:background="@color/surface"
     tools:context=".main.activity.AgentWebActivity">
 
-    <include layout="@layout/layout_base_actionbar_default"/>
+    <include layout="@layout/core_layout_base_actionbar_default"/>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlEnablePureScrollMode="true">
 
-        <liang.com.baseproject.widget.WebContainer
+        <com.liang.module_core_java.widget.WebContainer
             android:id="@+id/web_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

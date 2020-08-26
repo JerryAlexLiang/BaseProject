@@ -22,15 +22,15 @@ import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
-import liang.com.baseproject.base.MVPBaseFragment;
+import com.liang.module_core_java.mvp.MVPBaseFragment;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.main.activity.AgentWebActivity;
-import liang.com.baseproject.utils.JsonFormatUtils;
-import liang.com.baseproject.utils.LogUtil;
+import com.liang.module_core_java.utils.JsonFormatUtils;
+import com.liang.module_core_java.utils.LogUtil;
 
 /**
  * 创建日期：2019/3/7 on 13:23
@@ -133,7 +133,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         smartRefreshLayout.autoRefresh();
 
         //添加头部
-        View headerView = getLayoutInflater().inflate(R.layout.layout_web_error, null);
+        View headerView = getLayoutInflater().inflate(R.layout.core_layout_web_error, null);
         headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         homeContainerAdapter.addHeaderView(headerView);
         //默认出现了头部就不会显示Empty，和尾部  配置以下方法也支持同时显示setHeaderAndEmpty  setHeaderFooterEmpty

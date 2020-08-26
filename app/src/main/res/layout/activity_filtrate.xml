@@ -40,7 +40,7 @@
     </LinearLayout>
 
     <include
-        layout="@layout/layout_base_actionbar_default" />
+        layout="@layout/core_layout_base_actionbar_default" />
 
     <ScrollView
         android:id="@+id/scroll_container"

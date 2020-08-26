@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">BaseProject</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="no_permissions">应用需要必要的运行权限</string>
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="quit">退出</string>
+
+    <string name="progress_loading_warn_content">Loading</string>
+
+    <!--网络异常提示-->
+    <string name="net_warn_content">网络连接异常，请检查你的网络设置</string>
+
+    <string name="loading">加载中...</string>
+
+    <!--设置界面-->
+    <string name="actionbar_theme">主题</string>
+    <string name="key_actionbar_theme_modify">key_actionbar_theme_modify</string>
+    <string name="title_actionbar_theme_modify">修改主题颜色</string>
+    <string name="title_normal">常规</string>
+    <string name="key_theme_red">theme_red</string>
+    <string name="title_theme_red">红色</string>
+    <string name="key_theme_blue">theme_blue</string>
+    <string name="title_theme_blue">蓝色</string>
+    <string name="key_theme_black">theme_black</string>
+    <string name="title_theme_black">黑色</string>
+    <string name="key_theme_white">theme_white</string>
+    <string name="title_theme_white">白色</string>
+    <string name="key_theme_picture">theme_picture</string>
+    <string name="title_theme_picture">图片</string>
+    <string name="summary_no_load_img">移动网络下不加载图片</string>
+    <string name="title_no_load_img">无图模式</string>
+    <string name="title_big_font">大字号</string>
+    <string name="title_other">其他</string>
+    <string name="title_clear_cache">清除缓存</string>
+    <string name="title_notice">声明</string>
+    <string name="title_developer">开发者</string>
+    <string name="key_clear_cache">clear_cache</string>
+    <string name="key_notice">notice</string>
+    <string name="key_developer">developer</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="toast_clear_cache">缓存已清除</string>
+    <string name="login_by_mb">使用微博登录</string>
+    <string name="sina">新浪微博</string>
+    <string name="tencent">腾讯微博</string>
+    <string name="radio_button_one_text">新推荐</string>
+    <string name="radio_button_two_text">最资讯</string>
+    <string name="radio_button_three_text">颜如玉</string>
+    <string name="radio_button_mine_text">我的</string>
+    <string name="offline_map">离线地图</string>
+
+    <!--登录界面-->
+    <string name="welcome_title">欢迎使用</string>
+    <string name="welcome_content">BaseProject</string>
+    <string name="go_to_register">去注册</string>
+    <string name="input_user_name">请输入用户名</string>
+    <string name="input_password">请输入密码</string>
+    <string name="go_to_login">去登录</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="please_login_first">请先登录!</string>
+    <string name="connect_error">连接错误</string>
+    <string name="connect_timeout">连接超时</string>
+    <string name="bad_netword">网络错误</string>
+    <string name="parse_error">解析数据失败</string>
+    <string name="unknown_error">未知错误</string>
+    <string name="user_integral">积分:</string>
+    <string name="user_level">等级:</string>
+    <string name="setting">设置</string>
+    <string name="go_to_logout">退出登录</string>
+    <string name="ensure_go_to_logout">确定要退出登陆吗?</string>
+    <string name="read_later">稍后阅读</string>
+
+    <!--设置-->
+    <string name="set_title">设置</string>
+    <string name="set_securty">账号与安全</string>
+    <string name="set_notice">新消息通知</string>
+    <string name="set_clear_cache">清除缓存</string>
+    <string name="ensure_clear_cache">确定要清除已缓存内容吗！</string>
+    <string name="set_language">语言设置</string>
+    <string name="set_ours">关于我们</string>
+    <string name="modify_pwd">修改密码</string>
+    <string name="night_mode">黑夜模式</string>
+    <string name="blade_white_mode">银翼白</string>
+    <string name="night_black_mode">玄夜黑</string>
+
+    <!--解锁相关-->
+    <string name="unlock_mode_set">设置解锁方式</string>
+    <string name="account_verify">账号密码验证</string>
+    <string name="gesture_pwd">手势密码</string>
+    <string name="gesture_pwd_modify">修改手势密码</string>
+    <string name="gesture_set">设置手势密码</string>
+    <string name="gesture_login">用手势密码验证登录</string>
+    <string name="gesture_paint_tips">请绘制解锁图形</string>
+    <string name="gesture_paint_msg">请绘制手势</string>
+    <string name="gesture_forget_pwd">忘记手势密码</string>
+    <string name="gesture_switch_login">切换登陆</string>
+    <string name="gesture_unlock_clear_success">清空手势密码成功</string>
+    <string name="gesture_unlock_verify_success">验证手势密码成功,请重新设置</string>
+    <string name="finger__verify_failed_times">验证失败，您还有%s 次机会</string>
+    <string name="finger_temp_lock_verify_failed">验证失败指纹暂被锁定</string>
+    <string name="finger_lock_verify_failed">验证失败，指纹已被锁定</string>
+    <string name="finger_relogin_tip">到自己登录页面重新登陆,处理逻辑</string>
+    <string name="finger_verify_cancelled">指纹验证功能已取消</string>
+    <string name="finger_verify_opened">指纹验证功能已打开</string>
+    <string name="finger_record_first">请先去录入指纹</string>
+    <string name="finger_unsupport">当前手机不支持指纹系统</string>
+    <string name="finger_verify_click">点击指纹进行验证</string>
+    <string name="finger">指纹</string>
+    <string name="finger_exist">通过Home键验证已有手机指纹</string>
+
+</resources>

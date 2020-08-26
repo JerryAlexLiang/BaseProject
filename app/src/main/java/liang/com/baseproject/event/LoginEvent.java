@@ -1,4 +1,7 @@
 package liang.com.baseproject.event;
+
+import com.liang.module_core_java.event.BaseEvent;
+
 /**
  * 创建日期：2019/8/23 on 11:16
  * 描述: EventBus - LoginEvent

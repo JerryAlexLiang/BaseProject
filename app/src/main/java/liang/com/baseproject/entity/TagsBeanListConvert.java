@@ -4,7 +4,7 @@ import org.greenrobot.greendao.converter.PropertyConverter;
 
 import java.util.List;
 
-import liang.com.baseproject.utils.GsonUtils;
+import com.liang.module_core_java.utils.GsonUtils;
 
 /**
  * 创建日期：2019/9/9 on 16:09

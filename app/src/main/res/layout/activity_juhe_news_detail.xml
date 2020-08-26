@@ -13,7 +13,7 @@
     tools:context=".activity.WebViewDetailActivity"
     tools:targetApi="lollipop">
 
-    <!--<include layout="@layout/layout_base_actionbar_default" />-->
+    <!--<include layout="@layout/core_layout_base_actionbar_default" />-->
 
     <!--<ProgressBar-->
     <!--android:id="@+id/pb_progress"-->
@@ -108,7 +108,7 @@
                 android:visibility="visible"
                 app:layout_collapseMode="pin" />
 
-            <!--<liang.com.baseproject.widget.CustomScrollRelativeLayout-->
+            <!--<com.liang.module_core_java.widget.CustomScrollRelativeLayout-->
             <!--android:id="@+id/custom_scroll_container"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="match_parent"-->
@@ -116,9 +116,9 @@
             <!--app:layout_collapseMode="parallax">-->
             <!---->
 
-            <!--</liang.com.baseproject.widget.CustomScrollRelativeLayout>-->
+            <!--</com.liang.module_core_java.widget.CustomScrollRelativeLayout>-->
 
-            <include layout="@layout/layout_base_toolbar_default" />
+            <include layout="@layout/core_layout_base_toolbar_default" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

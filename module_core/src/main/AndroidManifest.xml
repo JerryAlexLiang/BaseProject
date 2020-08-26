@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.liang.module_core_java">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <application>
+        <activity android:name=".base.PermissionActivity"
+            android:theme="@style/Transparent"
+            android:windowSoftInputMode="adjustPan"/>
+    </application>
+
+</manifest>

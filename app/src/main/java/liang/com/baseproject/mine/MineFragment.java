@@ -51,25 +51,27 @@ import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
-import liang.com.baseproject.base.MVPBaseFragment;
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseFragment;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.mine.activity.ReadLaterActivity;
 import liang.com.baseproject.setting.activity.AppSettingActivity;
-import liang.com.baseproject.utils.AnimationUtils;
-import liang.com.baseproject.utils.LogUtil;
+import com.liang.module_core_java.utils.AnimationUtils;
+import com.liang.module_core_java.utils.LogUtil;
 import liang.com.baseproject.utils.PictureSelectorUtils;
-import liang.com.baseproject.utils.ToastUtil;
+import com.liang.module_core_java.utils.ToastUtil;
 import liang.com.baseproject.utils.UserLoginUtils;
-import liang.com.baseproject.widget.popupwindow.CustomPopupWindow;
+import com.liang.module_core_java.widget.popupwindow.CustomPopupWindow;
 
 import static com.luck.picture.lib.config.PictureConfig.MULTIPLE;
 import static com.luck.picture.lib.config.PictureConfig.TYPE_IMAGE;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 创建日期:2020/8/26 on 10:24 AM
+ * 描述: 个人中心
+ * 作者: 杨亮
  */
 public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.ViewInterface {
 

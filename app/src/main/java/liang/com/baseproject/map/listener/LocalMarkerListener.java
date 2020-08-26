@@ -2,7 +2,7 @@ package liang.com.baseproject.map.listener;
 
 import java.util.List;
 
-import liang.com.baseproject.base.MVPRetrofitListener;
+import com.liang.module_core_java.mvp.MVPRetrofitListener;
 
 public interface LocalMarkerListener<T> extends MVPRetrofitListener<T> {
 

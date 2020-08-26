@@ -8,7 +8,7 @@
     android:background="@color/black"
     tools:context=".activity.SinglePictureActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
     <ImageView
         android:id="@+id/iv_meizhi_pic"

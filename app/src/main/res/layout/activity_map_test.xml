@@ -43,7 +43,7 @@
             app:expandedTitleTextAppearance="@style/ExpandedCollapsingToolbarTitle"
             app:statusBarScrim="?attr/colorPrimary">
 
-            <liang.com.baseproject.widget.CustomScrollRelativeLayout
+            <com.liang.module_core_java.widget.CustomScrollRelativeLayout
                 android:id="@+id/custom_scroll_container2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -55,9 +55,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-            </liang.com.baseproject.widget.CustomScrollRelativeLayout>
+            </com.liang.module_core_java.widget.CustomScrollRelativeLayout>
 
-             <include layout="@layout/layout_base_toolbar_default" />
+             <include layout="@layout/core_layout_base_toolbar_default" />
 
             <!--<android.support.v7.widget.Toolbar-->
                 <!--android:layout_width="match_parent"-->

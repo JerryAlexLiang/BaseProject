@@ -19,12 +19,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
-import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.utils.SPUtils;
-import liang.com.baseproject.utils.SettingUtils;
-import liang.com.baseproject.widget.CustomRadioGroup;
-import liang.com.baseproject.widget.SearchEditText;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core_java.utils.SPUtils;
+import com.liang.module_core_java.utils.SettingUtils;
+import com.liang.module_core_java.widget.SearchEditText;
+
+import com.liang.module_core_java.widget.CustomRadioGroup;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;

@@ -1,9 +1,9 @@
 package liang.com.baseproject.login.presenter;
 
-import liang.com.baseproject.base.MVPRetrofitListener;
+import com.liang.module_core_java.mvp.MVPRetrofitListener;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.view.LoginView;
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 import liang.com.baseproject.login.interactor.LoginInteractor;
 import liang.com.baseproject.utils.UserLoginUtils;
 

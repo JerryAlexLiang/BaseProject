@@ -5,6 +5,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.liang.module_core_java.widget.RevealLayout;
+
 import liang.com.baseproject.R;
 import liang.com.baseproject.utils.UserLoginUtils;
 

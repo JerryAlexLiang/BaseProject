@@ -8,9 +8,9 @@
     android:background="@color/foreground"
     tools:context=".setting.activity.SettingPatternPswActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
-    <liang.com.baseproject.widget.CustomGestureView
+    <com.liang.module_core_java.widget.CustomGestureView
         android:id="@+id/gesture_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

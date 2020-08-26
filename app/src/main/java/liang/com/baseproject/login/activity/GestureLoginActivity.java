@@ -19,14 +19,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
-import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 import liang.com.baseproject.setting.activity.SettingPatternPswActivity;
-import liang.com.baseproject.utils.GsonUtils;
-import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.SPUtils;
+import com.liang.module_core_java.utils.GsonUtils;
+import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core_java.utils.SPUtils;
 import liang.com.baseproject.utils.UserLoginUtils;
-import liang.com.baseproject.widget.CustomGestureView;
+import com.liang.module_core_java.widget.CustomGestureView;
 
 public class GestureLoginActivity extends MVPBaseActivity implements CustomGestureView.GestureCallBack {
 

@@ -1,6 +1,6 @@
 package liang.com.baseproject.setting.presenter;
 
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 import liang.com.baseproject.setting.interactor.AppSettingInteractor;
 import liang.com.baseproject.setting.listener.LogoutRetrofitListener;
 import liang.com.baseproject.setting.view.AppSettingView;

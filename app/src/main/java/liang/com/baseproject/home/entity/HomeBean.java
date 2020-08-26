@@ -2,7 +2,7 @@ package liang.com.baseproject.home.entity;
 
 import java.util.List;
 
-import liang.com.baseproject.base.MVPBaseBean;
+import com.liang.module_core_java.mvp.MVPBaseBean;
 
 /**
  * 创建日期：2019/8/29 on 19:43

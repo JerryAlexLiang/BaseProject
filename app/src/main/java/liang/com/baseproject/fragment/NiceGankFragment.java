@@ -17,9 +17,9 @@ import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.NiceGankView;
 import liang.com.baseproject.activity.MainHomeActivity;
-import liang.com.baseproject.base.MVPBaseFragment;
+import com.liang.module_core_java.mvp.MVPBaseFragment;
 import liang.com.baseproject.presenter.NiceGankPresenter;
-import liang.com.baseproject.utils.NetUtil;
+import com.liang.module_core_java.utils.NetUtil;
 
 /**
  * 创建日期：2019/2/25 on 19:22

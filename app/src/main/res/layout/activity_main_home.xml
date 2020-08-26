@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="@color/foreground">
 
-        <include layout="@layout/layout_base_actionbar_default" />
+        <include layout="@layout/core_layout_base_actionbar_default" />
 
         <include
             layout="@layout/layout_net_warn_bar"
@@ -25,7 +25,7 @@
             android:layout_below="@id/base_actionbar"
             android:visibility="visible" />
 
-        <!--<liang.com.baseproject.widget.MyViewPage-->
+        <!--<com.liang.module_core_java.widget.MyViewPage-->
         <!--android:id="@+id/my_view_pager"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->

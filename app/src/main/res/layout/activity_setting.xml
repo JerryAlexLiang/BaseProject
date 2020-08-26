@@ -8,7 +8,7 @@
     android:background="@color/foreground"
     tools:context=".activity.SettingActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
     <EditText
         android:layout_width="match_parent"

@@ -1,6 +1,6 @@
 package liang.com.baseproject.main.listener;
 
-import liang.com.baseproject.base.MVPRetrofitListener;
+import com.liang.module_core_java.mvp.MVPRetrofitListener;
 
 public interface CollectRetrofitListener<T> extends MVPRetrofitListener<T> {
 

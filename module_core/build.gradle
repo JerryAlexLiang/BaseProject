@@ -1,0 +1,97 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.1"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //ButterKnife
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+
+    /*事件总线*/
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    //ARouter路由
+    //// 替换成最新版本, 需要注意的是api
+    //    // 要与compiler匹配使用，均使用最新版可以保证兼容
+    //    compile 'com.alibaba:arouter-api:x.x.x'
+    //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
+    implementation 'com.alibaba:arouter-api:1.5.0'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    /*SmartRefreshLayout 下拉加载刷新*/
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+
+    //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+
+    //栗子动画引入step2：ParticleView
+    implementation 'me.wangyuwei:ParticleView:1.0.4'
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    /*基于的 Android WebViewInterface(必选)*/
+    implementation 'com.just.agentweb:agentweb:4.1.2'
+
+    // (可选)
+    implementation 'com.just.agentweb:filechooser:4.1.2'
+
+    // (可选)
+    implementation 'com.download.library:Downloader:4.1.2'
+
+    /*Android PersistentCookieJar  持久化Cookie*/
+    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+}

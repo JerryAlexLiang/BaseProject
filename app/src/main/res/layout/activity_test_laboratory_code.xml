@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.liang.module_core_java.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -54,7 +54,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/layout_base_actionbar_default" />
+            layout="@layout/core_layout_base_actionbar_default" />
 
         <ScrollView
             android:id="@+id/scroll_View"
@@ -196,4 +196,4 @@
 
     </LinearLayout>
 
-</liang.com.baseproject.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout>
+</com.liang.module_core_java.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout>

@@ -5,12 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.nio.file.Path;
-
-import liang.com.baseproject.utils.NetUtil;
-import retrofit2.http.POST;
+import com.liang.module_core_java.utils.NetUtil;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_NONE;

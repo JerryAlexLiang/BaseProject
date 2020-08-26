@@ -8,7 +8,7 @@
     android:background="@color/foreground"
     tools:context=".mine.activity.ReadLaterActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
     <RelativeLayout
         android:id="@+id/rl_empty_container"
@@ -22,9 +22,9 @@
             android:id="@+id/iv_empty"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:tint="@color/accent"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_empty" />
+            android:src="@drawable/ic_empty"
+            app:tint="@color/accent" />
 
         <TextView
             android:layout_width="match_parent"

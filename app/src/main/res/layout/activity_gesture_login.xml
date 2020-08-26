@@ -34,7 +34,7 @@
         android:textColor="@color/white"
         android:textSize="20sp" />
 
-    <liang.com.baseproject.widget.CustomGestureView
+    <com.liang.module_core_java.widget.CustomGestureView
         android:id="@+id/gesture_view"
         android:layout_width="match_parent"
         android:layout_height="320dp"

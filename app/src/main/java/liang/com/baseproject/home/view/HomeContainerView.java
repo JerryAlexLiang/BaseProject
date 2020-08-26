@@ -1,6 +1,6 @@
 package liang.com.baseproject.home.view;
 
-import liang.com.baseproject.base.MVPBaseView;
+import com.liang.module_core_java.mvp.MVPBaseView;
 import liang.com.baseproject.home.entity.HomeBean;
 
 public interface HomeContainerView extends MVPBaseView {

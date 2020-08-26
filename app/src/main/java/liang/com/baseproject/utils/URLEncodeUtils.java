@@ -6,9 +6,10 @@ import java.net.URLEncoder;
 import liang.com.baseproject.retrofit.UrlConstants;
 
 /**
- * Created by pyb on 2018/7/9.
+ * 创建日期:2020/8/26 on 10:06 AM
+ * 描述:
+ * 作者: 杨亮
  */
-
 public class URLEncodeUtils {
 
     public static String URLEncode(String url) {

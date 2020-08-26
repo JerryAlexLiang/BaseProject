@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.fragment.app.Fragment;
@@ -38,7 +37,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.liang.model_middleware.impl.ServiceProvider;
-import com.liang.model_middleware.router.AppRouter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -51,8 +49,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
-import liang.com.baseproject.base.BaseActivity;
-import liang.com.baseproject.base.PermissionActivity;
+
+import com.liang.module_core_java.mvp.BaseActivity;
+import com.liang.module_core_java.base.PermissionActivity;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
@@ -64,11 +63,11 @@ import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
-import liang.com.baseproject.utils.CheckPermission;
-import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.NetUtil;
+import com.liang.module_core_java.utils.CheckPermission;
+import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core_java.utils.NetUtil;
 import liang.com.baseproject.utils.UserLoginUtils;
-import liang.com.baseproject.utils.WifiUtils;
+import com.liang.module_core_java.utils.WifiUtils;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_WIFI;

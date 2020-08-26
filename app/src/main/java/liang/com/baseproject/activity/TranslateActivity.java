@@ -7,11 +7,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.liang.module_core_java.mvp.BaseActivity;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.BaseActivity;
 
 public class TranslateActivity extends BaseActivity {
 

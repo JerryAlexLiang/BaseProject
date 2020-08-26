@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.ThemeSettingActivity;
-import liang.com.baseproject.utils.CacheCleanUtil;
-import liang.com.baseproject.utils.ToastUtil;
+import com.liang.module_core_java.utils.CacheCleanUtil;
+import com.liang.module_core_java.utils.ToastUtil;
 
 /**
  * 创建日期：2019/2/21 on 17:23

@@ -1,8 +1,8 @@
 package liang.com.baseproject.entity;
 
-import java.util.List;
+import com.liang.module_core_java.base.AdapterBean;
 
-import liang.com.baseproject.base.AdapterBean;
+import java.util.List;
 
 /**
  * 创建日期：2019/2/12 on 14:02

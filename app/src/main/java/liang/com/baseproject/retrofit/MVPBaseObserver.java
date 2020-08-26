@@ -7,6 +7,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
+import com.liang.module_core_java.R;
+import com.liang.module_core_java.app.BaseApplication;
+import com.liang.module_core_java.mvp.MVPBaseResponse;
+import com.liang.module_core_java.retrofit.UrlConstants;
+import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core_java.utils.ToastUtil;
 
 import org.json.JSONException;
 
@@ -17,17 +23,10 @@ import java.text.ParseException;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import liang.com.baseproject.R;
-import liang.com.baseproject.app.MyApplication;
-import liang.com.baseproject.base.MVPBaseResponse;
 import liang.com.baseproject.login.activity.LoginActivity;
-import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.utils.ToastUtil;
 import retrofit2.HttpException;
 
-import static liang.com.baseproject.retrofit.UrlConstants.FAILED_NOT_LOGIN;
-import static liang.com.baseproject.retrofit.UrlConstants.SUCCESS;
-import static liang.com.baseproject.utils.ResUtils.getResources;
+import static com.liang.module_core_java.utils.ResUtils.getResources;
 
 /**
  * 创建日期：2018/12/24 on 11:13
@@ -48,12 +47,12 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
     @Override
     public void onNext(MVPBaseResponse<T> data) {
         switch (data.getErrorCode()) {
-            case SUCCESS:
+            case UrlConstants.SUCCESS:
                 onSuccess(data.getData());
                 LogUtil.e(TAG, "onSuccess():  " + new Gson().toJson(data));
                 break;
 
-            case FAILED_NOT_LOGIN:
+            case UrlConstants.FAILED_NOT_LOGIN:
                 onShowToast(getResources().getString(R.string.please_login_first));
                 LoginActivity.actionStart();
                 break;
@@ -98,27 +97,27 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
         switch (reason) {
             case CONNECT_ERROR:
                 //连接错误
-                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.connect_error));
+                onShowToast(BaseApplication.getAppContext().getResources().getString(R.string.connect_error));
                 break;
 
             case CONNECT_TIMEOUT:
                 //连接超时
-                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.connect_timeout));
+                onShowToast(BaseApplication.getAppContext().getResources().getString(R.string.connect_timeout));
                 break;
 
             case BAD_NETWORK:
                 //网络错误
-                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.bad_netword));
+                onShowToast(BaseApplication.getAppContext().getResources().getString(R.string.bad_netword));
                 break;
 
             case PARSE_ERROR:
                 //解析数据失败
-                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.parse_error));
+                onShowToast(BaseApplication.getAppContext().getResources().getString(R.string.parse_error));
                 break;
 
             case UNKNOWN_ERROR:
                 //未知错误
-                onShowToast(MyApplication.getAppContext().getResources().getString(R.string.unknown_error));
+                onShowToast(BaseApplication.getAppContext().getResources().getString(R.string.unknown_error));
                 break;
         }
     }
@@ -174,7 +173,7 @@ public abstract class MVPBaseObserver<T> implements Observer<MVPBaseResponse<T>>
     protected abstract void onError(String errorMsg);
 
     public void onShowToast(String content) {
-        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
                 true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 }

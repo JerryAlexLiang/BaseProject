@@ -2,13 +2,14 @@ package liang.com.baseproject.main.interactor;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import liang.com.baseproject.base.MVPBaseBean;
-import liang.com.baseproject.base.MVPRetrofitListener;
+import com.liang.module_core_java.mvp.MVPBaseBean;
+import com.liang.module_core_java.mvp.MVPRetrofitListener;
 import liang.com.baseproject.main.entity.CollectOutsideArticleBean;
 import liang.com.baseproject.main.entity.CollectionLinkBean;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
-import liang.com.baseproject.retrofit.RetrofitHelper;
+import com.liang.module_core_java.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
+import liang.com.baseproject.retrofit.UrlService;
 
 public class WebViewInteractor {
 
@@ -27,8 +28,9 @@ public class WebViewInteractor {
     public void goToCollectInsideArticle(int id, collectRetrofitListener listener) {
 
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToCollectInsideArticle(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -65,8 +67,9 @@ public class WebViewInteractor {
      */
     public void goToCollectOutsideArticle(String title, String author, String link, collectRetrofitListener listener) {
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToCollectOutsideArticle(title, author, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -102,8 +105,9 @@ public class WebViewInteractor {
      */
     public void goToCollectLink(String name, String link, collectRetrofitListener listener) {
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToCollectLink(name, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

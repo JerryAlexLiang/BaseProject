@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 
 public class FiltrateActivity extends MVPBaseActivity {
 

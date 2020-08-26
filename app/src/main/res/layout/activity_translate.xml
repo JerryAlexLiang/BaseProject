@@ -10,7 +10,7 @@
     tools:context=".activity.TranslateActivity">
 
     <include
-        layout="@layout/layout_base_actionbar_default"/>
+        layout="@layout/core_layout_base_actionbar_default"/>
 
     <Button
         android:id="@+id/btn_log_out"

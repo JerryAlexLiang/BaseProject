@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import liang.com.baseproject.View.JuheNewsDetailWebView;
-import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.utils.LogUtil;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core_java.utils.LogUtil;
 
 /**
  * 创建日期：2019/2/20 on 15:46

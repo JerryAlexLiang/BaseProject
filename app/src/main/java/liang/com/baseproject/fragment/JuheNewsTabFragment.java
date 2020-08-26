@@ -28,10 +28,10 @@ import liang.com.baseproject.adapter.JuheNewsAdapter;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.interactor.NewsInteractor;
 import liang.com.baseproject.presenter.NewsPresenter;
-import liang.com.baseproject.retrofit.RetrofitHelper;
+import com.liang.module_core_java.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
-import liang.com.baseproject.utils.ToastUtil;
-import liang.com.baseproject.widget.CustomProgressDialog;
+import com.liang.module_core_java.utils.ToastUtil;
+import com.liang.module_core_java.widget.CustomProgressDialog;
 
 /**
  * 创建日期：2019/2/13 on 10:25

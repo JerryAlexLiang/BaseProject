@@ -2,16 +2,19 @@ package liang.com.baseproject.main.presenter;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import liang.com.baseproject.base.MVPBaseBean;
-import liang.com.baseproject.base.MVPBasePresenter;
+
+import com.liang.module_core_java.mvp.MVPBaseBean;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
+
 import liang.com.baseproject.main.entity.CollectOutsideArticleBean;
 import liang.com.baseproject.main.entity.CollectionLinkBean;
-import liang.com.baseproject.main.interactor.WebViewInteractor;
-import liang.com.baseproject.main.listener.CollectRetrofitListener;
 import liang.com.baseproject.main.view.WebViewInterface;
+
 import liang.com.baseproject.retrofit.MVPBaseObserver;
-import liang.com.baseproject.retrofit.RetrofitHelper;
+import com.liang.module_core_java.retrofit.RetrofitHelper;
+
 import liang.com.baseproject.retrofit.UrlConstants;
+import liang.com.baseproject.retrofit.UrlService;
 
 public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
 
@@ -28,8 +31,9 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
      */
     public void goToCollectInsideArticle(int id) {
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToCollectInsideArticle(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -76,8 +80,9 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
      */
     public void goToCollectOutsideArticle(String title, String author, String link) {
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToCollectOutsideArticle(title, author, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -123,8 +128,9 @@ public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
      */
     public void goToCollectLink(String name, String link) {
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToCollectLink(name, link)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

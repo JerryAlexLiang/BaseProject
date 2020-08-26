@@ -54,7 +54,7 @@ dependencies {
 //    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     kapt 'com.alibaba:arouter-compiler:1.2.2'
 
-    implementation project(path: ':model_middleware')
+    implementation project(path: ':module_middleware')
 
     //anko-common包编译配置
     implementation "org.jetbrains.anko:anko-common:$anko_version"

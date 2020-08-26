@@ -1,6 +1,6 @@
 package liang.com.baseproject.main.entity;
 
-import liang.com.baseproject.base.MVPBaseBean;
+import com.liang.module_core_java.mvp.MVPBaseBean;
 
 public class CollectionLinkBean extends MVPBaseBean {
 

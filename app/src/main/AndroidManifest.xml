@@ -101,10 +101,6 @@
         <activity
             android:name=".activity.MainHomeActivity"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".base.PermissionActivity"
-            android:theme="@style/Transparent"
-            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.TestCodeActivity" />
         <activity android:name=".activity.WebViewDetailActivity">
 

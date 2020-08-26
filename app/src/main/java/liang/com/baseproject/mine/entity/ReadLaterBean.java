@@ -8,7 +8,7 @@ import org.greenrobot.greendao.annotation.Unique;
 
 import java.util.List;
 
-import liang.com.baseproject.base.MVPBaseBean;
+import com.liang.module_core_java.mvp.MVPBaseBean;
 import liang.com.baseproject.entity.TagsBean;
 import liang.com.baseproject.entity.TagsBeanListConvert;
 

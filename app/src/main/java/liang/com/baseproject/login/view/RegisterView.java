@@ -1,6 +1,6 @@
 package liang.com.baseproject.login.view;
 
-import liang.com.baseproject.base.MVPBaseView;
+import com.liang.module_core_java.mvp.MVPBaseView;
 import liang.com.baseproject.login.entity.UserBean;
 
 public interface RegisterView extends MVPBaseView {

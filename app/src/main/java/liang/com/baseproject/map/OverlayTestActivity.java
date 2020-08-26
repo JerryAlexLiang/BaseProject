@@ -19,10 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 import liang.com.baseproject.utils.MyPointOverlay;
 
 /**

@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.SinglePictureActivity;
 import liang.com.baseproject.entity.GankRes;
-import liang.com.baseproject.utils.ToastUtil;
+import com.liang.module_core_java.utils.ToastUtil;
 
 /**
  * 创建日期：2019/2/25 on 16:54

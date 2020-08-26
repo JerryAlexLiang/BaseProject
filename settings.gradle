@@ -1,5 +1,6 @@
+include ':module_core'
 include ':module_weather'
-include ':model_middleware'
-include ':MyDatePicker'
+include ':module_middleware'
+include ':module_datePicker'
 include ':app',
         ':CustomDatePicker'

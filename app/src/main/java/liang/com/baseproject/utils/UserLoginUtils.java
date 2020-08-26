@@ -6,6 +6,8 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.liang.module_core_java.utils.SPUtils;
+import com.liang.module_core_java.utils.ToastUtil;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
@@ -15,7 +17,7 @@ import liang.com.baseproject.login.entity.UserBean;
 import static liang.com.baseproject.Constant.Constant.KEY_BG;
 import static liang.com.baseproject.Constant.Constant.KEY_ICON;
 import static liang.com.baseproject.Constant.Constant.KEY_LOGIN_JSON;
-import static liang.com.baseproject.utils.ResUtils.getResources;
+import static com.liang.module_core_java.utils.ResUtils.getResources;
 
 /**
  * 创建日期：2019/8/27 on 15:57

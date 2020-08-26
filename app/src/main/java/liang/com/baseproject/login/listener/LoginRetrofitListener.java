@@ -1,6 +1,6 @@
 package liang.com.baseproject.login.listener;
 
-import liang.com.baseproject.base.MVPRetrofitListener;
+import com.liang.module_core_java.mvp.MVPRetrofitListener;
 
 public interface LoginRetrofitListener<T> extends MVPRetrofitListener<T> {
 

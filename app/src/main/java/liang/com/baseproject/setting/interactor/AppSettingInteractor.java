@@ -3,8 +3,9 @@ package liang.com.baseproject.setting.interactor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
-import liang.com.baseproject.retrofit.RetrofitHelper;
+import com.liang.module_core_java.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
+import liang.com.baseproject.retrofit.UrlService;
 import liang.com.baseproject.setting.listener.LogoutRetrofitListener;
 
 public class AppSettingInteractor {
@@ -14,8 +15,9 @@ public class AppSettingInteractor {
      */
     public void goToLogout(LogoutRetrofitListener<String> listener) {
         RetrofitHelper
-                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL)
-                .getMyService()
+                .getInstanceChangeBaseUrl(UrlConstants.WAN_ANDROID_BASE_URL);
+        RetrofitHelper
+                .getMyService(UrlService.class)
                 .goToLogout()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

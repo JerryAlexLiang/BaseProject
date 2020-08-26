@@ -2,6 +2,7 @@ package liang.com.baseproject.presenter;
 
 import android.content.Context;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,12 +14,17 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.View.NiceGankView;
 import liang.com.baseproject.adapter.NiceGankAdapter;
-import liang.com.baseproject.base.MVPBasePresenter;
+
+import com.liang.module_core_java.mvp.MVPBasePresenter;
+
 import liang.com.baseproject.entity.GankRes;
 import liang.com.baseproject.entity.NiceGankRes;
-import liang.com.baseproject.retrofit.BaseObserver;
-import liang.com.baseproject.retrofit.RetrofitHelper;
+
+import com.liang.module_core_java.retrofit.BaseObserver;
+import com.liang.module_core_java.retrofit.RetrofitHelper;
+
 import liang.com.baseproject.retrofit.UrlConstants;
+import liang.com.baseproject.retrofit.UrlService;
 
 /**
  * 创建日期：2019/2/25 on 19:21
@@ -59,8 +65,9 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
             //请求网络数据
             RetrofitHelper
 //                    .getGankSingletonInstance(UrlConstants.GANK_BASE_URL)
-                    .getInstanceChangeBaseUrl(UrlConstants.GANK_BASE_URL)
-                    .getMyService()
+                    .getInstanceChangeBaseUrl(UrlConstants.GANK_BASE_URL);
+            RetrofitHelper
+                    .getMyService(UrlService.class)
                     .getNiceGankData(page)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

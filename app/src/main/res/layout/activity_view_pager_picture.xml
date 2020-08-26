@@ -7,7 +7,7 @@
     android:background="@color/black"
     tools:context=".activity.ViewPagerPictureActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/image_view_pager"

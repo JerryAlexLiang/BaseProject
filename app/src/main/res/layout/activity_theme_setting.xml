@@ -9,7 +9,7 @@
     android:orientation="vertical"
     tools:context=".activity.ThemeSettingActivity">
 
-    <include layout="@layout/layout_base_actionbar_default" />
+    <include layout="@layout/core_layout_base_actionbar_default" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -134,7 +134,7 @@
                     android:layout_marginTop="20dp"
                     android:textSize="26sp"/>
 
-                <liang.com.baseproject.widget.CustomRadioGroup
+                <com.liang.module_core_java.widget.CustomRadioGroup
                     android:id="@+id/custom_radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -323,7 +323,7 @@
 
                     </LinearLayout>
 
-                </liang.com.baseproject.widget.CustomRadioGroup>
+                </com.liang.module_core_java.widget.CustomRadioGroup>
 
             </LinearLayout>
 

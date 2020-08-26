@@ -13,17 +13,6 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- 自定义进度对话框样式 -->
-    <style name="CustomProgressDialog" parent="android:style/Theme.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
-        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-    </style>
-
     <!-- item name="android:windowBackground"         设置背景透明度及其颜色值 -->
     <!-- item name="android:windowIsTranslucent"      设置当前Activity是否透明-->
     <!-- item name="android:windowAnimationStyle"     设置当前Activity进出方式-->
@@ -328,20 +317,6 @@
         <item name="picture.crop.title.color">@color/white</item>
         <!--相册文件夹列表选中图标-->
         <item name="picture.folder_checked_dot">@drawable/orange_oval</item>
-    </style>
-
-    <style name="editTextStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/shape_search_view_bg</item>
-        <item name="android:drawablePadding">5dp</item>
-        <item name="android:drawableStart">@drawable/icon_contact_search</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:imeOptions">actionSearch</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:hint">搜索</item>
     </style>
 
 </resources>

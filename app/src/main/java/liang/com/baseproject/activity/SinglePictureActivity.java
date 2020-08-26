@@ -16,10 +16,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.utils.FileUtil;
-import liang.com.baseproject.utils.ImageLoaderUtils;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core_java.utils.FileUtil;
+import com.liang.module_core_java.utils.ImageLoaderUtils;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 

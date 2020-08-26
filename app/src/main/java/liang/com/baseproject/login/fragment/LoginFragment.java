@@ -21,11 +21,11 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.view.LoginView;
-import liang.com.baseproject.base.MVPBaseFragment;
+import com.liang.module_core_java.mvp.MVPBaseFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.presenter.LoginPresenter;
-import liang.com.baseproject.utils.LogUtil;
-import liang.com.baseproject.widget.CustomProgressDialog;
+import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core_java.widget.CustomProgressDialog;
 
 /**
  * A simple {@link Fragment} subclass.

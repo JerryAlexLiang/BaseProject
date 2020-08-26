@@ -1,7 +1,6 @@
 package liang.com.baseproject.activity;
 
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.amap.api.maps.MapsInitializer;
@@ -19,13 +18,13 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
-import liang.com.baseproject.base.MVPBaseActivity;
-import liang.com.baseproject.base.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
 import liang.com.baseproject.login.activity.GestureLoginActivity;
 import liang.com.baseproject.login.activity.WelcomeGuideActivity;
-import liang.com.baseproject.utils.APKVersionCodeUtils;
-import liang.com.baseproject.utils.FileUtil;
-import liang.com.baseproject.utils.SPUtils;
+import com.liang.module_core_java.utils.APKVersionCodeUtils;
+import com.liang.module_core_java.utils.FileUtil;
+import com.liang.module_core_java.utils.SPUtils;
 import me.wangyuwei.particleview.ParticleView;
 
 import static liang.com.baseproject.Constant.Constant.IS_FIRST_FLAG;

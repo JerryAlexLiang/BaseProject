@@ -11,8 +11,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.base.MVPBasePresenter;
-import liang.com.baseproject.base.MVPBaseActivity;
+import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core_java.mvp.MVPBaseActivity;
 import liang.com.baseproject.fragment.SettingsFragment;
 
 /**

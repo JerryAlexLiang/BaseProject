@@ -19,7 +19,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.entity.TagsBean;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import liang.com.baseproject.utils.DateUtils;
+import com.liang.module_core_java.utils.DateUtils;
 
 /**
  * 创建日期：2019/9/9 on 11:07
