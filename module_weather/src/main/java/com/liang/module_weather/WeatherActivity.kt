@@ -6,6 +6,8 @@ import android.os.Bundle
 import com.alibaba.android.arouter.launcher.ARouter
 import com.liang.module_core.jetpack.JetPackActivity
 import com.liang.module_core.mvp.MVPBasePresenter
+import com.liang.module_core.utils.ToastUtil
+
 /**
  * 创建日期:2020/8/27 on 5:02 PM
  * 描述: 天气界面
@@ -27,6 +29,10 @@ class WeatherActivity : JetPackActivity() {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_weather)
         ARouter.getInstance().inject(this)
+        if (WeatherApplication.WEATHER_API_TOKEN.isEmpty()) {
+            ToastUtil.onShowErrorToast(this, "请在WeatherApplication中填入你申请到的令牌值")
+//            finish()
+        }
     }
 
     override fun isRegisterEventBus(): Boolean {

@@ -2,6 +2,7 @@ package com.liang.module_weather.logic
 
 import androidx.lifecycle.liveData
 import com.liang.module_weather.logic.model.Place
+import com.liang.module_weather.logic.network.Constant
 import com.liang.module_weather.logic.network.WeatherNetwork
 import kotlinx.coroutines.Dispatchers
 
@@ -21,7 +22,7 @@ object Repository {
     fun searchPlaces(query: String) = liveData<Result<List<Place>>>(Dispatchers.IO) {
         val result: Result<List<Place>> = try {
             val placeResponse = WeatherNetwork.searchPlaces(query)
-            if (placeResponse.status == "ok") {
+            if (placeResponse.status == Constant.STATUES_OK) {
                 val places = placeResponse.places
                 //4、kotlin内置的 Result.success()方法来包装获取的城市数据列表
                 Result.success(places)
