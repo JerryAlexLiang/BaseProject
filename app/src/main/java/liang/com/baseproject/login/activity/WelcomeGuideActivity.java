@@ -20,9 +20,9 @@ import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.adapter.GuideViewPagerAdapter;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
-import com.liang.module_core_java.utils.SPUtils;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.SPUtils;
 
 public class WelcomeGuideActivity extends MVPBaseActivity implements View.OnClickListener {
 

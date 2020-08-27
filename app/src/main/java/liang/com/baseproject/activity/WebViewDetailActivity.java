@@ -25,11 +25,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.View.JuheNewsDetailWebView;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBaseActivity;
 import liang.com.baseproject.presenter.JuheNewsDetailPresenter;
-import com.liang.module_core_java.utils.ImageLoaderUtils;
-import com.liang.module_core_java.utils.LogUtil;
-import com.liang.module_core_java.utils.SettingUtils;
+import com.liang.module_core.utils.ImageLoaderUtils;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.SettingUtils;
 
 /**
  * 创建日期：2019/2/20 on 13:31

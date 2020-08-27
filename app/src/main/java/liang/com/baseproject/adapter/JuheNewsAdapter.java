@@ -22,7 +22,7 @@ import liang.com.baseproject.activity.WebViewDetailActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
 import liang.com.baseproject.activity.ViewPagerPictureActivity;
 import liang.com.baseproject.entity.NewsRes;
-import com.liang.module_core_java.utils.ImageLoaderUtils;
+import com.liang.module_core.utils.ImageLoaderUtils;
 
 public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

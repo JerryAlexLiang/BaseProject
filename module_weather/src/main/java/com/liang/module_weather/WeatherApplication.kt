@@ -2,7 +2,7 @@ package com.liang.module_weather
 
 import android.app.Application
 import android.content.Context
-import com.liang.module_core_java.app.BaseApplication
+import com.liang.module_core.app.BaseApplication
 import com.liang.model_middleware.app.BaseApplicationImpl
 
 /**

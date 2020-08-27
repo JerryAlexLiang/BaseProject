@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.liang.module_core_java.R;
-import com.liang.module_core_java.app.BaseApplication;
-import com.liang.module_core_java.mvp.MVPBaseResponse;
-import com.liang.module_core_java.retrofit.UrlConstants;
-import com.liang.module_core_java.utils.LogUtil;
-import com.liang.module_core_java.utils.ToastUtil;
+import com.liang.module_core.R;
+import com.liang.module_core.app.BaseApplication;
+import com.liang.module_core.mvp.MVPBaseResponse;
+import com.liang.module_core.retrofit.UrlConstants;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.ToastUtil;
 
 import org.json.JSONException;
 
@@ -26,7 +26,7 @@ import io.reactivex.disposables.Disposable;
 import liang.com.baseproject.login.activity.LoginActivity;
 import retrofit2.HttpException;
 
-import static com.liang.module_core_java.utils.ResUtils.getResources;
+import static com.liang.module_core.utils.ResUtils.getResources;
 
 /**
  * 创建日期：2018/12/24 on 11:13

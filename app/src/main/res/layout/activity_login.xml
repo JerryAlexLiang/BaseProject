@@ -9,7 +9,7 @@
     android:clipChildren="false"
     tools:context=".login.activity.LoginActivity">
 
-    <include layout="@layout/core_layout_base_actionbar_default" />
+    <include layout="@layout/weather_layout_base_actionbar_default" />
 
     <LinearLayout
         android:id="@+id/ll_logo"

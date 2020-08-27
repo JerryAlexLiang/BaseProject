@@ -13,7 +13,7 @@
     tools:context=".activity.WebViewDetailActivity"
     tools:targetApi="lollipop">
 
-    <!--<include layout="@layout/core_layout_base_actionbar_default" />-->
+    <!--<include layout="@layout/weather_layout_base_actionbar_default" />-->
 
     <!--<ProgressBar-->
     <!--android:id="@+id/pb_progress"-->

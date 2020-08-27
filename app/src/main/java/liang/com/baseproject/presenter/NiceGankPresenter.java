@@ -15,13 +15,13 @@ import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.View.NiceGankView;
 import liang.com.baseproject.adapter.NiceGankAdapter;
 
-import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPBasePresenter;
 
 import liang.com.baseproject.entity.GankRes;
 import liang.com.baseproject.entity.NiceGankRes;
 
-import com.liang.module_core_java.retrofit.BaseObserver;
-import com.liang.module_core_java.retrofit.RetrofitHelper;
+import com.liang.module_core.retrofit.BaseObserver;
+import com.liang.module_core.retrofit.RetrofitHelper;
 
 import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.retrofit.UrlService;

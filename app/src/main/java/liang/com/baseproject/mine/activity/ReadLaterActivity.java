@@ -27,17 +27,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
 import liang.com.baseproject.event.ReadLaterEvent;
 import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
 import liang.com.baseproject.main.activity.AgentWebActivity;
 import liang.com.baseproject.mine.adapter.ReadLaterAdapter;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import com.liang.module_core_java.utils.CopyUtils;
-import com.liang.module_core_java.utils.GsonUtils;
-import com.liang.module_core_java.utils.IntentUtils;
-import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core.utils.CopyUtils;
+import com.liang.module_core.utils.GsonUtils;
+import com.liang.module_core.utils.IntentUtils;
+import com.liang.module_core.utils.LogUtil;
 
 public class ReadLaterActivity extends MVPBaseActivity {
 

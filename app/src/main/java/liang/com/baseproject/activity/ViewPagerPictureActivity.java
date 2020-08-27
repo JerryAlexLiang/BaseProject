@@ -18,10 +18,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.ImageViewPagerAdapter;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.utils.FileUtil;
-import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.utils.FileUtil;
+import com.liang.module_core.utils.LogUtil;
 
 /**
  * 创建日期：2019/2/22 on 13:18

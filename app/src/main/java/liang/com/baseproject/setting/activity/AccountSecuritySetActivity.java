@@ -19,10 +19,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
 import liang.com.baseproject.login.activity.GestureLoginActivity;
-import com.liang.module_core_java.utils.SPUtils;
+import com.liang.module_core.utils.SPUtils;
 
 /**
  * 创建日期：2019/9/11 on 9:30

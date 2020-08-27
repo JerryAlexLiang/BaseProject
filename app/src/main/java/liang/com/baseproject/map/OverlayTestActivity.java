@@ -20,8 +20,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import liang.com.baseproject.R;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
 import liang.com.baseproject.utils.MyPointOverlay;
 
 /**

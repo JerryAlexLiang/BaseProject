@@ -1,6 +1,6 @@
 package liang.com.baseproject.main.entity;
 
-import com.liang.module_core_java.mvp.MVPBaseBean;
+import com.liang.module_core.mvp.MVPBaseBean;
 
 public class CollectOutsideArticleBean extends MVPBaseBean {
 

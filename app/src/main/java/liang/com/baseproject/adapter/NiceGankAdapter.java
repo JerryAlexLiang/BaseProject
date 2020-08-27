@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.SinglePictureActivity;
 import liang.com.baseproject.entity.GankRes;
-import com.liang.module_core_java.utils.ToastUtil;
+import com.liang.module_core.utils.ToastUtil;
 
 /**
  * 创建日期：2019/2/25 on 16:54
@@ -89,7 +89,7 @@ public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             //点击Card
             cardNiceGank.setOnClickListener(v -> {
-                ToastUtil.onShowToast("卡片");
+                ToastUtil.onShowToast(context,"卡片");
             });
         }
     }

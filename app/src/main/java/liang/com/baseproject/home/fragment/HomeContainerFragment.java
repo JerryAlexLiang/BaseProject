@@ -22,15 +22,15 @@ import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
-import com.liang.module_core_java.mvp.MVPBaseFragment;
+import com.liang.module_core.mvp.MVPBaseFragment;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.main.activity.AgentWebActivity;
-import com.liang.module_core_java.utils.JsonFormatUtils;
-import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core.utils.JsonFormatUtils;
+import com.liang.module_core.utils.LogUtil;
 
 /**
  * 创建日期：2019/3/7 on 13:23

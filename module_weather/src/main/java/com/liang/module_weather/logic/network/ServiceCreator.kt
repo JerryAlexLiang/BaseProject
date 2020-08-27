@@ -1,7 +1,7 @@
 package com.liang.module_weather.logic.network
 
-import com.liang.module_core_java.retrofit.HttpLoggingInterceptor
-import com.liang.module_core_java.utils.LogUtil
+import com.liang.module_core.retrofit.HttpLoggingInterceptor
+import com.liang.module_core.utils.LogUtil
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

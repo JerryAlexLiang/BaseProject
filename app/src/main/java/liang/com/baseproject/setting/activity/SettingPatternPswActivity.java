@@ -15,12 +15,12 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
-import com.liang.module_core_java.utils.GsonUtils;
-import com.liang.module_core_java.utils.LogUtil;
-import com.liang.module_core_java.utils.SPUtils;
-import com.liang.module_core_java.widget.CustomGestureView;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.GsonUtils;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.SPUtils;
+import com.liang.module_core.widget.CustomGestureView;
 
 import static liang.com.baseproject.Constant.Constant.IS_GESTURE_FLAG;
 

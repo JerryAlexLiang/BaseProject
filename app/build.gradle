@@ -177,8 +177,6 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    implementation project(path: ':module_core')
-
     //ARouter路由
     //// 替换成最新版本, 需要注意的是api
     //    // 要与compiler匹配使用，均使用最新版可以保证兼容
@@ -186,6 +184,8 @@ dependencies {
     //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
     implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    implementation project(path: ':module_core')
 
     implementation project(':module_middleware')
 

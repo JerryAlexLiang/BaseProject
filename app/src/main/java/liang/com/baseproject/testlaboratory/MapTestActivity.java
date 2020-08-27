@@ -26,9 +26,9 @@ import butterknife.OnClick;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.map.MapLocationActivity;
-import com.liang.module_core_java.utils.SettingUtils;
-import com.liang.module_core_java.utils.TitleBarUtils;
-import com.liang.module_core_java.widget.CustomScrollRelativeLayout;
+import com.liang.module_core.utils.SettingUtils;
+import com.liang.module_core.utils.TitleBarUtils;
+import com.liang.module_core.widget.CustomScrollRelativeLayout;
 
 public class MapTestActivity extends AppCompatActivity {
 

@@ -4,15 +4,15 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.liang.module_core_java.BuildConfig;
-import com.liang.module_core_java.app.BaseApplication;
+import com.liang.module_core.BuildConfig;
+import com.liang.module_core.app.BaseApplication;
 
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
 
 import com.liang.model_middleware.app.BaseApplicationImpl;
 import com.liang.model_middleware.app.ModuleConfig;
-import com.liang.module_core_java.retrofit.RetrofitHelper;
+import com.liang.module_core.retrofit.RetrofitHelper;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 

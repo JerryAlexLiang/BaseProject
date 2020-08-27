@@ -1,6 +1,6 @@
 package liang.com.baseproject.setting.listener;
 
-import com.liang.module_core_java.mvp.MVPRetrofitListener;
+import com.liang.module_core.mvp.MVPRetrofitListener;
 
 public interface LogoutRetrofitListener<T> extends MVPRetrofitListener<T> {
 

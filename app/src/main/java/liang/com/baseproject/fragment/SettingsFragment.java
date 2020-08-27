@@ -1,17 +1,20 @@
 package liang.com.baseproject.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+
 import androidx.annotation.Nullable;
 
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.ThemeSettingActivity;
-import com.liang.module_core_java.utils.CacheCleanUtil;
-import com.liang.module_core_java.utils.ToastUtil;
+
+import com.liang.module_core.utils.CacheCleanUtil;
+import com.liang.module_core.utils.ToastUtil;
 
 /**
  * 创建日期：2019/2/21 on 17:23
@@ -47,13 +50,14 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     }
 
+    @SuppressLint("NewApi")
     @Override
     public boolean onPreferenceClick(Preference preference) {
         switch (preference.getKey()) {
             case "key_actionbar_theme_modify":
                 ThemeSettingActivity.actionStart(getActivity());
                 getActivity().finish();
-                ToastUtil.onShowToast("更该主题样式~");
+                ToastUtil.onShowToast(this.getContext(), "更该主题样式~");
                 break;
 
             case "clear_cache":
@@ -65,7 +69,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 break;
 
             case "developer":
-                ToastUtil.onShowToast("开发中~");
+                ToastUtil.onShowToast(getContext(), "开发中~");
                 break;
         }
         return false;
@@ -95,10 +99,11 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                     }
                 })
                 .setPositiveButton("清除", new DialogInterface.OnClickListener() {
+                    @SuppressLint("NewApi")
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         CacheCleanUtil.cleanAllCache();
-                        ToastUtil.onShowTrueToast(getResources().getString(R.string.toast_clear_cache));
+                        ToastUtil.onShowTrueToast(getContext(), getResources().getString(R.string.toast_clear_cache));
                     }
                 })
                 .show();

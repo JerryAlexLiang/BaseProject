@@ -16,14 +16,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
-import com.liang.module_core_java.mvp.MVPBaseFragment;
+import com.liang.module_core.mvp.MVPBaseFragment;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.login.presenter.RegisterPresenter;
 import liang.com.baseproject.login.view.RegisterView;
-import com.liang.module_core_java.utils.GsonUtils;
-import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core.utils.GsonUtils;
+import com.liang.module_core.utils.LogUtil;
 
 /**
  * A simple {@link Fragment} subclass.

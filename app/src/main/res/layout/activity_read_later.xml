@@ -8,7 +8,7 @@
     android:background="@color/foreground"
     tools:context=".mine.activity.ReadLaterActivity">
 
-    <include layout="@layout/core_layout_base_actionbar_default" />
+    <include layout="@layout/weather_layout_base_actionbar_default" />
 
     <RelativeLayout
         android:id="@+id/rl_empty_container"

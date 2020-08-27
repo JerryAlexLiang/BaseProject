@@ -2,7 +2,7 @@ package liang.com.baseproject.entity;
 
 import java.io.Serializable;
 
-import com.liang.module_core_java.mvp.MVPBaseBean;
+import com.liang.module_core.mvp.MVPBaseBean;
 /**
  * 创建日期：2019/9/9 on 16:09
  * 描述: 玩Android - API - 返回数据 tags 数据

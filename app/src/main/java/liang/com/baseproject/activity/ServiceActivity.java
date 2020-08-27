@@ -20,9 +20,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.MyAIDLService;
 import liang.com.baseproject.R;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
-import com.liang.module_core_java.widget.SearchEditText;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.widget.SearchEditText;
 
 import liang.com.baseproject.service.MyRemoteService;
 import liang.com.baseproject.service.MyService;

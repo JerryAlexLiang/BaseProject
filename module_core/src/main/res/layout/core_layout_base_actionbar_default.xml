@@ -76,7 +76,7 @@
             android:textSize="16sp"
             android:visibility="gone" />
 
-        <com.liang.module_core_java.widget.SearchEditText
+        <com.liang.module_core.widget.SearchEditText
             android:id="@+id/edit_search_view"
             style="@style/editTextStyle"
             android:layout_width="0dp"

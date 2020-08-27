@@ -50,8 +50,8 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 
-import com.liang.module_core_java.mvp.BaseActivity;
-import com.liang.module_core_java.base.PermissionActivity;
+import com.liang.module_core.mvp.BaseActivity;
+import com.liang.module_core.base.PermissionActivity;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
@@ -63,11 +63,11 @@ import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
-import com.liang.module_core_java.utils.CheckPermission;
-import com.liang.module_core_java.utils.LogUtil;
-import com.liang.module_core_java.utils.NetUtil;
+import com.liang.module_core.utils.CheckPermission;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.NetUtil;
 import liang.com.baseproject.utils.UserLoginUtils;
-import com.liang.module_core_java.utils.WifiUtils;
+import com.liang.module_core.utils.WifiUtils;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_WIFI;

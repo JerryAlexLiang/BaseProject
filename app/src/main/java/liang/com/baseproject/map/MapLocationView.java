@@ -2,7 +2,7 @@ package liang.com.baseproject.map;
 
 import java.util.List;
 
-import com.liang.module_core_java.mvp.MVPBaseView;
+import com.liang.module_core.mvp.MVPBaseView;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.login.entity.UserBean;
 

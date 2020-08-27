@@ -1,6 +1,6 @@
 package liang.com.baseproject.receiver;
 
-import com.liang.module_core_java.event.BaseEvent;
+import com.liang.module_core.event.BaseEvent;
 
 /**
  * 创建日期：2018/1/12 on 下午1:45

@@ -1,6 +1,6 @@
 package liang.com.baseproject.entity;
 
-import com.liang.module_core_java.base.AdapterBean;
+import com.liang.module_core.base.AdapterBean;
 
 import java.util.List;
 

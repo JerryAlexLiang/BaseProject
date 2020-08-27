@@ -8,16 +8,7 @@
     android:focusableInTouchMode="true"
     tools:context=".ui.place.PlaceFragment">
 
-    <com.liang.module_core_java.widget.SearchEditText
-        android:id="@+id/editSearchView"
-        style="@style/editTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:textColor="@color/text_invert"
-        android:textColorHint="@color/text_invert"
-        android:background="@drawable/shape_search_view_bg"
-        android:backgroundTint="@color/colorBlue"
-        android:visibility="visible" />
+    <include layout="@layout/weather_layout_base_actionbar_default" />
 
     <ImageView
         android:id="@+id/ivBgImageView"
@@ -30,7 +21,7 @@
         android:id="@+id/rvCityPlaces"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/editSearchView"
-        android:visibility="gone" />
+        android:layout_below="@+id/base_actionbar"
+        android:visibility="invisible" />
 
 </RelativeLayout>

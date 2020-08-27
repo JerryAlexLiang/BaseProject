@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
-import com.liang.module_core_java.widget.SearchEditText;
+import com.liang.module_core.widget.SearchEditText;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import butterknife.BindView;
@@ -23,11 +23,11 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.app.MyApplication;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBaseActivity;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.setting.presenter.AppSettingPresenter;
 import liang.com.baseproject.setting.view.AppSettingView;
-import com.liang.module_core_java.utils.SettingUtils;
+import com.liang.module_core.utils.SettingUtils;
 import liang.com.baseproject.utils.UserLoginUtils;
 
 public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSettingPresenter> implements AppSettingView {

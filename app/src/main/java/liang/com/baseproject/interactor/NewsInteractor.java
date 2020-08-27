@@ -7,9 +7,9 @@ import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.retrofit.UrlService;
 
-import com.liang.module_core_java.retrofit.BaseObserver;
-import com.liang.module_core_java.retrofit.RetrofitHelper;
-import com.liang.module_core_java.utils.LogUtil;
+import com.liang.module_core.retrofit.BaseObserver;
+import com.liang.module_core.retrofit.RetrofitHelper;
+import com.liang.module_core.utils.LogUtil;
 
 public class NewsInteractor {
 

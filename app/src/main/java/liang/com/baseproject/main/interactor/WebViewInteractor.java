@@ -2,12 +2,12 @@ package liang.com.baseproject.main.interactor;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import com.liang.module_core_java.mvp.MVPBaseBean;
-import com.liang.module_core_java.mvp.MVPRetrofitListener;
+import com.liang.module_core.mvp.MVPBaseBean;
+import com.liang.module_core.mvp.MVPRetrofitListener;
 import liang.com.baseproject.main.entity.CollectOutsideArticleBean;
 import liang.com.baseproject.main.entity.CollectionLinkBean;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
-import com.liang.module_core_java.retrofit.RetrofitHelper;
+import com.liang.module_core.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.retrofit.UrlService;
 

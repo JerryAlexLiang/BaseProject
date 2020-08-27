@@ -3,8 +3,8 @@ package liang.com.baseproject.retrofit;
 import java.util.List;
 
 import io.reactivex.Observable;
-import com.liang.module_core_java.mvp.MVPBaseBean;
-import com.liang.module_core_java.mvp.MVPBaseResponse;
+import com.liang.module_core.mvp.MVPBaseBean;
+import com.liang.module_core.mvp.MVPBaseResponse;
 import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;

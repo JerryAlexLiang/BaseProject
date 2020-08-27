@@ -77,21 +77,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.base.PermissionActivity;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.base.PermissionActivity;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.listener.AppBarStateChangeListener;
 import liang.com.baseproject.login.entity.UserBean;
-import com.liang.module_core_java.utils.CheckPermission;
-import com.liang.module_core_java.utils.DrawCustomMarkerBitmapUtil;
-import com.liang.module_core_java.utils.LogUtil;
-import com.liang.module_core_java.utils.NetUtil;
-import com.liang.module_core_java.utils.ResolutionUtils;
-import com.liang.module_core_java.utils.SPUtils;
-import com.liang.module_core_java.utils.SettingUtils;
-import com.liang.module_core_java.widget.CustomScrollRelativeLayout;
-import com.liang.module_core_java.widget.popupwindow.CustomPopupWindow;
+import com.liang.module_core.utils.CheckPermission;
+import com.liang.module_core.utils.DrawCustomMarkerBitmapUtil;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.NetUtil;
+import com.liang.module_core.utils.ResolutionUtils;
+import com.liang.module_core.utils.SPUtils;
+import com.liang.module_core.utils.SettingUtils;
+import com.liang.module_core.widget.CustomScrollRelativeLayout;
+import com.liang.module_core.widget.popupwindow.CustomPopupWindow;
 
 public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLocationPresenter> implements AMap.OnMyLocationChangeListener,
         AMap.OnMarkerClickListener, AMap.OnMapTouchListener, CustomPopupWindow.ViewInterface, View.OnClickListener, MapLocationView {

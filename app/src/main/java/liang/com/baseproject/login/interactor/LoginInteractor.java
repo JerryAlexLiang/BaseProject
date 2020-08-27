@@ -1,8 +1,8 @@
 package liang.com.baseproject.login.interactor;
 
-import com.liang.module_core_java.mvp.MVPRetrofitListener;
+import com.liang.module_core.mvp.MVPRetrofitListener;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
-import com.liang.module_core_java.retrofit.RetrofitHelper;
+import com.liang.module_core.retrofit.RetrofitHelper;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;

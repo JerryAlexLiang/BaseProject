@@ -2,8 +2,8 @@ package liang.com.baseproject.map;
 
 import java.util.List;
 
-import com.liang.module_core_java.mvp.MVPBasePresenter;
-import com.liang.module_core_java.mvp.MVPRetrofitListener;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPRetrofitListener;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.interactor.HomeContainerInteractor;
 import liang.com.baseproject.login.entity.UserBean;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 
-import com.liang.module_core_java.utils.NetUtil;
+import com.liang.module_core.utils.NetUtil;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_NONE;

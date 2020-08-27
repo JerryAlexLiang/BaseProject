@@ -3,7 +3,7 @@ package liang.com.baseproject.home.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import com.liang.module_core_java.mvp.MVPBaseBean;
+import com.liang.module_core.mvp.MVPBaseBean;
 import liang.com.baseproject.entity.TagsBean;
 
 /**

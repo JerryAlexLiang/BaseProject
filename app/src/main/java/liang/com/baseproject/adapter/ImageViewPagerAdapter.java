@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import liang.com.baseproject.R;
-import com.liang.module_core_java.utils.FileUtil;
-import com.liang.module_core_java.utils.ImageLoaderUtils;
+import com.liang.module_core.utils.FileUtil;
+import com.liang.module_core.utils.ImageLoaderUtils;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 

@@ -26,12 +26,12 @@ import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.app.MyApplication;
-import com.liang.module_core_java.mvp.MVPBaseActivity;
-import com.liang.module_core_java.mvp.MVPBasePresenter;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
 import liang.com.baseproject.login.fragment.LoginFragment;
 import liang.com.baseproject.login.fragment.RegisterFragment;
-import com.liang.module_core_java.utils.LogUtil;
-import com.liang.module_core_java.utils.SPUtils;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.SPUtils;
 import per.goweii.percentimageview.percentimageview.PercentImageView;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;

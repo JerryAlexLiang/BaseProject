@@ -3,7 +3,7 @@ package liang.com.baseproject.setting.interactor;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import liang.com.baseproject.retrofit.MVPBaseObserver;
-import com.liang.module_core_java.retrofit.RetrofitHelper;
+import com.liang.module_core.retrofit.RetrofitHelper;
 import liang.com.baseproject.retrofit.UrlConstants;
 import liang.com.baseproject.retrofit.UrlService;
 import liang.com.baseproject.setting.listener.LogoutRetrofitListener;

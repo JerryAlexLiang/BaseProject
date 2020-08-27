@@ -1,6 +1,6 @@
 package liang.com.baseproject.event;
 
-import com.liang.module_core_java.event.BaseEvent;
+import com.liang.module_core.event.BaseEvent;
 
 public class ReadLaterEvent extends BaseEvent {
 

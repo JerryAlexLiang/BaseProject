@@ -10,7 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.liang.module_core_java.mvp.BaseActivity;
+import com.liang.module_core.mvp.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
