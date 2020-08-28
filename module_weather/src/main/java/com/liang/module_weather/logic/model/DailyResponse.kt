@@ -1,5 +1,7 @@
 package com.liang.module_weather.logic.model
 
+import java.util.*
+
 /**
  * 创建日期: 2020/8/27 on 5:57 PM
  * 描述: 未来几天天气
@@ -46,7 +48,7 @@ data class DailyResponse(
             ) {
                 data class Aqi(
                         val avg: Avg,
-                        val date: String,
+                        val date: Date,
                         val max: Max,
                         val min: Min
                 ) {
@@ -68,14 +70,14 @@ data class DailyResponse(
 
                 data class Pm25(
                         val avg: Double,
-                        val date: String,
+                        val date: Date,
                         val max: Int,
                         val min: Int
                 )
             }
 
             data class Astro(
-                    val date: String,
+                    val date: Date,
                     val sunrise: Sunrise,
                     val sunset: Sunset
             ) {
@@ -90,21 +92,21 @@ data class DailyResponse(
 
             data class Cloudrate(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
 
             data class Dswrf(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
 
             data class Humidity(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
@@ -117,31 +119,31 @@ data class DailyResponse(
                     val ultraviolet: List<Ultraviolet>
             ) {
                 data class CarWashing(
-                        val date: String,
+                        val date: Date,
                         val desc: String,
                         val index: String
                 )
 
                 data class ColdRisk(
-                        val date: String,
+                        val date: Date,
                         val desc: String,
                         val index: String
                 )
 
                 data class Comfort(
-                        val date: String,
+                        val date: Date,
                         val desc: String,
                         val index: String
                 )
 
                 data class Dressing(
-                        val date: String,
+                        val date: Date,
                         val desc: String,
                         val index: String
                 )
 
                 data class Ultraviolet(
-                        val date: String,
+                        val date: Date,
                         val desc: String,
                         val index: String
                 )
@@ -149,50 +151,50 @@ data class DailyResponse(
 
             data class Precipitation(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
 
             data class Pressure(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
 
             data class Skycon(
-                    val date: String,
+                    val date: Date,
                     val value: String
             )
 
             data class Skycon08h20h(
-                    val date: String,
+                    val date: Date,
                     val value: String
             )
 
             data class Skycon20h32h(
-                    val date: String,
+                    val date: Date,
                     val value: String
             )
 
             data class Temperature(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
 
             data class Visibility(
                     val avg: Double,
-                    val date: String,
+                    val date: Date,
                     val max: Double,
                     val min: Double
             )
 
             data class Wind(
                     val avg: Avg,
-                    val date: String,
+                    val date: Date,
                     val max: Max,
                     val min: Min
             ) {

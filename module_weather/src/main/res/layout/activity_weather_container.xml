@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.weather.WeatherContainerActivity">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smart_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlEnablePreviewInEditMode="true">
+
+        <ScrollView
+            android:id="@+id/scrollWeatherLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/weather_item_now" />
+
+                <include layout="@layout/layout_weather_forecast" />
+
+                <include layout="@layout/layout_weather_life_index" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</FrameLayout>
+
+<!--
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.weather.WeatherContainerActivity">
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smart_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srlEnablePreviewInEditMode="true">
+
+        <ScrollView
+            android:id="@+id/scrollWeatherLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/weather_item_now" />
+
+                <include layout="@layout/layout_weather_forecast" />
+
+                <include layout="@layout/layout_weather_life_index" />
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
+-->

@@ -17,7 +17,9 @@ class PlaceViewModel : ViewModel() {
 
     private val searchLiveData = MutableLiveData<String>()
 
-    val placeList = ArrayList<Place>()
+    //城市列表数据List
+    //和界面相关的数据，定义在ViewModel中，可以保证它们在手机屏幕发生旋转的时候不会丢失，稍后在编写UI层代码的时候就会用到这几个变量
+    var placeList = ArrayList<Place>()
 
     val placeLiveData = Transformations.switchMap(searchLiveData) { query ->
         Repository.searchPlaces(query)

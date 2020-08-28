@@ -9,11 +9,11 @@ android {
         enabled = true
     }
 
-    compileSdkVersion 30
+    compileSdkVersion 29
     defaultConfig {
         applicationId "liang.com.baseproject"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

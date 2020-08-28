@@ -1,14 +1,19 @@
 package com.liang.module_weather.ui.place
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.liang.module_core.constant.Constant
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_weather.R
+import com.liang.module_weather.WeatherActivity
 import com.liang.module_weather.logic.model.Place
+import com.liang.module_weather.logic.network.WeatherConstant
+import com.liang.module_weather.ui.weather.WeatherContainerActivity
 
 /**
  * 创建日期: 2020/8/27 on 3:31 PM
@@ -22,7 +27,19 @@ class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: L
         val viewHolder = MyViewHolder(view)
 
         viewHolder.itemView.setOnClickListener {
-            ToastUtil.onShowToast(parent.context, placeList[viewHolder.adapterPosition].name)
+
+            val adapterPosition = viewHolder.adapterPosition
+            val place = placeList[adapterPosition]
+
+            ToastUtil.onShowToast(parent.context, place.name)
+
+            val intent = Intent(parent.context, WeatherContainerActivity::class.java).apply {
+                putExtra(WeatherConstant.LOCATION_LNG, place.location.lng)
+                putExtra(WeatherConstant.LOCATION_LAT, place.location.lat)
+                putExtra(WeatherConstant.PLACE_NAME, place.name)
+            }
+            fragment.startActivity(intent)
+//            fragment.activity?.finish()
         }
 
         return viewHolder

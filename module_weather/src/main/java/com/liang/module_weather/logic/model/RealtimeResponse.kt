@@ -8,54 +8,54 @@ package com.liang.module_weather.logic.model
  * 作者: 杨亮
  */
 data class RealtimeResponse(
-        val api_status: String,
-        val api_version: String,
-        val lang: String,
+        val api_status: String, // active
+        val api_version: String, // v2.5
+        val lang: String, // zh_CN
         val location: List<Double>,
         val result: Result,
-        val server_time: Int,
-        val status: String,
-        val timezone: String,
-        val tzshift: Int,
-        val unit: String
+        val server_time: Int, // 1598581713
+        val status: String, // ok
+        val timezone: String, // Asia/Shanghai
+        val tzshift: Int, // 28800
+        val unit: String // metric
 ) {
     data class Result(
-            val primary: Int,
+            val primary: Int, // 0
             val realtime: Realtime
     ) {
         data class Realtime(
                 val air_quality: AirQuality,
-                val apparent_temperature: Double,
-                val cloudrate: Double,
-                val dswrf: Double,
-                val humidity: Double,
+                val apparent_temperature: Double, // 29.6
+                val cloudrate: Double, // 0.0
+                val dswrf: Double, // 540.0
+                val humidity: Double, // 0.5
                 val life_index: LifeIndex,
                 val precipitation: Precipitation,
-                val pressure: Double,
-                val skycon: String,
-                val status: String,
-                val temperature: Double,
-                val visibility: Double,
+                val pressure: Double, // 99960.7
+                val skycon: String, // CLEAR_DAY
+                val status: String, // ok
+                val temperature: Double, // 28.0
+                val visibility: Double, // 29.8
                 val wind: Wind
         ) {
             data class AirQuality(
                     val aqi: Aqi,
-                    val co: Double,
+                    val co: Double, // 0.6
                     val description: Description,
-                    val no2: Double,
-                    val o3: Double,
-                    val pm10: Double,
-                    val pm25: Double,
-                    val so2: Double
+                    val no2: Double, // 39.0
+                    val o3: Double, // 52.0
+                    val pm10: Double, // 33.0
+                    val pm25: Double, // 12.0
+                    val so2: Double // 1.0
             ) {
                 data class Aqi(
-                        val chn: Double,
-                        val usa: Double
+                        val chn: Double, // 33.0
+                        val usa: Double // 50.0
                 )
 
                 data class Description(
-                        val chn: String,
-                        val usa: String
+                        val chn: String, // 优
+                        val usa: String // 优
                 )
             }
 
@@ -64,13 +64,13 @@ data class RealtimeResponse(
                     val ultraviolet: Ultraviolet
             ) {
                 data class Comfort(
-                        val desc: String,
-                        val index: Int
+                        val desc: String, // 热
+                        val index: Int // 3
                 )
 
                 data class Ultraviolet(
-                        val desc: String,
-                        val index: Double
+                        val desc: String, // 很强
+                        val index: Double // 9.0
                 )
             }
 
@@ -79,21 +79,21 @@ data class RealtimeResponse(
                     val nearest: Nearest
             ) {
                 data class Local(
-                        val datasource: String,
-                        val intensity: Double,
-                        val status: String
+                        val datasource: String, // radar
+                        val intensity: Double, // 0.0
+                        val status: String // ok
                 )
 
                 data class Nearest(
-                        val distance: Double,
-                        val intensity: Double,
-                        val status: String
+                        val distance: Double, // 157.34
+                        val intensity: Double, // 0.1875
+                        val status: String // ok
                 )
             }
 
             data class Wind(
-                    val direction: Double,
-                    val speed: Double
+                    val direction: Double, // 345.0
+                    val speed: Double // 3.24
             )
         }
     }

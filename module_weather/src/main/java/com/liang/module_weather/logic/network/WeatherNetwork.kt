@@ -39,6 +39,16 @@ object WeatherNetwork {
     //5、借助协程技术来实现简化代码，这里定义一个await()函数，并将searchPlaces()函数也声明成挂起函数suspend
     suspend fun searchPlaces(query: String) = placeService.searchPlaces(query).await()
 
+
+    //WeatherService接口封装
+    private val weatherService = ServiceCreator.create(WeatherService::class.java)
+
+    //实时天气接口请求
+    suspend fun getRealtimeWeather(lng: String, lat: String) = weatherService.getRealtimeWeather(lng, lat).await()
+
+    //未来几天天气接口请求
+    suspend fun getDailyWeather(lng: String, lat: String) = weatherService.getDailyWeather(lng, lat).await()
+
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {

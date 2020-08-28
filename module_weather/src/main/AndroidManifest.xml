@@ -3,8 +3,10 @@
     package="com.liang.module_weather">
 
     <application>
-        <activity android:name=".WeatherActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.weather.WeatherContainerActivity"/>
+        <activity
+            android:name=".WeatherActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

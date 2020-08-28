@@ -8,9 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_margin="12dp"
-
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:background="@drawable/selector_bg_press_color_white"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="4dp">
 
         <LinearLayout
@@ -24,6 +23,8 @@
                 android:id="@+id/tvPlaceName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="---"
                 android:textColor="@color/text_surface"
                 android:textSize="20sp" />
@@ -34,6 +35,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:drawablePadding="10dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="---"
                 android:textColor="@color/text_third"
                 android:textSize="14sp"
