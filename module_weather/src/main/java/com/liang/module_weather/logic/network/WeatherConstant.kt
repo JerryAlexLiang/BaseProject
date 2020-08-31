@@ -18,6 +18,10 @@ class WeatherConstant {
 
         const val PLACE_NAME = "place_name"
 
+        const val SHARED_PREFERENCES_NAME = "BaseProjectWeather"
+
+        const val SHARED_PLACE_NAME = "Place"
+
     }
 
 }

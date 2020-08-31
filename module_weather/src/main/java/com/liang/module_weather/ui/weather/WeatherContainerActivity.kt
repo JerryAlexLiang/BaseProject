@@ -43,13 +43,13 @@ class WeatherContainerActivity : JetPackActivity() {
 
         getIntentData()
 
+        observeData()
+
         refreshWeather()
 
 //        smart_refresh_layout.autoRefresh()
 
         initRefreshListener()
-
-        observeData()
     }
 
     private fun initRefreshListener() {

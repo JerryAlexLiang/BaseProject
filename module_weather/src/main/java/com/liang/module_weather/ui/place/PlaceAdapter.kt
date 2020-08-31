@@ -38,6 +38,8 @@ class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: L
                 putExtra(WeatherConstant.LOCATION_LAT, place.location.lat)
                 putExtra(WeatherConstant.PLACE_NAME, place.name)
             }
+            //存储点击的Item对应的Place数据
+            fragment.viewModel.savePlace(place)
             fragment.startActivity(intent)
 //            fragment.activity?.finish()
         }

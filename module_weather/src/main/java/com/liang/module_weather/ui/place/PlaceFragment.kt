@@ -1,5 +1,6 @@
 package com.liang.module_weather.ui.place
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.utils.LogUtil
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_weather.R
+import com.liang.module_weather.WeatherActivity
+import com.liang.module_weather.logic.network.WeatherConstant
+import com.liang.module_weather.ui.weather.WeatherContainerActivity
 import kotlinx.android.synthetic.main.fragment_place.*
 import kotlinx.android.synthetic.main.weather_layout_base_actionbar_default.*
 
@@ -24,7 +28,7 @@ class PlaceFragment : Fragment() {
 
     //1、使用lazy函数这种懒加载技术来获取PlaceViewModel的实例
     //这是一种非常棒的写法，允许我们在整个类中随时使用viewModel这个变量，而完全不用关心它何时初始化、是否为空等前提条件
-    private val viewModel by lazy { ViewModelProviders.of(this).get(PlaceViewModel::class.java) }
+     val viewModel by lazy { ViewModelProviders.of(this).get(PlaceViewModel::class.java) }
 
     companion object {
         private const val TAG = "PlaceFragment"
@@ -37,6 +41,19 @@ class PlaceFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        if (activity is WeatherActivity && viewModel.isPlaceSaved()){
+            val savedPlace = viewModel.getSavedPlace()
+            val intent = Intent(context, WeatherContainerActivity::class.java).apply {
+                putExtra(WeatherConstant.LOCATION_LNG, savedPlace.location.lng)
+                putExtra(WeatherConstant.LOCATION_LAT, savedPlace.location.lat)
+                putExtra(WeatherConstant.PLACE_NAME, savedPlace.name)
+            }
+            startActivity(intent)
+            this.activity?.finish()
+            return
+        }
+
         val linearLayoutManager = LinearLayoutManager(activity)
         rvCityPlaces.layoutManager = linearLayoutManager
         placeAdapter = PlaceAdapter(this, viewModel.placeList)
