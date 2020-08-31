@@ -31,7 +31,7 @@ class WeatherActivity : JetPackActivity() {
         ARouter.getInstance().inject(this)
         if (WeatherApplication.WEATHER_API_TOKEN.isEmpty()) {
             ToastUtil.onShowErrorToast(this, "请在WeatherApplication中填入你申请到的令牌值")
-//            finish()
+            finish()
         }
     }
 

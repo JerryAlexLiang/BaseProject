@@ -6,20 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.liang.module_core.constant.Constant
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_weather.R
-import com.liang.module_weather.WeatherActivity
 import com.liang.module_weather.logic.model.Place
 import com.liang.module_weather.logic.network.WeatherConstant
 import com.liang.module_weather.ui.weather.WeatherContainerActivity
+import kotlinx.android.synthetic.main.activity_weather_container.*
 
 /**
  * 创建日期: 2020/8/27 on 3:31 PM
  * 描述: 彩云天气城市搜索列表适配器
  * 作者: 杨亮
  */
+//class PlaceAdapter(private val fragment: Fragment, private val placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapter.MyViewHolder>() {
 class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: List<Place>) : RecyclerView.Adapter<PlaceAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -33,15 +34,26 @@ class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: L
 
             ToastUtil.onShowToast(parent.context, place.name)
 
-            val intent = Intent(parent.context, WeatherContainerActivity::class.java).apply {
-                putExtra(WeatherConstant.LOCATION_LNG, place.location.lng)
-                putExtra(WeatherConstant.LOCATION_LAT, place.location.lat)
-                putExtra(WeatherConstant.PLACE_NAME, place.name)
+            val activity = fragment.activity
+            if (activity is WeatherContainerActivity) {
+                //如果当前是WeatherContainerActivity，则不需要再次跳转，只需关闭DrawerLayout，并请求新数据并刷新界面即可
+                activity.drawerLayout.closeDrawers()
+                activity.viewModel.locationLng = place.location.lng
+                activity.viewModel.locationLat = place.location.lat
+                activity.viewModel.placeName = place.name
+                activity.refreshWeather()
+            } else {
+                val intent = Intent(parent.context, WeatherContainerActivity::class.java).apply {
+                    putExtra(WeatherConstant.LOCATION_LNG, place.location.lng)
+                    putExtra(WeatherConstant.LOCATION_LAT, place.location.lat)
+                    putExtra(WeatherConstant.PLACE_NAME, place.name)
+                }
+                fragment.startActivity(intent)
+                activity?.finish()
             }
             //存储点击的Item对应的Place数据
+//            (fragment as PlaceFragment).viewModel.savePlace(place)
             fragment.viewModel.savePlace(place)
-            fragment.startActivity(intent)
-//            fragment.activity?.finish()
         }
 
         return viewHolder

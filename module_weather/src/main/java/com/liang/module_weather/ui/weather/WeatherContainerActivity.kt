@@ -1,9 +1,13 @@
 package com.liang.module_weather.ui.weather
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.liang.module_core.jetpack.JetPackActivity
@@ -13,14 +17,10 @@ import com.liang.module_weather.R
 import com.liang.module_weather.logic.model.Weather
 import com.liang.module_weather.logic.model.getSky
 import com.liang.module_weather.logic.network.WeatherConstant
-import com.scwang.smartrefresh.header.*
-import com.scwang.smartrefresh.layout.header.BezierRadarHeader
-import com.scwang.smartrefresh.layout.header.ClassicsHeader
-import com.scwang.smartrefresh.layout.header.FalsifyHeader
-import com.scwang.smartrefresh.layout.header.TwoLevelHeader
+import com.scwang.smartrefresh.header.PhoenixHeader
 import kotlinx.android.synthetic.main.activity_weather_container.*
-import kotlinx.android.synthetic.main.layout_weather_life_index.*
 import kotlinx.android.synthetic.main.layout_weather_forecast.*
+import kotlinx.android.synthetic.main.layout_weather_life_index.*
 import kotlinx.android.synthetic.main.weather_item_now.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -34,7 +34,7 @@ class WeatherContainerActivity : JetPackActivity() {
     //1、使用lazy函数这种懒加载技术来获取ViewModel的实例
     //这是一种非常棒的写法，允许我们在整个类中随时使用viewModel这个变量，而完全不用关心它何时初始化、是否为空等前提条件
 //    private val viewModel = ViewModelProviders.of(this).get(WeatherViewModel::class.java)
-    private val viewModel by lazy { ViewModelProviders.of(this).get(WeatherViewModel::class.java) }
+    val viewModel by lazy { ViewModelProviders.of(this).get(WeatherViewModel::class.java) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +50,32 @@ class WeatherContainerActivity : JetPackActivity() {
 //        smart_refresh_layout.autoRefresh()
 
         initRefreshListener()
+
+        initListener()
+    }
+
+    private fun initListener() {
+        btnNav.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        drawerLayout.addDrawerListener(object : DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+                drawerView.isClickable = true
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                val im = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                im.hideSoftInputFromWindow(drawerView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+        })
     }
 
     private fun initRefreshListener() {
@@ -76,6 +102,8 @@ class WeatherContainerActivity : JetPackActivity() {
         smart_refresh_layout.setRefreshHeader(PhoenixHeader(this)) //大楼动画
 
 //        smart_refresh_layout.setRefreshHeader(MaterialHeader(this)) //经典Swip
+
+        getActionBarTheme(llStatusBar, null)
 
     }
 
@@ -181,7 +209,7 @@ class WeatherContainerActivity : JetPackActivity() {
         rlNowLayout.setBackgroundResource(getSky(realtime.skycon).bg)
     }
 
-    private fun refreshWeather() {
+    fun refreshWeather() {
         viewModel.refreshWeather(viewModel.locationLng, viewModel.locationLat)
     }
 
