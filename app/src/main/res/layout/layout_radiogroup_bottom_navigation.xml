@@ -23,7 +23,7 @@
         android:gravity="center"
         android:padding="6dp"
         android:text="@string/radio_button_one_text"
-        android:textColor="@color/text_second" />
+        android:textColor="@drawable/nav_item_color_state" />
 
     <RadioButton
         android:id="@+id/main_rg_rb_two"
@@ -36,7 +36,7 @@
         android:gravity="center"
         android:padding="6dp"
         android:text="@string/radio_button_two_text"
-        android:textColor="@color/text_second" />
+        android:textColor="@drawable/nav_item_color_state" />
 
     <RadioButton
         android:id="@+id/main_rg_rb_three"
@@ -49,7 +49,7 @@
         android:gravity="center"
         android:padding="6dp"
         android:text="@string/radio_button_three_text"
-        android:textColor="@color/text_second" />
+        android:textColor="@drawable/nav_item_color_state" />
 
     <RadioButton
         android:id="@+id/main_rg_rb_four"
@@ -62,5 +62,6 @@
         android:gravity="center"
         android:padding="6dp"
         android:text="@string/radio_button_mine_text"
-        android:textColor="@color/text_second" />
+        android:textColor="@drawable/nav_item_color_state" />
+
 </RadioGroup>
