@@ -2,48 +2,62 @@ package liang.com.baseproject.home.fragment;
 
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
+import com.liang.module_core.mvp.MVPBaseFragment;
+import com.liang.module_core.utils.JsonFormatUtils;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
-import com.liang.module_core.mvp.MVPBaseFragment;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.entity.ArticleBean;
+import liang.com.baseproject.home.entity.ArticleHomeBannerBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
 import liang.com.baseproject.main.activity.AgentWebActivity;
-import com.liang.module_core.utils.JsonFormatUtils;
-import com.liang.module_core.utils.LogUtil;
 
 /**
  * 创建日期：2019/3/7 on 13:23
  * 描述: 玩Android 开放API - 首页相关
  * 作者: liangyang
  */
-public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, HomeContainerPresenter> implements HomeContainerView {
+public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, HomeContainerPresenter> implements HomeContainerView, OnItemClickListener {
 
     private static final String TAG = HomeContainerFragment.class.getSimpleName();
     @BindView(R.id.rv_home)
     RecyclerView rvHome;
     @BindView(R.id.smart_refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
+
+    private ConvenientBanner convenientBanner;
+
     Unbinder unbinder;
 
     private MainHomeActivity mActivity;
@@ -53,6 +67,9 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
     private boolean setRefreshFooter;
+
+    private List<ArticleHomeBannerBean> mBannerData;
+    private View banner;
 
     public HomeContainerFragment() {
         // Required empty public constructor
@@ -78,7 +95,77 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     protected void initView(View rootView) {
         //绑定View
         mPresenter.attachView(this);
+        initArticleRvList();
+        initHeader();
+    }
 
+    private void initHeader() {
+        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.layout_article_home_banner_header, null);
+        convenientBanner = (ConvenientBanner) headerView.findViewById(R.id.convenient_banner);
+        //添加头部
+//        View headerView = getLayoutInflater().inflate(R.layout.core_layout_web_error, null);
+//        headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        homeContainerAdapter.addHeaderView(convenientBanner);
+        homeContainerAdapter.addHeaderView(headerView);
+        //默认出现了头部就不会显示Empty，和尾部  配置以下方法也支持同时显示setHeaderAndEmpty  setHeaderFooterEmpty
+        homeContainerAdapter.setHeaderAndEmpty(true);
+    }
+
+    private void initBanner() {
+        //自定义你的Holder，实现更多复杂的界面，不一定是图片翻页，其他任何控件翻页亦可。
+        convenientBanner.setPages(
+                new CBViewHolderCreator() {
+                    @Override
+                    public BannerImageHolderView createHolder(View itemView) {
+                        return new BannerImageHolderView(itemView);
+                    }
+
+                    @Override
+                    public int getLayoutId() {
+                        return R.layout.layout_iv_banner;
+                    }
+                }, mBannerData)
+                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator_pressed, R.drawable.shape_banner_indicator_normal})
+                .setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        ArticleHomeBannerBean articleHomeBannerBean = (ArticleHomeBannerBean) mBannerData.get(position);
+        if (articleHomeBannerBean != null) {
+            String url = articleHomeBannerBean.getUrl();
+            int id = articleHomeBannerBean.getId();
+            String title = articleHomeBannerBean.getTitle();
+            AgentWebActivity.actionStart(getContext(), id, title, url);
+        }
+    }
+
+    public class BannerImageHolderView extends Holder<ArticleHomeBannerBean> {
+
+        private ImageView imageView;
+        private TextView textView;
+
+        public BannerImageHolderView(View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        protected void initView(View itemView) {
+            imageView = itemView.findViewById(R.id.iv_banner_view);
+            textView = itemView.findViewById(R.id.tv_banner_title);
+        }
+
+        @Override
+        public void updateUI(ArticleHomeBannerBean data) {
+            textView.setText(data.getTitle());
+            Glide.with(getContext())
+                    .load(data.getImagePath())
+                    .into(imageView);
+        }
+    }
+
+    private void initArticleRvList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mActivity);
         rvHome.setLayoutManager(linearLayoutManager);
         //初始化适配器
@@ -88,7 +175,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
         rvHome.setAdapter(homeContainerAdapter);
 
-        mPresenter.getArticleList(PAGE_START);
+//        mPresenter.getArticleList(PAGE_START);
 
         homeContainerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -107,6 +194,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 currPage = PAGE_START;
                 mPresenter.getArticleList(currPage);
+                mPresenter.getArticleHomeBanner();
             }
         });
 
@@ -131,13 +219,6 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
         //自动刷新(替代第一次请求数据)
         smartRefreshLayout.autoRefresh();
-
-        //添加头部
-        View headerView = getLayoutInflater().inflate(R.layout.core_layout_web_error, null);
-        headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        homeContainerAdapter.addHeaderView(headerView);
-        //默认出现了头部就不会显示Empty，和尾部  配置以下方法也支持同时显示setHeaderAndEmpty  setHeaderFooterEmpty
-        homeContainerAdapter.setHeaderAndEmpty(true);
     }
 
     @Override
@@ -161,12 +242,21 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         LogUtil.d(TAG, "执行onResume()");
         //同步刷新背景
         getSmartRefreshPrimaryColorsTheme(smartRefreshLayout, true, true);
+        //开始自动翻页
+        if (convenientBanner != null) {
+            convenientBanner.startTurning();
+        }
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         LogUtil.d(TAG, "执行onPause()");
+        //停止自动翻页
+        if (convenientBanner != null) {
+            convenientBanner.stopTurning();
+        }
     }
 
     @Override
@@ -233,6 +323,25 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
         homeContainerAdapter.setEmptyView(R.layout.rl_empty_container_view);
+    }
+
+    @Override
+    public void getArticleHomeBannerSuccess(List<ArticleHomeBannerBean> data) {
+        if (mBannerData == null) {
+            mBannerData = new ArrayList<>();
+        }
+        mBannerData.clear();
+        mBannerData.addAll(data);
+
+        if (banner == null) {
+            initBanner();
+        }
+    }
+
+    @Override
+    public void getArticleHomeBannerFail(String content) {
+        ToastUtil.onShowErrorToast(getContext(), "Banner数据获取失败：" + content);
+        LogUtil.d(TAG, content);
     }
 
     @Override

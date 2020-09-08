@@ -9,6 +9,7 @@ import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
+import liang.com.baseproject.home.entity.ArticleHomeBannerBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.main.entity.CollectOutsideArticleBean;
@@ -102,6 +103,12 @@ public interface UrlService {
      */
     @GET("article/list/{page}/json")
     Observable<MVPBaseResponse<HomeBean>> getArticleList(@Path("page") int page);
+
+    /**
+     * 首页Banner
+     */
+    @GET("banner/json")
+    Observable<MVPBaseResponse<List<ArticleHomeBannerBean>>> getArticleHomeBanner();
 
     /**
      * 收藏站内文章
