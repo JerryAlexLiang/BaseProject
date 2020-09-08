@@ -1,0 +1,209 @@
+ext {
+
+    signingConfig = [
+            storeFile    : file("base_project_key.jks"),
+            storePassword: "2016Cba*",
+            keyAlias     : "yangliang",
+            keyPassword  : "2016Cba*",
+    ]
+
+    android = [
+            compileSdkVersion: 29,
+            minSdkVersion    : 21,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    compileOptions = [
+            sourceCompatibility: JavaVersion.VERSION_1_8,
+            targetCompatibility: JavaVersion.VERSION_1_8,
+    ]
+
+    versions = [
+            support               : "1.2.0",
+            constraintLayout      : "2.0.1",
+
+            androidx              : "1.2.0",
+            multidex              : "2.0.1",
+
+            rxpermissions         : "0.10.2",
+
+            //栗子动画引入step2：ParticleView
+            particleView          : "1.0.4",
+
+            recyclerview          : "1.1.0",
+            cardview              : "1.0.0",
+
+            alertview             : "1.0.3",
+
+            /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
+            loggingInterceptor    : "3.0.0",
+
+            gson                  : "2.8.6",
+            okhttp                : "3.9.0",
+            retrofit              : "2.6.1",
+
+            agentweb              : "4.1.2",
+
+            butterknife           : "10.1.0",
+
+            /*GreenDao gradle:3.2.1升级到gradle:4.0.1报错,修改greendao-gradle-plugin:3.3.0就解决*/
+            greendao              : "3.3.0",
+
+            eventbus              : "3.1.1",
+
+            bravh2X               : "2.9.50",
+            bravh3X               : "3.0.4",
+
+            smartRefreshLayout    : "1.1.0",
+            smartRefreshHorizontal: "1.0.0-beta-1",
+
+            //侧滑菜单
+            swipelayout           : "1.2.0",
+
+            glide                 : "4.9.0",
+            glideCompiler         : "4.9.0",
+
+            roundedimageview      : "2.3.0",
+            circleimageview       : "3.0.0",
+            photoView             : "1.2.4",
+
+            percentImageView      : "1.0.2",
+
+            floatingactionbutton  : "1.10.1",
+
+            flowlayout            : "1.1.2",
+
+            spinKit               : "1.4.0",
+
+            pictureSelector       : "v2.3.1",
+
+            navigationtabstrip    : "1.0.4",
+
+            persistentCookieJar   : "v1.0.1",
+
+            arouterApi            : "1.5.0",
+            arouterCompiler       : "1.2.2",
+
+    ]
+
+    dependencies = [
+            supportV4             : "com.android.support:support-v4:${versions.support}",
+            appcompat             : "androidx.appcompat:appcompat:${versions.support}",
+            material              : "com.google.android.material:material:${versions.support}",
+            annotations           : "com.android.support:support-annotations:${versions.support}",
+
+            constraint            : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+
+            androidx              : "androidx.core:core:${versions.androidx}",
+            legacy                : 'androidx.legacy:legacy-support-v4:1.0.0',
+            multidex              : "androidx.multidex:multidex:${versions.multidex}",
+
+            rxpermissions         : "com.github.tbruyelle:rxpermissions:${versions.rxpermissions}",
+
+            //栗子动画引入step2：ParticleView
+            //implementation 'me.wangyuwei:ParticleView:1.0.4'
+            particleView          : "me.wangyuwei:ParticleView:${versions.particleView}",
+
+            recyclerview          : "androidx.recyclerview:recyclerview:${versions.recyclerview}",
+            cardview              : "androidx.cardview:cardview:${versions.cardview}",
+
+            //仿IOS的Android的弹出框
+            alertview             : "com.bigkoo:alertview:${versions.alertview}",
+
+            /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
+//            loggingInterceptor     : "com.github.ihsanbal:LoggingInterceptor:${versions.loggingInterceptor}" {
+//                exclude group: 'org.json', module: 'json'
+//            },
+
+//            loggingInterceptor     : "com.github.ihsanbal:LoggingInterceptor:${versions.loggingInterceptor}{\n" +
+//                    "                exclude group: 'org.json', module: 'json'\n" +
+//                    "            }" ,
+
+
+            gson                  : "com.google.code.gson:gson:$versions.gson",
+            okhttp                : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
+
+            retrofit              : [
+                    core           : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
+                    converter_gson : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
+                    mock           : "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}",
+                    scalars        : "com.squareup.retrofit2:converter-scalars:${versions.retrofit}",
+                    moshi          : "com.squareup.retrofit2:converter-moshi:${versions.retrofit}",
+                    protobuf       : "com.squareup.retrofit2:converter-protobuf:${versions.retrofit}",
+                    adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
+            ],
+            rxjava                : 'io.reactivex.rxjava2:rxjava:2.2.10',
+            rxandroid             : 'io.reactivex.rxjava2:rxandroid:2.1.1',
+
+            /*基于的 Android WebViewInterface(1必选 2,3可选)*/
+            agentweb              : [
+                    agentweb   : "com.just.agentweb:agentweb:${versions.agentweb}",
+                    filechooser: "com.just.agentweb:filechooser:${versions.agentweb}",
+                    download   : "com.download.library:Downloader:${versions.agentweb}"
+            ],
+
+            butterknife           : "com.jakewharton:butterknife:$versions.butterknife",
+            butterknifeCompiler   : "com.jakewharton:butterknife-compiler:$versions.butterknife",
+
+            /*GreenDao*/
+            //gradle:3.2.1升级到gradle:4.0.1报错,修改greendao-gradle-plugin:3.3.0就解决
+            greendao              : "org.greenrobot:greendao:${versions.greendao}",
+
+            /*事件总线*/
+            eventbus              : "org.greenrobot:eventbus:$versions.eventbus",
+
+            bravh2X               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh2X",
+//            bravh3X               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh3X",
+
+            smartRefreshLayout    : "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout",
+            //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
+            smartRefreshHeader    : "com.scwang.smartrefresh:SmartRefreshHeader:${versions.smartRefreshLayout}",
+            smartRefreshHorizontal: "com.scwang.smartrefresh:SmartRefreshHorizontal:$versions.smartRefreshHorizontal",
+
+            //侧滑菜单
+            swipelayout           : "com.daimajia.swipelayout:library:$versions.swipelayout",
+
+            glide                 : "com.github.bumptech.glide:glide:$versions.glide",
+            glideCompiler         : "com.github.bumptech.glide:compiler:$versions.glideCompiler",
+            //glide样式（圆角、圆、毛玻璃）
+            glide_transformations : 'jp.wasabeef:glide-transformations:3.0.1',
+//            nopermission           : 'ru.alexbykov:nopermission:1.1.',
+
+            roundedimageview      : "com.makeramen:roundedimageview:$versions.roundedimageview",
+            circleimageview       : "de.hdodenhof:circleimageview:$versions.circleimageview",
+            photoView             : "com.github.chrisbanes.photoview:library:${versions.photoView}",
+
+            /*自由指定宽高比的ImageView*/
+            percentImageView      : "com.github.goweii:PercentImageView:$versions.percentImageView",
+
+            /*floatingactionbutton MD悬浮按钮菜单版*/
+            floatingactionbutton  : "com.getbase:floatingactionbutton:${versions.floatingactionbutton}",
+
+            /*flowlayout 流式标签*/
+            flowlayout            : "com.hyman:flowlayout-lib:${versions.flowlayout}",
+
+            ///*loading loading加载动画*/
+            spinKit               : "com.github.ybq:Android-SpinKit:${versions.spinKit}",
+
+            /*NavigationTabStrip 带动画的顶部导航*/
+            navigationtabstrip    : "com.github.devlight.navigationtabstrip:navigationtabstrip:${versions.navigationtabstrip}",
+
+            //图片选择器
+            pictureSelector       : "com.github.goweii:PictureSelector:${versions.pictureSelector}",
+
+            /*Android PersistentCookieJar  持久化Cookie*/
+            persistentCookieJar   : "com.github.franmontiel:PersistentCookieJar:$versions.persistentCookieJar",
+
+            //ARouter路由
+            //替换成最新版本, 需要注意的是api
+            //要与compiler匹配使用，均使用最新版可以保证兼容
+            //compile 'com.alibaba:arouter-api:x.x.x'
+            //annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
+            arouterApi            : "com.alibaba:arouter-api:$versions.arouterApi",
+            arouterCompiler       : "com.alibaba:arouter-compiler:$versions.arouterCompiler",
+
+    ]
+
+}

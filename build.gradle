@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "config.gradle"
 
 buildscript {
     ext.kotlin_version = '1.4.0'
@@ -33,4 +34,25 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+//构建时自动生成版本号 https://blog.csdn.net/superviser3000/article/details/106418728
+//android的版本号分为version Nubmer和version Name，我们可以把版本定义为 versionMajor.versionMinor.versionBuildNumber，
+// 其中versionMajor和versionMinor自己定义，versionBuildNumber可以从环境变量获取。
+
+// 主版本
+ext.versionMajor = 1
+// 次版本
+ext.versionMinor = 0
+
+// 主版本号.次版本号.编译序列号
+def computeVersionName() {
+    // Basic <major>.<minor> version name
+    return String.format('%d.%d.%d', versionMajor, versionMinor, Integer.valueOf(System.env.BUILD_NUMBER ?: 0))
+}
+
+// Will return 100042 for Jenkins build #42
+def computeVersionCode() {
+    // Major + minor + Jenkins build number (where available)
+    return (versionMajor * 100000) + (versionMinor * 10000) + Integer.valueOf(System.env.BUILD_NUMBER ?: 0)
 }

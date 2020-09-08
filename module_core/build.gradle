@@ -32,71 +32,145 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    configurations {
+        ////这里要排除到这个包，这个包会与 com.google.guava 冲突，导致编译不过
+        //com.google.guava:listenablefuture 与 com.google.guava 冲突 下面非全局排除未生效
+        all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+//    implementation fileTree(dir: "libs", include: ["*.jar"])
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    implementation 'androidx.core:core-ktx:1.3.1'
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.code.gson:gson:2.8.6'
+//    testImplementation 'junit:junit:4.13'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//
+//    //ButterKnife
+//    implementation 'com.jakewharton:butterknife:10.1.0'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+//    implementation 'com.google.android.material:material:1.1.0'
+//
+//    /*事件总线*/
+//    implementation 'org.greenrobot:eventbus:3.1.1'
+//
+//    implementation 'androidx.multidex:multidex:2.0.1'
+//
+//    //ARouter路由
+//    //// 替换成最新版本, 需要注意的是api
+//    //    // 要与compiler匹配使用，均使用最新版可以保证兼容
+//    //    compile 'com.alibaba:arouter-api:x.x.x'
+//    //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
+//    implementation 'com.alibaba:arouter-api:1.5.0'
+//    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+//
+//    /*SmartRefreshLayout 下拉加载刷新*/
+//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+//
+//    //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
+//    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+//
+//    //栗子动画引入step2：ParticleView
+//    implementation 'me.wangyuwei:ParticleView:1.0.4'
+//
+//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+//    implementation 'com.github.bumptech.glide:glide:4.9.0'
+//    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+//
+//    /*基于的 Android WebViewInterface(必选)*/
+//    implementation 'com.just.agentweb:agentweb:4.1.2'
+//
+//    // (可选)
+//    implementation 'com.just.agentweb:filechooser:4.1.2'
+//
+//    // (可选)
+//    implementation 'com.download.library:Downloader:4.1.2'
+//
+//    /*Android PersistentCookieJar  持久化Cookie*/
+//    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+//
+//    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
+//    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+//    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
+
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'ru.alexbykov:nopermission:1.1.2'
+    /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
+    implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation "androidx.core:core-ktx:1.3.1"
 
-    //ButterKnife
-    implementation 'com.jakewharton:butterknife:10.1.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    implementation 'com.google.android.material:material:1.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    /*事件总线*/
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
-    implementation 'androidx.multidex:multidex:2.0.1'
-
-    //ARouter路由
-    //// 替换成最新版本, 需要注意的是api
-    //    // 要与compiler匹配使用，均使用最新版可以保证兼容
-    //    compile 'com.alibaba:arouter-api:x.x.x'
-    //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
-    implementation 'com.alibaba:arouter-api:1.5.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
-    /*SmartRefreshLayout 下拉加载刷新*/
-    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
-
-    //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
-    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
-
-    //栗子动画引入step2：ParticleView
-    implementation 'me.wangyuwei:ParticleView:1.0.4'
-
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-
-    /*基于的 Android WebViewInterface(必选)*/
-    implementation 'com.just.agentweb:agentweb:4.1.2'
-
-    // (可选)
-    implementation 'com.just.agentweb:filechooser:4.1.2'
-
-    // (可选)
-    implementation 'com.download.library:Downloader:4.1.2'
-
-    /*Android PersistentCookieJar  持久化Cookie*/
-    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-
-    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
-    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+    implementation rootProject.ext.dependencies.supportV4
+    implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.material
+    implementation rootProject.ext.dependencies.annotations
+    implementation rootProject.ext.dependencies.constraint
+    implementation rootProject.ext.dependencies.androidx
+    implementation rootProject.ext.dependencies.legacy
+    implementation rootProject.ext.dependencies.androidx
+    implementation rootProject.ext.dependencies.multidex
+    implementation rootProject.ext.dependencies.rxpermissions
+    implementation rootProject.ext.dependencies.particleView
+    implementation rootProject.ext.dependencies.recyclerview
+    implementation rootProject.ext.dependencies.cardview
+    implementation rootProject.ext.dependencies.alertview
+//    implementation rootProject.ext.dependencies.loggingInterceptor
+    implementation rootProject.ext.dependencies.gson
+    implementation rootProject.ext.dependencies.okhttp
+    implementation rootProject.ext.dependencies.retrofit.core
+    implementation rootProject.ext.dependencies.retrofit.converter_gson
+    implementation rootProject.ext.dependencies.retrofit.adapter_rxjava2
+    implementation rootProject.ext.dependencies.rxjava
+    implementation rootProject.ext.dependencies.rxandroid
+    implementation rootProject.ext.dependencies.agentweb.agentweb
+    implementation rootProject.ext.dependencies.agentweb.filechooser
+    implementation rootProject.ext.dependencies.agentweb.download
+    implementation rootProject.ext.dependencies.butterknife
+//    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+    kapt rootProject.ext.dependencies.butterknifeCompiler
+    implementation rootProject.ext.dependencies.greendao
+    implementation rootProject.ext.dependencies.eventbus
+    implementation rootProject.ext.dependencies.bravh2X
+//    implementation rootProject.ext.dependencies.bravh3X
+    implementation rootProject.ext.dependencies.smartRefreshLayout
+    implementation rootProject.ext.dependencies.smartRefreshHeader
+    implementation rootProject.ext.dependencies.swipelayout
+    implementation rootProject.ext.dependencies.glide
+    implementation rootProject.ext.dependencies.glideCompiler
+    implementation rootProject.ext.dependencies.glide_transformations
+//    implementation rootProject.ext.dependencies.nopermission
+    implementation rootProject.ext.dependencies.roundedimageview
+    implementation rootProject.ext.dependencies.circleimageview
+    implementation rootProject.ext.dependencies.photoView
+    implementation rootProject.ext.dependencies.percentImageView
+    implementation rootProject.ext.dependencies.floatingactionbutton
+    implementation rootProject.ext.dependencies.flowlayout
+    implementation rootProject.ext.dependencies.spinKit
+    implementation rootProject.ext.dependencies.navigationtabstrip
+    implementation rootProject.ext.dependencies.pictureSelector
+    implementation rootProject.ext.dependencies.persistentCookieJar
+    implementation rootProject.ext.dependencies.arouterApi
+    implementation rootProject.ext.dependencies.arouterCompiler
 
 }
