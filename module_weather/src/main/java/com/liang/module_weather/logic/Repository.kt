@@ -14,6 +14,7 @@ import kotlin.coroutines.CoroutineContext
 /**
  * 创建日期: 2020/8/26 on 4:23 PM
  * 描述: Repository单例类 仓库层的统一封装入口
+ * 协程：协程是一种轻量级的线程的概念
  * 作者: 杨亮
  */
 object Repository {
@@ -32,7 +33,7 @@ object Repository {
      * 然后在它的代码块中提供一个挂起函数的上下文，这样就可以在liveData()函数中调用任意的挂起函数了。
      * 3、注意，这里将liveData()函数的线程参数类型指定为Dispatchers.IO，这样代码块中的所有代码就都运行在子线程中了;
      * 4*、注意，因为使用了协程来简化网络回调的写法，导致WeatherNetwork中封装的每个网络请求接口都有可能会抛出异常，
-     * 于是，我们在仓库层中为每个网络请求都进行try-catch处理
+     * 于是，我们在仓库层中为每个网络请求都进行try-catch处理。
      */
 //    fun searchPlaces(query: String) = liveData<Result<List<Place>>>(Dispatchers.IO) {
 //        val result: Result<List<Place>> = try {
@@ -103,16 +104,33 @@ object Repository {
 //    }
 
     fun refreshWeather(lng: String, lat: String) = fire(Dispatchers.IO) {
+        //suspend关键字只能将一个函数声明成挂起函数，是无法给它提供协程作用域的；这个问题可以借助coroutineScope函数来解决；
+        //coroutineScope函数也是一个挂起函数，因此可以在任何其他挂起函数中调用，
+        //1、它的特点是会继承外部的协程作用域并创建一个子作用域，
+        //借助这个特性，我们就可以给任意挂起函数提供协程作用域了。
+        //2、coroutineScope函数和runBlocking函数还有点类似，它可以保证其作用域内的所有代码和子协程在全部执行完之前，会一直阻塞当前协程。
+        //即：只有当coroutineScope作用域内的所有代码和子协程都执行完毕之后，coroutineScope函数之后的代码才能得到运行。
+        //3、coroutineScope函数只会阻塞当前协程，既不影响其他协程，也不影响任何线程，因此是不会造成任何性能上的问题的。
+        //而runBlocking函数会阻塞当前线程，而如果你又恰好在主线程中调用它的话，那么就有可能会导致界面卡死的情况，所以不推荐在实际项目中使用。
         coroutineScope {
             val deferredRealtime = async {
                 WeatherNetwork.getRealtimeWeather(lng, lat)
             }
 
             val deferredDaily = async {
+                //创建一个协程，并获取它的执行结果 ---> async函数
+                //1、async函数必须在协程作用域内才能调用，它会创建一个新的子协程并返回一个Deferred对象；
+                //2、如果我们想要获取async函数代码块中的执行结果，只需要调用Deferred对象的await()方法即可。
                 WeatherNetwork.getDailyWeather(lng, lat)
             }
 
+            //2、如果我们想要获取async函数代码块中的执行结果，只需要调用Deferred对象的await()方法即可。
+            //3、在调用了async函数之后，代码块中的代码就会立刻开始执行，当调用await()方法时，如果代码块中的代码还没有执行完，
+            // 那么await()方法会将当前协程阻塞住，知道可以获得async函数的执行结果
             val realtimeResponse = deferredRealtime.await()
+
+
+            //4、仅在需要用到async函数执行结果时才调用await()方法获取结果，这样两个async函数就变成一种并行的关系了，从而提高运行效率。
             val dailyResponse = deferredDaily.await()
 
             //在同时获取到RealtimeResponse和DailyResponse之后，判断响应状态
@@ -129,7 +147,7 @@ object Repository {
     }
 
     /**
-     * 可以在某个统一的入口函数中进行封装，使得只要进行一次try-catch处理就行了
+     * 可以在某个统一的入口函数中进行封装，使得只要进行一次try-catch处理就行了。
      * 新增fire()函数，这是一个按照liveData()函数的参数接收标准定义的一个高阶函数；
      * 在fire()函数内部，会先调用一下liveData()函数，然后在liveData()函数的代码块中统一进行了try-catch处理，
      * 并在try语句中调用传入的Lambda表达式中的代码，最终获取Lambda表达式的执行结果并调用emit()方法发射出去。
