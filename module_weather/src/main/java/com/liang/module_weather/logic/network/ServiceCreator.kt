@@ -32,6 +32,7 @@ object ServiceCreator {
         client.build();
     }
 
+    //1、使用private修饰符来声明，相当于对外部而言它们都是不可见的
     private val retrofit = Retrofit.Builder()
             .baseUrl(WEATHER_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -43,11 +44,17 @@ object ServiceCreator {
 //        return retrofit.create(serviceClass)
 //    }
 
+    //2、最后，提供一个外部可见的create()方法，并接收一个Class类型的参数
+    //当外部调用这个方法时，实际上就是调用了Retrofit对象的create()方法，从而创建出相应Service接口的动态代理对象
     fun <T> create(serviceClass: Class<T>): T = retrofit.create(serviceClass)
 
 //    inline fun <reified T> create(): T {
 //        return create(T::class.java)
 //    }
 
+    //3、优化：泛型实化功能：
+    //a、定义一个不带参数的create()方法，并使用inline关键字来修饰方法；
+    //b、使用reified具体化关键字来修饰泛型，这是泛型实化的两大前提条件；
+    //c、接下来就可以使用T::class.java这种语法了，这里调用刚才2中定义的带有Class参数的create()方法即可
     inline fun <reified T> create(): T = create(T::class.java)
 }

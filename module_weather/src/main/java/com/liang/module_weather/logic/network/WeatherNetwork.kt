@@ -18,7 +18,9 @@ import kotlin.coroutines.suspendCoroutine
 object WeatherNetwork {
 
     //1、使用ServiceCreator创建了一个PlaceService接口的动态代理对象
-    private val placeService = ServiceCreator.create(PlaceService::class.java)
+//    private val placeService = ServiceCreator.create(PlaceService::class.java)
+    //泛型实化
+    private val placeService = ServiceCreator.create<PlaceService>()
 
     /**
      * 当外部调用WeatherNetwork的searchPlaces()函数时，
