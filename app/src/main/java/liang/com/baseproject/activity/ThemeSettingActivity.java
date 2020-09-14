@@ -6,7 +6,6 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.cardview.widget.CardView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -14,18 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
+
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.SPUtils;
+import com.liang.module_core.utils.SettingUtils;
+import com.liang.module_core.widget.CustomRadioGroup;
+import com.liang.module_core.widget.SearchEditText;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
-import com.liang.module_core.mvp.MVPBaseActivity;
-import com.liang.module_core.mvp.MVPBasePresenter;
-import com.liang.module_core.utils.SPUtils;
-import com.liang.module_core.utils.SettingUtils;
-import com.liang.module_core.widget.SearchEditText;
-
-import com.liang.module_core.widget.CustomRadioGroup;
 
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLACK;
 import static liang.com.baseproject.Constant.Constant.ACTIONBAR_COLOR_BLUE;
@@ -230,30 +231,52 @@ public class ThemeSettingActivity extends MVPBaseActivity implements CustomRadio
             case R.id.card_night_mode:
                 SettingUtils.getInstance().setDarkTheme(true);
                 MyApplication.setDarkModeStatus();
-                //Recreate所有Activity
-                MyApplication.recreate();
-
-//                ThemeSettingActivity.actionStart(ThemeSettingActivity.this);
-//                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//                finish();
-
 
                 initDayNightMode();
                 baseActionBar.setBackgroundColor(Color.BLACK);
 
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Recreate所有Activity
+                        MyApplication.recreate();
+
+                        //方式1: 直接退出当前Activity - 最佳实现方案
+                        MainHomeActivity.actionStart(ThemeSettingActivity.this);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+
+//                        //方式2: 使用recreate()方法重启Activity(会有闪屏问题)
+//                        recreate();
+
+                        //方式3: 不掉用recreate()方法，而是自己重启当前activity并为activity设置启动和退出动画即可,但是仅仅这样的话主界面MainHomeActivity没有产生效果,
+                        //需要发送一个广播通知MainHomeActivity->重启
+                        //Activity切换动画,必须在 StartActivity()  或 finish() 之后立即调用
+//                        AppSettingActivity.actionStart(AppSettingActivity.this);
+//                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+//                        finish();
+                    }
+                }, 300);
                 break;
+
             case R.id.card_day_mode:
                 SettingUtils.getInstance().setDarkTheme(false);
                 MyApplication.setDarkModeStatus();
-                //Recreate所有Activity
-                MyApplication.recreate();
 
                 initDayNightMode();
                 initBarColorStyle();
 
-//                ThemeSettingActivity.actionStart(ThemeSettingActivity.this);
-//                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-//                finish();
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Recreate所有Activity
+                        MyApplication.recreate();
+                        ThemeSettingActivity.actionStart(ThemeSettingActivity.this);
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                        finish();
+                    }
+                }, 300);
+
                 break;
 
             default:

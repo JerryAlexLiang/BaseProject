@@ -4,10 +4,12 @@ package liang.com.baseproject.home.fragment;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +37,9 @@ import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
+import liang.com.baseproject.entity.HomeFunctionBean;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
+import liang.com.baseproject.home.adapter.HomeFunctionContainerAdapter;
 import liang.com.baseproject.home.entity.ArticleBean;
 import liang.com.baseproject.home.entity.ArticleHomeBannerBean;
 import liang.com.baseproject.home.entity.HomeBean;
@@ -69,7 +73,9 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     private boolean setRefreshFooter;
 
     private List<ArticleHomeBannerBean> mBannerData;
-    private View banner;
+    private HomeFunctionContainerAdapter functionContainerAdapter;
+    private List<HomeFunctionBean> functionBeanList;
+    private RecyclerView rvHomeFunctionContainer;
 
     public HomeContainerFragment() {
         // Required empty public constructor
@@ -100,18 +106,29 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     }
 
     private void initHeader() {
-        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.layout_article_home_banner_header, null);
-        convenientBanner = (ConvenientBanner) headerView.findViewById(R.id.convenient_banner);
         //添加头部
-//        View headerView = getLayoutInflater().inflate(R.layout.core_layout_web_error, null);
-//        headerView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-//        homeContainerAdapter.addHeaderView(convenientBanner);
-        homeContainerAdapter.addHeaderView(headerView);
+        initHeader1();
+        initHeader2();
         //默认出现了头部就不会显示Empty，和尾部  配置以下方法也支持同时显示setHeaderAndEmpty  setHeaderFooterEmpty
         homeContainerAdapter.setHeaderAndEmpty(true);
     }
 
+    private void initHeader1() {
+        View headerView = LayoutInflater.from(getContext()).inflate(R.layout.layout_article_home_banner_header, null);
+        convenientBanner = (ConvenientBanner) headerView.findViewById(R.id.convenient_banner);
+        homeContainerAdapter.addHeaderView(headerView);
+    }
+
+    private void initHeader2() {
+        View headerView2 = LayoutInflater.from(getContext()).inflate(R.layout.layout_home_function_container, null);
+        rvHomeFunctionContainer = (RecyclerView) headerView2.findViewById(R.id.rv_home_function_container);
+        headerView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        homeContainerAdapter.addHeaderView(headerView2);
+    }
+
     private void initBanner() {
+        //加载FunctionContainer数据
+        initHeader2Data();
         //自定义你的Holder，实现更多复杂的界面，不一定是图片翻页，其他任何控件翻页亦可。
         convenientBanner.setPages(
                 new CBViewHolderCreator() {
@@ -128,6 +145,25 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
                 //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
                 .setPageIndicator(new int[]{R.drawable.shape_banner_indicator_pressed, R.drawable.shape_banner_indicator_normal})
                 .setOnItemClickListener(this);
+    }
+
+    private void initHeader2Data() {
+        functionBeanList.clear();
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
+        rvHomeFunctionContainer.setLayoutManager(gridLayoutManager);
+        functionContainerAdapter = new HomeFunctionContainerAdapter();
+        rvHomeFunctionContainer.setAdapter(functionContainerAdapter);
+
+        HomeFunctionBean bean1 = new HomeFunctionBean(0, R.drawable.icon_submit, "天气");
+        HomeFunctionBean bean2 = new HomeFunctionBean(1, R.drawable.ic_calendar_black_19dp, "日历");
+        HomeFunctionBean bean3 = new HomeFunctionBean(2, R.drawable.im_hover_bzfamily, "日历");
+        HomeFunctionBean bean4 = new HomeFunctionBean(3, R.drawable.icon_function_more, "更多");
+        functionBeanList.add(bean1);
+        functionBeanList.add(bean2);
+        functionBeanList.add(bean3);
+        functionBeanList.add(bean4);
+        functionContainerAdapter.addData(functionBeanList);
     }
 
     @Override
@@ -246,7 +282,10 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         if (convenientBanner != null) {
             convenientBanner.startTurning();
         }
-
+        //加载FunctionContainer数据
+        if (functionBeanList != null) {
+            initHeader2Data();
+        }
     }
 
     @Override
@@ -271,15 +310,12 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         LogUtil.d(TAG, "执行onDestroy()");
     }
 
-    private HomeBean homeBeanData = null;
-
     @Override
     public void onGetArticleListSuccess(HomeBean data) {
 
         if (data.getDatas() == null) {
             homeContainerAdapter.setEmptyView(R.layout.rl_empty_container_view);
         }
-
 
         LogUtil.d(TAG, "数据: ===>" + JsonFormatUtils.format(new Gson().toJson(data.getDatas())));
         LogUtil.e(TAG, "当前数据源: " + " page= " + currPage);
@@ -330,12 +366,14 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         if (mBannerData == null) {
             mBannerData = new ArrayList<>();
         }
+        if (functionBeanList == null) {
+            functionBeanList = new ArrayList<>();
+        }
+
         mBannerData.clear();
         mBannerData.addAll(data);
 
-        if (banner == null) {
-            initBanner();
-        }
+        initBanner();
     }
 
     @Override
@@ -369,5 +407,4 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         homeContainerAdapter.setEmptyView(errorView);
         LogUtil.d(TAG, content);
     }
-
 }
