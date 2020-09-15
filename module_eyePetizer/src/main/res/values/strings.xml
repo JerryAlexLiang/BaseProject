@@ -1,0 +1,9 @@
+<resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="slogan">- Your contribution is highly appreciated! -</string>
+    <string name="slogan_two">Daily appetizersfor your eyes. Bon eyepétit.</string>
+    <string name="slogan_description">让每一个人都开眼，开了又开。</string>
+    <string name="slogan_description_two">每日精选视频推介，让你大开眼界。</string>
+</resources>

@@ -11,4 +11,7 @@ public class AppRouter {
 
     //天气模块
     public static final String MODULE_WEATHER_PATH = "/weather/WeatherActivity";
+
+    //开眼视频模块
+    public static final String MODULE_EYE_PETIZER = "/eye/EyePetizerActivity";
 }

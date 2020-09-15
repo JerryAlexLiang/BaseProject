@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:clipToPadding="false"
+    android:elevation="2dp"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <!--app:contentScrim="?attr/colorPrimary"
+        app:statusBarScrim="?attr/colorPrimary"
+        app:collapsedTitleGravity="center"
+        app:expandedTitleGravity="center"
+        app:titleEnabled="false" 即不显示CollapsingToolbarLayout的title
+        设置toolbar背景颜色,如果设置状态栏透明的话，状态栏会跟toolbar颜色一致
+        app:contentScrim="@color/colorPrimaryDark"
+        设置合并之后的状态栏的颜色,如果设置状态栏透明，则此属性失效
+        app:statusBarScrim="@color/colorAccent"
+
+        设置滑动的一些属性
+        第一种，滑动到顶部的时候，toolbar 会固定在上方
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        第二种，滑动到顶部的时候，toolbar 会一直往上滑直到隐藏掉
+        app:layout_scrollFlags="scroll|enterAlways"
+        -->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:collapsedTitleTextAppearance="@style/CollapsedCollapsingToolbarTitle"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@style/ExpandedCollapsingToolbarTitle"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:statusBarScrim="?attr/colorPrimary">
+
+            <include layout="@layout/core_layout_base_toolbar_default" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smart_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:srlEnablePreviewInEditMode="true"
+        tools:showIn="@layout/core_layout_coordinator">
+
+        <!--        android:background="@color/surface"-->
+        <RelativeLayout
+            android:id="@+id/rl_recycler_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:scrollbars="vertical" />
+        </RelativeLayout>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

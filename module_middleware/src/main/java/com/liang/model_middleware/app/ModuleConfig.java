@@ -8,9 +8,11 @@ package com.liang.model_middleware.app;
 public interface ModuleConfig {
 
     static final String MODULE_WEATHER = "com.liang.module_weather";
+    static final String MODULE_EYEPETIZER = "com.liang.module_eyepetizer";
 
     public static final String[] MODULE_LIST = {
             MODULE_WEATHER,
+            MODULE_EYEPETIZER
     };
 
 }

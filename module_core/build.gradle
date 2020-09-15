@@ -126,7 +126,6 @@ dependencies {
     implementation rootProject.ext.dependencies.material
     implementation rootProject.ext.dependencies.annotations
     implementation rootProject.ext.dependencies.constraint
-    implementation rootProject.ext.dependencies.androidx
     implementation rootProject.ext.dependencies.legacy
     implementation rootProject.ext.dependencies.androidx
     implementation rootProject.ext.dependencies.multidex
@@ -171,6 +170,15 @@ dependencies {
     implementation rootProject.ext.dependencies.pictureSelector
     implementation rootProject.ext.dependencies.persistentCookieJar
     implementation rootProject.ext.dependencies.arouterApi
-    implementation rootProject.ext.dependencies.arouterCompiler
+    annotationProcessor rootProject.ext.dependencies.arouterCompiler
+
+    implementation rootProject.ext.dependencies.flycoTabLayoutLib
+
+    //Android Jetpack 组件
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.work:work-runtime:2.3.4'
+    
 
 }

@@ -86,8 +86,16 @@ ext {
             arouterApi            : "1.5.0",
             arouterCompiler       : "1.2.2",
 
-            convenientBanner      : "2.1.5"
+            convenientBanner      : "2.1.5",
 
+            viewpager2            : "1.0.0",
+
+            permissionx           : "1.2.2",
+
+            gsyVideoPlayer        : "7.1.3",
+
+            //implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+            flycoTabLayoutLib     : "2.1.2@aar"
     ]
 
     dependencies = [
@@ -207,8 +215,15 @@ ext {
             arouterCompiler       : "com.alibaba:arouter-compiler:$versions.arouterCompiler",
 
             //通用的广告栏控件
-            convenientBanner      : "com.bigkoo:convenientbanner:${versions.convenientBanner}"
+            convenientBanner      : "com.bigkoo:convenientbanner:${versions.convenientBanner}",
 
+            viewpager2            : "androidx.viewpager2:viewpager2:${versions.viewpager2}",
+
+            permissionx           : "com.permissionx.guolindev:permissionx:${versions.permissionx}",
+
+            gsyVideoPlayer        : "com.shuyu:GSYVideoPlayer:${versions.gsyVideoPlayer}",
+
+            flycoTabLayoutLib     : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions.flycoTabLayoutLib}"
     ]
 
 }

@@ -3,6 +3,7 @@ package com.liang.model_middleware.impl;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.liang.model_middleware.router.AppRouter;
 import com.liang.model_middleware.service.DatePickerService;
+import com.liang.model_middleware.service.EyeModuleService;
 import com.liang.model_middleware.service.WeatherModuleService;
 
 /**
@@ -29,4 +30,11 @@ public class ServiceProvider {
         return (WeatherModuleService) ARouter.getInstance().build(AppRouter.MODULE_WEATHER_PATH).navigation();
     }
 
+    /**
+     * 获取Module_EyePetizer的Service
+     */
+    public static EyeModuleService getEyeModuleService() {
+        //使用依赖查找的方法发现服务，主动去发现服务并使用
+        return (EyeModuleService) ARouter.getInstance().build(AppRouter.MODULE_EYE_PETIZER).navigation();
+    }
 } 

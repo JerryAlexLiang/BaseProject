@@ -1,3 +1,4 @@
+include ':module_eyePetizer'
 include ':module_core'
 include ':module_weather'
 include ':module_middleware'

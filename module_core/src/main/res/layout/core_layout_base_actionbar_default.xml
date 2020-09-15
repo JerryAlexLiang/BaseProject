@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/base_actionbar"
     android:layout_width="match_parent"
@@ -82,9 +83,27 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_weight="3"
-            android:textColor="@color/text_second"
             android:background="@drawable/shape_search_view_bg"
+            android:textColor="@color/text_second"
             android:visibility="gone" />
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/commonTabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"
+            app:tl_iconVisible="false"
+            app:tl_indicator_bounce_enable="false"
+            app:tl_indicator_color="@color/red"
+            app:tl_indicator_height="3dp"
+            app:tl_indicator_margin_bottom="3dp"
+            app:tl_indicator_width="10dp"
+            app:tl_tab_width="66dp"
+            app:tl_textBold="BOTH"
+            app:tl_textSelectColor="@color/red"
+            app:tl_textUnselectColor="@color/text_surface"
+            app:tl_textsize="12sp" />
 
         <RelativeLayout
             android:layout_width="0dp"

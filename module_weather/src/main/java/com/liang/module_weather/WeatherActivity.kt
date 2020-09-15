@@ -3,7 +3,6 @@ package com.liang.module_weather
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.alibaba.android.arouter.launcher.ARouter
 import com.liang.module_core.jetpack.JetPackActivity
 import com.liang.module_core.mvp.MVPBasePresenter
 import com.liang.module_core.utils.ToastUtil
@@ -28,7 +27,7 @@ class WeatherActivity : JetPackActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_weather)
-        ARouter.getInstance().inject(this)
+//        ARouter.getInstance().inject(this)
         if (WeatherApplication.WEATHER_API_TOKEN.isEmpty()) {
             ToastUtil.onShowErrorToast(this, "请在WeatherApplication中填入你申请到的令牌值")
             finish()

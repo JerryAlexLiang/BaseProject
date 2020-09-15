@@ -75,7 +75,8 @@ public class HomeFunctionContainerAdapter extends BaseQuickAdapter<HomeFunctionB
                         break;
 
                     case 2:
-                        ToastUtil.showShortToast("主题");
+                        ToastUtil.showShortToast("开眼Video");
+                        ServiceProvider.getEyeModuleService().startEyePetizerActivity(mContext);
                         break;
 
                     case 3:
