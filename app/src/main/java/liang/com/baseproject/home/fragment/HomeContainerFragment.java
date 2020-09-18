@@ -66,8 +66,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-    //        private static final int PAGE_START = 376;
-    private static final int PAGE_START = 0;
+            private static final int PAGE_START = 460;
+//    private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
     private boolean setRefreshFooter;

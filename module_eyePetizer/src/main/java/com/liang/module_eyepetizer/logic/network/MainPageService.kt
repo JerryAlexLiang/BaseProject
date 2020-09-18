@@ -1,9 +1,9 @@
 package com.liang.module_eyepetizer.logic.network
 
-import com.liang.module_eyepetizer.logic.model.EyeHomeCommendResponse
-import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Url
+//import com.liang.module_eyepetizer.logic.model.EyeHomeCommendResponse
+//import retrofit2.Call
+//import retrofit2.http.GET
+//import retrofit2.http.Url
 
 /**
  * 创建日期: 2020/9/15 on 7:10 PM
@@ -11,10 +11,10 @@ import retrofit2.http.Url
  * 作者: 杨亮
  */
 interface MainPageService {
-
-    /**
-     * 首页-推荐列表
-     */
-    @GET
-    fun fetchEyeHomeCommendData(@Url url: String): Call<EyeHomeCommendResponse>
+//
+//    /**
+//     * 首页-推荐列表
+//     */
+//    @GET
+//    fun fetchEyeHomeCommendData(@Url url: String): Call<EyeHomeCommendResponse>
 }

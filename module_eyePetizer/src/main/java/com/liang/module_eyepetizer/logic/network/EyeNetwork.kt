@@ -15,26 +15,26 @@ import kotlin.coroutines.suspendCoroutine
  */
 object EyeNetwork {
 
-    //1、泛型实化
-    private val mainPageService = EyeServiceCreator.create<MainPageService>()
-
-    //2、借助协程来简化代码，获取开眼首页推荐数据
-    suspend fun fetchEyeHomeCommendData(query:String) = mainPageService.fetchEyeHomeCommendData(query).await()
-
-    private suspend fun <T> Call<T>.await(): T {
-        return suspendCoroutine { continuation ->
-            enqueue(object : Callback<T> {
-                override fun onResponse(call: Call<T>, response: Response<T>) {
-                    val body = response.body()
-                    if (body != null) continuation.resume(body)
-                    else continuation.resumeWithException(RuntimeException("response body is null"))
-                }
-
-                override fun onFailure(call: Call<T>, t: Throwable) {
-                    continuation.resumeWithException(t)
-                }
-            })
-        }
-    }
+//    //1、泛型实化
+//    private val mainPageService = EyeServiceCreator.create<MainPageService>()
+//
+//    //2、借助协程来简化代码，获取开眼首页推荐数据
+//    suspend fun fetchEyeHomeCommendData(query:String) = mainPageService.fetchEyeHomeCommendData(query).await()
+//
+//    private suspend fun <T> Call<T>.await(): T {
+//        return suspendCoroutine { continuation ->
+//            enqueue(object : Callback<T> {
+//                override fun onResponse(call: Call<T>, response: Response<T>) {
+//                    val body = response.body()
+//                    if (body != null) continuation.resume(body)
+//                    else continuation.resumeWithException(RuntimeException("response body is null"))
+//                }
+//
+//                override fun onFailure(call: Call<T>, t: Throwable) {
+//                    continuation.resumeWithException(t)
+//                }
+//            })
+//        }
+//    }
 
 }
