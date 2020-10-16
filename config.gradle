@@ -21,6 +21,9 @@ ext {
     ]
 
     versions = [
+            //指定Anko库的版本号
+            anko_version          : "0.10.8",
+
             support               : "1.2.0",
             constraintLayout      : "2.0.1",
 
@@ -99,28 +102,31 @@ ext {
     ]
 
     dependencies = [
-            supportV4             : "com.android.support:support-v4:${versions.support}",
-            appcompat             : "androidx.appcompat:appcompat:${versions.support}",
-            material              : "com.google.android.material:material:${versions.support}",
-            annotations           : "com.android.support:support-annotations:${versions.support}",
+            //指定Anko库的版本号
+            "ankoVersion"           : "org.jetbrains.anko:anko-common:${versions.anko_version}",
 
-            constraint            : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
+            "supportV4"             : "com.android.support:support-v4:${versions.support}",
+            "appcompat"             : "androidx.appcompat:appcompat:${versions.support}",
+            "material"              : "com.google.android.material:material:${versions.support}",
+            "annotations"           : "com.android.support:support-annotations:${versions.support}",
 
-            androidx              : "androidx.core:core:${versions.androidx}",
-            legacy                : 'androidx.legacy:legacy-support-v4:1.0.0',
-            multidex              : "androidx.multidex:multidex:${versions.multidex}",
+            "constraint"            : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
 
-            rxpermissions         : "com.github.tbruyelle:rxpermissions:${versions.rxpermissions}",
+            "androidx"              : "androidx.core:core:${versions.androidx}",
+            "legacy"                : 'androidx.legacy:legacy-support-v4:1.0.0',
+            "multidex"              : "androidx.multidex:multidex:${versions.multidex}",
+
+            "rxpermissions"         : "com.github.tbruyelle:rxpermissions:${versions.rxpermissions}",
 
             //栗子动画引入step2：ParticleView
             //implementation 'me.wangyuwei:ParticleView:1.0.4'
-            particleView          : "me.wangyuwei:ParticleView:${versions.particleView}",
+            "particleView"          : "me.wangyuwei:ParticleView:${versions.particleView}",
 
-            recyclerview          : "androidx.recyclerview:recyclerview:${versions.recyclerview}",
-            cardview              : "androidx.cardview:cardview:${versions.cardview}",
+            "recyclerview"          : "androidx.recyclerview:recyclerview:${versions.recyclerview}",
+            "cardview"              : "androidx.cardview:cardview:${versions.cardview}",
 
             //仿IOS的Android的弹出框
-            alertview             : "com.bigkoo:alertview:${versions.alertview}",
+            "alertview"             : "com.bigkoo:alertview:${versions.alertview}",
 
             /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
 //            loggingInterceptor     : "com.github.ihsanbal:LoggingInterceptor:${versions.loggingInterceptor}" {
@@ -132,10 +138,10 @@ ext {
 //                    "            }" ,
 
 
-            gson                  : "com.google.code.gson:gson:$versions.gson",
-            okhttp                : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
+            "gson"                  : "com.google.code.gson:gson:$versions.gson",
+            "okhttp"                : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
 
-            retrofit              : [
+            "retrofit"              : [
                     core           : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
                     converter_gson : "com.squareup.retrofit2:converter-gson:${versions.retrofit}",
                     mock           : "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}",
@@ -144,86 +150,86 @@ ext {
                     protobuf       : "com.squareup.retrofit2:converter-protobuf:${versions.retrofit}",
                     adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
             ],
-            rxjava                : 'io.reactivex.rxjava2:rxjava:2.2.10',
-            rxandroid             : 'io.reactivex.rxjava2:rxandroid:2.1.1',
+            "rxjava"                : 'io.reactivex.rxjava2:rxjava:2.2.10',
+            "rxandroid"             : 'io.reactivex.rxjava2:rxandroid:2.1.1',
 
             /*基于的 Android WebViewInterface(1必选 2,3可选)*/
-            agentweb              : [
+            "agentweb"              : [
                     agentweb   : "com.just.agentweb:agentweb:${versions.agentweb}",
                     filechooser: "com.just.agentweb:filechooser:${versions.agentweb}",
                     download   : "com.download.library:Downloader:${versions.agentweb}"
             ],
 
-            butterknife           : "com.jakewharton:butterknife:$versions.butterknife",
-            butterknifeCompiler   : "com.jakewharton:butterknife-compiler:$versions.butterknife",
+            "butterknife"           : "com.jakewharton:butterknife:$versions.butterknife",
+            "butterknifeCompiler"   : "com.jakewharton:butterknife-compiler:$versions.butterknife",
 
             /*GreenDao*/
             //gradle:3.2.1升级到gradle:4.0.1报错,修改greendao-gradle-plugin:3.3.0就解决
-            greendao              : "org.greenrobot:greendao:${versions.greendao}",
+            "greendao"              : "org.greenrobot:greendao:${versions.greendao}",
 
             /*事件总线*/
-            eventbus              : "org.greenrobot:eventbus:$versions.eventbus",
+            "eventbus"              : "org.greenrobot:eventbus:$versions.eventbus",
 
-            bravh2X               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh2X",
+            "bravh2X"               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh2X",
 //            bravh3X               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh3X",
 
-            smartRefreshLayout    : "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout",
+            "smartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout",
             //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
-            smartRefreshHeader    : "com.scwang.smartrefresh:SmartRefreshHeader:${versions.smartRefreshLayout}",
-            smartRefreshHorizontal: "com.scwang.smartrefresh:SmartRefreshHorizontal:$versions.smartRefreshHorizontal",
+            "smartRefreshHeader"    : "com.scwang.smartrefresh:SmartRefreshHeader:${versions.smartRefreshLayout}",
+            "smartRefreshHorizontal": "com.scwang.smartrefresh:SmartRefreshHorizontal:$versions.smartRefreshHorizontal",
 
             //侧滑菜单
-            swipelayout           : "com.daimajia.swipelayout:library:$versions.swipelayout",
+            "swipelayout"           : "com.daimajia.swipelayout:library:$versions.swipelayout",
 
-            glide                 : "com.github.bumptech.glide:glide:$versions.glide",
-            glideCompiler         : "com.github.bumptech.glide:compiler:$versions.glideCompiler",
+            "glide"                 : "com.github.bumptech.glide:glide:$versions.glide",
+            "glideCompiler"         : "com.github.bumptech.glide:compiler:$versions.glideCompiler",
             //glide样式（圆角、圆、毛玻璃）
-            glide_transformations : 'jp.wasabeef:glide-transformations:3.0.1',
+            "glide_transformations" : 'jp.wasabeef:glide-transformations:3.0.1',
 //            nopermission           : 'ru.alexbykov:nopermission:1.1.',
 
-            roundedimageview      : "com.makeramen:roundedimageview:$versions.roundedimageview",
-            circleimageview       : "de.hdodenhof:circleimageview:$versions.circleimageview",
-            photoView             : "com.github.chrisbanes.photoview:library:${versions.photoView}",
+            "roundedimageview"      : "com.makeramen:roundedimageview:$versions.roundedimageview",
+            "circleimageview"       : "de.hdodenhof:circleimageview:$versions.circleimageview",
+            "photoView"             : "com.github.chrisbanes.photoview:library:${versions.photoView}",
 
             /*自由指定宽高比的ImageView*/
-            percentImageView      : "com.github.goweii:PercentImageView:$versions.percentImageView",
+            "percentImageView"      : "com.github.goweii:PercentImageView:$versions.percentImageView",
 
             /*floatingactionbutton MD悬浮按钮菜单版*/
-            floatingactionbutton  : "com.getbase:floatingactionbutton:${versions.floatingactionbutton}",
+            "floatingactionbutton"  : "com.getbase:floatingactionbutton:${versions.floatingactionbutton}",
 
             /*flowlayout 流式标签*/
-            flowlayout            : "com.hyman:flowlayout-lib:${versions.flowlayout}",
+            "flowlayout"            : "com.hyman:flowlayout-lib:${versions.flowlayout}",
 
             ///*loading loading加载动画*/
-            spinKit               : "com.github.ybq:Android-SpinKit:${versions.spinKit}",
+            "spinKit"               : "com.github.ybq:Android-SpinKit:${versions.spinKit}",
 
             /*NavigationTabStrip 带动画的顶部导航*/
-            navigationtabstrip    : "com.github.devlight.navigationtabstrip:navigationtabstrip:${versions.navigationtabstrip}",
+            "navigationtabstrip"    : "com.github.devlight.navigationtabstrip:navigationtabstrip:${versions.navigationtabstrip}",
 
             //图片选择器
-            pictureSelector       : "com.github.goweii:PictureSelector:${versions.pictureSelector}",
+            "pictureSelector"       : "com.github.goweii:PictureSelector:${versions.pictureSelector}",
 
             /*Android PersistentCookieJar  持久化Cookie*/
-            persistentCookieJar   : "com.github.franmontiel:PersistentCookieJar:$versions.persistentCookieJar",
+            "persistentCookieJar"   : "com.github.franmontiel:PersistentCookieJar:$versions.persistentCookieJar",
 
             //ARouter路由
             //替换成最新版本, 需要注意的是api
             //要与compiler匹配使用，均使用最新版可以保证兼容
             //compile 'com.alibaba:arouter-api:x.x.x'
             //annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
-            arouterApi            : "com.alibaba:arouter-api:$versions.arouterApi",
-            arouterCompiler       : "com.alibaba:arouter-compiler:$versions.arouterCompiler",
+            "arouterApi"            : "com.alibaba:arouter-api:$versions.arouterApi",
+            "arouterCompiler"       : "com.alibaba:arouter-compiler:$versions.arouterCompiler",
 
             //通用的广告栏控件
-            convenientBanner      : "com.bigkoo:convenientbanner:${versions.convenientBanner}",
+            "convenientBanner"      : "com.bigkoo:convenientbanner:${versions.convenientBanner}",
 
-            viewpager2            : "androidx.viewpager2:viewpager2:${versions.viewpager2}",
+            "viewpager2"            : "androidx.viewpager2:viewpager2:${versions.viewpager2}",
 
-            permissionx           : "com.permissionx.guolindev:permissionx:${versions.permissionx}",
+            "permissionx"           : "com.permissionx.guolindev:permissionx:${versions.permissionx}",
 
-            gsyVideoPlayer        : "com.shuyu:GSYVideoPlayer:${versions.gsyVideoPlayer}",
+            "gsyVideoPlayer"        : "com.shuyu:GSYVideoPlayer:${versions.gsyVideoPlayer}",
 
-            flycoTabLayoutLib     : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions.flycoTabLayoutLib}"
+            "flycoTabLayoutLib"     : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions.flycoTabLayoutLib}"
     ]
 
 }

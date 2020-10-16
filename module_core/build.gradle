@@ -41,144 +41,152 @@ android {
 }
 
 dependencies {
-//    implementation fileTree(dir: "libs", include: ["*.jar"])
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-//    implementation 'androidx.core:core-ktx:1.3.1'
-//    implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'com.google.code.gson:gson:2.8.6'
+//    api fileTree(dir: "libs", include: ["*.jar"])
+//    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+//    api 'androidx.core:core-ktx:1.3.1'
+//    api 'androidx.appcompat:appcompat:1.2.0'
+//    api 'com.google.code.gson:gson:2.8.6'
 //    testImplementation 'junit:junit:4.13'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
-//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//    api 'androidx.constraintlayout:constraintlayout:2.0.0'
+//    api 'androidx.legacy:legacy-support-v4:1.0.0'
 //
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 //
 //    //ButterKnife
-//    implementation 'com.jakewharton:butterknife:10.1.0'
+//    api 'com.jakewharton:butterknife:10.1.0'
 //    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-//    implementation 'com.google.android.material:material:1.1.0'
+//    api 'com.google.android.material:material:1.1.0'
 //
 //    /*事件总线*/
-//    implementation 'org.greenrobot:eventbus:3.1.1'
+//    api 'org.greenrobot:eventbus:3.1.1'
 //
-//    implementation 'androidx.multidex:multidex:2.0.1'
+//    api 'androidx.multidex:multidex:2.0.1'
 //
 //    //ARouter路由
 //    //// 替换成最新版本, 需要注意的是api
 //    //    // 要与compiler匹配使用，均使用最新版可以保证兼容
 //    //    compile 'com.alibaba:arouter-api:x.x.x'
 //    //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
-//    implementation 'com.alibaba:arouter-api:1.5.0'
+//    api 'com.alibaba:arouter-api:1.5.0'
 //    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 //
 //    /*SmartRefreshLayout 下拉加载刷新*/
-//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+//    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
 //
 //    //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
-//    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+//    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
 //
 //    //栗子动画引入step2：ParticleView
-//    implementation 'me.wangyuwei:ParticleView:1.0.4'
+//    api 'me.wangyuwei:ParticleView:1.0.4'
 //
-//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-//    implementation 'com.github.bumptech.glide:glide:4.9.0'
+//    api 'androidx.recyclerview:recyclerview:1.1.0'
+//    api 'com.github.bumptech.glide:glide:4.9.0'
 //    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 //
 //    /*基于的 Android WebViewInterface(必选)*/
-//    implementation 'com.just.agentweb:agentweb:4.1.2'
+//    api 'com.just.agentweb:agentweb:4.1.2'
 //
 //    // (可选)
-//    implementation 'com.just.agentweb:filechooser:4.1.2'
+//    api 'com.just.agentweb:filechooser:4.1.2'
 //
 //    // (可选)
-//    implementation 'com.download.library:Downloader:4.1.2'
+//    api 'com.download.library:Downloader:4.1.2'
 //
 //    /*Android PersistentCookieJar  持久化Cookie*/
-//    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
+//    api 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 //
-//    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
-//    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
-//    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
-//    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-//    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
-//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+//    api 'com.squareup.okhttp3:okhttp:3.12.2'
+//    api 'com.squareup.retrofit2:retrofit:2.6.1'
+//    api 'com.squareup.retrofit2:converter-gson:2.6.1'
+//    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+//    api 'io.reactivex.rxjava2:rxjava:2.2.10'
+//    api 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
 
 
 
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'ru.alexbykov:nopermission:1.1.2'
+//    api fileTree(include: ['*.jar'], dir: 'libs')
+//    testImplementation 'junit:junit:4.13'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //anko-common包编译配置
+    api rootProject.ext.dependencies.ankoVersion
+
+    api 'ru.alexbykov:nopermission:1.1.2'
     /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
-    implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
+    api('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
         exclude group: 'org.json', module: 'json'
     }
 
-    implementation "androidx.core:core-ktx:1.3.1"
+    api "androidx.core:core-ktx:1.3.1"
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation rootProject.ext.dependencies.supportV4
-    implementation rootProject.ext.dependencies.appcompat
-    implementation rootProject.ext.dependencies.material
-    implementation rootProject.ext.dependencies.annotations
-    implementation rootProject.ext.dependencies.constraint
-    implementation rootProject.ext.dependencies.legacy
-    implementation rootProject.ext.dependencies.androidx
-    implementation rootProject.ext.dependencies.multidex
-    implementation rootProject.ext.dependencies.rxpermissions
-    implementation rootProject.ext.dependencies.particleView
-    implementation rootProject.ext.dependencies.recyclerview
-    implementation rootProject.ext.dependencies.cardview
-    implementation rootProject.ext.dependencies.alertview
-//    implementation rootProject.ext.dependencies.loggingInterceptor
-    implementation rootProject.ext.dependencies.gson
-    implementation rootProject.ext.dependencies.okhttp
-    implementation rootProject.ext.dependencies.retrofit.core
-    implementation rootProject.ext.dependencies.retrofit.converter_gson
-    implementation rootProject.ext.dependencies.retrofit.adapter_rxjava2
-    implementation rootProject.ext.dependencies.rxjava
-    implementation rootProject.ext.dependencies.rxandroid
-    implementation rootProject.ext.dependencies.agentweb.agentweb
-    implementation rootProject.ext.dependencies.agentweb.filechooser
-    implementation rootProject.ext.dependencies.agentweb.download
-    implementation rootProject.ext.dependencies.butterknife
+    api rootProject.ext.dependencies.supportV4
+    api rootProject.ext.dependencies.appcompat
+    api rootProject.ext.dependencies.material
+    api rootProject.ext.dependencies.annotations
+    api rootProject.ext.dependencies.constraint
+    api rootProject.ext.dependencies.legacy
+    api rootProject.ext.dependencies.androidx
+    api rootProject.ext.dependencies.multidex
+    api rootProject.ext.dependencies.rxpermissions
+    api rootProject.ext.dependencies.particleView
+    api rootProject.ext.dependencies.recyclerview
+    api rootProject.ext.dependencies.cardview
+    api rootProject.ext.dependencies.alertview
+//    api rootProject.ext.dependencies.loggingInterceptor
+    api rootProject.ext.dependencies.gson
+    api rootProject.ext.dependencies.okhttp
+    api rootProject.ext.dependencies.retrofit.core
+    api rootProject.ext.dependencies.retrofit.converter_gson
+    api rootProject.ext.dependencies.retrofit.adapter_rxjava2
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    api rootProject.ext.dependencies.agentweb.agentweb
+    api rootProject.ext.dependencies.agentweb.filechooser
+    api rootProject.ext.dependencies.agentweb.download
+    api rootProject.ext.dependencies.butterknife
 //    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
     kapt rootProject.ext.dependencies.butterknifeCompiler
-    implementation rootProject.ext.dependencies.greendao
-    implementation rootProject.ext.dependencies.eventbus
-    implementation rootProject.ext.dependencies.bravh2X
-//    implementation rootProject.ext.dependencies.bravh3X
-    implementation rootProject.ext.dependencies.smartRefreshLayout
-    implementation rootProject.ext.dependencies.smartRefreshHeader
-    implementation rootProject.ext.dependencies.swipelayout
-    implementation rootProject.ext.dependencies.glide
-    implementation rootProject.ext.dependencies.glideCompiler
-    implementation rootProject.ext.dependencies.glide_transformations
-//    implementation rootProject.ext.dependencies.nopermission
-    implementation rootProject.ext.dependencies.roundedimageview
-    implementation rootProject.ext.dependencies.circleimageview
-    implementation rootProject.ext.dependencies.photoView
-    implementation rootProject.ext.dependencies.percentImageView
-    implementation rootProject.ext.dependencies.floatingactionbutton
-    implementation rootProject.ext.dependencies.flowlayout
-    implementation rootProject.ext.dependencies.spinKit
-    implementation rootProject.ext.dependencies.navigationtabstrip
-    implementation rootProject.ext.dependencies.pictureSelector
-    implementation rootProject.ext.dependencies.persistentCookieJar
-    implementation rootProject.ext.dependencies.arouterApi
-    annotationProcessor rootProject.ext.dependencies.arouterCompiler
+    api rootProject.ext.dependencies.greendao
+    api rootProject.ext.dependencies.eventbus
+    api rootProject.ext.dependencies.bravh2X
+//    api rootProject.ext.dependencies.bravh3X
+    api rootProject.ext.dependencies.smartRefreshLayout
+    api rootProject.ext.dependencies.smartRefreshHeader
+    api rootProject.ext.dependencies.swipelayout
+    api rootProject.ext.dependencies.glide
+    api rootProject.ext.dependencies.glideCompiler
+    api rootProject.ext.dependencies.glide_transformations
+//    api rootProject.ext.dependencies.nopermission
+    api rootProject.ext.dependencies.roundedimageview
+    api rootProject.ext.dependencies.circleimageview
+    api rootProject.ext.dependencies.photoView
+    api rootProject.ext.dependencies.percentImageView
+    api rootProject.ext.dependencies.floatingactionbutton
+    api rootProject.ext.dependencies.flowlayout
+    api rootProject.ext.dependencies.spinKit
+    api rootProject.ext.dependencies.navigationtabstrip
+    api rootProject.ext.dependencies.pictureSelector
+    api rootProject.ext.dependencies.persistentCookieJar
+    api rootProject.ext.dependencies.arouterApi
+    kapt rootProject.ext.dependencies.arouterCompiler
 
-    implementation rootProject.ext.dependencies.flycoTabLayoutLib
+    api rootProject.ext.dependencies.flycoTabLayoutLib
+
+    api rootProject.ext.dependencies.viewpager2
+    api rootProject.ext.dependencies.permissionx
+    api rootProject.ext.dependencies.gsyVideoPlayer
 
     //Android Jetpack 组件
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.work:work-runtime:2.3.4'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    api 'androidx.work:work-runtime:2.4.0'
     
 
 }
