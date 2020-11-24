@@ -139,7 +139,9 @@ dependencies {
     implementation project(path: ':module_datePicker')
 
     implementation project(path: ':module_weather')
-    
+
+    implementation project(path: ':module_ui')
+
 //    implementation 'com.google.android.material:material:1.2.0'
 //    implementation 'androidx.appcompat:appcompat:1.2.0'
 //    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
@@ -189,7 +191,7 @@ dependencies {
 //    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
 //
 //    /*BaseRecyclerViewAdapterHelper 暂时不升级3.X*/
-//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
 //
 //    /*NavigationTabStrip 带动画的顶部导航*/
 //    implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'

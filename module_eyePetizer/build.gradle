@@ -29,12 +29,14 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation project(path: ':module_core')
     implementation project(path: ':module_middleware')
 
     api rootProject.ext.dependencies.arouterApi
+    implementation project(path: ':module_core')
     kapt rootProject.ext.dependencies.arouterCompiler
 
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
 
 }

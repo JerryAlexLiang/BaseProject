@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.MotionEvent;
@@ -24,9 +25,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.liang.model_middleware.impl.ServiceProvider;
+import com.liang.module_core.utils.GlideEngine;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,18 +48,25 @@ import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
+
 import com.liang.module_core.mvp.MVPBaseActivity;
 import com.liang.module_core.mvp.MVPBasePresenter;
+
 import liang.com.baseproject.databinding.ActivityTestLaboratoryCodeBinding;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
 import liang.com.baseproject.testlaboratory.FiltrateActivity;
 import liang.com.baseproject.testlaboratory.MapTestActivity;
+
 import com.liang.module_core.utils.AnimationUtils;
 import com.liang.module_core.utils.FileUtil;
 import com.liang.module_core.utils.LogUtil;
+
 import liang.com.baseproject.utils.PictureSelectorUtils;
+
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 import static com.luck.picture.lib.config.PictureConfig.MULTIPLE;
 import static com.luck.picture.lib.config.PictureConfig.TYPE_IMAGE;
@@ -221,8 +235,25 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
         btnSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
-                        true, false, true, 9);
+//                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
+//                        true, false, true, 9);
+                PictureSelector.create(TestCodeActivity.this)
+                        .openGallery(PictureMimeType.ofImage())
+//                        .imageEngine(GlideEngine.createGlideEngine()) // Please refer to the Demo GlideEngine.java
+                        .compressQuality(60)
+                        .isCompress(true)
+                        .selectionMode(PictureConfig.SINGLE)// 多选 or 单选
+                        .maxSelectNum(1)// 最大图片选择数量
+                        .minSelectNum(1)// 最小选择数量
+                        .isPreviewImage(true)// 是否可预览图片
+                        .isCamera(true)// 是否显示拍照按钮
+                        .isEnableCrop(false)// 是否裁剪
+//                .circleDimmedLayer(true)// 是否圆形裁剪
+//                .freeStyleCropEnabled(true)// 裁剪框是否可拖拽
+//                .showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
+//                .showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false
+                        .minimumCompressSize(100)// 小于100kb的图片不压缩
+                        .forResult(PictureConfig.CHOOSE_REQUEST);
             }
         });
     }
@@ -326,38 +357,102 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case Constant.REQUEST_CODE_SELECT_USER_ICON:
-                    List<LocalMedia> localMedia = PictureSelectorUtils.forResult(resultCode, data);
-                    if (localMedia != null) {
-                        LocalMedia media = localMedia.get(0);
-                        if (media.isCut() && !media.isCompressed()) {
-                            //裁剪未压缩
-                            imagePath = media.getCutPath();
-                            long cutImageSize = new File(media.getCutPath()).length() / 1024;
-                            LogUtil.d(TAG, "裁剪地址: ---> 大小:  " + cutImageSize + "k" + "   裁剪地址:" + media.getCutPath());
-                        } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
-                            //压缩过，或者裁剪同时压缩过，以最终压缩过的图片为准
-                            imagePath = media.getCompressPath();
-                            long compressImageSize = new File(media.getCompressPath()).length() / 1024;
-                            LogUtil.d(TAG, "压缩地址: ---> 大小:  " + compressImageSize + "k" + "   压缩地址:" + media.getCutPath());
+//                case Constant.REQUEST_CODE_SELECT_USER_ICON:
+//                    List<LocalMedia> localMedia = PictureSelectorUtils.forResult(resultCode, data);
+//                    if (localMedia != null) {
+//                        LocalMedia media = localMedia.get(0);
+//                        if (media.isCut() && !media.isCompressed()) {
+//                            //裁剪未压缩
+//                            imagePath = media.getCutPath();
+//                            long cutImageSize = new File(media.getCutPath()).length() / 1024;
+//                            LogUtil.d(TAG, "裁剪地址: ---> 大小:  " + cutImageSize + "k" + "   裁剪地址:" + media.getCutPath());
+//                        } else if (media.isCompressed() || (media.isCut() && media.isCompressed())) {
+//                            //压缩过，或者裁剪同时压缩过，以最终压缩过的图片为准
+//                            imagePath = media.getCompressPath();
+//                            long compressImageSize = new File(media.getCompressPath()).length() / 1024;
+//                            LogUtil.d(TAG, "压缩地址: ---> 大小:  " + compressImageSize + "k" + "   压缩地址:" + media.getCutPath());
+//                        } else {
+//                            //原图
+//                            imagePath = media.getPath();
+//                            long imageSize = new File(media.getPath()).length() / 1024;
+//                            LogUtil.d(TAG, "原图地址: ---> 大小:  " + imageSize + "k" + "   原图地址:" + media.getPath());
+//                        }
+//                        //UI
+//                        if (!imagePath.isEmpty()) {
+//                            Glide.with(TestCodeActivity.this).asBitmap().load(imagePath).into(ivIcon);
+//
+//                            RequestOptions options = new RequestOptions()
+//                                    .transform(new BlurTransformation(50));
+//                            Glide.with(TestCodeActivity.this).asBitmap().apply(options).load(imagePath).into(ivBg);
+//                        }
+//                    }
+//                    break;
+
+                case PictureConfig.CHOOSE_REQUEST:
+                    List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+                    if (!CollectionUtils.isEmpty(selectList)) {
+                        String path;
+                        LocalMedia localMedia = selectList.get(0);
+                        if (localMedia.isCut() && !localMedia.isCompressed()) {
+                            // 裁剪过
+                            path = localMedia.getCutPath();
+                        } else if (localMedia.isCompressed() || (localMedia.isCut() && localMedia.isCompressed())) {
+                            // 压缩过,或者裁剪同时压缩过,以最终压缩过图片为准
+                            path = localMedia.getCompressPath();
                         } else {
-                            //原图
-                            imagePath = media.getPath();
-                            long imageSize = new File(media.getPath()).length() / 1024;
-                            LogUtil.d(TAG, "原图地址: ---> 大小:  " + imageSize + "k" + "   原图地址:" + media.getPath());
+                            // 原图  localMedia.getPath()
+                            path = FileUtil.getRealPath(TestCodeActivity.this, localMedia.getPath());
+//                            path = getRealPath(TestCodeActivity.this, localMedia.getPath());
+
                         }
                         //UI
-                        if (!imagePath.isEmpty()) {
-                            Glide.with(TestCodeActivity.this).asBitmap().load(imagePath).into(ivIcon);
+                        if (!path.isEmpty()) {
+                            Glide.with(TestCodeActivity.this).asBitmap().load(path).into(ivIcon);
 
                             RequestOptions options = new RequestOptions()
                                     .transform(new BlurTransformation(50));
-                            Glide.with(TestCodeActivity.this).asBitmap().apply(options).load(imagePath).into(ivBg);
+                            Glide.with(TestCodeActivity.this).asBitmap().apply(options).load(path).into(ivBg);
                         }
+                        break;
                     }
-                    break;
             }
         }
+    }
+
+    // 存在沙盒中的path不能直接使用new File(path)形式生成文件 ，可以通过以下方式转换下
+    public static String getRealPath(Context context,String path) {
+        if (PictureMimeType.isContent(path)){
+            Uri uri = Uri.parse(path);
+            try {
+                File imgFile = context.getExternalFilesDir("image");
+                if (!imgFile.exists()){
+                    imgFile.mkdir();
+                }
+                try {
+                    File file = new File(imgFile.getAbsolutePath() + File.separator +
+                            System.currentTimeMillis() + ".jpg");
+                    // 使用openInputStream(uri)方法获取字节输入流
+                    InputStream fileInputStream = context.getContentResolver().openInputStream(uri);
+                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                    byte[] buffer = new byte[1024];
+                    int byteRead;
+                    while (-1 != (byteRead = fileInputStream.read(buffer))) {
+                        fileOutputStream.write(buffer, 0, byteRead);
+                    }
+                    fileInputStream.close();
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                    // 文件可用新路径 file.getAbsolutePath()
+                    path=file.getAbsolutePath();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return path;
     }
 
     /**

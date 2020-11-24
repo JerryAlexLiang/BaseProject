@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.liang.module_core.R;
+import com.luck.picture.lib.config.PictureMimeType;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -353,6 +354,42 @@ public class FileUtil {
         }
         BigDecimal result4 = new BigDecimal(teraBytes);
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
+    }
+
+    // 存在沙盒中的path不能直接使用new File(path)形式生成文件 ，可以通过以下方式转换下
+    public static String getRealPath(Context context,String path) {
+        if (PictureMimeType.isContent(path)){
+            Uri uri = Uri.parse(path);
+            try {
+                File imgFile = context.getExternalFilesDir("image");
+                if (!imgFile.exists()){
+                    imgFile.mkdir();
+                }
+                try {
+                    File file = new File(imgFile.getAbsolutePath() + File.separator +
+                            System.currentTimeMillis() + ".jpg");
+                    // 使用openInputStream(uri)方法获取字节输入流
+                    InputStream fileInputStream = context.getContentResolver().openInputStream(uri);
+                    FileOutputStream fileOutputStream = new FileOutputStream(file);
+                    byte[] buffer = new byte[1024];
+                    int byteRead;
+                    while (-1 != (byteRead = fileInputStream.read(buffer))) {
+                        fileOutputStream.write(buffer, 0, byteRead);
+                    }
+                    fileInputStream.close();
+                    fileOutputStream.flush();
+                    fileOutputStream.close();
+                    // 文件可用新路径 file.getAbsolutePath()
+                    path=file.getAbsolutePath();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return path;
     }
 }
 

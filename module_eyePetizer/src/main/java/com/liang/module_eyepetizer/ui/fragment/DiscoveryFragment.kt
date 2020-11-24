@@ -5,35 +5,71 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.liang.module_core.utils.GsonUtils
+import com.liang.module_core.utils.LogUtil
 import com.liang.module_eyepetizer.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.liang.module_eyepetizer.logic.network.InjectorUtil
+import com.liang.module_eyepetizer.ui.viewModel.DiscoveryViewModel
+import kotlinx.android.synthetic.main.fragment_discovery.*
 
 /**
- * A simple [Fragment] subclass.
- * Use the [DiscoveryFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * 创建日期:2020/11/24 on 1:52 PM
+ * 描述: 发现页面
+ * 作者: 杨亮
  */
 class DiscoveryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private val viewModel by lazy {
+        ViewModelProvider(this, InjectorUtil.getDiscoveryViewModelFactory()).get(DiscoveryViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_discovery, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        smart_refresh_layout.setOnRefreshListener {
+            viewModel.onRefresh()
+        }
+
+        observe()
+    }
+
+
+    private fun observe() {
+
+        viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
+            val response = result.getOrNull()
+            if (response != null) {
+                viewModel.nextPageUrl = response.nextPageUrl
+                if (response.itemList.isNullOrEmpty() && viewModel.dataList.isEmpty()) {
+                    smart_refresh_layout.closeHeaderOrFooter()
+                }
+
+                if (response.itemList.isNullOrEmpty() && viewModel.dataList.isNotEmpty()) {
+                    smart_refresh_layout.finishLoadMoreWithNoMoreData()
+                }
+
+                if (response.nextPageUrl.isNullOrEmpty()) {
+                    smart_refresh_layout.finishLoadMoreWithNoMoreData()
+                } else {
+                    smart_refresh_layout.closeHeaderOrFooter()
+                }
+
+                viewModel.dataList.clear()
+                viewModel.dataList.addAll(response.itemList)
+
+                LogUtil.d("eye", "eye data ---> " + GsonUtils.toJson(viewModel.dataList))
+            } else {
+                smart_refresh_layout.closeHeaderOrFooter()
+            }
+        })
+
     }
 
     companion object {

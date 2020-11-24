@@ -10,7 +10,7 @@ ext {
     android = [
             compileSdkVersion: 29,
             minSdkVersion    : 21,
-            targetSdkVersion : 29,
+            targetSdkVersion : 26,
             versionCode      : 1,
             versionName      : "1.0"
     ]
@@ -80,7 +80,8 @@ ext {
 
             spinKit               : "1.4.0",
 
-            pictureSelector       : "v2.3.1",
+//            pictureSelector       : "v2.3.1",
+            pictureSelector       : "v2.5.9",
 
             navigationtabstrip    : "1.0.4",
 
@@ -105,10 +106,10 @@ ext {
             //指定Anko库的版本号
             "ankoVersion"           : "org.jetbrains.anko:anko-common:${versions.anko_version}",
 
-            "supportV4"             : "com.android.support:support-v4:${versions.support}",
+            "supportV4"             : 'androidx.legacy:legacy-support-v4:1.0.0',
             "appcompat"             : "androidx.appcompat:appcompat:${versions.support}",
             "material"              : "com.google.android.material:material:${versions.support}",
-            "annotations"           : "com.android.support:support-annotations:${versions.support}",
+            "annotations"           : 'androidx.annotation:annotation:1.0.0',
 
             "constraint"            : "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}",
 
@@ -136,7 +137,6 @@ ext {
 //            loggingInterceptor     : "com.github.ihsanbal:LoggingInterceptor:${versions.loggingInterceptor}{\n" +
 //                    "                exclude group: 'org.json', module: 'json'\n" +
 //                    "            }" ,
-
 
             "gson"                  : "com.google.code.gson:gson:$versions.gson",
             "okhttp"                : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
@@ -171,7 +171,7 @@ ext {
             "eventbus"              : "org.greenrobot:eventbus:$versions.eventbus",
 
             "bravh2X"               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh2X",
-//            bravh3X               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh3X",
+            "bravh3X"               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh3X",
 
             "smartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout",
             //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
@@ -207,7 +207,8 @@ ext {
             "navigationtabstrip"    : "com.github.devlight.navigationtabstrip:navigationtabstrip:${versions.navigationtabstrip}",
 
             //图片选择器
-            "pictureSelector"       : "com.github.goweii:PictureSelector:${versions.pictureSelector}",
+//            "pictureSelector"       : "com.github.goweii:PictureSelector:${versions.pictureSelector}",
+            "pictureSelector"       : "com.github.LuckSiege.PictureSelector:picture_library:${versions.pictureSelector}",
 
             /*Android PersistentCookieJar  持久化Cookie*/
             "persistentCookieJar"   : "com.github.franmontiel:PersistentCookieJar:$versions.persistentCookieJar",

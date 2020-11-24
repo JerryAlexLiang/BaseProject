@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -26,6 +27,7 @@ import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
+import com.liang.module_core.utils.FileUtil;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
@@ -51,18 +53,25 @@ import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
+
 import com.liang.module_core.mvp.MVPBaseFragment;
 import com.liang.module_core.mvp.MVPBasePresenter;
+
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.UserBean;
 import liang.com.baseproject.mine.activity.ReadLaterActivity;
 import liang.com.baseproject.setting.activity.AppSettingActivity;
+
 import com.liang.module_core.utils.AnimationUtils;
 import com.liang.module_core.utils.LogUtil;
+
 import liang.com.baseproject.utils.PictureSelectorUtils;
+
 import com.liang.module_core.utils.ToastUtil;
+
 import liang.com.baseproject.utils.UserLoginUtils;
+
 import com.liang.module_core.widget.popupwindow.CustomPopupWindow;
 
 import static com.luck.picture.lib.config.PictureConfig.MULTIPLE;
@@ -675,8 +684,13 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
                             LogUtil.d(TAG, "压缩地址: ---> 大小:  " + compressImageSize + "k" + "   压缩地址:" + media.getCutPath());
                         } else {
                             //原图
-                            imagePath = media.getPath();
-                            long imageSize = new File(media.getPath()).length() / 1024;
+//                            imagePath = media.getPath();
+//                            long imageSize = new File(media.getPath()).length() / 1024;
+//                            LogUtil.d(TAG, "原图地址: ---> 大小:  " + imageSize + "k" + "   原图地址:" + media.getPath());
+                            //存在沙盒中的path不能直接使用new File(path)形式生成文件 ，可以通过以下方式转换下
+                            // 原图  localMedia.getPath()
+                            imagePath = FileUtil.getRealPath(getContext(), media.getPath());
+                            int imageSize = imagePath.length() / 1024;
                             LogUtil.d(TAG, "原图地址: ---> 大小:  " + imageSize + "k" + "   原图地址:" + media.getPath());
                         }
                         //UI
@@ -705,8 +719,10 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
                             LogUtil.d(TAG, "压缩地址: ---> 大小:  " + compressImageSize + "k" + "   压缩地址:" + media.getCutPath());
                         } else {
                             //原图
-                            imagePath = media.getPath();
-                            long imageSize = new File(media.getPath()).length() / 1024;
+//                            imagePath = media.getPath();
+//                            long imageSize = new File(media.getPath()).length() / 1024;
+                            imagePath = FileUtil.getRealPath(getContext(), media.getPath());
+                            long imageSize = imagePath.length() / 1024;
                             LogUtil.d(TAG, "原图地址: ---> 大小:  " + imageSize + "k" + "   原图地址:" + media.getPath());
                         }
                         //UI
