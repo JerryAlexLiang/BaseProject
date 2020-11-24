@@ -12,7 +12,7 @@ ext {
             minSdkVersion    : 21,
             targetSdkVersion : 26,
             versionCode      : 1,
-            versionName      : "1.0"
+            versionName      : "2.0"
     ]
 
     compileOptions = [
@@ -56,7 +56,6 @@ ext {
 
             eventbus              : "3.1.1",
 
-            bravh2X               : "2.9.50",
             bravh3X               : "3.0.4",
 
             smartRefreshLayout    : "1.1.0",
@@ -170,7 +169,6 @@ ext {
             /*事件总线*/
             "eventbus"              : "org.greenrobot:eventbus:$versions.eventbus",
 
-            "bravh2X"               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh2X",
             "bravh3X"               : "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.bravh3X",
 
             "smartRefreshLayout"    : "com.scwang.smartrefresh:SmartRefreshLayout:$versions.smartRefreshLayout",

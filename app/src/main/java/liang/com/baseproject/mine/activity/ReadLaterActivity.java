@@ -15,6 +15,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -134,7 +136,9 @@ public class ReadLaterActivity extends MVPBaseActivity {
         //初始化适配器
         readLaterAdapter = new ReadLaterAdapter();
         //开启动画
-        readLaterAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        readLaterAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        readLaterAdapter.setAnimationEnable(true);
+        readLaterAdapter.setAdapterAnimation(new SlideInLeftAnimation());
         //绑定适配器
         rvReadLater.setAdapter(readLaterAdapter);
 
@@ -162,15 +166,15 @@ public class ReadLaterActivity extends MVPBaseActivity {
 //                }
 //            });
 //        } else {
-            readLaterAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                @Override
-                public void onLoadMoreRequested() {
-                    getArticleList();
-
-//                    currPage++;
-//                    getArticleListByPage();
-                }
-            }, rvReadLater);
+//            readLaterAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//                @Override
+//                public void onLoadMoreRequested() {
+//                    getArticleList();
+//
+////                    currPage++;
+////                    getArticleListByPage();
+//                }
+//            }, rvReadLater);
 //        }
 
         //自动刷新(替代第一次请求数据)
@@ -178,26 +182,83 @@ public class ReadLaterActivity extends MVPBaseActivity {
         smartRefreshLayout.autoLoadMore();
 //        readLaterAdapter.setEnableLoadMore(false);
 
-        readLaterAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                readLaterAdapter.closeAll(null);
+//        readLaterAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+//            @Override
+//            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+//                readLaterAdapter.closeAll(null);
+//
+//                ReadLaterBean item = readLaterAdapter.getItem(position);
+//                if (item == null) {
+//                    return;
+//                }
+//
+//                switch (view.getId()) {
+//                    case R.id.rl_page_container:
+//                        AgentWebActivity.actionStart(ReadLaterActivity.this, item.getTitle(), item.getLink());
+//                        break;
+//
+//                    case R.id.tv_delete:
+//                        //本地数据库删除操作
+//                        ReadLaterBeanDaoHelpter.removeReaderLaterBean(item);
+//                        //事件总线
+//                        ReadLaterEvent.postUnReadLaterWithTitle(item.getTitle());
+////                        //UI
+////                        readLaterAdapter.remove(position);
+////                        onShowToast("删除成功");
+////                        List<ReadLaterBean> allReadLaters = ReadLaterBeanDaoHelpter.findAllReadLaters();
+////                        if (allReadLaters.isEmpty()) {
+////                            rlEmptyContainer.setVisibility(View.VISIBLE);
+////                        } else {
+////                            rlEmptyContainer.setVisibility(View.GONE);
+////                        }
+//                        break;
+//
+//                    case R.id.tv_edit:
+//                        onShowToast("编辑");
+//                        ReadLaterBeanDaoHelpter.updateChangeReadLaterBean(item,"测试");
+//                        adapter.notifyItemChanged(position);
+//                        break;
+//
+//                    case R.id.tv_open_browser:
+//                        if (TextUtils.isEmpty(item.getLink())) {
+//                            onShowToast("链接为空");
+//                            break;
+//                        }
+//                        IntentUtils.openBrowser(ReadLaterActivity.this, item.getLink());
+////                        if (getActivity()!=null){
+////                            IntentUtils.openBrowser(getActivity(), item.getLink());
+////                        }
+//                        break;
+//
+//                    case R.id.tv_copy:
+//                        CopyUtils.copyText(item.getLink());
+//                        onShowToast("复制成功");
+//                        break;
+//
+//                    default:
+//                        break;
+//                }
+//            }
+//        });
 
-                ReadLaterBean item = readLaterAdapter.getItem(position);
-                if (item == null) {
-                    return;
-                }
+        readLaterAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            readLaterAdapter.closeAll(null);
 
-                switch (view.getId()) {
-                    case R.id.rl_page_container:
-                        AgentWebActivity.actionStart(ReadLaterActivity.this, item.getTitle(), item.getLink());
-                        break;
+            ReadLaterBean item = readLaterAdapter.getItem(position);
+            if (item == null) {
+                return;
+            }
 
-                    case R.id.tv_delete:
-                        //本地数据库删除操作
-                        ReadLaterBeanDaoHelpter.removeReaderLaterBean(item);
-                        //事件总线
-                        ReadLaterEvent.postUnReadLaterWithTitle(item.getTitle());
+            switch (view.getId()) {
+                case R.id.rl_page_container:
+                    AgentWebActivity.actionStart(ReadLaterActivity.this, item.getTitle(), item.getLink());
+                    break;
+
+                case R.id.tv_delete:
+                    //本地数据库删除操作
+                    ReadLaterBeanDaoHelpter.removeReaderLaterBean(item);
+                    //事件总线
+                    ReadLaterEvent.postUnReadLaterWithTitle(item.getTitle());
 //                        //UI
 //                        readLaterAdapter.remove(position);
 //                        onShowToast("删除成功");
@@ -207,35 +268,35 @@ public class ReadLaterActivity extends MVPBaseActivity {
 //                        } else {
 //                            rlEmptyContainer.setVisibility(View.GONE);
 //                        }
-                        break;
+                    break;
 
-                    case R.id.tv_edit:
-                        onShowToast("编辑");
-                        ReadLaterBeanDaoHelpter.updateChangeReadLaterBean(item,"测试");
-                        adapter.notifyItemChanged(position);
-                        break;
+                case R.id.tv_edit:
+                    onShowToast("编辑");
+                    ReadLaterBeanDaoHelpter.updateChangeReadLaterBean(item,"测试");
+                    adapter.notifyItemChanged(position);
+                    break;
 
-                    case R.id.tv_open_browser:
-                        if (TextUtils.isEmpty(item.getLink())) {
-                            onShowToast("链接为空");
-                            break;
-                        }
-                        IntentUtils.openBrowser(ReadLaterActivity.this, item.getLink());
+                case R.id.tv_open_browser:
+                    if (TextUtils.isEmpty(item.getLink())) {
+                        onShowToast("链接为空");
+                        break;
+                    }
+                    IntentUtils.openBrowser(ReadLaterActivity.this, item.getLink());
 //                        if (getActivity()!=null){
 //                            IntentUtils.openBrowser(getActivity(), item.getLink());
 //                        }
-                        break;
+                    break;
 
-                    case R.id.tv_copy:
-                        CopyUtils.copyText(item.getLink());
-                        onShowToast("复制成功");
-                        break;
+                case R.id.tv_copy:
+                    CopyUtils.copyText(item.getLink());
+                    onShowToast("复制成功");
+                    break;
 
-                    default:
-                        break;
-                }
+                default:
+                    break;
             }
         });
+
     }
 
     private void initView() {
@@ -280,7 +341,7 @@ public class ReadLaterActivity extends MVPBaseActivity {
         smartRefreshLayout.finishRefresh();
         smartRefreshLayout.finishLoadMore();
 
-        readLaterAdapter.loadMoreEnd();
+//        readLaterAdapter.loadMoreEnd();
     }
 
     public void getArticleListByPage() {
@@ -300,17 +361,17 @@ public class ReadLaterActivity extends MVPBaseActivity {
         } else {
             //请求更多数据,直接添加list中
             readLaterAdapter.addData(readLatersByPage);
-            readLaterAdapter.loadMoreComplete();
+//            readLaterAdapter.loadMoreComplete();
         }
 
         if (readLatersByPage.size() == 0) {
             onShowToast("没有更多数据了!");
-            readLaterAdapter.loadMoreEnd();
+//            readLaterAdapter.loadMoreEnd();
             smartRefreshLayout.setEnableLoadMore(false);
         } else {
-            if (!readLaterAdapter.isLoadMoreEnable()) {
-                readLaterAdapter.setEnableLoadMore(true);
-            }
+//            if (!readLaterAdapter.isLoadMoreEnable()) {
+//                readLaterAdapter.setEnableLoadMore(true);
+//            }
             smartRefreshLayout.setEnableLoadMore(true);
         }
         //这两个方法是在加载成功,并且还有数据的情况下调用的

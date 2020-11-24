@@ -1,15 +1,17 @@
 package liang.com.baseproject.mine.adapter;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.daimajia.swipe.SwipeLayout;
+import com.liang.module_core.utils.DateUtils;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -19,7 +21,6 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.entity.TagsBean;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import com.liang.module_core.utils.DateUtils;
 
 /**
  * 创建日期：2019/9/9 on 11:07
@@ -32,6 +33,8 @@ public class ReadLaterAdapter extends BaseQuickAdapter<ReadLaterBean, BaseViewHo
 
     public ReadLaterAdapter() {
         super(R.layout.rv_swipe_article_list_item);
+        //点击事件
+        addChildClickViewIds(R.id.rl_page_container, R.id.tv_delete, R.id.tv_edit, R.id.tv_open_browser, R.id.tv_copy);
     }
 
     /**
@@ -173,6 +176,6 @@ public class ReadLaterAdapter extends BaseQuickAdapter<ReadLaterBean, BaseViewHo
         });
 
         //点击事件
-        helper.addOnClickListener(R.id.rl_page_container, R.id.tv_delete, R.id.tv_edit, R.id.tv_open_browser, R.id.tv_copy);
+//        helper.addOnClickListener(R.id.rl_page_container, R.id.tv_delete, R.id.tv_edit, R.id.tv_open_browser, R.id.tv_copy);
     }
 }

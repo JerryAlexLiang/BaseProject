@@ -19,6 +19,8 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
+import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.google.gson.Gson;
 import com.liang.module_core.mvp.MVPBaseFragment;
 import com.liang.module_core.utils.JsonFormatUtils;
@@ -110,7 +112,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         initHeader1();
         initHeader2();
         //默认出现了头部就不会显示Empty，和尾部  配置以下方法也支持同时显示setHeaderAndEmpty  setHeaderFooterEmpty
-        homeContainerAdapter.setHeaderAndEmpty(true);
+        homeContainerAdapter.setHeaderWithEmptyEnable(true);
     }
 
     private void initHeader1() {
@@ -206,51 +208,47 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         rvHome.setLayoutManager(linearLayoutManager);
         //初始化适配器
         homeContainerAdapter = new HomeContainerAdapter();
-        homeContainerAdapter.setEnableLoadMore(false);
+//        homeContainerAdapter.setEnableLoadMore(false);
         //开启动画
-        homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        homeContainerAdapter.setAnimationEnable(true);
+//        homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        homeContainerAdapter.setAdapterAnimation(new SlideInLeftAnimation());
         rvHome.setAdapter(homeContainerAdapter);
 
 //        mPresenter.getArticleList(PAGE_START);
 
-        homeContainerAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ArticleBean item = homeContainerAdapter.getItem(position);
-                if (item != null) {
-                    LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
+        homeContainerAdapter.setOnItemClickListener((adapter, view, position) -> {
+            ArticleBean item = homeContainerAdapter.getItem(position);
+            if (item != null) {
+                LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
 //                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
-                    AgentWebActivity.actionStart(getContext(), item);
-                }
+                AgentWebActivity.actionStart(getContext(), item);
             }
         });
 
-        smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                currPage = PAGE_START;
-                mPresenter.getArticleList(currPage);
-                mPresenter.getArticleHomeBanner();
-            }
+        smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            currPage = PAGE_START;
+            mPresenter.getArticleList(currPage);
+            mPresenter.getArticleHomeBanner();
         });
 
         setRefreshFooter = isSetRefreshFooter();
         if (setRefreshFooter) {
-            smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
-                @Override
-                public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
+            smartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+                currPage++;
+                mPresenter.getArticleList(currPage);
             });
         } else {
-            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                @Override
-                public void onLoadMoreRequested() {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
-            }, rvHome);
+//            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//                @Override
+//                public void onLoadMoreRequested() {
+//                    currPage++;
+//                    mPresenter.getArticleList(currPage);
+//                }
+//            }, rvHome);
+            homeContainerAdapter.getLoadMoreModule().setAutoLoadMore(true);
+            //当自动加载开启，同时数据不满一屏时，是否继续执行自动加载更多(默认为true)
+            homeContainerAdapter.getLoadMoreModule().setEnableLoadMoreIfNotFullPage(false);
         }
 
         //自动刷新(替代第一次请求数据)
@@ -329,22 +327,21 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         } else {
             //请求更多数据,直接添加list中
             homeContainerAdapter.addData(data.getDatas());
-            homeContainerAdapter.loadMoreComplete();
+//            homeContainerAdapter.loadMoreComplete();
             LogUtil.d(TAG, "上拉加载更多：  " + "数量: " + homeContainerAdapter.getData().size());
         }
 
 //        if (data.isOver() || data.getDatas().size() == 0) {
         if (data.getDatas().size() == 0 && currPage != PAGE_START) {
-            homeContainerAdapter.loadMoreEnd();
-//            smartRefreshLayout.setEnableLoadMore(false);
+//            homeContainerAdapter.loadMoreEnd();
             onShowToast("没有更多数据了!");
             //设置是否在全部加载结束之后Footer跟随内容
             smartRefreshLayout.setNoMoreData(true);
             smartRefreshLayout.setEnableFooterFollowWhenNoMoreData(true);
         } else {
-            if (!homeContainerAdapter.isLoadMoreEnable()) {
-                homeContainerAdapter.setEnableLoadMore(true);
-            }
+//            if (!homeContainerAdapter.isLoadMoreEnable()) {
+//                homeContainerAdapter.setEnableLoadMore(true);
+//            }
             smartRefreshLayout.setEnableLoadMore(true);
         }
         smartRefreshLayout.finishRefresh();
@@ -354,7 +351,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     @Override
     public void onGetArticleListFail(String content) {
         onShowToast(content);
-        homeContainerAdapter.loadMoreFail();
+//        homeContainerAdapter.loadMoreFail();
         //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
@@ -402,7 +399,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         //这两个方法是在加载成功,并且还有数据的情况下调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);
-        homeContainerAdapter.loadMoreFail();
+//        homeContainerAdapter.loadMoreFail();
         View errorView = LayoutInflater.from(mActivity).inflate(R.layout.rl_empty_container_view, null);
         homeContainerAdapter.setEmptyView(errorView);
         LogUtil.d(TAG, content);

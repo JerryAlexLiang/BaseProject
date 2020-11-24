@@ -154,8 +154,7 @@ dependencies {
     kapt rootProject.ext.dependencies.butterknifeCompiler
     api rootProject.ext.dependencies.greendao
     api rootProject.ext.dependencies.eventbus
-    api rootProject.ext.dependencies.bravh2X
-//    api rootProject.ext.dependencies.bravh3X
+    api rootProject.ext.dependencies.bravh3X
     api rootProject.ext.dependencies.smartRefreshLayout
     api rootProject.ext.dependencies.smartRefreshHeader
     api rootProject.ext.dependencies.swipelayout

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
+import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.liang.model_middleware.impl.ServiceProvider;
 import com.liang.module_core.constant.Constant;
 import com.liang.module_core.utils.SPUtils;
@@ -41,25 +41,25 @@ public class HomeFunctionContainerAdapter extends BaseQuickAdapter<HomeFunctionB
             helper.ivFunctionImage.setImageResource(item.getFunctionIconId());
 
             if (SettingUtils.getInstance().isDarkTheme()) {
-                helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.colorBlue)));
-                helper.ivFunctionImage.setBackgroundColor(mContext.getResources().getColor(R.color.translucent_background));
+                helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.colorBlue)));
+                helper.ivFunctionImage.setBackgroundColor(getContext().getResources().getColor(R.color.translucent_background));
             } else {
-                int actionBarColorInt = (int) SPUtils.get(mContext, Constant.ACTIONBAR_COLOR_THEME, 0);
+                int actionBarColorInt = (int) SPUtils.get(getContext(), Constant.ACTIONBAR_COLOR_THEME, 0);
                 switch (actionBarColorInt) {
                     case Constant.ACTIONBAR_COLOR_BLUE:
-                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.title_bar_blue)));
+                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.title_bar_blue)));
                         break;
 
                     case Constant.ACTIONBAR_COLOR_BLACK:
-                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.black)));
+                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.black)));
                         break;
 
                     case Constant.ACTIONBAR_COLOR_RED:
-                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.title_bar_red)));
+                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.title_bar_red)));
                         break;
 
                     case Constant.ACTIONBAR_COLOR_GREEN:
-                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(mContext.getResources().getColor(R.color.title_bar_green)));
+                        helper.ivFunctionImage.setImageTintList(ColorStateList.valueOf(getContext().getResources().getColor(R.color.title_bar_green)));
                         break;
                 }
             }
@@ -67,16 +67,16 @@ public class HomeFunctionContainerAdapter extends BaseQuickAdapter<HomeFunctionB
             helper.itemView.setOnClickListener(v -> {
                 switch (item.getFunctionId()) {
                     case 0:
-                        ServiceProvider.getWeatherService().startWeatherActivity(mContext);
+                        ServiceProvider.getWeatherService().startWeatherActivity(getContext());
                         break;
 
                     case 1:
-                        ServiceProvider.getDatePickerService().startDatePickerDemoActivity(mContext);
+                        ServiceProvider.getDatePickerService().startDatePickerDemoActivity(getContext());
                         break;
 
                     case 2:
                         ToastUtil.showShortToast("开眼Video");
-                        ServiceProvider.getEyeModuleService().startEyePetizerActivity(mContext);
+                        ServiceProvider.getEyeModuleService().startEyePetizerActivity(getContext());
                         break;
 
                     case 3:

@@ -14,6 +14,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+
+import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -500,9 +502,11 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         rvMap.setLayoutManager(linearLayoutManager);
         //初始化适配器
         homeContainerAdapter = new HomeContainerAdapter();
-        homeContainerAdapter.setEnableLoadMore(false);
+//        homeContainerAdapter.setEnableLoadMore(false);
         //开启动画
-        homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+//        homeContainerAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_LEFT);
+        homeContainerAdapter.setAnimationEnable(true);
+        homeContainerAdapter.setAdapterAnimation(new SlideInLeftAnimation());
         rvMap.setAdapter(homeContainerAdapter);
 
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
@@ -523,13 +527,13 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                 }
             });
         } else {
-            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-                @Override
-                public void onLoadMoreRequested() {
-                    currPage++;
-                    mPresenter.getArticleList(currPage);
-                }
-            }, rvMap);
+//            homeContainerAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//                @Override
+//                public void onLoadMoreRequested() {
+//                    currPage++;
+//                    mPresenter.getArticleList(currPage);
+//                }
+//            }, rvMap);
         }
 
         //自动刷新(替代第一次请求数据)
@@ -1296,19 +1300,19 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         } else {
             //请求更多数据,直接添加list中
             homeContainerAdapter.addData(data.getDatas());
-            homeContainerAdapter.loadMoreComplete();
+//            homeContainerAdapter.loadMoreComplete();
             LogUtil.d(TAG, "上拉加载更多：  " + "数量: " + homeContainerAdapter.getData().size());
         }
 
         if (data.isOver() || data.getDatas().size() == 0) {
 //        if (data.getDatas().size() == 0) {
-            homeContainerAdapter.loadMoreEnd();
+//            homeContainerAdapter.loadMoreEnd();
             smartRefreshLayout.setEnableLoadMore(false);
             onShowToast("没有更多数据了!");
         } else {
-            if (!homeContainerAdapter.isLoadMoreEnable()) {
-                homeContainerAdapter.setEnableLoadMore(true);
-            }
+//            if (!homeContainerAdapter.isLoadMoreEnable()) {
+//                homeContainerAdapter.setEnableLoadMore(true);
+//            }
             smartRefreshLayout.setEnableLoadMore(true);
         }
         //这两个方法是在加载成功,并且还有数据的情况下调用的
@@ -1319,7 +1323,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     @Override
     public void onGetArticleListFail(String content) {
         onShowToast(content);
-        homeContainerAdapter.loadMoreFail();
+//        homeContainerAdapter.loadMoreFail();
         //这两个方法是在加载失败时调用的
         smartRefreshLayout.finishRefresh(false);
         smartRefreshLayout.finishLoadMore(false);

@@ -276,8 +276,7 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
     implementation rootProject.ext.dependencies.greendao
     implementation rootProject.ext.dependencies.eventbus
-    implementation rootProject.ext.dependencies.bravh2X
-//    implementation rootProject.ext.dependencies.bravh3X
+    implementation rootProject.ext.dependencies.bravh3X
     implementation rootProject.ext.dependencies.smartRefreshLayout
     implementation rootProject.ext.dependencies.smartRefreshHeader
     implementation rootProject.ext.dependencies.swipelayout
