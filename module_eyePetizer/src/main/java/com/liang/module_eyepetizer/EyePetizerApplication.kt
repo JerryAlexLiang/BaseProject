@@ -15,14 +15,14 @@ class EyePetizerApplication : BaseApplication(), BaseApplicationImpl {
     companion object {
 
         lateinit var context: Context
-
     }
 
     override fun onCreate() {
         super.onCreate()
-        context = applicationContext
+//        context = applicationContext
     }
 
     override fun onCreate(application: Application?, isDebug: Boolean) {
+        context = getAppContext()
     }
 }

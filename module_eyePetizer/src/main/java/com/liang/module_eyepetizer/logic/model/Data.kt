@@ -1,0 +1,31 @@
+package com.liang.module_eyepetizer.logic.model
+
+data class Data(
+    val actionUrl: Any,
+    val adTrack: Any,
+    val count: Int,
+    val dataType: String,
+    val description: String,
+    val detail: Detail,
+    val expert: Boolean,
+    val follow: Any,
+    val footer: Any,
+    val haveReward: Boolean,
+    val header: Header,
+    val icon: String,
+    val iconType: String,
+    val id: Int,
+    val ifNewest: Boolean,
+    val ifPgc: Boolean,
+    val ifShowNotificationIcon: Boolean,
+    val itemList: List<ItemX>,
+    val medalIcon: Boolean,
+    val newestEndTime: Any,
+    val rightText: String,
+    val subTitle: Any,
+    val switchStatus: Boolean,
+    val text: String,
+    val title: String,
+    val type: String,
+    val uid: Int
+)

@@ -177,7 +177,10 @@ dependencies {
 
     api rootProject.ext.dependencies.flycoTabLayoutLib
 
+    api rootProject.ext.dependencies.convenientBanner
+
     api rootProject.ext.dependencies.viewpager2
+    api rootProject.ext.dependencies.BannerViewPager
     api rootProject.ext.dependencies.permissionx
     api rootProject.ext.dependencies.gsyVideoPlayer
 

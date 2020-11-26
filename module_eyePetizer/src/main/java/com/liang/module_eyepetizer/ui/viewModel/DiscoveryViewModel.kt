@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.liang.module_eyepetizer.logic.EyeRepository
-import com.liang.module_eyepetizer.logic.model.DiscoveryBean
+import com.liang.module_eyepetizer.logic.model.Item
 import com.liang.module_eyepetizer.logic.network.DiscoveryApiService
 
 /**
@@ -15,7 +15,7 @@ import com.liang.module_eyepetizer.logic.network.DiscoveryApiService
 class DiscoveryViewModel(repository: EyeRepository) : ViewModel() {
 
     //和界面相关的数据，定义在ViewModel中，可以保证它们在手机屏幕发生旋转的时候不会丢失，稍后在编写UI层代码的时候就会用到这几个变量
-    var dataList = mutableListOf<DiscoveryBean.ItemListBeanX>()
+    var dataList = mutableListOf<Item>()
 
     private val requestParamLiveData = MutableLiveData<String>()
 

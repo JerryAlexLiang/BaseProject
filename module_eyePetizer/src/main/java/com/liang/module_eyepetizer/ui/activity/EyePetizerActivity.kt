@@ -3,6 +3,7 @@ package com.liang.module_eyepetizer.ui.activity
 import android.os.Bundle
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_eyepetizer.R
+import com.liang.module_eyepetizer.ui.fragment.DiscoveryFragment
 import com.liang.module_eyepetizer.ui.fragment.EyeHomeFragment
 
 /**
@@ -34,7 +35,8 @@ class EyePetizerActivity : MVVMBaseActivity() {
     }
 
     private fun initFragment() {
-        val eyeHomeFragment = EyeHomeFragment.newInstance()
-        replaceFragment(eyeHomeFragment)
+//        val eyeHomeFragment = EyeHomeFragment.newInstance()
+        val discoveryFragment = DiscoveryFragment.newInstance()
+        replaceFragment(discoveryFragment)
     }
 }

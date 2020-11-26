@@ -1,6 +1,7 @@
 package com.liang.module_eyepetizer.logic.network
 
 import com.liang.module_eyepetizer.logic.model.DiscoveryBean
+import com.liang.module_eyepetizer.logic.model.DiscoveryModel
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -17,8 +18,8 @@ interface DiscoveryApiService {
      * 首页-发现列表
      */
     @GET
-    fun fetchDiscovery(@Url url: String): Call<DiscoveryBean>
-
+//    fun fetchDiscovery(@Url url: String): Call<DiscoveryBean>
+    fun fetchDiscovery(@Url url: String): Call<DiscoveryModel>
 
     companion object {
 

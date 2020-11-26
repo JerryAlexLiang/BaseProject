@@ -159,7 +159,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
         HomeFunctionBean bean1 = new HomeFunctionBean(0, R.drawable.icon_submit, "天气");
         HomeFunctionBean bean2 = new HomeFunctionBean(1, R.drawable.ic_calendar_black_19dp, "日历");
-        HomeFunctionBean bean3 = new HomeFunctionBean(2, R.drawable.im_hover_bzfamily, "日历");
+        HomeFunctionBean bean3 = new HomeFunctionBean(2, R.drawable.im_hover_bzfamily, "EyePetizer");
         HomeFunctionBean bean4 = new HomeFunctionBean(3, R.drawable.icon_function_more, "更多");
         functionBeanList.add(bean1);
         functionBeanList.add(bean2);

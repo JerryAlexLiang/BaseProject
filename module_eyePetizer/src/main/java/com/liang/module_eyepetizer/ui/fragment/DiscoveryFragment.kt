@@ -7,12 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.utils.GsonUtils
 import com.liang.module_core.utils.LogUtil
 import com.liang.module_eyepetizer.R
 import com.liang.module_eyepetizer.logic.network.InjectorUtil
+import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapter
+import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapterJava
 import com.liang.module_eyepetizer.ui.viewModel.DiscoveryViewModel
 import kotlinx.android.synthetic.main.fragment_discovery.*
+
 
 /**
  * 创建日期:2020/11/24 on 1:52 PM
@@ -20,6 +24,9 @@ import kotlinx.android.synthetic.main.fragment_discovery.*
  * 作者: 杨亮
  */
 class DiscoveryFragment : Fragment() {
+
+    private lateinit var adapter: DiscoveryAdapter
+//    private lateinit var adapter: DiscoveryAdapterJava
 
     private val viewModel by lazy {
         ViewModelProvider(this, InjectorUtil.getDiscoveryViewModelFactory()).get(DiscoveryViewModel::class.java)
@@ -33,20 +40,29 @@ class DiscoveryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val manager = LinearLayoutManager(context)
+        recyclerView.layoutManager = manager
+
+        smart_refresh_layout.autoRefresh()
         smart_refresh_layout.setOnRefreshListener {
             viewModel.onRefresh()
         }
+
+        adapter = DiscoveryAdapter(viewModel.dataList)
+//        adapter = DiscoveryAdapterJava(viewModel.dataList)
+        recyclerView.adapter = adapter
 
         observe()
     }
 
 
     private fun observe() {
-
         viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
             val response = result.getOrNull()
+
             if (response != null) {
-                viewModel.nextPageUrl = response.nextPageUrl
+
+                val nextPageUrl = response.nextPageUrl
                 if (response.itemList.isNullOrEmpty() && viewModel.dataList.isEmpty()) {
                     smart_refresh_layout.closeHeaderOrFooter()
                 }
@@ -62,9 +78,15 @@ class DiscoveryFragment : Fragment() {
                 }
 
                 viewModel.dataList.clear()
-                viewModel.dataList.addAll(response.itemList)
+//                viewModel.dataList.addAll(response.itemList)
+                viewModel.dataList.add(response.itemList[0])
+                viewModel.dataList.add(response.itemList[1])
+//                viewModel.dataList.add(response.itemList[0])
+                adapter.notifyDataSetChanged()
 
-                LogUtil.d("eye", "eye data ---> " + GsonUtils.toJson(viewModel.dataList))
+                LogUtil.d("eye", "eye data0 :  " + GsonUtils.toJson(viewModel.dataList[0].type))
+                LogUtil.d("eye", "eye data1 :  " + GsonUtils.toJson(adapter.data[0].type))
+                LogUtil.d("eye", "eye data2 :  " + adapter.data.size)
             } else {
                 smart_refresh_layout.closeHeaderOrFooter()
             }
