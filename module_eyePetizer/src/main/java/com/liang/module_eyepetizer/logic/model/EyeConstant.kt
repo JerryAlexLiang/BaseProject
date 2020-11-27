@@ -21,35 +21,37 @@ interface EyeConstant {
              */
             const val TOP_BANNER_VIEW = 1
 
+            const val TOP_SINGLE_BANNER_VIEW = 2
+
             /**
              * 热门分类
              */
-            const val CATEGORY_CARD_VIEW = 2
+            const val CATEGORY_CARD_VIEW = 3
 
             /**
              * 专题策划
              */
-            const val SUBJECT_CARD_VIEW = 3
+            const val SUBJECT_CARD_VIEW = 4
 
             /**
              * 标题栏
              */
-            const val TITLE_VIEW = 4
+            const val TITLE_VIEW = 5
 
             /**
              * 内容banner
              */
-            const val CONTENT_BANNER_VIEW = 5
+            const val CONTENT_BANNER_VIEW = 6
 
             /**
              * 本周视频榜单
              */
-            const val VIDEO_CARD_VIEW = 6
+            const val VIDEO_CARD_VIEW = 7
 
             /**
              * 推荐主题
              */
-            const val THEME_CARD_VIEW = 7
+            const val THEME_CARD_VIEW = 8
 
 
         }
@@ -63,6 +65,7 @@ interface EyeConstant {
              * 顶部banner
              */
             const val horizontalScrollCard = "horizontalScrollCard"
+            const val topHorizontalScrollCard = "TopHorizontalScrollCard"
 
             /**
              * 热门分类

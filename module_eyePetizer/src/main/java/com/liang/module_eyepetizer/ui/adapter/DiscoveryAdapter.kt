@@ -31,6 +31,7 @@ class DiscoveryAdapter(dataList: MutableList<Item>) : BaseProviderMultiAdapter<I
                 //热门分类
                 return EyeConstant.IDisCoverItemType.CATEGORY_CARD_VIEW
             }
+
             else -> {
                 return EyeConstant.IDisCoverItemType.UNKNOWN
             }

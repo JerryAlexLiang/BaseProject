@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.utils.GsonUtils
 import com.liang.module_core.utils.LogUtil
 import com.liang.module_eyepetizer.R
+import com.liang.module_eyepetizer.logic.model.EyeConstant
+import com.liang.module_eyepetizer.logic.model.Item
 import com.liang.module_eyepetizer.logic.network.InjectorUtil
 import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapter
-import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapterJava
 import com.liang.module_eyepetizer.ui.viewModel.DiscoveryViewModel
 import kotlinx.android.synthetic.main.fragment_discovery.*
 
@@ -79,14 +80,19 @@ class DiscoveryFragment : Fragment() {
 
                 viewModel.dataList.clear()
 //                viewModel.dataList.addAll(response.itemList)
+
                 viewModel.dataList.add(response.itemList[0])
                 viewModel.dataList.add(response.itemList[1])
-//                viewModel.dataList.add(response.itemList[0])
+
                 adapter.notifyDataSetChanged()
 
                 LogUtil.d("eye", "eye data0 :  " + GsonUtils.toJson(viewModel.dataList[0].type))
-                LogUtil.d("eye", "eye data1 :  " + GsonUtils.toJson(adapter.data[0].type))
-                LogUtil.d("eye", "eye data2 :  " + adapter.data.size)
+                LogUtil.d("eye", "eye data1 :  " + GsonUtils.toJson(viewModel.dataList[1].type))
+
+                for (index in 0 until adapter.itemCount) {
+                    LogUtil.d("eye", "eye data index source:  " + index + "  " + GsonUtils.toJson(adapter.data[index].type))
+                }
+                LogUtil.d("eye", "eye data adapter :  " + adapter.data.size)
             } else {
                 smart_refresh_layout.closeHeaderOrFooter()
             }
