@@ -93,6 +93,8 @@ ext {
 
             BannerViewPager       : "3.2.0",
 
+            YouthBanner           : "2.0.12",
+
             viewpager2            : "1.0.0",
 
             permissionx           : "1.2.2",
@@ -225,6 +227,8 @@ ext {
             "convenientBanner"      : "com.bigkoo:convenientbanner:${versions.convenientBanner}",
 
             "BannerViewPager"       : "com.github.zhpanvip:BannerViewPager:${versions.BannerViewPager}",
+
+            "YouthBanner"           : "com.youth.banner:banner:${versions.YouthBanner}",
 
             "viewpager2"            : "androidx.viewpager2:viewpager2:${versions.viewpager2}",
 

@@ -11,18 +11,18 @@ import com.zhpan.bannerview.BaseBannerAdapter
  * 描述:
  * 作者: 杨亮
  */
-class BannerAdapter : BaseBannerAdapter<ItemX, BannerViewHolder>() {
+class BannerAdapter : BaseBannerAdapter<ItemX, BannerImageViewHolder>() {
 
     override fun getLayoutId(viewType: Int): Int {
         return R.layout.eye_item_banner_item_view
     }
 
-    override fun createViewHolder(parent: ViewGroup, itemView: View?, viewType: Int): BannerViewHolder {
-        return BannerViewHolder(itemView!!)
+    override fun createViewHolder(parent: ViewGroup, itemView: View?, viewType: Int): BannerImageViewHolder {
+        return BannerImageViewHolder(itemView!!)
     }
 
-    override fun onBind(holder: BannerViewHolder?, data: ItemX?, position: Int, pageSize: Int) {
-        holder?.bindData(data, position, pageSize)
+    override fun onBind(holderImage: BannerImageViewHolder?, data: ItemX?, position: Int, pageSize: Int) {
+        holderImage?.bindData(data, position, pageSize)
     }
 
 }

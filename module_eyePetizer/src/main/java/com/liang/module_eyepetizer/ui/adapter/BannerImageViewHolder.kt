@@ -13,7 +13,7 @@ import com.zhpan.bannerview.BaseViewHolder
  * 描述:
  * 作者: 杨亮
  */
-class BannerViewHolder(itemView: View) : BaseViewHolder<ItemX>(itemView) {
+class BannerImageViewHolder(itemView: View) : BaseViewHolder<ItemX>(itemView) {
 
     override fun bindData(data: ItemX?, position: Int, pageSize: Int) {
         val ivBanner: ImageView = findView(R.id.bannerBg)

@@ -179,6 +179,8 @@ dependencies {
 
     api rootProject.ext.dependencies.convenientBanner
 
+    api rootProject.ext.dependencies.YouthBanner
+
     api rootProject.ext.dependencies.viewpager2
     api rootProject.ext.dependencies.BannerViewPager
     api rootProject.ext.dependencies.permissionx

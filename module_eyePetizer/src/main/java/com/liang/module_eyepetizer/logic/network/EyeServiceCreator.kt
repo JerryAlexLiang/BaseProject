@@ -33,6 +33,7 @@ object EyeServiceCreator {
     init {
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY;
         client.addInterceptor(loggingInterceptor)
+        client.addInterceptor(HttpLoggingInterceptor())
         client.addInterceptor(HeaderInterceptor())
         client.addInterceptor(BasicParamsInterceptor())
         client.build();
