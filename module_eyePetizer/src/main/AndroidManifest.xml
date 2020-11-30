@@ -3,7 +3,8 @@
     package="com.liang.module_eyepetizer">
 
     <application>
-        <activity android:name=".ui.activity.EyePetizerActivity"></activity>
+        <activity android:name=".ui.activity.TestLocalDataActivity"></activity>
+        <activity android:name=".ui.activity.EyePetizerActivity" />
         <activity android:name=".ui.activity.EyeSplashActivity" />
     </application>
 

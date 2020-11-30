@@ -1,0 +1,53 @@
+{
+  "inquiry" : [
+    {
+      "iconUrl" : "http://img.kaiyanapp.com/11eb1c75f892c9fea38e3ebd8ca03932.jpeg?imageMogr2/quality/60/format/jpg",
+      "linkUrl" : "jk://view/home",
+      "type" : "H5"
+    },
+    {
+      "iconUrl" : "www.baidu.com",
+      "linkUrl" : "jk://view/home",
+      "type" : "H5"
+    }
+  ],
+  "multiCard" : {
+    "banner" : [
+      {
+        "iconUrl" : "http://img.kaiyanapp.com/11eb1c75f892c9fea38e3ebd8ca03932.jpeg?imageMogr2/quality/60/format/jpg",
+        "linkUrl" : "route",
+        "type" : "H5"
+      },
+      {
+        "iconUrl" : "http://img.kaiyanapp.com/96ba32e48697d4eeb1423c52c28f2c03.jpeg?imageMogr2/quality/60/format/jpg",
+        "linkUrl" : "route",
+        "type" : "H5"
+      },
+      {
+        "iconUrl" : "http://img.kaiyanapp.com/a76500238a061b314669021fe9e2ece0.jpeg?imageMogr2/quality/60/format/jpg",
+        "linkUrl" : "route",
+        "type" : "H5"
+      }
+    ],
+    "rightBottomItem" : {
+      "iconUrl" : "www.baidu.com",
+      "linkUrl" : "route",
+      "type" : "H5"
+    },
+    "rightTopItem" : {
+      "iconUrl" : "www.baidu.com",
+      "linkUrl" : "route",
+      "type" : "H5"
+    }
+  },
+  "singleCardOne" : {
+    "iconUrl" : "http://img.kaiyanapp.com/5232f4b636b9a8840d0046aa8d143be2.png?imageMogr2/quality/60/format/jpg",
+    "linkUrl" : "route跳转路由",
+    "type" : "H5"
+  },
+  "singleCardTwo" : {
+    "iconUrl" : "http://img.kaiyanapp.com/9c3d53ae1af82132c3368ab2d652310d.jpeg?imageMogr2/quality/60/format/jpg",
+    "linkUrl" : "route",
+    "type" : "H5"
+  }
+}

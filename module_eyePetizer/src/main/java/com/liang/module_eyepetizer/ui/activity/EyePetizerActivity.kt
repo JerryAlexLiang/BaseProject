@@ -1,10 +1,13 @@
 package com.liang.module_eyepetizer.ui.activity
 
+import android.app.LocalActivityManager
 import android.os.Bundle
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_eyepetizer.R
 import com.liang.module_eyepetizer.ui.fragment.DiscoveryFragment
 import com.liang.module_eyepetizer.ui.fragment.EyeHomeFragment
+import kotlinx.android.synthetic.main.activity_eye_petizer.*
+import org.jetbrains.anko.startActivity
 
 /**
  * 创建日期:2020/9/15 on 2:24 PM
@@ -32,6 +35,10 @@ class EyePetizerActivity : MVVMBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initFragment()
+
+        floatingBtn.setOnClickListener {
+            startActivity<TestLocalDataActivity>()
+        }
     }
 
     private fun initFragment() {
