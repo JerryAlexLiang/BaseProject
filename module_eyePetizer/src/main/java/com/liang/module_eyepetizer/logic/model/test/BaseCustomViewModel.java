@@ -11,7 +11,16 @@ import java.io.Serializable;
  * @author darryrzhoong
  * @since 2020-01-27
  */
-public class BaseCustomViewModel implements Serializable
-{
-    
+public class BaseCustomViewModel implements Serializable {
+
+    private int sortIndex;
+
+    public int getSortIndex() {
+        return sortIndex;
+    }
+
+    public BaseCustomViewModel setSortIndex(int sortIndex) {
+        this.sortIndex = sortIndex;
+        return this;
+    }
 }

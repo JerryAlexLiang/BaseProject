@@ -1,14 +1,20 @@
 package com.liang.module_eyepetizer.logic.network
 
 import android.os.Build
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
+import com.liang.module_core.app.BaseApplication
 import com.liang.module_core.retrofit.HttpLoggingInterceptor
 import com.liang.module_core.utils.LogUtil
+import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -18,6 +24,8 @@ import java.util.concurrent.TimeUnit
  * 作者: 杨亮
  */
 object EyeServiceCreator {
+
+    private var cookieJar: PersistentCookieJar? = null
 
     //开眼视频BASE_URL
     const val EYE_BASE_URL = "http://baobab.kaiyanapp.com/"
@@ -29,13 +37,21 @@ object EyeServiceCreator {
         LogUtil.e("RxHttpUtils", "message= $message")
     })
 
-
     init {
+        cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(BaseApplication.getAppContext()))
+
+        //cache url
+        val httpCacheDirectory = File(BaseApplication.mContext.cacheDir, "responses")
+        val cacheSize = 10 * 1024 * 1024 // 10 MiB
+        val cache = Cache(httpCacheDirectory, cacheSize.toLong())
+
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY;
         client.addInterceptor(loggingInterceptor)
         client.addInterceptor(HttpLoggingInterceptor())
         client.addInterceptor(HeaderInterceptor())
         client.addInterceptor(BasicParamsInterceptor())
+        client.cache(cache)
+         client.cookieJar(cookieJar);
         client.build();
     }
 
@@ -66,7 +82,8 @@ object EyeServiceCreator {
     inline fun <reified T> create(): T = create(T::class.java)
 
 
-    class HeaderInterceptor : Interceptor {
+//    class HeaderInterceptor : Interceptor {
+    class HeaderInterceptor : HttpLoggingInterceptor() {
         override fun intercept(chain: Interceptor.Chain): Response {
             val original = chain.request()
             val request = original.newBuilder().apply {
@@ -78,7 +95,8 @@ object EyeServiceCreator {
         }
     }
 
-    class BasicParamsInterceptor : Interceptor {
+//    class BasicParamsInterceptor : Interceptor {
+    class BasicParamsInterceptor : HttpLoggingInterceptor() {
         override fun intercept(chain: Interceptor.Chain): Response {
             val originalRequest = chain.request()
             val originalHttpUrl = originalRequest.url()

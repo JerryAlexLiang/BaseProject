@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import com.liang.module_core.app.BaseApplication;
 import com.liang.module_core.utils.NetUtil;
 
+import okhttp3.CacheControl;
 import okhttp3.Connection;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -133,19 +134,19 @@ public class HttpLoggingInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Level level = this.level;
 //        //************添加缓存******************//
-//        CacheControl.Builder cacheBuilder = new CacheControl.Builder();
-//        cacheBuilder.maxAge(0, TimeUnit.SECONDS);
-//        cacheBuilder.maxStale(365, TimeUnit.DAYS);
-//        CacheControl cacheControl = cacheBuilder.build();
-//
-//        Request request = chain.request();
-//        if (!NetUtil.isNetworkAvailable(MyApplication.mContext)){
-//            request = request.newBuilder()
-//                    .cacheControl(cacheControl)
-//                    .build();
-//        }
-//        //*************************************//
+        CacheControl.Builder cacheBuilder = new CacheControl.Builder();
+        cacheBuilder.maxAge(0, TimeUnit.SECONDS);
+        cacheBuilder.maxStale(365, TimeUnit.DAYS);
+        CacheControl cacheControl = cacheBuilder.build();
+
         Request request = chain.request();
+        if (!NetUtil.isNetworkAvailable(BaseApplication.mContext)){
+            request = request.newBuilder()
+                    .cacheControl(cacheControl)
+                    .build();
+        }
+//        //*************************************//
+//        Request request = chain.request();
         if (level == Level.NONE) {
             return chain.proceed(request);
         }

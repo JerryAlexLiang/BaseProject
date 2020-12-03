@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,11 +43,28 @@
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginStart="15dp"
-        tools:itemCount="16"
-        app:spanCount="2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/eye_category_item_child_view"/>
+        app:spanCount="2"
+        tools:itemCount="16"
+        tools:listitem="@layout/eye_category_item_child_view" />
+
+    <com.liang.module_core.widget.pageMenuLayout.PageSlideMenuBanner
+        android:id="@+id/pageSlideMenuBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:page_menu_column_count="5"
+        app:page_menu_row_count="2" />
+
+    <com.liang.module_core.widget.pageMenuLayout.PageSlideIndicatorView
+        android:id="@+id/pageSlideIndicatorView"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_gravity="center_horizontal"
+        app:indicatorColor="#668b8989"
+        app:indicatorColorSelected="#FF5722"
+        app:indicatorWidth="6"/>
 
 </LinearLayout>

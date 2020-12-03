@@ -1,13 +1,23 @@
 package com.liang.module_eyepetizer.ui.adapter.provider
 
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.liang.module_core.utils.ImageLoaderUtils
 import com.liang.module_core.jetpack.utils.SpecialSquareCardCollectionItemDecoration
 import com.liang.module_core.jetpack.utils.load
+import com.liang.module_core.utils.DensityUtil.getScreenWidth
 import com.liang.module_core.utils.ToastUtil
+import com.liang.module_core.widget.pageMenuLayout.PageSlideIndicatorView
+import com.liang.module_core.widget.pageMenuLayout.PageSlideMenuBanner
+import com.liang.module_core.widget.pageMenuLayout.adapter.PageSlideMenuViewHolderCreator
+import com.liang.module_core.widget.pageMenuLayout.adapter.PageSlideRvHolder
 import com.liang.module_eyepetizer.R
 import com.liang.module_eyepetizer.logic.model.Item
 import com.liang.module_eyepetizer.logic.model.ItemX
@@ -40,6 +50,57 @@ class CategoryCardProvider(override val itemViewType: Int, override val layoutId
         val categoryItemAdapter = CategoryItemAdapter(R.layout.eye_category_item_child_view)
         rvCategory.adapter = categoryItemAdapter
         categoryItemAdapter.setNewInstance(dataList as MutableList<ItemX>)
+
+        val pageSlideMenuBanner: PageSlideMenuBanner<ItemX> = helper.getView(R.id.pageSlideMenuBanner)
+        pageSlideMenuBanner.setPageData(dataList, object : PageSlideMenuViewHolderCreator {
+
+            override fun createHolder(itemView: View): PageSlideRvHolder<*>? {
+                return object : PageSlideRvHolder<ItemX?>(itemView) {
+
+                    private var entranceNameTextView: TextView? = null
+                    private var entranceIconImageView: ImageView? = null
+
+                    override fun initView(itemView: View?) {
+                        entranceIconImageView = itemView?.findViewById(R.id.entrance_image)
+                        entranceNameTextView = itemView?.findViewById(R.id.entrance_name)
+                        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (getScreenWidth(context).toFloat() / 4.0f).toInt())
+                        itemView?.layoutParams = layoutParams
+                    }
+
+                    override fun bindView(holder: RecyclerView.ViewHolder?, data: ItemX?, pos: Int) {
+                        entranceNameTextView?.text = data?.data?.title
+//                        Glide.with(context).asBitmap().load(data?.data?.image).into(entranceIconImageView!!)
+                        entranceIconImageView?.load(data?.data?.image!!, 4f)
+
+                        holder?.itemView?.setOnClickListener {
+                            ToastUtil.showShortToast(data?.data?.title)
+                        }
+
+                    }
+
+                }
+            }
+
+            override fun getLayoutId(): Int {
+                return R.layout.eye_item_home_entrance
+            }
+        })
+
+        val pageSlideIndicatorView: PageSlideIndicatorView = helper.getView(R.id.pageSlideIndicatorView)
+        if (dataList.size < 11) {
+            pageSlideIndicatorView.visibility = View.GONE
+        } else {
+            pageSlideIndicatorView.visibility = View.VISIBLE
+        }
+
+        pageSlideIndicatorView.setIndicatorCount(pageSlideMenuBanner.pageCount)
+
+        pageSlideMenuBanner.setOnPageListener(object : SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                pageSlideIndicatorView.setCurrentIndicator(position)
+            }
+        })
+
     }
 
     inner class CategoryItemAdapter(layoutResId: Int) : BaseQuickAdapter<ItemX, BaseViewHolder>(layoutResId) {

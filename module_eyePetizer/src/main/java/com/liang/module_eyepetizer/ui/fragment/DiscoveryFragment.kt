@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.utils.GsonUtils
 import com.liang.module_core.utils.LogUtil
 import com.liang.module_eyepetizer.R
+import com.liang.module_eyepetizer.logic.model.Data
 import com.liang.module_eyepetizer.logic.model.EyeConstant
 import com.liang.module_eyepetizer.logic.model.Item
+import com.liang.module_eyepetizer.logic.model.ItemX
 import com.liang.module_eyepetizer.logic.network.InjectorUtil
 import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapter
 import com.liang.module_eyepetizer.ui.viewModel.DiscoveryViewModel
@@ -41,6 +43,8 @@ class DiscoveryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        //确定Item的改变不会影响RecyclerView的宽高
+        recyclerView.setHasFixedSize(true)
         val manager = LinearLayoutManager(context)
         recyclerView.layoutManager = manager
 
@@ -81,8 +85,23 @@ class DiscoveryFragment : Fragment() {
                 viewModel.dataList.clear()
 //                viewModel.dataList.addAll(response.itemList)
 
-                viewModel.dataList.add(response.itemList[0])
-                viewModel.dataList.add(response.itemList[1])
+
+                for (element in response.itemList) {
+                    when (element.type) {
+                        EyeConstant.IDisCoverItemReturnType.horizontalScrollCard -> {
+                            viewModel.dataList.add(element)
+                        }
+                        EyeConstant.IDisCoverItemReturnType.specialSquareCardCollection -> {
+                            viewModel.dataList.add(element)
+                        }
+                        EyeConstant.IDisCoverItemReturnType.textCard -> {
+                            viewModel.dataList.add(element)
+                        }
+                    }
+                }
+
+//                viewModel.dataList.add(response.itemList[0])
+//                viewModel.dataList.add(response.itemList[1])
 
                 adapter.notifyDataSetChanged()
 

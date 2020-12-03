@@ -106,4 +106,15 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="PageSlideMenuBanner">
+        <attr name="page_menu_row_count" format="integer" />
+        <attr name="page_menu_column_count" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="PageSlideIndicatorView">
+        <attr name="indicatorColor" format="color"/>
+        <attr name="indicatorColorSelected" format="color"/>
+        <attr name="indicatorWidth" format="integer"/>
+        <attr name="gravity" format="integer"/>
+    </declare-styleable>
 </resources>

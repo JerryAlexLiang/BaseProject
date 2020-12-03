@@ -5,6 +5,7 @@ import com.liang.module_eyepetizer.R
 import com.liang.module_eyepetizer.logic.model.EyeConstant
 import com.liang.module_eyepetizer.logic.model.Item
 import com.liang.module_eyepetizer.ui.adapter.provider.CategoryCardProvider
+import com.liang.module_eyepetizer.ui.adapter.provider.TextTitleProvider
 import com.liang.module_eyepetizer.ui.adapter.provider.TopBannerProvider
 
 /**
@@ -17,6 +18,7 @@ class DiscoveryAdapter(dataList: MutableList<Item>) : BaseProviderMultiAdapter<I
     init {
         addItemProvider(TopBannerProvider())
         addItemProvider(CategoryCardProvider(EyeConstant.IDisCoverItemType.CATEGORY_CARD_VIEW, R.layout.eye_category_item_card_view))
+        addItemProvider(TextTitleProvider())
     }
 
     override fun getItemType(data: List<Item>, position: Int): Int {
@@ -30,6 +32,11 @@ class DiscoveryAdapter(dataList: MutableList<Item>) : BaseProviderMultiAdapter<I
             EyeConstant.IDisCoverItemReturnType.specialSquareCardCollection->{
                 //热门分类
                 return EyeConstant.IDisCoverItemType.CATEGORY_CARD_VIEW
+            }
+
+            EyeConstant.IDisCoverItemReturnType.textCard->{
+                //测试标题栏
+                return EyeConstant.IDisCoverItemType.TITLE_VIEW
             }
 
             else -> {

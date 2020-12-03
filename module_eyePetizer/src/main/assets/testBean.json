@@ -1,214 +1,223 @@
 {
-  "articlePage" : {
-    "items" : [
+  "articlePage": {
+    "sort": 3,
+    "items": [
       {
-        "items" : [
+        "items": [
           {
-            "acticleType" : "acticle",
-            "articleId" : "14354656",
-            "authorHeadImage" : "www.baidu.com",
-            "authorName" : "复星健康",
-            "duration" : "01:27",
-            "iconUrl" : "www.baiduc.om",
-            "imageUrl" : "www.baiduc,om",
-            "linkUrl" : "www.baidu.com",
-            "pv" : 450,
-            "title" : "牙根有条小黑缝，小心这个病",
-            "type" : "H5",
-            "videoId" : "1243535"
+            "acticleType": "acticle",
+            "articleId": "14354656",
+            "authorHeadImage": "www.baidu.com",
+            "authorName": "复星健康",
+            "duration": "01:27",
+            "iconUrl": "www.baiduc.om",
+            "imageUrl": "www.baiduc,om",
+            "linkUrl": "www.baidu.com",
+            "pv": 450,
+            "title": "牙根有条小黑缝，小心这个病",
+            "type": "H5",
+            "videoId": "1243535"
           },
           {
-            "acticleType" : "acticle",
-            "articleId" : "14354656",
-            "authorHeadImage" : "www.baidu.com",
-            "authorName" : "复星健康",
-            "duration" : "01:27",
-            "iconUrl" : "www.baiduc.om",
-            "imageUrl" : "www.baiduc,om",
-            "linkUrl" : "www.baidu.com",
-            "pv" : 450,
-            "title" : "秋冬换季=皮肤干燥？原因可能在你自己身上",
-            "type" : "H5",
-            "videoId" : "1243535"
+            "acticleType": "acticle",
+            "articleId": "14354656",
+            "authorHeadImage": "www.baidu.com",
+            "authorName": "复星健康",
+            "duration": "01:27",
+            "iconUrl": "www.baiduc.om",
+            "imageUrl": "www.baiduc,om",
+            "linkUrl": "www.baidu.com",
+            "pv": 450,
+            "title": "秋冬换季=皮肤干燥？原因可能在你自己身上",
+            "type": "H5",
+            "videoId": "1243535"
           },
           {
-            "acticleType" : "acticle",
-            "articleId" : "14354656",
-            "authorHeadImage" : "www.baidu.com",
-            "authorName" : "复星健康",
-            "duration" : "01:27",
-            "iconUrl" : "www.baiduc.om",
-            "imageUrl" : "www.baiduc,om",
-            "linkUrl" : "www.baidu.com",
-            "pv" : 450,
-            "title" : "牙根有条小黑缝，小心这个病",
-            "type" : "H5",
-            "videoId" : "1243535"
+            "acticleType": "acticle",
+            "articleId": "14354656",
+            "authorHeadImage": "www.baidu.com",
+            "authorName": "复星健康",
+            "duration": "01:27",
+            "iconUrl": "www.baiduc.om",
+            "imageUrl": "www.baiduc,om",
+            "linkUrl": "www.baidu.com",
+            "pv": 450,
+            "title": "牙根有条小黑缝，小心这个病",
+            "type": "H5",
+            "videoId": "1243535"
           }
         ],
-        "title" : "精选"
+        "title": "精选"
       },
       {
-        "items" : [
+        "items": [
           {
-            "acticleType" : "acticle",
-            "articleId" : "14354656",
-            "authorHeadImage" : "www.baidu.com",
-            "authorName" : "复星健康",
-            "duration" : "01:27",
-            "iconUrl" : "www.baiduc.om",
-            "imageUrl" : "www.baiduc,om",
-            "linkUrl" : "www.baidu.com",
-            "pv" : 450,
-            "title" : "牙根有条小黑缝，小心这个病",
-            "type" : "H5",
-            "videoId" : "1243535"
+            "acticleType": "acticle",
+            "articleId": "14354656",
+            "authorHeadImage": "www.baidu.com",
+            "authorName": "复星健康",
+            "duration": "01:27",
+            "iconUrl": "www.baiduc.om",
+            "imageUrl": "www.baiduc,om",
+            "linkUrl": "www.baidu.com",
+            "pv": 450,
+            "title": "牙根有条小黑缝，小心这个病",
+            "type": "H5",
+            "videoId": "1243535"
           },
           {
-            "acticleType" : "acticle",
-            "articleId" : "14354656",
-            "authorHeadImage" : "www.baidu.com",
-            "authorName" : "复星健康",
-            "duration" : "01:27",
-            "iconUrl" : "www.baiduc.om",
-            "imageUrl" : "www.baiduc,om",
-            "linkUrl" : "www.baidu.com",
-            "pv" : 450,
-            "title" : "牙根有条小黑缝，小心这个病",
-            "type" : "H5",
-            "videoId" : "1243535"
+            "acticleType": "acticle",
+            "articleId": "14354656",
+            "authorHeadImage": "www.baidu.com",
+            "authorName": "复星健康",
+            "duration": "01:27",
+            "iconUrl": "www.baiduc.om",
+            "imageUrl": "www.baiduc,om",
+            "linkUrl": "www.baidu.com",
+            "pv": 450,
+            "title": "牙根有条小黑缝，小心这个病",
+            "type": "H5",
+            "videoId": "1243535"
           },
           {
-            "acticleType" : "acticle",
-            "articleId" : "14354656",
-            "authorHeadImage" : "www.baidu.com",
-            "authorName" : "复星健康",
-            "duration" : "01:27",
-            "iconUrl" : "www.baiduc.om",
-            "imageUrl" : "www.baiduc,om",
-            "linkUrl" : "www.baidu.com",
-            "pv" : 450,
-            "title" : "牙根有条小黑缝，小心这个病",
-            "type" : "H5",
-            "videoId" : "1243535"
+            "acticleType": "acticle",
+            "articleId": "14354656",
+            "authorHeadImage": "www.baidu.com",
+            "authorName": "复星健康",
+            "duration": "01:27",
+            "iconUrl": "www.baiduc.om",
+            "imageUrl": "www.baiduc,om",
+            "linkUrl": "www.baidu.com",
+            "pv": 450,
+            "title": "牙根有条小黑缝，小心这个病",
+            "type": "H5",
+            "videoId": "1243535"
           }
         ],
-        "title" : "健康养生"
+        "title": "健康养生"
       }
     ],
-    "linkUrl" : "jk://view/home",
-    "moreText" : "查看更多",
-    "type" : "H5"
+    "linkUrl": "jk://view/home",
+    "moreText": "查看更多",
+    "type": "H5"
   },
-  "doctorRecommend" : {
-    "items" : [
+  "doctorRecommend": {
+    "sort": 1,
+    "items": [
       {
-        "deptName" : "妇科",
-        "doctors" : [
+        "deptName": "妇科",
+        "doctors": [
           {
-            "doctorHeadImg" : "www.baidu.com",
-            "doctorId" : "1434354",
-            "doctorName" : "覃莎",
-            "doctorTitle" : "主治医师",
-            "hospitalName" : "上海儿童医学中心",
-            "linkUrl" : "jk://view/home",
-            "type" : "H5"
+            "doctorHeadImg": "www.baidu.com",
+            "doctorId": "1434354",
+            "doctorName": "覃莎",
+            "doctorTitle": "主治医师",
+            "hospitalName": "上海儿童医学中心",
+            "linkUrl": "jk://view/home",
+            "type": "H5"
           },
           {
-            "doctorHeadImg" : "www.baidu.com",
-            "doctorId" : "1434354",
-            "doctorName" : "叶江枫",
-            "doctorTitle" : "主治医师",
-            "hospitalName" : "上海儿童医学中心",
-            "linkUrl" : "jk://view/home",
-            "type" : "H5"
+            "doctorHeadImg": "www.baidu.com",
+            "doctorId": "1434354",
+            "doctorName": "叶江枫",
+            "doctorTitle": "主治医师",
+            "hospitalName": "上海儿童医学中心",
+            "linkUrl": "jk://view/home",
+            "type": "H5"
           },
           {
-            "doctorHeadImg" : "www.baidu.com",
-            "doctorId" : "1434354",
-            "doctorName" : "王大锤",
-            "doctorTitle" : "主治医师",
-            "hospitalName" : "北京儿童医学中心",
-            "linkUrl" : "jk://view/home",
-            "type" : "H5"
+            "doctorHeadImg": "www.baidu.com",
+            "doctorId": "1434354",
+            "doctorName": "王大锤",
+            "doctorTitle": "主治医师",
+            "hospitalName": "北京儿童医学中心",
+            "linkUrl": "jk://view/home",
+            "type": "H5"
           }
         ]
       }
     ],
-    "linkUrl" : "jk://view/home",
-    "moreText" : "查看更多",
-    "title" : "专家推荐",
-    "type" : "H5"
+    "linkUrl": "jk://view/home",
+    "moreText": "查看更多",
+    "title": "专家推荐",
+    "type": "H5"
   },
-  "inquiry" : [
-    {
-      "iconUrl" : "www.baidu.com",
-      "linkUrl" : "jk://view/home",
-      "type" : "H5"
-    },
-    {
-      "iconUrl" : "www.baidu.com",
-      "linkUrl" : "jk://view/home",
-      "type" : "H5"
-    }
-  ],
-  "multiCard" : {
-    "banner" : [
+  "inquiry": {
+    "sort": 1,
+    "items": [
       {
-        "iconUrl" : "www.baidu.com",
-        "linkUrl" : "route",
-        "type" : "H5"
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "jk://view/home",
+        "type": "H5"
+      },
+      {
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "jk://view/home",
+        "type": "H5"
+      }
+    ]
+  },
+  "multiCard": {
+    "sort": 2,
+    "banner": [
+      {
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "route",
+        "type": "H5"
       }
     ],
-    "rightBottomItem" : {
-      "iconUrl" : "www.baidu.com",
-      "linkUrl" : "route",
-      "type" : "H5"
+    "rightBottomItem": {
+      "iconUrl": "www.baidu.com",
+      "linkUrl": "route",
+      "type": "H5"
     },
-    "rightTopItem" : {
-      "iconUrl" : "www.baidu.com",
-      "linkUrl" : "route",
-      "type" : "H5"
+    "rightTopItem": {
+      "iconUrl": "www.baidu.com",
+      "linkUrl": "route",
+      "type": "H5"
     }
   },
-  "singleCardOne" : {
-    "iconUrl" : "www.baidu.com跳转路径",
-    "linkUrl" : "route跳转路由",
-    "type" : "H5"
+  "singleCardOne": {
+    "sort": 1,
+    "iconUrl": "www.baidu.com跳转路径",
+    "linkUrl": "route跳转路由",
+    "type": "H5"
   },
-  "singleCardTwo" : {
-    "iconUrl" : "www.baidu.com",
-    "linkUrl" : "route",
-    "type" : "H5"
+  "singleCardTwo": {
+    "sort": 1,
+    "iconUrl": "www.baidu.com",
+    "linkUrl": "route",
+    "type": "H5"
   },
-  "special" : {
-    "desc" : "顶级专家，守护您的健康",
-    "items" : [
+  "special": {
+    "sort": 1,
+    "desc": "顶级专家，守护您的健康",
+    "items": [
       {
-        "iconUrl" : "www.baidu.com",
-        "linkUrl" : "jk://view/home",
-        "title" : "听力",
-        "type" : "H5"
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "jk://view/home",
+        "title": "听力",
+        "type": "H5"
       },
       {
-        "iconUrl" : "www.baidu.com",
-        "linkUrl" : "jk://view/home",
-        "title" : "慢病",
-        "type" : "H5"
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "jk://view/home",
+        "title": "慢病",
+        "type": "H5"
       },
       {
-        "iconUrl" : "www.baidu.com",
-        "linkUrl" : "jk://view/home",
-        "title" : "医美",
-        "type" : "H5"
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "jk://view/home",
+        "title": "医美",
+        "type": "H5"
       },
       {
-        "iconUrl" : "www.baidu.com",
-        "linkUrl" : "jk://view/home",
-        "title" : "肿瘤",
-        "type" : "H5"
+        "iconUrl": "www.baidu.com",
+        "linkUrl": "jk://view/home",
+        "title": "肿瘤",
+        "type": "H5"
       }
     ],
-    "title" : "特色专区"
+    "title": "特色专区"
   }
 }

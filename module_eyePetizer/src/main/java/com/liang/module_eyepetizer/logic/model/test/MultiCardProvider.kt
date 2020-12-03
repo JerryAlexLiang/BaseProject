@@ -2,6 +2,7 @@ package com.liang.module_eyepetizer.logic.model.test
 
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.liang.module_core.utils.ToastUtil
 import com.liang.module_eyepetizer.R
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
@@ -36,6 +37,10 @@ class MultiCardProvider : BaseItemProvider<BaseCustomViewModel>() {
             setBannerRound(20f)
             //adapter = YouthBannerImageAdapter(item.data)
             adapter = YouthBannerAdapter(multiCardBean.banner)
+        }
+
+        helper.itemView.setOnClickListener {
+            ToastUtil.showShortToast("原始顺序: " + item.sortIndex + "整理顺序: " + item.sort)
         }
     }
 }

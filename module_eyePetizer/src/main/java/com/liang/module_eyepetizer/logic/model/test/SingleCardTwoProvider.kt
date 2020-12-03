@@ -4,6 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.liang.module_core.utils.ToastUtil
 import com.liang.module_eyepetizer.R
 
 /**
@@ -29,5 +30,9 @@ class SingleCardTwoProvider : BaseItemProvider<BaseCustomViewModel>() {
         val singleCardTwoBean: Test.SingleCardTwoBean = item as Test.SingleCardTwoBean
         val imageView = helper.getView<ImageView>(R.id.ivTwo)
         Glide.with(context).asBitmap().load(singleCardTwoBean.iconUrl).into(imageView)
+
+        helper.itemView.setOnClickListener {
+            ToastUtil.showShortToast("原始顺序: " + item.sortIndex + "整理顺序: " + item.sort)
+        }
     }
 }

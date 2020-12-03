@@ -41,4 +41,15 @@ dependencies {
 
 //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.6'
 
+    implementation 'com.github.gzu-liyujiang:HorizontalGridView:1.0.0.20200710@aar'
+
+//    implementation 'com.github.xiaohaibin:PageMenuLayout:0.3.0'//将latestVersion替换成上面 jitpack 后面的版本号
+
+//    implementation project(path: ':pagemenulibrary')
+
+    /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
+    implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
+
 }
