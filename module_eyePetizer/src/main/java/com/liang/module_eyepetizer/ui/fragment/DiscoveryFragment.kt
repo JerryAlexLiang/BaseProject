@@ -11,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.utils.GsonUtils
 import com.liang.module_core.utils.LogUtil
 import com.liang.module_eyepetizer.R
-import com.liang.module_eyepetizer.logic.model.Data
 import com.liang.module_eyepetizer.logic.model.EyeConstant
-import com.liang.module_eyepetizer.logic.model.Item
-import com.liang.module_eyepetizer.logic.model.ItemX
 import com.liang.module_eyepetizer.logic.network.InjectorUtil
 import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapter
 import com.liang.module_eyepetizer.ui.viewModel.DiscoveryViewModel
@@ -56,6 +53,9 @@ class DiscoveryFragment : Fragment() {
         adapter = DiscoveryAdapter(viewModel.dataList)
 //        adapter = DiscoveryAdapterJava(viewModel.dataList)
         recyclerView.adapter = adapter
+
+        // 必须设置Diff Callback
+//        adapter.setDiffCallback(DiffDemoCallback)
 
         observe()
     }

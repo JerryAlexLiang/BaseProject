@@ -186,6 +186,8 @@ dependencies {
     api rootProject.ext.dependencies.permissionx
     api rootProject.ext.dependencies.gsyVideoPlayer
 
+    api rootProject.ext.dependencies.broccoli
+
     //Android Jetpack 组件
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'

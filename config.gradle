@@ -102,7 +102,9 @@ ext {
             gsyVideoPlayer        : "7.1.3",
 
             //implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-            flycoTabLayoutLib     : "2.1.2@aar"
+            flycoTabLayoutLib     : "2.1.2@aar",
+
+            broccoli              : "1.0.0"
     ]
 
     dependencies = [
@@ -236,7 +238,10 @@ ext {
 
             "gsyVideoPlayer"        : "com.shuyu:GSYVideoPlayer:${versions.gsyVideoPlayer}",
 
-            "flycoTabLayoutLib"     : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions.flycoTabLayoutLib}"
+            "flycoTabLayoutLib"     : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions.flycoTabLayoutLib}",
+
+            //占位图
+            "broccoli"              : "me.samlss:broccoli:${versions.broccoli}"
     ]
 
 }

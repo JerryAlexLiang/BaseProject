@@ -7,9 +7,16 @@
     android:orientation="vertical"
     tools:context=".ui.activity.TestLocalDataActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLocalJson"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLocalJson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>
