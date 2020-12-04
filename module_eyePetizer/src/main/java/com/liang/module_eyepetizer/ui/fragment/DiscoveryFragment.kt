@@ -8,10 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.liang.module_core.utils.GsonUtils
-import com.liang.module_core.utils.LogUtil
+import com.liang.module_core.database.CacheManager
+import com.liang.module_core.utils.*
 import com.liang.module_eyepetizer.R
 import com.liang.module_eyepetizer.logic.model.EyeConstant
+import com.liang.module_eyepetizer.logic.model.Item
 import com.liang.module_eyepetizer.logic.network.InjectorUtil
 import com.liang.module_eyepetizer.ui.adapter.DiscoveryAdapter
 import com.liang.module_eyepetizer.ui.viewModel.DiscoveryViewModel
@@ -40,28 +41,55 @@ class DiscoveryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         //确定Item的改变不会影响RecyclerView的宽高
         recyclerView.setHasFixedSize(true)
         val manager = LinearLayoutManager(context)
         recyclerView.layoutManager = manager
 
-        smart_refresh_layout.autoRefresh()
-        smart_refresh_layout.setOnRefreshListener {
-            viewModel.onRefresh()
-        }
+//        smart_refresh_layout.autoRefresh()
+//        smart_refresh_layout.setOnRefreshListener {
+//            viewModel.onRefresh()
+//        }
 
         adapter = DiscoveryAdapter(viewModel.dataList)
 //        adapter = DiscoveryAdapterJava(viewModel.dataList)
         recyclerView.adapter = adapter
 
-        // 必须设置Diff Callback
-//        adapter.setDiffCallback(DiffDemoCallback)
+
+//        val mutableList = CacheManager.getCache("eyeLocal")
+
+
+//        LogUtil.d("eye", "eye data=> local :  " + GsonUtils.toJson(mutableList))
+//        if (localData != null && localData.size > 0) {
+//            ToastUtil.showShortToast("数据: $localData")
+//
+//            viewModel.dataList.clear()
+//            viewModel.dataList = localData
+//
+//            adapter.data = viewModel.dataList
+//            adapter.notifyDataSetChanged()
+//
+//        }
+
+        changeData1.setOnClickListener {
+            viewModel.onRefresh()
+        }
+
+        changeData2.setOnClickListener {
+            viewModel.onRefresh2()
+        }
 
         observe()
+
+        observe2()
     }
 
+    var dataListOld = mutableListOf<Item>()
+    var dataListNew = mutableListOf<Item>()
 
     private fun observe() {
+        dataListOld.clear()
         viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
             val response = result.getOrNull()
 
@@ -83,27 +111,30 @@ class DiscoveryFragment : Fragment() {
                 }
 
                 viewModel.dataList.clear()
-//                viewModel.dataList.addAll(response.itemList)
 
+                dataListOld.clear()
 
                 for (element in response.itemList) {
                     when (element.type) {
                         EyeConstant.IDisCoverItemReturnType.horizontalScrollCard -> {
-                            viewModel.dataList.add(element)
+                            dataListOld.add(element)
                         }
                         EyeConstant.IDisCoverItemReturnType.specialSquareCardCollection -> {
-                            viewModel.dataList.add(element)
+                            dataListOld.add(element)
                         }
                         EyeConstant.IDisCoverItemReturnType.textCard -> {
-                            viewModel.dataList.add(element)
+                            dataListOld.add(element)
                         }
                     }
                 }
+//                CacheManager.save("eyeLocal", dataListOld)
 
-//                viewModel.dataList.add(response.itemList[0])
-//                viewModel.dataList.add(response.itemList[1])
-
+                viewModel.dataList = dataListOld
+                LogUtil.d("eye", "eye data=> old :  " + GsonUtils.toJson(viewModel.dataList[0].type))
+                LogUtil.d("eye", "eye data=> old 1:  " + GsonUtils.toJson(dataListOld[0].type))
+                adapter.data = viewModel.dataList
                 adapter.notifyDataSetChanged()
+
 
                 LogUtil.d("eye", "eye data0 :  " + GsonUtils.toJson(viewModel.dataList[0].type))
                 LogUtil.d("eye", "eye data1 :  " + GsonUtils.toJson(viewModel.dataList[1].type))
@@ -118,6 +149,121 @@ class DiscoveryFragment : Fragment() {
         })
 
     }
+
+    private fun observe2() {
+        dataListNew.clear()
+        viewModel.dataListLiveData2.observe(viewLifecycleOwner, Observer { result ->
+            val response = result.getOrNull()
+
+            if (response != null) {
+
+                val nextPageUrl = response.nextPageUrl
+                if (response.itemList.isNullOrEmpty() && viewModel.dataList.isEmpty()) {
+                    smart_refresh_layout.closeHeaderOrFooter()
+                }
+
+                if (response.itemList.isNullOrEmpty() && viewModel.dataList.isNotEmpty()) {
+                    smart_refresh_layout.finishLoadMoreWithNoMoreData()
+                }
+
+                if (response.nextPageUrl.isNullOrEmpty()) {
+                    smart_refresh_layout.finishLoadMoreWithNoMoreData()
+                } else {
+                    smart_refresh_layout.closeHeaderOrFooter()
+                }
+
+                for (element in response.itemList) {
+                    when (element.type) {
+                        EyeConstant.IDisCoverItemReturnType.textCard -> {
+                            dataListNew.add(element)
+                        }
+                        EyeConstant.IDisCoverItemReturnType.horizontalScrollCard -> {
+                            dataListNew.add(element)
+                        }
+                        EyeConstant.IDisCoverItemReturnType.specialSquareCardCollection -> {
+                            dataListNew.add(element)
+                        }
+                    }
+                }
+                viewModel.dataList = dataListNew
+                LogUtil.d("eye", "eye data=> new :  " + GsonUtils.toJson(viewModel.dataList[0].type))
+                LogUtil.d("eye", "eye data=> new 1:  " + GsonUtils.toJson(dataListNew[0].type))
+                adapter.data = viewModel.dataList
+                adapter.notifyDataSetChanged()
+
+                //SPUtils.get(context, "eye", "")
+
+                LogUtil.d("eye", "eye data0 :  " + GsonUtils.toJson(viewModel.dataList[0].type))
+                LogUtil.d("eye", "eye data1 :  " + GsonUtils.toJson(viewModel.dataList[1].type))
+
+                for (index in 0 until adapter.itemCount) {
+                    LogUtil.d("eye", "eye data index source:  " + index + "  " + GsonUtils.toJson(adapter.data[index].type))
+                }
+                LogUtil.d("eye", "eye data adapter :  " + adapter.data.size)
+            } else {
+                smart_refresh_layout.closeHeaderOrFooter()
+            }
+        })
+
+    }
+
+//    private fun observe() {
+//        viewModel.dataListLiveData.observe(viewLifecycleOwner, Observer { result ->
+//            val response = result.getOrNull()
+//
+//            if (response != null) {
+//
+//                val nextPageUrl = response.nextPageUrl
+//                if (response.itemList.isNullOrEmpty() && viewModel.dataList.isEmpty()) {
+//                    smart_refresh_layout.closeHeaderOrFooter()
+//                }
+//
+//                if (response.itemList.isNullOrEmpty() && viewModel.dataList.isNotEmpty()) {
+//                    smart_refresh_layout.finishLoadMoreWithNoMoreData()
+//                }
+//
+//                if (response.nextPageUrl.isNullOrEmpty()) {
+//                    smart_refresh_layout.finishLoadMoreWithNoMoreData()
+//                } else {
+//                    smart_refresh_layout.closeHeaderOrFooter()
+//                }
+//
+//                viewModel.dataList.clear()
+////                viewModel.dataList.addAll(response.itemList)
+//
+//
+//                for (element in response.itemList) {
+//                    when (element.type) {
+//                        EyeConstant.IDisCoverItemReturnType.horizontalScrollCard -> {
+//                            viewModel.dataList.add(element)
+//                        }
+//                        EyeConstant.IDisCoverItemReturnType.specialSquareCardCollection -> {
+//                            viewModel.dataList.add(element)
+//                        }
+//                        EyeConstant.IDisCoverItemReturnType.textCard -> {
+//                            viewModel.dataList.add(element)
+//                        }
+//                    }
+//                }
+//
+//
+//                SPUtils.put(context, "eye", viewModel.dataList)
+//
+//                adapter.notifyDataSetChanged()
+//
+//                LogUtil.d("eye", "eye data0 :  " + GsonUtils.toJson(viewModel.dataList[0].type))
+//                LogUtil.d("eye", "eye data1 :  " + GsonUtils.toJson(viewModel.dataList[1].type))
+//
+//                for (index in 0 until adapter.itemCount) {
+//                    LogUtil.d("eye", "eye data index source:  " + index + "  " + GsonUtils.toJson(adapter.data[index].type))
+//                }
+//                LogUtil.d("eye", "eye data adapter :  " + adapter.data.size)
+//            } else {
+//                smart_refresh_layout.closeHeaderOrFooter()
+//            }
+//        })
+//
+//    }
 
     companion object {
         @JvmStatic

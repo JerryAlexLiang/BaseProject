@@ -6,6 +6,23 @@
     android:descendantFocusability="blocksDescendants"
     tools:context=".ui.fragment.DiscoveryFragment">
 
+    <Button
+        android:id="@+id/changeData1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
+        android:text="变化数据1"/>
+
+    <Button
+        android:id="@+id/changeData2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp"
+        android:text="变化数据2"/>
+
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
         android:layout_width="match_parent"

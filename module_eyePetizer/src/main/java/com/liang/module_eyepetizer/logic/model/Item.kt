@@ -1,10 +1,10 @@
 package com.liang.module_eyepetizer.logic.model
 
 data class Item(
-        val adIndex: Int,
-        val `data`: Data,
-        val id: Int,
-        val tag: Any,
-        val trackingData: Any,
+        var adIndex: Int,
+        var `data`: Data,
+        var id: Int,
+        var tag: Any,
+        var trackingData: Any,
         var type: String
 )

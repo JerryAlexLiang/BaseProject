@@ -18,6 +18,7 @@ class DiscoveryViewModel(repository: EyeRepository) : ViewModel() {
     var dataList = mutableListOf<Item>()
 
     private val requestParamLiveData = MutableLiveData<String>()
+    private val requestParamLiveData2 = MutableLiveData<String>()
 
     var nextPageUrl: String? = null
 
@@ -25,9 +26,16 @@ class DiscoveryViewModel(repository: EyeRepository) : ViewModel() {
         repository.fetchDiscoveryData(url)
     }
 
+    val dataListLiveData2 = Transformations.switchMap(requestParamLiveData2) { url ->
+        repository.fetchDiscoveryData(url)
+    }
 
     fun onRefresh() {
         requestParamLiveData.value = DiscoveryApiService.DISCOVERY_URL
+    }
+
+    fun onRefresh2() {
+        requestParamLiveData2.value = DiscoveryApiService.DISCOVERY_URL
     }
 
     fun onLoadMore() {
