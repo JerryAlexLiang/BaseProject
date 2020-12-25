@@ -25,11 +25,19 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.liang.model_middleware.impl.ServiceProvider;
-import com.liang.module_core.utils.GlideEngine;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.AnimationUtils;
+import com.liang.module_core.utils.FileUtil;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
+import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener;
 import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -44,32 +52,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import liang.com.baseproject.Constant.Constant;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.adapter.MyBannerPagerAdapter;
-
-import com.liang.module_core.mvp.MVPBaseActivity;
-import com.liang.module_core.mvp.MVPBasePresenter;
-
-import liang.com.baseproject.databinding.ActivityTestLaboratoryCodeBinding;
 import liang.com.baseproject.fragment.JuheNewsTabFragment;
 import liang.com.baseproject.testlaboratory.FiltrateActivity;
 import liang.com.baseproject.testlaboratory.MapTestActivity;
-
-import com.liang.module_core.utils.AnimationUtils;
-import com.liang.module_core.utils.FileUtil;
-import com.liang.module_core.utils.LogUtil;
-
-import liang.com.baseproject.utils.PictureSelectorUtils;
-
-import com.liang.module_core.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout;
-import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener;
-
-import org.apache.commons.collections4.CollectionUtils;
-
-import static com.luck.picture.lib.config.PictureConfig.MULTIPLE;
-import static com.luck.picture.lib.config.PictureConfig.TYPE_IMAGE;
 
 public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPageChangeListener {
 
@@ -112,7 +100,6 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
     Button btnServiceAidl;
     @BindView(R.id.btn_modularization_router)
     Button btnModularizationRouter;
-    private ActivityTestLaboratoryCodeBinding binding;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, TestCodeActivity.class);

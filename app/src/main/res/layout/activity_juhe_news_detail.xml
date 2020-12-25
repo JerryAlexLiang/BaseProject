@@ -52,6 +52,7 @@
         第二种，滑动到顶部的时候，toolbar 会一直往上滑直到隐藏掉
         app:layout_scrollFlags="scroll|enterAlways"
         -->
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_layout"
             android:layout_width="match_parent"
@@ -135,7 +136,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_juhe_news_detail">
 

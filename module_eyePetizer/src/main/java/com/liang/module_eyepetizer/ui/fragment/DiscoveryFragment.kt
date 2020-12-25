@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.liang.module_core.database.CacheManager
 import com.liang.module_core.utils.*
 import com.liang.module_eyepetizer.R
 import com.liang.module_eyepetizer.logic.model.EyeConstant
@@ -56,11 +55,39 @@ class DiscoveryFragment : Fragment() {
 //        adapter = DiscoveryAdapterJava(viewModel.dataList)
         recyclerView.adapter = adapter
 
+        /*
+        //        List<String> list = new ArrayList<>();
+//        list.add("1");
+//        list.add("3");
+//        list.add("2");
+//        CacheManager.INSTANCE.save("eye",list);
 
-//        val mutableList = CacheManager.getCache("eyeLocal")
+        Handsome h1 = new Handsome("丁程鑫",18);
+        Handsome h2 = new Handsome("马嘉祺",17);
+        Handsome h3 = new Handsome("贺峻霖",16);
+
+        List<Handsome> list1 = new ArrayList<>();
+        list1.add(h1);
+        list1.add(h2);
+        list1.add(h3);
+
+        CacheManager.INSTANCE.save("eye",list1);
+
+        Button btn = (Button) findViewById(R.id.btnClick);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                List<String> data = (List<String>) CacheManager.INSTANCE.getCache("eye");
+//                Logger.t("eye").d("本地数据: " + GsonUtils.getGson().toJson(data));
+
+                List<Handsome> data2 = (List<Handsome>) CacheManager.INSTANCE.getCache("eye");
+                Logger.t("eye2").d("本地数据2: " + GsonUtils.getGson().toJson(data2));
+            }
+        });
+         */
 
 
-//        LogUtil.d("eye", "eye data=> local :  " + GsonUtils.toJson(mutableList))
+//        LogUtil.d("eye", "eye data=> local :  " + GsonUtils.toJson(localList))
 //        if (localData != null && localData.size > 0) {
 //            ToastUtil.showShortToast("数据: $localData")
 //
@@ -127,7 +154,7 @@ class DiscoveryFragment : Fragment() {
                         }
                     }
                 }
-//                CacheManager.save("eyeLocal", dataListOld)
+
 
                 viewModel.dataList = dataListOld
                 LogUtil.d("eye", "eye data=> old :  " + GsonUtils.toJson(viewModel.dataList[0].type))

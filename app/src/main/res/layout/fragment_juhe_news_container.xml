@@ -15,10 +15,11 @@
         android:background="@color/foreground"
         app:tabIndicatorColor="@color/tabIndicatorColor"
         app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="4dp"
+        app:tabIndicatorHeight="0dp"
         app:tabMode="scrollable"
         app:tabSelectedTextColor="#ff0000"
         app:tabTextColor="@color/text_surface"
+        app:tabBackground="@drawable/shape_banner_selected"
         app:tabUnboundedRipple="true" />
 
     <androidx.viewpager.widget.ViewPager

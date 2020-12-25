@@ -17,6 +17,7 @@ import com.liang.module_eyepetizer.ui.adapter.BannerImageViewHolder
 import com.liang.module_eyepetizer.ui.adapter.YouthBannerImageAdapter
 import com.youth.banner.Banner
 import com.youth.banner.indicator.CircleIndicator
+import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.indicator.RoundLinesIndicator
 import com.youth.banner.util.BannerUtils
 import com.zhpan.bannerview.BannerViewPager
@@ -52,7 +53,10 @@ class TopBannerProvider() : BaseItemProvider<Item>() {
 
         bannerYouth.run {
 //            indicator= CircleIndicator(context)
-            indicator= RoundLinesIndicator(context)
+//            indicator= RoundLinesIndicator(context)
+            indicator = RectangleIndicator(context)
+            setIndicatorNormalWidth(BannerUtils.dp2px(8F).toInt())
+            setIndicatorHeight(BannerUtils.dp2px(8F).toInt())
             setIndicatorSelectedWidth(BannerUtils.dp2px(15F).toInt())
             setBannerRound(20f)
             adapter = YouthBannerImageAdapter(item.data)
