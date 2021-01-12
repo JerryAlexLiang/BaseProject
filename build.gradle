@@ -26,13 +26,21 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-//        maven { url 'https://www.jitpack.io' }
+//        google()
+//        jcenter()
+////        maven { url 'https://www.jitpack.io' }
+////        maven { url "https://maven.google.com" }
+//
+//        maven { url 'https://jitpack.io' }
 //        maven { url "https://maven.google.com" }
 
-        maven { url 'https://jitpack.io' }
-        maven { url "https://maven.google.com" }
+        //最新版本的Android Studio （Canary 9） + Gradle 已经使用 google()来指代 google 仓库了，
+        // 会自动解析到https://dl.google.com/dl/android/maven2/。
+        // 也就是说创建好项目不需要翻|墙，也不需要修改什么就能更新依赖包了.
+        //直接修改Google的maven地址：
+        maven {url 'https://dl.google.com/dl/android/maven2/'}
+        maven {url 'https://www.jitpack.io'}
+        jcenter()
     }
 }
 
