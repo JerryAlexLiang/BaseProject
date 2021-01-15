@@ -1,4 +1,4 @@
-package com.example.module_ui
+package com.liang.module_laboratory
 
 import org.junit.Test
 

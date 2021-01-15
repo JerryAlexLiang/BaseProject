@@ -52,6 +52,7 @@ import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 
 import com.liang.module_core.mvp.BaseActivity;
 import com.liang.module_core.base.PermissionActivity;
+
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
@@ -63,10 +64,13 @@ import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
+
 import com.liang.module_core.utils.CheckPermission;
 import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.NetUtil;
+
 import liang.com.baseproject.utils.UserLoginUtils;
+
 import com.liang.module_core.utils.WifiUtils;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
@@ -421,7 +425,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         break;
 
                     case R.id.menu_nav_laboratory:
-                        TestCodeActivity.actionStart(MainHomeActivity.this);
+                        //TestCodeActivity.actionStart(MainHomeActivity.this);
+                        //测试Demo实验室
+                        ServiceProvider.getTestLaboratoryModuleService().startTestLaboratoryActivity(MainHomeActivity.this);
                         break;
 
                     case R.id.menu_nav_setting:

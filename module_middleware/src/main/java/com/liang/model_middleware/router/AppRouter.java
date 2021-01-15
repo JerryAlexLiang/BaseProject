@@ -14,4 +14,7 @@ public class AppRouter {
 
     //开眼视频模块
     public static final String MODULE_EYE_PETIZER = "/eye/EyePetizerActivity";
+
+    //测试Demo实验室模块
+    public static final String MODULE_TEST_LABORATORY = "/test_laboratory/TestLaboratoryActivity";
 }

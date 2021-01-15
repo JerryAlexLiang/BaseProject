@@ -140,6 +140,8 @@ dependencies {
 
     implementation project(path: ':module_weather')
 
+    implementation project(path: ':module_laboratory')
+    
     implementation project(path: ':module_ui')
 
 //    implementation 'com.google.android.material:material:1.2.0'

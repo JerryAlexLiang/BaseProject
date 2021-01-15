@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,18 +17,13 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
 import com.google.gson.Gson;
 import com.liang.module_core.mvp.MVPBaseFragment;
 import com.liang.module_core.utils.JsonFormatUtils;
 import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,7 +139,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
                     }
                 }, mBannerData)
                 //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
-                .setPageIndicator(new int[]{R.drawable.shape_banner_indicator_pressed, R.drawable.shape_banner_indicator_normal})
+                .setPageIndicator(new int[]{R.drawable.ui_shape_banner_indicator_pressed, R.drawable.ui_shape_banner_indicator_normal})
                 .setOnItemClickListener(this);
     }
 

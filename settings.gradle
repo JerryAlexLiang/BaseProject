@@ -1,3 +1,4 @@
+include ':module_laboratory'
 include ':module_ui'
 include ':module_eyePetizer'
 include ':module_core'

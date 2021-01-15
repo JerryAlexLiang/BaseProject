@@ -1,4 +1,4 @@
-package com.example.module_ui
+package com.liang.module_ui
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

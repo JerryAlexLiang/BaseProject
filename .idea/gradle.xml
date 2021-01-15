@@ -15,12 +15,14 @@
             <option value="$PROJECT_DIR$/module_core" />
             <option value="$PROJECT_DIR$/module_datePicker" />
             <option value="$PROJECT_DIR$/module_eyePetizer" />
+            <option value="$PROJECT_DIR$/module_laboratory" />
             <option value="$PROJECT_DIR$/module_middleware" />
             <option value="$PROJECT_DIR$/module_ui" />
             <option value="$PROJECT_DIR$/module_weather" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>
