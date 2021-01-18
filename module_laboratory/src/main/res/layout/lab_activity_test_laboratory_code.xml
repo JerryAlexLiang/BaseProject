@@ -81,7 +81,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/scanViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:layout_height="200dp" />
 
                 <View
                     android:layout_width="match_parent"

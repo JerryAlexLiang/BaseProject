@@ -17,10 +17,16 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
 
-        //ARouter配置(Kotlin中)
-        kapt {
-            arguments {
-                arg("AROUTER_MODULE_NAME", project.getName())
+//        //ARouter配置(Kotlin中)
+//        kapt {
+//            arguments {
+//                arg("AROUTER_MODULE_NAME", project.getName())
+//            }
+//        }
+        //ARouter配置
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }

@@ -425,7 +425,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         break;
 
                     case R.id.menu_nav_laboratory:
-                        //TestCodeActivity.actionStart(MainHomeActivity.this);
+//                        TestCodeActivity.actionStart(MainHomeActivity.this);
                         //测试Demo实验室
                         ServiceProvider.getTestLaboratoryModuleService().startTestLaboratoryActivity(MainHomeActivity.this);
                         break;

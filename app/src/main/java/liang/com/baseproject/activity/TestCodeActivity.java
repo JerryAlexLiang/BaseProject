@@ -37,8 +37,6 @@ import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 
-import org.apache.commons.collections4.CollectionUtils;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -377,7 +375,8 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
 
                 case PictureConfig.CHOOSE_REQUEST:
                     List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
-                    if (!CollectionUtils.isEmpty(selectList)) {
+//                    if (!CollectionUtils.isEmpty(selectList)) {
+                    if (selectList != null && selectList.size() > 0) {
                         String path;
                         LocalMedia localMedia = selectList.get(0);
                         if (localMedia.isCut() && !localMedia.isCompressed()) {
@@ -407,12 +406,12 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
     }
 
     // 存在沙盒中的path不能直接使用new File(path)形式生成文件 ，可以通过以下方式转换下
-    public static String getRealPath(Context context,String path) {
-        if (PictureMimeType.isContent(path)){
+    public static String getRealPath(Context context, String path) {
+        if (PictureMimeType.isContent(path)) {
             Uri uri = Uri.parse(path);
             try {
                 File imgFile = context.getExternalFilesDir("image");
-                if (!imgFile.exists()){
+                if (!imgFile.exists()) {
                     imgFile.mkdir();
                 }
                 try {
@@ -430,7 +429,7 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
                     fileOutputStream.flush();
                     fileOutputStream.close();
                     // 文件可用新路径 file.getAbsolutePath()
-                    path=file.getAbsolutePath();
+                    path = file.getAbsolutePath();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

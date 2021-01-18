@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
@@ -103,7 +104,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
             override fun rightEvent() {}
         })
 
-//        initBanner()
+        initBanner()
 
         savePicture()
 
@@ -122,19 +123,19 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
         setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon) {
             when (this) {
                 btnFiltrateJingdong -> {
-                    //FiltrateActivity.actionStart(this@TestCodeActivity)
+                    ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
                 }
 
                 btnMapView -> {
-                    //MapTestActivity.actionStart(this@TestCodeActivity)
+                    ServiceProvider.getMainService().openMapTestActivity(this@TestLaboratoryActivity)
                 }
 
                 btnCamera -> {
-                    //startActivity(Intent(this@TestCodeActivity, CameraActivity::class.java))
+                    ServiceProvider.getMainService().openCustomSimpleCameraActivity(this@TestLaboratoryActivity)
                 }
 
                 btnAidl -> {
-                    //ServiceActivity.actionStart(this@TestCodeActivity)
+                    ServiceProvider.getMainService().openServiceAIDLActivity(this@TestLaboratoryActivity)
                 }
 
                 btnModularizationRouter -> {
@@ -264,13 +265,14 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
         stringList.add("时尚")
         stringList.add("明星")
         stringList.add("科技")
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
-//        fragmentList.add(JuheNewsTabFragment.newInstance(null))
+
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
+        fragmentList.add(ServiceProvider.getMainService().getJuheNewsTabFragment())
 
         //第一步：初始化数据
         val imageResIDs = intArrayOf(

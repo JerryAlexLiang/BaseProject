@@ -17,4 +17,7 @@ public class AppRouter {
 
     //测试Demo实验室模块
     public static final String MODULE_TEST_LABORATORY = "/test_laboratory/TestLaboratoryActivity";
+
+    //主APP
+    public static final String MODULE_MAIN_HOME = "/main_home/MainHomeContainer";
 }

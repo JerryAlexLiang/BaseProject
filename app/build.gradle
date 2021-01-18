@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.greenrobot.greendao'
-//apply plugin: 'com.alibaba.arouter'
+apply plugin: 'com.alibaba.arouter'
+apply plugin: 'kotlin-kapt'
 
 android {
 //    //使用Gradle生成正式签名的APK文件
@@ -296,8 +297,10 @@ dependencies {
     implementation rootProject.ext.dependencies.navigationtabstrip
     implementation rootProject.ext.dependencies.pictureSelector
     implementation rootProject.ext.dependencies.persistentCookieJar
-    implementation rootProject.ext.dependencies.arouterApi
-    implementation rootProject.ext.dependencies.arouterCompiler
+
+    //Java与Kotlin混合代码中Arouter要这样配置
+    api rootProject.ext.dependencies.arouterApi
+    kapt rootProject.ext.dependencies.arouterCompiler
 
     //convenientBanner
     implementation rootProject.ext.dependencies.convenientBanner
