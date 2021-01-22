@@ -3,6 +3,8 @@
     package="com.liang.module_laboratory">
 
     <application>
+        <activity android:name=".breathing.BreathingActivity"></activity>
+        <activity android:name=".select_list.SelectItemActivity" />
         <activity android:name=".TestLaboratoryActivity" />
     </application>
 

@@ -47,6 +47,7 @@ dependencies {
     implementation project(path: ':module_ui')
 
     api rootProject.ext.dependencies.arouterApi
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt rootProject.ext.dependencies.arouterCompiler
 
     implementation project(path: ':module_core')

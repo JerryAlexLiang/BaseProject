@@ -276,7 +276,8 @@ dependencies {
     implementation rootProject.ext.dependencies.agentweb.filechooser
     implementation rootProject.ext.dependencies.agentweb.download
     implementation rootProject.ext.dependencies.butterknife
-    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+//    annotationProcessor rootProject.ext.dependencies.butterknifeCompiler
+    kapt rootProject.ext.dependencies.butterknifeCompiler
     implementation rootProject.ext.dependencies.greendao
     implementation rootProject.ext.dependencies.eventbus
     implementation rootProject.ext.dependencies.bravh3X

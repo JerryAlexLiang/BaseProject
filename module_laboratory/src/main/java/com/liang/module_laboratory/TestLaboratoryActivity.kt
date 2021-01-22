@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageView
@@ -22,6 +21,8 @@ import com.liang.module_core.utils.FileUtil
 import com.liang.module_core.utils.LogUtil
 import com.liang.module_core.utils.setOnClickListener
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener
+import com.liang.module_laboratory.breathing.BreathingActivity
+import com.liang.module_laboratory.select_list.SelectItemActivity
 import com.liang.module_ui.adapter.FragmentViewPagerAdapter
 import com.liang.module_ui.adapter.MyBannerPagerAdapter
 import com.luck.picture.lib.PictureSelector
@@ -31,6 +32,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.lab_activity_test_laboratory_code.*
 import kotlinx.android.synthetic.main.lab_layout_base_actionbar_default.*
 import kotlinx.android.synthetic.main.lab_layout_view_pager_banner.*
+import org.jetbrains.anko.startActivity
 import java.io.File
 import java.io.FileOutputStream
 import java.util.*
@@ -120,7 +122,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun initListener() {
-        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon) {
+        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem,btnBreathingItem) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -144,6 +146,14 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 
                 base_actionbar_left_icon -> {
                     finish()
+                }
+
+                btnSelectItem -> {
+                    SelectItemActivity.actionStart(this@TestLaboratoryActivity)
+                }
+
+                btnBreathingItem->{
+                    startActivity<BreathingActivity>()
                 }
 
                 else -> {

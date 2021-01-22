@@ -190,6 +190,26 @@
                     android:textAllCaps="false"
                     android:text="组件化-路由"/>
 
+                <Button
+                    android:id="@+id/btnSelectItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textAllCaps="false"
+                    android:text="单选多选列表"/>
+
+                <Button
+                    android:id="@+id/btnBreathingItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:textAllCaps="false"
+                    android:text="呼吸机Service"/>
+
             </LinearLayout>
 
         </ScrollView>

@@ -18,12 +18,14 @@
     <dimen name="dp6">6dp</dimen>
     <dimen name="dp10">10dp</dimen>
     <dimen name="dp16">16dp</dimen>
+    <dimen name="dp20">20dp</dimen>
     <dimen name="dp30">30dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp44">44dp</dimen>
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp80">80dp</dimen>
     <dimen name="dp100">100dp</dimen>
+    <dimen name="dp200">200dp</dimen>
 
     <dimen name="action_bar_height">44dp</dimen>
     <dimen name="action_bar_bottom_line_height">1dp</dimen>

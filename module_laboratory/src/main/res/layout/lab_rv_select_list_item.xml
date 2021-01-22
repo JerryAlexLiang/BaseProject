@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_bg_press_color_white"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/dp10"
+    android:paddingTop="@dimen/dp16"
+    android:paddingEnd="@dimen/dp10"
+    android:paddingBottom="@dimen/dp16">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="@dimen/dp30"
+        android:layout_height="@dimen/dp30"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/dp10"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/dp20"
+        android:layout_toEndOf="@id/ivIcon"
+        android:text="测试测试测试测试测试测试测试"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_14" />
+
+    <ImageView
+        android:id="@+id/ivSelectContainer"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:src="@drawable/ui_common_uncheck" />
+
+</RelativeLayout>
