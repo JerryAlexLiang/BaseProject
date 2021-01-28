@@ -20,6 +20,7 @@ import com.liang.module_core.utils.ToastUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
+import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.entity.HomeFunctionBean;
 
 /**
@@ -80,7 +81,8 @@ public class HomeFunctionContainerAdapter extends BaseQuickAdapter<HomeFunctionB
                         break;
 
                     case 3:
-                        ToastUtil.showShortToast("更多");
+                        //测试Demo实验室
+                        ServiceProvider.getTestLaboratoryModuleService().startTestLaboratoryActivity(getContext());
                         break;
 
                     default:

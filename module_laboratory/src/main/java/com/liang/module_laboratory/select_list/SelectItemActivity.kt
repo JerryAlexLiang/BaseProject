@@ -72,7 +72,7 @@ class SelectItemActivity : MVVMBaseActivity() {
         //初始化适配器
         val fragmentViewPagerAdapter = FragmentViewPagerAdapter(supportFragmentManager, fragmentList, stringList)
         //设置至少9个fragment，防止重复创建和销毁，造成内存溢出
-        viewPager.offscreenPageLimit = 3
+        viewPager.offscreenPageLimit = 5
         //绑定适配器
         //绑定适配器
         viewPager.adapter = fragmentViewPagerAdapter
@@ -88,9 +88,13 @@ class SelectItemActivity : MVVMBaseActivity() {
     private fun initData() {
         stringList.add("单选列表")
         stringList.add("多选列表")
+        stringList.add("封装单选列表")
+        stringList.add("封装多选列表")
 
         fragmentList.add(SingleSelectListFragment.newInstance())
         fragmentList.add(MultipleSelectListFragment.newInstance())
+        fragmentList.add(CommonSingleSelectListFragment.newInstance())
+        fragmentList.add(CommonMultipleSelectListFragment.newInstance())
     }
 
     companion object {
