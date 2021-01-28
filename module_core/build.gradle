@@ -188,6 +188,8 @@ dependencies {
 
     api rootProject.ext.dependencies.broccoli
 
+    api rootProject.ext.dependencies.fabMenu
+
     //Android Jetpack 组件
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'

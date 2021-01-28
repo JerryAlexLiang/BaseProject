@@ -104,7 +104,10 @@ ext {
             //implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
             flycoTabLayoutLib     : "2.1.2@aar",
 
-            broccoli              : "1.0.0"
+            broccoli              : "1.0.0",
+
+            //悬浮按钮
+            fabMenu               : "1.6.4"
     ]
 
     dependencies = [
@@ -241,7 +244,11 @@ ext {
             "flycoTabLayoutLib"     : "com.flyco.tablayout:FlycoTabLayout_Lib:${versions.flycoTabLayoutLib}",
 
             //占位图
-            "broccoli"              : "me.samlss:broccoli:${versions.broccoli}"
+            "broccoli"              : "me.samlss:broccoli:${versions.broccoli}",
+
+            //悬浮按钮
+            //implementation 'com.github.clans:fab:1.6.4'  fabMenu
+            "fabMenu"               : "com.github.clans:fab:${versions.fabMenu}"
     ]
 
 }

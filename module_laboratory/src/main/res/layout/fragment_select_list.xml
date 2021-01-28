@@ -8,24 +8,34 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSelectList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/dp10"
-        android:src="@drawable/sel"/>
+        android:src="@drawable/sel"
+        android:visibility="gone" />
 
     <com.getbase.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnCheck2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/btnCheck"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/dp10"
-        android:src="@drawable/sel_qq"/>
+        android:layout_toStartOf="@+id/btnCheck"
+        android:src="@drawable/sel_qq"
+        android:visibility="gone" />
+
+    <include
+        layout="@layout/lab_fab_menu_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/dp16" />
 
 </RelativeLayout>

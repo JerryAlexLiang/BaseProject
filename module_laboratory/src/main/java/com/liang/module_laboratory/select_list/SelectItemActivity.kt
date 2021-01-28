@@ -6,7 +6,6 @@ import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.liang.model_middleware.impl.ServiceProvider
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.jetpack.utils.dp2px
 import com.liang.module_core.utils.setOnClickListener

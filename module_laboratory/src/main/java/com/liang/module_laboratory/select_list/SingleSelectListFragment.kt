@@ -6,9 +6,11 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.jetpack.MVVMBaseFragment
 import com.liang.module_core.utils.GsonUtils
+import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.utils.setOnClickListener
 import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.fragment_select_list.*
+import kotlinx.android.synthetic.main.lab_fab_menu_layout.*
 
 /**
  * 创建日期:2021/1/19 on 11:13 AM
@@ -33,6 +35,11 @@ class SingleSelectListFragment : MVVMBaseFragment() {
         super.onActivityCreated(savedInstanceState)
         initData()
 
+        fabMenuOne.visibility = View.VISIBLE
+        fabMenuTwo.visibility = View.VISIBLE
+        fabMenuOne.labelText = "打印选中"
+        fabMenuTwo.labelText = "设置默认选中"
+
         val linearLayoutManager = LinearLayoutManager(context)
         rvSelectList.layoutManager = linearLayoutManager
 
@@ -44,7 +51,7 @@ class SingleSelectListFragment : MVVMBaseFragment() {
     }
 
     private fun initListener() {
-        setOnClickListener(btnCheck, btnCheck2) {
+        setOnClickListener(btnCheck, btnCheck2, fabMenuOne, fabMenuTwo) {
             when (this) {
                 btnCheck -> {
                     val selectedList = adapter.getSelectedList()
@@ -55,6 +62,22 @@ class SingleSelectListFragment : MVVMBaseFragment() {
                     defaultSelectDataList.clear()
                     defaultSelectDataList.add(dataList[6])
                     adapter.setDefaultSelectList(defaultSelectDataList)
+                }
+
+                fabMenuOne -> {
+                    val selectedList = adapter.getSelectedList()
+                    Log.d(TAG, "initListener: " + GsonUtils.toJson(selectedList))
+                    ToastUtil.showShortToast(GsonUtils.toJson(selectedList))
+
+                    fabMenu.toggle(false)
+                }
+
+                fabMenuTwo -> {
+                    defaultSelectDataList.clear()
+                    defaultSelectDataList.add(dataList[6])
+                    adapter.setDefaultSelectList(defaultSelectDataList)
+
+                    fabMenu.toggle(false)
                 }
 
             }

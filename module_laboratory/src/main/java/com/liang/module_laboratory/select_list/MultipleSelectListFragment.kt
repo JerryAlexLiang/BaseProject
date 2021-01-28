@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.liang.module_core.jetpack.MVVMBaseFragment
 import com.liang.module_core.utils.GsonUtils
+import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.utils.setOnClickListener
 import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.fragment_select_list.*
+import kotlinx.android.synthetic.main.lab_fab_menu_layout.*
 
 /**
  * 创建日期:2021/1/22 on 3:31 PM
@@ -34,6 +36,16 @@ class MultipleSelectListFragment : MVVMBaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData()
+
+        fabMenuOne.visibility = View.VISIBLE
+        fabMenuTwo.visibility = View.VISIBLE
+        fabMenuThree.visibility = View.VISIBLE
+        fabMenuFour.visibility = View.VISIBLE
+
+        fabMenuOne.labelText = "打印选中"
+        fabMenuTwo.labelText = "设置默认选中"
+        fabMenuThree.labelText = "全选"
+        fabMenuFour.labelText = "取消全选"
 
         val linearLayoutManager = LinearLayoutManager(context)
         rvSelectList.layoutManager = linearLayoutManager
@@ -62,7 +74,7 @@ class MultipleSelectListFragment : MVVMBaseFragment() {
     }
 
     private fun initListener() {
-        setOnClickListener(btnCheck, btnCheck2) {
+        setOnClickListener(btnCheck, btnCheck2, fabMenuOne, fabMenuTwo, fabMenuThree, fabMenuFour) {
             when (this) {
                 btnCheck -> {
                     val selectedList = adapter.getSelectedList()
@@ -76,6 +88,36 @@ class MultipleSelectListFragment : MVVMBaseFragment() {
                     adapter.setDefaultSelectList(defaultSelectDataList)
                 }
 
+                fabMenuOne -> {
+                    val selectedList = adapter.getSelectedList()
+                    Log.d(TAG, "initListener: " + GsonUtils.toJson(selectedList))
+                    ToastUtil.showShortToast(GsonUtils.toJson(selectedList))
+
+                    fabMenu.toggle(false)
+                }
+
+                fabMenuTwo -> {
+                    defaultSelectDataList.clear()
+                    defaultSelectDataList.add(dataList[0])
+                    defaultSelectDataList.add(dataList[6])
+                    adapter.setDefaultSelectList(defaultSelectDataList)
+
+                    fabMenu.toggle(false)
+                }
+
+                fabMenuThree -> {
+                    //全选
+                    adapter.selectAll(dataList)
+
+                    fabMenu.toggle(false)
+                }
+
+                fabMenuFour -> {
+                    //取消全选
+                    adapter.deselectAll()
+
+                    fabMenu.toggle(false)
+                }
             }
         }
     }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.github.clans.fab.FloatingActionMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fabMenu"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/dp16"
+    app:menu_colorNormal="#3E99D2"
+    app:menu_colorPressed="#2488C6"
+    app:menu_colorRipple="#AF2488C6"
+    app:menu_labels_ellipsize="end"
+    app:menu_labels_singleLine="true">
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabMenuOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ui_icon_message"
+        app:fabSize="mini"
+        app:fab_colorNormal="#3E99D2"
+        app:fab_colorPressed="#2488C6"
+        app:fab_colorRipple="#AF2488C6"
+        app:fab_label="设置默认按钮"
+        android:visibility="gone"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabMenuTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ui_icon_video"
+        app:fabSize="mini"
+        app:fab_colorNormal="#3E99D2"
+        app:fab_colorPressed="#2488C6"
+        app:fab_colorRipple="#AF2488C6"
+        app:fab_label="设置默认按钮2"
+        android:visibility="gone"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabMenuThree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ui_icon_video"
+        app:fabSize="mini"
+        app:fab_colorNormal="#3E99D2"
+        app:fab_colorPressed="#2488C6"
+        app:fab_colorRipple="#AF2488C6"
+        app:fab_label="设置默认按钮3"
+        android:visibility="gone"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabMenuFour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ui_icon_video"
+        app:fabSize="mini"
+        app:fab_colorNormal="#3E99D2"
+        app:fab_colorPressed="#2488C6"
+        app:fab_colorRipple="#AF2488C6"
+        app:fab_label="设置默认按钮4"
+        android:visibility="gone"/>
+
+</com.github.clans.fab.FloatingActionMenu>

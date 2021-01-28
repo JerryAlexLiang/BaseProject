@@ -4,7 +4,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.lab_rv_select_list_item.view.*
-import kotlin.collections.contains as contains1
 
 /**
  * 创建日期: 2021/1/19 on 11:17 AM
@@ -45,7 +44,25 @@ class MultipleSelectListAdapter(layoutResId: Int) : BaseQuickAdapter<BookBean, B
         notifyDataSetChanged()
     }
 
-    fun getSelectedList(): List<BookBean?>? {
+    fun getSelectedList(): MutableList<BookBean> {
         return selectDataList
     }
+
+    /**
+     * 全选
+     */
+    fun selectAll(allDataList: MutableList<BookBean>) {
+        selectDataList.clear()
+        selectDataList.addAll(allDataList)
+        notifyDataSetChanged()
+    }
+
+    /**
+     * 取消全选
+     */
+    fun deselectAll() {
+        selectDataList.clear()
+        notifyDataSetChanged()
+    }
+
 }
