@@ -114,7 +114,7 @@ public class GestureLoginActivity extends MVPBaseActivity implements CustomGestu
             tvUserName.setText("Welcome");
             cvGestureAvatar.setBorderColor(getResources().getColor(R.color.colorBlue));
 
-            Glide.with(GestureLoginActivity.this).asBitmap().load(R.drawable.icon_user_logo).into(cvGestureAvatar);
+            Glide.with(GestureLoginActivity.this).asBitmap().load(R.drawable.core_icon_user_logo).into(cvGestureAvatar);
         }
     }
 

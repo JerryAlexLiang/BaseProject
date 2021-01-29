@@ -218,7 +218,7 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
             if (!TextUtils.isEmpty(localUserIcon)) {
                 Glide.with(mActivity).asBitmap().load(localUserIcon).into(civUserIcon);
             } else {
-                Glide.with(mActivity).asBitmap().load(R.drawable.icon_user_logo).into(civUserIcon);
+                Glide.with(mActivity).asBitmap().load(R.drawable.core_icon_user_logo).into(civUserIcon);
             }
 
             if (!TextUtils.isEmpty(localBg)) {
@@ -235,7 +235,7 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
             llUserCoin.setVisibility(View.VISIBLE);
         } else {
             //未登录，初始化视图
-            civUserIcon.setImageResource(R.drawable.icon_user_logo);
+            civUserIcon.setImageResource(R.drawable.core_icon_user_logo);
             civUserIcon.setCircleBackgroundColorResource(R.color.translate);
             Glide.with(mActivity).asBitmap().load(R.drawable.icon_header).into(ivBlur);
             tvUserName.setText(getString(R.string.go_to_login));

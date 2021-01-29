@@ -134,7 +134,7 @@ public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText 
                 }
             }else {
 //                Toast.makeText(getContext(), "请输入搜索内容!", Toast.LENGTH_SHORT).show();
-                ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+                ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_true),
                         true, "请输入搜索内容!", getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
             }
         }
@@ -162,9 +162,9 @@ public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText 
             getGlobalVisibleRect(rect);
             rect.left = rect.right - drawableDel.getIntrinsicWidth();
             if (rect.contains(eventX, eventY))
-                drawableDel = this.getResources().getDrawable(R.drawable.edit_delete_icon);
+                drawableDel = this.getResources().getDrawable(R.drawable.core_iocn_edit_delete);
         } else {
-            drawableDel = this.getResources().getDrawable(R.drawable.edit_delete_icon);
+            drawableDel = this.getResources().getDrawable(R.drawable.core_iocn_edit_delete);
         }
         return super.onTouchEvent(event);
     }
@@ -184,7 +184,7 @@ public class SearchEditText extends androidx.appcompat.widget.AppCompatEditText 
         if (this.length() < 1) {
             drawableDel = null;
         } else {
-            drawableDel = this.getResources().getDrawable(R.drawable.edit_delete_icon);
+            drawableDel = this.getResources().getDrawable(R.drawable.core_iocn_edit_delete);
         }
         if (changeListener != null) {
             changeListener.onSearchTextChangedListener(s);

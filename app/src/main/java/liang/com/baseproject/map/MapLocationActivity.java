@@ -56,7 +56,6 @@ import com.amap.api.maps.model.animation.Animation;
 import com.amap.api.maps.model.animation.ScaleAnimation;
 import com.amap.api.maps.offlinemap.OfflineMapCity;
 import com.amap.api.maps.offlinemap.OfflineMapManager;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -212,7 +211,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     //最近一次点击的Marker
     private Marker lastClickMarker;
 
-    private int[] img = {R.drawable.icon_expand_open, R.drawable.icon_expand_close};//定义一个int数组，用来放图片
+    private int[] img = {R.drawable.core_icon_expand_open, R.drawable.core_icon_expand_close};//定义一个int数组，用来放图片
     private boolean isExpandSmartContainer = true;//定义一个标识符，用来判断是open,还是close
 
     private DisplayMetrics metrics;
@@ -247,13 +246,13 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
         //首先判断isExpandSmartContainer是真还是假，如果是真，就显示close，如果是假，就显示open
         if (isExpandSmartContainer) {
             //当SmartContainer=true是展开状态时,显示向下图标，并且SmartContainer设置显示展开
-            iconExpand.setImageResource(R.drawable.icon_expand_open);//向下
+            iconExpand.setImageResource(R.drawable.core_icon_expand_open);//向下
 //            smartRefreshLayout.setVisibility(View.VISIBLE);
             layoutParams.height = (int) (heightPixels * 0.8);
             appBar.setLayoutParams(layoutParams);
         } else {
             //当SmartContainer=true是展开关闭时,显示向上图标，并且SmartContainer设置伸缩隐藏
-            iconExpand.setImageResource(R.drawable.icon_expand_close);//向上
+            iconExpand.setImageResource(R.drawable.core_icon_expand_close);//向上
             smartRefreshLayout.setVisibility(View.GONE);
             layoutParams.height = heightPixels;
             appBar.setLayoutParams(layoutParams);
@@ -1072,7 +1071,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                 //首先判断isExpandSmartContainer是真还是假，如果是真，就显示close，如果是假，就显示open
                 if (isExpandSmartContainer) {
                     //SmartContainer是展开状态时，点击后缩回SmartContainer，并切换向上图标
-                    iconExpand.setImageResource(R.drawable.icon_expand_close);//向上
+                    iconExpand.setImageResource(R.drawable.core_icon_expand_close);//向上
                     smartRefreshLayout.setVisibility(View.GONE);
                     layoutParams.height = heightPixels;
                     appBar.setLayoutParams(layoutParams);
@@ -1080,7 +1079,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
                     onShowToast("关闭列表布局");
                 } else {
                     //SmartContainer是关闭状态时，点击后展开SmartContainer，并切换向下图标
-                    iconExpand.setImageResource(R.drawable.icon_expand_open);//向下
+                    iconExpand.setImageResource(R.drawable.core_icon_expand_open);//向下
                     smartRefreshLayout.setVisibility(View.VISIBLE);
                     layoutParams.height = (int) (heightPixels * 0.8);
                     appBar.setLayoutParams(layoutParams);

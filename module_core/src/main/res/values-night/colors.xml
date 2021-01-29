@@ -106,4 +106,6 @@
     <color name="text_invert_alpha">#88111111</color>
     <color name="text_on_main">#ffffff</color>
 
+    <color name="toast_context">#000000</color>
+
 </resources>

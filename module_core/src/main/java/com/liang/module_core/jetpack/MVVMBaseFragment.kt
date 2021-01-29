@@ -216,17 +216,17 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
     }
 
     fun onShowToast(content: String?) {
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.icon_true),
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.core_icon_true),
                 false, content, resources.getColor(R.color.toast_bg), resources.getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
     }
 
     fun onShowTrueToast(content: String?) {
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.icon_true),
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.core_icon_true),
                 true, content, resources.getColor(R.color.toast_bg), resources.getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
     }
 
     fun onShowErrorToast(content: String?) {
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.icon_wrong),
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.core_icon_wrong),
                 true, content, resources.getColor(R.color.toast_bg), resources.getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
     }
 

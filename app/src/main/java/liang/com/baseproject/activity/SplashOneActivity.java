@@ -67,7 +67,7 @@ public class SplashOneActivity extends MVPBaseActivity {
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_splash_one;
+        return R.layout.core_activity_splash_one;
     }
 
     @Override

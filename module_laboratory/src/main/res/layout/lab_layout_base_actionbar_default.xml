@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:padding="8dp"
-                android:src="@drawable/icon_back"
+                android:src="@drawable/core_icon_back"
                 android:visibility="gone"
                 tools:ignore="RtlSymmetry" />
 
@@ -52,7 +52,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_toEndOf="@id/base_actionbar_left_icon"
                 android:padding="8dp"
-                android:src="@drawable/ic_close"
+                android:src="@drawable/core_icon_close"
                 android:visibility="gone" />
 
         </RelativeLayout>
@@ -83,7 +83,7 @@
             android:layout_width="0dp"
             android:layout_height="36dp"
             android:layout_weight="3"
-            android:background="@drawable/shape_search_view_bg"
+            android:background="@drawable/core_shape_search_view_bg"
             android:textColor="@color/text_second"
             android:visibility="gone" />
 
@@ -129,7 +129,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:padding="10dp"
-                android:src="@drawable/ic_more"
+                android:src="@drawable/core_icon_more"
                 android:visibility="gone" />
 
         </RelativeLayout>

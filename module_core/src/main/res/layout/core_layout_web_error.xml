@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitEnd"
-        android:src="@drawable/pic_404" />
+        android:src="@drawable/core_icon_pic_404" />
 
     <ImageView
         android:id="@+id/iv_web_error"
@@ -20,7 +20,7 @@
         android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:src="@drawable/ic_error"
+        android:src="@drawable/core_icon_error"
         app:tint="@color/accent" />
 
     <TextView

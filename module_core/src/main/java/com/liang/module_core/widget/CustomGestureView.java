@@ -138,22 +138,22 @@ public class CustomGestureView extends View {
         if (dw_selected != null) {
             selectedBitmap = ((BitmapDrawable) dw_selected).getBitmap();
         } else {
-            selectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon_finger_selected);
+            selectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_finger_selected);
         }
         if (dw_unSeclect != null) {
             unSelectedBitmap = ((BitmapDrawable) dw_unSeclect).getBitmap();
         } else {
-            unSelectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon_finger_unselected);
+            unSelectedBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_finger_unselected);
         }
         if (dw_selected_small != null) {
             selectedBitmapSmall = ((BitmapDrawable) dw_selected_small).getBitmap();
         } else {
-            selectedBitmapSmall = BitmapFactory.decodeResource(getResources(), R.drawable.icon_finger_selected_small);
+            selectedBitmapSmall = BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_finger_selected_small);
         }
         if (dw_unSeclect_small != null) {
             unSelectedBitmapSmall = ((BitmapDrawable) dw_unSeclect_small).getBitmap();
         } else {
-            unSelectedBitmapSmall = BitmapFactory.decodeResource(getResources(), R.drawable.icon_finger_unselected_new);
+            unSelectedBitmapSmall = BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_finger_unselected_new);
         }
         //等待时间,默认30s
         waitTime = ta.getInteger(R.styleable.SecurityCenter_waitTime, 30);
@@ -643,7 +643,7 @@ public class CustomGestureView extends View {
     }
 
     public void onShowToast(String content){
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_true),
                 true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 

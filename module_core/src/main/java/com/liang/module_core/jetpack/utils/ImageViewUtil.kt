@@ -33,7 +33,7 @@ fun ImageView.load(url: String, round: Float = 0f, cornerType: RoundedCornersTra
     if (round == 0f) {
         Glide.with(this.context).load(url).into(this)
     } else {
-        val option = RequestOptions.bitmapTransform(RoundedCornersTransformation(dp2px(context, round), 0, cornerType)).placeholder(R.drawable.shape_album_loading_bg)
+        val option = RequestOptions.bitmapTransform(RoundedCornersTransformation(dp2px(context, round), 0, cornerType)).placeholder(R.drawable.core_shape_album_loading_bg)
         Glide.with(this.context).load(url).apply(option).into(this)
     }
 }

@@ -57,7 +57,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             case "key_actionbar_theme_modify":
                 ThemeSettingActivity.actionStart(getActivity());
                 getActivity().finish();
-                ToastUtil.onShowToast(this.getContext(), "更该主题样式~");
+                ToastUtil.onShowDefaultToast(this.getContext(), "更该主题样式~");
                 break;
 
             case "clear_cache":
@@ -69,7 +69,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
                 break;
 
             case "developer":
-                ToastUtil.onShowToast(getContext(), "开发中~");
+                ToastUtil.onShowDefaultToast(getContext(), "开发中~");
                 break;
         }
         return false;

@@ -89,7 +89,7 @@ public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             //点击Card
             cardNiceGank.setOnClickListener(v -> {
-                ToastUtil.onShowToast(context,"卡片");
+                ToastUtil.onShowDefaultToast(context,"卡片");
             });
         }
     }

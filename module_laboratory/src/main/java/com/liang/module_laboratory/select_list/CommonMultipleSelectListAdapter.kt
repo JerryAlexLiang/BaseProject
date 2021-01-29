@@ -26,10 +26,10 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
         holder.itemView.ivSelectContainer.visibility = View.VISIBLE
 
         holder.itemView.ivIcon.setOnClickListener {
-            ToastUtil.showShortToast("当前点击: " + item.name)
+            ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
         }
         holder.itemView.tvName.setOnClickListener {
-            ToastUtil.showShortToast("当前点击: " + item.name)
+            ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
         }
     }
 
@@ -45,7 +45,7 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
         holder.setText(R.id.tvName, item.name)
         holder.itemView.ivSelectContainer.visibility = View.INVISIBLE
         holder.itemView.setOnClickListener {
-            ToastUtil.showShortToast("当前点击: " + item.name)
+            ToastUtil.onShowSuccessRectangleToast(context,"当前点击: " + item.name)
         }
 
     }

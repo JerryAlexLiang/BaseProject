@@ -80,7 +80,7 @@ public class ExpandableTextView extends LinearLayout {
                 if (isCollapsed) {
                     id_expand_textView.setText("展开全部");
                     //修改TextView的DrawableRight图片
-                    Drawable drawableDown = getResources().getDrawable(R.drawable.icon_expand_open);
+                    Drawable drawableDown = getResources().getDrawable(R.drawable.core_icon_expand_open);
                     drawableDown.setBounds(0, 0, drawableDown.getMinimumWidth(), drawableDown.getMinimumHeight());
                     id_expand_textView.setCompoundDrawables(null, null, drawableDown, null);
                     if (listener != null) {
@@ -90,7 +90,7 @@ public class ExpandableTextView extends LinearLayout {
                 } else {
                     id_expand_textView.setText("收起全部");
                     //修改TextView的DrawableRight图片
-                    Drawable drawableUp = getResources().getDrawable(R.drawable.icon_expand_close);
+                    Drawable drawableUp = getResources().getDrawable(R.drawable.core_icon_expand_close);
                     drawableUp.setBounds(0, 0, drawableUp.getMinimumWidth(), drawableUp.getMinimumHeight());
                     id_expand_textView.setCompoundDrawables(null, null, drawableUp, null);
                     if (listener != null) {

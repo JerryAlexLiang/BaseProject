@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/shape_progress_custom_bg"
+    android:background="@drawable/core_shape_progress_custom_bg"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:paddingBottom="20dp"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/background"
-        android:background="@drawable/animation_list_spinner_dialog" />
+        android:background="@drawable/core_animation_list_spinner_dialog" />
 
     <TextView
         android:id="@+id/progressDialog_text"

@@ -29,9 +29,10 @@ public class CustomToast {
     public final ImageView icon;//图标
     public final TextView message;//内容
 
-    public CustomToast(Context context) {
+    public CustomToast(Context context, int layoutResID) {
         toast = new Toast(context);
-        view = LayoutInflater.from(context).inflate(R.layout.core_custom_toast_layout, null);
+//        view = LayoutInflater.from(context).inflate(R.layout.core_custom_toast_layout, null);
+        view = LayoutInflater.from(context).inflate(layoutResID, null);
         icon = view.findViewById(R.id.iv_toast_icon);
         message = view.findViewById(R.id.tv_toast_message);
     }
@@ -45,7 +46,7 @@ public class CustomToast {
 
     public static class Builder {
         private Bitmap icon;//图标图片
-        private int iconID = R.drawable.icon_user_logo;//图标资源ID
+        private int iconID = R.drawable.core_icon_user_logo;//图标资源ID
         private String message;//内容
         private int backgroundColor = 0x56000000;//背景颜色
         private Context mContext;//上下文
@@ -53,13 +54,19 @@ public class CustomToast {
         private CustomToast mine;
         private int gravity = Gravity.NO_GRAVITY;//设置位置
         private int offsetX = 0;//设置偏移度X
-//        private int offsetY = 0;//设置偏移度Y
+        //        private int offsetY = 0;//设置偏移度Y
         private int offsetY = 160;//设置偏移度Y
         private boolean isShowIcon;//是否显示图标
         private int textColor = Color.WHITE;//字体颜色
+        private int layoutResID;
 
         public Builder(Context context) {
             this.mContext = context;
+        }
+
+        public Builder setLayoutResID(int layoutResID) {
+            this.layoutResID = layoutResID;
+            return this;
         }
 
         /**
@@ -133,10 +140,11 @@ public class CustomToast {
 
         /**
          * 设置字体的颜色
+         *
          * @param color
          * @return
          */
-        public Builder setTextColor(@ColorInt int color){
+        public Builder setTextColor(@ColorInt int color) {
             this.textColor = color;
             return this;
         }
@@ -148,7 +156,7 @@ public class CustomToast {
 
             if (null == mine) {
                 //创建对象
-                mine = new CustomToast(mContext);
+                mine = new CustomToast(mContext, layoutResID);
             }
 
             if (isShowIcon) {

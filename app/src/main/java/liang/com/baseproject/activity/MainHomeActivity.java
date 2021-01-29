@@ -71,6 +71,7 @@ import com.liang.module_core.utils.NetUtil;
 
 import liang.com.baseproject.utils.UserLoginUtils;
 
+import com.liang.module_core.utils.ToastUtil;
 import com.liang.module_core.utils.WifiUtils;
 
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
@@ -299,7 +300,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
             if (!TextUtils.isEmpty(localUserIcon)) {
                 Glide.with(MainHomeActivity.this).asBitmap().load(localUserIcon).into(navUserIocn);
             } else {
-                navUserIocn.setBackgroundResource(R.drawable.icon_user_logo);
+                navUserIocn.setBackgroundResource(R.drawable.core_icon_user_logo);
             }
 
             if (!TextUtils.isEmpty(localBg)) {
@@ -313,7 +314,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                 navViewHeaderView.setBackgroundResource(R.drawable.icon_info_bg);
             }
         } else {
-            Glide.with(mActivity).asBitmap().load(R.drawable.icon_user_logo).into(navUserIocn);
+            Glide.with(mActivity).asBitmap().load(R.drawable.core_icon_user_logo).into(navUserIocn);
             navViewHeaderView.setBackgroundResource(R.drawable.icon_info_bg);
             navUserMail.setText("ID: ");
             navUserName.setText("昵称");
@@ -501,7 +502,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         currentPosition = 1;
                         mainRgRbTwo.setChecked(true);
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
-                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_more));
+                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.core_icon_more));
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -565,7 +566,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                             @Override
                             public void onClick(View v) {
                                 //跳转搜索文章界面
-                                goToSearchWanAndroidArticle();
+//                                goToSearchWanAndroidArticle();
+
+                                ToastUtil.onShowSuccessRectangleToast(MainHomeActivity.this, "测试");
                             }
                         });
                         baseActionBar.setVisibility(View.VISIBLE);
@@ -581,7 +584,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 //                        switchFragment(1);
                         myViewPager.setCurrentItem(1);
                         baseToolbarRightIcon.setVisibility(View.VISIBLE);
-                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_more));
+                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.core_icon_more));
                         baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

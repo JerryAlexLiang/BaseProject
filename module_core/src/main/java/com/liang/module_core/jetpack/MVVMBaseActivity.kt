@@ -16,6 +16,7 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -409,18 +410,21 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
     }
 
     fun onShowToast(content: String?) {
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.icon_true),
-                false, content, resources.getColor(R.color.toast_bg), resources.getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.core_icon_true),
+                false, content, ContextCompat.getColor(BaseApplication.getAppContext(), R.color.toast_bg),
+                ContextCompat.getColor(BaseApplication.getAppContext(), R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
     }
 
     fun onShowTrueToast(content: String?) {
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.icon_true),
-                true, content, resources.getColor(R.color.toast_bg), resources.getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.core_icon_true),
+                true, content, ContextCompat.getColor(BaseApplication.getAppContext(), R.color.toast_bg),
+                ContextCompat.getColor(BaseApplication.getAppContext(), R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
     }
 
     fun onShowErrorToast(content: String?) {
-        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.icon_wrong),
-                true, content, resources.getColor(R.color.toast_bg), resources.getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
+        ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(resources, R.drawable.core_icon_wrong),
+                true, content, ContextCompat.getColor(BaseApplication.getAppContext(), R.color.toast_bg),
+                ContextCompat.getColor(BaseApplication.getAppContext(), R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT)
     }
 
     fun jumpToActivity(intent: Intent?) {

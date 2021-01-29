@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_weather.R
@@ -32,7 +31,7 @@ class PlaceAdapter(private val fragment: PlaceFragment, private val placeList: L
             val adapterPosition = viewHolder.adapterPosition
             val place = placeList[adapterPosition]
 
-            ToastUtil.onShowToast(parent.context, place.name)
+            ToastUtil.onShowDefaultToast(parent.context, place.name)
 
             val activity = fragment.activity
             if (activity is WeatherContainerActivity) {

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-    android:background="@drawable/selector_bg_press_color_white"
+    android:background="@drawable/core_selector_bg_press_color_white"
     app:cardCornerRadius="4dp">
 
     <LinearLayout

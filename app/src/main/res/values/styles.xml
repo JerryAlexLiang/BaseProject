@@ -235,7 +235,7 @@
         <!--预览界面底部背景色-->
         <item name="picture.ac_preview.bottom.bg">@color/color_fa</item>
         <!--预览界面返回箭头-->
-        <item name="picture.preview.leftBack.icon">@drawable/icon_back</item>
+        <item name="picture.preview.leftBack.icon">@drawable/core_icon_back</item>
         <!--裁剪页面标题背景色-->
         <item name="picture.crop.toolbar.bg">@color/colorBlue</item>
         <!--裁剪页面状态栏颜色-->

@@ -184,7 +184,7 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/icon_expand_open"
+            android:src="@drawable/core_icon_expand_open"
             android:tint="@color/black" />
 
         <ImageView
@@ -196,7 +196,7 @@
             android:layout_marginEnd="25dp"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_more"
+            android:src="@drawable/core_icon_more"
             app:tint="@color/invert" />
 
     </RelativeLayout>

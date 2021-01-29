@@ -306,7 +306,7 @@ public class WebContainer extends FrameLayout {
     private ImageView createImageView() {
         ImageView imageView = new ImageView(getContext());
         imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        imageView.setImageResource(R.drawable.ic_heart);
+        imageView.setImageResource(R.drawable.core_icon_heart);
         imageView.setColorFilter(ContextCompat.getColor(getContext(), R.color.accent));
         imageView.setLayoutParams(new LayoutParams(getWidth() / 3, getWidth() / 3));
         return imageView;

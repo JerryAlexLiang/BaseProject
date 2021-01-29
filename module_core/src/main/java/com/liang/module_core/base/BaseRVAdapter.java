@@ -85,7 +85,7 @@ public abstract class BaseRVAdapter<T extends AdapterBean> extends RecyclerView.
             itemView = LayoutInflater.from(parent.getContext()).inflate(getTitleLayout(), parent, false);
             return getTitleViewHolder(itemView);
         } else if (viewType == TYPE_FOOTER) {
-            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.footer_item, parent, false);
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.core_footer_item, parent, false);
             return new FooterViewHolder(itemView);
         } else if (viewType == TYPE_HEADER) {
             return new HeaderViewHolder(mHeaderView);

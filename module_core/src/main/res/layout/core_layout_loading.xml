@@ -6,4 +6,4 @@
     android:layout_gravity="center"
     android:layout_margin="64dp"
     android:indeterminate="true"
-    android:indeterminateTint="@color/blue" />
+    android:indeterminateTint="@color/colorBlue" />

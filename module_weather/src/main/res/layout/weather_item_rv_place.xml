@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_margin="12dp"
-        android:background="@drawable/selector_bg_press_color_white"
+        android:background="@drawable/core_selector_bg_press_color_white"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="4dp">
 

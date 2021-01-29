@@ -16,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/icon_user_logo"
+        android:src="@drawable/core_icon_user_logo"
         app:civ_border_color="@color/colorBlue"
         app:civ_border_overlay="true"
         app:civ_border_width="2dp"
@@ -47,10 +47,10 @@
         app:minPoint="4"
         app:paintColor="@color/white"
         app:paintTextSize="15sp"
-        app:selectedBitmap="@drawable/icon_finger_selected"
-        app:selectedBitmapSmall="@drawable/icon_finger_selected_small"
-        app:unselectedBitmap="@drawable/icon_finger_unselected"
-        app:unselectedBitmapSmall="@drawable/icon_finger_unselected_new"
+        app:selectedBitmap="@drawable/core_icon_finger_selected"
+        app:selectedBitmapSmall="@drawable/core_icon_finger_selected_small"
+        app:unselectedBitmap="@drawable/core_icon_finger_unselected"
+        app:unselectedBitmapSmall="@drawable/core_icon_finger_unselected_new"
         app:waitTime="30" />
 
     <RelativeLayout

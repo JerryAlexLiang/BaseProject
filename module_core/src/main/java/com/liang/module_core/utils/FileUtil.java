@@ -247,7 +247,7 @@ public class FileUtil {
             Uri uri = Uri.fromFile(file);
             intent.setData(uri);
             context.sendBroadcast(intent);
-            ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_true),
+            ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.core_icon_true),
                     true, "保存成功~", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
         } catch (Exception e) {
             e.printStackTrace();
@@ -322,7 +322,7 @@ public class FileUtil {
             Uri uri = Uri.fromFile(file);
             intent.setData(uri);
             context.sendBroadcast(intent);
-            ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_true),
+            ToastUtil.setCustomToast(context, BitmapFactory.decodeResource(context.getResources(), R.drawable.core_icon_true),
                     true, "保存成功~", Color.WHITE, Color.BLACK, Gravity.CENTER, Toast.LENGTH_SHORT);
         } catch (Exception e) {
             e.printStackTrace();

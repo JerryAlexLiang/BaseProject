@@ -44,7 +44,7 @@ public class DrawCustomMarkerBitmapUtil {
         source = Bitmap.createScaledBitmap(source, min, min, true);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(
-                context.getResources(), R.drawable.blue, null), min, min, true), 0, 0, paint);
+                context.getResources(), R.drawable.core_icon_blue, null), min, min, true), 0, 0, paint);
         source.recycle();
 
         return target;
@@ -117,10 +117,10 @@ public class DrawCustomMarkerBitmapUtil {
         Bitmap image = null;
         if (isWhite) {
             image = BitmapFactory.decodeResource(BaseApplication.getAppContext()
-                    .getResources(), R.drawable.white_map_head).copy(Bitmap.Config.ARGB_8888, true);
+                    .getResources(), R.drawable.core_icon_white_map_head).copy(Bitmap.Config.ARGB_8888, true);
         } else {
             image = BitmapFactory.decodeResource(BaseApplication.getAppContext()
-                    .getResources(), R.drawable.bule_map_head).copy(Bitmap.Config.ARGB_8888, true);
+                    .getResources(), R.drawable.core_icon_bule_map_head).copy(Bitmap.Config.ARGB_8888, true);
         }
         image = Bitmap.createScaledBitmap(image, 200, 200, true);
         Canvas canvas = new Canvas(image);

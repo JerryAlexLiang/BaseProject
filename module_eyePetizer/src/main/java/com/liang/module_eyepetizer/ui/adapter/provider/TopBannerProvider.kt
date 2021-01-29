@@ -16,9 +16,7 @@ import com.liang.module_eyepetizer.ui.adapter.BannerAdapter
 import com.liang.module_eyepetizer.ui.adapter.BannerImageViewHolder
 import com.liang.module_eyepetizer.ui.adapter.YouthBannerImageAdapter
 import com.youth.banner.Banner
-import com.youth.banner.indicator.CircleIndicator
 import com.youth.banner.indicator.RectangleIndicator
-import com.youth.banner.indicator.RoundLinesIndicator
 import com.youth.banner.util.BannerUtils
 import com.zhpan.bannerview.BannerViewPager
 import com.zhpan.indicator.DrawableIndicator
@@ -74,7 +72,7 @@ class TopBannerProvider() : BaseItemProvider<Item>() {
         val dp6 = getResources().getDimension(R.dimen.dp6).toInt()
         return DrawableIndicator(context)
                 .setIndicatorGap(getResources().getDimension(R.dimen.dp3).toInt())
-                .setIndicatorDrawable(R.drawable.banner_indicator_nornal, R.drawable.banner_indicator_focus)
+                .setIndicatorDrawable(R.drawable.core_shape_banner_indicator_nornal, R.drawable.core_shape_banner_indicator_focus)
                 .setIndicatorSize(dp6, dp6, getResources().getDimension(R.dimen.dp10).toInt(), dp6)
     }
 

@@ -126,7 +126,7 @@ public class UserLoginUtils {
     }
 
     public void onShowToast(String content) {
-        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+        ToastUtil.setCustomToast(MyApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_true),
                 true, content, getResources().getColor(R.color.toast_bg), Color.WHITE, Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 }

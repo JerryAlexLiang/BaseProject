@@ -137,7 +137,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/icon_user_logo"/>
+                        android:src="@drawable/core_icon_user_logo"/>
 
                 </RelativeLayout>
 

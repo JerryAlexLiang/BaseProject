@@ -21,10 +21,10 @@
         app:minPoint="4"
         app:paintColor="@color/colorBlue"
         app:paintTextSize="15sp"
-        app:selectedBitmap="@drawable/icon_finger_selected"
-        app:selectedBitmapSmall="@drawable/icon_finger_selected_small"
-        app:unselectedBitmap="@drawable/icon_finger_unselected"
-        app:unselectedBitmapSmall="@drawable/icon_finger_unselected_new"
+        app:selectedBitmap="@drawable/core_icon_finger_selected"
+        app:selectedBitmapSmall="@drawable/core_icon_finger_selected_small"
+        app:unselectedBitmap="@drawable/core_icon_finger_unselected"
+        app:unselectedBitmapSmall="@drawable/core_icon_finger_unselected_new"
         app:waitTime="30" />
 
 </LinearLayout>

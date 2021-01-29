@@ -23,8 +23,8 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-    <include layout="@layout/layout_loading" />
+    <include layout="@layout/core_layout_loading" />
 
-    <include layout="@layout/layout_view_stub_holder" />
+    <include layout="@layout/core_layout_view_stub_holder" />
 
 </FrameLayout>

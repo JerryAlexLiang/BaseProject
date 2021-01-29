@@ -136,7 +136,7 @@ public class JuheNewsTabFragment extends Fragment implements NewsView, SwipeRefr
 
     @Override
     public void setToastShow(String str) {
-        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.icon_true),
+        ToastUtil.setCustomToast(getContext(), BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_true),
                 true, str, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
 

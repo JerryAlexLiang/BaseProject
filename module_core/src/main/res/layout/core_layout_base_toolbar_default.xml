@@ -22,7 +22,7 @@
             android:layout_centerVertical="true"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/icon_back"
+            android:src="@drawable/core_icon_back"
             android:visibility="gone" />
 
         <TextView
@@ -45,7 +45,7 @@
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@id/base_toolbar_left_icon"
             android:padding="8dp"
-            android:src="@drawable/ic_close"
+            android:src="@drawable/core_icon_close"
             android:visibility="gone" />
 
     </RelativeLayout>
@@ -79,7 +79,7 @@
             android:layout_centerInParent="true"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_more"
+            android:src="@drawable/core_icon_more"
             android:visibility="gone" />
 
         <TextView

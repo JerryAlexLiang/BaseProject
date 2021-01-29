@@ -253,6 +253,7 @@
     <color name="text_invert_alpha">#88ffffff</color>
     <color name="text_on_main">#ffffff</color>
 
+    <color name="toast_context">#ffffff</color>
 
 
 
