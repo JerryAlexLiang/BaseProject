@@ -2,7 +2,6 @@ package com.liang.module_core.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import java.util.*
 
 /**
  * 创建日期: 2021/1/28 on 5:58 PM
@@ -13,53 +12,99 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
 
     private val selectedList: MutableList<T> = mutableListOf()
 
-    override fun convert(holder: BaseViewHolder, item: T) {
-        doBindViewHolder(holder, item)
+    //默认选择模式列表
+    var isSelectModel: Boolean = true
 
-        holder.itemView.setOnClickListener {
-            if (isMultipleSelectModel) {
-                //多选
-                if (selectedList.contains(item)) {
-                    selectedList.remove(item)
+    override fun convert(holder: BaseViewHolder, item: T) {
+        if (isSelectModel) {
+            doSelectModelBindViewHolder(holder, item)
+            holder.itemView.setOnClickListener {
+                if (isMultipleSelectModel) {
+                    //多选
+                    if (selectedList.contains(item)) {
+                        selectedList.remove(item)
+                    } else {
+                        selectedList.add(item)
+                    }
                 } else {
-                    selectedList.add(item)
+                    if (!selectedList.contains(item)) {
+                        selectedList.clear()
+                        selectedList.add(item)
+                    }
                 }
-            } else {
-                if (!selectedList.contains(item)) {
-                    selectedList.clear()
-                    selectedList.add(item)
-                }
+
+                notifyDataSetChanged()
             }
-            notifyDataSetChanged()
-        }
-        if (selectedList.contains(item)) {
-            onItemViewSelected(holder)
+
+            if (selectedList.contains(item)) {
+                onItemViewSelected(holder)
+            } else {
+                onItemViewUnSelected(holder)
+            }
         } else {
-            onItemViewUnSelected(holder)
+            //切换编辑模式，清空之前选中的Item列表
+            selectedList.clear()
+            doNormalModelBindViewHolder(holder, item)
         }
     }
 
-    protected abstract fun doBindViewHolder(holder: BaseViewHolder, item: T)
+    /**
+     * 取消选中Item UI事件
+     */
+    open fun onItemViewUnSelected(holder: BaseViewHolder) {
 
-    protected abstract fun onItemViewUnSelected(holder: BaseViewHolder)
+    }
 
-    protected abstract fun onItemViewSelected(holder: BaseViewHolder)
+    /**
+     * 选中Item UI事件
+     */
+    open fun onItemViewSelected(holder: BaseViewHolder) {
+
+    }
+
+    /**
+     * 选择列表模式渲染UI赋值
+     */
+    open fun doSelectModelBindViewHolder(holder: BaseViewHolder, item: T) {
+
+    }
+
+    /**
+     * 普通列表模式渲染UI赋值
+     */
+    open fun doNormalModelBindViewHolder(holder: BaseViewHolder, item: T) {
+
+    }
+
+    /**
+     * 切换选择模式
+     * 当前布局是否是选择模式
+     * true: 是选择模式；false：普通模式
+     */
+    override fun toggleSelected(isCanSelect: Boolean) {
+        this.isSelectModel = isCanSelect
+        notifyDataSetChanged()
+    }
 
     /**
      * 全选
      */
     override fun selectAll(allDataList: MutableList<T>) {
-        selectedList.clear()
-        selectedList.addAll(allDataList)
-        notifyDataSetChanged()
+        if (isSelectModel) {
+            selectedList.clear()
+            selectedList.addAll(allDataList)
+            notifyDataSetChanged()
+        }
     }
 
     /**
      * 全不选
      */
     override fun deselectAll() {
-        selectedList.clear()
-        notifyDataSetChanged()
+        if (isSelectModel) {
+            selectedList.clear()
+            notifyDataSetChanged()
+        }
     }
 
     /**

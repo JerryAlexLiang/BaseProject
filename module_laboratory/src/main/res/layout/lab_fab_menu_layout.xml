@@ -60,4 +60,29 @@
         app:fab_label="设置默认按钮4"
         android:visibility="gone"/>
 
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabMenuFive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ui_icon_video"
+        app:fabSize="mini"
+        app:fab_colorNormal="#3E99D2"
+        app:fab_colorPressed="#2488C6"
+        app:fab_colorRipple="#AF2488C6"
+        app:fab_label="设置默认按钮4"
+        android:visibility="gone"/>
+
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fabMenuSix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ui_icon_video"
+        app:fabSize="mini"
+        app:fab_colorNormal="#3E99D2"
+        app:fab_colorPressed="#2488C6"
+        app:fab_colorRipple="#AF2488C6"
+        app:fab_label="设置默认按钮4"
+        android:visibility="gone"/>
+
+
 </com.github.clans.fab.FloatingActionMenu>

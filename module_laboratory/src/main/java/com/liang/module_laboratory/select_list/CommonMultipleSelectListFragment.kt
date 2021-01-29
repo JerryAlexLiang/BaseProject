@@ -41,11 +41,15 @@ class CommonMultipleSelectListFragment : MVVMBaseFragment() {
         fabMenuTwo.visibility = View.VISIBLE
         fabMenuThree.visibility = View.VISIBLE
         fabMenuFour.visibility = View.VISIBLE
+        fabMenuFive.visibility = View.VISIBLE
+        fabMenuSix.visibility = View.VISIBLE
 
         fabMenuOne.labelText = "打印选中"
         fabMenuTwo.labelText = "设置默认选中"
         fabMenuThree.labelText = "全选"
         fabMenuFour.labelText = "取消全选"
+        fabMenuFive.labelText = "编辑"
+        fabMenuSix.labelText = "取消编辑"
 
         val linearLayoutManager = LinearLayoutManager(context)
         rvSelectList.layoutManager = linearLayoutManager
@@ -74,7 +78,7 @@ class CommonMultipleSelectListFragment : MVVMBaseFragment() {
     }
 
     private fun initListener() {
-        setOnClickListener(btnCheck, btnCheck2, fabMenuOne, fabMenuTwo, fabMenuThree, fabMenuFour) {
+        setOnClickListener(btnCheck, btnCheck2, fabMenuOne, fabMenuTwo, fabMenuThree, fabMenuFour, fabMenuFive, fabMenuSix) {
             when (this) {
                 btnCheck -> {
                     val selectedList = adapter.getSelectedList()
@@ -116,6 +120,18 @@ class CommonMultipleSelectListFragment : MVVMBaseFragment() {
                     //取消全选
                     adapter.deselectAll()
 
+                    fabMenu.toggle(false)
+                }
+
+                fabMenuFive->{
+                    adapter.setCanSelect(true)
+                    adapter.notifyDataSetChanged()
+                    fabMenu.toggle(false)
+                }
+
+                fabMenuSix->{
+                    adapter.setCanSelect(false)
+                    adapter.notifyDataSetChanged()
                     fabMenu.toggle(false)
                 }
             }

@@ -8,17 +8,17 @@ package com.liang.module_core.adapter
 interface ISelectable<T> {
 
     /**
-     * 当前布局是否是选择模式
-     * @return true: 是选择模式；false：普通模式
+     * 是否多选
+     * true：多选模式  false：单选模式
      */
-//    val isSelectModel: Boolean
-
     val isMultipleSelectModel: Boolean
 
-//    /**
-//     * 切换选择模式
-//     */
-//    fun toggleSelected()
+    /**
+     * 切换选择模式
+     * 当前布局是否是选择模式
+     * true: 是选择模式；false：普通模式
+     */
+    fun toggleSelected(isCanSelect: Boolean)
 
     /**
      * 选中全部
