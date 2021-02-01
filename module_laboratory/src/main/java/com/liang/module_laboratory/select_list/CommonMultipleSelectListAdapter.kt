@@ -1,5 +1,6 @@
 package com.liang.module_laboratory.select_list
 
+import android.util.Log
 import android.view.View
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.liang.module_core.adapter.BaseSelectListAdapter
@@ -25,11 +26,18 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
         holder.setText(R.id.tvName, item.name)
         holder.itemView.ivSelectContainer.visibility = View.VISIBLE
 
+
+        Log.d("Jerry", "doSelectModelBindViewHolder1:   $isSelectModel")
+
         holder.itemView.ivIcon.setOnClickListener {
             ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
+
+            Log.d("Jerry", "doSelectModelBindViewHolder2:   $isSelectModel")
         }
         holder.itemView.tvName.setOnClickListener {
             ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
+
+            Log.d("Jerry", "doSelectModelBindViewHolder3:   $isSelectModel")
         }
     }
 
@@ -44,8 +52,12 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
     override fun doNormalModelBindViewHolder(holder: BaseViewHolder, item: BookBean) {
         holder.setText(R.id.tvName, item.name)
         holder.itemView.ivSelectContainer.visibility = View.INVISIBLE
+
+        Log.d("Jerry", "doSelectModelBindViewHolder4:   $isSelectModel")
+
         holder.itemView.setOnClickListener {
-            ToastUtil.onShowSuccessRectangleToast(context,"当前点击: " + item.name)
+            Log.d("Jerry", "doSelectModelBindViewHolder5:   $isSelectModel")
+            ToastUtil.onShowSuccessRectangleToast(context, "当前点击: " + item.name)
         }
 
     }
