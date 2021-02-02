@@ -2,6 +2,7 @@ package com.liang.module_core.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.liang.module_core.utils.ToastUtil
 
 /**
  * 创建日期: 2021/1/28 on 5:58 PM
@@ -15,6 +16,8 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
     //默认选择模式列表
     var isSelectModel: Boolean = true
 
+    private var maxSelectCount: Int? = null
+
     override fun convert(holder: BaseViewHolder, item: T) {
         doBindViewHolder(holder, item)
         if (isSelectModel) {
@@ -26,7 +29,16 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
                     } else {
                         selectedList.add(item)
                     }
+                    //选中数量限制
+                    if (maxSelectCount != null) {
+                        if (maxSelectCount!! < selectedList.size) {
+                            selectedList.remove(item)
+                            ToastUtil.onShowFailRectangleToast(context, "最多只能选择" + maxSelectCount + "个选项!")
+                        }
+                    }
+
                 } else {
+                    //单选
                     if (!selectedList.contains(item)) {
                         selectedList.clear()
                         selectedList.add(item)
@@ -45,6 +57,14 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
             //切换编辑模式，清空之前选中的Item列表
             selectedList.clear()
         }
+    }
+
+    open fun setMaxSelectCount(setMaxSelectCount: Int) {
+        this.maxSelectCount = setMaxSelectCount
+    }
+
+    open fun getMaxSelectCount(): Int? {
+        return maxSelectCount
     }
 
     abstract fun doBindViewHolder(holder: BaseViewHolder, item: T)
@@ -111,6 +131,13 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
             for (t in defaultSelectList) {
                 if (!selectedList.contains(t)) {
                     selectedList.add(t)
+                }
+                //选中数量限制
+                if (maxSelectCount != null) {
+                    if (maxSelectCount!! < selectedList.size) {
+                        selectedList.remove(t)
+                        ToastUtil.onShowFailRectangleToast(context, "最多只能选择" + maxSelectCount + "个选项!")
+                    }
                 }
             }
         } else {

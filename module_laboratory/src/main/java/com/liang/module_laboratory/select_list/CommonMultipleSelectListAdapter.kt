@@ -37,6 +37,13 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
 
         Log.d("Jerry", "doSelectModelBindViewHolder:   $isSelectModel")
         if (isSelectModel) {
+
+            //设置最大选中个数
+            setMaxSelectCount(3)
+//            setMaxSelectCount(data.size)
+
+            Log.d("Jerry", "dataListSize:   " + data.size)
+
             //可选列表模式
             Log.d("Jerry", "doSelectModelBindViewHolder1:   $isSelectModel")
             holder.itemView.ivSelectContainer.visibility = View.VISIBLE
@@ -53,6 +60,7 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
 
                 Log.d("Jerry", "doSelectModelBindViewHolder3:   $isSelectModel")
             }
+
         } else {
             //普通类表模式
             Log.d("Jerry", "doSelectModelBindViewHolder4:   $isSelectModel")
