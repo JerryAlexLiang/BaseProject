@@ -25,11 +25,6 @@ public class CommonSingleSelectListAdapter extends BaseSelectListAdapter<BookBea
     }
 
     @Override
-    public void doSelectModelBindViewHolder(@NotNull BaseViewHolder holder, BookBean item) {
-        holder.setText(R.id.tvName, item.getName());
-    }
-
-    @Override
     public void onItemViewSelected(@NotNull BaseViewHolder holder) {
         holder.setImageResource(R.id.ivSelectContainer, R.drawable.ui_common_checked_multi);
         holder.itemView.setBackgroundColor(getContext().getResources().getColor(R.color.darkgray));
@@ -39,5 +34,10 @@ public class CommonSingleSelectListAdapter extends BaseSelectListAdapter<BookBea
     public void onItemViewUnSelected(@NotNull BaseViewHolder holder) {
         holder.setImageResource(R.id.ivSelectContainer, R.drawable.ui_common_uncheck);
         holder.itemView.setBackgroundColor(Color.WHITE);
+    }
+
+    @Override
+    public void doBindViewHolder(@NotNull BaseViewHolder holder, BookBean item) {
+        holder.setText(R.id.tvName, item.getName());
     }
 }

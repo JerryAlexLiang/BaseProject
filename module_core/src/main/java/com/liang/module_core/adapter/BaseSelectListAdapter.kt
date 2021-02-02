@@ -16,8 +16,8 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
     var isSelectModel: Boolean = true
 
     override fun convert(holder: BaseViewHolder, item: T) {
+        doBindViewHolder(holder, item)
         if (isSelectModel) {
-            doSelectModelBindViewHolder(holder, item)
             holder.itemView.setOnClickListener {
                 if (isMultipleSelectModel) {
                     //多选
@@ -44,9 +44,10 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
         } else {
             //切换编辑模式，清空之前选中的Item列表
             selectedList.clear()
-            doNormalModelBindViewHolder(holder, item)
         }
     }
+
+    abstract fun doBindViewHolder(holder: BaseViewHolder, item: T)
 
     /**
      * 取消选中Item UI事件
@@ -62,19 +63,6 @@ abstract class BaseSelectListAdapter<T>(layoutResId: Int) : BaseQuickAdapter<T, 
 
     }
 
-    /**
-     * 选择列表模式渲染UI赋值
-     */
-    open fun doSelectModelBindViewHolder(holder: BaseViewHolder, item: T) {
-
-    }
-
-    /**
-     * 普通列表模式渲染UI赋值
-     */
-    open fun doNormalModelBindViewHolder(holder: BaseViewHolder, item: T) {
-
-    }
 
     /**
      * 切换选择模式

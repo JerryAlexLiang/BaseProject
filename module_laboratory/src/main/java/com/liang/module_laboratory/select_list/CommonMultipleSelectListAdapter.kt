@@ -22,25 +22,6 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
         toggleSelected(isCanSelect)
     }
 
-    override fun doSelectModelBindViewHolder(holder: BaseViewHolder, item: BookBean) {
-        holder.setText(R.id.tvName, item.name)
-        holder.itemView.ivSelectContainer.visibility = View.VISIBLE
-
-
-        Log.d("Jerry", "doSelectModelBindViewHolder1:   $isSelectModel")
-
-        holder.itemView.ivIcon.setOnClickListener {
-            ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
-
-            Log.d("Jerry", "doSelectModelBindViewHolder2:   $isSelectModel")
-        }
-        holder.itemView.tvName.setOnClickListener {
-            ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
-
-            Log.d("Jerry", "doSelectModelBindViewHolder3:   $isSelectModel")
-        }
-    }
-
     override fun onItemViewSelected(holder: BaseViewHolder) {
         holder.setImageResource(R.id.ivSelectContainer, R.drawable.ui_common_checked_multi);
     }
@@ -49,16 +30,39 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
         holder.setImageResource(R.id.ivSelectContainer, R.drawable.ui_common_uncheck)
     }
 
-    override fun doNormalModelBindViewHolder(holder: BaseViewHolder, item: BookBean) {
+    override fun doBindViewHolder(holder: BaseViewHolder, item: BookBean) {
         holder.setText(R.id.tvName, item.name)
-        holder.itemView.ivSelectContainer.visibility = View.INVISIBLE
+        val ivIcon = holder.itemView.ivIcon
+        val tvName = holder.itemView.tvName
 
-        Log.d("Jerry", "doSelectModelBindViewHolder4:   $isSelectModel")
+        Log.d("Jerry", "doSelectModelBindViewHolder:   $isSelectModel")
+        if (isSelectModel) {
+            //可选列表模式
+            Log.d("Jerry", "doSelectModelBindViewHolder1:   $isSelectModel")
+            holder.itemView.ivSelectContainer.visibility = View.VISIBLE
 
-        holder.itemView.setOnClickListener {
-            Log.d("Jerry", "doSelectModelBindViewHolder5:   $isSelectModel")
-            ToastUtil.onShowSuccessRectangleToast(context, "当前点击: " + item.name)
+            ivIcon.isClickable = true
+            tvName.isClickable = true
+            ivIcon.setOnClickListener {
+                ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
+
+                Log.d("Jerry", "doSelectModelBindViewHolder2:   $isSelectModel")
+            }
+            tvName.setOnClickListener {
+                ToastUtil.onShowDefaultToast(context, "当前点击: " + item.name)
+
+                Log.d("Jerry", "doSelectModelBindViewHolder3:   $isSelectModel")
+            }
+        } else {
+            //普通类表模式
+            Log.d("Jerry", "doSelectModelBindViewHolder4:   $isSelectModel")
+            holder.itemView.ivSelectContainer.visibility = View.INVISIBLE
+            ivIcon.isClickable = false
+            tvName.isClickable = false
+            holder.itemView.setOnClickListener {
+                Log.d("Jerry", "doSelectModelBindViewHolder5:   $isSelectModel")
+                ToastUtil.onShowSuccessRectangleToast(context, "当前点击: " + item.name)
+            }
         }
-
     }
 }
