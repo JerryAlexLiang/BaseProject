@@ -434,6 +434,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                     case R.id.menu_nav_setting:
                         SettingActivity.actionStart(MainHomeActivity.this);
                         break;
+
+                    case R.id.menu_nav_bluetooth:
+                        //蓝牙Module
+                        ServiceProvider.getBluetoothModuleService().startBluetoothMainActivity(MainHomeActivity.this);
+                        break;
                 }
                 // 关闭侧滑菜单
                 menuItem.setChecked(true);

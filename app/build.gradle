@@ -144,6 +144,7 @@ dependencies {
     implementation project(path: ':module_laboratory')
     
     implementation project(path: ':module_ui')
+    implementation project(path: ':module_bluetooth')
 
 //    implementation 'com.google.android.material:material:1.2.0'
 //    implementation 'androidx.appcompat:appcompat:1.2.0'

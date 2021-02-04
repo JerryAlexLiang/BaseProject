@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBlue"
+    tools:context=".BleHomeActivity">
+
+    <include layout="@layout/ble_layout_base_actionbar_default" />
+
+    <Button
+        android:id="@+id/btnBleServiceNormal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp30"
+        android:background="@drawable/core_selector_bg_press_color_white"
+        android:text="蓝牙BLE开发-官方API"/>
+
+    <Button
+        android:id="@+id/btnBleInukerLibNormal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp10"
+        android:layout_marginEnd="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:textAllCaps="false"
+        android:background="@drawable/core_selector_bg_press_color_white"
+        android:text="蓝牙BLE开发-InukerLib"/>
+
+</LinearLayout>

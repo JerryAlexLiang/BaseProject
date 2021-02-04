@@ -20,4 +20,7 @@ public class AppRouter {
 
     //主APP
     public static final String MODULE_MAIN_HOME = "/main_home/MainHomeContainer";
+
+    //蓝牙Module
+    public static final String MODULE_BLUETOOTH = "/bluetooth/bluetoothContainer";
 }

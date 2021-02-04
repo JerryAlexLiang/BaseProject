@@ -2,6 +2,7 @@ package com.liang.model_middleware.impl;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.liang.model_middleware.router.AppRouter;
+import com.liang.model_middleware.service.BluetoothModuleService;
 import com.liang.model_middleware.service.DatePickerService;
 import com.liang.model_middleware.service.EyeModuleService;
 import com.liang.model_middleware.service.MainService;
@@ -50,6 +51,10 @@ public class ServiceProvider {
 
     public static MainService getMainService(){
         return (MainService) ARouter.getInstance().build(AppRouter.MODULE_MAIN_HOME).navigation();
+    }
+
+    public static BluetoothModuleService getBluetoothModuleService(){
+        return (BluetoothModuleService) ARouter.getInstance().build(AppRouter.MODULE_BLUETOOTH).navigation();
     }
 
 } 

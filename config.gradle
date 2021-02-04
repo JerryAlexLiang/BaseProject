@@ -107,7 +107,10 @@ ext {
             broccoli              : "1.0.0",
 
             //悬浮按钮
-            fabMenu               : "1.6.4"
+            fabMenu               : "1.6.4",
+
+            //蓝牙通信
+            bluetooth             : "1.4.0"
     ]
 
     dependencies = [
@@ -248,7 +251,10 @@ ext {
 
             //悬浮按钮
             //implementation 'com.github.clans:fab:1.6.4'  fabMenu
-            "fabMenu"               : "com.github.clans:fab:${versions.fabMenu}"
+            "fabMenu"               : "com.github.clans:fab:${versions.fabMenu}",
+
+            //蓝牙通信
+            "bluetooth"             : "com.inuker.bluetooth:library:${versions.bluetooth}"
     ]
 
 }

@@ -7,6 +7,11 @@
             android:title="天气"/>
 
         <item
+            android:id="@+id/menu_nav_bluetooth"
+            android:icon="@drawable/ui_icon_blue_remote"
+            android:title="蓝牙"/>
+
+        <item
             android:id="@+id/menu_nav_scan"
             android:icon="@drawable/icon_scan_code"
             android:title="扫一扫" />
