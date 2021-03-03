@@ -42,8 +42,8 @@ class EyePetizerActivity : MVVMBaseActivity() {
     }
 
     private fun initFragment() {
-//        val eyeHomeFragment = EyeHomeFragment.newInstance()
-        val discoveryFragment = DiscoveryFragment.newInstance()
-        replaceFragment(discoveryFragment)
+        val eyeHomeFragment = EyeHomeFragment.newInstance()
+//        val discoveryFragment = DiscoveryFragment.newInstance()
+        replaceFragment(eyeHomeFragment)
     }
 }

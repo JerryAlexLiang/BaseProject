@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".BlueDetailActivity">
+    tools:context=".activity.BlueDetailActivity">
 
     <include layout="@layout/ble_layout_base_actionbar_default" />
 

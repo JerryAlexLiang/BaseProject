@@ -1,4 +1,4 @@
-package com.liang.module_bluetooth
+package com.liang.module_bluetooth.activity
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -27,6 +27,8 @@ import com.inuker.bluetooth.library.search.SearchRequest
 import com.inuker.bluetooth.library.search.SearchResult
 import com.inuker.bluetooth.library.search.response.SearchResponse
 import com.inuker.bluetooth.library.utils.BluetoothLog
+import com.liang.module_bluetooth.R
+import com.liang.module_bluetooth.adapter.DeviceAdapter
 import com.liang.module_bluetooth.ble.ClientManager
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.utils.LogUtil
@@ -83,44 +85,6 @@ class BluetoothMainActivity : MVVMBaseActivity() {
 
     }
 
-//    private fun initData() {
-//        blueConfig = BlueTooth.getBlueConfig()
-//        BlueTooth.init(this)
-//        //添加蓝牙扫描监听
-//        BlueTooth.addBleScanListener(this)
-//        btnScan.setOnClickListener {
-//            if (BlueTooth.getScanningState()) {
-//                //获取扫描状态
-//                ToastUtil.onShowWarnRectangleToast(this, "蓝牙正在扫描中,请稍后!")
-//            } else {
-//                if (!BleManagerImpl.getInstance().isLocServiceEnable(this)) {
-//                    //手机是否开启位置服务，如果没有开启那么所有app将不能使用定位功能
-//                    AlertView.Builder()
-//                            .setContext(this)
-//                            .setTitle("提示")
-//                            .setMessage("未开启位置信息，是否前往开启")
-//                            .setDestructive("取消", "确定")
-//                            .setOthers(null)
-//                            .setStyle(AlertView.Style.Alert)
-//                            .setOnItemClickListener { o, position ->
-//                                when (position) {
-//                                    0 -> toast("取消")
-//                                    1 -> {
-//                                        intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-//                                        startActivityForResult(intent, REQUEST_POSITION_LOCATION);
-//                                    }
-//                                }
-//                            }
-//                            .build()
-//                            .show()
-//
-//                } else {
-//                    checkPermissions()
-//                }
-//            }
-//        }
-//    }
-
     private fun initListener() {
         setOnClickListener(btnScan,base_actionbar_left_icon) {
             when (this) {
@@ -166,7 +130,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
     private fun initView() {
         base_actionbar_left_icon!!.visibility = View.VISIBLE
         base_actionbar_title!!.visibility = View.VISIBLE
-        base_actionbar_title!!.text = this.resources.getString(R.string.titleBar)
+        base_actionbar_title!!.text = this.resources.getString(R.string.titleBar2)
 
         deviceAdapter = DeviceAdapter(R.layout.ble_rv_adapter_device)
         val linearLayoutManager = LinearLayoutManager(this)

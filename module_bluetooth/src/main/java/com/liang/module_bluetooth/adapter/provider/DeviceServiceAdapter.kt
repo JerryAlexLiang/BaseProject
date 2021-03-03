@@ -1,10 +1,10 @@
-package com.liang.module_bluetooth.provider
+package com.liang.module_bluetooth.adapter.provider
 
 import android.util.TypedValue
 import androidx.core.content.ContextCompat
 import com.chad.library.adapter.base.provider.BaseItemProvider
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.liang.module_bluetooth.DetailItem
+import com.liang.module_bluetooth.model.DetailItem
 import com.liang.module_bluetooth.R
 import kotlinx.android.synthetic.main.ble_device_detail_item.view.*
 import java.lang.String

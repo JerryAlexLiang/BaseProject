@@ -1,4 +1,4 @@
-package com.liang.module_bluetooth;
+package com.liang.module_bluetooth.model;
 
 import java.util.UUID;
 

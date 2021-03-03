@@ -1,12 +1,11 @@
-package com.liang.module_bluetooth
+package com.liang.module_bluetooth.activity
 
 import android.os.Bundle
 import android.view.View
+import com.liang.module_bluetooth.R
 import com.liang.module_core.jetpack.MVVMBaseActivity
-import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.utils.setOnClickListener
 import kotlinx.android.synthetic.main.activity_ble_home.*
-import kotlinx.android.synthetic.main.ble_activity_bluetooth_main.*
 import kotlinx.android.synthetic.main.ble_layout_base_actionbar_default.*
 import org.jetbrains.anko.startActivity
 
@@ -48,7 +47,7 @@ class BleHomeActivity : MVVMBaseActivity() {
                 }
 
                 btnBleServiceNormal -> {
-                    ToastUtil.showShortToast("急急急")
+                    startActivity<BleServiceNormalActivity>()
                 }
 
                 btnBleInukerLibNormal -> {

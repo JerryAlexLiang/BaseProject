@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorBlue"
-    tools:context=".BleHomeActivity">
+    tools:context=".activity.BleHomeActivity">
 
     <include layout="@layout/ble_layout_base_actionbar_default" />
 

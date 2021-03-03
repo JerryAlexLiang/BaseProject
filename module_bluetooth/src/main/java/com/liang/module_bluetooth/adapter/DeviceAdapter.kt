@@ -1,10 +1,11 @@
-package com.liang.module_bluetooth
+package com.liang.module_bluetooth.adapter
 
 import android.view.View
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.inuker.bluetooth.library.model.BleGattProfile
 import com.inuker.bluetooth.library.search.SearchResult
+import com.liang.module_bluetooth.R
 import kotlinx.android.synthetic.main.ble_rv_adapter_device.view.*
 
 /**

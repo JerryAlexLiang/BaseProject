@@ -1,8 +1,9 @@
-package com.liang.module_bluetooth
+package com.liang.module_bluetooth.adapter
 
 import com.chad.library.adapter.base.BaseProviderMultiAdapter
-import com.liang.module_bluetooth.provider.DeviceProfileAdapter
-import com.liang.module_bluetooth.provider.DeviceServiceAdapter
+import com.liang.module_bluetooth.model.DetailItem
+import com.liang.module_bluetooth.adapter.provider.DeviceProfileAdapter
+import com.liang.module_bluetooth.adapter.provider.DeviceServiceAdapter
 
 /**
  * 创建日期: 2021/2/3 on 2:58 PM

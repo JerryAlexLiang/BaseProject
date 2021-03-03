@@ -12,15 +12,20 @@
         android:required="true" />
 
     <application>
-        <activity
-            android:name=".BleHomeActivity"
-            android:screenOrientation="portrait" />
+        <service
+            android:name=".service.BleNormalService"/>
 
         <activity
-            android:name=".BlueDetailActivity"
+            android:name=".activity.BleServiceNormalActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".BluetoothMainActivity"
+            android:name=".activity.BleHomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BlueDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BluetoothMainActivity"
             android:screenOrientation="portrait" />
 
         <service android:name="com.inuker.bluetooth.library.BluetoothService" />

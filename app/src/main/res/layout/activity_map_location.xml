@@ -184,8 +184,7 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/core_icon_expand_open"
-            android:tint="@color/black" />
+            android:src="@drawable/core_icon_expand_open" />
 
         <ImageView
             android:id="@+id/iv_control_btn"

@@ -1,4 +1,3 @@
-include ':lib_bluetooth'
 include ':module_bluetooth'
 include ':module_laboratory'
 include ':module_ui'

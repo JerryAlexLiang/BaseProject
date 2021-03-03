@@ -1,4 +1,4 @@
-package com.liang.module_bluetooth
+package com.liang.module_bluetooth.activity
 
 import android.bluetooth.BluetoothDevice
 import android.os.Bundle
@@ -11,6 +11,9 @@ import com.inuker.bluetooth.library.connect.options.BleConnectOptions
 import com.inuker.bluetooth.library.connect.response.BleConnectResponse
 import com.inuker.bluetooth.library.model.BleGattProfile
 import com.inuker.bluetooth.library.search.SearchResult
+import com.liang.module_bluetooth.model.DetailItem
+import com.liang.module_bluetooth.adapter.DeviceDetailAdapter
+import com.liang.module_bluetooth.R
 import com.liang.module_bluetooth.ble.ClientManager
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.utils.LogUtil
