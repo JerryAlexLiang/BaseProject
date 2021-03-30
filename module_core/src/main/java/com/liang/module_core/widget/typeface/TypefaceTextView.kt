@@ -23,10 +23,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import com.liang.module_core.R
 
 /**
- * 带有自定义字体TextView。
- *
- * @author vipyinzhiwei
- * @since  2020/5/24
+ * 创建日期:2021/3/30 on 10:34 AM
+ * 描述: 带有自定义字体TextView
+ * 作者: 杨亮
  */
 class TypefaceTextView : AppCompatTextView {
 

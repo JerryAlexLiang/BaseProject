@@ -18,8 +18,8 @@ import org.jetbrains.anko.startActivity
 class EyeServiceImpl : EyeModuleService {
 
     override fun startEyePetizerActivity(context: Context) {
-        context.startActivity<EyePetizerActivity>()
-//        EyeSplashActivity.actionStart(context)
+//        context.startActivity<EyePetizerActivity>()
+        EyeSplashActivity.actionStart(context)
 
     }
 
