@@ -21,6 +21,8 @@ import com.liang.module_core.BuildConfig;
 import com.liang.module_core.utils.SettingUtils;
 import com.liang.module_core.utils.ToastUtil;
 import com.liang.module_core.utils.Utils;
+import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -56,6 +58,11 @@ public class BaseApplication extends MultiDexApplication {
     private static void outputLog(String strTAG, String strInfo) {
         if (_bOuputLog)
             Log.i(strTAG, strInfo);
+    }
+
+    //设置全局的下拉刷新样式
+    static {
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> new MyRefreshLottieHeader(mContext));
     }
 
     /**

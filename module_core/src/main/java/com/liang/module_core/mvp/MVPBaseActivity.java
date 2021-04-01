@@ -6,8 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -24,7 +27,9 @@ import android.widget.Toast;
 import com.liang.module_core.R;
 import com.liang.module_core.app.BaseApplication;
 import com.liang.module_core.constant.Constant;
+import com.liang.module_core.utils.GlobalKotlin;
 import com.liang.module_core.widget.CustomProgressDialog;
+import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader;
 import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -35,6 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+
 import com.liang.module_core.utils.SPUtils;
 import com.liang.module_core.utils.ToastUtil;
 
@@ -344,7 +350,8 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         if (smartRefreshLayout != null) {
             if (isSetRefreshHeader) {
                 //下拉刷新沉浸式水滴头部View
-                smartRefreshLayout.setRefreshHeader(new MaterialHeader(BaseApplication.getAppContext()));//经典Swip
+//                smartRefreshLayout.setRefreshHeader(new MaterialHeader(BaseApplication.getAppContext()));//经典Swip
+                SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> new MyRefreshLottieHeader(BaseApplication.getAppContext()));
             }
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View
@@ -547,7 +554,6 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         ToastUtil.setCustomToast(BaseApplication.getAppContext(), BitmapFactory.decodeResource(getResources(), R.drawable.core_icon_wrong),
                 true, content, getResources().getColor(R.color.toast_bg), getResources().getColor(R.color.text_invert), Gravity.CENTER, Toast.LENGTH_SHORT);
     }
-
 
 
     public void jumpToActivity(Intent intent) {

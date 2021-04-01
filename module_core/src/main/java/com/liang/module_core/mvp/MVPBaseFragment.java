@@ -2,6 +2,7 @@ package com.liang.module_core.mvp;
 
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,10 @@ import android.widget.Toast;
 import com.liang.module_core.R;
 import com.liang.module_core.app.BaseApplication;
 import com.liang.module_core.constant.Constant;
+import com.liang.module_core.utils.DensityUtil;
+import com.liang.module_core.utils.GlobalKotlin;
+import com.liang.module_core.utils.ScreenUtil;
+import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader;
 import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
@@ -25,6 +30,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
 import com.liang.module_core.utils.SPUtils;
 import com.liang.module_core.utils.ToastUtil;
 import com.liang.module_core.widget.CustomProgressDialog;
@@ -148,7 +154,9 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
             if (isSetRefreshHeader) {
                 //下拉刷新沉浸式水滴头部View
 //                smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext()));
-                smartRefreshLayout.setRefreshHeader(new PhoenixHeader(BaseApplication.getAppContext()));
+//                smartRefreshLayout.setRefreshHeader(new PhoenixHeader(BaseApplication.getAppContext()));
+                smartRefreshLayout.setHeaderMaxDragRate(2);
+                SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> new MyRefreshLottieHeader(BaseApplication.getAppContext()));
             }
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View

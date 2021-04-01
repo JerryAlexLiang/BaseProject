@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical">
+
+<!--
+1、lottie_autoPlay 是否自动播放；
+2、lottie_fileName json  文件路径(assets)；
+3、lottie_imageAssetsFolder 图片资源路径(如果有图片资源，则必须要填，否则会崩溃)；
+4、lottie_scale   动画居中缩放；
+5、lottie_progress  播放进度；
+6、lottie_repeatCount 循环次数 -1无限循环 0不循环；
+7、lottie_repeatMode  循环模式
+-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/refreshHeaderLottie"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp100"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="lottie/55510-atom-css-customisible.json"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

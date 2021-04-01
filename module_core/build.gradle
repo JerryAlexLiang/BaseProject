@@ -192,6 +192,9 @@ dependencies {
 
     api rootProject.ext.dependencies.bluetooth
 
+    //lottie
+    api rootProject.ext.dependencies.lottie
+
     //Android Jetpack 组件
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'

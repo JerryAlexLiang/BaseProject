@@ -19,10 +19,13 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
 import com.google.gson.Gson;
+import com.liang.module_core.app.BaseApplication;
 import com.liang.module_core.mvp.MVPBaseFragment;
 import com.liang.module_core.utils.JsonFormatUtils;
 import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.ToastUtil;
+import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader;
+import com.scwang.smartrefresh.header.PhoenixHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ import butterknife.BindView;
 import butterknife.Unbinder;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
+import liang.com.baseproject.app.MyApplication;
 import liang.com.baseproject.entity.HomeFunctionBean;
 import liang.com.baseproject.home.adapter.HomeContainerAdapter;
 import liang.com.baseproject.home.adapter.HomeFunctionContainerAdapter;
@@ -97,6 +101,11 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
     protected void initView(View rootView) {
         //绑定View
         mPresenter.attachView(this);
+
+        smartRefreshLayout.setPrimaryColorsId(R.color.colorBlue, R.color.white);
+        smartRefreshLayout.setRefreshHeader(new MyRefreshLottieHeader(MyApplication.getAppContext()));
+//        smartRefreshLayout.setRefreshHeader(new PhoenixHeader(BaseApplication.getAppContext()));
+
         initArticleRvList();
         initHeader();
     }
