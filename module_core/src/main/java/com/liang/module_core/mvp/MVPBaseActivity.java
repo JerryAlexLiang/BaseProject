@@ -6,14 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -24,15 +16,35 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.liang.module_core.R;
 import com.liang.module_core.app.BaseApplication;
 import com.liang.module_core.constant.Constant;
-import com.liang.module_core.utils.GlobalKotlin;
+import com.liang.module_core.utils.SPUtils;
+import com.liang.module_core.utils.ToastUtil;
 import com.liang.module_core.widget.CustomProgressDialog;
 import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader;
+import com.scwang.smartrefresh.header.BezierCircleHeader;
+import com.scwang.smartrefresh.header.DeliveryHeader;
+import com.scwang.smartrefresh.header.DropBoxHeader;
+import com.scwang.smartrefresh.header.FlyRefreshHeader;
+import com.scwang.smartrefresh.header.FunGameBattleCityHeader;
+import com.scwang.smartrefresh.header.FunGameHitBlockHeader;
 import com.scwang.smartrefresh.header.MaterialHeader;
+import com.scwang.smartrefresh.header.PhoenixHeader;
+import com.scwang.smartrefresh.header.StoreHouseHeader;
+import com.scwang.smartrefresh.header.TaurusHeader;
+import com.scwang.smartrefresh.header.WaterDropHeader;
+import com.scwang.smartrefresh.header.WaveSwipeHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.header.TwoLevelHeader;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -40,9 +52,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-
-import com.liang.module_core.utils.SPUtils;
-import com.liang.module_core.utils.ToastUtil;
 
 
 /**
@@ -57,6 +66,8 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
     protected T mPresenter;
     private SwipeRefreshLayout mRefreshLayout;
     private boolean mIsRequestDataRefresh = false;
+    private String lottieFileName = "";
+    private MyRefreshLottieHeader myRefreshLottieHeader;
 
     /**
      * 管理所有的activity资源对象
@@ -150,6 +161,9 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
         if (splashRelativeLayout != null) {
             getSplashTheme(splashRelativeLayout);
         }
+
+        //初始化Header
+        myRefreshLottieHeader = new MyRefreshLottieHeader(BaseApplication.getAppContext());
 
         SmartRefreshLayout smartRefreshLayout = findViewById(R.id.smart_refresh_layout);
         if (smartRefreshLayout != null) {
@@ -329,30 +343,13 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
 
     public void getSmartRefreshPrimaryColorsTheme(SmartRefreshLayout smartRefreshLayout, boolean isSetRefreshHeader, boolean isSetRefreshFooter) {
         int actionBarColorInt = (int) SPUtils.get(MVPBaseActivity.this, Constant.ACTIONBAR_COLOR_THEME, 0);
-        Log.d(TAG, "setActionBarTheme: " + actionBarColorInt);
+        String refreshHeaderStyle = (String) SPUtils.get(BaseApplication.getAppContext(), Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
 
-//        smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext())); //经典Swip
-//        smartRefreshLayout.setRefreshHeader(new WaterDropHeader(MyApplication.getAppContext())); //弹性水滴效果
-//        smartRefreshLayout.setRefreshHeader(new WaveSwipeHeader(MyApplication.getAppContext()));//下坠水滴效果
-//        smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(MyApplication.getAppContext())); //水滴下拉
-//        smartRefreshLayout.setRefreshHeader(new PhoenixHeader(MyApplication.getAppContext()));  //大楼动画
-//        smartRefreshLayout.setRefreshHeader(new TaurusHeader(MyApplication.getAppContext()));  //飞机滑翔动画效果
-//        smartRefreshLayout.setRefreshHeader(new ClassicsHeader(MyApplication.getAppContext()));   //经典带时间的刷新
-//        smartRefreshLayout.setRefreshHeader(new TwoLevelHeader(MyApplication.getAppContext()));   //经典带时间的刷新
-//        smartRefreshLayout.setRefreshHeader(new BezierRadarHeader(MyApplication.getAppContext()));  //雷达动画
-//        smartRefreshLayout.setRefreshHeader(new DeliveryHeader(MyApplication.getAppContext()));   //快递交付动画
-//        smartRefreshLayout.setRefreshHeader(new DropBoxHeader(MyApplication.getAppContext())); //礼物盒子动画效果
-//        smartRefreshLayout.setRefreshHeader(new FalsifyHeader(MyApplication.getAppContext()));  //无动画效果
-//        smartRefreshLayout.setRefreshHeader(new FlyRefreshHeader(MyApplication.getAppContext()));
-//        smartRefreshLayout.setRefreshHeader(new FunGameBattleCityHeader(MyApplication.getAppContext())); //子弹游戏效果
-//        smartRefreshLayout.setRefreshHeader(new FunGameHitBlockHeader(MyApplication.getAppContext()));   //碰球游戏效果
-//        smartRefreshLayout.setRefreshHeader(new StoreHouseHeader(MyApplication.getAppContext()));  //StoreHouse文字渐变效果
         if (smartRefreshLayout != null) {
             if (isSetRefreshHeader) {
-                //下拉刷新沉浸式水滴头部View
-//                smartRefreshLayout.setRefreshHeader(new MaterialHeader(BaseApplication.getAppContext()));//经典Swip
-                SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> new MyRefreshLottieHeader(BaseApplication.getAppContext()));
+                setRefreshHeader(smartRefreshLayout, refreshHeaderStyle);
             }
+
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View
 //                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
@@ -391,6 +388,187 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                     smartRefreshLayout.setPrimaryColorsId(R.color.assist, R.color.white);
                 }
                 break;
+        }
+    }
+
+    /**
+     * 替换RefreshHeader
+     */
+    public void setRefreshHeader(SmartRefreshLayout smartRefreshLayout, String refreshHeaderStyle) {
+        switch (refreshHeaderStyle) {
+            case Constant.REFRESH_HEADER_34115_ROCKET_LUNCH:
+                lottieFileName = "lottie/34115-rocket-lunch.json";
+                myRefreshLottieHeader.setAnimationViewJson(lottieFileName);
+                setLottieRefreshHeader(smartRefreshLayout);
+                break;
+
+            case Constant.REFRESH_HEADER_28402_TEMPLO:
+                lottieFileName = "lottie/28402-templo.json";
+                myRefreshLottieHeader.setAnimationViewJson(lottieFileName);
+                setLottieRefreshHeader(smartRefreshLayout);
+                break;
+
+            case Constant.MaterialHeader:
+                smartRefreshLayout.setRefreshHeader(new MaterialHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.WaterDropHeader:
+                smartRefreshLayout.setRefreshHeader(new WaterDropHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.WaveSwipeHeader:
+                smartRefreshLayout.setRefreshHeader(new WaveSwipeHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.BezierCircleHeader:
+                smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.PhoenixHeader:
+                smartRefreshLayout.setRefreshHeader(new PhoenixHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.TaurusHeader:
+                smartRefreshLayout.setRefreshHeader(new TaurusHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.FlyRefreshHeader:
+                smartRefreshLayout.setRefreshHeader(new FlyRefreshHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.ClassicsHeader:
+                smartRefreshLayout.setRefreshHeader(new ClassicsHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.BezierRadarHeader:
+                smartRefreshLayout.setRefreshHeader(new BezierRadarHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.DeliveryHeader:
+                smartRefreshLayout.setRefreshHeader(new DeliveryHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.DropBoxHeader:
+                smartRefreshLayout.setRefreshHeader(new DropBoxHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.FunGameBattleCityHeader:
+                smartRefreshLayout.setRefreshHeader(new FunGameBattleCityHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.FunGameHitBlockHeader:
+                smartRefreshLayout.setRefreshHeader(new FunGameHitBlockHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.StoreHouseHeader:
+                smartRefreshLayout.setRefreshHeader(new StoreHouseHeader(BaseApplication.getAppContext()));
+                break;
+
+            case Constant.TwoLevelHeader:
+                smartRefreshLayout.setRefreshHeader(new TwoLevelHeader(BaseApplication.getAppContext()));
+                break;
+        }
+    }
+
+    /**
+     * 设置自定义RefreshHeader
+     */
+    private void setLottieRefreshHeader(SmartRefreshLayout smartRefreshLayout) {
+        smartRefreshLayout.setHeaderMaxDragRate(2);
+        smartRefreshLayout.setRefreshHeader(myRefreshLottieHeader);
+    }
+
+    /**
+     * 全局替换RefreshHeader
+     */
+    public void changeRefreshHeaderStyle(String refreshHeaderStyle) {
+        switch (refreshHeaderStyle) {
+            case Constant.REFRESH_HEADER_34115_ROCKET_LUNCH:
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+                break;
+
+            case Constant.REFRESH_HEADER_28402_TEMPLO:
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_28402_TEMPLO);
+                break;
+
+            case Constant.MaterialHeader:
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.MaterialHeader);
+                break;
+
+            case Constant.WaterDropHeader:
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.WaterDropHeader);
+                break;
+
+            case Constant.WaveSwipeHeader:
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.WaveSwipeHeader);
+                break;
+
+            case Constant.BezierCircleHeader:
+                //水滴下拉
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.BezierCircleHeader);
+                break;
+
+            case Constant.PhoenixHeader:
+                //大楼动画
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.PhoenixHeader);
+                break;
+
+            case Constant.TaurusHeader:
+                //飞机滑翔动画效果
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.TaurusHeader);
+                break;
+
+            case Constant.FlyRefreshHeader:
+                //飞机效果2
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.FlyRefreshHeader);
+                break;
+
+            case Constant.ClassicsHeader:
+                //经典带时间的刷新
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.ClassicsHeader);
+                break;
+
+            case Constant.BezierRadarHeader:
+                //雷达动画
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.BezierRadarHeader);
+                break;
+
+            case Constant.DeliveryHeader:
+                //快递交付动画
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.DeliveryHeader);
+                break;
+
+            case Constant.DropBoxHeader:
+                //礼物盒子动画效果
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.DropBoxHeader);
+                break;
+
+            case Constant.FalsifyHeader:
+                //无动画效果
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.FalsifyHeader);
+                break;
+
+            case Constant.FunGameBattleCityHeader:
+                //子弹游戏效果
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.FunGameBattleCityHeader);
+                break;
+
+            case Constant.FunGameHitBlockHeader:
+                //碰球游戏效果
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.FunGameHitBlockHeader);
+                break;
+
+            case Constant.StoreHouseHeader:
+                //StoreHouse文字渐变效果
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.StoreHouseHeader);
+                break;
+
+
+            case Constant.TwoLevelHeader:
+                //二楼
+                SPUtils.put(MVPBaseActivity.this, Constant.REFRESH_HEADER_STYLE, Constant.TwoLevelHeader);
+                break;
+
         }
     }
 

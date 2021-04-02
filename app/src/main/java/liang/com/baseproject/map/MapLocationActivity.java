@@ -479,13 +479,13 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     }
 
     private void initRecyclerView() {
-        smartRefreshLayout.setPrimaryColorsId(R.color.colorBlue, R.color.white);
-        smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext())); //经典Swip
+//        smartRefreshLayout.setPrimaryColorsId(R.color.colorBlue, R.color.white);
+//        smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext())); //经典Swip
 //        smartRefreshLayout.setRefreshHeader(new WaterDropHeader(MyApplication.getAppContext())); //弹性水滴效果
 //        smartRefreshLayout.setRefreshHeader(new WaveSwipeHeader(MyApplication.getAppContext()));//下坠水滴效果
 //        smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(MyApplication.getAppContext())); //水滴下拉
 //        smartRefreshLayout.setRefreshHeader(new PhoenixHeader(MyApplication.getAppContext()));  //大楼动画
-        //        smartRefreshLayout.setRefreshHeader(new TaurusHeader(MyApplication.getAppContext()));  //飞机滑翔动画效果
+//        smartRefreshLayout.setRefreshHeader(new TaurusHeader(MyApplication.getAppContext()));  //飞机滑翔动画效果
 //        smartRefreshLayout.setRefreshHeader(new ClassicsHeader(MyApplication.getAppContext()));   //经典带时间的刷新
 //        smartRefreshLayout.setRefreshHeader(new TwoLevelHeader(MyApplication.getAppContext()));   //经典带时间的刷新
 //        smartRefreshLayout.setRefreshHeader(new BezierRadarHeader(MyApplication.getAppContext()));  //雷达动画
@@ -496,6 +496,8 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 //        smartRefreshLayout.setRefreshHeader(new FunGameBattleCityHeader(MyApplication.getAppContext())); //子弹游戏效果
 //        smartRefreshLayout.setRefreshHeader(new FunGameHitBlockHeader(MyApplication.getAppContext()));   //碰球游戏效果
 //        smartRefreshLayout.setRefreshHeader(new StoreHouseHeader(MyApplication.getAppContext()));  //StoreHouse文字渐变效果
+
+        setRefreshHeader(smartRefreshLayout,com.liang.module_core.constant.Constant.DropBoxHeader);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvMap.setLayoutManager(linearLayoutManager);

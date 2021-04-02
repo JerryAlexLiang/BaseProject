@@ -22,9 +22,13 @@ import com.liang.module_core.constant.Constant
 import com.liang.module_core.utils.SPUtils
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.widget.CustomProgressDialog
-import com.scwang.smartrefresh.header.PhoenixHeader
+import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader
+import com.scwang.smartrefresh.header.*
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.scwang.smartrefresh.layout.header.TwoLevelHeader
 import org.greenrobot.eventbus.EventBus
 
 abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
@@ -67,6 +71,9 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
     private var mRefreshLayout: SwipeRefreshLayout? = null
     private var customProgressDialog: CustomProgressDialog? = null
 
+    private var lottieFileName = ""
+    private var myRefreshLottieHeader: MyRefreshLottieHeader? = null
+
     protected abstract fun createViewLayoutId(): Int
 
     protected abstract fun initView(rootView: View?)
@@ -100,6 +107,12 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
         if (isSetRefresh) {
             setupSwipeRefresh(rootView!!)
         }
+
+        //初始化Header
+
+        //初始化Header
+        myRefreshLottieHeader = MyRefreshLottieHeader(BaseApplication.getAppContext())
+
         val smartRefreshLayout = rootView?.findViewById<SmartRefreshLayout>(R.id.smart_refresh_layout)
         smartRefreshLayout?.let { getSmartRefreshPrimaryColorsTheme(it, isSetRefreshHeader(), isSetRefreshFooter())  }
         loading = view?.findViewById(R.id.loading)
@@ -149,12 +162,11 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
 
     private fun getSmartRefreshPrimaryColorsTheme(smartRefreshLayout: SmartRefreshLayout?, isSetRefreshHeader: Boolean, isSetRefreshFooter: Boolean) {
         val actionBarColorInt = SPUtils.get(BaseApplication.getAppContext(), Constant.ACTIONBAR_COLOR_THEME, 0) as Int
+        val refreshHeaderStyle = SPUtils.get(BaseApplication.getAppContext(), Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH) as String
 
         if (smartRefreshLayout != null) {
             if (isSetRefreshHeader) {
-                //下拉刷新沉浸式水滴头部View
-//                smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext()));
-                smartRefreshLayout.setRefreshHeader(PhoenixHeader(BaseApplication.getAppContext()))
+                setRefreshHeader(smartRefreshLayout, refreshHeaderStyle)
             }
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View
@@ -169,6 +181,132 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
             Constant.ACTIONBAR_COLOR_WHITE -> smartRefreshLayout?.setPrimaryColorsId(R.color.black, R.color.white)
             Constant.ACTIONBAR_COLOR_TRANSLATE -> smartRefreshLayout?.setPrimaryColorsId(R.color.transparent, R.color.white)
             Constant.ACTIONBAR_COLOR_GREEN -> smartRefreshLayout?.setPrimaryColorsId(R.color.assist, R.color.white)
+        }
+    }
+
+    /**
+     * 替换RefreshHeader
+     */
+    open fun setRefreshHeader(smartRefreshLayout: SmartRefreshLayout, refreshHeaderStyle: String?) {
+        when (refreshHeaderStyle) {
+            Constant.REFRESH_HEADER_34115_ROCKET_LUNCH -> {
+                lottieFileName = "lottie/34115-rocket-lunch.json"
+                myRefreshLottieHeader!!.setAnimationViewJson(lottieFileName)
+                setLottieRefreshHeader(smartRefreshLayout)
+            }
+
+            Constant.REFRESH_HEADER_28402_TEMPLO -> {
+                lottieFileName = "lottie/28402-templo.json"
+                myRefreshLottieHeader!!.setAnimationViewJson(lottieFileName)
+                setLottieRefreshHeader(smartRefreshLayout)
+            }
+
+            Constant.MaterialHeader -> smartRefreshLayout.setRefreshHeader(MaterialHeader(BaseApplication.getAppContext()))
+
+            Constant.WaterDropHeader -> smartRefreshLayout.setRefreshHeader(WaterDropHeader(BaseApplication.getAppContext()))
+
+            Constant.WaveSwipeHeader -> smartRefreshLayout.setRefreshHeader(WaveSwipeHeader(BaseApplication.getAppContext()))
+
+            Constant.BezierCircleHeader -> smartRefreshLayout.setRefreshHeader(BezierCircleHeader(BaseApplication.getAppContext()))
+
+            Constant.PhoenixHeader -> smartRefreshLayout.setRefreshHeader(PhoenixHeader(BaseApplication.getAppContext()))
+
+            Constant.TaurusHeader -> smartRefreshLayout.setRefreshHeader(TaurusHeader(BaseApplication.getAppContext()))
+
+            Constant.FlyRefreshHeader -> smartRefreshLayout.setRefreshHeader(FlyRefreshHeader(BaseApplication.getAppContext()))
+
+            Constant.ClassicsHeader -> smartRefreshLayout.setRefreshHeader(ClassicsHeader(BaseApplication.getAppContext()))
+
+            Constant.BezierRadarHeader -> smartRefreshLayout.setRefreshHeader(BezierRadarHeader(BaseApplication.getAppContext()))
+
+            Constant.DeliveryHeader -> smartRefreshLayout.setRefreshHeader(DeliveryHeader(BaseApplication.getAppContext()))
+
+            Constant.DropBoxHeader -> smartRefreshLayout.setRefreshHeader(DropBoxHeader(BaseApplication.getAppContext()))
+
+            Constant.FunGameBattleCityHeader -> smartRefreshLayout.setRefreshHeader(FunGameBattleCityHeader(BaseApplication.getAppContext()))
+
+            Constant.FunGameHitBlockHeader -> smartRefreshLayout.setRefreshHeader(FunGameHitBlockHeader(BaseApplication.getAppContext()))
+
+            Constant.StoreHouseHeader -> smartRefreshLayout.setRefreshHeader(StoreHouseHeader(BaseApplication.getAppContext()))
+
+            Constant.TwoLevelHeader -> smartRefreshLayout.setRefreshHeader(TwoLevelHeader(BaseApplication.getAppContext()))
+        }
+    }
+
+    /**
+     * 设置自定义RefreshHeader
+     */
+    private  fun setLottieRefreshHeader(smartRefreshLayout: SmartRefreshLayout) {
+        smartRefreshLayout.setHeaderMaxDragRate(2f)
+        smartRefreshLayout.setRefreshHeader(myRefreshLottieHeader!!)
+    }
+
+    /**
+     * 全局替换RefreshHeader
+     */
+    open fun changeRefreshHeaderStyle(refreshHeaderStyle: String?) {
+        when (refreshHeaderStyle) {
+            Constant.REFRESH_HEADER_34115_ROCKET_LUNCH -> SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH)
+
+            Constant.REFRESH_HEADER_28402_TEMPLO -> SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_28402_TEMPLO)
+
+            Constant.MaterialHeader -> SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.MaterialHeader)
+
+            Constant.WaterDropHeader -> SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.WaterDropHeader)
+
+            Constant.WaveSwipeHeader -> SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.WaveSwipeHeader)
+
+            Constant.BezierCircleHeader ->
+                //水滴下拉
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.BezierCircleHeader)
+
+            Constant.PhoenixHeader ->
+                //大楼动画
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.PhoenixHeader)
+
+            Constant.TaurusHeader ->
+                //飞机滑翔动画效果
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.TaurusHeader)
+
+            Constant.FlyRefreshHeader ->
+                //飞机效果2
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.FlyRefreshHeader)
+
+            Constant.ClassicsHeader ->
+                //经典带时间的刷新
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.ClassicsHeader)
+
+            Constant.BezierRadarHeader ->
+                //雷达动画
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.BezierRadarHeader)
+
+            Constant.DeliveryHeader ->
+                //快递交付动画
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.DeliveryHeader)
+
+            Constant.DropBoxHeader ->
+                //礼物盒子动画效果
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.DropBoxHeader)
+
+            Constant.FalsifyHeader ->
+                //无动画效果
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.FalsifyHeader)
+
+            Constant.FunGameBattleCityHeader ->
+                //子弹游戏效果
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.FunGameBattleCityHeader)
+
+            Constant.FunGameHitBlockHeader ->
+                //碰球游戏效果
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.FunGameHitBlockHeader)
+
+            Constant.StoreHouseHeader ->
+                //StoreHouse文字渐变效果
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.StoreHouseHeader)
+
+            Constant.TwoLevelHeader ->
+                //二楼
+                SPUtils.put(context, Constant.REFRESH_HEADER_STYLE, Constant.TwoLevelHeader)
         }
     }
 

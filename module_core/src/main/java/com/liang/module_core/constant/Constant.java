@@ -64,6 +64,31 @@ public class Constant {
     public static final int ACTIONBAR_COLOR_TRANSLATE = 4;
     public static final int ACTIONBAR_COLOR_GREEN = 5;
 
+    //SmartRefreshLayout MyRefreshLottieHeader样式
+    public static final String REFRESH_HEADER_STYLE = "refresh_header_style";
+    public static final String REFRESH_HEADER_34115_ROCKET_LUNCH = "34115_rocket_lunch";
+    public static final String REFRESH_HEADER_28402_TEMPLO = "28402_templo";
+
+    //SmartRefreshLayout自带头部刷新动画效果
+    public static final String MaterialHeader = "MaterialHeader";    //经典Swip
+    public static final String WaterDropHeader = "WaterDropHeader";  //弹性水滴效果
+    public static final String WaveSwipeHeader = "WaveSwipeHeader";  //下坠水滴效果
+    public static final String BezierCircleHeader = "BezierCircleHeader";  //水滴下拉
+    public static final String PhoenixHeader = "PhoenixHeader";  //大楼动画
+    public static final String TaurusHeader = "TaurusHeader";  //飞机滑翔动画效果
+    public static final String ClassicsHeader = "ClassicsHeader";  //经典带时间的刷新
+    public static final String BezierRadarHeader = "BezierRadarHeader";  //雷达动画
+    public static final String DeliveryHeader = "DeliveryHeader";  //快递交付动画
+    public static final String DropBoxHeader = "DropBoxHeader";  //礼物盒子动画效果
+    public static final String FalsifyHeader = "FalsifyHeader";  //无动画效果
+    public static final String FlyRefreshHeader = "FlyRefreshHeader";  //飞机效果2
+    public static final String FunGameBattleCityHeader = "FunGameBattleCityHeader";  //子弹游戏效果
+    public static final String FunGameHitBlockHeader = "FunGameHitBlockHeader";  //碰球游戏效果
+    public static final String StoreHouseHeader = "StoreHouseHeader";  //StoreHouse文字渐变效果
+    public static final String TwoLevelHeader = "TwoLevelHeader";  //二楼
+
+
+
     //没有连接网络
     public static final int NETWORK_NONE = -1;
     //移动网络

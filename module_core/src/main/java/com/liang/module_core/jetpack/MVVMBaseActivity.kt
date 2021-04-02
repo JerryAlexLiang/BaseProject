@@ -26,9 +26,13 @@ import com.liang.module_core.constant.Constant
 import com.liang.module_core.utils.SPUtils
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.widget.CustomProgressDialog
-import com.scwang.smartrefresh.header.MaterialHeader
+import com.liang.module_core.widget.refreshWidget.MyRefreshLottieHeader
+import com.scwang.smartrefresh.header.*
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader
+import com.scwang.smartrefresh.layout.header.ClassicsHeader
+import com.scwang.smartrefresh.layout.header.TwoLevelHeader
 import org.greenrobot.eventbus.EventBus
 import java.util.*
 
@@ -43,6 +47,9 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
     private var mIsRequestDataRefresh = false
     var mActivity: Activity? = null
     private var customProgressDialog: CustomProgressDialog? = null
+
+    private var lottieFileName = ""
+    private var myRefreshLottieHeader: MyRefreshLottieHeader? = null
 
     /**
      * 是否注册事件分发，默认不绑定
@@ -106,6 +113,10 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
         }
         val splashRelativeLayout = findViewById<RelativeLayout>(R.id.splash_container_layout)
         splashRelativeLayout?.let { getSplashTheme(it) }
+
+        //初始化Header
+        myRefreshLottieHeader = MyRefreshLottieHeader(BaseApplication.getAppContext())
+
         val smartRefreshLayout = findViewById<SmartRefreshLayout>(R.id.smart_refresh_layout)
         smartRefreshLayout?.let { getSmartRefreshPrimaryColorsTheme(it, isSetRefreshHeader(), isSetRefreshFooter()) }
         if (isSetRefresh) {
@@ -233,29 +244,13 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
 
     private fun getSmartRefreshPrimaryColorsTheme(smartRefreshLayout: SmartRefreshLayout?, isSetRefreshHeader: Boolean, isSetRefreshFooter: Boolean) {
         val actionBarColorInt = SPUtils.get(this@MVVMBaseActivity, Constant.ACTIONBAR_COLOR_THEME, 0) as Int
-        Log.d(TAG, "setActionBarTheme: $actionBarColorInt")
+        val refreshHeaderStyle = SPUtils.get(BaseApplication.getAppContext(), Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH) as String
 
-//        smartRefreshLayout.setRefreshHeader(new MaterialHeader(MyApplication.getAppContext())); //经典Swip
-//        smartRefreshLayout.setRefreshHeader(new WaterDropHeader(MyApplication.getAppContext())); //弹性水滴效果
-//        smartRefreshLayout.setRefreshHeader(new WaveSwipeHeader(MyApplication.getAppContext()));//下坠水滴效果
-//        smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(MyApplication.getAppContext())); //水滴下拉
-//        smartRefreshLayout.setRefreshHeader(new PhoenixHeader(MyApplication.getAppContext()));  //大楼动画
-//        smartRefreshLayout.setRefreshHeader(new TaurusHeader(MyApplication.getAppContext()));  //飞机滑翔动画效果
-//        smartRefreshLayout.setRefreshHeader(new ClassicsHeader(MyApplication.getAppContext()));   //经典带时间的刷新
-//        smartRefreshLayout.setRefreshHeader(new TwoLevelHeader(MyApplication.getAppContext()));   //经典带时间的刷新
-//        smartRefreshLayout.setRefreshHeader(new BezierRadarHeader(MyApplication.getAppContext()));  //雷达动画
-//        smartRefreshLayout.setRefreshHeader(new DeliveryHeader(MyApplication.getAppContext()));   //快递交付动画
-//        smartRefreshLayout.setRefreshHeader(new DropBoxHeader(MyApplication.getAppContext())); //礼物盒子动画效果
-//        smartRefreshLayout.setRefreshHeader(new FalsifyHeader(MyApplication.getAppContext()));  //无动画效果
-//        smartRefreshLayout.setRefreshHeader(new FlyRefreshHeader(MyApplication.getAppContext()));
-//        smartRefreshLayout.setRefreshHeader(new FunGameBattleCityHeader(MyApplication.getAppContext())); //子弹游戏效果
-//        smartRefreshLayout.setRefreshHeader(new FunGameHitBlockHeader(MyApplication.getAppContext()));   //碰球游戏效果
-//        smartRefreshLayout.setRefreshHeader(new StoreHouseHeader(MyApplication.getAppContext()));  //StoreHouse文字渐变效果
         if (smartRefreshLayout != null) {
             if (isSetRefreshHeader) {
-                //下拉刷新沉浸式水滴头部View
-                smartRefreshLayout.setRefreshHeader(MaterialHeader(BaseApplication.getAppContext())) //经典Swip
+                setRefreshHeader(smartRefreshLayout, refreshHeaderStyle)
             }
+
             if (isSetRefreshFooter) {
                 //上滑加载更多三点渐变动画底部View
 //                smartRefreshLayout.setRefreshFooter(new BallPulseFooter(MyApplication.getAppContext()).setSpinnerStyle(SpinnerStyle.Scale));
@@ -270,72 +265,133 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
             Constant.ACTIONBAR_COLOR_GREEN -> smartRefreshLayout?.setPrimaryColorsId(R.color.assist, R.color.white)
         }
     }
-    /*
-        //官网给的一些设置属性方法
-        //下面示例中的值等于默认值
-        RefreshLayout refreshLayout = (RefreshLayout)findViewById(R.id.refreshLayout);
-        refreshLayout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);
-        refreshLayout.setDragRate(0.5f);//显示下拉高度/手指真实下拉高度=阻尼效果
-        refreshLayout.setReboundDuration(300);//回弹动画时长（毫秒）
 
-        refreshLayout.setHeaderHeight(100);//Header标准高度（显示下拉高度>=标准高度 触发刷新）
-        refreshLayout.setHeaderHeightPx(100);//同上-像素为单位 （V1.1.0删除）
-        refreshLayout.setFooterHeight(100);//Footer标准高度（显示上拉高度>=标准高度 触发加载）
-        refreshLayout.setFooterHeightPx(100);//同上-像素为单位 （V1.1.0删除）
-
-        refreshLayout.setFooterHeaderInsetStart(0);//设置 Header 起始位置偏移量 1.0.5
-        refreshLayout.setFooterHeaderInsetStartPx(0);//同上-像素为单位 1.0.5 （V1.1.0删除）
-        refreshLayout.setFooterFooterInsetStart(0);//设置 Footer 起始位置偏移量 1.0.5
-        refreshLayout.setFooterFooterInsetStartPx(0);//同上-像素为单位 1.0.5 （V1.1.0删除）
-
-        refreshLayout.setHeaderMaxDragRate(2);//最大显示下拉高度/Header标准高度
-        refreshLayout.setFooterMaxDragRate(2);//最大显示下拉高度/Footer标准高度
-        refreshLayout.setHeaderTriggerRate(1);//触发刷新距离 与 HeaderHeight 的比率1.0.4
-        refreshLayout.setFooterTriggerRate(1);//触发加载距离 与 FooterHeight 的比率1.0.4
-
-        refreshLayout.setEnableRefresh(true);//是否启用下拉刷新功能
-        refreshLayout.setEnableLoadMore(false);//是否启用上拉加载功能
-        refreshLayout.setEnableAutoLoadMore(true);//是否启用列表惯性滑动到底部时自动加载更多
-        refreshLayout.setEnablePureScrollMode(false);//是否启用纯滚动模式
-        refreshLayout.setEnableNestedScroll(false);//是否启用嵌套滚动
-        refreshLayout.setEnableOverScrollBounce(true);//是否启用越界回弹
-        refreshLayout.setEnableScrollContentWhenLoaded(true);//是否在加载完成时滚动列表显示新的内容
-        refreshLayout.setEnableHeaderTranslationContent(true);//是否下拉Header的时候向下平移列表或者内容
-        refreshLayout.setEnableFooterTranslationContent(true);//是否上拉Footer的时候向上平移列表或者内容
-        refreshLayout.setEnableLoadMoreWhenContentNotFull(true);//是否在列表不满一页时候开启上拉加载功能
-        refreshLayout.setEnableFooterFollowWhenLoadFinished(false);//是否在全部加载结束之后Footer跟随内容1.0.4
-        refreshLayout.setEnableOverScrollDrag(false);//是否启用越界拖动（仿苹果效果）1.0.4
-
-        refreshLayout.setEnableScrollContentWhenRefreshed(true);//是否在刷新完成时滚动列表显示新的内容 1.0.5
-        refreshLayout.srlEnableClipHeaderWhenFixedBehind(true);//是否剪裁Header当时样式为FixedBehind时1.0.5
-        refreshLayout.srlEnableClipFooterWhenFixedBehind(true);//是否剪裁Footer当时样式为FixedBehind时1.0.5
-
-        refreshLayout.setDisableContentWhenRefresh(false);//是否在刷新的时候禁止列表的操作
-        refreshLayout.setDisableContentWhenLoading(false);//是否在加载的时候禁止列表的操作
-
-        refreshLayout.setOnMultiPurposeListener(new SimpleMultiPurposeListener());//设置多功能监听器
-        refreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDecider());//设置滚动边界判断
-        refreshLayout.setScrollBoundaryDecider(new ScrollBoundaryDeciderAdapter());//自定义滚动边界
-
-        refreshLayout.setRefreshHeader(new ClassicsHeader(context));//设置Header
-        refreshLayout.setRefreshFooter(new ClassicsFooter(context));//设置Footer
-        refreshLayout.setRefreshContent(new View(context));//设置刷新Content（用于非xml布局代替addView）1.0.4
-
-        refreshLayout.autoRefresh();//自动刷新
-        refreshLayout.autoLoadMore();//自动加载
-        refreshLayout.autoRefresh(400);//延迟400毫秒后自动刷新
-        refreshLayout.autoLoadMore(400);//延迟400毫秒后自动加载
-        refreshLayout.finishRefresh();//结束刷新
-        refreshLayout.finishLoadMore();//结束加载
-        refreshLayout.finishRefresh(3000);//延迟3000毫秒后结束刷新
-        refreshLayout.finishLoadMore(3000);//延迟3000毫秒后结束加载
-        refreshLayout.finishRefresh(false);//结束刷新（刷新失败）
-        refreshLayout.finishLoadMore(false);//结束加载（加载失败）
-        refreshLayout.finishLoadMoreWithNoMoreData();//完成加载并标记没有更多数据 1.0.4
-        refreshLayout.closeHeaderOrFooter();//关闭正在打开状态的 Header 或者 Footer（1.1.0）
-        refreshLayout.resetNoMoreData();//恢复没有更多数据的原始状态 1.0.4（1.1.0删除）
-        refreshLayout.setNoMoreData(false);//恢复没有更多数据的原始状态 1.0.5
+    /**
+     * 替换RefreshHeader
      */
+    open fun setRefreshHeader(smartRefreshLayout: SmartRefreshLayout, refreshHeaderStyle: String?) {
+        when (refreshHeaderStyle) {
+            Constant.REFRESH_HEADER_34115_ROCKET_LUNCH -> {
+                lottieFileName = "lottie/34115-rocket-lunch.json"
+                myRefreshLottieHeader!!.setAnimationViewJson(lottieFileName)
+                setLottieRefreshHeader(smartRefreshLayout)
+            }
+
+            Constant.REFRESH_HEADER_28402_TEMPLO -> {
+                lottieFileName = "lottie/28402-templo.json"
+                myRefreshLottieHeader!!.setAnimationViewJson(lottieFileName)
+                setLottieRefreshHeader(smartRefreshLayout)
+            }
+
+            Constant.MaterialHeader -> smartRefreshLayout.setRefreshHeader(MaterialHeader(BaseApplication.getAppContext()))
+
+            Constant.WaterDropHeader -> smartRefreshLayout.setRefreshHeader(WaterDropHeader(BaseApplication.getAppContext()))
+
+            Constant.WaveSwipeHeader -> smartRefreshLayout.setRefreshHeader(WaveSwipeHeader(BaseApplication.getAppContext()))
+
+            Constant.BezierCircleHeader -> smartRefreshLayout.setRefreshHeader(BezierCircleHeader(BaseApplication.getAppContext()))
+
+            Constant.PhoenixHeader -> smartRefreshLayout.setRefreshHeader(PhoenixHeader(BaseApplication.getAppContext()))
+
+            Constant.TaurusHeader -> smartRefreshLayout.setRefreshHeader(TaurusHeader(BaseApplication.getAppContext()))
+
+            Constant.FlyRefreshHeader -> smartRefreshLayout.setRefreshHeader(FlyRefreshHeader(BaseApplication.getAppContext()))
+
+            Constant.ClassicsHeader -> smartRefreshLayout.setRefreshHeader(ClassicsHeader(BaseApplication.getAppContext()))
+
+            Constant.BezierRadarHeader -> smartRefreshLayout.setRefreshHeader(BezierRadarHeader(BaseApplication.getAppContext()))
+
+            Constant.DeliveryHeader -> smartRefreshLayout.setRefreshHeader(DeliveryHeader(BaseApplication.getAppContext()))
+
+            Constant.DropBoxHeader -> smartRefreshLayout.setRefreshHeader(DropBoxHeader(BaseApplication.getAppContext()))
+
+            Constant.FunGameBattleCityHeader -> smartRefreshLayout.setRefreshHeader(FunGameBattleCityHeader(BaseApplication.getAppContext()))
+
+            Constant.FunGameHitBlockHeader -> smartRefreshLayout.setRefreshHeader(FunGameHitBlockHeader(BaseApplication.getAppContext()))
+
+            Constant.StoreHouseHeader -> smartRefreshLayout.setRefreshHeader(StoreHouseHeader(BaseApplication.getAppContext()))
+
+            Constant.TwoLevelHeader -> smartRefreshLayout.setRefreshHeader(TwoLevelHeader(BaseApplication.getAppContext()))
+        }
+    }
+
+    /**
+     * 设置自定义RefreshHeader
+     */
+    private  fun setLottieRefreshHeader(smartRefreshLayout: SmartRefreshLayout) {
+        smartRefreshLayout.setHeaderMaxDragRate(2f)
+        smartRefreshLayout.setRefreshHeader(myRefreshLottieHeader!!)
+    }
+
+    /**
+     * 全局替换RefreshHeader
+     */
+    open fun changeRefreshHeaderStyle(refreshHeaderStyle: String?) {
+        when (refreshHeaderStyle) {
+            Constant.REFRESH_HEADER_34115_ROCKET_LUNCH -> SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH)
+
+            Constant.REFRESH_HEADER_28402_TEMPLO -> SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_28402_TEMPLO)
+
+            Constant.MaterialHeader -> SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.MaterialHeader)
+
+            Constant.WaterDropHeader -> SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.WaterDropHeader)
+
+            Constant.WaveSwipeHeader -> SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.WaveSwipeHeader)
+
+            Constant.BezierCircleHeader ->
+                //水滴下拉
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.BezierCircleHeader)
+
+            Constant.PhoenixHeader ->
+                //大楼动画
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.PhoenixHeader)
+
+            Constant.TaurusHeader ->
+                //飞机滑翔动画效果
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.TaurusHeader)
+
+            Constant.FlyRefreshHeader ->
+                //飞机效果2
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.FlyRefreshHeader)
+
+            Constant.ClassicsHeader ->
+                //经典带时间的刷新
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.ClassicsHeader)
+
+            Constant.BezierRadarHeader ->
+                //雷达动画
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.BezierRadarHeader)
+
+            Constant.DeliveryHeader ->
+                //快递交付动画
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.DeliveryHeader)
+
+            Constant.DropBoxHeader ->
+                //礼物盒子动画效果
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.DropBoxHeader)
+
+            Constant.FalsifyHeader ->
+                //无动画效果
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.FalsifyHeader)
+
+            Constant.FunGameBattleCityHeader ->
+                //子弹游戏效果
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.FunGameBattleCityHeader)
+
+            Constant.FunGameHitBlockHeader ->
+                //碰球游戏效果
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.FunGameHitBlockHeader)
+
+            Constant.StoreHouseHeader ->
+                //StoreHouse文字渐变效果
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.StoreHouseHeader)
+
+            Constant.TwoLevelHeader ->
+                //二楼
+                SPUtils.put(this@MVVMBaseActivity, Constant.REFRESH_HEADER_STYLE, Constant.TwoLevelHeader)
+        }
+    }
+
     /**
      * google官方在安卓6.0以上版本才推出的深色状态栏字体api
      * <item name="android:windowLightStatusBar">true</item>
