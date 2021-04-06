@@ -33,7 +33,7 @@ import org.greenrobot.eventbus.EventBus
 
 abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
 
-    companion object{
+    companion object {
         private const val TAG = "MVVMBaseFragment"
     }
 
@@ -114,7 +114,7 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
         myRefreshLottieHeader = MyRefreshLottieHeader(BaseApplication.getAppContext())
 
         val smartRefreshLayout = rootView?.findViewById<SmartRefreshLayout>(R.id.smart_refresh_layout)
-        smartRefreshLayout?.let { getSmartRefreshPrimaryColorsTheme(it, isSetRefreshHeader(), isSetRefreshFooter())  }
+        smartRefreshLayout?.let { getSmartRefreshPrimaryColorsTheme(it, isSetRefreshHeader(), isSetRefreshFooter()) }
         loading = view?.findViewById(R.id.loading)
 
         //本地化存储操作(取出) - 设置状态栏颜色
@@ -236,7 +236,7 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
     /**
      * 设置自定义RefreshHeader
      */
-    private  fun setLottieRefreshHeader(smartRefreshLayout: SmartRefreshLayout) {
+    private fun setLottieRefreshHeader(smartRefreshLayout: SmartRefreshLayout) {
         smartRefreshLayout.setHeaderMaxDragRate(2f)
         smartRefreshLayout.setRefreshHeader(myRefreshLottieHeader!!)
     }

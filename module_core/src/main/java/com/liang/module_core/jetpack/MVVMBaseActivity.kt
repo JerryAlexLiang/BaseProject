@@ -318,7 +318,7 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
     /**
      * 设置自定义RefreshHeader
      */
-    private  fun setLottieRefreshHeader(smartRefreshLayout: SmartRefreshLayout) {
+    private fun setLottieRefreshHeader(smartRefreshLayout: SmartRefreshLayout) {
         smartRefreshLayout.setHeaderMaxDragRate(2f)
         smartRefreshLayout.setRefreshHeader(myRefreshLottieHeader!!)
     }
