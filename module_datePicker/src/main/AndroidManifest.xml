@@ -3,8 +3,10 @@
     package="com.liang.mydatepicker">
 
     <application>
-        <activity android:name=".DatePickerActivity"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".DatePickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

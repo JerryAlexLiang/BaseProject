@@ -3,9 +3,15 @@
     package="com.liang.module_laboratory">
 
     <application>
-        <activity android:name=".breathing.BreathingActivity"></activity>
-        <activity android:name=".select_list.SelectItemActivity" />
-        <activity android:name=".TestLaboratoryActivity" />
+        <activity
+            android:name=".breathing.BreathingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".select_list.SelectItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestLaboratoryActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

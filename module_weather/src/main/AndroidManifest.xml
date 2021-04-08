@@ -3,9 +3,12 @@
     package="com.liang.module_weather">
 
     <application>
-        <activity android:name=".ui.weather.WeatherContainerActivity"/>
+        <activity
+            android:name=".ui.weather.WeatherContainerActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".WeatherActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
     </application>
 

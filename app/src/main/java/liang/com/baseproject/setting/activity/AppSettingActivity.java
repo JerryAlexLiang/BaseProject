@@ -22,12 +22,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
+import liang.com.baseproject.activity.RefreshHeaderChangeActivity;
+import liang.com.baseproject.activity.ThemeSettingActivity;
 import liang.com.baseproject.app.MyApplication;
+
 import com.liang.module_core.mvp.MVPBaseActivity;
+
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.setting.presenter.AppSettingPresenter;
 import liang.com.baseproject.setting.view.AppSettingView;
+
 import com.liang.module_core.utils.SettingUtils;
+
 import liang.com.baseproject.utils.UserLoginUtils;
 
 public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSettingPresenter> implements AppSettingView {
@@ -46,6 +52,10 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
     FrameLayout baseActionbar;
     @BindView(R.id.ll_logout)
     LinearLayout llLogout;
+    @BindView(R.id.ll_app_theme_setting)
+    LinearLayout llAppThemeSetting;
+    @BindView(R.id.ll_refresh_header_change)
+    LinearLayout llRefreshHeaderChange;
     @BindView(R.id.smart_refresh_layout)
     SmartRefreshLayout smartRefreshLayout;
     @BindView(R.id.ll_setting_security)
@@ -181,7 +191,7 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
                 .build();
     }
 
-    @OnClick({R.id.base_actionbar_left_icon, R.id.ll_logout, R.id.ll_setting_security})
+    @OnClick({R.id.base_actionbar_left_icon, R.id.ll_logout, R.id.ll_setting_security, R.id.ll_app_theme_setting, R.id.ll_refresh_header_change})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.base_actionbar_left_icon:
@@ -194,6 +204,15 @@ public class AppSettingActivity extends MVPBaseActivity<AppSettingView, AppSetti
 
             case R.id.ll_setting_security:
                 AccountSecuritySetActivity.actionStart(this);
+                break;
+
+            case R.id.ll_app_theme_setting:
+                ThemeSettingActivity.actionStart(mActivity);
+                finish();
+                break;
+
+            case R.id.ll_refresh_header_change:
+                RefreshHeaderChangeActivity.actionStart(this);
                 break;
         }
     }

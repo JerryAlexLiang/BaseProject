@@ -58,6 +58,64 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_app_theme_setting"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/core_selector_bg_press_color_white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:text="@string/actionbar_theme_setting"
+                        android:textColor="@color/text_surface"
+                        android:textSize="@dimen/sp15" />
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/icon_arrow_next"
+                        app:tint="@color/gray_light" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_refresh_header_change"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/core_selector_bg_press_color_white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:singleLine="true"
+                        android:text="@string/refresh_header_change"
+                        android:textColor="@color/text_surface"
+                        android:textSize="@dimen/sp15" />
+
+                    <ImageView
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/icon_arrow_next"
+                        app:tint="@color/gray_light" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/ll_logout"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -78,10 +136,11 @@
                         android:textSize="@dimen/sp15" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/icon_arrow_next" />
+                        android:src="@drawable/icon_arrow_next"
+                        app:tint="@color/gray_light" />
 
                 </LinearLayout>
 
@@ -107,10 +166,11 @@
                         android:textSize="@dimen/sp15" />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="13dp"
+                        android:layout_height="13dp"
                         android:layout_gravity="center_vertical"
-                        android:src="@drawable/icon_arrow_next" />
+                        android:src="@drawable/icon_arrow_next"
+                        app:tint="@color/gray_light" />
 
                 </LinearLayout>
 

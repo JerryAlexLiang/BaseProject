@@ -18,7 +18,9 @@
     <string name="loading">加载中...</string>
 
     <!--设置界面-->
+    <string name="refresh_header_change">下拉刷新</string>
     <string name="actionbar_theme">主题</string>
+    <string name="actionbar_theme_setting">主题设置</string>
     <string name="key_actionbar_theme_modify">key_actionbar_theme_modify</string>
     <string name="title_actionbar_theme_modify">修改主题颜色</string>
     <string name="title_normal">常规</string>

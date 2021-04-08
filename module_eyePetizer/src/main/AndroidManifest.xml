@@ -3,9 +3,15 @@
     package="com.liang.module_eyepetizer">
 
     <application>
-        <activity android:name=".ui.activity.TestLocalDataActivity"></activity>
-        <activity android:name=".ui.activity.EyePetizerActivity" />
-        <activity android:name=".ui.activity.EyeSplashActivity" />
+        <activity
+            android:name=".ui.activity.TestLocalDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.EyePetizerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.EyeSplashActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
