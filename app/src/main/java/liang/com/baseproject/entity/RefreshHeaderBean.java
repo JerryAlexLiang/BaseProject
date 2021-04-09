@@ -12,6 +12,7 @@ public class RefreshHeaderBean implements Serializable {
     private int id;
     private int iconId;
     private String name;
+    private String animationFilename;
 
     public RefreshHeaderBean() {
     }
@@ -20,6 +21,13 @@ public class RefreshHeaderBean implements Serializable {
         this.id = id;
         this.iconId = iconId;
         this.name = name;
+    }
+
+    public RefreshHeaderBean(int id, int iconId, String name, String animationFilename) {
+        this.id = id;
+        this.iconId = iconId;
+        this.name = name;
+        this.animationFilename = animationFilename;
     }
 
     public int getId() {
@@ -46,6 +54,15 @@ public class RefreshHeaderBean implements Serializable {
 
     public RefreshHeaderBean setIconId(int iconId) {
         this.iconId = iconId;
+        return this;
+    }
+
+    public String getAnimationFilename() {
+        return animationFilename;
+    }
+
+    public RefreshHeaderBean setAnimationFilename(String animationFilename) {
+        this.animationFilename = animationFilename;
         return this;
     }
 }

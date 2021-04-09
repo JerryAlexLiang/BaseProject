@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
+import com.liang.module_core.app.BaseApplication;
 import com.liang.module_core.constant.Constant;
 import com.liang.module_core.jetpack.JetPackActivity;
 import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.SPUtils;
 import com.liang.module_core.widget.SearchEditText;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -63,6 +65,7 @@ public class RefreshHeaderChangeActivity extends JetPackActivity {
     SmartRefreshLayout smartRefreshLayout;
 
     private List<RefreshHeaderBean> list;
+    private List<RefreshHeaderBean> defaultSelectDataList;
     private RefreshHeaderChangeRvAdapter refreshHeaderChangeRvAdapter;
 
     @Override
@@ -106,28 +109,45 @@ public class RefreshHeaderChangeActivity extends JetPackActivity {
 
     private void initListener() {
         if (refreshHeaderChangeRvAdapter != null && refreshHeaderChangeRvAdapter.getData() != null) {
-            refreshHeaderChangeRvAdapter.setOnItemClickListener(new OnItemClickListener() {
-                @Override
-                public void onItemClick(@NonNull BaseQuickAdapter<?, ?> adapter, @NonNull View view, int position) {
-                    RefreshHeaderBean refreshHeaderBean = refreshHeaderChangeRvAdapter.getData().get(position);
-                    switch (refreshHeaderBean.getId()) {
-                        case 0:
-                            //火箭
-                            setRefreshHeader(smartRefreshLayout,Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
-                            changeRefreshHeaderStyle(Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
-                            break;
+//            refreshHeaderChangeRvAdapter.setOnItemClickListener((adapter, view, position) -> {
+//                RefreshHeaderBean refreshHeaderBean = refreshHeaderChangeRvAdapter.getData().get(position);
+//                switch (refreshHeaderBean.getId()) {
+//                    case 0:
+//                        //火箭
+//                        setRefreshHeader(smartRefreshLayout,Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+//                        changeRefreshHeaderStyle(Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+//                        break;
+//
+//                    case 1:
+//                        //太阳
+//                        setRefreshHeader(smartRefreshLayout,Constant.REFRESH_HEADER_28402_TEMPLO);
+//                        changeRefreshHeaderStyle(Constant.REFRESH_HEADER_28402_TEMPLO);
+//                        break;
+//
+//                    default:
+//                        break;
+//                }
+//                smartRefreshLayout.autoRefresh();
+//            });
 
-                        case 1:
-                            //太阳
-                            setRefreshHeader(smartRefreshLayout,Constant.REFRESH_HEADER_28402_TEMPLO);
-                            changeRefreshHeaderStyle(Constant.REFRESH_HEADER_28402_TEMPLO);
-                            break;
+            refreshHeaderChangeRvAdapter.setOnMyItemClickListener(bean -> {
+                switch (bean.getAnimationFilename()) {
+                    case Constant.REFRESH_HEADER_34115_ROCKET_LUNCH:
+                        //火箭
+                        setRefreshHeader(smartRefreshLayout, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+                        changeRefreshHeaderStyle(Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+                        break;
 
-                        default:
-                            break;
-                    }
-                    smartRefreshLayout.autoRefresh();
+                    case Constant.REFRESH_HEADER_28402_TEMPLO:
+                        //太阳
+                        setRefreshHeader(smartRefreshLayout, Constant.REFRESH_HEADER_28402_TEMPLO);
+                        changeRefreshHeaderStyle(Constant.REFRESH_HEADER_28402_TEMPLO);
+                        break;
+
+                    default:
+                        break;
                 }
+                smartRefreshLayout.autoRefresh();
             });
         }
 
@@ -135,12 +155,13 @@ public class RefreshHeaderChangeActivity extends JetPackActivity {
 
     private void initData() {
         list = new ArrayList<>();
+        defaultSelectDataList = new ArrayList<>();
 
         refreshHeaderChangeRvAdapter = new RefreshHeaderChangeRvAdapter();
         rvRefreshHeader.setAdapter(refreshHeaderChangeRvAdapter);
 
-        RefreshHeaderBean bean1 = new RefreshHeaderBean(0, R.drawable.rocket_lunch_34115, "火箭");
-        RefreshHeaderBean bean2 = new RefreshHeaderBean(1, R.drawable.templo_28402, "太阳");
+        RefreshHeaderBean bean1 = new RefreshHeaderBean(0, R.drawable.rocket_lunch_34115, "火箭", Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+        RefreshHeaderBean bean2 = new RefreshHeaderBean(1, R.drawable.templo_28402, "太阳", Constant.REFRESH_HEADER_28402_TEMPLO);
 
         list.clear();
         list.add(bean1);
@@ -148,24 +169,15 @@ public class RefreshHeaderChangeActivity extends JetPackActivity {
 
         refreshHeaderChangeRvAdapter.addData(list);
 
-        //myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                switch (refreshHeaderBean.getId()){
-        //                    case 0:
-        //
-        //                        break;
-        //
-        //                    case 1:
-        //
-        //                        break;
-        //
-        //                    default:
-        //                        break;
-        //                }
-        //            }
-        //        });
+        defaultSelectDataList.clear();
 
+        String refreshHeaderStyle = (String) SPUtils.get(BaseApplication.getAppContext(), Constant.REFRESH_HEADER_STYLE, Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
+        for (RefreshHeaderBean refreshHeaderBean : list) {
+            if (refreshHeaderBean.getAnimationFilename().equals(refreshHeaderStyle)) {
+                defaultSelectDataList.add(refreshHeaderBean);
+            }
+        }
+        refreshHeaderChangeRvAdapter.setDefaultSelectList(defaultSelectDataList);
     }
 
     private void intView() {

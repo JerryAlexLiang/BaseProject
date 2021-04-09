@@ -4,9 +4,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/core_selector_bg_press_color_white"
-    android:paddingStart="16dp"
+    android:paddingStart="35dp"
     android:paddingTop="10dp"
-    android:paddingEnd="16dp"
+    android:paddingEnd="35dp"
     android:paddingBottom="10dp">
 
     <ImageView
@@ -27,5 +27,14 @@
         android:textColor="@color/text_surface"
         android:textSize="@dimen/sp12" />
 
+    <ImageView
+        android:id="@+id/ivSelectContainer"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/tv_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/dp10"
+        android:padding="10dp"
+        android:src="@drawable/ui_common_uncheck" />
 
 </RelativeLayout>

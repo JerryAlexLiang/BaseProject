@@ -100,7 +100,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         mPresenter.attachView(this);
 
 //        changeRefreshHeaderStyle(Constant.MaterialHeader);
-        changeGlobalRefreshHeaderStyle(Constant.REFRESH_HEADER_28402_TEMPLO);
+//        changeGlobalRefreshHeaderStyle(Constant.REFRESH_HEADER_28402_TEMPLO);
 //        changeRefreshHeaderStyle(Constant.REFRESH_HEADER_34115_ROCKET_LUNCH);
 
         initArticleRvList();

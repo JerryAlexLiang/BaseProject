@@ -416,6 +416,10 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                         MapLocationActivity.actionStart(MainHomeActivity.this);
                         break;
 
+                    case R.id.menu_nav_refresh_header_style:
+                        RefreshHeaderChangeActivity.actionStart(MainHomeActivity.this);
+                        break;
+
                     case R.id.menu_nav_follow:
                         //闪屏
                         SplashTwoActivity.actionStart(MainHomeActivity.this);

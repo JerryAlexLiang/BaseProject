@@ -4,12 +4,12 @@
         <item
             android:id="@+id/menu_nav_weather"
             android:icon="@drawable/icon_submit"
-            android:title="天气"/>
+            android:title="天气" />
 
         <item
             android:id="@+id/menu_nav_bluetooth"
             android:icon="@drawable/ui_icon_blue_remote"
-            android:title="蓝牙"/>
+            android:title="蓝牙" />
 
         <item
             android:id="@+id/menu_nav_scan"
@@ -20,6 +20,11 @@
             android:id="@+id/menu_nav_night_theme"
             android:icon="@drawable/icon_activity"
             android:title="主题" />
+
+        <item
+            android:id="@+id/menu_nav_refresh_header_style"
+            android:icon="@drawable/core_animation_list_spinner_dialog"
+            android:title="下拉刷新" />
 
         <item
             android:id="@+id/menu_nav_location"
