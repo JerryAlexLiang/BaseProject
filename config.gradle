@@ -113,7 +113,10 @@ ext {
             bluetooth             : "1.4.0",
 
             //lottie动画
-            lottie                : "3.6.1"
+            lottie                : "3.6.1",
+
+            //Android程序崩溃框架—CustomActivityOnCrash
+            crashActivity         : "2.3.0",
     ]
 
     dependencies = [
@@ -260,7 +263,12 @@ ext {
             "bluetooth"             : "com.inuker.bluetooth:library:${versions.bluetooth}",
 
             //implementation 'com.airbnb.android:lottie:$lottieVersion'
-            "lottie"                : "com.airbnb.android:lottie:${versions.lottie}"
+            "lottie"                : "com.airbnb.android:lottie:${versions.lottie}",
+
+            //Android程序崩溃框架—CustomActivityOnCrash
+            crashActivity           : "cat.ereza:customactivityoncrash:$versions.crashActivity",
+
+
     ]
 
 }

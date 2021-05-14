@@ -101,6 +101,10 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+
     }
     configurations.all {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
@@ -310,6 +314,9 @@ dependencies {
     implementation "androidx.core:core-ktx:1.3.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Android程序崩溃框架—CustomActivityOnCrash
+    implementation rootProject.ext.dependencies.crashActivity
 
 
 }

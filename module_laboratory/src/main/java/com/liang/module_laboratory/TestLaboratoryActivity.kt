@@ -16,10 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.liang.model_middleware.impl.ServiceProvider
 import com.liang.module_core.jetpack.MVVMBaseActivity
-import com.liang.module_core.utils.AnimationUtils
-import com.liang.module_core.utils.FileUtil
-import com.liang.module_core.utils.LogUtil
-import com.liang.module_core.utils.setOnClickListener
+import com.liang.module_core.utils.*
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener
 import com.liang.module_laboratory.breathing.BreathingActivity
 import com.liang.module_laboratory.select_list.SelectItemActivity
@@ -122,7 +119,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun initListener() {
-        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem,btnBreathingItem) {
+        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -152,15 +149,32 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                     SelectItemActivity.actionStart(this@TestLaboratoryActivity)
                 }
 
-                btnBreathingItem->{
+                btnBreathingItem -> {
                     startActivity<BreathingActivity>()
                 }
 
+                btnAppCrashCatchItem -> {
+                    testAppCrashCatch()
+                }
                 else -> {
                 }
 
             }
         }
+    }
+
+    private fun testAppCrashCatch() {
+
+        var list: MutableList<String> = mutableListOf()
+        list.add("肖战")
+        list.add("张哲瀚")
+        list.add("肖宇梁")
+        list.add("丁程鑫")
+        list.add("马天宇")
+        list.clear()
+
+        ToastUtil.showShortToast(GsonUtils.toJson(list[0]))
+
     }
 
     private fun selectImage() {

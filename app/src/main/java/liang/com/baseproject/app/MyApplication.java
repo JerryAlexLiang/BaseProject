@@ -7,12 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import com.liang.module_core.BuildConfig;
 import com.liang.module_core.app.BaseApplication;
 
+import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
+import cat.ereza.customactivityoncrash.activity.DefaultErrorActivity;
+import cat.ereza.customactivityoncrash.config.CaocConfig;
+import liang.com.baseproject.R;
+import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
 
 import com.liang.model_middleware.app.BaseApplicationImpl;
 import com.liang.model_middleware.app.ModuleConfig;
 import com.liang.module_core.retrofit.RetrofitHelper;
+import com.liang.module_core.utils.LogUtil;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
@@ -69,6 +75,9 @@ public class MyApplication extends BaseApplication {
 //            setDarkModeStatus();
 //        }
 
+        //Android程序崩溃框架—CustomActivityOnCrash
+        initCrashActivity();
+
         // 初始化模块配置
         initModuleConfig();
 
@@ -94,6 +103,67 @@ public class MyApplication extends BaseApplication {
         //配置GreenDao数据库
         setupDatabase();
     }
+
+    /**
+     * Android程序崩溃框架—CustomActivityOnCrash
+     */
+    private void initCrashActivity() {
+        //CaocConfig.Builder.create()
+        //
+        //                .
+        //                .
+        //
+        //                .errorActivity(CrashActivity.class)
+        //                .apply();
+
+        //整个配置属性，可以设置一个或多个，也可以一个都不设置
+        CaocConfig.Builder.create()
+                //程序在后台时，发生崩溃的三种处理方式
+                //BackgroundMode.BACKGROUND_MODE_SHOW_CUSTOM: //当应用程序处于后台时崩溃，也会启动错误页面，
+                //BackgroundMode.BACKGROUND_MODE_CRASH:      //当应用程序处于后台崩溃时显示默认系统错误（一个系统提示的错误对话框），
+                //BackgroundMode.BACKGROUND_MODE_SILENT:     //当应用程序处于后台时崩溃，默默地关闭程序！
+                .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT)
+                .enabled(true)  //false表示对崩溃的拦截阻止,用它来禁用customactivityoncrash框架
+                .showErrorDetails(true)  //这将隐藏错误活动中的“错误详细信息”按钮，从而隐藏堆栈跟踪, —> 针对框架自带程序崩溃后显示的页面有用(DefaultErrorActivity)
+                .showRestartButton(true)  //是否可以重启页面,针对框架自带程序崩溃后显示的页面有用(DefaultErrorActivity)
+                .logErrorOnRestart(false)
+                .trackActivities(false)  //错误页面中显示错误详细信息；针对框架自带程序崩溃后显示的页面有用(DefaultErrorActivity)
+                .minTimeBetweenCrashesMs(2000)   //定义应用程序崩溃之间的最短时间，以确定我们不在崩溃循环中。比如：在规定的时间内再次崩溃，框架将不处理，让系统处理
+                .restartActivity(MainHomeActivity.class)  //重新启动后的页面
+                .errorDrawable(R.mipmap.icon_new_launcher) //崩溃页面显示的图标
+//        .errorActivity(CrashActivity.class) //程序崩溃后显示的页面
+                .errorActivity(DefaultErrorActivity.class) //程序崩溃后显示的页面(默认程序崩溃时错误页面)
+                .eventListener(new CustomEventListener())//设置监听
+                .apply();
+
+
+    }
+
+    /**
+     * 程序崩溃时设置监听
+     * The event listener cannot be an inner or anonymous class,
+     * because it will need to be serialized. Change it to a class of its own, or make it a static inner class.
+     */
+    private static class CustomEventListener implements CustomActivityOnCrash.EventListener {
+        @Override
+        public void onLaunchErrorActivity() {
+            //程序崩溃时回调
+            LogUtil.d(TAG, "程序崩溃时回调");
+        }
+
+        @Override
+        public void onRestartAppFromErrorActivity() {
+            //重启程序时回调
+            LogUtil.d(TAG, "重启程序时回调");
+        }
+
+        @Override
+        public void onCloseAppFromErrorActivity() {
+            //在崩溃提示页面关闭程序时回调
+            LogUtil.d(TAG, "在崩溃提示页面关闭程序时回调");
+        }
+    }
+
 
     /**
      * 通过反射拿到需要初始化的各种组件application
@@ -138,7 +208,7 @@ public class MyApplication extends BaseApplication {
         daoSession = daoMaster.newSession();
     }
 
-    public static DaoSession getDaoSession(){
+    public static DaoSession getDaoSession() {
         return daoSession;
     }
 
