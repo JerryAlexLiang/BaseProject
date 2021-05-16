@@ -16,8 +16,6 @@ import com.liang.module_core.utils.setOnClickListener
 import com.liang.module_core.utils.setVisible
 import liang.com.baseproject.R
 
-//import kotlinx.android.synthetic.main.activity_my_crash.*
-
 
 /**
  * 创建日期：5/16/21 on 4:15 PM
