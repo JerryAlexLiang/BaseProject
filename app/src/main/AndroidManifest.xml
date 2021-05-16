@@ -43,6 +43,10 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="q">
+
+        <activity android:name=".activity.MyCrashActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
+            android:process=":error_activity"/>
         <activity
             android:name=".activity.RefreshHeaderChangeActivity"
             android:screenOrientation="portrait" />

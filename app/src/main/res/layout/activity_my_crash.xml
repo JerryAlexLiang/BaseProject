@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/foreground"
+    tools:context=".activity.MyCrashActivity">
+
+    <include
+        layout="@layout/core_layout_base_actionbar_default"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp30">
+
+        <LinearLayout
+            android:id="@+id/llTipContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="APP爱啪啪了~"
+                android:textColor="@color/text_surface"
+                android:textSize="@dimen/sp22"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvTip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp20"
+                android:lineSpacingExtra="8dp"
+                android:text="我有两个秘诀：\n1.点下面的重启看下是否可以复现\n2.点下面的查看日志复制"
+                android:textColor="@color/text_second"
+                android:textSize="@dimen/sp15" />
+
+            <TextView
+                android:id="@+id/tvShowLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:lineSpacingExtra="8dp"
+                android:text="查看日志"
+                android:textColor="@color/text_surface"
+                android:textSize="@dimen/sp15" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/llBottomContainer"
+            android:layout_below="@id/llTipContainer"
+            android:paddingStart="@dimen/dp16"
+            android:paddingEnd="@dimen/dp16">
+
+            <ImageView
+                android:id="@+id/ivBug"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/core_icon_pic_404"
+                android:visibility="visible" />
+
+            <ScrollView
+                android:id="@+id/scrollViewLog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                android:visibility="invisible"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tvLog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_accent"
+                    android:textSize="@dimen/sp15"
+                    tools:text="logcat" />
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llBottomContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/dp5"
+            android:layout_marginEnd="@dimen/dp5"
+            android:paddingTop="@dimen/dp16"
+            android:paddingBottom="@dimen/dp16">
+
+            <TextView
+                android:id="@+id/tvShowLog2"
+                style="@style/ButtonMain"
+                android:layout_width="0dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="1"
+                android:text="查看日志" />
+
+            <TextView
+                android:id="@+id/tvExit"
+                style="@style/ButtonMain"
+                android:layout_width="0dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="1"
+                android:text="关闭应用" />
+
+            <TextView
+                android:id="@+id/tvRestart"
+                style="@style/ButtonMain"
+                android:layout_width="0dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_weight="1"
+                android:text="重新启动" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
