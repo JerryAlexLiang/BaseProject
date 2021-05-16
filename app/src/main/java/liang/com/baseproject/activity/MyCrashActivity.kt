@@ -22,7 +22,7 @@ import liang.com.baseproject.R
  * 描述: 自定义CrashActivity
  * 作者: liangyang
  */
-class MyCrashActivity : MVVMBaseActivity() {
+class MyCrashActivity : JetPackActivity() {
 
     private lateinit var scrollViewLog: ScrollView
     private lateinit var ivBug: ImageView
@@ -48,9 +48,9 @@ class MyCrashActivity : MVVMBaseActivity() {
         return false
     }
 
-//    override fun createPresenter(): MVPBasePresenter<*>? {
-//        return null
-//    }
+    override fun createPresenter(): MVPBasePresenter<*>? {
+        return null
+    }
 
     override fun provideContentViewId(): Int {
         return R.layout.activity_my_crash
