@@ -27,6 +27,10 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <!--腾讯bugly-->
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+
     <meta-data
         android:name="android.max_aspect"
         android:value="ratio_float" />
@@ -44,9 +48,10 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="q">
 
-        <activity android:name=".activity.MyCrashActivity"
+        <activity
+            android:name=".activity.MyCrashActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|fontScale|density|orientation"
-            android:process=":error_activity"/>
+            android:process=":error_activity" />
         <activity
             android:name=".activity.RefreshHeaderChangeActivity"
             android:screenOrientation="portrait" />
