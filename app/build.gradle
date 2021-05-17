@@ -318,7 +318,7 @@ dependencies {
     //Android程序崩溃框架—CustomActivityOnCrash
     implementation rootProject.ext.dependencies.crashActivity
 
-    //腾讯bugly
+    //腾讯Bugly
     implementation rootProject.ext.dependencies.bugly
 
 
