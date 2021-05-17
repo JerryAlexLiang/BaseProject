@@ -19,9 +19,7 @@ import liang.com.baseproject.gen.DaoSession;
 import com.liang.model_middleware.app.BaseApplicationImpl;
 import com.liang.model_middleware.app.ModuleConfig;
 import com.liang.module_core.retrofit.RetrofitHelper;
-import com.liang.module_core.utils.DebugUtils;
 import com.liang.module_core.utils.LogUtil;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
@@ -78,9 +76,6 @@ public class MyApplication extends BaseApplication {
 //            setDarkModeStatus();
 //        }
 
-        //腾讯Bugly
-        initBugly();
-
         //Android程序崩溃框架—CustomActivityOnCrash
         initCrashActivity();
 
@@ -108,22 +103,6 @@ public class MyApplication extends BaseApplication {
 
         //配置GreenDao数据库
         setupDatabase();
-    }
-
-    /**
-     * 腾讯bugly
-     */
-    private void initBugly() {
-        CrashReport.setIsDevelopmentDevice(this, DebugUtils.isDebug());
-        CrashReport.UserStrategy userStrategy = new CrashReport.UserStrategy(this);
-        userStrategy.setUploadProcess(isMainProcess());
-        //注册时申请的APP ID
-        //第三个参数为SDK调试模式开关，调试模式的行为特性如下：
-        //输出详细的Bugly SDK的Log；
-        //每一条Crash都会被立即上报；
-        //自定义日志将会在Logcat中输出。
-        //建议在测试阶段建议设置成true，发布时设置为false。
-        CrashReport.initCrashReport(this,"5f342ffb5a",DebugUtils.isDebug(), userStrategy);
     }
 
     /**
