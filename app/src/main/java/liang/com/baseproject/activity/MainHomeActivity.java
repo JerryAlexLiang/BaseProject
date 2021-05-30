@@ -197,6 +197,23 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         initViewPage();
         initDrawerLayout();
 
+        initUpdate();
+
+    }
+
+    private void initUpdate() {
+        //实现IUpdateParser接口即可实现解析器的自定义
+        //XUpdate.newBuild(getActivity())
+        //        .updateUrl(mUpdateUrl3)
+        //        .updateParser(new CustomUpdateParser()) //设置自定义的版本更新解析器
+        //        .update();
+
+        //XUpdate.newBuild(getActivity())
+        //                        .updateUrl(mUpdateUrl3)
+        //                        .updateParser(new CustomUpdateParser())
+        //                        .update();
+
+
     }
 
     private void initReceive() {

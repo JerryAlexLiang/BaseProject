@@ -321,6 +321,9 @@ dependencies {
     //腾讯Bugly
     implementation rootProject.ext.dependencies.bugly
 
+    //XUpdate
+    implementation rootProject.ext.dependencies.XUpdate
+    implementation 'com.zhy:okhttputils:2.6.2'
 
 }
 repositories {

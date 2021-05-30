@@ -15,14 +15,22 @@ import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.activity.MyCrashActivity;
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
+import liang.com.baseproject.update.http.OKHttpUpdateHttpService;
 
 import com.liang.model_middleware.app.BaseApplicationImpl;
 import com.liang.model_middleware.app.ModuleConfig;
 import com.liang.module_core.retrofit.RetrofitHelper;
 import com.liang.module_core.utils.DebugUtils;
 import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.ToastUtil;
+import com.luck.picture.lib.tools.ToastUtils;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.entity.UpdateError;
+import com.xuexiang.xupdate.listener.OnUpdateFailureListener;
+import com.xuexiang.xupdate.utils.UpdateUtils;
 
+import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NEW_VERSION;
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
 public class MyApplication extends BaseApplication {
@@ -108,7 +116,41 @@ public class MyApplication extends BaseApplication {
 
         //配置GreenDao数据库
         setupDatabase();
+
+        //初始化XUpdate
+        initUpdate();
     }
+
+    /**
+     * 在Application进行初始化配置：
+     */
+    private void initUpdate() {
+        XUpdate.get()
+                .debug(true)
+                //默认设置只在wifi下检查版本更新
+                .isWifiOnly(false)
+                //默认设置使用get请求检查版本
+                .isGet(true)
+                //默认设置非自动模式，可根据具体使用配置
+                .isAutoMode(false)
+                //设置默认公共请求参数
+                .param("versionCode", UpdateUtils.getVersionCode(this))
+                .param("appKey", getPackageName())
+                //设置版本更新出错的监听
+                .setOnUpdateFailureListener(error -> {
+                    //对不同错误进行处理
+                    if (error.getCode() != UpdateError.ERROR.CHECK_NO_NEW_VERSION) {
+                        ToastUtil.onShowErrorToast(getAppContext(), error.toString());
+                    }
+                })
+                //设置是否支持静默安装，默认是true
+                .supportSilentInstall(false)
+                //这个必须设置！实现网络请求功能
+                .setIUpdateHttpService(new OKHttpUpdateHttpService())
+                //这个必须初始化
+                .init(this);
+    }
+
 
     /**
      * 腾讯bugly
@@ -123,7 +165,7 @@ public class MyApplication extends BaseApplication {
         //每一条Crash都会被立即上报；
         //自定义日志将会在Logcat中输出。
         //建议在测试阶段建议设置成true，发布时设置为false。
-        CrashReport.initCrashReport(this,"5f342ffb5a",DebugUtils.isDebug(), userStrategy);
+        CrashReport.initCrashReport(this, "5f342ffb5a", DebugUtils.isDebug(), userStrategy);
     }
 
     /**

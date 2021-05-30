@@ -120,6 +120,9 @@ ext {
 
             //腾讯bugly
             bugly                 : "3.3.9",
+
+            //XUpdate
+            XUpdate               : "2.0.7",
     ]
 
     dependencies = [
@@ -274,7 +277,10 @@ ext {
             //腾讯bugly
             //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.2.0
 //            bugly:"com.tencent.bugly:crashreport:latest.release"
-            bugly                   : "com.tencent.bugly:crashreport:$versions.bugly"
+            bugly                   : "com.tencent.bugly:crashreport:$versions.bugly",
+
+            //XUpdate
+            XUpdate:"com.github.xuexiangjys:XUpdate:$versions.XUpdate",
     ]
 
 }
