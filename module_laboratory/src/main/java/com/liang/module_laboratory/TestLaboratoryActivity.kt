@@ -19,6 +19,7 @@ import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.utils.*
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener
 import com.liang.module_laboratory.breathing.BreathingActivity
+import com.liang.module_laboratory.doubleRecyclerView.NestRecyclerViewActivity
 import com.liang.module_laboratory.select_list.SelectItemActivity
 import com.liang.module_ui.adapter.FragmentViewPagerAdapter
 import com.liang.module_ui.adapter.MyBannerPagerAdapter
@@ -119,7 +120,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun initListener() {
-        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem) {
+        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem, btnRvViewPager) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -155,6 +156,10 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 
                 btnAppCrashCatchItem -> {
                     testAppCrashCatch()
+                }
+
+                btnRvViewPager -> {
+                    NestRecyclerViewActivity.actionStart(context)
                 }
                 else -> {
                 }

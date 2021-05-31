@@ -2,14 +2,14 @@
 <com.liang.module_core.widget.slideDampingAnimationLayout.SlideDampingAnimationLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scanSlideSwipeBackLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/foreground"
     android:orientation="vertical"
-    android:id="@+id/scanSlideSwipeBackLayout"
     app:allow_gesture="only_left"
     app:bezier_curves_color="#ff00"
     app:bezier_curves_type="quadratic_bezier_curves"
-    android:background="@color/foreground"
     tools:context=".TestLaboratoryActivity">
 
     <!--
@@ -53,8 +53,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include
-            layout="@layout/lab_layout_base_actionbar_default" />
+        <include layout="@layout/lab_layout_base_actionbar_default" />
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -95,31 +94,31 @@
                     android:id="@+id/btnAnimatorOpen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:text="Animator_Open"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnAnimatorHide"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
                     android:text="Animator_hide"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
 
                 <Button
                     android:id="@+id/btnSelectImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:text="选择图片"/>
+                    android:text="选择图片" />
 
 
                 <RelativeLayout
@@ -130,14 +129,14 @@
                         android:id="@+id/ivBg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/colorBlue"/>
+                        android:background="@color/colorBlue" />
 
                     <ImageView
                         android:id="@+id/ivIcon"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/core_icon_user_logo"/>
+                        android:src="@drawable/core_icon_user_logo" />
 
                 </RelativeLayout>
 
@@ -145,79 +144,89 @@
                     android:id="@+id/btnFiltrateJingdong"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:text="仿京东筛选demo01"/>
+                    android:text="仿京东筛选demo01" />
 
                 <Button
                     android:id="@+id/btnMapView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="MapViewCoordinatorLayout"/>
+                    android:text="MapViewCoordinatorLayout"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnCamera"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="Camera"/>
+                    android:text="Camera"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnAidl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="Service AIDL"/>
+                    android:text="Service AIDL"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnModularizationRouter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="组件化-路由"/>
+                    android:text="组件化-路由"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnSelectItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="单选多选列表"/>
+                    android:text="单选多选列表"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btnRvViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="RecyclerView + ViewPager"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnBreathingItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:textAllCaps="false"
-                    android:text="呼吸机Service"/>
+                    android:text="呼吸机Service"
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnAppCrashCatchItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="20dp"
-                    android:text="程序崩溃框架—CustomActivityOnCrash测试"/>
+                    android:text="程序崩溃框架—CustomActivityOnCrash测试" />
 
             </LinearLayout>
 
