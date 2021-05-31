@@ -91,6 +91,16 @@
                 <include layout="@layout/lab_layout_view_pager_banner" />
 
                 <Button
+                    android:id="@+id/btnUpdateApp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="应用内更新测试XUpdate"
+                    android:textAllCaps="false" />
+
+                <Button
                     android:id="@+id/btnAnimatorOpen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -69,7 +69,7 @@ task clean(type: Delete) {
 // 其中versionMajor和versionMinor自己定义，versionBuildNumber可以从环境变量获取。
 
 // 主版本
-ext.versionMajor = 2
+ext.versionMajor = 1
 // 次版本
 ext.versionMinor = 0
 

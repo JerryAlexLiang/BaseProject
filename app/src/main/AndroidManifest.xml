@@ -180,6 +180,9 @@
             android:process=":remote" />
 
         <activity android:name=".activity.ServiceActivity" />
+
+        <activity android:name="com.liang.module_core.update.activity.CustomUpdateDialogActivity"
+            android:theme="@style/XUpdate_DialogTheme"/>
     </application>
 
 </manifest>

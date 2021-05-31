@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package liang.com.baseproject.update.http;
+package com.liang.module_core.update.http;
 
 import androidx.annotation.NonNull;
 

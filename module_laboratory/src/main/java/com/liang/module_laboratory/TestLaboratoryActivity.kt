@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.liang.model_middleware.impl.ServiceProvider
 import com.liang.module_core.jetpack.MVVMBaseActivity
+import com.liang.module_core.update.updateParser.CustomUpdateParser
+import com.liang.module_core.update.updateParser.CustomUpdatePrompter
 import com.liang.module_core.utils.*
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener
 import com.liang.module_laboratory.breathing.BreathingActivity
@@ -26,6 +28,7 @@ import com.liang.module_ui.adapter.MyBannerPagerAdapter
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.PictureMimeType
+import com.xuexiang.xupdate.XUpdate
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.lab_activity_test_laboratory_code.*
 import kotlinx.android.synthetic.main.lab_layout_base_actionbar_default.*
@@ -120,7 +123,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun initListener() {
-        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem, btnRvViewPager) {
+        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem, btnRvViewPager, btnUpdateApp) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -161,11 +164,38 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                 btnRvViewPager -> {
                     NestRecyclerViewActivity.actionStart(context)
                 }
+
+                btnUpdateApp -> {
+                    initUpdate()
+                }
                 else -> {
                 }
 
             }
         }
+    }
+
+    private val mUpdateUrl = "https://gitee.com/xuexiangjys/XUpdate/raw/master/jsonapi/update_custom.json"
+
+    private fun initUpdate() {
+        //实现IUpdateParser接口即可实现解析器的自定义
+//        XUpdate.newBuild(this)
+//                .updateUrl(mUpdateUrl)
+//                .updateParser(new CustomUpdateParser())  //设置自定义的版本更新解析器
+//                .update();
+
+        //promptThemeColor: 设置主题颜色
+        //promptButtonTextColor: 设置按钮的文字颜色
+        //promptTopResId: 设置顶部背景图片
+        //promptWidthRatio: 设置版本更新提示器宽度占屏幕的比例，默认是-1，不做约束
+        //promptHeightRatio: 设置版本更新提示器高度占屏幕的比例，默认是-1，不做约束
+        XUpdate.newBuild(this)
+                .updateUrl(mUpdateUrl)
+                .updateParser(CustomUpdateParser())
+                .updatePrompter(CustomUpdatePrompter())
+                .promptThemeColor(resources.getColor(R.color.red))
+                .promptTopResId(R.drawable.ic_bg_update_top)
+                .update()
     }
 
     private fun testAppCrashCatch() {

@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+#Update 混淆文件
+-keep class com.xuexiang.xupdate.entity.** { *; }
+#注意，如果你使用的是自定义Api解析器解析，还需要给你自定义Api实体配上混淆，如下是本demo中配置的自定义Api实体混淆规则：
+-keep class com.xuexiang.xupdatedemo.entity.** { *; }

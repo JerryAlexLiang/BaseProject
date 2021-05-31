@@ -201,4 +201,9 @@ dependencies {
     api 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     api 'androidx.work:work-runtime:2.4.0'
 
+    //XUpdate
+    implementation rootProject.ext.dependencies.XUpdate
+//    implementation project(path: ':xupdate-lib')
+    implementation 'com.zhy:okhttputils:2.6.2'
+
 }

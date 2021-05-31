@@ -8,14 +8,13 @@ import com.liang.module_core.BuildConfig;
 import com.liang.module_core.app.BaseApplication;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
-import cat.ereza.customactivityoncrash.activity.DefaultErrorActivity;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.activity.MyCrashActivity;
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
-import liang.com.baseproject.update.http.OKHttpUpdateHttpService;
+import com.liang.module_core.update.http.OKHttpUpdateHttpService;
 
 import com.liang.model_middleware.app.BaseApplicationImpl;
 import com.liang.model_middleware.app.ModuleConfig;
@@ -23,14 +22,11 @@ import com.liang.module_core.retrofit.RetrofitHelper;
 import com.liang.module_core.utils.DebugUtils;
 import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.ToastUtil;
-import com.luck.picture.lib.tools.ToastUtils;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.xuexiang.xupdate.XUpdate;
 import com.xuexiang.xupdate.entity.UpdateError;
-import com.xuexiang.xupdate.listener.OnUpdateFailureListener;
 import com.xuexiang.xupdate.utils.UpdateUtils;
 
-import static com.xuexiang.xupdate.entity.UpdateError.ERROR.CHECK_NO_NEW_VERSION;
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
 public class MyApplication extends BaseApplication {
