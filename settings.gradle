@@ -1,4 +1,4 @@
-//include ':xupdate-lib'
+include ':updateapp'//include ':xupdate-lib'
 include ':module_bluetooth'
 include ':module_laboratory'
 include ':module_ui'

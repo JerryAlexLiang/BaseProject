@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.liang.module_core.update.updateParser;
+package com.liang.updateapp.updateParser;
 
 
 import androidx.annotation.NonNull;
 
-import com.liang.module_core.update.entity.CustomResult;
-import com.liang.module_core.utils.GsonUtils;
+import com.liang.updateapp.CustomResult;
+import com.liang.updateapp.GsonUtils;
 import com.xuexiang.xupdate.entity.UpdateEntity;
 import com.xuexiang.xupdate.listener.IUpdateParseCallback;
 import com.xuexiang.xupdate.proxy.IUpdateParser;
-
-//import com.xuexiang.xupdate.entity.CheckVersionResult;
 
 /**
  * 创建日期:2021/5/31 on 11:05 AM
@@ -41,9 +39,9 @@ public class CustomUpdateParser implements IUpdateParser {
 
     private UpdateEntity getParseResult(String json) {
         CustomResult result = GsonUtils.parseJsonObjectToBean(json, CustomResult.class);
-        result.isIgnorable = false;
+//        result.isIgnorable = true;
         result.apkUrl = "https://www.wanandroid.com/blogimgs/eb31f405-afb9-4df1-8bae-30c60a71d9c2.apk";
-        result.updateStatus = 1;
+        result.updateStatus = 2;
         result.hasUpdate = true;
         if (result != null) {
 //            return new UpdateEntity()
@@ -65,6 +63,7 @@ public class CustomUpdateParser implements IUpdateParser {
                 }
                 updateEntity
                         .setHasUpdate(result.hasUpdate)
+//                        .setIsIgnorable(result.isIgnorable())
                         .setUpdateContent(result.updateLog)
                         .setVersionCode(result.getVersionCode())
                         .setVersionName(result.getVersionName())

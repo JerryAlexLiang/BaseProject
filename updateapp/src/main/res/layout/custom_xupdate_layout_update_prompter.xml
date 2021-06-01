@@ -132,13 +132,12 @@
                 android:layout_height="@dimen/xupdate_close_line_height"
                 android:background="@color/xupdate_close_line_color" />
 
-            <!--            app:srcCompat="@drawable/xupdate_icon_app_close"-->
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_close"
                 android:layout_width="@dimen/xupdate_close_icon_size"
                 android:layout_height="@dimen/xupdate_close_icon_size"
                 android:layout_marginTop="-2dp"
-                app:srcCompat="@drawable/picture_icon_audio_bg" />
+                app:srcCompat="@drawable/xupdate_icon_app_close" />
 
         </LinearLayout>
 
