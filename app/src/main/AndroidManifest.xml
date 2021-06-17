@@ -28,7 +28,8 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <!--腾讯bugly-->
-    <uses-permission android:name="android.permission.READ_LOGS"
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
 
     <meta-data
@@ -96,6 +97,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".main.activity.AgentWebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".main.activity.AgentWebActivityX5"
             android:screenOrientation="portrait" />
         <activity
             android:name=".mine.activity.ReadLaterActivity"
@@ -181,8 +185,17 @@
 
         <activity android:name=".activity.ServiceActivity" />
 
-        <activity android:name="com.liang.module_core.update.activity.CustomUpdateDialogActivity"
-            android:theme="@style/XUpdate_DialogTheme"/>
+        <activity
+            android:name="com.liang.module_core.update.activity.CustomUpdateDialogActivity"
+            android:theme="@style/XUpdate_DialogTheme" />
+
+        <!--        X5启动优化2
+        在AndroidManifest.xml中增加内核首次加载时优化Service声明。
+        该Service仅在TBS内核首次Dex加载时触发并执行dex2oat任务，任务完成后自动结束。-->
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt"/>
     </application>
 
 </manifest>

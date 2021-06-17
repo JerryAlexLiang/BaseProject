@@ -238,6 +238,15 @@
                     android:layout_marginRight="20dp"
                     android:text="程序崩溃框架—CustomActivityOnCrash测试" />
 
+                <Button
+                    android:id="@+id/btnWebViewX5Item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="X5 WebView示例" />
+
             </LinearLayout>
 
         </ScrollView>

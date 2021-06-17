@@ -159,7 +159,7 @@ dependencies {
     api rootProject.ext.dependencies.smartRefreshHeader
     api rootProject.ext.dependencies.swipelayout
     api rootProject.ext.dependencies.glide
-    api rootProject.ext.dependencies.glideCompiler
+    annotationProcessor rootProject.ext.dependencies.glideCompiler
     api rootProject.ext.dependencies.glide_transformations
 //    api rootProject.ext.dependencies.nopermission
     api rootProject.ext.dependencies.roundedimageview

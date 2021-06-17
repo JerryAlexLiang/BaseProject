@@ -123,7 +123,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun initListener() {
-        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem, btnRvViewPager, btnUpdateApp) {
+        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem, btnRvViewPager, btnUpdateApp, btnWebViewX5Item) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -167,6 +167,13 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 
                 btnUpdateApp -> {
                     initUpdate()
+                }
+
+                btnWebViewX5Item -> {
+                    ServiceProvider
+                            .getMainService()
+                            .openAgentWebActivityX5(this@TestLaboratoryActivity,
+                                    "X5 WebView示例", "http://viewer.weiyunyingxiang.com/s/TVBSLjI5OA==")
                 }
                 else -> {
                 }

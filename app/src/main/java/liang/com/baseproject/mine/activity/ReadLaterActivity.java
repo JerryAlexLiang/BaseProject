@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -14,9 +11,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
-import com.chad.library.adapter.base.listener.OnItemChildClickListener;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.CopyUtils;
+import com.liang.module_core.utils.GsonUtils;
+import com.liang.module_core.utils.IntentUtils;
+import com.liang.module_core.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -29,17 +34,11 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import com.liang.module_core.mvp.MVPBaseActivity;
-import com.liang.module_core.mvp.MVPBasePresenter;
 import liang.com.baseproject.event.ReadLaterEvent;
 import liang.com.baseproject.helperDao.ReadLaterBeanDaoHelpter;
-import liang.com.baseproject.main.activity.AgentWebActivity;
+import liang.com.baseproject.main.activity.AgentWebActivityX5;
 import liang.com.baseproject.mine.adapter.ReadLaterAdapter;
 import liang.com.baseproject.mine.entity.ReadLaterBean;
-import com.liang.module_core.utils.CopyUtils;
-import com.liang.module_core.utils.GsonUtils;
-import com.liang.module_core.utils.IntentUtils;
-import com.liang.module_core.utils.LogUtil;
 
 public class ReadLaterActivity extends MVPBaseActivity {
 
@@ -251,7 +250,8 @@ public class ReadLaterActivity extends MVPBaseActivity {
 
             switch (view.getId()) {
                 case R.id.rl_page_container:
-                    AgentWebActivity.actionStart(ReadLaterActivity.this, item.getTitle(), item.getLink());
+//                    AgentWebActivity.actionStart(ReadLaterActivity.this, item.getTitle(), item.getLink());
+                    AgentWebActivityX5.actionStart(ReadLaterActivity.this, item.getTitle(), item.getLink());
                     break;
 
                 case R.id.tv_delete:

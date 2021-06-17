@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/surface"
-    tools:context=".main.activity.AgentWebActivity">
+    tools:context=".main.activity.AgentWebActivityX5">
 
     <include layout="@layout/weather_layout_base_actionbar_default"/>
 

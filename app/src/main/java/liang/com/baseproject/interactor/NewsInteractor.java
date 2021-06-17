@@ -44,7 +44,7 @@ public class NewsInteractor {
                     public void onNext(NewsRes newsRes) {
                         super.onNext(newsRes);
                         String reason = newsRes.getReason();
-                        if (reason.contains("成功的返回")) {
+                        if (reason.contains("成功的返回")||reason.contains("success")) {
                             List<NewsRes.ResultBean.DataBean> data = newsRes.getResult().getData();
                             listener.getNewsSuccess(data);
                             listener.onHideProgress();

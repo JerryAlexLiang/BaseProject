@@ -8,6 +8,7 @@
     android:background="@color/foreground"
     tools:context=".fragment.JuheNewsContainerFragment">
 
+<!--    app:tabBackground="@drawable/ui_shape_banner_selected"-->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/news_tab_layout"
         android:layout_width="match_parent"
@@ -19,7 +20,7 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="#ff0000"
         app:tabTextColor="@color/text_surface"
-        app:tabBackground="@drawable/ui_shape_banner_selected"
+
         app:tabUnboundedRipple="true" />
 
     <androidx.viewpager.widget.ViewPager

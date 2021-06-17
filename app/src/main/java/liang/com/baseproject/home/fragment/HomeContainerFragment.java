@@ -19,7 +19,6 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
 import com.google.gson.Gson;
-import com.liang.module_core.constant.Constant;
 import com.liang.module_core.mvp.MVPBaseFragment;
 import com.liang.module_core.utils.JsonFormatUtils;
 import com.liang.module_core.utils.LogUtil;
@@ -42,7 +41,7 @@ import liang.com.baseproject.home.entity.ArticleHomeBannerBean;
 import liang.com.baseproject.home.entity.HomeBean;
 import liang.com.baseproject.home.presenter.HomeContainerPresenter;
 import liang.com.baseproject.home.view.HomeContainerView;
-import liang.com.baseproject.main.activity.AgentWebActivity;
+import liang.com.baseproject.main.activity.AgentWebActivityX5;
 
 /**
  * 创建日期：2019/3/7 on 13:23
@@ -175,7 +174,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             String url = articleHomeBannerBean.getUrl();
             int id = articleHomeBannerBean.getId();
             String title = articleHomeBannerBean.getTitle();
-            AgentWebActivity.actionStart(getContext(), id, title, url);
+//            AgentWebActivity.actionStart(getContext(), id, title, url);
+            AgentWebActivityX5.actionStart(getContext(), id, title, url);
         }
     }
 
@@ -222,7 +222,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             if (item != null) {
                 LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
 //                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
-                AgentWebActivity.actionStart(getContext(), item);
+//                AgentWebActivity.actionStart(getContext(), item);
+                AgentWebActivityX5.actionStart(getContext(),item);
             }
         });
 

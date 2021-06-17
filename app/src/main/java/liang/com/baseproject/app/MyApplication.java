@@ -4,8 +4,26 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.liang.model_middleware.app.BaseApplicationImpl;
+import com.liang.model_middleware.app.ModuleConfig;
 import com.liang.module_core.BuildConfig;
 import com.liang.module_core.app.BaseApplication;
+import com.liang.module_core.retrofit.RetrofitHelper;
+import com.liang.module_core.update.http.OKHttpUpdateHttpService;
+import com.liang.module_core.utils.DebugUtils;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.ToastUtil;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.smtt.export.external.TbsCoreSettings;
+import com.tencent.smtt.sdk.QbSdk;
+import com.xuexiang.xupdate.XUpdate;
+import com.xuexiang.xupdate.entity.UpdateError;
+import com.xuexiang.xupdate.utils.UpdateUtils;
+
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 import cat.ereza.customactivityoncrash.config.CaocConfig;
@@ -14,18 +32,6 @@ import liang.com.baseproject.activity.MainHomeActivity;
 import liang.com.baseproject.activity.MyCrashActivity;
 import liang.com.baseproject.gen.DaoMaster;
 import liang.com.baseproject.gen.DaoSession;
-import com.liang.module_core.update.http.OKHttpUpdateHttpService;
-
-import com.liang.model_middleware.app.BaseApplicationImpl;
-import com.liang.model_middleware.app.ModuleConfig;
-import com.liang.module_core.retrofit.RetrofitHelper;
-import com.liang.module_core.utils.DebugUtils;
-import com.liang.module_core.utils.LogUtil;
-import com.liang.module_core.utils.ToastUtil;
-import com.tencent.bugly.crashreport.CrashReport;
-import com.xuexiang.xupdate.XUpdate;
-import com.xuexiang.xupdate.entity.UpdateError;
-import com.xuexiang.xupdate.utils.UpdateUtils;
 
 import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
@@ -82,6 +88,8 @@ public class MyApplication extends BaseApplication {
 //            setDarkModeStatus();
 //        }
 
+        //初始化X5 QbSdk
+        initQbSdkX5();
         //腾讯Bugly
         initBugly();
 
@@ -115,6 +123,28 @@ public class MyApplication extends BaseApplication {
 
         //初始化XUpdate
         initUpdate();
+    }
+
+    private void initQbSdkX5() {
+        // X5启动优化1
+        // 在调用TBS初始化、创建WebView之前进行如下配置
+        HashMap<String, Object> map = new HashMap<>();
+        map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);
+        map.put(TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE, true);
+        QbSdk.initTbsSettings(map);
+
+        //X5
+        QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+                LogUtil.d(TAG, "initX5Environment ---------------> onCoreInitFinished");
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+                LogUtil.d(TAG, "initX5Environment ---------------> onViewInitFinished=" + b);
+            }
+        });
     }
 
     /**
@@ -155,6 +185,29 @@ public class MyApplication extends BaseApplication {
         CrashReport.setIsDevelopmentDevice(this, DebugUtils.isDebug());
         CrashReport.UserStrategy userStrategy = new CrashReport.UserStrategy(this);
         userStrategy.setUploadProcess(isMainProcess());
+
+        //为了提高合作方的webview场景稳定性，及时发现并解决x5相关问题，
+        // 当客户端发生crash等异常情况并上报给服务器时请务必带上x5内核相关信息。
+        // x5内核异常信息获取接口为：com.tencent.smtt.sdk.WebView.getCrashExtraMessage(context)
+        userStrategy.setCrashHandleCallback(new CrashReport.CrashHandleCallback() {
+            @Override
+            public synchronized Map<String, String> onCrashHandleStart(int crashType, String errorType, String errorMessage, String errorStack) {
+                LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+                String x5CrashInfo = com.tencent.smtt.sdk.WebView.getCrashExtraMessage(getAppContext());
+                map.put("x5crashInfo", x5CrashInfo);
+                return map;
+            }
+
+            @Override
+            public synchronized byte[] onCrashHandleStart2GetExtraDatas(int crashType, String errorType, String errorMessage, String errorStack) {
+                try {
+                    return "Extra data.".getBytes(StandardCharsets.UTF_8);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        });
+
         //注册时申请的APP ID
         //第三个参数为SDK调试模式开关，调试模式的行为特性如下：
         //输出详细的Bugly SDK的Log；

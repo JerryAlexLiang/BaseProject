@@ -24,9 +24,9 @@ android {
         }
     }
 
-    viewBinding {
-        enabled = true
-    }
+//    viewBinding {
+//        enabled = true
+//    }
 
 //    compileSdkVersion 29
 //    defaultConfig {
@@ -290,7 +290,7 @@ dependencies {
     implementation rootProject.ext.dependencies.smartRefreshHeader
     implementation rootProject.ext.dependencies.swipelayout
     implementation rootProject.ext.dependencies.glide
-    implementation rootProject.ext.dependencies.glideCompiler
+    annotationProcessor rootProject.ext.dependencies.glideCompiler
     implementation rootProject.ext.dependencies.glide_transformations
 //    implementation rootProject.ext.dependencies.nopermission
     implementation rootProject.ext.dependencies.roundedimageview
@@ -324,6 +324,9 @@ dependencies {
 //    //XUpdate
     implementation rootProject.ext.dependencies.XUpdate
 //    implementation 'com.zhy:okhttputils:2.6.2'
+
+    //腾讯X5浏览器内核
+    implementation rootProject.ext.dependencies.tbssdk
 
 }
 repositories {

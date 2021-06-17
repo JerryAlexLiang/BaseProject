@@ -107,16 +107,21 @@ public class ServiceActivity extends MVPBaseActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             //在onServiceConnected()方法中，我们又通过向下转型得到了MyBinder的实例
+            //可以在onServiceConnected方法里拿到了MyService服务的内部类MyBinder的对象，
+            //通过这个内部类对象，只要强转一下，我们可以调用这个内部类的非私有成员对象和方法。
             myBinder = (MyService.MyBinder) service;
             //有了这个实例，Activity和Service之间的关系就变得非常紧密了
             //根据具体的场景来调用MyBinder中的任何public方法
             //一个Service必须要在既没有和任何Activity关联又处理停止状态的时候才会被销毁
             myBinder.startDownload();
+            Log.d(TAG, "onServiceConnected() executed");
+            Log.d("MyService", "onServiceConnected() executed");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+            Log.d(TAG, "onServiceDisconnected() executed");
+            Log.d("MyService", "onServiceDisconnected() executed");
         }
     };
 
@@ -140,7 +145,8 @@ public class ServiceActivity extends MVPBaseActivity {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+            Log.d(TAG, "onServiceDisconnected() executed");
+            Log.d("MyService", "onServiceDisconnected() executed");
         }
     };
 

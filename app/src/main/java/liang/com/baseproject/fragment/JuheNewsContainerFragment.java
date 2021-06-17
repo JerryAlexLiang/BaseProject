@@ -95,31 +95,31 @@ public class JuheNewsContainerFragment extends Fragment {
          */
         //TabLayout
         stringList.add("头条");
-        stringList.add("国内");
-        stringList.add("国际");
-        stringList.add("娱乐");
-        stringList.add("科技");
+//        stringList.add("国内");
+//        stringList.add("国际");
+//        stringList.add("娱乐");
+//        stringList.add("科技");
 
         Bundle bundle = new Bundle();
         bundle.putString("newsKey", "top");
 
-        Bundle bundle2 = new Bundle();
-        bundle2.putString("newsKey", "guonei");
-
-        Bundle bundle3 = new Bundle();
-        bundle3.putString("newsKey", "guoji");
-
-        Bundle bundle4 = new Bundle();
-        bundle4.putString("newsKey", "yule");
-
-        Bundle bundle5 = new Bundle();
-        bundle5.putString("newsKey", "keji");
+//        Bundle bundle2 = new Bundle();
+//        bundle2.putString("newsKey", "guonei");
+//
+//        Bundle bundle3 = new Bundle();
+//        bundle3.putString("newsKey", "guoji");
+//
+//        Bundle bundle4 = new Bundle();
+//        bundle4.putString("newsKey", "yule");
+//
+//        Bundle bundle5 = new Bundle();
+//        bundle5.putString("newsKey", "keji");
 
         fragmentList.add(JuheNewsTabFragment.newInstance(bundle));
-        fragmentList.add(JuheNewsTabFragment.newInstance(bundle2));
-        fragmentList.add(JuheNewsTabFragment.newInstance(bundle3));
-        fragmentList.add(JuheNewsTabFragment.newInstance(bundle4));
-        fragmentList.add(JuheNewsTabFragment.newInstance(bundle5));
+//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle2));
+//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle3));
+//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle4));
+//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle5));
     }
 
     @Override

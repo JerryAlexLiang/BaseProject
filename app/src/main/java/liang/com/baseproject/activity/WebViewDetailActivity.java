@@ -1,5 +1,6 @@
 package liang.com.baseproject.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
@@ -7,36 +8,39 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.liang.module_core.mvp.MVPBaseActivity;
+import com.liang.module_core.utils.ImageLoaderUtils;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.SettingUtils;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
-import liang.com.baseproject.View.JuheNewsDetailWebView;
-import com.liang.module_core.mvp.MVPBaseActivity;
-import liang.com.baseproject.presenter.JuheNewsDetailPresenter;
-import com.liang.module_core.utils.ImageLoaderUtils;
-import com.liang.module_core.utils.LogUtil;
-import com.liang.module_core.utils.SettingUtils;
+import liang.com.baseproject.View.JuheNewsDetailWebViewX5;
+import liang.com.baseproject.presenter.JuheNewsDetailPresenterX5;
 
 /**
  * 创建日期：2019/2/20 on 13:31
  * 描述: 聚合新闻详情页- WebView加载Url
  * 作者: liangyang
  */
-public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView {
+//public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView, JuheNewsDetailPresenter> implements JuheNewsDetailWebView {
+public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebViewX5, JuheNewsDetailPresenterX5> implements JuheNewsDetailWebViewX5 {
 
     private static final String TAG = WebViewDetailActivity.class.getSimpleName();
     @BindView(R.id.iv_detail_top)
@@ -69,8 +73,10 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     CollapsingToolbarLayout toolbarLayout;
     @BindView(R.id.app_bar)
     AppBarLayout appBar;
-    @BindView(R.id.url_web)
-    WebView urlWeb;
+    //    @BindView(R.id.url_web)
+//    WebView urlWeb;
+    @BindView(R.id.url_web_x5)
+    com.tencent.smtt.sdk.WebView urlWebX5;
     @BindView(R.id.iv_web_view_error)
     ImageView ivWebViewError;
     @BindView(R.id.coordinator_layout)
@@ -121,9 +127,15 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         return false;
     }
 
+//    @Override
+//    protected JuheNewsDetailPresenter createPresenter() {
+//        return new JuheNewsDetailPresenter(this);
+//    }
+
+
     @Override
-    protected JuheNewsDetailPresenter createPresenter() {
-        return new JuheNewsDetailPresenter(this);
+    protected JuheNewsDetailPresenterX5 createPresenter() {
+        return new JuheNewsDetailPresenterX5(this);
     }
 
     @Override
@@ -145,10 +157,10 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         //初始化视图
         initView();
         //WebViewInterface
-//        mPresenter.setWebView(url);
+        mPresenter.setWebView(url);
         ImageLoaderUtils.loadRadiusImage(WebViewDetailActivity.this, true, ivDetailTop,
                 imageUrl, R.drawable.image_top_default, R.drawable.image_top_default, 0);
-        mPresenter.setWebView("https://www.baidu.com/");
+//        mPresenter.setWebView("https://www.baidu.com/");
     }
 
     private void initView() {
@@ -182,9 +194,15 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         return pbProgress;
     }
 
+//    @Override
+//    public WebView getWebView() {
+//        return urlWeb;
+//    }
+
+
     @Override
-    public WebView getWebView() {
-        return urlWeb;
+    public com.tencent.smtt.sdk.WebView getWebView() {
+        return urlWebX5;
     }
 
     @Override
@@ -197,18 +215,56 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
         onShowTrueToast(content);
     }
 
+    @Override
+    protected void onResume() {
+        urlWebX5.onResume();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        urlWebX5.onPause();
+        super.onPause();
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        urlWeb.destroy();
+//        urlWeb.destroy();
+        urlWebX5.destroy();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (handleKeyEvent(keyCode, event)) {
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+
+    }
+
+    public boolean handleKeyEvent(int keyCode, KeyEvent keyEvent) {
+        if (keyCode != KeyEvent.KEYCODE_BACK) {
+            return false;
+        }
+        if (urlWebX5.canGoBack()) {
+            urlWebX5.goBack();
+            return true;
+        }
+        return false;
+    }
+
+    @SuppressLint("NonConstantResourceId")
     @OnClick({R.id.toolbar_back_layout, R.id.toolbar_right_layout, R.id.iv_detail_top})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.toolbar_back_layout:
-                finish();
+//                finish();
+                if (!urlWebX5.canGoBack()) {
+                    finish();
+                } else {
+                    urlWebX5.goBack();
+                }
                 break;
 
             case R.id.toolbar_right_layout:

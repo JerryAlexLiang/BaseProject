@@ -123,6 +123,9 @@ ext {
 
             //XUpdate
             XUpdate               : "2.0.7",
+
+            //腾讯X5浏览器内核
+            tbssdk                : "43939",
     ]
 
     dependencies = [
@@ -280,7 +283,10 @@ ext {
             bugly                   : "com.tencent.bugly:crashreport:$versions.bugly",
 
             //XUpdate
-            XUpdate:"com.github.xuexiangjys:XUpdate:$versions.XUpdate",
+            XUpdate                 : "com.github.xuexiangjys:XUpdate:$versions.XUpdate",
+
+            //腾讯X5浏览器内核
+            tbssdk                  : "com.tencent.tbs.tbssdk:sdk:$versions.tbssdk",
     ]
 
 }

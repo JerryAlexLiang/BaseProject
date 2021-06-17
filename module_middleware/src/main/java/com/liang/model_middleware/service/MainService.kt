@@ -20,4 +20,6 @@ interface MainService : IProvider {
     fun openCustomSimpleCameraActivity(context: Context)
 
     fun openServiceAIDLActivity(context: Context)
+
+    fun openAgentWebActivityX5(context: Context, title: String, url: String)
 }
