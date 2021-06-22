@@ -126,6 +126,8 @@ ext {
 
             //腾讯X5浏览器内核
             tbssdk                : "43939",
+
+            materialProgressBar   : "1.4.2",
     ]
 
     dependencies = [
@@ -287,6 +289,8 @@ ext {
 
             //腾讯X5浏览器内核
             tbssdk                  : "com.tencent.tbs.tbssdk:sdk:$versions.tbssdk",
+
+            materialProgressBar     : "me.zhanghai.android.materialprogressbar:library:$versions.materialProgressBar",
     ]
 
 }

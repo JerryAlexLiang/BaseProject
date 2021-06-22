@@ -146,7 +146,7 @@ dependencies {
     implementation project(path: ':module_weather')
 
     implementation project(path: ':module_laboratory')
-    
+
     implementation project(path: ':module_ui')
     implementation project(path: ':module_bluetooth')
 
@@ -327,6 +327,8 @@ dependencies {
 
     //腾讯X5浏览器内核
     implementation rootProject.ext.dependencies.tbssdk
+
+    implementation rootProject.ext.dependencies.materialProgressBar
 
 }
 repositories {

@@ -22,4 +22,6 @@ interface MainService : IProvider {
     fun openServiceAIDLActivity(context: Context)
 
     fun openAgentWebActivityX5(context: Context, title: String, url: String)
+
+    fun openWebActivityX5(context: Context, title: String, url: String)
 }

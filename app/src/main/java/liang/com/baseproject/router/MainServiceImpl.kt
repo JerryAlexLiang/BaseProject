@@ -11,6 +11,7 @@ import liang.com.baseproject.fragment.JuheNewsTabFragment
 import liang.com.baseproject.main.activity.AgentWebActivityX5
 import liang.com.baseproject.testlaboratory.FiltrateActivity
 import liang.com.baseproject.testlaboratory.MapTestActivity
+import liang.com.baseproject.webX5.WebActivityX5
 import org.jetbrains.anko.startActivity
 
 /**
@@ -43,6 +44,10 @@ class MainServiceImpl : MainService {
 
     override fun openAgentWebActivityX5(context: Context, title: String, url: String) {
         AgentWebActivityX5.actionStart(context, title, url)
+    }
+
+    override fun openWebActivityX5(context: Context, title: String, url: String) {
+        WebActivityX5.actionStart(context, title, url)
     }
 
     override fun init(context: Context?) {

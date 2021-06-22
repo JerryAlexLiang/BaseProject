@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/surface"
+    tools:context=".main.activity.AgentWebActivityX5">
+
+    <include layout="@layout/weather_layout_base_actionbar_default"/>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srlEnablePureScrollMode="true">
+
+        <liang.com.baseproject.webX5.WebContainerX5
+            android:id="@+id/web_container_x5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/surface"
+            android:visibility="visible"/>
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+</LinearLayout>

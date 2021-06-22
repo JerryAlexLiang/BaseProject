@@ -101,6 +101,11 @@
         <activity
             android:name=".main.activity.AgentWebActivityX5"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".webX5.WebActivityX5"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".mine.activity.ReadLaterActivity"
             android:screenOrientation="portrait" />
@@ -195,7 +200,7 @@
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
-            android:process=":dexopt"/>
+            android:process=":dexopt" />
     </application>
 
 </manifest>

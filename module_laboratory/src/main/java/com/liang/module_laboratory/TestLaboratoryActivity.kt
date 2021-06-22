@@ -170,10 +170,22 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                 }
 
                 btnWebViewX5Item -> {
+//                    ServiceProvider
+//                            .getMainService()
+//                            .openAgentWebActivityX5(this@TestLaboratoryActivity,
+////                                    "X5 WebView示例", "http://viewer.weiyunyingxiang.com/s/TVBSLjI5OA==")
+//                                    "X5 WebView示例", "https://doctor-dev.health2m.com/doctor-side/index.html#/inquiry/setting?access_token=17d74942-906a-4011-af6d-512b9a054b48&reqchannel=APP&_hospitalId=1000001")
+
+
                     ServiceProvider
                             .getMainService()
-                            .openAgentWebActivityX5(this@TestLaboratoryActivity,
-                                    "X5 WebView示例", "http://viewer.weiyunyingxiang.com/s/TVBSLjI5OA==")
+                            .openWebActivityX5(this@TestLaboratoryActivity,"X5 WebView示例",
+//                                    "https://wanandroid.com/index")
+//                                    "https://www.apple.com.cn")
+//                                    "http://viewer.weiyunyingxiang.com/s/TVBSLjI5OA==")
+                                    "https://web-stage.health2m.com/views/video/index.html?videoid=1000100&reqchannel=APP&_hospitalId=1000001")
+//                                    "https://doctor-dev.health2m.com/doctor-side/index.html#/inquiry/setting?access_token=17d74942-906a-4011-af6d-512b9a054b48&reqchannel=APP&_hospitalId=1000001")
+//                                    "https://hospital.health2m.com/inquiry.html#/qualificationsPhone")
                 }
                 else -> {
                 }
