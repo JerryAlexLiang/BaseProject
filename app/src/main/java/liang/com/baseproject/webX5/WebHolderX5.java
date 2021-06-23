@@ -2,6 +2,7 @@ package liang.com.baseproject.webX5;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -18,6 +19,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.liang.module_core.utils.SettingUtils;
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
 import com.tencent.smtt.export.external.interfaces.IX5WebSettings;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
@@ -355,6 +357,7 @@ public class WebHolderX5 {
             return false;
         }
 
+        private boolean shouldOverrideUrlLoading(String url) {
 //        private boolean shouldOverrideUrlLoading(Uri uri) {
 //            switch (SettingUtils.getInstance().getUrlInterceptType()) {
 //                default:
@@ -365,7 +368,28 @@ public class WebHolderX5 {
 //                case HostInterceptUtils.TYPE_INTERCEPT_BLACK:
 //                    return HostInterceptUtils.isBlackHost(uri.getHost());
 //            }
-//        }
+
+            if (url == null) return false;
+            try {
+                if (url.startsWith("alipays:") || url.startsWith("tel:")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    activity.startActivity(intent);
+                    return true;
+                } else if (url.contains(".apk?") || url.endsWith(".apk")) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    if (isXiaomi()) {
+                        intent.setClassName("com.android.browser", "com.android.browser.BrowserActivity");
+                    }
+                    activity.startActivity(intent);
+                    return true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+            mWebView.loadUrl(url);
+            return true;
+        }
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
@@ -387,15 +411,12 @@ public class WebHolderX5 {
         @Override
         public boolean shouldOverrideUrlLoading(WebView webView, String url) {
 //            return shouldOverrideUrlLoading(Uri.parse(url));
-
-            webView.loadUrl(url);
-            return super.shouldOverrideUrlLoading(webView, url);
+            return shouldOverrideUrlLoading(url);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//            return shouldOverrideUrlLoading(request.getUrl());
             return shouldOverrideUrlLoading(view, request.getUrl() + "");
         }
 
@@ -428,6 +449,11 @@ public class WebHolderX5 {
                 mOnHistoryUpdateCallback.onHistoryUpdate(isReload);
             }
         }
+    }
+
+    // 是否是小米手机
+    private static boolean isXiaomi() {
+        return "Xiaomi".equals(Build.MANUFACTURER);
     }
 
     public interface OnPageTitleCallback {

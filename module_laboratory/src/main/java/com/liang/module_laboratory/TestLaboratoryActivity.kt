@@ -183,7 +183,8 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 //                                    "https://wanandroid.com/index")
 //                                    "https://www.apple.com.cn")
 //                                    "http://viewer.weiyunyingxiang.com/s/TVBSLjI5OA==")
-                                    "https://web-stage.health2m.com/views/video/index.html?videoid=1000100&reqchannel=APP&_hospitalId=1000001")
+//                                    "https://web-stage.health2m.com/views/video/index.html?videoid=1000100&reqchannel=APP&_hospitalId=1000001")
+                                    "https://mall-h5-stage.fosun-creative.com/pages/prod/prod?prodid=6912&&access_token=74c8721a-ec0a-4a10-820e-7c6fa58d7dd7&reqchannel=APP&_hospitalId=1000001")
 //                                    "https://doctor-dev.health2m.com/doctor-side/index.html#/inquiry/setting?access_token=17d74942-906a-4011-af6d-512b9a054b48&reqchannel=APP&_hospitalId=1000001")
 //                                    "https://hospital.health2m.com/inquiry.html#/qualificationsPhone")
                 }
