@@ -1,3 +1,4 @@
+include ':autosize'
 include ':updateapp'//include ':xupdate-lib'
 include ':module_bluetooth'
 include ':module_laboratory'
