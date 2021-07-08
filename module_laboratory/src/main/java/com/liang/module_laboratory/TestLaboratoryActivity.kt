@@ -123,7 +123,9 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun initListener() {
-        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter, base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem, btnRvViewPager, btnUpdateApp, btnWebViewX5Item) {
+        setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter,
+                base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem,
+                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnWebViewX5Item) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -169,6 +171,10 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                     initUpdate()
                 }
 
+                btnExecutorsItem -> {
+                    ThreadPoolExecutorActivity.actionStart(this@TestLaboratoryActivity)
+                }
+
                 btnWebViewX5Item -> {
 //                    ServiceProvider
 //                            .getMainService()
@@ -179,7 +185,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 
                     ServiceProvider
                             .getMainService()
-                            .openWebActivityX5(this@TestLaboratoryActivity,"X5 WebView示例",
+                            .openWebActivityX5(this@TestLaboratoryActivity, "X5 WebView示例",
 //                                    "https://wanandroid.com/index")
 //                                    "https://www.apple.com.cn")
 //                                    "http://viewer.weiyunyingxiang.com/s/TVBSLjI5OA==")
