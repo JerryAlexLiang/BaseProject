@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="100dp"
+        android:visibility="gone"
         android:text="变化数据1"/>
 
     <Button
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dp"
+        android:visibility="gone"
         android:text="变化数据2"/>
 
 
