@@ -1,13 +1,12 @@
 package com.liang.module_laboratory;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.liang.module_core.utils.LogUtil;
 
@@ -36,6 +35,7 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity {
         Button btnStart2 = (Button) findViewById(R.id.btnStartThreadTask2);
         Button btnStart3 = (Button) findViewById(R.id.btnStartThreadTask3);
         Button btnStart4 = (Button) findViewById(R.id.btnStartThreadTask4);
+        Button btnStart5 = (Button) findViewById(R.id.btnStartThreadTask5);
         tvLog = (TextView) findViewById(R.id.tvLog);
 
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
@@ -100,6 +100,15 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity {
                 //向线程池中提交任务
                 singleThreadExecutor.execute(myRunnable);
                 //可以看出所有的task始终是在同一个线程中被执行的
+            }
+        });
+
+        btnStart5.setOnClickListener(v -> {
+            tvLog.setText("");
+            for (int i = 0; i < 10; i++) {
+                MyRunnable myRunnable = new MyRunnable(ThreadPoolExecutorActivity.this, i);
+                //线程池工具类的使用
+                ThreadManager.getInstance().execute(myRunnable);
             }
         });
     }
