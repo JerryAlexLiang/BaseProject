@@ -7,21 +7,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.core.view.GravityCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -33,10 +22,29 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.google.android.material.navigation.NavigationView;
 import com.liang.model_middleware.impl.ServiceProvider;
+import com.liang.module_core.base.PermissionActivity;
+import com.liang.module_core.mvp.BaseActivity;
+import com.liang.module_core.utils.CheckPermission;
+import com.liang.module_core.utils.LogUtil;
+import com.liang.module_core.utils.NetUtil;
+import com.liang.module_core.utils.ToastUtil;
+import com.liang.module_core.utils.WifiUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -49,10 +57,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
-
-import com.liang.module_core.mvp.BaseActivity;
-import com.liang.module_core.base.PermissionActivity;
-
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
 import liang.com.baseproject.fragment.NiceGankFragment;
@@ -64,16 +68,13 @@ import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
-
-import com.liang.module_core.utils.CheckPermission;
-import com.liang.module_core.utils.LogUtil;
-import com.liang.module_core.utils.NetUtil;
-
+import liang.com.baseproject.service.MusicPlayService;
+import liang.com.baseproject.service.MusicServiceConnection;
+import liang.com.baseproject.utils.NotificationUtils;
 import liang.com.baseproject.utils.UserLoginUtils;
 
-import com.liang.module_core.utils.ToastUtil;
-import com.liang.module_core.utils.WifiUtils;
-
+import static android.app.Notification.EXTRA_CHANNEL_ID;
+import static android.provider.Settings.EXTRA_APP_PACKAGE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_MOBILE;
 import static liang.com.baseproject.Constant.Constant.NETWORK_WIFI;
 
@@ -185,6 +186,8 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
 
         //请求权限
         initPermission();
+        //通知栏权限
+        checkNotify();
         //注册监听网络状态的广播接收者
         initReceive();
 
@@ -213,7 +216,6 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         //                        .updateParser(new CustomUpdateParser())
         //                        .update();
 
-
     }
 
     private void initReceive() {
@@ -221,6 +223,54 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(netReceiver, intentFilter);
+    }
+
+    private void checkNotify() {
+        if (!NotificationUtils.checkNotifySetting(MainHomeActivity.this)) {
+            new AlertView.Builder()
+                    .setContext(MainHomeActivity.this)
+                    .setTitle("通知权限")
+                    .setMessage("尚未开启通知权限，点击去开启")
+                    .setDestructive("确定")
+                    .setOthers(null)
+                    .setStyle(AlertView.Style.Alert)
+                    .setOnItemClickListener((o, position) -> {
+                        switch (position) {
+                            case 0:
+                                openNotificationSetting();
+                                break;
+                        }
+                    })
+                    .build()
+                    .show();
+        }
+    }
+
+    private void openNotificationSetting() {
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Settings.ACTION_APP_NOTIFICATION_SETTINGS);
+            //这种方案适用于 API 26, 即8.0（含8.0）以上可以用
+            intent.putExtra(EXTRA_APP_PACKAGE, getPackageName());
+            intent.putExtra(EXTRA_CHANNEL_ID, getApplicationInfo().uid);
+
+            //这种方案适用于 API21——25，即 5.0——7.1 之间的版本可以使用
+            intent.putExtra("app_package", getPackageName());
+            intent.putExtra("app_uid", getApplicationInfo().uid);
+
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 出现异常则跳转到应用设置界面：锤子坚果3——OC105 API25
+            Intent intent = new Intent();
+
+            //下面这种方案是直接跳转到当前应用的设置界面。
+            //https://blog.csdn.net/ysy950803/article/details/71910806
+            intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
+        }
     }
 
     @Subscribe

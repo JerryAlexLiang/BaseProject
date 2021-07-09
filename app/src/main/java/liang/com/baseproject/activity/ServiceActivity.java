@@ -20,10 +20,14 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.MyAIDLService;
 import liang.com.baseproject.R;
+
 import com.liang.module_core.mvp.MVPBaseActivity;
 import com.liang.module_core.mvp.MVPBasePresenter;
+import com.liang.module_core.utils.ToastUtil;
 import com.liang.module_core.widget.SearchEditText;
 
+import liang.com.baseproject.service.MusicPlayService;
+import liang.com.baseproject.service.MusicServiceConnection;
 import liang.com.baseproject.service.MyRemoteService;
 import liang.com.baseproject.service.MyService;
 
@@ -60,9 +64,21 @@ public class ServiceActivity extends MVPBaseActivity {
     @BindView(R.id.unbind_aidl_service)
     Button btnUnBindAidlService;
 
+    @BindView(R.id.btnPlayer)
+    Button btnPlayer;
+    @BindView(R.id.btnPause)
+    Button btnPause;
+    @BindView(R.id.btnRePlayer)
+    Button btnRePlayer;
+    @BindView(R.id.btnSignOutMethod)
+    Button btnSignOutMethod;
+
     private MyService.MyBinder myBinder;
 
     private MyAIDLService myAIDLService;
+
+    private Intent appServiceIntent;
+    private MusicServiceConnection musicServiceConnection;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ServiceActivity.class);
@@ -154,6 +170,8 @@ public class ServiceActivity extends MVPBaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initView();
+        //Android服务之混合方式开启服务
+        startAppService();
     }
 
     private void initView() {
@@ -164,8 +182,25 @@ public class ServiceActivity extends MVPBaseActivity {
         baseActionbarTitle.setText("Service");
     }
 
+    /**
+     * Android服务之混合方式开启服务
+     */
+    private void startAppService() {
+        //1、使用startService()方式开启服务
+        appServiceIntent = new Intent(ServiceActivity.this, MusicPlayService.class);
+        startService(appServiceIntent);
+
+        //2、通过bindService()的方式绑定该服务（注意:使用同一个Intent对象）
+        if (musicServiceConnection == null) {
+            //保证ServiceConnection连接对象的唯一性
+            musicServiceConnection = new MusicServiceConnection();
+        }
+        bindService(appServiceIntent, musicServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
     @OnClick({R.id.base_actionbar_left_icon, R.id.start_service, R.id.stop_service, R.id.bind_service,
-            R.id.unbind_service, R.id.bind_aidl_service, R.id.unbind_aidl_service})
+            R.id.unbind_service, R.id.bind_aidl_service, R.id.unbind_aidl_service, R.id.btnPlayer,
+            R.id.btnPause, R.id.btnRePlayer, R.id.btnSignOutMethod})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -207,6 +242,76 @@ public class ServiceActivity extends MVPBaseActivity {
             case R.id.unbind_aidl_service:
                 unbindService(aidlConnection);
                 break;
+
+            case R.id.btnPlayer:
+                //播放
+                if (musicServiceConnection != null) {
+                    MusicPlayService.MusicBindImpl musicBind = musicServiceConnection.getMusicBindImpl();
+                    if (musicBind != null) {
+                        musicBind.callPlayer();
+                        ToastUtil.onShowTrueToast(ServiceActivity.this, "继续服务模拟播放音乐...");
+                    }
+                } else {
+                    startAppService();
+                    MusicPlayService.MusicBindImpl musicBind = musicServiceConnection.getMusicBindImpl();
+                    if (musicBind != null) {
+                        musicBind.callPlayer();
+                        ToastUtil.onShowTrueToast(ServiceActivity.this, "继续服务模拟播放音乐...");
+                    }
+                }
+                break;
+
+            case R.id.btnPause:
+                //暂停
+                if (musicServiceConnection != null) {
+                    MusicPlayService.MusicBindImpl musicBind = musicServiceConnection.getMusicBindImpl();
+                    if (musicBind != null) {
+                        musicBind.callPausePlayer();
+                    }
+                } else {
+                    ToastUtil.onShowErrorToast(ServiceActivity.this, "音乐服务还未开启");
+                }
+                break;
+
+            case R.id.btnRePlayer:
+                //继续
+                if (musicServiceConnection != null) {
+                    MusicPlayService.MusicBindImpl musicBind = musicServiceConnection.getMusicBindImpl();
+                    if (musicBind != null) {
+                        musicBind.callRePlayer();
+                        ToastUtil.onShowTrueToast(ServiceActivity.this, "开始服务模拟播放音乐...");
+                    }
+                } else {
+                    ToastUtil.onShowErrorToast(ServiceActivity.this, "音乐服务还未开启");
+                }
+                break;
+
+            case R.id.btnSignOutMethod:
+                //解绑服务并停止服务
+                if (musicServiceConnection != null) {
+                    //退出(先暂停播放，在解绑，最后应用退出)
+                    musicServiceConnection.getMusicBindImpl().callPausePlayer();
+                    unbindService(musicServiceConnection);
+                    //解绑后切记把ServiceConnection对象置null，避免运行异常
+                    musicServiceConnection = null;
+                } else {
+                    ToastUtil.onShowErrorToast(ServiceActivity.this, "音乐服务还未开启");
+                }
+
+                if (appServiceIntent != null) {
+                    stopService(appServiceIntent);
+                }
+                break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (musicServiceConnection != null) {
+            unbindService(musicServiceConnection);
+            musicServiceConnection = null;
+        }
+        appServiceIntent = null;
     }
 }
