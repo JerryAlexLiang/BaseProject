@@ -3,7 +3,8 @@
     package="com.liang.module_laboratory">
 
     <application>
-        <activity android:name=".ThreadPoolExecutorActivity"></activity>
+        <activity android:name=".HandlerThreadActivity"></activity>
+        <activity android:name=".ThreadPoolExecutorActivity" />
         <activity android:name=".doubleRecyclerView.NestRecyclerViewActivity" />
         <activity
             android:name=".breathing.BreathingActivity"

@@ -125,7 +125,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     private fun initListener() {
         setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter,
                 base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem,
-                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnWebViewX5Item) {
+                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnHandlerThreadItem, btnWebViewX5Item) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -173,6 +173,10 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 
                 btnExecutorsItem -> {
                     ThreadPoolExecutorActivity.actionStart(this@TestLaboratoryActivity)
+                }
+
+                btnHandlerThreadItem -> {
+                    HandlerThreadActivity.actionStart(this@TestLaboratoryActivity)
                 }
 
                 btnWebViewX5Item -> {
