@@ -80,6 +80,12 @@ public class MyService extends Service {
         return myBinder;
     }
 
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d(TAG, "onUnbind() executed");
+        return super.onUnbind(intent);
+    }
+
     public static class MyBinder extends Binder {
 
         public void startDownload() {

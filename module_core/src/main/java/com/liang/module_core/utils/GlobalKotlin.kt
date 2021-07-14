@@ -1,5 +1,6 @@
 package com.liang.module_core.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Matrix
@@ -7,6 +8,7 @@ import android.text.format.DateFormat
 import android.widget.Toast
 import java.io.ByteArrayOutputStream
 
+@SuppressLint("StaticFieldLeak")
 object GlobalKotlin {
     private var context: Context? = null
     private var mScreenWidth = 0

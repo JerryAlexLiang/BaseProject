@@ -22,6 +22,7 @@ import com.liang.module_core.utils.*
 import com.liang.module_core.widget.slideDampingAnimationLayout.SlideEventListener
 import com.liang.module_laboratory.breathing.BreathingActivity
 import com.liang.module_laboratory.doubleRecyclerView.NestRecyclerViewActivity
+import com.liang.module_laboratory.jetpack.JetpackDemoActivity
 import com.liang.module_laboratory.select_list.SelectItemActivity
 import com.liang.module_ui.adapter.FragmentViewPagerAdapter
 import com.liang.module_ui.adapter.MyBannerPagerAdapter
@@ -125,7 +126,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     private fun initListener() {
         setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter,
                 base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem,
-                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnHandlerThreadItem, btnWebViewX5Item) {
+                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnHandlerThreadItem, btnWebViewX5Item, btnJetPackItem) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -198,6 +199,11 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 //                                    "https://doctor-dev.health2m.com/doctor-side/index.html#/inquiry/setting?access_token=17d74942-906a-4011-af6d-512b9a054b48&reqchannel=APP&_hospitalId=1000001")
 //                                    "https://hospital.health2m.com/inquiry.html#/qualificationsPhone")
                 }
+
+                btnJetPackItem -> {
+                    JetpackDemoActivity.actionStart(this@TestLaboratoryActivity)
+                }
+
                 else -> {
                 }
 

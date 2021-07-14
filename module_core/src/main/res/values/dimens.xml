@@ -22,6 +22,7 @@
     <dimen name="dp30">30dp</dimen>
     <dimen name="dp40">40dp</dimen>
     <dimen name="dp44">44dp</dimen>
+    <dimen name="dp50">50dp</dimen>
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp80">80dp</dimen>
     <dimen name="dp90">90dp</dimen>

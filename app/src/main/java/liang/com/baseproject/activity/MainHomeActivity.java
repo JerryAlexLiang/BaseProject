@@ -32,7 +32,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bigkoo.alertview.AlertView;
-import com.bigkoo.alertview.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -68,8 +67,6 @@ import liang.com.baseproject.map.MapLocationActivity;
 import liang.com.baseproject.mine.MineFragment;
 import liang.com.baseproject.receiver.NetBroadcastReceiver;
 import liang.com.baseproject.receiver.NetEvent;
-import liang.com.baseproject.service.MusicPlayService;
-import liang.com.baseproject.service.MusicServiceConnection;
 import liang.com.baseproject.utils.NotificationUtils;
 import liang.com.baseproject.utils.UserLoginUtils;
 

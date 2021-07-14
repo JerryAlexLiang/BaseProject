@@ -3,6 +3,8 @@
     package="com.liang.module_laboratory">
 
     <application>
+        <activity android:name=".jetpack.LifeCycleDemoActivity"></activity>
+        <activity android:name=".jetpack.JetpackDemoActivity" />
         <activity android:name=".HandlerThreadActivity" />
         <activity android:name=".ThreadPoolExecutorActivity" />
         <activity android:name=".doubleRecyclerView.NestRecyclerViewActivity" />
