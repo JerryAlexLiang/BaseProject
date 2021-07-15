@@ -1,6 +1,7 @@
 package com.liang.module_core.widget;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.flyco.tablayout.CommonTabLayout;
 import com.liang.module_core.R;
 import com.liang.module_core.utils.DensityUtil;
@@ -49,10 +53,11 @@ public class BaseActionBarWidget extends FrameLayout implements View.OnClickList
     private void init() {
         LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 //        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, DensityUtil.dpToPx(this.getContext(), 100));
+//        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, DensityUtil.dpToPx(this.getContext(), 100));
         viewAppTitle = inflater.inflate(R.layout.core_layout_base_actionbar_default, null);
-        this.addView(viewAppTitle, layoutParams);
+//        this.addView(viewAppTitle, layoutParams);
 
+        setActionBarHeight(LayoutParams.WRAP_CONTENT);
         myViewHolder = new MyViewHolder(this);
 
         initListener();
@@ -115,29 +120,41 @@ public class BaseActionBarWidget extends FrameLayout implements View.OnClickList
     }
 
     /**
+     * 设置标题栏高度
+     */
+    public void setActionBarHeight(int height) {
+        this.removeAllViews();
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, DensityUtil.dpToPx(this.getContext(), height));
+        this.addView(viewAppTitle, layoutParams);
+    }
+
+    /**
      * 设置标题文字
      */
-    public void setActionBarTitle(String title) {
+    public void setActionBarTitle(String title, int textColor) {
         if (!TextUtils.isEmpty(title)) {
             myViewHolder.tvTitle.setText(title);
+            myViewHolder.tvTitle.setTextColor(textColor);
         }
     }
 
     /**
      * 设置左侧文字
      */
-    public void setLeftTitle(String title) {
+    public void setLeftTitle(String title, int textColor) {
         if (!TextUtils.isEmpty(title)) {
             myViewHolder.tvLeft.setText(title);
+            myViewHolder.tvLeft.setTextColor(textColor);
         }
     }
 
     /**
      * 设置右侧文字
      */
-    public void setRightTitle(String title) {
+    public void setRightTitle(String title, int textColor) {
         if (!TextUtils.isEmpty(title)) {
             myViewHolder.tvRight.setText(title);
+            myViewHolder.tvRight.setTextColor(textColor);
         }
     }
 
@@ -171,6 +188,25 @@ public class BaseActionBarWidget extends FrameLayout implements View.OnClickList
      */
     public void setActionBarBackgroundResource(int sourceID) {
         viewAppTitle.setBackgroundResource(sourceID);
+    }
+
+    /**
+     * 设置背景网络图片
+     */
+    public void setActionBarNetBackground(Context context, String imageUrl) {
+        Glide.with(context)
+                .load(imageUrl)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        viewAppTitle.setBackground(resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });
     }
 
     /**

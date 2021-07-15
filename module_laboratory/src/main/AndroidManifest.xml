@@ -3,7 +3,9 @@
     package="com.liang.module_laboratory">
 
     <application>
-        <activity android:name=".jetpack.LifeCycleDemoActivity"></activity>
+        <service android:name=".jetpack.CustomService" />
+
+        <activity android:name=".jetpack.LifeCycleDemoActivity" />
         <activity android:name=".jetpack.JetpackDemoActivity" />
         <activity android:name=".HandlerThreadActivity" />
         <activity android:name=".ThreadPoolExecutorActivity" />
