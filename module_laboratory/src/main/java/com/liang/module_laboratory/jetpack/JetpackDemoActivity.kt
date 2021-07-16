@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.utils.setOnClickListener
 import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.activity_jetpack_demo.*
+import org.jetbrains.anko.startActivity
 
 
 /**
@@ -89,7 +91,8 @@ class JetpackDemoActivity : MVVMBaseActivity() {
         baseActionBarWidget.setActionBarHeight(100)
         baseActionBarWidget.initViewsVisible(true, true, false,
                 true, false, true, false)
-        baseActionBarWidget.setActionBarTitle("JetPackDemo", R.color.colorBlue)
+//        baseActionBarWidget.setActionBarTitle("JetPackDemo", ContextCompat.getColor(this,R.color.colorBlue))
+        baseActionBarWidget.setActionBarTitle(this,"JetPackDemo", R.color.colorBlue)
 
         baseActionBarWidget.setOnLeftButtonClickListener {
             ToastUtil.showShortToast("左侧按钮1")
@@ -117,7 +120,7 @@ class JetpackDemoActivity : MVVMBaseActivity() {
     }
 
     private fun initListener() {
-        setOnClickListener(btnLifeCycleDemo, btnTvTime, btnStartLiveDataTimer, btnResetTime) {
+        setOnClickListener(btnLifeCycleDemo, btnTvTime, btnStartLiveDataTimer, btnResetTime, btnNavigation) {
             when (this) {
                 btnLifeCycleDemo -> {
                     LifeCycleDemoActivity.actionStart(this@JetpackDemoActivity)
@@ -136,6 +139,10 @@ class JetpackDemoActivity : MVVMBaseActivity() {
                     //postValue()是在非UI线程中使用，如果在UI线程中，则使用setValue()方法
 //                    currentSecond?.value = 0
                     timeLiveDataViewModel.resetTime()
+                }
+
+                btnNavigation -> {
+                    startActivity<NavigationDemoActivity>()
                 }
 
                 else -> {

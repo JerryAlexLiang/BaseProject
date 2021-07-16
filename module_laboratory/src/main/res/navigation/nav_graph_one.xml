@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_one"
+    app:startDestination="@id/navigationOneFragment">
+
+    <!--    navigation标签下的 startDestination属性，该属性指定起始destination为navigationOneFragment-->
+    <fragment
+        android:id="@+id/navigationOneFragment"
+        android:name="com.liang.module_laboratory.NavigationOneFragment"
+        android:label="fragment_navigation_one"
+        tools:layout="@layout/fragment_navigation_one">
+
+        <!--        app:destination属性表示它的目的地是navigationTwoFragment-->
+        <action
+            android:id="@+id/action_navigationOneFragment_to_navigationTwoFragment"
+            app:destination="@id/navigationTwoFragment" />
+
+        <!-- 添加参数传递数据 safe args方式       -->
+        <argument
+            android:name="key_one"
+            android:defaultValue='""'
+            app:argType="string" />
+
+        <argument
+            android:name="key_two"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigationTwoFragment"
+        android:name="com.liang.module_laboratory.NavigationTwoFragment"
+        android:label="fragment_navigation_two"
+        tools:layout="@layout/fragment_navigation_two" />
+</navigation>

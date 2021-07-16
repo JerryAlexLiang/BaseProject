@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".jetpack.NavigationDemoActivity">
+
+<!--    <com.liang.module_core.widget.BaseActionBarWidget-->
+<!--        android:id="@+id/baseActionBarWidget"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:visibility="gone"/>-->
+
+<!--
+1、告诉系统，这是一个特殊的Fragment
+android:name="androidx.navigation.fragment.NavHostFragment"
+2、app:defaultNavHost="true"
+将defaultNavHost属性设置为true，则该Fragment会自动处理系统返回键，
+即，当用户按下手机的返回按钮时，系统能自动将当前的Fragment推出。
+3、app:navGraph="@navigation/nav_graph"
+设置该Fragment对应的导航图
+-->
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:defaultNavHost="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:navGraph="@navigation/nav_graph_one" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

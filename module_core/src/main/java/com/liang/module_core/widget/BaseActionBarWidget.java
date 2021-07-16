@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -131,30 +132,30 @@ public class BaseActionBarWidget extends FrameLayout implements View.OnClickList
     /**
      * 设置标题文字
      */
-    public void setActionBarTitle(String title, int textColor) {
+    public void setActionBarTitle(Context context, String title, int textColor) {
         if (!TextUtils.isEmpty(title)) {
             myViewHolder.tvTitle.setText(title);
-            myViewHolder.tvTitle.setTextColor(textColor);
+            myViewHolder.tvTitle.setTextColor(ContextCompat.getColor(context, textColor));
         }
     }
 
     /**
      * 设置左侧文字
      */
-    public void setLeftTitle(String title, int textColor) {
+    public void setLeftTitle(Context context, String title, int textColor) {
         if (!TextUtils.isEmpty(title)) {
             myViewHolder.tvLeft.setText(title);
-            myViewHolder.tvLeft.setTextColor(textColor);
+            myViewHolder.tvLeft.setTextColor(ContextCompat.getColor(context, textColor));
         }
     }
 
     /**
      * 设置右侧文字
      */
-    public void setRightTitle(String title, int textColor) {
+    public void setRightTitle(Context context, String title, int textColor) {
         if (!TextUtils.isEmpty(title)) {
             myViewHolder.tvRight.setText(title);
-            myViewHolder.tvRight.setTextColor(textColor);
+            myViewHolder.tvRight.setTextColor(ContextCompat.getColor(context, textColor));
         }
     }
 
