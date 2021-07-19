@@ -66,6 +66,10 @@ class NavigationTwoFragment : MVVMBaseFragment() {
 
         }
 
+        btnJumpBottomNavigation.setOnClickListener {
+            findNavController().navigate(R.id.action_navigationTwoFragment_to_bottomNavigationActivity)
+        }
+
     }
 
     companion object {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<!--   注意： nav_graph导航图中的fragment的id没有与bottom_nav_menu选项菜单中item的id一一对应-->
+    <item
+        android:id="@+id/bottom_navigation_one"
+        android:icon="@drawable/core_ic_home_black_24dp"
+        android:title="首页" />
+
+    <item
+        android:id="@+id/bottom_navigation_two"
+        android:icon="@drawable/core_ic_dashboard_black_24dp"
+        android:title="资讯" />
+
+    <item
+        android:id="@+id/bottom_navigation_three"
+        android:icon="@drawable/core_ic_notifications_black_24dp"
+        android:title="消息" />
+
+</menu>

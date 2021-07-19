@@ -34,5 +34,17 @@
         android:id="@+id/navigationTwoFragment"
         android:name="com.liang.module_laboratory.NavigationTwoFragment"
         android:label="fragment_navigation_two"
-        tools:layout="@layout/fragment_navigation_two" />
+        tools:layout="@layout/fragment_navigation_two">
+
+        <action
+            android:id="@+id/action_navigationTwoFragment_to_bottomNavigationActivity"
+            app:destination="@id/bottomNavigationActivity" />
+
+    </fragment>
+
+    <activity
+        android:id="@+id/bottomNavigationActivity"
+        android:name="com.liang.module_laboratory.BottomNavigationActivity"
+        android:label="BottomNavigationActivity" />
+
 </navigation>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_two"
+    app:startDestination="@id/bottom_navigation_one">
+
+<!--    注意：nav_graph导航图中的fragment的id没有与bottom_nav_menu选项菜单中item的id一一对应-->
+
+    <fragment
+        android:id="@+id/bottom_navigation_one"
+        android:name="com.liang.module_laboratory.BottomOneFragment"
+        android:label="fragment_bottom_one"
+        tools:layout="@layout/fragment_bottom_one" />
+
+    <fragment
+        android:id="@+id/bottom_navigation_two"
+        android:name="com.liang.module_laboratory.BottomTwoFragment"
+        android:label="fragment_bottom_two"
+        tools:layout="@layout/fragment_bottom_two" />
+
+    <fragment
+        android:id="@+id/bottom_navigation_three"
+        android:name="com.liang.module_laboratory.BottomThreeFragment"
+        android:label="fragment_bottom_three"
+        tools:layout="@layout/fragment_bottom_three" />
+
+</navigation>

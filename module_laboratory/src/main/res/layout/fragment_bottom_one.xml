@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NavigationTwoFragment">
+    android:background="@color/pink"
+    tools:context=".BottomOneFragment">
 
     <com.liang.module_core.widget.BaseActionBarWidget
         android:id="@+id/baseActionBarWidget"
@@ -16,28 +17,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvTwoContent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Two"
-        android:textAllCaps="false"
+        android:text="BottomNavigation1"
         android:textColor="@color/colorBlue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/baseActionBarWidget" />
-
-    <Button
-        android:id="@+id/btnJumpBottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_10"
-        android:text="跳转BottomNavigationActivity"
-        android:textAllCaps="false"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTwoContent" />
+        app:layout_constraintTop_toBottomOf="@id/baseActionBarWidget" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

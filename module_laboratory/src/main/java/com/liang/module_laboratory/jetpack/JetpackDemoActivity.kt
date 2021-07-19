@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.utils.setOnClickListener
+import com.liang.module_laboratory.BottomNavigationActivity
 import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.activity_jetpack_demo.*
 import org.jetbrains.anko.startActivity

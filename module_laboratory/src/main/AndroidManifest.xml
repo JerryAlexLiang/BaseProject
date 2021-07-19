@@ -3,9 +3,8 @@
     package="com.liang.module_laboratory">
 
     <application>
-        <activity android:name=".jetpack.NavigationDemoActivity"></activity>
-
-        <service android:name=".jetpack.CustomService" />
+        <activity android:name=".BottomNavigationActivity"/>
+        <activity android:name=".jetpack.NavigationDemoActivity" />
 
         <activity android:name=".jetpack.LifeCycleDemoActivity" />
         <activity android:name=".jetpack.JetpackDemoActivity" />
