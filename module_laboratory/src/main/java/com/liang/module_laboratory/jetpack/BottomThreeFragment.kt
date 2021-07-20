@@ -2,9 +2,13 @@ package com.liang.module_laboratory.jetpack
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.liang.module_core.jetpack.MVVMBaseFragment
+import com.liang.module_core.utils.ToastUtil
 import com.liang.module_laboratory.R
+import kotlinx.android.synthetic.main.fragment_bottom_three.*
 import kotlinx.android.synthetic.main.fragment_navigation_one.*
+import kotlinx.android.synthetic.main.fragment_navigation_one.baseActionBarWidget
 
 class BottomThreeFragment : MVVMBaseFragment() {
 
@@ -29,11 +33,18 @@ class BottomThreeFragment : MVVMBaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        ToastUtil.showShortToast("Three")
+
         baseActionBarWidget.setActionBarHeight(100)
         baseActionBarWidget.initViewsVisible(false, false, false,
                 true, false, false, false)
         baseActionBarWidget.setActionBarTitle(context, "消息中心", R.color.colorWhite)
         baseActionBarWidget.setActionBarBackgroundResource(R.drawable.core_icon_bg_header)
+
+        tvBtnJump.setOnClickListener {
+            findNavController().navigate(R.id.action_bottom_navigation_three_to_bottomNavigationJumpSecondFragment)
+        }
     }
 
     companion object {
