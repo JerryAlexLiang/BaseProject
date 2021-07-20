@@ -3,7 +3,7 @@
     package="com.liang.module_laboratory">
 
     <application>
-        <activity android:name=".BottomNavigationActivity"/>
+        <activity android:name=".jetpack.BottomNavigationActivity"/>
         <activity android:name=".jetpack.NavigationDemoActivity" />
 
         <activity android:name=".jetpack.LifeCycleDemoActivity" />

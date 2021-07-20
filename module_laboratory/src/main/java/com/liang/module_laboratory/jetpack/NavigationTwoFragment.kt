@@ -1,10 +1,10 @@
-package com.liang.module_laboratory
+package com.liang.module_laboratory.jetpack
 
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.liang.module_core.jetpack.MVVMBaseFragment
-import kotlinx.android.synthetic.main.fragment_navigation_one.*
+import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.fragment_navigation_one.baseActionBarWidget
 import kotlinx.android.synthetic.main.fragment_navigation_two.*
 

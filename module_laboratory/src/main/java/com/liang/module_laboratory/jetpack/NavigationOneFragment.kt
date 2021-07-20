@@ -1,9 +1,10 @@
-package com.liang.module_laboratory
+package com.liang.module_laboratory.jetpack
 
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.liang.module_core.jetpack.MVVMBaseFragment
+import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.fragment_navigation_one.*
 
 
@@ -53,10 +54,11 @@ class NavigationOneFragment : MVVMBaseFragment() {
             //通过safe args完成参数传递
             val bundle = NavigationOneFragmentArgs.Builder().setKeyOne("肖战").setKeyTwo(100).build().toBundle()
 
-//            //Navigation跳转方式1:
+//            //Navigation跳转方式1: 有动画效果
+            findNavController().navigate(R.id.action_navigationOneFragment_to_navigationTwoFragment, bundle)
 //            Navigation.findNavController(it).navigate(R.id.action_navigationOneFragment_to_navigationTwoFragment, bundle)
-            //Navigation跳转方式2:
-            findNavController().navigate(R.id.navigationTwoFragment, bundle)
+            //Navigation跳转方式2:   无动画效果
+//            findNavController().navigate(R.id.navigationTwoFragment, bundle)
         }
     }
 

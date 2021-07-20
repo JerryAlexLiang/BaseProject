@@ -1,12 +1,13 @@
-package com.liang.module_laboratory
+package com.liang.module_laboratory.jetpack
 
 import android.os.Bundle
 import android.view.View
 import com.liang.module_core.jetpack.MVVMBaseFragment
+import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.fragment_navigation_one.*
 
 
-class BottomTwoFragment : MVVMBaseFragment() {
+class BottomOneFragment : MVVMBaseFragment() {
 
     override fun isRegisterEventBus(): Boolean {
         return false
@@ -21,7 +22,7 @@ class BottomTwoFragment : MVVMBaseFragment() {
     }
 
     override fun createViewLayoutId(): Int {
-        return R.layout.fragment_bottom_two
+        return R.layout.fragment_bottom_one
     }
 
     override fun initView(rootView: View?) {
@@ -32,13 +33,13 @@ class BottomTwoFragment : MVVMBaseFragment() {
         baseActionBarWidget.setActionBarHeight(100)
         baseActionBarWidget.initViewsVisible(false, false, false,
                 true, false, false, false)
-        baseActionBarWidget.setActionBarTitle(context, "资讯", R.color.colorWhite)
+        baseActionBarWidget.setActionBarTitle(context, "首页", R.color.colorWhite)
         baseActionBarWidget.setActionBarBackgroundResource(R.drawable.core_icon_bg_header)
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance() = BottomTwoFragment()
+        fun newInstance() = BottomOneFragment()
     }
 }

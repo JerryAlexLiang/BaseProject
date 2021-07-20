@@ -9,19 +9,19 @@
 
     <fragment
         android:id="@+id/bottom_navigation_one"
-        android:name="com.liang.module_laboratory.BottomOneFragment"
+        android:name="com.liang.module_laboratory.jetpack.BottomOneFragment"
         android:label="fragment_bottom_one"
         tools:layout="@layout/fragment_bottom_one" />
 
     <fragment
         android:id="@+id/bottom_navigation_two"
-        android:name="com.liang.module_laboratory.BottomTwoFragment"
+        android:name="com.liang.module_laboratory.jetpack.BottomTwoFragment"
         android:label="fragment_bottom_two"
         tools:layout="@layout/fragment_bottom_two" />
 
     <fragment
         android:id="@+id/bottom_navigation_three"
-        android:name="com.liang.module_laboratory.BottomThreeFragment"
+        android:name="com.liang.module_laboratory.jetpack.BottomThreeFragment"
         android:label="fragment_bottom_three"
         tools:layout="@layout/fragment_bottom_three" />
 

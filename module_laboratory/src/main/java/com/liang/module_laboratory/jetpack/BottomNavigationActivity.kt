@@ -1,14 +1,10 @@
-package com.liang.module_laboratory
+package com.liang.module_laboratory.jetpack
 
 import android.os.Bundle
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.NavigatorProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.liang.module_core.jetpack.MVVMBaseActivity
+import com.liang.module_laboratory.R
 import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class BottomNavigationActivity : MVVMBaseActivity() {

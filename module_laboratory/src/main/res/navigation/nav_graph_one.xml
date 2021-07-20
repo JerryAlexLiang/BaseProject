@@ -8,14 +8,18 @@
     <!--    navigation标签下的 startDestination属性，该属性指定起始destination为navigationOneFragment-->
     <fragment
         android:id="@+id/navigationOneFragment"
-        android:name="com.liang.module_laboratory.NavigationOneFragment"
+        android:name="com.liang.module_laboratory.jetpack.NavigationOneFragment"
         android:label="fragment_navigation_one"
         tools:layout="@layout/fragment_navigation_one">
 
         <!--        app:destination属性表示它的目的地是navigationTwoFragment-->
         <action
             android:id="@+id/action_navigationOneFragment_to_navigationTwoFragment"
-            app:destination="@id/navigationTwoFragment" />
+            app:destination="@id/navigationTwoFragment"
+            app:enterAnim="@anim/core_h_fragment_enter"
+            app:exitAnim="@anim/core_h_fragment_exit"
+            app:popEnterAnim="@anim/core_h_fragment_pop_enter"
+            app:popExitAnim="@anim/core_h_fragment_pop_exit" />
 
         <!-- 添加参数传递数据 safe args方式       -->
         <argument
@@ -32,19 +36,23 @@
 
     <fragment
         android:id="@+id/navigationTwoFragment"
-        android:name="com.liang.module_laboratory.NavigationTwoFragment"
+        android:name="com.liang.module_laboratory.jetpack.NavigationTwoFragment"
         android:label="fragment_navigation_two"
         tools:layout="@layout/fragment_navigation_two">
 
         <action
             android:id="@+id/action_navigationTwoFragment_to_bottomNavigationActivity"
-            app:destination="@id/bottomNavigationActivity" />
+            app:destination="@id/bottomNavigationActivity"
+            app:enterAnim="@anim/core_h_fragment_enter"
+            app:exitAnim="@anim/core_h_fragment_exit"
+            app:popEnterAnim="@anim/core_h_fragment_pop_enter"
+            app:popExitAnim="@anim/core_h_fragment_pop_exit" />
 
     </fragment>
 
     <activity
         android:id="@+id/bottomNavigationActivity"
-        android:name="com.liang.module_laboratory.BottomNavigationActivity"
+        android:name="com.liang.module_laboratory.jetpack.BottomNavigationActivity"
         android:label="BottomNavigationActivity" />
 
 </navigation>
