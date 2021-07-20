@@ -115,6 +115,7 @@
         <attr name="indicatorColor" format="color"/>
         <attr name="indicatorColorSelected" format="color"/>
         <attr name="indicatorWidth" format="integer"/>
+        <attr name="indicatorHeight" format="integer"/>
         <attr name="gravity" format="integer"/>
     </declare-styleable>
 </resources>

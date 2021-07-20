@@ -14,7 +14,9 @@ import com.liang.module_core.jetpack.utils.SpecialSquareCardCollectionItemDecora
 import com.liang.module_core.jetpack.utils.load
 import com.liang.module_core.utils.DensityUtil.getScreenWidth
 import com.liang.module_core.utils.ToastUtil
+import com.liang.module_core.widget.pageMenuLayout.PageSlideAutoHeightBanner
 import com.liang.module_core.widget.pageMenuLayout.PageSlideIndicatorView
+import com.liang.module_core.widget.pageMenuLayout.PageSlideIndicatorViewRect
 import com.liang.module_core.widget.pageMenuLayout.PageSlideMenuBanner
 import com.liang.module_core.widget.pageMenuLayout.adapter.PageSlideMenuViewHolderCreator
 import com.liang.module_core.widget.pageMenuLayout.adapter.PageSlideRvHolder
@@ -98,6 +100,56 @@ class CategoryCardProvider(override val itemViewType: Int, override val layoutId
         pageSlideMenuBanner.setOnPageListener(object : SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 pageSlideIndicatorView.setCurrentIndicator(position)
+            }
+        })
+
+
+        val pageSlideMenuBanner2: PageSlideAutoHeightBanner<ItemX> = helper.getView(R.id.pageSlideMenuBanner2)
+        pageSlideMenuBanner2.setPageData(dataList, object : PageSlideMenuViewHolderCreator {
+            override fun createHolder(itemView: View): PageSlideRvHolder<*> {
+                return object :PageSlideRvHolder<ItemX>(itemView){
+
+                    private var entranceNameTextView: TextView? = null
+                    private var entranceIconImageView: ImageView? = null
+
+                    override fun initView(itemView: View?) {
+                        entranceIconImageView = itemView?.findViewById(R.id.entrance_image)
+                        entranceNameTextView = itemView?.findViewById(R.id.entrance_name)
+                        val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (getScreenWidth(context).toFloat() / 4.0f).toInt())
+                        itemView?.layoutParams = layoutParams
+                    }
+
+                    override fun bindView(holder: RecyclerView.ViewHolder?, data: ItemX?, pos: Int) {
+                        entranceNameTextView?.text = data?.data?.title
+//                        Glide.with(context).asBitmap().load(data?.data?.image).into(entranceIconImageView!!)
+                        entranceIconImageView?.load(data?.data?.image!!, 4f)
+
+                        holder?.itemView?.setOnClickListener {
+                            ToastUtil.showShortToast(data?.data?.title)
+                        }
+                    }
+
+                }
+            }
+
+            override fun getLayoutId(): Int {
+                return R.layout.eye_item_home_entrance
+            }
+        })
+
+        val pageSlideIndicatorViewRect: PageSlideIndicatorViewRect = helper.getView(R.id.pageSlideIndicatorView2)
+        if (dataList.size < 11) {
+            pageSlideIndicatorViewRect.visibility = View.GONE
+        } else {
+            pageSlideIndicatorViewRect.visibility = View.VISIBLE
+        }
+
+        pageSlideIndicatorViewRect.setIndicatorCount(pageSlideMenuBanner2.pageCount)
+
+        pageSlideMenuBanner2.setOnPageListener(object : SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                pageSlideIndicatorViewRect.setCurrentIndicator(position)
+                pageSlideMenuBanner2.currentViewPager()?.resetHeight(position)
             }
         })
 

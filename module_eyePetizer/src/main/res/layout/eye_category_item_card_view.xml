@@ -39,6 +39,24 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.liang.module_core.widget.pageMenuLayout.PageSlideAutoHeightBanner
+        android:id="@+id/pageSlideMenuBanner2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:page_menu_column_count="4"
+        app:page_menu_row_count="3" />
+
+    <com.liang.module_core.widget.pageMenuLayout.PageSlideIndicatorViewRect
+        android:id="@+id/pageSlideIndicatorView2"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:visibility="visible"
+        app:indicatorColor="#dddddd"
+        app:indicatorColorSelected="@color/colorBlue"
+        app:indicatorHeight="4"
+        app:indicatorWidth="12" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategory"
         android:layout_width="match_parent"
@@ -46,6 +64,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
         tools:itemCount="16"
@@ -56,15 +75,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:page_menu_column_count="5"
+        android:visibility="visible"
         app:page_menu_row_count="2" />
 
     <com.liang.module_core.widget.pageMenuLayout.PageSlideIndicatorView
         android:id="@+id/pageSlideIndicatorView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_gravity="center_horizontal"
+        android:visibility="visible"
         app:indicatorColor="#668b8989"
         app:indicatorColorSelected="#FF5722"
-        app:indicatorWidth="6"/>
+        app:indicatorWidth="6" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="占位" />
 
 </LinearLayout>
