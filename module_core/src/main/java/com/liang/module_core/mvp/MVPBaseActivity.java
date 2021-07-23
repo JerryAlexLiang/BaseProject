@@ -2,6 +2,8 @@ package com.liang.module_core.mvp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
@@ -16,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -703,6 +706,28 @@ public abstract class MVPBaseActivity<V, T extends MVPBasePresenter<V>> extends 
                                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
             }
         }
+    }
+
+    /**
+     * 禁止跟随系统字体大小调节
+     */
+    @Override
+    public Resources getResources() {
+        //还原字体大小
+        Resources res = super.getResources();
+        Configuration config = new Configuration();
+        config.setToDefaults();
+        res.updateConfiguration(config, res.getDisplayMetrics());
+        return res;
+    }
+
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        if (newConfig.fontScale != 1) {
+            //非默认值
+            getResources();
+        }
+        super.onConfigurationChanged(newConfig);
     }
 
 

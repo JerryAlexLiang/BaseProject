@@ -36,7 +36,7 @@ class BleHomeActivity : MVVMBaseActivity() {
     private fun initView() {
         base_actionbar_left_icon!!.visibility = View.VISIBLE
         base_actionbar_title!!.visibility = View.VISIBLE
-        base_actionbar_title!!.text = this.resources.getString(R.string.titleBar)
+        base_actionbar_title!!.text = this.resources?.getString(R.string.titleBar) ?: ""
     }
 
     private fun initListener() {

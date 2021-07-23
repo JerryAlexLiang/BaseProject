@@ -43,7 +43,7 @@ import java.util.*
  */
 class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCallback {
 
-//    private lateinit var mScanCallback: SampleScanCallback
+    //    private lateinit var mScanCallback: SampleScanCallback
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var mBLEScanner: BluetoothLeScanner? = null
 
@@ -86,7 +86,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
     private fun initView() {
         base_actionbar_left_icon!!.visibility = View.VISIBLE
         base_actionbar_title!!.visibility = View.VISIBLE
-        base_actionbar_title!!.text = this.resources.getString(R.string.titleBar1)
+        base_actionbar_title!!.text = this.resources?.getString(R.string.titleBar1) ?: ""
 
         deviceAdapter = DeviceAdapter(R.layout.ble_rv_adapter_device)
         val linearLayoutManager = LinearLayoutManager(this)
@@ -103,7 +103,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
 
     fun dp2px(dp: Int): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dp.toFloat(), resources.displayMetrics).toInt()
+                dp.toFloat(), resources?.displayMetrics).toInt()
     }
 
     private fun initListener() {
@@ -131,7 +131,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
 
             override fun onConnect(bleDevice: SearchResult?) {
 //                connectDevice(bleDevice)
-                ToastUtil.onShowWarnRectangleToast(this@BleServiceNormalActivity,bleDevice?.name)
+                ToastUtil.onShowWarnRectangleToast(this@BleServiceNormalActivity, bleDevice?.name)
 
             }
 
@@ -153,7 +153,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
 //        val adapter = manager.adapter
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (bluetoothAdapter == null) {
-            ToastUtil.onShowFailRectangleToast(this, resources.getString(R.string.not_have_blue))
+            ToastUtil.onShowFailRectangleToast(this, resources?.getString(R.string.not_have_blue))
             return
         }
         if (!bluetoothAdapter!!.isEnabled) {
@@ -197,9 +197,9 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
                 //手机是否开启位置服务，如果没有开启那么所有app将不能使用定位功能
                 AlertView.Builder()
                         .setContext(this)
-                        .setTitle(resources.getString(R.string.notifyTitle))
-                        .setMessage(resources.getString(R.string.gpsNotifyMsg))
-                        .setDestructive(resources.getString(R.string.cancel), resources.getString(R.string.setting))
+                        .setTitle(resources?.getString(R.string.notifyTitle))
+                        .setMessage(resources?.getString(R.string.gpsNotifyMsg))
+                        .setDestructive(resources?.getString(R.string.cancel), resources?.getString(R.string.setting))
                         .setOthers(null)
                         .setStyle(AlertView.Style.Alert)
                         .setOnItemClickListener { o, position ->
@@ -242,7 +242,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
 //            btnScan.text = "开始扫描"
 //        }, 10000)
 
-        btnScan.text = resources.getString(R.string.string_refreshing)
+        btnScan.text = resources?.getString(R.string.string_refreshing) ?: ""
         blueDevices.clear()
         deviceAdapter.notifyDataSetChanged()
 
@@ -251,7 +251,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
         //搜索10秒
         Handler().postDelayed({
             bluetoothAdapter?.stopLeScan(this)
-            btnScan.text = resources.getString(R.string.start_scan)
+            btnScan.text = resources?.getString(R.string.start_scan) ?: ""
         }, 10000)
     }
 
@@ -264,8 +264,8 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
 
         val searchResult = SearchResult(device)
 
-        if (!blueDevices.contains(searchResult)){
-            if (searchResult.address=="DE:7E:F0:7F:8F:EC"){
+        if (!blueDevices.contains(searchResult)) {
+            if (searchResult.address == "DE:7E:F0:7F:8F:EC") {
                 blueDevices.add(searchResult)
                 deviceAdapter.setNewData(blueDevices)
                 deviceAdapter.notifyDataSetChanged()

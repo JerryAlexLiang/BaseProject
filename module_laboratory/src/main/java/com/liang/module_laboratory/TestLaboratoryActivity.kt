@@ -225,13 +225,15 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
         //promptTopResId: 设置顶部背景图片
         //promptWidthRatio: 设置版本更新提示器宽度占屏幕的比例，默认是-1，不做约束
         //promptHeightRatio: 设置版本更新提示器高度占屏幕的比例，默认是-1，不做约束
-        XUpdate.newBuild(this)
+        resources?.let {
+            XUpdate.newBuild(this)
                 .updateUrl(mUpdateUrl)
                 .updateParser(CustomUpdateParser())
                 .updatePrompter(CustomUpdatePrompter())
-                .promptThemeColor(resources.getColor(R.color.red))
+                .promptThemeColor(it.getColor(R.color.red))
                 .promptTopResId(R.drawable.ic_bg_update_top)
                 .update()
+        }
     }
 
     private fun testAppCrashCatch() {

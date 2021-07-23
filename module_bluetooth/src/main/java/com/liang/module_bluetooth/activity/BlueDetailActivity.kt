@@ -58,7 +58,7 @@ class BlueDetailActivity : MVVMBaseActivity() {
     }
 
     private fun initListener() {
-        ClientManager.client?.registerConnectStatusListener(bleDevice!!.address,mConnectStatusListener)
+        ClientManager.client?.registerConnectStatusListener(bleDevice!!.address, mConnectStatusListener)
 
         setOnClickListener(base_actionbar_left_icon) {
             when (this) {
@@ -80,7 +80,7 @@ class BlueDetailActivity : MVVMBaseActivity() {
             if (!mConnected) {
                 //断开重连
                 base_actionbar_title!!.text = "断开重连"
-                ToastUtil.onShowWarnRectangleToast(this@BlueDetailActivity,"断开重连")
+                ToastUtil.onShowWarnRectangleToast(this@BlueDetailActivity, "断开重连")
                 connectDevice(bleDevice!!)
             }
         }
@@ -99,7 +99,7 @@ class BlueDetailActivity : MVVMBaseActivity() {
         ClientManager.client?.connect(mDevice?.address, options, BleConnectResponse { _, profile ->
             LogUtil.d(BluetoothMainActivity.TAG, "connectDevice    =========>   " + String.format("profile:\n%s", profile))
             base_actionbar_title!!.text = deviceBroadcastName
-            ToastUtil.onShowSuccessRectangleToast(this,"连接成功")
+            ToastUtil.onShowSuccessRectangleToast(this, "连接成功")
             setGattProfile(profile)
         })
     }
@@ -107,7 +107,7 @@ class BlueDetailActivity : MVVMBaseActivity() {
     private fun initView() {
         base_actionbar_left_icon!!.visibility = View.VISIBLE
         base_actionbar_title!!.visibility = View.VISIBLE
-        base_actionbar_title!!.text = this.resources.getString(R.string.titleBar)
+        base_actionbar_title!!.text = this.resources?.getString(R.string.titleBar) ?: ""
 
         deviceDetailAdapter = DeviceDetailAdapter()
         val linearLayoutManager = LinearLayoutManager(this)
@@ -118,7 +118,7 @@ class BlueDetailActivity : MVVMBaseActivity() {
 
     fun dp2px(dp: Int): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dp.toFloat(), resources.displayMetrics).toInt()
+                dp.toFloat(), resources?.displayMetrics).toInt()
     }
 
     private fun initData() {

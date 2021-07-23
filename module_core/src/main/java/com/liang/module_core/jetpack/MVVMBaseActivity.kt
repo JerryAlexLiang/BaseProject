@@ -2,6 +2,8 @@ package com.liang.module_core.jetpack
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
@@ -137,7 +139,7 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
             //第一个参数scale是刷新圆形进度是否缩放,true表示缩放,圆形进度图会从小到大展示出来,为false就不缩放
             //第二个参数start和end是刷新进度条展示的相对于默认的展示位置,start和end组成一个范围，在这个y轴范围就是那个圆形进度ProgressView展示的位置
             mRefreshLayout!!.setProgressViewOffset(true, 0, TypedValue
-                    .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources.displayMetrics).toInt())
+                    .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, resources?.displayMetrics).toInt())
             mRefreshLayout!!.setOnRefreshListener { requestDataRefresh() }
         }
     }
@@ -185,17 +187,17 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
         Log.d(TAG, "setActionBarTheme: $actionBarColorInt")
         when (actionBarColorInt) {
             Constant.ACTIONBAR_COLOR_BLUE -> {
-                baseActionBar?.setBackgroundColor(resources.getColor(R.color.title_bar_blue))
+                resources?.let { baseActionBar?.setBackgroundColor(it.getColor(R.color.title_bar_blue)) }
                 if (baseCollapsingToolBar != null) {
-                    baseCollapsingToolBar.setContentScrimColor(resources.getColor(R.color.title_bar_blue))
-                    baseCollapsingToolBar.setStatusBarScrimColor(resources.getColor(R.color.title_bar_blue))
+                    resources?.let { baseCollapsingToolBar.setContentScrimColor(it.getColor(R.color.title_bar_blue)) }
+                    resources?.let { baseCollapsingToolBar.setStatusBarScrimColor(it.getColor(R.color.title_bar_blue)) }
                 }
             }
             Constant.ACTIONBAR_COLOR_RED -> {
-                baseActionBar?.setBackgroundColor(resources.getColor(R.color.title_bar_red))
+                resources?.let { baseActionBar?.setBackgroundColor(it.getColor(R.color.title_bar_red)) }
                 if (baseCollapsingToolBar != null) {
-                    baseCollapsingToolBar.setContentScrimColor(resources.getColor(R.color.title_bar_red))
-                    baseCollapsingToolBar.setStatusBarScrimColor(resources.getColor(R.color.title_bar_red))
+                    resources?.let { baseCollapsingToolBar.setContentScrimColor(it.getColor(R.color.title_bar_red)) }
+                    resources?.let { baseCollapsingToolBar.setStatusBarScrimColor(it.getColor(R.color.title_bar_red)) }
                 }
             }
             Constant.ACTIONBAR_COLOR_BLACK -> {
@@ -220,10 +222,10 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
                 }
             }
             Constant.ACTIONBAR_COLOR_GREEN -> {
-                baseActionBar?.setBackgroundColor(resources.getColor(R.color.title_bar_green))
+                resources?.let { baseActionBar?.setBackgroundColor(it.getColor(R.color.title_bar_green)) }
                 if (baseCollapsingToolBar != null) {
-                    baseCollapsingToolBar.setContentScrimColor(resources.getColor(R.color.title_bar_green))
-                    baseCollapsingToolBar.setStatusBarScrimColor(resources.getColor(R.color.title_bar_green))
+                    resources?.let { baseCollapsingToolBar.setContentScrimColor(it.getColor(R.color.title_bar_green)) }
+                    resources?.let { baseCollapsingToolBar.setStatusBarScrimColor(it.getColor(R.color.title_bar_green)) }
                 }
             }
         }
@@ -233,12 +235,12 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
         val actionBarColorInt = SPUtils.get(this@MVVMBaseActivity, Constant.ACTIONBAR_COLOR_THEME, 0) as Int
         Log.d(TAG, "setActionBarTheme: $actionBarColorInt")
         when (actionBarColorInt) {
-            Constant.ACTIONBAR_COLOR_BLUE -> relativeLayout?.setBackgroundColor(resources.getColor(R.color.title_bar_blue))
-            Constant.ACTIONBAR_COLOR_RED -> relativeLayout?.setBackgroundColor(resources.getColor(R.color.title_bar_red))
+            Constant.ACTIONBAR_COLOR_BLUE -> resources?.let { relativeLayout?.setBackgroundColor(it.getColor(R.color.title_bar_blue)) }
+            Constant.ACTIONBAR_COLOR_RED -> resources?.let { relativeLayout?.setBackgroundColor(it.getColor(R.color.title_bar_red)) }
             Constant.ACTIONBAR_COLOR_BLACK -> relativeLayout?.setBackgroundColor(Color.BLACK)
             Constant.ACTIONBAR_COLOR_WHITE -> relativeLayout?.setBackgroundColor(Color.WHITE)
             Constant.ACTIONBAR_COLOR_TRANSLATE -> relativeLayout?.setBackgroundColor(Color.TRANSPARENT)
-            Constant.ACTIONBAR_COLOR_GREEN -> relativeLayout?.setBackgroundColor(resources.getColor(R.color.title_bar_green))
+            Constant.ACTIONBAR_COLOR_GREEN -> resources?.let { relativeLayout?.setBackgroundColor(it.getColor(R.color.title_bar_green)) }
         }
     }
 
@@ -548,5 +550,25 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
         if (!isDestroyed) {
             transaction.commitAllowingStateLoss()
         }
+    }
+
+    /**
+     * 禁止跟随系统字体大小调节
+     */
+    override fun getResources(): Resources? {
+        //还原字体大小
+        val res = super.getResources()
+        val config = Configuration()
+        config.setToDefaults()
+        res.updateConfiguration(config, res.displayMetrics)
+        return res
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        if (newConfig.fontScale != 1f) {
+            //非默认值
+            resources
+        }
+        super.onConfigurationChanged(newConfig)
     }
 }

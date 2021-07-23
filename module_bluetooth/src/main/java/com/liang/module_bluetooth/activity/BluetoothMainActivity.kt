@@ -86,7 +86,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
     }
 
     private fun initListener() {
-        setOnClickListener(btnScan,base_actionbar_left_icon) {
+        setOnClickListener(btnScan, base_actionbar_left_icon) {
             when (this) {
                 btnScan -> {
                     if (btnScan.text == getString(R.string.start_scan)) {
@@ -98,7 +98,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
                     }
                 }
 
-                base_actionbar_left_icon->{
+                base_actionbar_left_icon -> {
                     finish()
                 }
             }
@@ -130,7 +130,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
     private fun initView() {
         base_actionbar_left_icon!!.visibility = View.VISIBLE
         base_actionbar_title!!.visibility = View.VISIBLE
-        base_actionbar_title!!.text = this.resources.getString(R.string.titleBar2)
+        base_actionbar_title!!.text = this.resources?.getString(R.string.titleBar2) ?: ""
 
         deviceAdapter = DeviceAdapter(R.layout.ble_rv_adapter_device)
         val linearLayoutManager = LinearLayoutManager(this)
@@ -204,7 +204,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
 
     fun dp2px(dp: Int): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dp.toFloat(), resources.displayMetrics).toInt()
+                dp.toFloat(), resources?.displayMetrics).toInt()
     }
 
     private fun onPermissionGranted(permission: String) {
@@ -224,9 +224,9 @@ class BluetoothMainActivity : MVVMBaseActivity() {
                 //手机是否开启位置服务，如果没有开启那么所有app将不能使用定位功能
                 AlertView.Builder()
                         .setContext(this)
-                        .setTitle(resources.getString(R.string.notifyTitle))
-                        .setMessage(resources.getString(R.string.gpsNotifyMsg))
-                        .setDestructive(resources.getString(R.string.cancel), resources.getString(R.string.setting))
+                        .setTitle(resources?.getString(R.string.notifyTitle))
+                        .setMessage(resources?.getString(R.string.gpsNotifyMsg))
+                        .setDestructive(resources?.getString(R.string.cancel), resources?.getString(R.string.setting))
                         .setOthers(null)
                         .setStyle(AlertView.Style.Alert)
                         .setOnItemClickListener { o, position ->
@@ -288,7 +288,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
 
         override fun onSearchStarted() {
             LogUtil.d(TAG, "onSearchStarted")
-            btnScan.text = resources.getString(R.string.string_refreshing)
+            btnScan.text = resources?.getString(R.string.string_refreshing) ?: ""
             blueDevices.clear()
             deviceAdapter.notifyDataSetChanged()
         }
@@ -312,12 +312,12 @@ class BluetoothMainActivity : MVVMBaseActivity() {
 
         override fun onSearchStopped() {
             LogUtil.d(TAG, "onSearchStopped")
-            btnScan.text = resources.getString(R.string.start_scan)
+            btnScan.text = resources?.getString(R.string.start_scan) ?: ""
         }
 
         override fun onSearchCanceled() {
             LogUtil.d(TAG, "onSearchCanceled")
-            btnScan.text = resources.getString(R.string.start_scan)
+            btnScan.text = resources?.getString(R.string.start_scan) ?: ""
 
         }
 
