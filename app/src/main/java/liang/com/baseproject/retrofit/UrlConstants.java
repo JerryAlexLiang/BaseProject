@@ -23,6 +23,9 @@ public interface UrlConstants {
     //枝干-干货API
     String GANK_BASE_URL = "http://gank.io/api/";
 
+    //枝干-干货新API
+    String GANK_BASE_URL2 = "https://gank.io/api/v2/";
+
     //知乎日报API
     String ZHIHU_BASE_URL = "http://news-at.zhihu.com/api/4/";
 

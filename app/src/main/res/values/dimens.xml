@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--字体大小sp-->
-    <dimen name="sp22">22sp</dimen>
     <dimen name="sp11">11sp</dimen>
     <dimen name="sp12">12sp</dimen>
     <dimen name="sp13">13sp</dimen>
     <dimen name="sp15">15sp</dimen>
-
+    <dimen name="sp16">16sp</dimen>
+    <dimen name="sp17">17sp</dimen>
+    <dimen name="sp18">18sp</dimen>
+    <dimen name="sp19">19sp</dimen>
+    <dimen name="sp20">20sp</dimen>
+    <dimen name="sp21">21sp</dimen>
+    <dimen name="sp22">22sp</dimen>
 
 
     <!--间距dp-->

@@ -3,10 +3,13 @@ package liang.com.baseproject.retrofit;
 import java.util.List;
 
 import io.reactivex.Observable;
+
 import com.liang.module_core.mvp.MVPBaseBean;
 import com.liang.module_core.mvp.MVPBaseResponse;
+
 import liang.com.baseproject.entity.BannerBean;
 import liang.com.baseproject.entity.NewsRes;
+import liang.com.baseproject.entity.NiceGankGirlRes;
 import liang.com.baseproject.entity.NiceGankRes;
 import liang.com.baseproject.entity.ZhihuLastNewsRes;
 import liang.com.baseproject.home.entity.ArticleHomeBannerBean;
@@ -44,6 +47,11 @@ public interface UrlService {
 //    @GET("/data/福利/10/{page}")
     @GET("data/%E7%A6%8F%E5%88%A9/6/{page}")
     Observable<NiceGankRes> getNiceGankData(@Path("page") int page);
+
+    //获取妹子类表-新接口
+    //https://gank.io/api/v2/data/category/Girl/type/Girl/page/1/count/10
+    @GET("data/category/Girl/type/Girl/page/{page}/count/10")
+    Observable<NiceGankGirlRes> getNiceGankGirlData(@Path("page") int page);
 
     /**
      * 知乎API - 获取最新信息

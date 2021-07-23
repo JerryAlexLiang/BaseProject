@@ -8,10 +8,12 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
+    card_view:cardCornerRadius="8dp"
     card_view:cardElevation="3dp"
-    card_view:cardPreventCornerOverlap="true"
-    card_view:cardUseCompatPadding="true"
-    card_view:contentPadding="8dp">
+    android:layout_margin="3dp"
+    card_view:cardPreventCornerOverlap="true">
+    <!--    card_view:cardUseCompatPadding="true"
+        card_view:contentPadding="8dp"-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,33 +24,36 @@
             android:id="@+id/iv_nice_gank"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/core_icon_bg_header" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5dp">
+            android:padding="@dimen/dp5">
 
             <TextView
                 android:id="@+id/tv_nice_gank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/text_surface" />
+                android:textColor="@color/text_surface"
+                android:textSize="@dimen/sp_14"
+                tools:text="描述" />
 
             <TextView
                 android:id="@+id/tv_nice_source"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nice_gank"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textColor="@color/color_397bff"
-                tools:ignore="RtlHardcoded" />
+                android:textSize="@dimen/sp12"
+                tools:ignore="RtlHardcoded"
+                tools:text="来源" />
 
         </RelativeLayout>
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,10 @@ import liang.com.baseproject.adapter.NiceGankAdapter;
 
 import com.liang.module_core.mvp.MVPBasePresenter;
 
+import liang.com.baseproject.adapter.NiceGankGirlAdapter;
+import liang.com.baseproject.entity.GankGirlRes;
 import liang.com.baseproject.entity.GankRes;
+import liang.com.baseproject.entity.NiceGankGirlRes;
 import liang.com.baseproject.entity.NiceGankRes;
 
 import com.liang.module_core.retrofit.BaseObserver;
@@ -35,6 +39,7 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
 
     private Context context;
     private List<GankRes> list;
+    private List<GankGirlRes> list2;
     private int page = 1;     //根据页数进行分页加载
     private int lastVisibleItem;
     private boolean isLoadMore = false; // 是否加载过更多
@@ -42,6 +47,7 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayoutManager;
     private NiceGankAdapter niceGankAdapter;
+    private NiceGankGirlAdapter niceGankGirlAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     public NiceGankPresenter(Context context) {
@@ -73,7 +79,7 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new BaseObserver<NiceGankRes>() {
                         @Override
-                        public void onNext(NiceGankRes niceGankRes) {
+                        public void onNext(@io.reactivex.annotations.NonNull NiceGankRes niceGankRes) {
                             super.onNext(niceGankRes);
                             displayData(niceGankRes);
                         }
@@ -86,6 +92,39 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
                     });
         }
 
+    }
+
+    public void getNiceGankGirlData() {
+        niceGankView = getView();
+        if (niceGankView != null) {
+            recyclerView = niceGankView.getRecyclerView();
+            gridLayoutManager = niceGankView.getGridLayoutManager();
+
+            if (isLoadMore) {
+                page = page + 1;
+            }
+
+            RetrofitHelper
+                    .getInstanceChangeBaseUrl(UrlConstants.GANK_BASE_URL2);
+            RetrofitHelper
+                    .getMyService(UrlService.class)
+                    .getNiceGankGirlData(page)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new BaseObserver<NiceGankGirlRes>() {
+                        @Override
+                        public void onNext(@io.reactivex.annotations.NonNull NiceGankGirlRes niceGankGirlRes) {
+                            super.onNext(niceGankGirlRes);
+                            displayData2(niceGankGirlRes);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            loadError(e);
+                        }
+                    });
+        }
     }
 
     /**
@@ -105,9 +144,11 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
                         //设置SwipeRefreshLayout刷新
                         niceGankView.setDataRefresh(true);
                         isLoadMore = true;
-                        new Handler().postDelayed(() -> getNiceGankData(), 1000);
+//                        new Handler().postDelayed(() -> getNiceGankData(), 1000);
+                        new Handler().postDelayed(() -> getNiceGankGirlData(), 1000);
                     }
                 }
+
             }
 
             @Override
@@ -146,6 +187,26 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
         niceGankView.setDataRefresh(false);
     }
 
+    private void displayData2(NiceGankGirlRes niceGankGirlRes) {
+        List<GankGirlRes> girlResList = niceGankGirlRes.getData();
+        if (isLoadMore) {
+            if (girlResList == null) {
+                niceGankView.setDataRefresh(false);
+                return;
+            }else {
+                list2.addAll(girlResList);
+            }
+            //刷新适配器
+            niceGankGirlAdapter.notifyDataSetChanged();
+        } else {
+            list2 = girlResList;
+            niceGankGirlAdapter = new NiceGankGirlAdapter(context, list2);
+            recyclerView.setAdapter(niceGankGirlAdapter);
+            niceGankGirlAdapter.notifyDataSetChanged();
+        }
+        niceGankView.setDataRefresh(false);
+    }
+
     public void swipeRefreshListener() {
         niceGankView = getView();
         if (niceGankView != null) {
@@ -155,7 +216,8 @@ public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
                 public void onRefresh() {
                     isLoadMore = false;
                     page = 1;
-                    new Handler().postDelayed(() -> getNiceGankData(), 1000);
+//                    new Handler().postDelayed(() -> getNiceGankData(), 1000);
+                    new Handler().postDelayed(() -> getNiceGankGirlData(), 1000);
                 }
             });
         }
