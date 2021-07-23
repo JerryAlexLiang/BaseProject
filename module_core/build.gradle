@@ -207,6 +207,9 @@ dependencies {
     api "androidx.navigation:navigation-fragment-ktx:2.3.0"
     api "androidx.navigation:navigation-ui-ktx:2.3.0"
 
+    //Paging3
+    api "androidx.paging:paging-runtime:3.0.0"
+
     //XUpdate
     implementation rootProject.ext.dependencies.XUpdate
 //    implementation project(path: ':xupdate-lib')

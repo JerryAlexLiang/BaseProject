@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/bottomNavigationJumpSecondFragment"
-        android:name="com.liang.module_laboratory.BottomNavigationJumpSecondFragment"
+        android:name="com.liang.module_laboratory.jetpack.BottomNavigationJumpSecondFragment"
         android:label="fragment_bottom_navigation_jump_second"
         tools:layout="@layout/fragment_bottom_navigation_jump_second" />
 
