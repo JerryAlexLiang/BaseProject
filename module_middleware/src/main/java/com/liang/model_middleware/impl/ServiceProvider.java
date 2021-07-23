@@ -5,6 +5,7 @@ import com.liang.model_middleware.router.AppRouter;
 import com.liang.model_middleware.service.BluetoothModuleService;
 import com.liang.model_middleware.service.DatePickerService;
 import com.liang.model_middleware.service.EyeModuleService;
+import com.liang.model_middleware.service.GankModuleService;
 import com.liang.model_middleware.service.MainService;
 import com.liang.model_middleware.service.TestLaboratoryService;
 import com.liang.model_middleware.service.WeatherModuleService;
@@ -49,12 +50,20 @@ public class ServiceProvider {
         return (TestLaboratoryService) ARouter.getInstance().build(AppRouter.MODULE_TEST_LABORATORY).navigation();
     }
 
-    public static MainService getMainService(){
+    public static MainService getMainService() {
         return (MainService) ARouter.getInstance().build(AppRouter.MODULE_MAIN_HOME).navigation();
     }
 
-    public static BluetoothModuleService getBluetoothModuleService(){
+    public static BluetoothModuleService getBluetoothModuleService() {
         return (BluetoothModuleService) ARouter.getInstance().build(AppRouter.MODULE_BLUETOOTH).navigation();
+    }
+
+    /**
+     * 获取Module_Gank的Service
+     */
+    public static GankModuleService getGankModuleService() {
+        //使用依赖查找的方法发现服务，主动去发现服务并使用
+        return (GankModuleService) ARouter.getInstance().build(AppRouter.MODULE_GANK_NICE_GIRLS).navigation();
     }
 
 } 

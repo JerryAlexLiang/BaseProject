@@ -23,4 +23,7 @@ public class AppRouter {
 
     //蓝牙Module
     public static final String MODULE_BLUETOOTH = "/bluetooth/bluetoothContainer";
+
+    //Grank颜如玉模块
+    public static final String MODULE_GANK_NICE_GIRLS = "/gank/NiceGankGirlFragment";
 }

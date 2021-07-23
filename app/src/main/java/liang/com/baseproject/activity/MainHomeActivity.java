@@ -141,6 +141,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private HomeContainerFragment homeContainerFragment;
     private JuheNewsContainerFragment juheNewsContainerFragment;
     private NiceGankFragment niceGankFragment;
+    private Fragment niceGankFragment2;
     private MineFragment mineFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
 
@@ -457,62 +458,59 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void setupDrawerContent(NavigationView navView) {
-        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int itemOrder = menuItem.getOrder();
-                switch (menuItem.getItemId()) {
-                    case R.id.menu_nav_weather:
-                        ServiceProvider.getWeatherService().startWeatherActivity(MainHomeActivity.this);
-                        break;
+        navView.setNavigationItemSelectedListener(menuItem -> {
+            int itemOrder = menuItem.getOrder();
+            switch (menuItem.getItemId()) {
+                case R.id.menu_nav_weather:
+                    ServiceProvider.getWeatherService().startWeatherActivity(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_scan:
-                        //扫描界面
-                        onShowToast("扫一扫");
-                        break;
+                case R.id.menu_nav_scan:
+                    //扫描界面
+                    onShowToast("扫一扫");
+                    break;
 
-                    case R.id.menu_nav_night_theme:
-                        //改变主题
-                        ThemeSettingActivity.actionStart(MainHomeActivity.this);
-                        break;
+                case R.id.menu_nav_night_theme:
+                    //改变主题
+                    ThemeSettingActivity.actionStart(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_location:
-                        MapLocationActivity.actionStart(MainHomeActivity.this);
-                        break;
+                case R.id.menu_nav_location:
+                    MapLocationActivity.actionStart(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_refresh_header_style:
-                        RefreshHeaderChangeActivity.actionStart(MainHomeActivity.this);
-                        break;
+                case R.id.menu_nav_refresh_header_style:
+                    RefreshHeaderChangeActivity.actionStart(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_follow:
-                        //闪屏
-                        SplashTwoActivity.actionStart(MainHomeActivity.this);
-                        break;
+                case R.id.menu_nav_follow:
+                    //闪屏
+                    SplashTwoActivity.actionStart(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_feedback:
-                        onShowToast("反馈");
-                        break;
+                case R.id.menu_nav_feedback:
+                    onShowToast("反馈");
+                    break;
 
-                    case R.id.menu_nav_laboratory:
+                case R.id.menu_nav_laboratory:
 //                        TestCodeActivity.actionStart(MainHomeActivity.this);
-                        //测试Demo实验室
-                        ServiceProvider.getTestLaboratoryModuleService().startTestLaboratoryActivity(MainHomeActivity.this);
-                        break;
+                    //测试Demo实验室
+                    ServiceProvider.getTestLaboratoryModuleService().startTestLaboratoryActivity(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_setting:
-                        SettingActivity.actionStart(MainHomeActivity.this);
-                        break;
+                case R.id.menu_nav_setting:
+                    SettingActivity.actionStart(MainHomeActivity.this);
+                    break;
 
-                    case R.id.menu_nav_bluetooth:
-                        //蓝牙Module
-                        ServiceProvider.getBluetoothModuleService().startBluetoothMainActivity(MainHomeActivity.this);
-                        break;
-                }
-                // 关闭侧滑菜单
-                menuItem.setChecked(true);
-                drawerLayout.closeDrawers();
-                return true;
+                case R.id.menu_nav_bluetooth:
+                    //蓝牙Module
+                    ServiceProvider.getBluetoothModuleService().startBluetoothMainActivity(MainHomeActivity.this);
+                    break;
             }
+            // 关闭侧滑菜单
+            menuItem.setChecked(true);
+            drawerLayout.closeDrawers();
+            return true;
         });
     }
 
@@ -520,11 +518,13 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         homeContainerFragment = new HomeContainerFragment();
         juheNewsContainerFragment = new JuheNewsContainerFragment();
         niceGankFragment = new NiceGankFragment();
+//        niceGankFragment2 = ServiceProvider.getGankModuleService().initNewGankGirlFragment();
         mineFragment = new MineFragment();
 
         fragmentList.add(homeContainerFragment);
         fragmentList.add(juheNewsContainerFragment);
         fragmentList.add(niceGankFragment);
+//        fragmentList.add(niceGankFragment2);
         fragmentList.add(mineFragment);
 
         titleList.add("推荐");
@@ -625,83 +625,75 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
-        radioGroupContainerHome.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.main_rg_rb_one:
-                        //切换fragment
+        radioGroupContainerHome.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.main_rg_rb_one:
+                    //切换fragment
 //                        switchFragment(0);
-                        myViewPager.setCurrentItem(0);
-                        baseToolbarRightIcon.setVisibility(View.VISIBLE);
-                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search));
-                        baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                //跳转搜索文章界面
+                    myViewPager.setCurrentItem(0);
+                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                    baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.ic_search));
+                    baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //跳转搜索文章界面
 //                                goToSearchWanAndroidArticle();
 
-                                ToastUtil.onShowSuccessRectangleToast(MainHomeActivity.this, "测试");
-                            }
-                        });
-                        baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus) {
-                            rlNetBar.setVisibility(View.GONE);
-                        } else {
-                            rlNetBar.setVisibility(View.VISIBLE);
+                            ToastUtil.onShowSuccessRectangleToast(MainHomeActivity.this, "测试");
                         }
-                        break;
-
-                    case R.id.main_rg_rb_two:
-                        //切换fragment
-//                        switchFragment(1);
-                        myViewPager.setCurrentItem(1);
-                        baseToolbarRightIcon.setVisibility(View.VISIBLE);
-                        baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.core_icon_more));
-                        baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                onShowToast("切换模式");
-                            }
-                        });
-                        baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus) {
-                            rlNetBar.setVisibility(View.GONE);
-                        } else {
-                            rlNetBar.setVisibility(View.VISIBLE);
-                        }
-                        break;
-
-                    case R.id.main_rg_rb_three:
-                        //切换fragment
-//                        switchFragment(2);
-                        myViewPager.setCurrentItem(2);
-                        baseToolbarRightIcon.setVisibility(View.GONE);
-                        baseActionBar.setVisibility(View.VISIBLE);
-                        if (currentNetStatus) {
-                            rlNetBar.setVisibility(View.GONE);
-                        } else {
-                            rlNetBar.setVisibility(View.VISIBLE);
-                        }
-                        break;
-
-                    case R.id.main_rg_rb_four:
-                        //切换fragment
-//                        switchFragment(3);
-                        myViewPager.setCurrentItem(3);
-                        baseToolbarRightIcon.setVisibility(View.VISIBLE);
-                        baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                onShowToast("特色产品");
-                            }
-                        });
-                        baseActionBar.setVisibility(View.GONE);
+                    });
+                    baseActionBar.setVisibility(View.VISIBLE);
+                    if (currentNetStatus) {
                         rlNetBar.setVisibility(View.GONE);
-                        break;
-                }
-                baseToolbarTitle.setText(titleList.get(currentPosition));
+                    } else {
+                        rlNetBar.setVisibility(View.VISIBLE);
+                    }
+                    break;
+
+                case R.id.main_rg_rb_two:
+                    //切换fragment
+//                        switchFragment(1);
+                    myViewPager.setCurrentItem(1);
+                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                    baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.core_icon_more));
+                    baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onShowToast("切换模式");
+                        }
+                    });
+                    baseActionBar.setVisibility(View.VISIBLE);
+                    if (currentNetStatus) {
+                        rlNetBar.setVisibility(View.GONE);
+                    } else {
+                        rlNetBar.setVisibility(View.VISIBLE);
+                    }
+                    break;
+
+                case R.id.main_rg_rb_three:
+                    //切换fragment
+//                        switchFragment(2);
+                    myViewPager.setCurrentItem(2);
+                    baseToolbarRightIcon.setVisibility(View.GONE);
+                    baseActionBar.setVisibility(View.VISIBLE);
+                    if (currentNetStatus) {
+                        rlNetBar.setVisibility(View.GONE);
+                    } else {
+                        rlNetBar.setVisibility(View.VISIBLE);
+                    }
+                    break;
+
+                case R.id.main_rg_rb_four:
+                    //切换fragment
+//                        switchFragment(3);
+                    myViewPager.setCurrentItem(3);
+                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                    baseToolbarRightIcon.setOnClickListener(v -> onShowToast("特色产品"));
+                    baseActionBar.setVisibility(View.GONE);
+                    rlNetBar.setVisibility(View.GONE);
+                    break;
             }
+            baseToolbarTitle.setText(titleList.get(currentPosition));
         });
     }
 

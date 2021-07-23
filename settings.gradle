@@ -1,3 +1,4 @@
+include ':module_gank'
 include ':autosize'
 include ':updateapp'//include ':xupdate-lib'
 include ':module_bluetooth'
