@@ -306,7 +306,7 @@ public class FileUtil {
     public static void translateBitmapToFile(Context context, Bitmap bitmap, String fileName) {
         //将Bitmap 转换成二进制，写入本地
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/BaseProjectJerry");
         if (!dir.exists()) {
