@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.liang.module_core.utils.ToastUtil;
+import com.liang.module_core.widget.ViewPagerPictureActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -85,13 +87,16 @@ public class NiceGankGirlAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             //点击图片
             ivNiceGank.setOnClickListener(v -> {
                 //跳转到大图显示界面
-                SinglePictureActivity.actionStart(context, gankRes.getUrl(), gankRes.getDesc());
+//                SinglePictureActivity.actionStart(context, gankRes.getUrl(), gankRes.getDesc());
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add(gankRes.getUrl());
+                ViewPagerPictureActivity.actionStart(context, arrayList);
                 ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             });
 
             //点击Card
             cardNiceGank.setOnClickListener(v -> {
-                ToastUtil.onShowDefaultToast(context,"卡片");
+                ToastUtil.onShowDefaultToast(context, "卡片");
             });
         }
     }

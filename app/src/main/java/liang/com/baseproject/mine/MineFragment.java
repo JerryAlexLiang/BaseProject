@@ -40,6 +40,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,6 +58,7 @@ import liang.com.baseproject.activity.SinglePictureActivity;
 import com.liang.module_core.mvp.MVPBaseFragment;
 import com.liang.module_core.mvp.MVPBasePresenter;
 
+import liang.com.baseproject.activity.ViewPagerPictureActivity;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.login.activity.LoginActivity;
 import liang.com.baseproject.login.entity.UserBean;
@@ -438,7 +440,11 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
                     AnimationUtils.pageHideScaleAnimator(mActivity.getMainPageContainer());
 
                     String localUserIcon = UserLoginUtils.getInstance().getLocalUserIcon();
-                    SinglePictureActivity.actionStart(mActivity, localUserIcon, System.currentTimeMillis() + "");
+//                    SinglePictureActivity.actionStart(mActivity, localUserIcon, System.currentTimeMillis() + "");
+
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    arrayList.add(localUserIcon);
+                    ViewPagerPictureActivity.actionStart(mActivity, arrayList);
                 }
             });
 
@@ -545,7 +551,10 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
                     }
                     AnimationUtils.pageHideScaleAnimator(mActivity.getMainPageContainer());
                     String localBg = UserLoginUtils.getInstance().getLocalBg();
-                    SinglePictureActivity.actionStart(mActivity, localBg, System.currentTimeMillis() + "");
+//                    SinglePictureActivity.actionStart(mActivity, localBg, System.currentTimeMillis() + "");
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    arrayList.add(localBg);
+                    ViewPagerPictureActivity.actionStart(mActivity, arrayList);
                 }
             });
 

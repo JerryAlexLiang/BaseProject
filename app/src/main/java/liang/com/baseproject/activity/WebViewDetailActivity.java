@@ -26,6 +26,10 @@ import com.liang.module_core.mvp.MVPBaseActivity;
 import com.liang.module_core.utils.ImageLoaderUtils;
 import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.SettingUtils;
+import com.liang.module_core.widget.ViewPagerPictureActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -276,7 +280,10 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
                 break;
 
             case R.id.iv_detail_top:
-                SinglePictureActivity.actionStart(WebViewDetailActivity.this, imageUrl, title);
+//                SinglePictureActivity.actionStart(WebViewDetailActivity.this, imageUrl, title);
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add(imageUrl);
+                ViewPagerPictureActivity.actionStart(WebViewDetailActivity.this, arrayList);
                 break;
 
             default:

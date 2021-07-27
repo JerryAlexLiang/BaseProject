@@ -3,13 +3,13 @@ package com.liang.module_core.widget
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.liang.module_core.R
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.utils.LogUtil
 import kotlinx.android.synthetic.main.core_activity_single_picture.baseActionBarWidget
 import kotlinx.android.synthetic.main.core_activity_view_pager_picture.*
-import org.jetbrains.anko.toast
 import java.io.Serializable
 
 
@@ -95,6 +95,16 @@ class ViewPagerPictureActivity : MVVMBaseActivity() {
 
     private fun parseIntent() {
         imageUrlList = intent.getSerializableExtra("imageUrlList") as List<String?>
+        if (imageUrlList != null) {
+            if (imageUrlList!!.size > 1) {
+                tv_current_page.visibility = View.VISIBLE
+            } else {
+                tv_current_page.visibility = View.GONE
+            }
+        } else {
+            tv_current_page.visibility = View.GONE
+        }
+
         LogUtil.d(TAG, imageUrlList.toString())
     }
 

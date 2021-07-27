@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.viewpager.widget.ViewPager;
+
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,6 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.ImageViewPagerAdapter;
+
 import com.liang.module_core.mvp.MVPBasePresenter;
 import com.liang.module_core.mvp.MVPBaseActivity;
 import com.liang.module_core.utils.FileUtil;
@@ -132,6 +136,15 @@ public class ViewPagerPictureActivity extends MVPBaseActivity {
 
     private void parseIntent() {
         imageUrlList = (List<String>) getIntent().getSerializableExtra("imageUrlList");
+        if (imageUrlList != null) {
+            if (imageUrlList.size() > 1) {
+                tvCurrentPage.setVisibility(View.VISIBLE);
+            } else {
+                tvCurrentPage.setVisibility(View.GONE);
+            }
+        } else {
+            tvCurrentPage.setVisibility(View.GONE);
+        }
         LogUtil.d(TAG, imageUrlList.toString());
     }
 

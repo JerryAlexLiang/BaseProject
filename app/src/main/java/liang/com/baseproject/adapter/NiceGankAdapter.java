@@ -2,9 +2,11 @@ package liang.com.baseproject.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +15,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.SinglePictureActivity;
+import liang.com.baseproject.activity.ViewPagerPictureActivity;
 import liang.com.baseproject.entity.GankRes;
+
 import com.liang.module_core.utils.ToastUtil;
 
 /**
@@ -83,13 +88,16 @@ public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             //点击图片
             ivNiceGank.setOnClickListener(v -> {
                 //跳转到大图显示界面
-                SinglePictureActivity.actionStart(context, gankRes.getUrl(), gankRes.getDesc());
+//                SinglePictureActivity.actionStart(context, gankRes.getUrl(), gankRes.getDesc());
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add(gankRes.getUrl());
+                ViewPagerPictureActivity.actionStart(context, arrayList);
                 ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             });
 
             //点击Card
             cardNiceGank.setOnClickListener(v -> {
-                ToastUtil.onShowDefaultToast(context,"卡片");
+                ToastUtil.onShowDefaultToast(context, "卡片");
             });
         }
     }

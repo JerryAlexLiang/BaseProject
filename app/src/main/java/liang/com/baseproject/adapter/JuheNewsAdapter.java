@@ -2,9 +2,11 @@ package liang.com.baseproject.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,6 +23,7 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.activity.WebViewDetailActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
 import liang.com.baseproject.entity.NewsRes;
+
 import com.liang.module_core.utils.ImageLoaderUtils;
 import com.liang.module_core.widget.ViewPagerPictureActivity;
 
@@ -130,10 +133,13 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         imageUrlList.add(thumbnail_pic_s02);
                         imageUrlList.add(thumbnail_pic_s03);
 //                        ViewPagerPictureActivity.actionStart(context, imageUrlList);
-                        ViewPagerPictureActivity.actionStart(context,imageUrlList);
+                        ViewPagerPictureActivity.actionStart(context, imageUrlList);
                     } else {
                         //不是全部有数据的时候跳转到单张大图显示界面
-                        SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
+//                        SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
+                        ArrayList<String> arrayList = new ArrayList<>();
+                        arrayList.add(dataBean.getThumbnail_pic_s());
+                        ViewPagerPictureActivity.actionStart(context, arrayList);
                     }
                     //渐变式切换Activity效果
                     ((Activity) context).overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
