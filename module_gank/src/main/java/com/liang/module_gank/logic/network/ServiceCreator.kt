@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit
 object ServiceCreator {
 
     //Gank API
-    private const val GANK_BASE_URL = "http://gank.io/api/"
+//    private const val GANK_BASE_URL = "http://gank.io/api/"
+    private const val GANK_BASE_URL = "https://gank.io/api/v2/"
 
     private val client = OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)

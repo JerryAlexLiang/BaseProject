@@ -62,8 +62,8 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private MainHomeActivity mActivity;
 
-    private static final int PAGE_START = 460;
-    //    private static final int PAGE_START = 0;
+    //    private static final int PAGE_START = 460;
+    private static final int PAGE_START = 0;
     private int currPage = PAGE_START;
     private HomeContainerAdapter homeContainerAdapter;
     private boolean setRefreshFooter;
@@ -223,7 +223,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
                 LogUtil.d(TAG, "点击了:  " + Objects.requireNonNull(item).getTitle());
 //                    AgentWebActivity.actionStart(getContext(), item.getId(), item.getTitle(), item.getLink());
 //                AgentWebActivity.actionStart(getContext(), item);
-                AgentWebActivityX5.actionStart(getContext(),item);
+                AgentWebActivityX5.actionStart(getContext(), item);
             }
         });
 

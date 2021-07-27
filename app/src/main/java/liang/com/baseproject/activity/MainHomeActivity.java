@@ -140,7 +140,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private List<String> titleList = new ArrayList<>();
     private HomeContainerFragment homeContainerFragment;
     private JuheNewsContainerFragment juheNewsContainerFragment;
-    private NiceGankFragment niceGankFragment;
+//    private NiceGankFragment niceGankFragment;
     private Fragment niceGankFragment2;
     private MineFragment mineFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
@@ -517,14 +517,14 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private void initViewPage() {
         homeContainerFragment = new HomeContainerFragment();
         juheNewsContainerFragment = new JuheNewsContainerFragment();
-        niceGankFragment = new NiceGankFragment();
-//        niceGankFragment2 = ServiceProvider.getGankModuleService().initNewGankGirlFragment();
+//        niceGankFragment = new NiceGankFragment();
+        niceGankFragment2 = ServiceProvider.getGankModuleService().initNewGankGirlFragment();
         mineFragment = new MineFragment();
 
         fragmentList.add(homeContainerFragment);
         fragmentList.add(juheNewsContainerFragment);
-        fragmentList.add(niceGankFragment);
-//        fragmentList.add(niceGankFragment2);
+//        fragmentList.add(niceGankFragment);
+        fragmentList.add(niceGankFragment2);
         fragmentList.add(mineFragment);
 
         titleList.add("推荐");

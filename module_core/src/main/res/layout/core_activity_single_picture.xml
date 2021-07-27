@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_pic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <com.liang.module_core.widget.BaseActionBarWidget
+        android:id="@+id/baseActionBarWidget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_meizhi_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/baseActionBarWidget"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:fitsSystemWindows="true"
+        tools:ignore="UnknownIdInLayout" />
+
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/iv_meizhi_zoom_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/baseActionBarWidget"
+        android:layout_centerInParent="true"
+        android:fitsSystemWindows="true"
+        tools:ignore="UnknownIdInLayout" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/save_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="27dp"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:src="@drawable/core_icon_file_download"
+        app:backgroundTint="@color/refresh_progress_2"
+        app:borderWidth="0dp"
+        app:elevation="4dp"
+        tools:targetApi="lollipop" />
+
+
+</RelativeLayout>

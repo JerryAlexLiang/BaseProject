@@ -20,9 +20,9 @@ import butterknife.ButterKnife;
 import liang.com.baseproject.R;
 import liang.com.baseproject.activity.WebViewDetailActivity;
 import liang.com.baseproject.activity.SinglePictureActivity;
-import liang.com.baseproject.activity.ViewPagerPictureActivity;
 import liang.com.baseproject.entity.NewsRes;
 import com.liang.module_core.utils.ImageLoaderUtils;
+import com.liang.module_core.widget.ViewPagerPictureActivity;
 
 public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -129,7 +129,8 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                         imageUrlList.add(thumbnail_pic_s);
                         imageUrlList.add(thumbnail_pic_s02);
                         imageUrlList.add(thumbnail_pic_s03);
-                        ViewPagerPictureActivity.actionStart(context, imageUrlList);
+//                        ViewPagerPictureActivity.actionStart(context, imageUrlList);
+                        ViewPagerPictureActivity.actionStart(context,imageUrlList);
                     } else {
                         //不是全部有数据的时候跳转到单张大图显示界面
                         SinglePictureActivity.actionStart(context, dataBean.getThumbnail_pic_s(), dataBean.getDate());
