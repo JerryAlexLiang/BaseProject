@@ -21,7 +21,7 @@ class NewGankGirlAdapter(layoutResId: Int) : BaseQuickAdapter<GankGirlRes, BaseV
     @SuppressLint("SetTextI18n")
     override fun convert(holder: BaseViewHolder, item: GankGirlRes) {
         holder.itemView.tvNiceGank.text = item.desc ?: "desc"
-        holder.itemView.tvNiceSource.text = "来源: ${item.author}"
+        holder.itemView.tvNiceSource.text = "nice: ${item.author}"
 
         Glide.with(context).load(item.url).into(holder.itemView.ivNiceGank)
 
@@ -35,7 +35,7 @@ class NewGankGirlAdapter(layoutResId: Int) : BaseQuickAdapter<GankGirlRes, BaseV
 
         //点击Card
         holder.itemView.cardNiceGank.setOnClickListener {
-            ToastUtil.showShortToast(item.desc)
+            ToastUtil.showLongToast(item.desc)
         }
 
     }

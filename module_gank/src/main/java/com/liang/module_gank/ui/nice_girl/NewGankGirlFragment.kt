@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.new_gank_girl_fragment.*
 class NewGankGirlFragment : MVVMBaseFragment() {
 
     companion object {
+
         @JvmStatic
         fun newInstance() = NewGankGirlFragment()
     }
@@ -89,14 +90,16 @@ class NewGankGirlFragment : MVVMBaseFragment() {
             val girls = result.getOrNull()
             if (girls != null) {
                 if (currPage == PAGE_START) {
+                    newGankGirlAdapter.data.clear()
                     viewModel.girlsList.clear()
                     viewModel.girlsList.addAll(girls)
                     newGankGirlAdapter.setNewInstance(viewModel.girlsList)
-                    LogUtil.d("nice", "data: " + GsonUtils.toJson(viewModel.girlsList))
+                    LogUtil.d(TAG, "data refresh : data size: " + viewModel.girlsList.size + "  " + GsonUtils.toJson(viewModel.girlsList))
                 } else {
                     //请求更多数据,直接添加list中
                     viewModel.girlsList.addAll(girls)
-                    newGankGirlAdapter.addData(viewModel.girlsList)
+                    newGankGirlAdapter.setDiffNewData(viewModel.girlsList)
+                    LogUtil.d(TAG, "data loadMore : data size: " + viewModel.girlsList.size + "  " + GsonUtils.toJson(viewModel.girlsList))
                 }
 
                 if (girls.size == 0 && currPage != PAGE_START) {

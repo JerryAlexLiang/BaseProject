@@ -36,6 +36,10 @@ object TypeFaceUtil {
 
     const val LOBSTER_TYPEFACE = 5
 
+    const val XINGKAI_TYPEFACE = 6
+
+    const val HAPPY_FOUNT_TYPEFACE = 7
+
     private var fzlLTypeface: Typeface? = null
 
     private var fzdb1Typeface: Typeface? = null
@@ -45,6 +49,12 @@ object TypeFaceUtil {
     private var dinTypeface: Typeface? = null
 
     private var lobsterTypeface: Typeface? = null
+
+    //钟齐志莽行书
+    private var xingkaiTypeface: Typeface? = null
+
+    //站酷快乐体2016修订版
+    private var happyFountTypeface: Typeface? = null
 
     fun getFzlLTypeface() = if (fzlLTypeface == null) {
         try {
@@ -98,4 +108,23 @@ object TypeFaceUtil {
         lobsterTypeface!!
     }
 
+    fun getXingkaiTypeface() = if (xingkaiTypeface == null) {
+        try {
+            Typeface.createFromAsset(BaseApplication.mContext.assets, "fonts/钟齐志莽行书.ttf")
+        } catch (e: RuntimeException) {
+            Typeface.DEFAULT
+        }
+    } else {
+        xingkaiTypeface!!
+    }
+
+    fun getHappyFountTypeface() = if (happyFountTypeface==null){
+        try {
+            Typeface.createFromAsset(BaseApplication.mContext.assets, "fonts/Happy-Font.ttf")
+        } catch (e: RuntimeException) {
+            Typeface.DEFAULT
+        }
+    }else{
+        happyFountTypeface!!
+    }
 }

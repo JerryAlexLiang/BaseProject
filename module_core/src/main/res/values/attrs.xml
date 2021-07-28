@@ -103,6 +103,8 @@
             <enum name="futuraTypeface" value="3" />
             <enum name="dinTypeface" value="4" />
             <enum name="lobsterTypeface" value="5" />
+            <enum name="xingkaiTypeface" value="6"/>
+            <enum name="happyFountTypeface" value="7"/>
         </attr>
     </declare-styleable>
 

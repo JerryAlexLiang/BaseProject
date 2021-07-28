@@ -44,7 +44,7 @@ class ImageViewPagerAdapter(private val imageUrlList: List<String>?) : PagerAdap
             AlertView.Builder()
                     .setContext(container.context)
                     .setTitle("保存图片")
-                    .setMessage("图片将保存到手机内存中，会占用内存哦~")
+                    .setMessage("下载图片到手机内存中，会占用内存哦")
                     .setDestructive("取消", "下载")
                     .setOthers(null)
                     .setStyle(AlertView.Style.Alert)
