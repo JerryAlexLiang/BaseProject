@@ -64,7 +64,7 @@ class NewGankGirlAdapter(layoutResId: Int) : BaseQuickAdapter<GankGirlRes, BaseV
         holder.itemView.ivNiceGank.setOnClickListener {
             //跳转到大图显示界面
 //            SinglePictureActivity.actionStart(context, item.url, item.desc)
-            ViewPagerPictureActivity.actionStart(context, mutableListOf(item.url))
+            ViewPagerPictureActivity.actionStart(context, mutableListOf(item.url), mutableListOf(item.desc))
             (context as Activity).overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 

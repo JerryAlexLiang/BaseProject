@@ -22,6 +22,19 @@
         android:layout_below="@+id/baseActionBarWidget"
         tools:ignore="UnknownIdInLayout" />
 
+    <com.liang.module_core.widget.typeface.TypefaceTextView
+        android:id="@+id/tvDesc"
+        android:layout_above="@+id/tv_current_page"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp50"
+        android:padding="@dimen/dp16"
+        tools:text="春花秋月何时了"
+        android:textSize="@dimen/sp20"
+        android:textColor="@color/colorWhite"
+        app:typeface="xingkaiTypeface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/tv_current_page"
         android:layout_width="wrap_content"
@@ -30,6 +43,7 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="16dp"
         android:textColor="@android:color/white"
+        android:text="1/2"
         android:textSize="20sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

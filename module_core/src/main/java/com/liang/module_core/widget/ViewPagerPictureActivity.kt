@@ -29,11 +29,20 @@ class ViewPagerPictureActivity : MVVMBaseActivity() {
             intent.putExtra("imageUrlList", imageUrlList as Serializable?)
             context.startActivity(intent)
         }
+
+        @JvmStatic
+        fun actionStart(context: Context, imageUrlList: List<String?>?, descList: List<String?>?) {
+            val intent = Intent(context, ViewPagerPictureActivity::class.java)
+            intent.putExtra("imageUrlList", imageUrlList as Serializable?)
+            intent.putExtra("descList", descList as Serializable?)
+            context.startActivity(intent)
+        }
+
+        private val TAG = ViewPagerPictureActivity::class.java.simpleName
     }
 
-    private val TAG = ViewPagerPictureActivity::class.java.simpleName
-
     private var imageUrlList: List<String?>? = null
+    private var descList: List<String?>? = null
 
     private var currentPage = 0
 
@@ -81,6 +90,8 @@ class ViewPagerPictureActivity : MVVMBaseActivity() {
                 tv_current_page.text = String.format("%s/" + imageUrlList!!.size, position + 1)
                 currentPage = position
                 LogUtil.d(TAG, "当前图片索引是:  $currentPage")
+
+                tvDesc.text = descList?.get(position) ?: "颜如玉"
             }
 
             override fun onPageSelected(position: Int) {
@@ -94,7 +105,9 @@ class ViewPagerPictureActivity : MVVMBaseActivity() {
     }
 
     private fun parseIntent() {
+        descList = intent.getSerializableExtra("descList") as List<String?>
         imageUrlList = intent.getSerializableExtra("imageUrlList") as List<String?>
+        descList
         if (imageUrlList != null) {
             if (imageUrlList!!.size > 1) {
                 tv_current_page.visibility = View.VISIBLE
@@ -105,7 +118,8 @@ class ViewPagerPictureActivity : MVVMBaseActivity() {
             tv_current_page.visibility = View.GONE
         }
 
-        LogUtil.d(TAG, imageUrlList.toString())
+        LogUtil.d(TAG, "imageList: ${imageUrlList.toString()}")
+        LogUtil.d(TAG, "descList: ${descList.toString()}")
     }
 
     private fun initActionBar() {
