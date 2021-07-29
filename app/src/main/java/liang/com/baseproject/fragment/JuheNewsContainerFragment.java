@@ -4,13 +4,18 @@ package liang.com.baseproject.fragment;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import com.google.android.material.tabs.TabLayout;
+
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,6 +90,41 @@ public class JuheNewsContainerFragment extends Fragment {
 //                optimizeIndicator.setIndicator(newsTabLayout, 15, 15);
 //            }
 //        });
+
+        //自定义TabLayout背景
+        initCustomTabLayout();
+    }
+
+    private void initCustomTabLayout() {
+        newsTabLayout.removeAllTabs();
+        for (int i = 0; i < stringList.size(); i++) {
+            TabLayout.Tab newTab = newsTabLayout.newTab();
+            View tabCustomView = LayoutInflater.from(getContext()).inflate(R.layout.core_select_tab_bg_rectangle, null);
+            TextView tvTab = tabCustomView.findViewById(R.id.tvChooseTab);
+            tvTab.setText(stringList.get(i));
+            newTab.setCustomView(tabCustomView);
+            newsTabLayout.addTab(newTab);
+
+            //TabLayout点击事件
+            TabLayout.Tab tab = newsTabLayout.getTabAt(i);
+            if (tab != null) {
+                if (tab.getCustomView() != null) {
+                    //获得tab对应父item
+                    View tabView = (View) tab.getCustomView().getParent();
+                    //父item放入标记值
+                    tabView.setTag(i);
+
+                    int finalI = i;
+                    tabView.setOnClickListener(v -> {
+                        TabLayout.Tab tab1 = newsTabLayout.getTabAt(finalI);
+                        if (tab1 != null) {
+                            tab1.select();
+                        }
+                    });
+                }
+            }
+
+        }
     }
 
     private void initData() {
@@ -95,31 +135,56 @@ public class JuheNewsContainerFragment extends Fragment {
          */
         //TabLayout
         stringList.add("头条");
-//        stringList.add("国内");
-//        stringList.add("国际");
-//        stringList.add("娱乐");
-//        stringList.add("科技");
+        stringList.add("国内");
+        stringList.add("国际");
+        stringList.add("军事");
+        stringList.add("娱乐");
+        stringList.add("财经");
+        stringList.add("科技");
+        stringList.add("社会");
+        stringList.add("体育");
+        stringList.add("时尚");
 
         Bundle bundle = new Bundle();
         bundle.putString("newsKey", "top");
 
-//        Bundle bundle2 = new Bundle();
-//        bundle2.putString("newsKey", "guonei");
-//
-//        Bundle bundle3 = new Bundle();
-//        bundle3.putString("newsKey", "guoji");
-//
-//        Bundle bundle4 = new Bundle();
-//        bundle4.putString("newsKey", "yule");
-//
-//        Bundle bundle5 = new Bundle();
-//        bundle5.putString("newsKey", "keji");
+        Bundle bundle2 = new Bundle();
+        bundle2.putString("newsKey", "guonei");
+
+        Bundle bundle3 = new Bundle();
+        bundle3.putString("newsKey", "guoji");
+
+        Bundle bundle4 = new Bundle();
+        bundle3.putString("newsKey", "junshi");
+
+        Bundle bundle5 = new Bundle();
+        bundle4.putString("newsKey", "yule");
+
+        Bundle bundle6 = new Bundle();
+        bundle5.putString("newsKey", "caijing");
+
+        Bundle bundle7 = new Bundle();
+        bundle5.putString("newsKey", "keji");
+
+        Bundle bundle8 = new Bundle();
+        bundle5.putString("newsKey", "shehui");
+
+        Bundle bundle9 = new Bundle();
+        bundle5.putString("newsKey", "tiyu");
+
+        Bundle bundle10 = new Bundle();
+        bundle5.putString("newsKey", "shishang");
 
         fragmentList.add(JuheNewsTabFragment.newInstance(bundle));
-//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle2));
-//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle3));
-//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle4));
-//        fragmentList.add(JuheNewsTabFragment.newInstance(bundle5));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle2));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle3));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle4));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle5));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle6));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle7));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle8));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle9));
+        fragmentList.add(JuheNewsTabFragment.newInstance(bundle10));
     }
 
     @Override

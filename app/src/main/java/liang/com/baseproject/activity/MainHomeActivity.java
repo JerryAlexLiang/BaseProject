@@ -1,6 +1,7 @@
 package liang.com.baseproject.activity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
@@ -514,6 +515,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         });
     }
 
+    @SuppressLint({"UseCompatLoadingForDrawables", "NonConstantResourceId"})
     private void initViewPage() {
         homeContainerFragment = new HomeContainerFragment();
         juheNewsContainerFragment = new JuheNewsContainerFragment();
@@ -574,14 +576,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                     case 1:
                         currentPosition = 1;
                         mainRgRbTwo.setChecked(true);
-                        baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                        baseToolbarRightIcon.setVisibility(View.GONE);
                         baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.core_icon_more));
-                        baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                onShowToast("切换模式");
-                            }
-                        });
+                        baseToolbarRightIcon.setOnClickListener(v -> onShowToast("切换模式"));
                         baseActionBar.setVisibility(View.VISIBLE);
                         if (currentNetStatus) {
                             rlNetBar.setVisibility(View.GONE);
@@ -654,7 +651,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                     //切换fragment
 //                        switchFragment(1);
                     myViewPager.setCurrentItem(1);
-                    baseToolbarRightIcon.setVisibility(View.VISIBLE);
+                    baseToolbarRightIcon.setVisibility(View.GONE);
                     baseToolbarRightIcon.setImageDrawable(getResources().getDrawable(R.drawable.core_icon_more));
                     baseToolbarRightIcon.setOnClickListener(new View.OnClickListener() {
                         @Override

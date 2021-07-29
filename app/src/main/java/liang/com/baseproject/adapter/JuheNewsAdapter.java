@@ -100,8 +100,8 @@ public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvNewsTitle.setText(dataBean.getTitle());
             tvNewsTime.setText(dataBean.getDate());
             tvNewsAuthor.setText(dataBean.getAuthor_name());
-            Glide.with(context).load(dataBean.getThumbnail_pic_s()).into(ivNewsImg);
-            ImageLoaderUtils.loadRadiusImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 10);
+//            Glide.with(context).load(dataBean.getThumbnail_pic_s()).into(ivNewsImg);
+            ImageLoaderUtils.loadRadiusImage(context, true, ivNewsImg, dataBean.getThumbnail_pic_s(), 0, 0, 30);
 
 
 //            //点击图片跳转图片Activity -> SinglePictureActivity  a%2 != 0

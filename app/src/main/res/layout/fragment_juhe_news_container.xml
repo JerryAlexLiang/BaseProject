@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/foreground"
+    android:orientation="vertical"
     tools:context=".fragment.JuheNewsContainerFragment">
 
-<!--    app:tabBackground="@drawable/ui_shape_banner_selected"-->
+    <!--    app:tabBackground="@drawable/ui_shape_banner_selected"-->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/news_tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/dp30"
+        android:layout_marginTop="@dimen/dp5"
         android:background="@color/foreground"
+        app:tabBackground="@color/transparent"
+        app:tabGravity="center"
         app:tabIndicatorColor="@color/tabIndicatorColor"
-        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorFullWidth="true"
         app:tabIndicatorHeight="0dp"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="#ff0000"
+        app:tabMode="auto"
+        app:tabRippleColor="@color/transparent"
+        app:tabSelectedTextColor="@color/colorBlue"
         app:tabTextColor="@color/text_surface"
-
         app:tabUnboundedRipple="true" />
+
+    <!--    <com.google.android.material.tabs.TabLayout
+                    app:tabIndicatorFullWidth="true"
+                    app:tabMaxWidth="@dimen/dp_200"
+                    app:tabMinWidth="@dimen/dp_5"
+                    app:tabPaddingEnd="@dimen/dp_5"
+                    android:layout_marginStart="@dimen/dp_10"
+                    app:tabPaddingStart="@dimen/dp_5"
+                    app:tabTextColor="@color/black"
+                    app:tabUnboundedRipple="false" />-->
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/news_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

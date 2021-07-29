@@ -253,5 +253,7 @@
     <color name="text_invert_alpha">#88ffffff</color>
     <color name="text_on_main">#ffffff</color>
 
+    <color name="F2F2F2">#F2F2F2</color>
+    <color name="EAF0FF">#EAF0FF</color>
 
 </resources>

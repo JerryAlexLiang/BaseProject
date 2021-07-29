@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvChooseTab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingStart="@dimen/dp12"
+        android:paddingEnd="@dimen/dp12"
+        android:paddingTop="@dimen/dp3"
+        android:paddingBottom="@dimen/dp3"
+        android:textSize="@dimen/sp12"
+        android:text="丁程鑫"
+        android:textColor="@drawable/core_tab_tv_text_color_selector"
+        android:background="@drawable/core_tab_select_selector"/>
+
+</LinearLayout>
