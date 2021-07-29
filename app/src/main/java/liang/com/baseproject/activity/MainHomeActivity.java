@@ -674,8 +674,8 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                     //切换fragment
 //                        switchFragment(2);
                     myViewPager.setCurrentItem(2);
-                    baseToolbarRightIcon.setVisibility(View.GONE);
                     baseActionBar.setVisibility(View.VISIBLE);
+                    baseToolbarRightIcon.setVisibility(View.GONE);
                     if (currentNetStatus) {
                         rlNetBar.setVisibility(View.GONE);
                     } else {

@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/menu_nav_weather"
-            android:icon="@drawable/icon_submit"
+            android:icon="@drawable/gank_icon_submit"
             android:title="天气" />
 
         <item

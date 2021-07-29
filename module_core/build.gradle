@@ -194,6 +194,9 @@ dependencies {
     //lottie
     api rootProject.ext.dependencies.lottie
 
+    //parallaximageview
+//    api rootProject.ext.dependencies.parallaximageview
+
     //Android Jetpack 组件
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'

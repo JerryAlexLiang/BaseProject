@@ -128,6 +128,9 @@ ext {
             tbssdk                : "43939",
 
             materialProgressBar   : "1.4.2",
+
+//            //Android Parallax Image View
+//            parallaximageview     : "1.1"
     ]
 
     dependencies = [
@@ -291,6 +294,9 @@ ext {
             tbssdk                  : "com.tencent.tbs.tbssdk:sdk:$versions.tbssdk",
 
             materialProgressBar     : "me.zhanghai.android.materialprogressbar:library:$versions.materialProgressBar",
+
+//            //Android Parallax Image View
+//            parallaximageview       : "com.github.abdularis:parallaximageview:$versions.parallaximageview"
     ]
 
 }

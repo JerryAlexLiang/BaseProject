@@ -17,11 +17,19 @@
         card_view:contentPadding="8dp"-->
 
     <LinearLayout
+        android:id="@+id/llContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageView
+        <!--        <ImageView-->
+        <!--            android:id="@+id/ivNiceGank"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="180dp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:src="@drawable/core_icon_bg_header" />-->
+
+        <com.github.abdularis.piv.VerticalScrollParallaxImageView
             android:id="@+id/ivNiceGank"
             android:layout_width="match_parent"
             android:layout_height="180dp"

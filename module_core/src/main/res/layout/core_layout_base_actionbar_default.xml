@@ -73,6 +73,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="true"
             android:text="测试"
+            android:layout_gravity="center"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:visibility="gone" />

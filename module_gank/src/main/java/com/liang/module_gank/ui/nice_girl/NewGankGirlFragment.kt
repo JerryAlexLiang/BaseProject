@@ -3,13 +3,17 @@ package com.liang.module_gank.ui.nice_girl
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.liang.module_core.jetpack.MVVMBaseFragment
 import com.liang.module_core.utils.GsonUtils
 import com.liang.module_core.utils.LogUtil
+import com.liang.module_core.utils.ToastUtil
 import com.liang.module_core.widget.decoration.SpaceItemDecoration
 import com.liang.module_gank.R
-import kotlinx.android.synthetic.main.new_gank_girl_fragment.*
+import kotlinx.android.synthetic.main.new_gank_girl_fragment2.*
+
+//import kotlinx.android.synthetic.main.new_gank_girl_fragment.*
 
 /**
  * 创建日期:2021/7/23 on 4:50 PM
@@ -26,13 +30,15 @@ class NewGankGirlFragment : MVVMBaseFragment() {
 
     private val PAGE_START = 1
     private var currPage = PAGE_START
+    private var isStaggeredGridModel = true
 
     private lateinit var newGankGirlAdapter: NewGankGirlAdapter
 
     private lateinit var viewModel: NewGankGirlViewModel
 
     override fun createViewLayoutId(): Int {
-        return R.layout.new_gank_girl_fragment
+//        return R.layout.new_gank_girl_fragment
+        return R.layout.new_gank_girl_fragment2
     }
 
     override fun initView(rootView: View?) {
@@ -54,8 +60,13 @@ class NewGankGirlFragment : MVVMBaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(NewGankGirlViewModel::class.java)
 
-        val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        rvNiceGirl.layoutManager = staggeredGridLayoutManager
+        if (isStaggeredGridModel) {
+            val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            rvNiceGirl.layoutManager = staggeredGridLayoutManager
+        } else {
+            val linearLayoutManager = LinearLayoutManager(context)
+            rvNiceGirl.layoutManager = linearLayoutManager
+        }
 
         val decoration = SpaceItemDecoration()
                 .setLeft(12)
@@ -65,10 +76,18 @@ class NewGankGirlFragment : MVVMBaseFragment() {
         rvNiceGirl.addItemDecoration(decoration)
 
         newGankGirlAdapter = NewGankGirlAdapter(R.layout.item_rv_new_nice_gank)
+//        newGankGirlAdapter = NewGankGirlAdapter(R.layout.item_rv_new_nice_gank2)
         rvNiceGirl.adapter = newGankGirlAdapter
 
 //        viewModel.getNiceGankGirlData(PAGE_START)
 
+        initListener()
+
+        observe()
+
+    }
+
+    private fun initListener() {
         smart_refresh_layout.setOnRefreshListener {
             currPage = PAGE_START
             viewModel.getNiceGankGirlData(currPage)
@@ -81,8 +100,19 @@ class NewGankGirlFragment : MVVMBaseFragment() {
 
         smart_refresh_layout.autoRefresh()
 
-        observe()
-
+        fabSwitchModel.setOnClickListener {
+            if (isStaggeredGridModel) {
+                val linearLayoutManager = LinearLayoutManager(context)
+                rvNiceGirl.layoutManager = linearLayoutManager
+                isStaggeredGridModel = false
+                ToastUtil.showShortToast("切换列表模式")
+            } else {
+                val staggeredGridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                rvNiceGirl.layoutManager = staggeredGridLayoutManager
+                isStaggeredGridModel = true
+                ToastUtil.showShortToast("切换流式布局模式")
+            }
+        }
     }
 
     private fun observe() {
@@ -116,8 +146,6 @@ class NewGankGirlFragment : MVVMBaseFragment() {
             } else {
                 newGankGirlAdapter.setEmptyView(R.layout.core_rl_empty_container_view)
             }
-
-
         }
     }
 

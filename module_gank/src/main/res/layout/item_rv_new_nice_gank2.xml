@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardNiceGank"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <!--        <ImageView-->
+    <!--            android:id="@+id/ivNiceGank"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="180dp"-->
+    <!--            android:scaleType="centerCrop"-->
+    <!--            android:src="@drawable/core_icon_bg_header" />-->
+
+    <com.github.abdularis.piv.VerticalScrollParallaxImageView
+        android:id="@+id/ivNiceGank"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/core_icon_bg_header" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/dp5">
+
+        <com.liang.module_core.widget.typeface.TypefaceTextView
+            android:id="@+id/tvNiceGank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/text_surface"
+            android:textSize="@dimen/sp14"
+            app:typeface="happyFountTypeface"
+            tools:text="描述" />
+
+        <com.liang.module_core.widget.typeface.TypefaceTextView
+            android:id="@+id/tvNiceSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNiceGank"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/color_397bff"
+            android:textSize="@dimen/sp12"
+            app:typeface="lobsterTypeface"
+            tools:ignore="RtlHardcoded"
+            tools:text="source" />
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvNiceGank"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:textColor="@color/text_surface"-->
+        <!--                android:textSize="@dimen/sp_14"-->
+        <!--                tools:text="描述" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/tvNiceSource"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_below="@id/tvNiceGank"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_alignParentRight="true"-->
+        <!--                android:ellipsize="end"-->
+        <!--                android:maxLines="2"-->
+        <!--                android:textColor="@color/color_397bff"-->
+        <!--                android:textSize="@dimen/sp12"-->
+        <!--                tools:ignore="RtlHardcoded"-->
+        <!--                tools:text="来源" />-->
+
+    </RelativeLayout>
+
+</FrameLayout>
+

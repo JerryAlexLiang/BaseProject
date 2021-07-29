@@ -43,7 +43,7 @@ class NavigationOneFragment : MVVMBaseFragment() {
             activity.finish()
         }
 
-        baseActionBarWidget.setActionBarBackgroundResource(R.drawable.core_icon_bg_header)
+//        baseActionBarWidget.setActionBarBackgroundResource(R.drawable.core_icon_bg_header)
 
         btnJump2.setOnClickListener {
 //            //未采用safe args的参数传递方式

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/foreground"
-    tools:context=".ui.nice_girl.NewGankGirlFragment">
+    android:layout_height="match_parent">
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/smart_refresh_layout"
@@ -15,6 +13,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNiceGirl"
+            tools:listitem="@layout/item_rv_new_nice_gank"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -22,33 +21,34 @@
             android:paddingTop="@dimen/dp3"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:spanCount="2"
-            tools:listitem="@layout/item_rv_new_nice_gank" />
+            app:spanCount="2" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
-<!--    android:src：FAB中显示的图标.
-app:backgroundTint：正常的背景颜色
-app:rippleColor：按下时的背景颜色
-app:elevation：正常的阴影大小
-app:pressedTranslationZ：按下时的阴影大小
-app:layout_anchor：设置FAB的锚点，即以哪个控件为参照设置位置
-app:layout_anchorGravity：FAB相对于锚点的位置
-app:fabSize：FAB的大小，normal或mini（分别对应56dp和40dp）
--->
+    <!--    android:src：FAB中显示的图标.
+    app:backgroundTint：正常的背景颜色
+    app:rippleColor：按下时的背景颜色
+    app:elevation：正常的阴影大小
+    app:pressedTranslationZ：按下时的阴影大小
+    app:layout_anchor：设置FAB的锚点，即以哪个控件为参照设置位置
+    app:layout_anchorGravity：FAB相对于锚点的位置
+    app:fabSize：FAB的大小，normal或mini（分别对应56dp和40dp）
+    -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSwitchModel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/dp10"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/dp16"
         android:backgroundTint="@color/colorBlue"
-        app:rippleColor="@color/red"
         android:elevation="@dimen/dp5"
-        app:pressedTranslationZ="@dimen/dp10"
-        app:fabSize="normal"
+        android:src="@drawable/gank_icon_submit"
         android:tint="@color/white"
-        android:src="@drawable/gank_icon_submit"/>
+        app:fabSize="normal"
+        app:layout_behavior="com.liang.module_core.widget.behavior.FabBehavior"
+        app:pressedTranslationZ="@dimen/dp10"
+        app:rippleColor="@color/red" />
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
