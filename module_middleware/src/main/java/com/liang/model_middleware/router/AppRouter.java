@@ -26,4 +26,7 @@ public class AppRouter {
 
     //Grank颜如玉模块
     public static final String MODULE_GANK_NICE_GIRLS = "/gank/NiceGankGirlFragment";
+
+    //开启定位工具类
+    public static final String MODULE_AMAP_LOCATION = "amap_location/startLocation";
 }

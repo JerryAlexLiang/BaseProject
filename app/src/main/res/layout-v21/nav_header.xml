@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/nav_tv_user_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/nav_tv_user_mail"
         android:layout_alignBaseline="@id/nav_icon_user_image"
@@ -38,14 +38,13 @@
         android:layout_toRightOf="@id/nav_icon_user_image"
         android:text="昵称"
         android:textColor="@color/white"
-        android:textSize="32sp"
         tools:ignore="RtlHardcoded" />
 
     <TextView
         android:id="@+id/nav_tv_user_mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/tvLocationAddress"
         android:text="ID:"
         android:textColor="@color/text_accent"
         android:textSize="16sp" />
@@ -54,8 +53,8 @@
         android:id="@+id/nav_tv_wifi_ssid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tvLocationAddress"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@id/nav_tv_user_mail"
@@ -66,5 +65,20 @@
         android:text="Wifi"
         android:textColor="@color/blue"
         android:textSize="16sp" />
+
+    <com.liang.module_core.widget.typeface.TypefaceTextView
+        android:id="@+id/tvLocationAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp5"
+        android:drawableStart="@drawable/core_icon_location"
+        android:drawablePadding="@dimen/dp5"
+        android:drawableTint="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/sp16"
+        app:typeface="happyFountTypeface"
+        tools:text="定位信息" />
 
 </RelativeLayout>

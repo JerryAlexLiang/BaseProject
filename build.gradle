@@ -53,7 +53,8 @@ allprojects {
         //直接修改Google的maven地址：
         maven { url 'https://dl.google.com/dl/android/maven2/' }
         maven { url 'https://www.jitpack.io' }
-//        jcenter()
+
+        jcenter()
 
         maven {
             url "https://maven.aliyun.com/repository/google"

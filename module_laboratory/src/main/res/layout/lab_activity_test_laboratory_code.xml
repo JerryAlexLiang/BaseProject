@@ -101,6 +101,62 @@
                     android:textAllCaps="false" />
 
                 <Button
+                    android:id="@+id/btnJetPackItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="JetPackDemo"
+                    android:textAllCaps="false" />
+
+                <Button
+                    android:id="@+id/btnGetLocationItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="高德定位组件LifeCycle封装接口调"
+                    android:textAllCaps="false" />
+
+                <com.liang.module_core.widget.typeface.TypefaceTextView
+                    android:id="@+id/tvLocationAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp5"
+                    android:drawableStart="@drawable/core_iocn_location"
+                    android:drawablePadding="@dimen/dp5"
+                    android:gravity="center"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="@dimen/sp14"
+                    app:typeface="happyFountTypeface"
+                    tools:text="定位信息" />
+
+                <Button
+                    android:id="@+id/btnGetLocationItem2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="高德定位组件LifeCycle封装LiveData"
+                    android:textAllCaps="false" />
+
+                <com.liang.module_core.widget.typeface.TypefaceTextView
+                    android:id="@+id/tvLocationAddress2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dp5"
+                    android:drawableStart="@drawable/core_iocn_location"
+                    android:drawablePadding="@dimen/dp5"
+                    android:gravity="center|center_vertical"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/sp14"
+                    app:typeface="happyFountTypeface"
+                    tools:text="定位信息" />
+
+                <Button
                     android:id="@+id/btnAnimatorOpen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -149,16 +205,6 @@
                         android:src="@drawable/core_icon_user_logo" />
 
                 </RelativeLayout>
-
-                <Button
-                    android:id="@+id/btnJetPackItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="20dp"
-                    android:text="JetPackDemo"
-                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/btnFiltrateJingdong"

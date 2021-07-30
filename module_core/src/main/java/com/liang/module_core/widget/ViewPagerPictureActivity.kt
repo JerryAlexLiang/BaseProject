@@ -105,9 +105,14 @@ class ViewPagerPictureActivity : MVVMBaseActivity() {
     }
 
     private fun parseIntent() {
-        descList = intent.getSerializableExtra("descList") as List<String?>
-        imageUrlList = intent.getSerializableExtra("imageUrlList") as List<String?>
-        descList
+        if (intent.getSerializableExtra("descList") != null) {
+            descList = intent.getSerializableExtra("descList") as List<String?>
+        }
+
+        if (intent.getSerializableExtra("imageUrlList") != null) {
+            imageUrlList = intent.getSerializableExtra("imageUrlList") as List<String?>
+        }
+
         if (imageUrlList != null) {
             if (imageUrlList!!.size > 1) {
                 tv_current_page.visibility = View.VISIBLE

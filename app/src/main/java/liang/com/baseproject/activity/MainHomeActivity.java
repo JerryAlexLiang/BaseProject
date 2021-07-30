@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,14 +29,18 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.ViewPager;
 
+import com.amap.api.location.AMapLocation;
 import com.bigkoo.alertview.AlertView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.navigation.NavigationView;
 import com.liang.model_middleware.impl.ServiceProvider;
+import com.liang.module_amaplocation.AMapLocationUtilJava;
 import com.liang.module_core.base.PermissionActivity;
 import com.liang.module_core.mvp.BaseActivity;
 import com.liang.module_core.utils.CheckPermission;
@@ -45,6 +48,7 @@ import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.NetUtil;
 import com.liang.module_core.utils.ToastUtil;
 import com.liang.module_core.utils.WifiUtils;
+import com.liang.module_core.widget.typeface.TypefaceTextView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -59,7 +63,6 @@ import liang.com.baseproject.R;
 import liang.com.baseproject.adapter.FragmentViewPagerAdapter;
 import liang.com.baseproject.event.LoginEvent;
 import liang.com.baseproject.fragment.JuheNewsContainerFragment;
-import liang.com.baseproject.fragment.NiceGankFragment;
 import liang.com.baseproject.home.activity.SearchWanArticleActivity;
 import liang.com.baseproject.home.fragment.HomeContainerFragment;
 import liang.com.baseproject.login.activity.LoginActivity;
@@ -141,7 +144,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private List<String> titleList = new ArrayList<>();
     private HomeContainerFragment homeContainerFragment;
     private JuheNewsContainerFragment juheNewsContainerFragment;
-//    private NiceGankFragment niceGankFragment;
+    //    private NiceGankFragment niceGankFragment;
     private Fragment niceGankFragment2;
     private MineFragment mineFragment;
     private FragmentViewPagerAdapter fragmentViewPagerAdapter;
@@ -154,6 +157,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private TextView navUserMail;
     private TextView navWifiName;
     private View navViewHeaderView;
+    private TypefaceTextView tvLocationAddress;
+
+    private AMapLocationUtilJava aMapLocationUtilJava;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, MainHomeActivity.class);
@@ -394,8 +400,10 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
         navUserName = navViewHeaderView.findViewById(R.id.nav_tv_user_name);
         navUserMail = navViewHeaderView.findViewById(R.id.nav_tv_user_mail);
         navWifiName = navViewHeaderView.findViewById(R.id.nav_tv_wifi_ssid);
+        tvLocationAddress = navViewHeaderView.findViewById(R.id.tvLocationAddress);
         //设置跑马灯效果
         navWifiName.setSelected(true);
+        navUserName.setSelected(true);
         //nav_menu
         setupDrawerContent(navView);
 
@@ -423,8 +431,11 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
+        initLocation();
+
         navUserIocn.setOnClickListener(this);
         navUserName.setOnClickListener(this);
+        tvLocationAddress.setOnClickListener(this);
 
     }
 
@@ -453,9 +464,54 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
                 }
                 break;
 
+            case R.id.tvLocationAddress:
+                //重新获取定位
+                initLocation();
+                break;
+
             default:
                 break;
         }
+    }
+
+    private void initLocation() {
+        if (null == aMapLocationUtilJava) {
+            aMapLocationUtilJava = new AMapLocationUtilJava(MainHomeActivity.this);
+        }
+        aMapLocationUtilJava.initLocation();
+        aMapLocationUtilJava.startLocation();
+
+        ToastUtil.showShortToast("开始定位");
+
+        aMapLocationUtilJava.setonLocationCallbackListener(new AMapLocationUtilJava.OnLocationCallbackListener() {
+
+            @Override
+            public void onLocationSuccess(AMapLocation location) {
+                //定位成功
+                tvLocationAddress.setText(location.getProvince() + location.getCity() + location.getDistrict() + location.getStreet());
+                LogUtil.d(TAG, "定位成功1: " + location.getProvince() + location.getCity() + location.getDistrict() + location.getStreet());
+            }
+
+            @Override
+            public void onLocationFail(AMapLocation location) {
+                //定位失败
+                tvLocationAddress.setText("定位失败");
+                LogUtil.d(TAG, "定位失败1: " + location.getErrorCode() + " " + location.getErrorInfo());
+            }
+        });
+
+        LiveData<AMapLocation> locationLiveData = aMapLocationUtilJava.getLocationLiveData();
+//            locationLiveData.observe(this, new Observer<AMapLocation>() {
+        locationLiveData.observe(this, location -> {
+            if (location.getErrorCode() == 0) {
+                ToastUtil.showShortToast("定位成功");
+                LogUtil.d(TAG, "定位成功2: " + location.getProvince() + location.getCity() + location.getDistrict() + location.getStreet());
+            } else {
+                ToastUtil.showShortToast("定位失败");
+                LogUtil.d(TAG, "定位失败2: " + location.getErrorCode() + " " + location.getErrorInfo());
+            }
+        });
+
     }
 
     private void setupDrawerContent(NavigationView navView) {

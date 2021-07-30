@@ -150,6 +150,7 @@ dependencies {
     implementation project(path: ':module_ui')
     implementation project(path: ':module_bluetooth')
     implementation project(path: ':module_gank')
+    implementation project(path: ':module_amapLocation')
 
 
 //    implementation 'com.google.android.material:material:1.2.0'

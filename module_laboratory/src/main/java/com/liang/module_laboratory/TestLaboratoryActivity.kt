@@ -12,9 +12,12 @@ import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.amap.api.location.AMapLocation
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.liang.model_middleware.impl.ServiceProvider
+import com.liang.module_amaplocation.AMapLocationUtil
+import com.liang.module_amaplocation.AMapLocationUtilJava
 import com.liang.module_core.jetpack.MVVMBaseActivity
 import com.liang.module_core.update.updateParser.CustomUpdateParser
 import com.liang.module_core.update.updateParser.CustomUpdatePrompter
@@ -65,6 +68,9 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     private var previousPosition = 0 // 前一个被选中的position
     private var isStop = false //是否停止自动播放
     private var currentPosition = 0 //当前位置 = 0
+
+    private var aMapLocationUtilJava: AMapLocationUtilJava? = null
+    private var aMapLocationUtil: AMapLocationUtil? = null
 
     //第五步: 设置自动播放,每隔3秒换一张图片
     private val mTimerTask: TimerTask = object : TimerTask() {
@@ -126,7 +132,8 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     private fun initListener() {
         setOnClickListener(btnFiltrateJingdong, btnMapView, btnCamera, btnAidl, btnModularizationRouter,
                 base_actionbar_left_icon, btnSelectItem, btnBreathingItem, btnAppCrashCatchItem,
-                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnHandlerThreadItem, btnWebViewX5Item, btnJetPackItem) {
+                btnRvViewPager, btnUpdateApp, btnExecutorsItem, btnHandlerThreadItem, btnWebViewX5Item, btnJetPackItem,
+                btnGetLocationItem, btnGetLocationItem2) {
             when (this) {
                 btnFiltrateJingdong -> {
                     ServiceProvider.getMainService().openFiltrateActivity(this@TestLaboratoryActivity)
@@ -204,6 +211,54 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                     JetpackDemoActivity.actionStart(this@TestLaboratoryActivity)
                 }
 
+                btnGetLocationItem -> {
+                    if (null == aMapLocationUtilJava) {
+                        aMapLocationUtilJava = AMapLocationUtilJava(this@TestLaboratoryActivity)
+                    }
+                    aMapLocationUtilJava?.initLocation()
+                    aMapLocationUtilJava?.startLocation()
+
+                    aMapLocationUtilJava?.setonLocationCallbackListener(object : AMapLocationUtilJava.OnLocationCallbackListener {
+
+                        override fun onLocationFail(location: AMapLocation?) {
+                            //定位失败
+                            ToastUtil.showShortToast("定位失败")
+                            tvLocationAddress.text = "定位失败"
+                            LogUtil.d(TAG, "定位失败1: " + location?.errorCode + " " + location?.errorInfo);
+                        }
+
+                        @SuppressLint("SetTextI18n")
+                        override fun onLocationSuccess(location: AMapLocation?) {
+                            //定位成功
+                            ToastUtil.showShortToast("定位成功")
+                            tvLocationAddress.text = location?.province + location?.city + location?.district + location?.street + location?.poiName
+                            LogUtil.d(TAG, "定位成功1: " + location?.province + location?.city + location?.district + location?.street + location?.poiName)
+                        }
+
+                    })
+                }
+
+                btnGetLocationItem2 -> {
+                    if (null == aMapLocationUtil) {
+                        aMapLocationUtil = AMapLocationUtil(this@TestLaboratoryActivity)
+                    }
+                    aMapLocationUtil?.initLocation()
+                    aMapLocationUtil?.startLocation()
+
+                    val locationLiveData = aMapLocationUtil?.getLocationLiveData()
+                    locationLiveData?.observe(this@TestLaboratoryActivity, {
+                        if (it.errorCode == 0) {
+                            ToastUtil.showShortToast("定位成功")
+                            tvLocationAddress2.text = it.province + it.city + it.district + it.street + it.poiName
+                            LogUtil.d(TAG, "定位成功2: " + it.province + it.city + it.district + it.street + it.poiName)
+                        } else {
+                            ToastUtil.showShortToast("定位失败")
+                            tvLocationAddress2.text = "定位失败"
+                            LogUtil.d(TAG, "定位失败2: " + it.errorCode + " " + it.errorInfo);
+                        }
+                    })
+                }
+
                 else -> {
                 }
 
@@ -227,12 +282,12 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
         //promptHeightRatio: 设置版本更新提示器高度占屏幕的比例，默认是-1，不做约束
         resources?.let {
             XUpdate.newBuild(this)
-                .updateUrl(mUpdateUrl)
-                .updateParser(CustomUpdateParser())
-                .updatePrompter(CustomUpdatePrompter())
-                .promptThemeColor(it.getColor(R.color.red))
-                .promptTopResId(R.drawable.ic_bg_update_top)
-                .update()
+                    .updateUrl(mUpdateUrl)
+                    .updateParser(CustomUpdateParser())
+                    .updatePrompter(CustomUpdatePrompter())
+                    .promptThemeColor(it.getColor(R.color.red))
+                    .promptTopResId(R.drawable.ic_bg_update_top)
+                    .update()
         }
     }
 

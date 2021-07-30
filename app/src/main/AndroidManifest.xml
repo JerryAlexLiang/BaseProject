@@ -70,14 +70,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".testlaboratory.FiltrateActivity"
-            android:screenOrientation="portrait" /> <!-- 配置高德地图key -->
-        <!-- <meta-data -->
-        <!-- android:name="com.amap.api.v2.apikey" -->
-        <!-- android:value="407924c0edf98e401382b2730ee6ea82" /> -->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="cb8ce9f2d44999c1a0a180f44a51780f" />
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".home.activity.SearchWanArticleActivity"
             android:screenOrientation="portrait" />
@@ -202,6 +195,17 @@
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
             android:process=":dexopt" />
+
+<!--        &lt;!&ndash; 配置高德地图key &ndash;&gt;-->
+<!--        &lt;!&ndash; <meta-data &ndash;&gt;-->
+<!--        &lt;!&ndash; android:name="com.amap.api.v2.apikey" &ndash;&gt;-->
+<!--        &lt;!&ndash; android:value="407924c0edf98e401382b2730ee6ea82" /> &ndash;&gt;-->
+<!--        <meta-data-->
+<!--            android:name="com.amap.api.v2.apikey"-->
+<!--            android:value="cb8ce9f2d44999c1a0a180f44a51780f" />-->
+
+<!--        &lt;!&ndash;高德地图 获取定位数据之前，需要在 AndroidManifest.xml 文件中进行权限设置，确保定位功能可以正常使用。        &ndash;&gt;-->
+<!--        <service android:name="com.amap.api.location.APSService" />-->
     </application>
 
 </manifest>

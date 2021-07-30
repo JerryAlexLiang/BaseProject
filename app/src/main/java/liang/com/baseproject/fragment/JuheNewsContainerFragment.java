@@ -71,7 +71,7 @@ public class JuheNewsContainerFragment extends Fragment {
         //初始化适配器
         FragmentViewPagerAdapter fragmentViewPagerAdapter = new FragmentViewPagerAdapter(getFragmentManager(), fragmentList, stringList);
         //设置至少9个fragment，防止重复创建和销毁，造成内存溢出
-        newsViewPager.setOffscreenPageLimit(9);
+//        newsViewPager.setOffscreenPageLimit(9);
         //绑定适配器
         newsViewPager.setAdapter(fragmentViewPagerAdapter);
         //TabLayout属性设置
