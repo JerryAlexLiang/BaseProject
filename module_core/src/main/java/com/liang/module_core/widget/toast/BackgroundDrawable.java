@@ -20,8 +20,8 @@ import android.util.TypedValue;
  */
 public class BackgroundDrawable extends Drawable {
 
-    private Paint paint;
-    private Context mContext;
+    private final Paint paint;
+    private final Context mContext;
 
     public BackgroundDrawable(@ColorInt int color, Context context) {
         //上下文

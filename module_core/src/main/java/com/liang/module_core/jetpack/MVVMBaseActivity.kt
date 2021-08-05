@@ -423,7 +423,7 @@ abstract class MVVMBaseActivity : AppCompatActivity() {
 
     fun finishAll() {
         for (activity in activities!!) {
-            activity?.finish()
+            activity.finish()
         }
     }
 

@@ -35,7 +35,7 @@ import liang.com.baseproject.View.JuheNewsDetailWebViewX5;
  */
 public class JuheNewsDetailPresenterX5 extends MVPBasePresenter<JuheNewsDetailWebViewX5> {
 
-    private Activity activity;
+    private final Activity activity;
 
     public JuheNewsDetailPresenterX5(Activity activity) {
         this.activity = activity;

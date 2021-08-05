@@ -118,7 +118,7 @@ public class ServiceActivity extends MVPBaseActivity {
      * 现在我们可以在Activity中根据具体的场景来调用MyBinder中的任何public方法，
      * 即实现了Activity指挥Service干什么Service就去干什么的功能。
      */
-    private ServiceConnection connection = new ServiceConnection() {
+    private final ServiceConnection connection = new ServiceConnection() {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -145,7 +145,7 @@ public class ServiceActivity extends MVPBaseActivity {
      * MyAIDLService.Stub.asInterface()方法将传入的IBinder对象传换成了MyAIDLService对象，
      * 接下来就可以调用在MyAIDLService.aidl文件中定义的所有接口了。
      */
-    private ServiceConnection aidlConnection = new ServiceConnection() {
+    private final ServiceConnection aidlConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             myAIDLService = MyAIDLService.Stub.asInterface(service);

@@ -17,7 +17,7 @@ import liang.com.baseproject.R;
 
 public class OfflineCityListAdapter extends RecyclerView.Adapter<OfflineCityListAdapter.MyViewHolder> implements View.OnClickListener {
 
-    private List<OfflineMapCity> dataList;
+    private final List<OfflineMapCity> dataList;
     private OnItemClickListener mOnItemClickListener = null;
 
     /**

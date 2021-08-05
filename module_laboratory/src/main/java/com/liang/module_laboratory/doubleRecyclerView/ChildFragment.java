@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class ChildFragment extends Fragment {
 
-    private ArrayList<String> mDataList = new ArrayList<String>();
+    private final ArrayList<String> mDataList = new ArrayList<String>();
 
     RecyclerView childRecyclerView;
 

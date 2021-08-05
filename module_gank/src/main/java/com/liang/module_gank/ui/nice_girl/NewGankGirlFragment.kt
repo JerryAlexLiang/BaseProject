@@ -94,7 +94,7 @@ class NewGankGirlFragment : MVVMBaseFragment() {
         }
 
         smart_refresh_layout.setOnLoadMoreListener {
-            currPage++;
+            currPage++
             viewModel.getNiceGankGirlData(currPage)
         }
 
@@ -138,7 +138,7 @@ class NewGankGirlFragment : MVVMBaseFragment() {
                     smart_refresh_layout.setNoMoreData(true)
                     smart_refresh_layout.setEnableFooterFollowWhenNoMoreData(true)
                 } else {
-                    smart_refresh_layout.setEnableLoadMore(true);
+                    smart_refresh_layout.setEnableLoadMore(true)
                 }
 
                 smart_refresh_layout.finishRefresh()

@@ -116,13 +116,13 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     private void initHeader1() {
         View headerView = LayoutInflater.from(getContext()).inflate(R.layout.layout_article_home_banner_header, null);
-        convenientBanner = (ConvenientBanner) headerView.findViewById(R.id.convenient_banner);
+        convenientBanner = headerView.findViewById(R.id.convenient_banner);
         homeContainerAdapter.addHeaderView(headerView);
     }
 
     private void initHeader2() {
         View headerView2 = LayoutInflater.from(getContext()).inflate(R.layout.layout_home_function_container, null);
-        rvHomeFunctionContainer = (RecyclerView) headerView2.findViewById(R.id.rv_home_function_container);
+        rvHomeFunctionContainer = headerView2.findViewById(R.id.rv_home_function_container);
         headerView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         homeContainerAdapter.addHeaderView(headerView2);
     }
@@ -169,7 +169,7 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
 
     @Override
     public void onItemClick(int position) {
-        ArticleHomeBannerBean articleHomeBannerBean = (ArticleHomeBannerBean) mBannerData.get(position);
+        ArticleHomeBannerBean articleHomeBannerBean = mBannerData.get(position);
         if (articleHomeBannerBean != null) {
             String url = articleHomeBannerBean.getUrl();
             int id = articleHomeBannerBean.getId();

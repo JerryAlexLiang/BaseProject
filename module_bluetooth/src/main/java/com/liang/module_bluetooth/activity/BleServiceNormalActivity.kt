@@ -93,7 +93,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
         rvBleDevice.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
-                outRect.top = dp2px(12);
+                outRect.top = dp2px(12)
             }
         })
         rvBleDevice.layoutManager = linearLayoutManager
@@ -207,7 +207,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
                                 0 -> toast("取消")
                                 1 -> {
                                     intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                                    startActivityForResult(intent, REQUEST_POSITION_LOCATION);
+                                    startActivityForResult(intent, REQUEST_POSITION_LOCATION)
                                 }
                             }
                         }
@@ -222,7 +222,6 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
 
     private fun checkGPSIsOpen(): Boolean {
         val locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                ?: return false
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
@@ -267,7 +266,7 @@ class BleServiceNormalActivity : MVVMBaseActivity(), BluetoothAdapter.LeScanCall
         if (!blueDevices.contains(searchResult)) {
             if (searchResult.address == "DE:7E:F0:7F:8F:EC") {
                 blueDevices.add(searchResult)
-                deviceAdapter.setNewData(blueDevices)
+                deviceAdapter.setNewInstance(blueDevices)
                 deviceAdapter.notifyDataSetChanged()
                 blueDevices.reverse()
 

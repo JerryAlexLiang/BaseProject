@@ -29,12 +29,12 @@ import java.util.List;
 
 public class NestRecyclerViewActivity extends MVVMBaseActivity {
 
-    private List<String> stringList = new ArrayList<>();
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private final List<String> stringList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
 
-    private ArrayList<String> mDataList = new ArrayList<>();
+    private final ArrayList<String> mDataList = new ArrayList<>();
 
-    private String[] strArray = new String[]{"关注", "推荐", "视频", "直播", "图片", "段子", "精华", "热门"};
+    private final String[] strArray = new String[]{"关注", "推荐", "视频", "直播", "图片", "段子", "精华", "热门"};
 
     private ViewPager viewPager;
     private TabLayout tabs;
@@ -78,9 +78,9 @@ public class NestRecyclerViewActivity extends MVVMBaseActivity {
     }
 
     private void initViews() {
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        tabs = (TabLayout) findViewById(R.id.tabs);
-        parentRecyclerView = (RecyclerView) findViewById(R.id.parent_recycler_view);
+        viewPager = findViewById(R.id.view_pager);
+        tabs = findViewById(R.id.tabs);
+        parentRecyclerView = findViewById(R.id.parent_recycler_view);
 
         parentRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         RecyclerViewAdapter adapter = new RecyclerViewAdapter();
@@ -95,8 +95,8 @@ public class NestRecyclerViewActivity extends MVVMBaseActivity {
         parentRecyclerView.getAdapter().notifyDataSetChanged();
 
 
-        CoordinatorLayoutFix coordinatorLayoutFix = (CoordinatorLayoutFix) findViewById(R.id.coordinator);
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.appBarLayout);
+        CoordinatorLayoutFix coordinatorLayoutFix = findViewById(R.id.coordinator);
+        AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
 
         coordinatorLayoutFix.setOnInterceptTouchListener(new CoordinatorLayoutFix.OnInterceptTouchListener() {
             @Override
@@ -133,7 +133,7 @@ public class NestRecyclerViewActivity extends MVVMBaseActivity {
 
     class IndexPagerAdapter extends FragmentPagerAdapter {
 
-        private List<String> titleList;
+        private final List<String> titleList;
 
         public IndexPagerAdapter(FragmentManager fm, List<String> titleList, List<Fragment> fragmentList) {
             super(fm);

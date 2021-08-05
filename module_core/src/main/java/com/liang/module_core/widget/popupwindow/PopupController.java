@@ -19,8 +19,8 @@ public class PopupController {
 
     //布局id
     private int layoutResId;
-    private Context context;
-    private PopupWindow popupWindow;
+    private final Context context;
+    private final PopupWindow popupWindow;
     //弹窗布局View
     View mPopupView;
     private View mView;

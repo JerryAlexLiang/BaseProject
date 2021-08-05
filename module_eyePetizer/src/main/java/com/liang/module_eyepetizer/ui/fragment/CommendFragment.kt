@@ -35,11 +35,6 @@ class CommendFragment : MVVMBaseFragment() {
         return true
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() =

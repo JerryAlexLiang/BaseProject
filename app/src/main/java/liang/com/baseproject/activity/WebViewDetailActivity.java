@@ -92,7 +92,7 @@ public class WebViewDetailActivity extends MVPBaseActivity<JuheNewsDetailWebView
     private String url;
     private String imageUrl;
 
-    private String userIcon = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3706852963,2399513353&fm=26&gp=0.jpg";
+    private final String userIcon = "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3706852963,2399513353&fm=26&gp=0.jpg";
     private boolean mDarkTheme;
 
     public static void actionStart(Context context, String title, String url, String imageUrl) {

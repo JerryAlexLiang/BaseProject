@@ -74,7 +74,7 @@ public class LoginActivity extends MVPBaseActivity {
     @BindView(R.id.tv_login_user_name)
     TextView tvLoginUserName;
 
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
 
     private boolean isRunning = false;
     private AnimatorSet mSet1;
@@ -269,7 +269,7 @@ public class LoginActivity extends MVPBaseActivity {
         return set;
     }
 
-    private Random mRandom = new Random();
+    private final Random mRandom = new Random();
 
     private float[] calculateRandomXY() {
         float x = mRandom.nextInt(mMaxMoveDistanceX) - (mMaxMoveDistanceX * 0.5F);

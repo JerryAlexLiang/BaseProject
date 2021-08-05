@@ -105,7 +105,7 @@ public class WelcomeGuideActivity extends MVPBaseActivity implements View.OnClic
         for (int i = 0; i < pics.length; i++) {
             View view = LayoutInflater.from(this).inflate(pics[i], null);
             if (i == pics.length - 1) {
-                startBtn = (Button) view.findViewById(R.id.btn_enter);
+                startBtn = view.findViewById(R.id.btn_enter);
                 startBtn.setTag("enter");
                 startBtn.setOnClickListener(this);
             }

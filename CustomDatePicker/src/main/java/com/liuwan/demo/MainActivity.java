@@ -40,22 +40,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.btn_submit);
-        tvDate = (TextView) findViewById(R.id.tv_content_date);
-        tvDateFirst = (TextView) findViewById(R.id.tv_content_date_first);
-        tvTime = (TextView) findViewById(R.id.tv_content_time);
+        button = findViewById(R.id.btn_submit);
+        tvDate = findViewById(R.id.tv_content_date);
+        tvDateFirst = findViewById(R.id.tv_content_date_first);
+        tvTime = findViewById(R.id.tv_content_time);
 
         findViewById(R.id.ll_date).setOnClickListener(this);
         mTvSelectedDate = findViewById(R.id.tv_selected_date);
         initDatePicker();
 
         findViewById(R.id.ll_date_first).setOnClickListener(this);
-        mTvSelectedDateFirst = (TextView) findViewById(R.id.tv_selected_date_first);
+        mTvSelectedDateFirst = findViewById(R.id.tv_selected_date_first);
 
         //获取当前日期
         todayDate = DateUtils.getOldDate(0);
         parmDate = todayDate.replaceAll("[[\\s-:punct:]]", "");
-        ;
 
         //获取6天前的日期
         oldDate = DateUtils.getOldDate(-6);

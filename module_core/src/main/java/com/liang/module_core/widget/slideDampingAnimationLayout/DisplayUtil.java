@@ -11,7 +11,7 @@ import android.util.DisplayMetrics;
 
 public class DisplayUtil {
 
-    private Context mContext;
+    private final Context mContext;
     private static DisplayUtil mInstance;
 
     public static DisplayUtil getInstance(Context context) {

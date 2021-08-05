@@ -6,7 +6,7 @@ import android.widget.PopupWindow;
 
 public class CustomPopupWindow extends PopupWindow {
 
-    private PopupController controller;
+    private final PopupController controller;
 
     public PopupController getController() {
         return controller;

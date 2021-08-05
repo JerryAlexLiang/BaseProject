@@ -19,7 +19,7 @@ public class CustomScrollRelativeLayout extends RelativeLayout {
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private boolean mDarkTheme;
-    private int mMaskColor = Color.TRANSPARENT;
+    private final int mMaskColor = Color.TRANSPARENT;
 
     public CustomScrollRelativeLayout(Context context) {
         super(context);

@@ -17,8 +17,8 @@ import java.util.List;
  */
 public class MyBannerPagerAdapter extends PagerAdapter {
 
-    private List<ImageView> imageList;
-    private ViewPager viewPager;
+    private final List<ImageView> imageList;
+    private final ViewPager viewPager;
     private ViewPagerClickInterFace viewPagerClickInterFace;
 
     public MyBannerPagerAdapter(List<ImageView> imageList, ViewPager viewPager) {

@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private String mUpdateUrl = "https://gitee.com/xuexiangjys/XUpdate/raw/master/jsonapi/update_test.json";
-    private String mUpdateUrlCustom = "https://gitee.com/xuexiangjys/XUpdate/raw/master/jsonapi/update_custom.json";
+    private final String mUpdateUrl = "https://gitee.com/xuexiangjys/XUpdate/raw/master/jsonapi/update_test.json";
+    private final String mUpdateUrlCustom = "https://gitee.com/xuexiangjys/XUpdate/raw/master/jsonapi/update_custom.json";
 
     private Button btnUpdateDefault;
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnUpdateDefault = (Button) findViewById(R.id.btn_update_default);
+        btnUpdateDefault = findViewById(R.id.btn_update_default);
         btnUpdateDefault.setOnClickListener(this);
     }
 

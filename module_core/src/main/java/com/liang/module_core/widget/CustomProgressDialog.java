@@ -33,7 +33,7 @@ public class CustomProgressDialog {
         //得到加载布局
         View view = LayoutInflater.from(context).inflate(R.layout.custom_progress_dialog, null);
         //布局文字
-        textView = (TextView) view.findViewById(R.id.progressDialog_text);
+        textView = view.findViewById(R.id.progressDialog_text);
         textView.setText(content);
         progressBar = view.findViewById(R.id.progressDialog_progressbar);
 

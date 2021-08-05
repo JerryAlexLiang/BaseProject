@@ -37,7 +37,7 @@ import liang.com.baseproject.retrofit.UrlService;
  */
 public class NiceGankPresenter extends MVPBasePresenter<NiceGankView> {
 
-    private Context context;
+    private final Context context;
     private List<GankRes> list;
     private List<GankGirlRes> list2;
     private int page = 1;     //根据页数进行分页加载

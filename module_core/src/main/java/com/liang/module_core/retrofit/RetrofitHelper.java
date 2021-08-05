@@ -27,7 +27,7 @@ public class RetrofitHelper {
     private volatile static RetrofitHelper sInstance;
     private static Retrofit mRetrofit;
     //    private UrlService mUrlService;
-    private PersistentCookieJar cookieJar;
+    private final PersistentCookieJar cookieJar;
 
     private RetrofitHelper(String url) {
 

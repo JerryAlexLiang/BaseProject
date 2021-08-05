@@ -137,7 +137,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
         rvBleDevice.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
                 super.getItemOffsets(outRect, view, parent, state)
-                outRect.top = dp2px(12);
+                outRect.top = dp2px(12)
             }
         })
         rvBleDevice.layoutManager = linearLayoutManager
@@ -234,7 +234,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
                                 0 -> toast("取消")
                                 1 -> {
                                     intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                                    startActivityForResult(intent, REQUEST_POSITION_LOCATION);
+                                    startActivityForResult(intent, REQUEST_POSITION_LOCATION)
                                 }
                             }
                         }
@@ -263,7 +263,6 @@ class BluetoothMainActivity : MVVMBaseActivity() {
 
     private fun checkGPSIsOpen(): Boolean {
         val locationManager = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                ?: return false
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
@@ -302,7 +301,7 @@ class BluetoothMainActivity : MVVMBaseActivity() {
                     blueDevices.add(device)
                     LogUtil.d("onDeviceFounded2", "onDeviceFounded1    =========>   " + blueDevices.size)
 //                    deviceAdapter.setList(blueDevices)
-                    deviceAdapter.setNewData(blueDevices)
+                    deviceAdapter.setNewInstance(blueDevices)
                     deviceAdapter.notifyDataSetChanged()
                     blueDevices.reverse()
                     LogUtil.d("onDeviceFounded2", "onDeviceFounded2    =========>   " + deviceAdapter.data.size)

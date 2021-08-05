@@ -49,7 +49,7 @@ public class CustomToast {
         private int iconID = R.drawable.core_icon_user_logo;//图标资源ID
         private String message;//内容
         private int backgroundColor = 0x56000000;//背景颜色
-        private Context mContext;//上下文
+        private final Context mContext;//上下文
         private int duration = Toast.LENGTH_SHORT;//设置时间
         private CustomToast mine;
         private int gravity = Gravity.NO_GRAVITY;//设置位置

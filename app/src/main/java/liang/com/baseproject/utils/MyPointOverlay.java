@@ -26,9 +26,9 @@ import java.util.List;
  * 作者: liangyang
  */
 public class MyPointOverlay {
-    private List<PoiItem> a;
-    private AMap b;
-    private ArrayList<Marker> c = new ArrayList();
+    private final List<PoiItem> a;
+    private final AMap b;
+    private final ArrayList<Marker> c = new ArrayList();
 
     public MyPointOverlay(AMap var1, List<PoiItem> var2) {
         this.b = var1;
@@ -92,14 +92,14 @@ public class MyPointOverlay {
         LatLngBounds.Builder var1 = LatLngBounds.builder();
 
         for (int var2 = 0; var2 < this.a.size(); ++var2) {
-            var1.include(new LatLng(((PoiItem) this.a.get(var2)).getLatLonPoint().getLatitude(), ((PoiItem) this.a.get(var2)).getLatLonPoint().getLongitude()));
+            var1.include(new LatLng(this.a.get(var2).getLatLonPoint().getLatitude(), this.a.get(var2).getLatLonPoint().getLongitude()));
         }
 
         return var1.build();
     }
 
     private MarkerOptions a(int var1) {
-        return (new MarkerOptions()).position(new LatLng(((PoiItem) this.a.get(var1)).getLatLonPoint().getLatitude(), ((PoiItem) this.a.get(var1)).getLatLonPoint().getLongitude())).title(this.getTitle(var1)).snippet(this.getSnippet(var1)).icon(this.getBitmapDescriptor(var1));
+        return (new MarkerOptions()).position(new LatLng(this.a.get(var1).getLatLonPoint().getLatitude(), this.a.get(var1).getLatLonPoint().getLongitude())).title(this.getTitle(var1)).snippet(this.getSnippet(var1)).icon(this.getBitmapDescriptor(var1));
     }
 
     protected BitmapDescriptor getBitmapDescriptor(int var1) {
@@ -107,16 +107,16 @@ public class MyPointOverlay {
     }
 
     protected String getTitle(int var1) {
-        return ((PoiItem) this.a.get(var1)).getTitle();
+        return this.a.get(var1).getTitle();
     }
 
     protected String getSnippet(int var1) {
-        return ((PoiItem) this.a.get(var1)).getSnippet();
+        return this.a.get(var1).getSnippet();
     }
 
     public int getPoiIndex(Marker var1) {
         for (int var2 = 0; var2 < this.c.size(); ++var2) {
-            if (((Marker) this.c.get(var2)).equals(var1)) {
+            if (this.c.get(var2).equals(var1)) {
                 return var2;
             }
         }
@@ -125,6 +125,6 @@ public class MyPointOverlay {
     }
 
     public PoiItem getPoiItem(int var1) {
-        return var1 >= 0 && var1 < this.a.size() ? (PoiItem) this.a.get(var1) : null;
+        return var1 >= 0 && var1 < this.a.size() ? this.a.get(var1) : null;
     }
 }

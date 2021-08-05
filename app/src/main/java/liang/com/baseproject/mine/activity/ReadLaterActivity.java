@@ -68,7 +68,7 @@ public class ReadLaterActivity extends MVPBaseActivity {
     private ReadLaterAdapter readLaterAdapter;
 
     private static final int PAGE_START = 0;
-    private int currPage = PAGE_START;
+    private final int currPage = PAGE_START;
 
     public static void actionStart(Context context) {
         Intent intent = new Intent(context, ReadLaterActivity.class);

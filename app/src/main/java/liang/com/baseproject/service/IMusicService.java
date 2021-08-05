@@ -10,9 +10,9 @@ public interface IMusicService {
     /**
      * 定义一个接口，封装中间帮助类要实现的函数方法
      */
-    public void callPlayer();
+    void callPlayer();
 
-    public void callRePlayer();
+    void callRePlayer();
 
-    public void callPausePlayer();
+    void callPausePlayer();
 } 

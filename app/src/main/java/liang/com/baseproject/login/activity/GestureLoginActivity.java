@@ -49,7 +49,7 @@ public class GestureLoginActivity extends MVPBaseActivity implements CustomGestu
 
     private int gestureFlg;
 
-    int imageArray[] = {R.drawable.welcomimg1, R.drawable.welcomimg2, R.drawable.welcomimg3, R.drawable.welcomimg4,
+    int[] imageArray = {R.drawable.welcomimg1, R.drawable.welcomimg2, R.drawable.welcomimg3, R.drawable.welcomimg4,
             R.drawable.welcomimg5, R.drawable.welcomimg6, R.drawable.welcomimg7, R.drawable.welcomimg8,
             R.drawable.welcomimg9, R.drawable.welcomimg10, R.drawable.welcomimg11, R.drawable.welcomimg12};
 

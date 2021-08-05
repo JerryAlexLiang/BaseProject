@@ -32,10 +32,10 @@ public class PageSlideIndicatorViewRect extends View {
     private Paint mPaint;
     private int indicatorCount = 0;
     private int currentIndicator = 0;
-    private Context mContext;
+    private final Context mContext;
 
     @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
+    private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x12) {

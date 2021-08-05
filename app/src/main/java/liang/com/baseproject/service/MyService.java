@@ -30,7 +30,7 @@ public class MyService extends Service {
 
     public static final String TAG = "MyService";
 
-    private MyBinder myBinder = new MyBinder();
+    private final MyBinder myBinder = new MyBinder();
 
     public MyService() {
     }

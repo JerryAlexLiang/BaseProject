@@ -12,7 +12,7 @@ import android.content.Context;
 public class ScreenUtil {
 
     private static ScreenUtil mScreenTools;
-    private Context context;
+    private final Context context;
 
     private ScreenUtil(Context context) {
         this.context = context.getApplicationContext();

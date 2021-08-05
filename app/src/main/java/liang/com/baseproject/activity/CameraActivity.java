@@ -83,7 +83,7 @@ public class CameraActivity extends MVPBaseActivity {
     /**
      * 定义SurfaceView监听回调
      */
-    private SurfaceHolder.Callback callback = new SurfaceHolder.Callback() {
+    private final SurfaceHolder.Callback callback = new SurfaceHolder.Callback() {
 
         /**
          * SurfaceView被创建了
@@ -161,7 +161,7 @@ public class CameraActivity extends MVPBaseActivity {
     /**
      * 相机处理后的数据回调
      */
-    private Camera.PictureCallback pictureCallback = new Camera.PictureCallback() {
+    private final Camera.PictureCallback pictureCallback = new Camera.PictureCallback() {
         /**
          * 拍照完成，可以拿到数据了
          * @param data 数据

@@ -25,7 +25,7 @@ import liang.com.baseproject.entity.RefreshHeaderBean;
  */
 public class RefreshHeaderChangeRvAdapter extends BaseQuickAdapter<RefreshHeaderBean, RefreshHeaderChangeRvAdapter.MyViewHolder> {
 
-    private List<RefreshHeaderBean> selectDataList = new ArrayList<>();
+    private final List<RefreshHeaderBean> selectDataList = new ArrayList<>();
 
     private OnItemClickListener onItemClickListener;
 

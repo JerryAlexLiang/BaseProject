@@ -119,7 +119,7 @@ public abstract class MVPBaseFragment<V, T extends MVPBasePresenter<V>> extends 
     }
 
     private void setupSwipeRefresh(View view) {
-        mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         if (mRefreshLayout != null) {
             mRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1,
                     R.color.refresh_progress_2, R.color.refresh_progress_3);

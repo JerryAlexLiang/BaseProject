@@ -19,7 +19,7 @@ public class CommonViewHolder extends RecyclerView.ViewHolder implements View.On
 
     // SparseArray 比 HashMap 更省内存，在某些条件下性能更好，只能存储 key 为 int 类型的数据，
     // 用来存放 View 以减少 findViewById 的次数
-    private SparseArray<View> viewSparseArray;
+    private final SparseArray<View> viewSparseArray;
 
     private onItemBaseClickListener commonClickListener;
 

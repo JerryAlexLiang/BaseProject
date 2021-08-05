@@ -224,7 +224,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                             //定位失败
                             ToastUtil.showShortToast("定位失败")
                             tvLocationAddress.text = "定位失败"
-                            LogUtil.d(TAG, "定位失败1: " + location?.errorCode + " " + location?.errorInfo);
+                            LogUtil.d(TAG, "定位失败1: " + location?.errorCode + " " + location?.errorInfo)
                         }
 
                         @SuppressLint("SetTextI18n")
@@ -254,7 +254,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
                         } else {
                             ToastUtil.showShortToast("定位失败")
                             tvLocationAddress2.text = "定位失败"
-                            LogUtil.d(TAG, "定位失败2: " + it.errorCode + " " + it.errorInfo);
+                            LogUtil.d(TAG, "定位失败2: " + it.errorCode + " " + it.errorInfo)
                         }
                     })
                 }
@@ -311,7 +311,7 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
 //                        true, false, true, 9);
             PictureSelector.create(this@TestLaboratoryActivity)
                     .openGallery(PictureMimeType.ofImage())
-                    // .imageEngine(GlideEngine.createGlideEngine()) // Please refer to the Demo GlideEngine.java
+                    .imageEngine(GlideEngine.createGlideEngine()) // Please refer to the Demo GlideEngine.java
                     .compressQuality(60)
                     .isCompress(true)
                     .selectionMode(PictureConfig.SINGLE) // 多选 or 单选

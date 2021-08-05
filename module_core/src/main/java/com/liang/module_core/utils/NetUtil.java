@@ -99,11 +99,7 @@ public class NetUtil {
         }
         int ipAddress = wifiInfo == null ? 0 : wifiInfo.getIpAddress();
         assert mWifiManager != null;
-        if (mWifiManager.isWifiEnabled() && ipAddress != 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return mWifiManager.isWifiEnabled() && ipAddress != 0;
     }
 
     public static boolean isWiFiActive(Context inContext) {
@@ -134,12 +130,9 @@ public class NetUtil {
             if (networkInfo == null) {
                 return false;
             } else {
-                if (networkInfo.isAvailable()) {
-                    return true;
-                }
+                return networkInfo.isAvailable();
             }
         }
-        return false;
     }
 
     public static boolean isMobileActive(Context inContext) {
@@ -151,11 +144,8 @@ public class NetUtil {
         if (networkInfo == null) {
             return false;
         } else {
-            if (networkInfo.isConnected()) {
-                return true;
-            }
+            return networkInfo.isConnected();
         }
-        return false;
     }
 
     public static NetworkInfo getActiveNetwork(Context context) {

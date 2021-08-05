@@ -9,7 +9,7 @@ import liang.com.baseproject.interactor.NewsInteractor;
 public class NewsPresenter implements NewsInteractor.onRetrofitListener {
 
     private NewsView newsView;
-    private NewsInteractor newsInteractor;
+    private final NewsInteractor newsInteractor;
 
     public NewsPresenter(NewsView newsView, NewsInteractor newsInteractor) {
         this.newsView = newsView;

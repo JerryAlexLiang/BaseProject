@@ -29,7 +29,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     private Context mContext;
     private Callback mCallback;
     private Calendar mBeginTime, mEndTime, mSelectedTime;
-    private boolean mCanDialogShow;
+    private final boolean mCanDialogShow;
 
     private Dialog mPickerDialog;
     private PickerView mDpvYear, mDpvMonth, mDpvDay, mDpvHour, mDpvMinute;
@@ -37,9 +37,12 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
 
     private int mBeginYear, mBeginMonth, mBeginDay, mBeginHour, mBeginMinute,
             mEndYear, mEndMonth, mEndDay, mEndHour, mEndMinute;
-    private List<String> mYearUnits = new ArrayList<>(), mMonthUnits = new ArrayList<>(), mDayUnits = new ArrayList<>(),
-            mHourUnits = new ArrayList<>(), mMinuteUnits = new ArrayList<>();
-    private DecimalFormat mDecimalFormat = new DecimalFormat("00");
+    private final List<String> mYearUnits = new ArrayList<>();
+    private final List<String> mMonthUnits = new ArrayList<>();
+    private final List<String> mDayUnits = new ArrayList<>();
+    private final List<String> mHourUnits = new ArrayList<>();
+    private final List<String> mMinuteUnits = new ArrayList<>();
+    private final DecimalFormat mDecimalFormat = new DecimalFormat("00");
 
     private boolean mCanShowPreciseTime;
     private int mScrollUnits = SCROLL_UNIT_HOUR + SCROLL_UNIT_MINUTE;

@@ -43,7 +43,7 @@ public class SplashOneActivity extends MVPBaseActivity {
     TextView tvVersionCode;
 
     private String mAmapMap_path;
-    private String mPath_offline = "/AmapOfflineMapData";
+    private final String mPath_offline = "/AmapOfflineMapData";
 
     @Override
     protected boolean isRegisterEventBus() {

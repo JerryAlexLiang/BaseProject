@@ -61,7 +61,7 @@ class NavigationTwoFragment : MVVMBaseFragment() {
             val name = NavigationOneFragmentArgs.fromBundle(arguments).keyOne
             val score = NavigationOneFragmentArgs.fromBundle(arguments).keyTwo
 
-            tvTwoContent.append("\n");
+            tvTwoContent.append("\n")
             tvTwoContent.append("name: $name   分数: $score")
 
         }

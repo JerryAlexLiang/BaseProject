@@ -29,8 +29,8 @@ import com.liang.module_core.widget.ViewPagerPictureActivity;
 
 public class JuheNewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
-    private List<NewsRes.ResultBean.DataBean> dataList;
+    private final Context context;
+    private final List<NewsRes.ResultBean.DataBean> dataList;
 
     public JuheNewsAdapter(Context context, List<NewsRes.ResultBean.DataBean> dataList) {
         this.context = context;

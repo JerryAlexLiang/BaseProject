@@ -27,9 +27,9 @@ object ServiceCreator {
 
 
     init {
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY;
-        client.addInterceptor(loggingInterceptor);
-        client.build();
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+        client.addInterceptor(loggingInterceptor)
+        client.build()
     }
 
     //1、使用private修饰符来声明，相当于对外部而言它们都是不可见的

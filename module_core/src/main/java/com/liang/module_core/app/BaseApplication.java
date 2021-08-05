@@ -38,18 +38,18 @@ import java.util.List;
  */
 public class BaseApplication extends MultiDexApplication {
 
-    private static String TAG = "App";
+    private static final String TAG = "App";
 
     private static BaseApplication app;
 
-    private static List<Activity> activities = Collections.synchronizedList(new LinkedList<Activity>());
+    private static final List<Activity> activities = Collections.synchronizedList(new LinkedList<Activity>());
 
     public static Context getAppContext() {
         return app;
     }
 
     public static Context mContext;
-    private static boolean _bOuputLog = true;
+    private static final boolean _bOuputLog = true;
 
     public static Resources getAppResources() {
         return app.getResources();
@@ -128,10 +128,7 @@ public class BaseApplication extends MultiDexApplication {
         if (app == null) {
             return false;
         }
-        if (activities == null || activities.size() == 0) {
-            return false;
-        }
-        return true;
+        return activities != null && activities.size() != 0;
     }
 
     /**

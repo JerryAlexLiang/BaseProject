@@ -29,7 +29,7 @@ import com.zhpan.indicator.enums.IndicatorStyle
  * 描述: 顶部banner
  * 作者: 杨亮
  */
-class TopBannerProvider() : BaseItemProvider<Item>() {
+class TopBannerProvider : BaseItemProvider<Item>() {
 
 
     override val itemViewType: Int

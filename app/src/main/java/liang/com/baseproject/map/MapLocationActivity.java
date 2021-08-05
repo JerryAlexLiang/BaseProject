@@ -191,7 +191,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     private boolean isSetCustomMapMode = false;
     //定位成功时，存储当前定位坐标，作为判断下次定位成功时与其比较，相等的话，就不再重新执行添加Marker，
     // 不相等即定位坐标发生变化，则清除之前Marker并重新Add
-    private Map<String, LatLng> currentPositionMap = new HashMap<>();
+    private final Map<String, LatLng> currentPositionMap = new HashMap<>();
     private AMap aMap;
     private boolean isAddDefaultMarker = true;
 
@@ -211,7 +211,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     //最近一次点击的Marker
     private Marker lastClickMarker;
 
-    private int[] img = {R.drawable.core_icon_expand_open, R.drawable.core_icon_expand_close};//定义一个int数组，用来放图片
+    private final int[] img = {R.drawable.core_icon_expand_open, R.drawable.core_icon_expand_close};//定义一个int数组，用来放图片
     private boolean isExpandSmartContainer = true;//定义一个标识符，用来判断是open,还是close
 
     private DisplayMetrics metrics;
@@ -334,7 +334,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
     }
 
     private String mAmapMap_path;
-    private String mPath_offline = "/AmapOfflineMapData";
+    private final String mPath_offline = "/AmapOfflineMapData";
 
     /**
      * 查询离线地图资源

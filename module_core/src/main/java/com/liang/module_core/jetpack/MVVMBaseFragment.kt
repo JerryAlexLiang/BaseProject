@@ -334,10 +334,6 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
         if (rootView?.parent != null) (rootView?.parent as ViewGroup).removeView(rootView)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
     fun showProgressDialog(content: String?, cancelable: Boolean) {
         if (customProgressDialog == null) {
             customProgressDialog = CustomProgressDialog(activity, content, cancelable)
@@ -370,7 +366,7 @@ abstract class MVVMBaseFragment : Fragment(), RequestLifecycle {
 
     fun finishPage() {
         if (activity != null) {
-            activity!!.finish()
+            activity.finish()
         }
     }
 

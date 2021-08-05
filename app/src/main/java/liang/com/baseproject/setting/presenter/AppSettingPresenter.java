@@ -7,7 +7,7 @@ import liang.com.baseproject.setting.view.AppSettingView;
 
 public class AppSettingPresenter extends MVPBasePresenter<AppSettingView> implements LogoutRetrofitListener<String> {
 
-    private AppSettingInteractor appSettingInteractor;
+    private final AppSettingInteractor appSettingInteractor;
 
     public AppSettingPresenter() {
         this.appSettingInteractor = new AppSettingInteractor();

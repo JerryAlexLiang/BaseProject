@@ -23,7 +23,7 @@ class CommonMultipleSelectListAdapter : BaseSelectListAdapter<BookBean>(R.layout
     }
 
     override fun onItemViewSelected(holder: BaseViewHolder) {
-        holder.setImageResource(R.id.ivSelectContainer, R.drawable.ui_common_checked_multi);
+        holder.setImageResource(R.id.ivSelectContainer, R.drawable.ui_common_checked_multi)
     }
 
     override fun onItemViewUnSelected(holder: BaseViewHolder) {

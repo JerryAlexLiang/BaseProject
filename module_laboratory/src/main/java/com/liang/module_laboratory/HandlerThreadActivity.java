@@ -40,7 +40,7 @@ public class HandlerThreadActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler_thread);
 
-        tvContent = (TextView) findViewById(R.id.tvContent);
+        tvContent = findViewById(R.id.tvContent);
 
         //创建一个线程，线程标记'handler-thread'
         handlerThread = new HandlerThread("handler-thread");
@@ -80,7 +80,7 @@ public class HandlerThreadActivity extends AppCompatActivity {
 
     static class UIHandler extends Handler {
 
-        private WeakReference<HandlerThreadActivity> mWeakReference;
+        private final WeakReference<HandlerThreadActivity> mWeakReference;
 
         public UIHandler(@NonNull Looper looper, HandlerThreadActivity activity) {
             super(looper);

@@ -17,8 +17,8 @@ public class WebContainerX5 extends FrameLayout {
 
     private float mDownX = 0;
     private float mDownY = 0;
-    private float mLastDownX = 0;
-    private float mLastDownY = 0;
+    private final float mLastDownX = 0;
+    private final float mLastDownY = 0;
 
     public WebContainerX5(@NonNull Context context) {
         this(context, null);

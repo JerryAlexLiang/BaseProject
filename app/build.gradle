@@ -152,111 +152,19 @@ dependencies {
     implementation project(path: ':module_gank')
     implementation project(path: ':module_amapLocation')
 
-
-//    implementation 'com.google.android.material:material:1.2.0'
-//    implementation 'androidx.appcompat:appcompat:1.2.0'
-//    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-//
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-//
-//    //栗子动画引入step2：ParticleView
-//    implementation 'me.wangyuwei:ParticleView:1.0.4'
-//
-//    //ButterKnife
-//    implementation 'com.jakewharton:butterknife:10.1.0'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
-//    implementation 'androidx.cardview:cardview:1.0.0'
-//    implementation 'com.github.bumptech.glide:glide:4.9.0'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-//
-//    //glide样式（圆角、圆、毛玻璃）
-//    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+
     implementation 'ru.alexbykov:nopermission:1.1.2'
-//    implementation 'de.hdodenhof:circleimageview:3.0.0'
-//
-//    implementation 'com.squareup.okhttp3:okhttp:3.12.2'
-//    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-//    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-//    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-//    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
-//    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-//
-//    /*事件总线*/
-//    implementation 'org.greenrobot:eventbus:3.1.1'
-//    implementation 'com.github.chrisbanes.photoview:library:1.2.4'
-//
+
     /*logging 在项目中添加拦截库LoggingInterceptor，拦截网络请求和响应*/
     implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
         exclude group: 'org.json', module: 'json'
     }
-//    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
-//
-//    /*SmartRefreshLayout 下拉加载刷新*/
-//    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
-//
-//    //1.0.5及以前版本的老用户升级需谨慎，API改动过大,没有使用特殊Header，可以不加这行
-//    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
-//
+
 //    /*BaseRecyclerViewAdapterHelper 暂时不升级3.X*/
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
-//
-//    /*NavigationTabStrip 带动画的顶部导航*/
-//    implementation 'com.github.devlight.navigationtabstrip:navigationtabstrip:1.0.4'
-//
-//    /*loading loading加载动画*/
-//    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-//
-//    /*flowlayout 流式标签*/
-//    implementation 'com.hyman:flowlayout-lib:1.1.2'
-//
-//    /*floatingactionbutton MD悬浮按钮菜单版*/
-//    implementation 'com.getbase:floatingactionbutton:1.10.1'
-//
-//    /*自由指定宽高比的ImageView*/
-//    implementation 'com.github.goweii:PercentImageView:1.0.2'
-//
-//    //仿IOS的Android的弹出框
-//    implementation 'com.bigkoo:alertview:1.0.3'
-//
-//    /*GreenDao*/
-////    implementation 'org.greenrobot:greendao:3.2.2'
-//    //gradle:3.2.1升级到gradle:4.0.1报错,修改greendao-gradle-plugin:3.3.0就解决
-//    implementation 'org.greenrobot:greendao:3.3.0'
-//
-//    /*Android PersistentCookieJar  持久化Cookie*/
-//    implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
-//
-//    /*圆角图片*/
-//    implementation 'com.makeramen:roundedimageview:2.3.0'
-//
-//    /*基于的 Android WebViewInterface(必选)*/
-//    implementation 'com.just.agentweb:agentweb:4.1.2'
-//
-//    // (可选)
-//    implementation 'com.just.agentweb:filechooser:4.1.2'
-//
-//    // (可选)
-//    implementation 'com.download.library:Downloader:4.1.2'
-//
-//    //侧滑菜单
-//    implementation 'com.daimajia.swipelayout:library:1.2.0'
-//
-//    //图片选择器
-//    implementation 'com.github.goweii:PictureSelector:v2.3.1'
-//
-//    implementation 'androidx.multidex:multidex:2.0.1'
-//
-//    //ARouter路由
-//    //// 替换成最新版本, 需要注意的是api
-//    //    // 要与compiler匹配使用，均使用最新版可以保证兼容
-//    //    compile 'com.alibaba:arouter-api:x.x.x'
-//    //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
-//    implementation 'com.alibaba:arouter-api:1.5.0'
-//    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
     implementation rootProject.ext.dependencies.supportV4
     implementation rootProject.ext.dependencies.appcompat

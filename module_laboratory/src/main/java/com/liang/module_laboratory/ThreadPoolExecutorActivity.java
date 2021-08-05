@@ -31,12 +31,12 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_pool_executor);
-        Button btnStart = (Button) findViewById(R.id.btnStartThreadTask);
-        Button btnStart2 = (Button) findViewById(R.id.btnStartThreadTask2);
-        Button btnStart3 = (Button) findViewById(R.id.btnStartThreadTask3);
-        Button btnStart4 = (Button) findViewById(R.id.btnStartThreadTask4);
-        Button btnStart5 = (Button) findViewById(R.id.btnStartThreadTask5);
-        tvLog = (TextView) findViewById(R.id.tvLog);
+        Button btnStart = findViewById(R.id.btnStartThreadTask);
+        Button btnStart2 = findViewById(R.id.btnStartThreadTask2);
+        Button btnStart3 = findViewById(R.id.btnStartThreadTask3);
+        Button btnStart4 = findViewById(R.id.btnStartThreadTask4);
+        Button btnStart5 = findViewById(R.id.btnStartThreadTask5);
+        tvLog = findViewById(R.id.tvLog);
 
         ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
 
@@ -118,7 +118,7 @@ public class ThreadPoolExecutorActivity extends AppCompatActivity {
      */
     static class MyRunnable implements Runnable {
 
-        private WeakReference<ThreadPoolExecutorActivity> mWeakReference;
+        private final WeakReference<ThreadPoolExecutorActivity> mWeakReference;
 
         int threadNum;
 

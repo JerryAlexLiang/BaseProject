@@ -23,7 +23,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
  */
 public class ImageViewPagerAdapter extends PagerAdapter {
 
-    private List<String> imageUrlList;
+    private final List<String> imageUrlList;
 
     public ImageViewPagerAdapter(List<String> imageUrlList) {
         this.imageUrlList = imageUrlList;

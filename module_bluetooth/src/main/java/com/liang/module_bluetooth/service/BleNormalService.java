@@ -18,7 +18,7 @@ import java.util.UUID;
 public class BleNormalService extends Service {
 
     //蓝牙连接状态
-    private int mConnectionState = 0;
+    private final int mConnectionState = 0;
     // 蓝牙连接已断开
     private final int STATE_DISCONNECTED = 0;
     // 蓝牙正在连接
@@ -56,7 +56,7 @@ public class BleNormalService extends Service {
      * 而且在建立关联时它们都可以获取到相同的MyBinder实例.
      */
 
-    private LocalBinder mBinder = new LocalBinder();
+    private final LocalBinder mBinder = new LocalBinder();
 
     public class LocalBinder extends Binder{
         //获取蓝牙服务

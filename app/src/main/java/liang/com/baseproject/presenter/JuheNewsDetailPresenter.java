@@ -25,7 +25,7 @@ import com.liang.module_core.utils.LogUtil;
  */
 public class JuheNewsDetailPresenter extends MVPBasePresenter<JuheNewsDetailWebView> {
 
-    private Activity activity;
+    private final Activity activity;
 
     public JuheNewsDetailPresenter(Activity activity) {
         this.activity = activity;

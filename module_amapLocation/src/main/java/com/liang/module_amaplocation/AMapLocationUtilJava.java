@@ -25,7 +25,7 @@ public class AMapLocationUtilJava implements LifecycleObserver, AMapLocationList
 
     public static final String TAG = AMapLocationUtilJava.class.getSimpleName();
 
-    private Context mContext;
+    private final Context mContext;
 
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption locationClientOption = null;

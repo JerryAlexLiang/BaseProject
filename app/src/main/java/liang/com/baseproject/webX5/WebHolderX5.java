@@ -45,9 +45,9 @@ public class WebHolderX5 {
     private OnHistoryUpdateCallback mOnHistoryUpdateCallback = null;
 
     private boolean isProgressShown = false;
-    private WebView mWebView;
+    private final WebView mWebView;
     private final MaterialProgressBar mProgressBar;
-    private Activity activity;
+    private final Activity activity;
 
     public static WebHolderX5 with(Activity activity, WebContainerX5 container) {
         return new WebHolderX5(activity, container);

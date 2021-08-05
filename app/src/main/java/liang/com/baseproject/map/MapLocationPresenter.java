@@ -12,8 +12,8 @@ import liang.com.baseproject.map.listener.LocalMarkerListener;
 
 public class MapLocationPresenter extends MVPBasePresenter<MapLocationView> {
 
-    private HomeContainerInteractor homeContainerInteractor;
-    private LocalMarkerIntercator localMarkerIntercator;
+    private final HomeContainerInteractor homeContainerInteractor;
+    private final LocalMarkerIntercator localMarkerIntercator;
 
     public MapLocationPresenter() {
         this.homeContainerInteractor = new HomeContainerInteractor();

@@ -139,9 +139,9 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     private NetBroadcastReceiver netReceiver;
 
     //FragmentList
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
     //标题列表
-    private List<String> titleList = new ArrayList<>();
+    private final List<String> titleList = new ArrayList<>();
     private HomeContainerFragment homeContainerFragment;
     private JuheNewsContainerFragment juheNewsContainerFragment;
     //    private NiceGankFragment niceGankFragment;
@@ -782,7 +782,7 @@ public class MainHomeActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-    private long waitTime = 2000;
+    private final long waitTime = 2000;
     private long touchTime = 0;
 
     @Override

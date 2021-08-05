@@ -18,7 +18,7 @@ import liang.com.baseproject.retrofit.UrlService;
 
 public class AgentWebPresenter extends MVPBasePresenter<WebViewInterface> {
 
-    private WebViewInterface webViewInterface;
+    private final WebViewInterface webViewInterface;
 
     public AgentWebPresenter(WebViewInterface webViewInterface) {
         this.webViewInterface = webViewInterface;

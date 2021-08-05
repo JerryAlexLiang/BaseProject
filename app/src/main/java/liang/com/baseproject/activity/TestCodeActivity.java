@@ -105,26 +105,26 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
     }
 
     //TabLayout标题列表
-    private List<String> stringList = new ArrayList<>();
+    private final List<String> stringList = new ArrayList<>();
     //ViewPager+TabLayout包裹内容Fragment列表
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
 
     //Viewpager Banner ImageView列表
-    private List<ImageView> mImageList = new ArrayList<>();
+    private final List<ImageView> mImageList = new ArrayList<>();
     //Viewpager Banner ImageView中显示文字内容列表列表
-    private List<String> mBnanerDesacList = new ArrayList<>();
+    private final List<String> mBnanerDesacList = new ArrayList<>();
     private String[] imageDescs;
 
     //Viewpager Banner ImageView点击跳转详情页Url列表
-    private List<String> mBannerDetailUrl = new ArrayList<>();
+    private final List<String> mBannerDetailUrl = new ArrayList<>();
 
-    private Timer mTimer = new Timer();
+    private final Timer mTimer = new Timer();
     private int previousPosition = 0; // 前一个被选中的position
     private boolean isStop = false;   //是否停止自动播放
     private int currentPosition; //当前位置
 
     //第五步: 设置自动播放,每隔3秒换一张图片
-    private TimerTask mTimerTask = new TimerTask() {
+    private final TimerTask mTimerTask = new TimerTask() {
         @Override
         public void run() {
             if (!isStop) {
@@ -268,8 +268,8 @@ public class TestCodeActivity extends MVPBaseActivity implements ViewPager.OnPag
     }
 
     private void initAnimatorOpen() {
-        Button buttonOpen = (Button) findViewById(R.id.btn_animator_open);
-        Button buttonHide = (Button) findViewById(R.id.btn_animator_hide);
+        Button buttonOpen = findViewById(R.id.btn_animator_open);
+        Button buttonHide = findViewById(R.id.btn_animator_hide);
         buttonOpen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

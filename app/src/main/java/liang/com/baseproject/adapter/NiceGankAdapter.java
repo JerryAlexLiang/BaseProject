@@ -34,9 +34,9 @@ import com.liang.module_core.utils.ToastUtil;
  */
 public class NiceGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
+    private final Context context;
 
-    private List<GankRes> mGankResList;
+    private final List<GankRes> mGankResList;
 
     public NiceGankAdapter(Context context, List<GankRes> mGankResList) {
         this.context = context;

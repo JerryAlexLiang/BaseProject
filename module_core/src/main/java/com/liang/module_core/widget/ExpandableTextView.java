@@ -69,8 +69,8 @@ public class ExpandableTextView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        id_source_textView = (TextView) findViewById(R.id.id_source_textview);
-        id_expand_textView = (TextView) findViewById(R.id.id_expand_textview);
+        id_source_textView = findViewById(R.id.id_source_textview);
+        id_expand_textView = findViewById(R.id.id_expand_textview);
         id_expand_textView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

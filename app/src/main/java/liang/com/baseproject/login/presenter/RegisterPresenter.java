@@ -9,7 +9,7 @@ import liang.com.baseproject.utils.UserLoginUtils;
 
 public class RegisterPresenter extends MVPBasePresenter<RegisterView> implements MVPRetrofitListener<UserBean> {
 
-    private RegisterInteractor registerInteractor;
+    private final RegisterInteractor registerInteractor;
 
     public RegisterPresenter() {
         this.registerInteractor = new RegisterInteractor();

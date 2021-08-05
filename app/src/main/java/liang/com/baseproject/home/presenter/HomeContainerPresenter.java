@@ -12,7 +12,7 @@ import liang.com.baseproject.home.view.HomeContainerView;
 
 public class HomeContainerPresenter extends MVPBasePresenter<HomeContainerView> {
 
-    private HomeContainerInteractor homeContainerInteractor;
+    private final HomeContainerInteractor homeContainerInteractor;
 
     public HomeContainerPresenter() {
         this.homeContainerInteractor = new HomeContainerInteractor();

@@ -45,14 +45,14 @@ object EyeServiceCreator {
         val cacheSize = 10 * 1024 * 1024 // 10 MiB
         val cache = Cache(httpCacheDirectory, cacheSize.toLong())
 
-        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY;
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         client.addInterceptor(loggingInterceptor)
         client.addInterceptor(HttpLoggingInterceptor())
         client.addInterceptor(HeaderInterceptor())
         client.addInterceptor(BasicParamsInterceptor())
         client.cache(cache)
-         client.cookieJar(cookieJar);
-        client.build();
+         client.cookieJar(cookieJar)
+        client.build()
     }
 
     //1、使用private修饰符来声明，相当于对外部而言它们都是不可见的

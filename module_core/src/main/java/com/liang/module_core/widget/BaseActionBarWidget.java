@@ -248,10 +248,7 @@ public class BaseActionBarWidget extends FrameLayout implements View.OnClickList
     }
 
     private boolean isFastDoubleClick() {
-        if (NoDoubleClickListener.isFastDoubleClick()) {
-            return true;
-        }
-        return false;
+        return NoDoubleClickListener.isFastDoubleClick();
     }
 
     static class MyViewHolder {

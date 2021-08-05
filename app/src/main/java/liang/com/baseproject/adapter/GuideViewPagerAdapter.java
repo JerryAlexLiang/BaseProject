@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 public class GuideViewPagerAdapter extends PagerAdapter {
-    private List<View> views;
+    private final List<View> views;
 
     public GuideViewPagerAdapter(List<View> views) {
         super();
@@ -25,17 +25,17 @@ public class GuideViewPagerAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        ((ViewPager) container).removeView(views.get(position));
+        container.removeView(views.get(position));
     }
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view == ((View) object);
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        ((ViewPager) container).addView(views.get(position), 0);
+        container.addView(views.get(position), 0);
         return views.get(position);
     }
 }

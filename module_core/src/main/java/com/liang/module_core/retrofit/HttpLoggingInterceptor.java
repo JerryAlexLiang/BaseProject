@@ -3,6 +3,7 @@ package com.liang.module_core.retrofit;
 import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 import com.liang.module_core.app.BaseApplication;
@@ -31,7 +32,7 @@ import static okhttp3.internal.platform.Platform.INFO;
  * 作者: liangyang
  */
 public class HttpLoggingInterceptor implements Interceptor {
-    private static final Charset UTF8 = Charset.forName("UTF-8");
+    private static final Charset UTF8 = StandardCharsets.UTF_8;
 
     public enum Level {
         /**

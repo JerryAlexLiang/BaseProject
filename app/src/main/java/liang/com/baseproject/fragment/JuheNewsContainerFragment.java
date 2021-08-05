@@ -40,8 +40,8 @@ public class JuheNewsContainerFragment extends Fragment {
     @BindView(R.id.news_view_pager)
     ViewPager newsViewPager;
     Unbinder unbinder;
-    private List<String> stringList = new ArrayList<>();
-    private List<Fragment> fragmentList = new ArrayList<>();
+    private final List<String> stringList = new ArrayList<>();
+    private final List<Fragment> fragmentList = new ArrayList<>();
 
     private MainHomeActivity mActivity;
 

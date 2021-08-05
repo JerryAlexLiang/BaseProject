@@ -24,7 +24,7 @@ public class AutoHeightViewPager extends ViewPager {
 
     private int currentIndex;
     private int height;
-    private HashMap<Integer, View> mChildrenViews = new LinkedHashMap<Integer, View>();
+    private final HashMap<Integer, View> mChildrenViews = new LinkedHashMap<Integer, View>();
     public AutoHeightViewPager(@NonNull Context context) {
         super(context);
     }

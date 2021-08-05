@@ -34,7 +34,7 @@ public class PageSlideIndicatorView extends View {
     private int currentIndicator = 0;
 
     @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
+    private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 0x12) {

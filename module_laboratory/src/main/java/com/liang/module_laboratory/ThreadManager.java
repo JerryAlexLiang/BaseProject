@@ -16,14 +16,14 @@ public class ThreadManager {
     private static ThreadManager threadManager;
 
     //线程池核心数量
-    private int corePoolSize;
+    private final int corePoolSize;
 
     //最大线程池数量，表示当缓冲队列满的时候能够继续容纳的等待任务的数量
-    private int maximumPoolSize;
+    private final int maximumPoolSize;
 
     //存活时间
-    private long keepAliveTime = 1;
-    private TimeUnit unit = TimeUnit.HOURS;
+    private final long keepAliveTime = 1;
+    private final TimeUnit unit = TimeUnit.HOURS;
 
     //线程池执行者
     private ThreadPoolExecutor executor;

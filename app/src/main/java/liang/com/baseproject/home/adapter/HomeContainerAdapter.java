@@ -89,11 +89,7 @@ public class HomeContainerAdapter extends BaseQuickAdapter<ArticleBean, HomeCont
             helper.tvTag.setVisibility(View.GONE);
         }
         //标记收藏
-        if (item.isCollect()) {
-            helper.cvCollect.setChecked(true);
-        } else {
-            helper.cvCollect.setChecked(false);
-        }
+        helper.cvCollect.setChecked(item.isCollect());
         //标记收藏点击回调事件
         helper.cvCollect.setOnClickListener((CollectView.OnClickListener) v -> {
             if (mOnCollectViewClickListener != null) {

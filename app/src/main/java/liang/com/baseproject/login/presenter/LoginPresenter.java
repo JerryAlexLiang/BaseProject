@@ -9,7 +9,7 @@ import liang.com.baseproject.utils.UserLoginUtils;
 
 public class LoginPresenter extends MVPBasePresenter<LoginView> implements MVPRetrofitListener<UserBean> {
 
-    private LoginInteractor loginInteractor;
+    private final LoginInteractor loginInteractor;
 
     public LoginPresenter() {
         this.loginInteractor = new LoginInteractor();

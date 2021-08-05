@@ -16,18 +16,18 @@ import java.util.List;
  */
 public class PageSlideRvAdapter<T> extends RecyclerView.Adapter<PageSlideRvHolder> {
 
-    private List<T> mData;
+    private final List<T> mData;
 
     /**
      * 页数下标,从0开始(通俗讲第几页)
      */
-    private int mIndex;
+    private final int mIndex;
 
     /**
      * 每页显示最大条目个数
      */
-    private int mPageSize;
-    private PageSlideMenuViewHolderCreator mPageSlideMenuViewHolderCreator;
+    private final int mPageSize;
+    private final PageSlideMenuViewHolderCreator mPageSlideMenuViewHolderCreator;
 
     public PageSlideRvAdapter(PageSlideMenuViewHolderCreator holderCreator, List<T> data, int index, int pageSize) {
         this.mData = data;

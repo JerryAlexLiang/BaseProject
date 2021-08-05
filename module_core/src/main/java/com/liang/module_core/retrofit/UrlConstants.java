@@ -7,12 +7,12 @@ package com.liang.module_core.retrofit;
  */
 public interface UrlConstants {
 
-    public static final boolean DEBUG = true;
+    boolean DEBUG = true;
 
-    public static final long HTTP_TIMEOUT = 5000;
+    long HTTP_TIMEOUT = 5000;
 
-    public static final int SUCCESS = 0;
+    int SUCCESS = 0;
 
-    public static final int FAILED_NOT_LOGIN = -1001; //请先登录
+    int FAILED_NOT_LOGIN = -1001; //请先登录
 
 }

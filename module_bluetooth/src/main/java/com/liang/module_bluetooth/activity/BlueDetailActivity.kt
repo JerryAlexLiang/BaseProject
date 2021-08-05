@@ -154,7 +154,7 @@ class BlueDetailActivity : MVVMBaseActivity() {
     private fun setDataList(items: MutableList<DetailItem>) {
         detailItems.clear()
         detailItems.addAll(items)
-        deviceDetailAdapter.setNewData(detailItems)
+        deviceDetailAdapter.setNewInstance(detailItems)
         deviceDetailAdapter.notifyDataSetChanged()
     }
 

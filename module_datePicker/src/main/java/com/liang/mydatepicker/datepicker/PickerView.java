@@ -34,7 +34,7 @@ import java.util.TimerTask;
  */
 public class PickerView extends View {
 
-    private Context mContext;
+    private final Context mContext;
 
     private Paint mPaint;
     private int mLightColor, mDarkColor;
@@ -54,7 +54,7 @@ public class PickerView extends View {
 
     private Timer mTimer = new Timer();
     private TimerTask mTimerTask;
-    private Handler mHandler = new ScrollHandler(this);
+    private final Handler mHandler = new ScrollHandler(this);
 
     /**
      * 自动回滚到中间的速度
@@ -75,7 +75,7 @@ public class PickerView extends View {
     }
 
     private static class ScrollTimerTask extends TimerTask {
-        private WeakReference<Handler> mWeakHandler;
+        private final WeakReference<Handler> mWeakHandler;
 
         private ScrollTimerTask(Handler handler) {
             mWeakHandler = new WeakReference<>(handler);
@@ -91,7 +91,7 @@ public class PickerView extends View {
     }
 
     private static class ScrollHandler extends Handler {
-        private WeakReference<PickerView> mWeakView;
+        private final WeakReference<PickerView> mWeakView;
 
         private ScrollHandler(PickerView view) {
             mWeakView = new WeakReference<>(view);

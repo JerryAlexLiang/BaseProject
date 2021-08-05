@@ -56,7 +56,7 @@ public class CustomGestureView extends View {
     private boolean mTimeOut;
     //剩余的等待时间
     private int leftTime;
-    private int waitTime;
+    private final int waitTime;
     //记录是否手势密码处于可用状态
     private boolean mError;
     //尝试失败的最大次数 默认为5
@@ -80,22 +80,22 @@ public class CustomGestureView extends View {
     //一行3*1单位行高
     private float mLineHeight;
     //给小手势view留的空间
-    private static int panelHeight = 300;
+    private static final int panelHeight = 300;
     //view经过measure之后的宽度
     private int mPanelWidth;
     //单元控件的宽度
     private float pieceWidth;
     private float pieceWidthSmall;
 
-    private String message = "请绘制手势";
+    private final String message = "请绘制手势";
     private float currX;
     private float currY;
 
 
-    private Paint mPaint;
+    private final Paint mPaint;
     //接受TimerTask消息,通知UI
     @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
+    private final Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             leftTime--;

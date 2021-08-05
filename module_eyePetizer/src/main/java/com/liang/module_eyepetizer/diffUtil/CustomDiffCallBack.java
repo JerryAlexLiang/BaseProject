@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class CustomDiffCallBack extends DiffUtil.Callback {
 
-    private List<BaseCustomViewModel> mOldDatas, mNewDatas;
+    private final List<BaseCustomViewModel> mOldDatas;
+    private final List<BaseCustomViewModel> mNewDatas;
 
     public CustomDiffCallBack(List<BaseCustomViewModel> mOldDatas, List<BaseCustomViewModel> mNewDatas) {
         this.mOldDatas = mOldDatas;

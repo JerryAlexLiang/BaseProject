@@ -73,13 +73,13 @@ class SinglePictureActivity : MVVMBaseActivity(), View.OnLongClickListener {
                 }
 
                 save_img -> {
-                    savePictureLocal();
+                    savePictureLocal()
                 }
             }
         }
 
         //ivMeizhiZoomPic的长按点击事件
-        iv_meizhi_zoom_pic.setOnLongClickListener(this);
+        iv_meizhi_zoom_pic.setOnLongClickListener(this)
 
         //ivMeizhiZoomPic的单击点击事件- 仿微博单击后退出大图界面   ((Activity)context).finish();
         iv_meizhi_zoom_pic.setOnPhotoTapListener { _, _, _ ->
@@ -103,8 +103,8 @@ class SinglePictureActivity : MVVMBaseActivity(), View.OnLongClickListener {
     }
 
     private fun parseIntent() {
-        imgUrl = intent.getStringExtra(IMG_URL);
-        imgDesc = intent.getStringExtra(IMG_DESC);
+        imgUrl = intent.getStringExtra(IMG_URL)
+        imgDesc = intent.getStringExtra(IMG_DESC)
     }
 
     private fun initActionBar() {

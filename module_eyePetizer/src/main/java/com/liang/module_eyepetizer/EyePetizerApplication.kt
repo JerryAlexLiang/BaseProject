@@ -17,11 +17,6 @@ class EyePetizerApplication : BaseApplication(), BaseApplicationImpl {
         lateinit var context: Context
     }
 
-    override fun onCreate() {
-        super.onCreate()
-//        context = applicationContext
-    }
-
     override fun onCreate(application: Application?, isDebug: Boolean) {
         context = getAppContext()
     }

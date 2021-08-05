@@ -83,10 +83,7 @@ public class UserLoginUtils {
         if (loginUserBean == null) {
             return false;
         }
-        if (loginUserBean.getId() > 0) {
-            return true;
-        }
-        return false;
+        return loginUserBean.getId() > 0;
     }
 
     /**

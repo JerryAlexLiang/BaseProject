@@ -19,9 +19,9 @@ public class ItemTouchListener extends GestureDetector.SimpleOnGestureListener i
         void onItemLongClick(RecyclerView parent, View clickedView, int position);
     }
 
-    private OnItemClickListener listener;
-    private RecyclerView recyclerView;
-    private GestureDetector gestureDetector;
+    private final OnItemClickListener listener;
+    private final RecyclerView recyclerView;
+    private final GestureDetector gestureDetector;
 
     public ItemTouchListener(RecyclerView recyclerView, OnItemClickListener listener) {
         if (recyclerView == null || listener == null) {

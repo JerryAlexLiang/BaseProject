@@ -38,9 +38,9 @@ interface PagingService {
         })
 
         init {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY;
-            client.addInterceptor(loggingInterceptor);
-            client.build();
+            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+            client.addInterceptor(loggingInterceptor)
+            client.build()
         }
 
         fun create(): PagingService {

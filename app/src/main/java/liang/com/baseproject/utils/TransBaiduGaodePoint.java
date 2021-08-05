@@ -15,7 +15,7 @@ import liang.com.baseproject.app.MyApplication;
  */
 public class TransBaiduGaodePoint {
 
-    private static double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+    private static final double x_pi = 3.14159265358979324 * 3000.0 / 180.0;
 
     /**
      * 对double类型数据保留小数点后多少位

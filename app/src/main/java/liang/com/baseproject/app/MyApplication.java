@@ -37,7 +37,7 @@ import static liang.com.baseproject.Constant.Constant.APP_DB_NAME;
 
 public class MyApplication extends BaseApplication {
 
-    private static String TAG = "MyApplication";
+    private static final String TAG = "MyApplication";
 //
 //    private static MyApplication app;
 //

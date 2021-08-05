@@ -19,8 +19,8 @@ import java.security.MessageDigest;
  */
 public class CornersTransform extends BitmapTransformation {
 
-    private Context context;
-    private float radius;
+    private final Context context;
+    private final float radius;
 
     public CornersTransform(Context context) {
         this.context = context;

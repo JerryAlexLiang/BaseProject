@@ -8,7 +8,7 @@ package com.liang.module_core.widget.slideDampingAnimationLayout;
 
 public interface BezierCurve {
 
-    public final int QUADRATIC  = 0;
-    public final int CUBIC  = 1;
+    int QUADRATIC  = 0;
+    int CUBIC  = 1;
 
 }

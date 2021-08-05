@@ -33,9 +33,9 @@ import liang.com.baseproject.entity.GankRes;
  */
 public class NiceGankGirlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
+    private final Context context;
 
-    private List<GankGirlRes> mGankResList;
+    private final List<GankGirlRes> mGankResList;
 
     public NiceGankGirlAdapter(Context context, List<GankGirlRes> mGankResList) {
         this.context = context;

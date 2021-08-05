@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class ListDataSave {
 
-    private SharedPreferences preferences;
+    private final SharedPreferences preferences;
 
-    private SharedPreferences.Editor editor;
+    private final SharedPreferences.Editor editor;
 
     public ListDataSave(Context mContext, String preferenceName) {
         preferences = mContext.getSharedPreferences(preferenceName, Context.MODE_PRIVATE);
