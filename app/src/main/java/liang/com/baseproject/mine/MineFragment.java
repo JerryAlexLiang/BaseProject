@@ -414,8 +414,8 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
 //                AnimationUtils.pageHideScaleAnimator(rlPageContainer);
                     AnimationUtils.pageHideScaleAnimator(mActivity.getMainPageContainer());
 
-                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
-                            true, false, true, 9);
+//                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
+//                            true, false, true, 9);
                 }
             });
 
@@ -471,8 +471,8 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
 //                AnimationUtils.pageHideScaleAnimator(rlPageContainer);
                     AnimationUtils.pageHideScaleAnimator(mActivity.getMainPageContainer());
 
-                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
-                            false, false, true, 9);
+//                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
+//                            false, false, true, 9);
                 }
             });
 
@@ -528,8 +528,8 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
                     }
                     AnimationUtils.pageHideScaleAnimator(mActivity.getMainPageContainer());
 
-                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_BG, MULTIPLE, TYPE_IMAGE,
-                            false, false, true, 9);
+//                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_BG, MULTIPLE, TYPE_IMAGE,
+//                            false, false, true, 9);
                 }
             });
 
@@ -579,8 +579,8 @@ public class MineFragment extends MVPBaseFragment implements CustomPopupWindow.V
                     }
                     AnimationUtils.pageHideScaleAnimator(mActivity.getMainPageContainer());
 
-                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_BG, MULTIPLE, TYPE_IMAGE,
-                            false, false, true, 9);
+//                    PictureSelectorUtils.openGallery(MineFragment.this, Constant.REQUEST_CODE_SELECT_BG, MULTIPLE, TYPE_IMAGE,
+//                            false, false, true, 9);
                 }
             });
 

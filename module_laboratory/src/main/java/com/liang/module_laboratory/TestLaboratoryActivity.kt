@@ -306,27 +306,27 @@ class TestLaboratoryActivity : MVVMBaseActivity(), ViewPager.OnPageChangeListene
     }
 
     private fun selectImage() {
-        btnSelectImage!!.setOnClickListener {
-            //                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
-//                        true, false, true, 9);
-            PictureSelector.create(this@TestLaboratoryActivity)
-                    .openGallery(PictureMimeType.ofImage())
-                    .imageEngine(GlideEngine.createGlideEngine()) // Please refer to the Demo GlideEngine.java
-                    .compressQuality(60)
-                    .isCompress(true)
-                    .selectionMode(PictureConfig.SINGLE) // 多选 or 单选
-                    .maxSelectNum(1) // 最大图片选择数量
-                    .minSelectNum(1) // 最小选择数量
-                    .isPreviewImage(true) // 是否可预览图片
-                    .isCamera(true) // 是否显示拍照按钮
-                    .isEnableCrop(false) // 是否裁剪
-                    //.circleDimmedLayer(true)// 是否圆形裁剪
-                    //.freeStyleCropEnabled(true)// 裁剪框是否可拖拽
-                    //.showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
-                    //.showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false
-                    .minimumCompressSize(100) // 小于100kb的图片不压缩
-                    .forResult(PictureConfig.CHOOSE_REQUEST)
-        }
+//        btnSelectImage!!.setOnClickListener {
+//            //                PictureSelectorUtils.openGallery(TestCodeActivity.this, Constant.REQUEST_CODE_SELECT_USER_ICON, MULTIPLE, TYPE_IMAGE,
+////                        true, false, true, 9);
+//            PictureSelector.create(this@TestLaboratoryActivity)
+//                    .openGallery(PictureMimeType.ofImage())
+//                    .imageEngine(GlideEngine.createGlideEngine()) // Please refer to the Demo GlideEngine.java
+//                    .compressQuality(60)
+//                    .isCompress(true)
+//                    .selectionMode(PictureConfig.SINGLE) // 多选 or 单选
+//                    .maxSelectNum(1) // 最大图片选择数量
+//                    .minSelectNum(1) // 最小选择数量
+//                    .isPreviewImage(true) // 是否可预览图片
+//                    .isCamera(true) // 是否显示拍照按钮
+//                    .isEnableCrop(false) // 是否裁剪
+//                    //.circleDimmedLayer(true)// 是否圆形裁剪
+//                    //.freeStyleCropEnabled(true)// 裁剪框是否可拖拽
+//                    //.showCropFrame(false)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false
+//                    //.showCropGrid(false)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false
+//                    .minimumCompressSize(100) // 小于100kb的图片不压缩
+//                    .forResult(PictureConfig.CHOOSE_REQUEST)
+//        }
     }
 
     private fun initAnimatorOpen() {
