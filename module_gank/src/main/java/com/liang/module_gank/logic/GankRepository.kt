@@ -27,6 +27,12 @@ object GankRepository {
         Result.success(data)
     }
 
+    fun getNewNiceGirlData(page: Int) = fire(Dispatchers.IO) {
+        val newGirlsRes = GankNetwork.getNewNiceGirlData(page)
+        val data = newGirlsRes.data.list
+        Result.success(data)
+    }
+
     /**
      * 可以在某个统一的入口函数中进行封装，使得只要进行一次try-catch处理就行了。
      * 新增fire()函数，这是一个按照liveData()函数的参数接收标准定义的一个高阶函数；

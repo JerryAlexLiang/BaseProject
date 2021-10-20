@@ -18,6 +18,7 @@ object ServiceCreator {
     //Gank API
 //    private const val GANK_BASE_URL = "http://gank.io/api/"
     private const val GANK_BASE_URL = "https://gank.io/api/v2/"
+    private const val NEW_BASE_URL = "https://www.mxnzp.com/api/"
 
     private val client = OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -28,6 +29,8 @@ object ServiceCreator {
 
 
     init {
+        client.addInterceptor(AddHeadersInterceptor())
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.HEADERS
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         client.addInterceptor(loggingInterceptor)
         client.build()
@@ -35,7 +38,8 @@ object ServiceCreator {
 
     //1、使用private修饰符来声明，相当于对外部而言它们都是不可见的
     private val retrofit = Retrofit.Builder()
-            .baseUrl(GANK_BASE_URL)
+//            .baseUrl(GANK_BASE_URL)
+            .baseUrl(NEW_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client.build())

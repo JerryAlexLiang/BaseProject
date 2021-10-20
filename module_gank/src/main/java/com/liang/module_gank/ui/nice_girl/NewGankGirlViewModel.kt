@@ -5,6 +5,8 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.liang.module_gank.logic.GankRepository
 import com.liang.module_gank.logic.model.GankGirlRes
+import com.liang.module_gank.logic.model.NewGirlRes
+import com.liang.module_gank.logic.model.NewGirlsRes
 import java.util.ArrayList
 
 /**
@@ -19,16 +21,26 @@ class NewGankGirlViewModel : ViewModel() {
 
     //妹子列表数据List
     //和界面相关的数据，定义在ViewModel中，可以保证它们在手机屏幕发生旋转的时候不会丢失，稍后在编写UI层代码的时候就会用到这几个变量
-    var girlsList = ArrayList<GankGirlRes>()
+//    var girlsList = ArrayList<GankGirlRes>()
+
+    var newGrilsList = ArrayList<NewGirlRes>()
 
     //通过switchMap()转换函数转换后，仓库层返回的LiveData对象就可以转换成一个可供Activity和Fragment观察的LiveData对象了
-    val niceGankGirlBeanLiveData = Transformations.switchMap(pageLiveData) {
-        GankRepository.getNiceGankGirlData(it)
+//    val niceGankGirlBeanLiveData = Transformations.switchMap(pageLiveData) {
+//        GankRepository.getNiceGankGirlData(it)
+//    }
+
+    val newGirlBeanLiveData = Transformations.switchMap(pageLiveData) {
+        GankRepository.getNewNiceGirlData(it)
     }
 
-    fun getNiceGankGirlData(page: Int) {
-        //这里没有直接调用仓库层中的Repository.getNiceGankGirlData()方法，而是将传入的搜索参数赋值给一个pageLiveData对象，
-        //并使用Transformations.switchMap(pageLiveData)方法来观察这个对像，否则仓库层返回的LiveData对象将无法进行观察。
+//    fun getNiceGankGirlData(page: Int) {
+//        //这里没有直接调用仓库层中的Repository.getNiceGankGirlData()方法，而是将传入的搜索参数赋值给一个pageLiveData对象，
+//        //并使用Transformations.switchMap(pageLiveData)方法来观察这个对像，否则仓库层返回的LiveData对象将无法进行观察。
+//        pageLiveData.value = page
+//    }
+
+    fun getNewNiceGirlData(page: Int) {
         pageLiveData.value = page
     }
 

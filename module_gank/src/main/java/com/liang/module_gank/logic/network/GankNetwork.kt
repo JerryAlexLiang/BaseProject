@@ -26,4 +26,6 @@ object GankNetwork {
     //4、为了让代码更加简洁
     //5、借助协程技术来实现简化代码，这里定义一个await()函数，并将searchPlaces()函数也声明成挂起函数suspend
     suspend fun getNiceGankGirlData(page: Int) = gankService.getNiceGankGirlData(page).await()
+
+    suspend fun getNewNiceGirlData(page: Int) = gankService.getNewNiceGirlData(page).await()
 }

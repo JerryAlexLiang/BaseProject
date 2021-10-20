@@ -141,7 +141,7 @@ public class HttpLoggingInterceptor implements Interceptor {
         CacheControl cacheControl = cacheBuilder.build();
 
         Request request = chain.request();
-        if (!NetUtil.isNetworkAvailable(BaseApplication.mContext)){
+        if (!NetUtil.isNetworkAvailable(BaseApplication.mContext)) {
             request = request.newBuilder()
                     .cacheControl(cacheControl)
                     .build();
@@ -183,7 +183,7 @@ public class HttpLoggingInterceptor implements Interceptor {
                 String name = headers.name(i);
                 // Skip headers from the request body as they are explicitly logged above.
                 if (!"Content-Type".equalsIgnoreCase(name) && !"Content-Length".equalsIgnoreCase(name)) {
-                    logger.log(name + ": " + headers.value(i));
+                    logger.log("headers: " + name + ": " + headers.value(i));
                 }
             }
 

@@ -13,7 +13,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNiceGirl"
-            tools:listitem="@layout/item_rv_new_nice_gank"
+            tools:listitem="@layout/item_rv_new_girl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"

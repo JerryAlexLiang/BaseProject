@@ -13,8 +13,6 @@ import com.liang.module_core.widget.decoration.SpaceItemDecoration
 import com.liang.module_gank.R
 import kotlinx.android.synthetic.main.new_gank_girl_fragment2.*
 
-//import kotlinx.android.synthetic.main.new_gank_girl_fragment.*
-
 /**
  * 创建日期:2021/7/23 on 4:50 PM
  * 描述: Gank新版api 美女颜如玉
@@ -32,7 +30,8 @@ class NewGankGirlFragment : MVVMBaseFragment() {
     private var currPage = PAGE_START
     private var isStaggeredGridModel = true
 
-    private lateinit var newGankGirlAdapter: NewGankGirlAdapter
+    //    private lateinit var newGankGirlAdapter: NewGankGirlAdapter
+    private lateinit var newGirlAdapter: NewGirlRvAdapter
 
     private lateinit var viewModel: NewGankGirlViewModel
 
@@ -75,27 +74,31 @@ class NewGankGirlFragment : MVVMBaseFragment() {
                 .setBottom(12)
         rvNiceGirl.addItemDecoration(decoration)
 
-        newGankGirlAdapter = NewGankGirlAdapter(R.layout.item_rv_new_nice_gank)
+        newGirlAdapter = NewGirlRvAdapter(R.layout.item_rv_new_girl)
+//        newGankGirlAdapter = NewGankGirlAdapter(R.layout.item_rv_new_nice_gank)
 //        newGankGirlAdapter = NewGankGirlAdapter(R.layout.item_rv_new_nice_gank2)
-        rvNiceGirl.adapter = newGankGirlAdapter
 
-//        viewModel.getNiceGankGirlData(PAGE_START)
+        rvNiceGirl.adapter = newGirlAdapter
 
         initListener()
 
-        observe()
+//        observe()
+
+        observe2()
 
     }
 
     private fun initListener() {
         smart_refresh_layout.setOnRefreshListener {
             currPage = PAGE_START
-            viewModel.getNiceGankGirlData(currPage)
+//            viewModel.getNiceGankGirlData(currPage)
+            viewModel.getNewNiceGirlData(currPage)
         }
 
         smart_refresh_layout.setOnLoadMoreListener {
             currPage++
-            viewModel.getNiceGankGirlData(currPage)
+//            viewModel.getNiceGankGirlData(currPage)
+            viewModel.getNewNiceGirlData(currPage)
         }
 
         smart_refresh_layout.autoRefresh()
@@ -115,21 +118,55 @@ class NewGankGirlFragment : MVVMBaseFragment() {
         }
     }
 
-    private fun observe() {
-        viewModel.niceGankGirlBeanLiveData.observe(viewLifecycleOwner) { result ->
+//    private fun observe() {
+//        viewModel.niceGankGirlBeanLiveData.observe(viewLifecycleOwner) { result ->
+//            val girls = result.getOrNull()
+//            if (girls != null) {
+//                if (currPage == PAGE_START) {
+//                    newGankGirlAdapter.data.clear()
+//                    viewModel.girlsList.clear()
+//                    viewModel.girlsList.addAll(girls)
+//                    newGankGirlAdapter.setNewInstance(viewModel.girlsList)
+//                    LogUtil.d(TAG, "data refresh : data size: " + viewModel.girlsList.size + "  " + GsonUtils.toJson(viewModel.girlsList))
+//                } else {
+//                    //请求更多数据,直接添加list中
+//                    viewModel.girlsList.addAll(girls)
+//                    newGankGirlAdapter.setDiffNewData(viewModel.girlsList)
+//                    LogUtil.d(TAG, "data loadMore : data size: " + viewModel.girlsList.size + "  " + GsonUtils.toJson(viewModel.girlsList))
+//                }
+//
+//                if (girls.size == 0 && currPage != PAGE_START) {
+//                    onShowToast("没有更多数据了!")
+//                    //设置是否在全部加载结束之后Footer跟随内容
+//                    smart_refresh_layout.setNoMoreData(true)
+//                    smart_refresh_layout.setEnableFooterFollowWhenNoMoreData(true)
+//                } else {
+//                    smart_refresh_layout.setEnableLoadMore(true)
+//                }
+//
+//                smart_refresh_layout.finishRefresh()
+//                smart_refresh_layout.finishLoadMore()
+//            } else {
+//                newGankGirlAdapter.setEmptyView(R.layout.core_rl_empty_container_view)
+//            }
+//        }
+//    }
+
+    private fun observe2() {
+        viewModel.newGirlBeanLiveData.observe(viewLifecycleOwner) { result ->
             val girls = result.getOrNull()
             if (girls != null) {
                 if (currPage == PAGE_START) {
-                    newGankGirlAdapter.data.clear()
-                    viewModel.girlsList.clear()
-                    viewModel.girlsList.addAll(girls)
-                    newGankGirlAdapter.setNewInstance(viewModel.girlsList)
-                    LogUtil.d(TAG, "data refresh : data size: " + viewModel.girlsList.size + "  " + GsonUtils.toJson(viewModel.girlsList))
+                    newGirlAdapter.data.clear()
+                    viewModel.newGrilsList.clear()
+                    viewModel.newGrilsList.addAll(girls)
+                    newGirlAdapter.setNewInstance(viewModel.newGrilsList)
+                    LogUtil.d(TAG, "data refresh : data size: " + viewModel.newGrilsList.size + "  " + GsonUtils.toJson(viewModel.newGrilsList))
                 } else {
                     //请求更多数据,直接添加list中
-                    viewModel.girlsList.addAll(girls)
-                    newGankGirlAdapter.setDiffNewData(viewModel.girlsList)
-                    LogUtil.d(TAG, "data loadMore : data size: " + viewModel.girlsList.size + "  " + GsonUtils.toJson(viewModel.girlsList))
+                    viewModel.newGrilsList.addAll(girls)
+                    newGirlAdapter.setDiffNewData(viewModel.newGrilsList)
+                    LogUtil.d(TAG, "data loadMore : data size: " + viewModel.newGrilsList.size + "  " + GsonUtils.toJson(viewModel.newGrilsList))
                 }
 
                 if (girls.size == 0 && currPage != PAGE_START) {
@@ -144,7 +181,7 @@ class NewGankGirlFragment : MVVMBaseFragment() {
                 smart_refresh_layout.finishRefresh()
                 smart_refresh_layout.finishLoadMore()
             } else {
-                newGankGirlAdapter.setEmptyView(R.layout.core_rl_empty_container_view)
+                newGirlAdapter.setEmptyView(R.layout.core_rl_empty_container_view)
             }
         }
     }
