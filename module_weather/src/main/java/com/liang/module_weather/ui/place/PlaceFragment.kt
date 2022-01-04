@@ -29,7 +29,7 @@ class PlaceFragment : Fragment() {
 
     //1、使用lazy函数这种懒加载技术来获取PlaceViewModel的实例
     //这是一种非常棒的写法，允许我们在整个类中随时使用viewModel这个变量，而完全不用关心它何时初始化、是否为空等前提条件
-     val viewModel by lazy { ViewModelProviders.of(this).get(PlaceViewModel::class.java) }
+    val viewModel by lazy { ViewModelProviders.of(this).get(PlaceViewModel::class.java) }
 
     companion object {
         private const val TAG = "PlaceFragment"
@@ -43,7 +43,7 @@ class PlaceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        if (activity is WeatherActivity && viewModel.isPlaceSaved()){
+        if (activity is WeatherActivity && viewModel.isPlaceSaved()) {
             val savedPlace = viewModel.getSavedPlace()
             val intent = Intent(context, WeatherContainerActivity::class.java).apply {
                 putExtra(WeatherConstant.LOCATION_LNG, savedPlace.location.lng)
@@ -95,7 +95,11 @@ class PlaceFragment : Fragment() {
 //        }
 
 
-        viewModel.placeLiveData.observe(this) { result ->
+        // 当需要观察 view 相关的 LiveData ，可以在 onCreateView()、onViewCreated() 或
+        // onActivityCreated() 中 LiveData observe 方法中传入 viewLifecycleOwner 而不是传入 this
+
+//        viewModel.placeLiveData.observe(this) { result ->
+        viewModel.placeLiveData.observe(viewLifecycleOwner) { result ->
             val places = result.getOrNull()
             if (places != null) {
                 rvCityPlaces.visibility = View.VISIBLE
