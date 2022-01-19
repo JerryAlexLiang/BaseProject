@@ -102,5 +102,7 @@ public class HandlerThreadActivity extends AppCompatActivity {
         super.onDestroy();
         //释放资源
         handlerThread.quit();
+        // 在外部类对象被销毁时，将MessageQueue中的消息情况
+        uiHandler.removeCallbacksAndMessages(null);
     }
 }
