@@ -495,7 +495,7 @@ public class MapLocationActivity extends MVPBaseActivity<MapLocationView, MapLoc
 //        smartRefreshLayout.setRefreshHeader(new FunGameHitBlockHeader(MyApplication.getAppContext()));   //碰球游戏效果
 //        smartRefreshLayout.setRefreshHeader(new StoreHouseHeader(MyApplication.getAppContext()));  //StoreHouse文字渐变效果
 
-        setRefreshHeader(smartRefreshLayout,com.liang.module_core.constant.Constant.DropBoxHeader);
+        setRefreshHeader(smartRefreshLayout, com.liang.module_core.constant.Constant.DropBoxHeader);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rvMap.setLayoutManager(linearLayoutManager);
