@@ -1,3 +1,4 @@
+include ':module_card3D'
 include ':module_amapLocation'
 include ':module_gank'
 include ':autosize'

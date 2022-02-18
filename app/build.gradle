@@ -151,6 +151,7 @@ dependencies {
     implementation project(path: ':module_bluetooth')
     implementation project(path: ':module_gank')
     implementation project(path: ':module_amapLocation')
+    implementation project(path: ':module_card3D')
 
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

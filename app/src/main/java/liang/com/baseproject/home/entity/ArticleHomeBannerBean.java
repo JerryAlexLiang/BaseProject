@@ -28,6 +28,16 @@ public class ArticleHomeBannerBean extends MVPBaseBean {
     private String title;
     private int type;
     private String url;
+    private Integer localImages;
+
+    public Integer getLocalImages() {
+        return localImages;
+    }
+
+    public ArticleHomeBannerBean setLocalImages(Integer localImages) {
+        this.localImages = localImages;
+        return this;
+    }
 
     public String getDesc() {
         return desc;

@@ -19,7 +19,9 @@ import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.animation.SlideInLeftAnimation;
 import com.google.gson.Gson;
+import com.liang.model_middleware.impl.ServiceProvider;
 import com.liang.module_core.mvp.MVPBaseFragment;
+import com.liang.module_core.utils.GsonUtils;
 import com.liang.module_core.utils.JsonFormatUtils;
 import com.liang.module_core.utils.LogUtil;
 import com.liang.module_core.utils.ToastUtil;
@@ -174,8 +176,17 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
             String url = articleHomeBannerBean.getUrl();
             int id = articleHomeBannerBean.getId();
             String title = articleHomeBannerBean.getTitle();
-//            AgentWebActivity.actionStart(getContext(), id, title, url);
-            AgentWebActivityX5.actionStart(getContext(), id, title, url);
+            Integer localImages = articleHomeBannerBean.getLocalImages();
+
+            if (localImages == null) {
+                //AgentWebActivity.actionStart(getContext(), id, title, url);
+                AgentWebActivityX5.actionStart(getContext(), id, title, url);
+            } else {
+                if (getContext() != null) {
+                    ServiceProvider.getCard3DModuleService().startCard3DActivity(getContext());
+                }
+            }
+
         }
     }
 
@@ -197,9 +208,16 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         @Override
         public void updateUI(ArticleHomeBannerBean data) {
             textView.setText(data.getTitle());
-            Glide.with(getContext())
-                    .load(data.getImagePath())
-                    .into(imageView);
+
+            if (data.getLocalImages() != null) {
+                Glide.with(getContext())
+                        .load(data.getLocalImages())
+                        .into(imageView);
+            } else {
+                Glide.with(getContext())
+                        .load(data.getImagePath())
+                        .into(imageView);
+            }
         }
     }
 
@@ -369,7 +387,18 @@ public class HomeContainerFragment extends MVPBaseFragment<HomeContainerView, Ho
         }
 
         mBannerData.clear();
+
+        ArticleHomeBannerBean bean = new ArticleHomeBannerBean();
+        bean.setDesc("3D旋转汽车模型");
+        bean.setTitle("3D旋转汽车模型");
+        bean.setId(1);
+        bean.setLocalImages(R.drawable.app_icon_card1);
+
+        mBannerData.add(bean);
+
         mBannerData.addAll(data);
+
+        LogUtil.d(TAG,"Banner Data: "+ GsonUtils.toJson(mBannerData));
 
         initBanner();
     }

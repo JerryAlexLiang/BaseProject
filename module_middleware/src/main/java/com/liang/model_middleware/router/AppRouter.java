@@ -29,4 +29,7 @@ public class AppRouter {
 
     //开启定位工具类
     public static final String MODULE_AMAP_LOCATION = "amap_location/startLocation";
+
+    //3D旋转汽车模型
+    public  static  final String MODULE_CARD_3D = "/3d/Card3DActivity";
 }

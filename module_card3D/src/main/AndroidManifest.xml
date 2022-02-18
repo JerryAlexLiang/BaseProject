@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.liang.module_card3d">
+
+    <application>
+        <activity android:name=".ui.Card3DRotateActivityJava"></activity>
+        <activity android:name=".ui.Card3DRotateActivity" />
+    </application>
+
+</manifest>
